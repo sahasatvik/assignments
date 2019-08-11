@@ -1,0 +1,439 @@
+\documentclass[10pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+
+\title{Mathematics I - Problem Sheet I}
+\author{Satvik Saha}
+\date{}
+
+\geometry{a4paper, margin=1in}
+\setlength\parindent{0pt}
+\renewcommand{\labelenumi}{(\roman{enumi})}
+% \renewcommand\qedsymbol{$\blacksquare$}
+
+\begin{document}
+        \par\textbf{IISER Kolkata} \hfill \textbf{Problem Sheet I}
+        \vspace{3pt}
+        \hrule
+        \vspace{3pt}
+        \begin{center}
+                \LARGE{\textbf{MA 1101 : Mathematics I}}
+        \end{center}
+        \vspace{3pt}
+        \hrule
+        \vspace{3pt}
+        Satvik Saha, \texttt{19MS154}\hfill\today
+        \vspace{20pt}
+
+        \textbf{Solution 1.}\\
+        Let $A$, $B$, $C$ be sets.
+        \begin{enumerate}
+                \item
+                We wish to prove $A \cup B = B \cup A$. We do so by showing that $A \cup B \subseteq B \cup A$ and
+                $B \cup A \subseteq A \cup B$.
+
+                Let $x \in A \cup B$. This implies $x \in A$ or $x \in B$, which is the same as $x \in B$ or $x \in A$.
+                Thus, $x \in B \cup A$. This proves $A \cup B \subseteq B \cup A$.
+                
+                Similarly, let $x \in B \cup A$. This implies $x \in B$ or $x \in A$, which is the same as $x \in A$ or $x \in B$.
+                Thus, $x \in A \cup B$. This proves $B \cup A \subseteq A \cup B$, and we are done. \qed \\
+                
+                Next, we wish to prove $A \cap B = B \cap A$. We do so by showing that $A \cap B \subseteq B \cap A$ and
+                $B \cap A \subseteq A \cap B$.
+                
+                Let $x \in A \cap B$. This implies $x \in A$ and $x \in B$, which is the same as $x \in B$ and $x \in A$.
+                Thus, $x \in B \cap A$. This proves $A \cap B \subseteq B \cap A$.
+                
+                Similarly, let $x \in B \cap A$. This implies $x \in B$ and $x \in A$, which is the same as $x \in A$ and $x \in B$.
+                Thus, $x \in A \cap B$. This proves $B \cap A \subseteq A \cap B$, and we are done. \qed
+
+
+                \item
+                We wish to prove $(A \cup B) \cup C = A \cup (B \cup C)$. We do so by showing that $(A \cup B) \cup C \subseteq A \cup (B \cup C)$
+                and $A \cup (B \cup C) \subseteq (A \cup B) \cup C$.
+
+                Let $\land$ denote `and' and $\lor$ denote `or'. Let
+                \begin{align*}
+                        x \in (A \cup B) \cup C
+                                \;&\Rightarrow\; x \in (A \cup B) \lor x \in C\\
+                                \;&\Rightarrow\; (x \in A \lor x \in B) \lor x \in C\\
+                                \;&\Rightarrow\; x \in A \lor x \in B \lor x \in C\\
+                                \;&\Rightarrow\; x \in A \lor (x \in B \lor x \in C)\\
+                                \;&\Rightarrow\; x \in A \lor x \in (B \cup C)\\
+                                \;&\Rightarrow\; x \in A \cup (B \cup C)
+                \end{align*}
+                This proves, $(A \cup B) \cup C \subseteq A \cup (B \cup C)$. Similarly, let
+                \begin{align*}
+                        x \in A \cup (B \cup C)
+                                \;&\Rightarrow\; x \in A \lor x \in (B \cup C)\\
+                                \;&\Rightarrow\; x \in A \lor (x \in B \lor x \in C)\\
+                                \;&\Rightarrow\; x \in A \lor x \in B \lor x \in C\\
+                                \;&\Rightarrow\; (x \in A \lor x \in B) \lor x \in C\\
+                                \;&\Rightarrow\; x \in (A \cup B) \lor x \in C\\
+                                \;&\Rightarrow\; x \in (A \cup B) \cup C
+                \end{align*}
+                This proves, $A \cup (B \cup C) \subseteq (A \cup B) \cup C$, and we are done. \qed
+                
+                Next, we wish to prove $(A \cap B) \cap C = A \cap (B \cap C)$. We do so by showing that $(A \cap B) \cap C \subseteq A \cap (B \cap C)$
+                and $A \cap (B \cap C) \subseteq (A \cap B) \cap C$. Let
+                \begin{align*}
+                        x \in (A \cap B) \cap C
+                                \;&\Rightarrow\; x \in (A \cap B) \land x \in C\\
+                                \;&\Rightarrow\; (x \in A \land x \in B) \land x \in C\\
+                                \;&\Rightarrow\; x \in A \land x \in B \land x \in C\\
+                                \;&\Rightarrow\; x \in A \land (x \in B \land x \in C)\\
+                                \;&\Rightarrow\; x \in A \land x \in (B \cap C)\\
+                                \;&\Rightarrow\; x \in A \cap (B \cap C)
+                \end{align*}
+                This proves, $(A \cap B) \cap C \subseteq A \cap (B \cap C)$. Similarly, let
+                \begin{align*}
+                        x \in A \cap (B \cap C)
+                                \;&\Rightarrow\; x \in A \land x \in (B \cap C)\\
+                                \;&\Rightarrow\; x \in A \land (x \in B \land x \in C)\\
+                                \;&\Rightarrow\; x \in A \land x \in B \land x \in C\\
+                                \;&\Rightarrow\; (x \in A \land x \in B) \land x \in C\\
+                                \;&\Rightarrow\; x \in (A \cap B) \land x \in C\\
+                                \;&\Rightarrow\; x \in (A \cap B) \cap C
+                \end{align*}
+                This proves, $A \cap (B \cap C) \subseteq (A \cap B) \cap C$, and we are done. \qed
+
+                
+                \item
+                We wish to prove $A \subseteq B$ if and only if $A \cup B = B$. We first show that $A \subseteq B$ if $A \cup B = B$.
+                \begin{align*}
+                        x \in A
+                                \;&\Rightarrow\; x \in A \lor x \in B\\
+                                \;&\Rightarrow\; x \in A \cup B\\
+                                \;&\Rightarrow\; x \in B                                        \tag{$A \cup B = B$}
+                \end{align*}
+                Thus, $A \cup B = B \;\Rightarrow\; A \subseteq B$. Next, we show that if $A \cup B = B$ if $A \subseteq B$.
+                \begin{align*}
+                        x \in A \cup B
+                                \;&\Rightarrow\; x \in A \lor x \in B\\
+                                \;&\Rightarrow\; x \in B \lor x \in B                           \tag{$A \subseteq B$}\\
+                                \;&\Rightarrow\; x \in B\\\\
+                        x \in B
+                                \;&\Rightarrow\; x \in B \lor x \in A\\
+                                \;&\Rightarrow\; x \in A \lor x \in B\\
+                                \;&\Rightarrow\; x \in A \cup B
+                \end{align*}
+                Thus, $A \subseteq B \;\Rightarrow\; A \cup B = B$.
+
+                This proves $A \subseteq B \;\Leftrightarrow\; A \cup B = B$. \qed
+                
+
+                \item
+                We wish to prove $A \subseteq B$ if and only if $A \cap B = A$. We first show that $A \subseteq B$ if $A \cap B = A$.
+                \begin{align*}
+                        x \in A
+                                \;&\Rightarrow\; x \in A \cap B                                 \tag{$A \cap B = A$}\\
+                                \;&\Rightarrow\; x \in A \land x \in B\\
+                                \;&\Rightarrow\; x \in B
+                \end{align*}
+                Thus, $A \cap B = A \;\Rightarrow\; A \subseteq B$. Next, we show that $A \cap B = A$ if $A \subseteq B$.
+                \begin{align*}
+                        x \in A \cap B
+                                \;&\Rightarrow\; x \in A \land x \in B\\
+                                \;&\Rightarrow\; x \in A\\\\
+                        x \in A
+                                \;&\Rightarrow\; x \in A \land x \in A\\
+                                \;&\Rightarrow\; x \in A \land x \in B                          \tag{$A \subseteq B$}\\
+                                \;&\Rightarrow\; x \in A \cap B
+                \end{align*}
+                Thus, $A \subseteq B \;\Rightarrow\; A \cap B = A$.
+                
+                This proves $A \subseteq B \;\Leftrightarrow\; A \cap B = A$. \qed
+
+
+                \item
+                We wish to prove $A \subseteq B$ if and only if $A \setminus B = \emptyset$. We first show that $A \subseteq B$ if $A \setminus B = \emptyset$.
+                \begin{align*}
+                        x \in A
+                                \;&\Rightarrow\; x \in A \land (x \in B \lor x \notin B)\\
+                                \;&\Rightarrow\; (x \in A \land x \in B) \lor (x \in A \land x \notin B)\\
+                                \;&\Rightarrow\; (x \in A \land x \in B) \lor x \in A \setminus B\\
+                                \;&\Rightarrow\; (x \in A \land x \in B) \lor x \in \emptyset   \tag{$A \setminus B = \emptyset$}\\
+                                \;&\Rightarrow\; x \in A \land x \in B                          \tag{$x \in A$}\\
+                                \;&\Rightarrow\; x \in B
+                \end{align*}
+                Thus, $A \setminus B = \emptyset \;\Rightarrow\; A \subseteq B$. Next, we show that $A \setminus B = \emptyset$ if $A \subseteq B$.
+                \begin{align*}
+                        x \in A \setminus B
+                                \;&\Leftrightarrow\; x \in A \land x \notin B\\
+                                \;&\Leftrightarrow\; x \in B \land x \notin B                   \tag{$A \subseteq B$}
+                \end{align*}
+                However, there is no such $x$ which is simultaneously in and not in $B$. Hence, the set $A \setminus B$ is empty, that is,
+                $A \subseteq B \;\Rightarrow\; A \setminus B = \emptyset$.
+
+                This proves $A \subseteq B \;\Leftrightarrow\; A \setminus B = \emptyset$. \qed
+
+
+                \item
+                We wish to prove $A \setminus (A \setminus B) = A \cap B$.
+                
+                Note that for sets $X$ and $Y$,
+                \begin{align*}
+                        X \setminus Y \;&=\; \{x : x \in X \land x \notin Y\}\\
+                                \;&=\; \{x : x \in X \land x \in Y^C\}\\
+                                \;&=\; X \cap Y^C
+                \end{align*}
+                Thus, $X \cap X^C \;=\; \{x : x \in X \land x \notin X\} \;=\; \emptyset$.
+                Also note that $(X^C)^C = X$, since
+                \begin{align*}
+                        x \in X \;&\Leftrightarrow\; x \notin X^C\\
+                                \;&\Leftrightarrow\; x \in (X^C)^C
+                \end{align*}
+                Thus, we have
+                \begin{align*}
+                        A \setminus (A \setminus B) \;&=\; A \setminus (A \cap B^C)\\
+                                \;&=\; A \cap (A \cap B^C)^C\\
+                                \;&=\; A \cap (A^C \cup (B^C)^C)                                \tag{De Morgan's Law}\\
+                                \;&=\; A \cap (A^C \cup B)\\
+                                \;&=\; (A \cap A^C) \cup (A \cap B)                             \tag{Distributive Law}\\
+                                \;&=\; \emptyset \cup (A \cap B)\\
+                                \;&=\; A \cap B \tag*\qed
+                \end{align*}
+                
+
+                \item
+                We wish to prove $A \setminus (B \cup C) = (A \setminus B) \cap (A \setminus C)$.
+                \begin{align*}
+                        A \setminus (B \cup C) \;&=\; A \cap (B \cup C)^C\\
+                                \;&=\; A \cap (B^C \cap C^C)                                            \tag{De Morgan's Law}\\
+                                \;&=\; (A \cap B^C) \cap (A \cap C^C)                                   \tag{Distributive Law}\\
+                                \;&=\; (A \setminus B) \cap (A \setminus C)     \tag*\qed
+                \end{align*}
+ 
+
+                \item
+                We wish to prove $A \setminus (B \cap C) = (A \setminus B) \cup (A \setminus C)$.
+                \begin{align*}
+                        A \setminus (B \cap C) \;&=\; A \cap (B \cap C)^C\\
+                                \;&=\; A \cap (B^C \cup C^C)                                            \tag{De Morgan's Law}\\
+                                \;&=\; (A \cap B^C) \cup (A \cap C^C)                                   \tag{Distributive Law}\\
+                                \;&=\; (A \setminus B) \cup (A \setminus C) \tag*\qed
+                \end{align*}
+
+                
+                \item
+                We wish to prove $A \Delta B = (A \cup B) \setminus (A \cap B)$.
+                
+                Let $U$ be a universal set. Note that for a set $X$, $X \cup X^C = \{x : x \in X \lor x \notin X\} = U$.
+                Also, $X \cap U = \{x: x \in X \land x \in U\} = X$.
+                \begin{align*}
+                        A \Delta B \;&=\; (A \setminus B) \cup (B \setminus A)\\
+                                \;&=\; (A \cap B^C) \cup (B \cap A^C)\\
+                                \;&=\; ((A \cap B^C) \cup B) \cap ((A \cap B^C) \cup A^C)               \tag{Distributive Law}\\
+                                \;&=\; (B \cup (A \cap B^C)) \cap (A^C \cup (A \cap B^C))\\
+                                \;&=\; ((B \cup A) \cap (B \cup B^C)) \cap ((A^C \cup A) \cap (A^C \cup B^C)) \tag{Distributive Law}\\
+                                \;&=\; ((B \cup A) \cap U) \cap (U \cap (A^C \cup B^C))\\
+                                \;&=\; (B \cup A) \cap (A^C \cup B^C)\\
+                                \;&=\; (A \cup B) \cap (A \cap B)^C                                     \tag{De Morgan's Law}\\
+                                \;&=\; (A \cup B) \setminus (A \cap B)  \tag*\qed
+                 \end{align*}
+
+
+                \item
+                We wish to prove $A \cap (B \Delta C) = (A \cap B) \Delta (A \cap C)$.
+                \begin{align*}
+                        (A \cap B) \Delta (A \cap C)
+                                \;&=\; ((A \cap B) \cup (A \cap C)) \setminus ((A \cap B) \cap (A \cap C)) \tag{From (ix)}\\
+                                \;&=\; (A \cap (B \cup C)) \setminus (A \cap B \cap A \cap C)           \tag{Distributive Law}\\
+                                \;&=\; (A \cap (B \cup C)) \setminus (A \cap B \cap C)\\
+                                \;&=\; (A \cap (B \cup C)) \cap (A \cap (B \cap C))^C\\
+                                \;&=\; (A \cap (B \cup C)) \cap (A^C \cup (B \cap C)^C)                 \tag{De Morgan's Law}\\
+                                \;&=\; (A \cap (B \cup C) \cap A^C) \cup (A \cap (B \cup C) \cap (B \cap C)^C) \tag{Distributive Law}\\
+                                \;&=\; (A \cap A^C \cap (B \cup C)) \cup (A \cap (B \cup C) \cap (B \cap C)^C) \\
+                                \;&=\; (\emptyset \cap (B \cup C)) \cup (A \cap (B \cup C) \setminus (B \cap C)) \\
+                                \;&=\; \emptyset \cup (A \cap (B \Delta C)) \tag{From (ix)}\\
+                                \;&=\; A \cap (B \Delta C)      \tag*\qed
+                \end{align*}
+
+
+                \item
+                We wish to prove $A \Delta (B \Delta C) = (A \Delta B) \Delta C$.
+
+                Note that $A \Delta B = B \Delta A$, since
+                \begin{align*}
+                        A \Delta B \;&=\; (A \cup B) \setminus (A \cap B)\\
+                                \;&=\; (B \cup A) \setminus (B \cap A)\\
+                                \;&=\; B \Delta A
+                \end{align*}
+                First, we expand
+                \begin{align*}
+                        A \Delta (B \Delta C)
+                                \;&=\; (A \setminus (B \Delta C)) \cup ((B \Delta C) \setminus A)\\
+                                \;&=\; (A \setminus ((B \setminus C) \cup (C \setminus B))) \cup (((B \setminus C) \cup (C \setminus B)) \setminus A)\\
+                                \;&=\; (A \cap ((B \cap C^C) \cup (C \cap B^C))^C) \cup (((B \cap C^C) \cup (C \cap B^C)) \cap A^C)\\
+                                \;&=\; (A \cap ((B \cap C^C)^C \cap (C \cap B^C)^C)) \cup (((B \cap C^C) \cup (C \cap B^C)) \cap A^C)\\
+                                \;&=\; (A \cap ((B^C \cup C) \cap (C^C \cup B))) \cup (((B \cap C^C) \cup (C \cap B^C)) \cap A^C)\\
+                                \;&=\; (A \cap ((B^C \cap (C^C \cup B)) \cup (C \cap (C^C \cup B)))) \cup (((B \cap C^C) \cup (C \cap B^C)) \cap A^C)\\
+                                \;&=\; (A \cap ((B^C \cap C^C) \cup (B^C \cap B) \cup (C \cap C^C) \cup (C \cap B))) \cup (((B \cap C^C) \cup (C \cap B^C)) \cap A^C)\\
+                                \;&=\; (A \cap ((B^C \cap C^C) \cup \emptyset \cup \emptyset \cup (C \cap B))) \cup (((B \cap C^C) \cap A^C) \cup ((C \cap B^C) \cap A^C))\\
+                                \;&=\; (A \cap ((B^C \cap C^C) \cup (C \cap B))) \cup ((B \cap C^C \cap A^C) \cup (C \cap B^C \cap A^C))\\
+                                \;&=\; ((A \cap (B^C \cap C^C)) \cup (A \cap (C \cap B))) \cup ((B \cap C^C \cap A^C) \cup (C \cap B^C \cap A^C))\\
+                                \;&=\; ((A \cap B^C \cap C^C) \cup (A \cap B \cap C)) \cup ((A^C \cap B \cap C^C) \cup (A^C \cap B^C \cap C))\\
+                                \;&=\; (A \cap B \cap C) \cup (A \cap B^C \cap C^C) \cup (A^C \cap B \cap C^C) \cup (A^C \cap B^C \cap C)
+                \end{align*}
+                Similarly,
+                \begin{align*}
+                        (A \Delta B) \Delta C
+                                \;&=\; ((A \Delta B) \setminus C) \cup (C \setminus (A \Delta B))\\
+                                \;&=\; (((A \setminus B) \cup (B \setminus A)) \setminus C) \cup (C \setminus((A \setminus B) \cup (B \setminus A)))\\
+                                \;&=\; (((A \cap B^C) \cup (B \cap A^C)) \cap C^C) \cup (C \cap ((A \cap B^C) \cup (B \cap A^C))^C)\\
+                                \;&=\; (((A \cap B^C) \cup (B \cap A^C)) \cap C^C) \cup (C \cap ((A \cap B^C)^C \cap (B \cap A^C)^C))\\
+                                \;&=\; (((A \cap B^C) \cup (B \cap A^C)) \cap C^C) \cup (C \cap ((A^C \cup B) \cap (B^C \cup A)))\\
+                                \;&=\; (((A \cap B^C) \cup (B \cap A^C)) \cap C^C) \cup (C \cap ((A^C \cap (B^C \cup A)) \cup (B \cap (B^C \cup A))))\\
+                                \;&=\; (((A \cap B^C) \cup (B \cap A^C)) \cap C^C) \cup (C \cap ((A^C \cap B^C) \cup (A^C \cap A) \cup (B \cap B^C) \cup (B \cap A)))\\
+                                \;&=\; (((A \cap B^C) \cap C^C) \cup ((B \cap A^C) \cap C^C)) \cup (C \cap ((A^C \cap B^C) \cup \emptyset \cup \emptyset \cup (B \cap A)))\\
+                                \;&=\; ((A \cap B^C \cap C^C) \cup (B \cap A^C \cap C^C)) \cup (C \cap ((A^C \cap B^C) \cup (B \cap A)))\\
+                                \;&=\; ((A \cap B^C \cap C^C) \cup (B \cap A^C \cap C^C)) \cup ((C \cap (A^C \cap B^C)) \cup (C \cap (B \cap A)))\\
+                                \;&=\; ((A \cap B^C \cap C^C) \cup (A^C \cap B \cap C^C)) \cup ((A^C \cap B^C \cap C) \cup (A \cap B \cap C))\\
+                                \;&=\; (A \cap B \cap C) \cup (A \cap B^C \cap C^C) \cup (A^C \cap B \cap C^C) \cup (A^C \cap B^C \cap C)
+                \end{align*}
+                Thus, $A \Delta (B \Delta C)$ and $(A \Delta B) \Delta C$ expand to the same expression, proving them to be equal. \qed
+
+
+                \item
+                We wish to prove $A \Delta B = A \Delta C$ if and only if $B = C$.
+
+                Note that for a set $X$, $X \Delta X = (X \setminus X) \cup (X \setminus X) = \emptyset$, and
+                $X \Delta \emptyset = \emptyset \Delta X = (X \setminus \emptyset) \cup (\emptyset \setminus X) = X$. Using the result from (xi)
+                \begin{align*}
+                         (A \Delta A) \Delta B
+                                \;&=\; A \Delta (A \Delta B)\\
+                                \;&=\; A \Delta (A \Delta C)\\
+                                \;&=\; (A \Delta A) \Delta C\\
+                        \emptyset \Delta B \;&=\; \emptyset \Delta C\\
+                        B \;&=\; C \tag*\qed
+                \end{align*}
+        \end{enumerate}
+        
+        \clearpage
+        \textbf{Solution 2.}
+        Let $A$, $B$, $C$, $D$ be sets.
+        \begin{enumerate}
+                \item
+                We wish to prove $A \times (B \cup C) = (A \times B) \cup (A \times C)$.
+                \begin{align*}
+                        (x, y) \in A \times (B \cup C)
+                                \;&\Leftrightarrow\; x \in A \land y \in (B \cup C)\\
+                                \;&\Leftrightarrow\; (x \in A) \land (y \in B \lor y \in C)\\
+                                \;&\Leftrightarrow\; (x \in A \land y \in B) \lor (x \in A \lor y \in C)\\
+                                \;&\Leftrightarrow\; ((x, y) \in A \times B) \lor ((x, y) \in A \times C)\\
+                                \;&\Leftrightarrow\; (x, y) \in (A \times B) \cup (A \times C) \tag*\qed
+                \end{align*}
+
+ 
+                \item
+                We wish to prove $A \times (B \cap C) = (A \times B) \cap (A \times C)$.
+                \begin{align*}
+                        (x, y) \in A \times (B \cap C)
+                                \;&\Leftrightarrow\; x \in A \land y \in (B \cap C)\\
+                                \;&\Leftrightarrow\; (x \in A) \land (y \in B \land y \in C)\\
+                                \;&\Leftrightarrow\; (x \in A \land y \in B) \land (x \in A \land y \in C)\\
+                                \;&\Leftrightarrow\; ((x, y) \in A \times B) \land ((x, y) \in A \times C)\\
+                                \;&\Leftrightarrow\; (x, y) \in (A \times B) \cap (A \times C) \tag*\qed
+                \end{align*}
+ 
+                
+                \item
+                We wish to prove $A \times (B \setminus C) = (A \times B) \setminus (A \times C)$.
+                \begin{align*}
+                        (x, y) \in A \times (B \setminus C)
+                                \;&\Rightarrow\; x \in A \land y \in (B \setminus C)\\
+                                \;&\Rightarrow\; (x \in A) \land (y \in B \land y \notin C)\\
+                                \;&\Rightarrow\; (x \in A \land y \in B) \land (y \notin C)\\
+                                \;&\Rightarrow\; (x, y) \in A \times B) \land ((x, y) \notin A \times C)\\
+                                \;&\Rightarrow\; (x, y) \in (A \times B) \setminus (A \times C)\\\\
+                        (x, y) \in (A \times B) \setminus (A \times C)
+                                \;&\Rightarrow\; ((x, y) \in A \times B) \land ((x, y) \notin A \times C)\\
+                                \;&\Rightarrow\; (x \in A \land y \in B) \land (x \notin A \lor y \notin C)\\
+                                \;&\Rightarrow\; (x \in A \land y \in B \land x \notin A) \lor (x \in A \land y \in B \land y \notin C)\\
+                                \;&\Rightarrow\; (x \in \emptyset) \lor (x \in A \land y \in (B \setminus C))\\
+                                \;&\Rightarrow\; x \in A \times (B \setminus C)
+                \end{align*}
+                Since each side is a subset of the other, they are equal. \qed
+
+
+                \item
+                We wish to determine whether $\mathcal{P}(A \times B) = \mathcal{P}(A) \times \mathcal{P}(B)$. This can be shown to be false in general.
+                As a counterexample, consider $A = \{a\}$, $B = \{b\}$.
+                \begin{align*}
+                        A \times B \;&=\; \{(a, b)\}\\
+                        \mathcal{P}(A \times B) \;&=\; \{\emptyset, \{(a, b)\}\}\\
+                        \mathcal{P}(A) \;&=\; \{\emptyset, \{a\}\}\\
+                        \mathcal{P}(B) \;&=\; \{\emptyset, \{b\}\}\\
+                        \mathcal{P}(A) \times \mathcal{P}(B) \;&=\; \{(\emptyset, \emptyset), (\emptyset, \{b\}), (\{a\}, \emptyset), (\{a\}, \{b\})\} \tag*\qed
+                \end{align*}
+
+
+                \item
+                We wish to determine whether $(A \cap C) \times (B \cap D) = (A \times B) \cap (C \times D)$. We prove this by selecting
+                \begin{align*}
+                        (x, y) \in (A \cap C) \times (B \cap D)
+                                \;&\Leftrightarrow\; x \in (A \cap C) \land y \in (B \cap D)\\
+                                \;&\Leftrightarrow\; x \in A \land x \in C \land y \in B \land y \in D\\
+                                \;&\Leftrightarrow\; x \in A \land y \in B \land x \in C \land y \in D\\
+                                \;&\Leftrightarrow\; ((x, y) \in A \times B) \land ((x, y) \in C \times D)\\
+                                \;&\Leftrightarrow\; (x, y) \in (A \times B) \cap (B \times C) \tag*\qed
+                \end{align*}
+
+
+                \item
+                We wish to determine whether $(A \cup C) \times (B \cup D) = (A \times B) \cup (C \times D)$. This can be shown to be false in general.
+                As a counterexample, consider
+                \begin{align*}
+                        A \;&=\; \{a\}\\
+                        B \;&=\; \{b\}\\
+                        C \;&=\; \{c\}\\
+                        D \;&=\; \{d\}\\
+                        A \cup C \;&=\; \{a, c\}\\
+                        B \cup D \;&=\; \{b, d\}\\
+                        (A \cup C) \times (B \cup D) \;&=\; \{(a, b), (a, d), (c, b), (c, d)\}\\
+                        (A \times B) \;&=\; \{(a, b)\}\\
+                        (C \times D) \;&=\; \{(c, d)\}\\
+                        (A \times B) \cup (C \times D) \;&=\; \{(a, b), (c, d)\} \tag*\qed
+                \end{align*}
+        \end{enumerate}
+
+        \clearpage
+        \textbf{Solution 3.} 
+        Let $n \in \mathbb{N}$ and let $X$ be a set of $n$ elements.
+        \begin{enumerate}
+                \item
+                The number of subsets of $X$ is $2^n$.
+
+                A subset of $X$ must have $k \in \{0, 1, 2, \dots, n\}$ elements. For a given $k$, there are exactly $\binom{n}{k}$ ways
+                of selecting $k$ elements from $X$, hence there are as many subsets of $X$ with $k$ elements. Thus, the total number of subsets
+                of $X$ is
+                \begin{align*}
+                        \sum_{k=0}^n \binom{n}{k} \;=\; 2^n     \tag*\qed
+                \end{align*}
+                
+                \item
+                The number of non-empty subsets of $X$ is $2^n - 1$.
+
+                Of the $2^n$ subsets of $X$, the number of empty subsets, that is, sets with zero elements, is exactly $\binom{n}{0} = 1$.
+                Removing the empty set from our count gives $2^n - 1$. \qed
+
+                \item
+                The number of ways one can choose two disjoint subsets of $X$ is $(3^n + 1)/2$.
+
+                Let us choose two disjoint subsets $A$ and $B$ of $X$. Each $x \in X$ has $3$ choices: it can be placed either in $A$, or in $B$, or in neither.
+                This gives us $3^n$ ways of constructing $A$ and $B$. We must also include the possibility that $A = B = \emptyset$, giving us $3^n + 1$.
+                Note that we are not concerned about the order in which we choose $A$ and $B$, so by symmetry, we have precisely double counted,
+                giving a total of $(3^n + 1)/2$. \qed
+
+                \item
+                The number of ways one can choose two non-empty disjoint subsets of $X$ is $(3^n - 2^{n+1} + 1)/2$.
+
+                Again, let us choose two disjoint subsets $A$ and $B$ of $X$. Of the $3^n$ ways of placing some $x \in X$ in $A$, $B$, or neither,
+                note that $A$ remains empty in exactly $2^n$ cases. This is because each $x \in X$ has $2$ choices: it can be placed either in $B$,
+                or in neither $A$ nor $B$. Similarly, $B$ remains empty in exactly $2^n$ cases, since each $x \in X$ can be placed either in $A$ or in
+                neither $A$ nor $B$. We have excluded the case where $A = B = \emptyset$ twice, so we have $3^n - 2^n - 2^n + 1$. Again,
+                symmetry gives us a total of $(3^n -2^{n + 1} + 1)/2$ unordered pairs of disjoint non-empty subsets of $X$. \qed
+         \end{enumerate}
+\end{document}
