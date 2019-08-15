@@ -85,17 +85,17 @@ a {
     background-color: rgba(0, 0, 0, 0);
 }
 
-#ma1101 {
+.card {
     flex: 0 1 80%;
 }
 
-#ma1101 li:before {
+.card li:before {
     content: '-';
 }
 
 @media only screen and (max-width: 600px) {
     #main-card-container {
-        width: 80%;
+        width: 90%;
     }
     #logo-container {
         font-size: 2rem;
