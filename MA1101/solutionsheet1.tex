@@ -422,9 +422,11 @@
                 \item
                 The number of ways one can choose two disjoint subsets of $X$ is $(3^n + 1)/2$.
 
-                Let us choose two disjoint subsets $A$ and $B$ of $X$. Each $x \in X$ has $3$ choices: it can be placed either in $A$, or in $B$, or in neither.
-                This gives us $3^n$ ways of constructing $A$ and $B$. We must also include the possibility that $A = B = \emptyset$, giving us $3^n + 1$.
-                Note that we are not concerned about the order in which we choose $A$ and $B$, so by symmetry, we have precisely double counted,
+                Let us choose two disjoint subsets $A$ and $B$ of $X$. Each $x \in X$ has $3$ choices: it can be placed either in $A$, or in $B$,
+                or in neither.
+                This gives us $3^n$ ways of constructing $A$ and $B$.
+                Note that we are not concerned about the order in which we choose $A$ and $B$, so we have precisely double counted the cases when
+                $A \neq B$, i.e., all but one, giving us $(3^n - 1)/2$. The only remaining case is $A = B = \emptyset$, which we add back on,
                 giving a total of $(3^n + 1)/2$. \qed
 
                 \item
