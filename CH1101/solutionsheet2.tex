@@ -1,0 +1,70 @@
+\documentclass[10pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{chemformula}
+\usepackage{array} 
+\usepackage{tikz, tikz-3dplot}
+
+\title{Mathematics I - Problem Sheet I}
+\author{Satvik Saha}
+\date{}
+
+\geometry{a4paper, margin=1in}
+\setlength\parindent{0pt}
+% \renewcommand\qedsymbol{$\blacksquare$}
+\newcolumntype{L}{l@{\quad\quad}}
+
+\begin{document}
+        \par\textbf{IISER Kolkata} \hfill \textbf{Problem Sheet II}
+        \vspace{3pt}
+        \hrule
+        \vspace{3pt}
+        \begin{center}
+                \LARGE{\textbf{CH1101 : Elements of Chemistry}}
+        \end{center}
+        \vspace{3pt}
+        \hrule
+        \vspace{3pt}
+        Satvik Saha, \texttt{19MS154}\hfill\today
+        \vspace{20pt}
+
+        \begin{enumerate}
+                \item An \textit{eigenfunction} of a given operator $D$ is any (non-zero) function $f$ which, when operated upon by $D$,
+                        gets multiplied by some scalar $\lambda$ called its \textit{eigenvalue}, i.e.,
+                        \[
+                                Df \;=\; \lambda f.
+                        \]
+                        For example, consider the differentiation operator $D_x = \frac{\mathrm{d} }{\mathrm{d}x}$. Note that
+                        \[
+                                D_x \exp(kx) \;=\; k \cdot\exp(kx).
+                        \]
+                        Thus, $\exp(kx)$ is an eigenfunction of the operator $D_x$, with an eigenvalue of $k$.
+                
+                \item Below is the point $P(x, y, z)$ in a spherical polar coordinate system.
+                        \begin{center}
+                        \tdplotsetmaincoords{60}{120}
+                        \begin{tikzpicture}[scale=4, tdplot_main_coords]
+                        \coordinate (O) at (0, 0, 0) node[left]{$O$};
+                        \draw[thick, -latex] (0, 0, 0) -- (1, 0, 0) node[anchor=north east]{$x$};
+                        \draw[thick, -latex] (0, 0, 0) -- (0, 1, 0) node[anchor=north west]{$y$};
+                        \draw[thick, -latex] (0, 0, 0) -- (0, 0, 1) node[anchor=south]{$z$};
+                        
+                        \tdplotsetcoord{P}{1}{30}{60}
+                        \draw[-stealth, color=red] (O) -- (P) node[above right]{$P$};
+                        \draw[dashed, color=red] (O) -- (Pxy) node[below right]{$P'$};
+                        \draw[dashed, color=red] (P) -- (Pxy);
+                        \tdplotdrawarc[-stealth]{(O)}{0.2}{0}{60}{anchor=north}{$\phi$}
+                        \tdplotsetthetaplanecoords{60}
+                        \tdplotdrawarc[tdplot_rotated_coords, -stealth]{(0,0,0)}{0.5}{0}{30}{anchor=south west}{$\theta$}
+                        \end{tikzpicture}
+                        \end{center}
+                        \begin{align*}
+                                r \;&=\; \sqrt{x^2 + y^2 + z^2} \\
+                                \theta \;&=\; \arccos\left( \frac{z}{\sqrt{x^2 + y^2 + z^2}}\right) \\
+                                \phi \;&=\; \arctan\left(\frac{y}{x}\right)
+                        \end{align*}
+                        We must have $r \geq 0$, $0\leq\theta\leq\pi$ and $0\leq\phi\leq 2\pi$.
+        \end{enumerate}
+\end{document}
