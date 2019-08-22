@@ -1,0 +1,60 @@
+\documentclass[10pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+
+\title{Mathematics I - Problem Sheet II}
+\author{Satvik Saha}
+\date{}
+
+\geometry{a4paper, margin=1in}
+\setlength\parindent{0pt}
+\renewcommand{\labelenumi}{(\roman{enumi})}
+% \renewcommand\qedsymbol{$\blacksquare$}
+
+\begin{document}
+        \par\textbf{IISER Kolkata} \hfill \textbf{Problem Sheet II}
+        \vspace{3pt}
+        \hrule
+        \vspace{3pt}
+        \begin{center}
+                \LARGE{\textbf{MA 1101 : Mathematics I}}
+        \end{center}
+        \vspace{3pt}
+        \hrule
+        \vspace{3pt}
+        Satvik Saha, \texttt{19MS154}\hfill\today
+        \vspace{20pt}
+
+        \textbf{Solution 1.}\\
+        Let $R$ be a relation on $\mathbb{R}^2$ such that
+        \[(x_1, x_2)\,R\,(y_1, y_2) \quad\text{if}\quad x_1 = y_1.\]
+        \begin{enumerate}
+                \item For an arbitrary $(x, y)\in\mathbb{R}^2$, $(x, y)\,R\,(x, y)$, since $x = x$. Therefore, $R$ is reflexive.
+
+                For $(x_1, x_2), (y_1, y_2) \in \mathbb{R}^2$, if $(x_1, x_2)\,R\,(y_1, y_2)$, we can write $x_1 = y_1 \Rightarrow y_1 = x_1$.
+                Thus, we have $(y_1, y_2)\,R\,(x_1, x_2)$. Therefore, $R$ is symmetric.
+
+                For $(x_1, x_2), (y_1, y_2), (z_1, z_2) \in \mathbb{R}^2$, if $(x_1, x_2)\,R\,(y_1, y_2)$ and $(y_1, y_2)\,R\,(z_1, z_2)$,
+                we can write $x_1 = y_1$ and $y_1 = z_1$, from which we have $x_1 = z_1 \Rightarrow (x_1, x_2)\,R\,(z_1, z_2)$.
+                Therefore, $R$ is transitive.
+
+                Hence, $R$ is an equivalence relation.\qed
+
+                \item For $(x_1, x_2) \in \mathbb{R}^2$, we have
+                \begin{align*}
+                [(x_1, x_2)] \;&=\; \{(y_1, y_2) \in \mathbb{R}^2 : (x_1, x_2)\,R\,(y_1, y_2)\} \\
+                        \;&=\; \{(y_1, y_2) \in \mathbb{R}^2 : x_1 = y_1\}\\\\
+                [(x_1, x_2)] \;&=\; \{(x_1, y) : y \in \mathbb{R}\}
+                \end{align*}
+                Therefore, the quotient set of $R$ is given by $$\mathbb{R}/R \;=\; \{L_x : x \in \mathbb{R}\},$$
+                where $L_x = \{(x, y) : y \in \mathbb{R}\}$.
+                Clearly, each equivalence class $L_x \in \mathbb{R}/R$ is a vertical line in the Cartesian plane, passing through $(x, 0)$.
+        \end{enumerate}
+
+        \textbf{Solution 2.}\\
+        Let $R$ be a relation on $\mathbb{R}^2$ such that
+        \[(x_1, x_2)\,R\,(y_1, y_2) \quad\text{if}\quad x_1^2 + x_2^2 = y_1^2 + y_2^2\]
+
+\end{document}
