@@ -45,8 +45,8 @@
                 \item For $(x_1, x_2) \in \mathbb{R}^2$, we have
                 \begin{align*}
                 [(x_1, x_2)] \;&=\; \{(y_1, y_2) \in \mathbb{R}^2 : (x_1, x_2)\,R\,(y_1, y_2)\} \\
-                        \;&=\; \{(y_1, y_2) \in \mathbb{R}^2 : x_1 = y_1\}\\\\
-                [(x_1, x_2)] \;&=\; \{(x_1, y) : y \in \mathbb{R}\}
+                        \;&=\; \{(y_1, y_2) \in \mathbb{R}^2 : x_1 = y_1\}\\
+                        \;&=\; \{(x_1, y) : y \in \mathbb{R}\}
                 \end{align*}
                 Therefore, the quotient set of $R$ is given by $$\mathbb{R}/R \;=\; \{L_x : x \in \mathbb{R}\},$$
                 where $L_x = \{(x, y) : y \in \mathbb{R}\}$.
@@ -56,5 +56,53 @@
         \textbf{Solution 2.}\\
         Let $R$ be a relation on $\mathbb{R}^2$ such that
         \[(x_1, x_2)\,R\,(y_1, y_2) \quad\text{if}\quad x_1^2 + x_2^2 = y_1^2 + y_2^2\]
+
+        \begin{enumerate}
+                \item For an arbitrary $(x, y) \in \mathbb{R}^2$, $(x, y)\,R\,(x, y)$, since $x^2 + y^2 = x^2 + y^2$. Therefore, $R$
+                is reflexive.
+
+                For $(x_1, x_2), (y_1, y_2) \in \mathbb{R}^2$, if $(x_1, x_2)\,R\,(y_1, y_2)$, we can write 
+                $x_1^2 + x_2^2 = y_1^2 + y_2^2 \Rightarrow y_1^2 + y_2^2 = x_1^2 + x_2^2$. Thus, we have $(y_1, y_2)\,R\,(x_1, x_2)$.
+                Therefore, $R$ is symmetric.
+
+                For $(x_1, x_2), (y_1, y_2), (z_1, z_2) \in \mathbb{R}^2$, if $(x_1, x_2)\,R\,(y_1, y_2)$ and $(y_1, y_2)\,R\,(z_1, z_2)$,
+                we can write $x_1^2 + x_2^2 = y_1^2 + y_2^2$ and $y_1^2 + y_2^2 = z_1^2 + z_2^2$, from which we have
+                $x_1^2 + x_2^2 = z_1^2 + z_2^2 \Rightarrow (x_1, x_2)\,R\,(z_1, z_2)$. Therefore, $R$ is transitive.
+
+                Hence, $R$ is an equivalence relation.\qed
+                
+                \item For $(x_1, x_2) \in \mathbb{R}^2$, we have
+                \begin{align*}
+                [(x_1, x_2)] \;&=\; \{(y_1, y_2) \in \mathbb{R}^2 : (x_1, x_2)\,R\,(y_1, y_2)\} \\
+                        \;&=\; \{(y_1, y_2) \in \mathbb{R}^2 : x_1^2 + x_2^2 = y_1^2 + y_2^2\}
+                \end{align*}
+                Clearly, each equivalence class is a circle of radius $r = \sqrt{x_1^2 + x_2^2}$ centred at the origin.
+                Such a circle can be denoted by $C_r = \{(x, y) \in \mathbb{R}^2 : x^2 + y^2 = r^2\}$.
+                Therefore, the quotient set of $R$ is given by $$\mathbb{R}/R \;=\; \{C_r : r \geq 0\}.$$
+                
+        \end{enumerate}
+
+        \textbf{Solution 5.}\\
+        Let $n \in \mathbb{N}$ and $X$ be a set of $n$ elements.
+        An arbitrary relation $R$ on $X$ is a subset of the Cartesian product $X\times X = X^2$.
+        Note that for $(a, b) \in X^2$, $a$ can be any of the $n$ elements in $X$, and $b$ can be independently any
+        of the $n$ elements in $X$. Thus, we have a total of $n^2$ elements in $X^2$.
+        \begin{enumerate}
+                \item Since $R$ is any subset $R \subseteq X^2$, we can say that a relation on $X$ is any $R \in \mathcal{P}(X^2)$.
+                Thus, the total number of possible relations $R$ is the number of elements in $\mathcal{P}(X^2)$, i.e., $2^{n^2}$.
+
+                \item Let $D = \{(x, x) : x \in X\}$ be the set of the diagonal elements of $X^2$. Clearly, there are $n$ elements in $D$.
+                A reflexive relation $R$ must have $D \subseteq R$. Thus, of the $n^2$ elements of $X^2$, the $n$ diagonal elements
+                are fixed -- the remaining $n^2 - n$ elements can be chosen to be or not to be in $R$, giving us a total of
+                $2^{n^2 - n}$ such relations.
+
+                \item Since $xRy \Rightarrow yRx$ if $x = y$, each of the $n$ diagonal elements of $X^2$ may or may not be present in a
+                symmetric relation $R$ on $X$. Also, the presence of $(x, y) \in X^2\setminus D$ in $R$ forces the presence
+                of $(y, x)$ in $R$. Thus, we have $(n^2 - n)/2$ choices for the non-diagonal elements, giving a total of
+                $2^n \cdot 2^{(n^2 - n)/2} = 2^{(n^2 + n)/2}$ such relations.
+
+                \item As before, we have $(n^2 - n)/2$ choices for non-diagonal elements to fulfil symmetry. The remaining diagonal
+                elements are fixed to fulfil reflexivity, giving a total of $2^{(n^2 - n)/2}$ such relations.
+        \end{enumerate}
 
 \end{document}
