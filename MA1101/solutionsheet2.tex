@@ -56,7 +56,6 @@
         \textbf{Solution 2.}\\
         Let $R$ be a relation on $\mathbb{R}^2$ such that
         \[(x_1, x_2)\,R\,(y_1, y_2) \quad\text{if}\quad x_1^2 + x_2^2 = y_1^2 + y_2^2\]
-
         \begin{enumerate}
                 \item For an arbitrary $(x, y) \in \mathbb{R}^2$, $(x, y)\,R\,(x, y)$, since $x^2 + y^2 = x^2 + y^2$. Therefore, $R$
                 is reflexive.
@@ -80,6 +79,61 @@
                 Such a circle can be denoted by $C_r = \{(x, y) \in \mathbb{R}^2 : x^2 + y^2 = r^2\}$.
                 Therefore, the quotient set of $R$ is given by $$\mathbb{R}/R \;=\; \{C_r : r \geq 0\}.$$
                 
+        \end{enumerate}
+
+        \textbf{Solution 3.}\\
+        Let $R$ be a relation on $\mathbb{N}^2$ such that
+        \[(m, n)\,R\,(p, q) \quad\text{if}\quad m + q = n + p\]
+        \begin{enumerate}
+                \item For an arbitrary $(m, n) \in \mathbb{N}^2$, $(m, n)\,R\,(m, n)$, since $m + n = n + m$. Therefore, $R$
+                is reflexive.
+
+                For $(m, n), (p, q) \in \mathbb{N}^2$, if $(m, n)\,R\,(p, q)$, we can write $m + q = n + p \Rightarrow p + n = q + m$.
+                Thus, we have $(p, q)\,R\,(m, n)$. Therefore, $R$ is symmetric.
+
+                For $(m, n), (p, q), (r, s) \in \mathbb{N}^2$, note that $m + q = n + p \Leftrightarrow m - n = p - q$.
+                If $(m, n)\,R\,(p, q)$ and $((p, q)\,R\,(r, s)$, we can write $m - n = p - q$ and $p - q = r - s$, from which we have
+                $m - n = r - s \Rightarrow (m, n)\,R\,(r, s)$. Therefore, $R$ is transitive.
+
+                Hence, $R$ is an equivalence relation.\qed
+
+                \item For $(m, n) \in \mathbb{N}^2$, we have
+                \begin{align*}
+                [(m, n)] \;&=\; \{(p, q) \in \mathbb{N}^2 : (m, n)\,R\,(p, q)\} \\
+                        \;&=\; \{(p, q) \in \mathbb{N}^2 : m + q = n + p\} \\
+                        \;&=\; \{(p, q) \in \mathbb{N}^2 : m - n = p - q\}
+                \end{align*}
+                Clearly, each equivalence class has its elements $(p, q)$ on the line $m - n = x - y$ in the Cartesian plane.
+                Note that $m - n = p - q \Rightarrow n = m + (q - p)$, so for $n \in \mathbb{N}$, we must have $(q - p) \geq 0$.
+                Also note that $(p , q)\,R\,(1, 1 + (q - p))$. Thus, we have
+                \[
+                        [(m, n)] \;=\; \{(1, 1 + (n - m)): m, n \in \mathbb{N}\}
+                \]
+        \end{enumerate}
+
+        \textbf{Solution 4.}\\
+        Let $R$ be a relation on $\mathbb{R}^2\setminus\{(0,0)\}$ such that
+        \[(x_1, x_2)\,R\,(y_1, y_2) \quad\text{if}\quad (y_1, y_2) = \alpha(x_1, x_2), \quad\alpha\neq 0\]
+        \begin{enumerate}
+                \item Let $x_i \in \mathbb{R}\setminus\{0\}$.
+                Clearly, $R$ is reflexive since $(x_1, x_2) = (1)\cdot (x_1, x_2)$.
+
+                Note that $\frac{1}{\alpha} \in \mathbb{R}\setminus\{0\}$, so if $(x_1, x_2)\,R\,(x_3, x_4)$, we have
+                $(x_3, x_4)=\alpha(x_1, x_2) \Rightarrow (x_1, x_2) = \frac{1}{\alpha}(x_3, x_4)$. Therefore, $R$ is symmetric.
+                
+                If $(x_3, x_4) = \alpha(x_1, x_2)$ and $(x_5, x_6) = \beta(x_3, x_4)$, we have $(x_5, x_6) = (\alpha\beta)\cdot (x_1, x_2)$.
+                Therefore, $R$ is transitive.
+
+                Hence, $R$ is an equivalence relation.\qed
+                
+                \item For $(r, s) \in \mathbb{R}\setminus(0,0)$, we have
+                \begin{align*}
+                        [(r, s)] \;&=\; \{(x, y) \in \mathbb{R}^2\setminus\{(0, 0)\} : (r, s)\,R\,(x, y)\} \\
+                                \;&=\; \{(x, y) \in \mathbb{R}^2\setminus\{(0, 0)\} : (x, y) = \alpha(r, s), \alpha \neq 0\} \\
+                                \;&=\; \{(\alpha r, \alpha s) : \alpha, r, s \in \mathbb{R}\setminus\{0\}\}
+                \end{align*}
+                Clearly, each equivalence class $[(r, s)]$ is a line of slope $s/r$, through $(1, s/r)$, excluding the origin in the
+                Cartesian plane.
         \end{enumerate}
 
         \textbf{Solution 5.}\\
