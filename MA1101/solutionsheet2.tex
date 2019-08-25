@@ -3,6 +3,7 @@
 \usepackage[T1]{fontenc}
 \usepackage{geometry}
 \usepackage{amsmath, amssymb, amsthm}
+\usepackage{tikz}
 
 \title{Mathematics I - Problem Sheet II}
 \author{Satvik Saha}
@@ -50,8 +51,23 @@
                 \end{align*}
                 Therefore, the quotient set of $R$ is given by $$\mathbb{R}/R \;=\; \{L_x : x \in \mathbb{R}\},$$
                 where $L_x = \{(x, y) : y \in \mathbb{R}\}$.
-                Clearly, each equivalence class $L_x \in \mathbb{R}/R$ is a vertical line in the Cartesian plane, passing through $(x, 0)$.
+                Clearly, each equivalence class $L_x \in \mathbb{R}/R$ is a vertical line in the Cartesian plane, passing through $(x, 0)$.\\
+
+                \begin{center}
+                \begin{tikzpicture}[scale=1, transform shape]
+                        \draw[latex-latex, thick] (0, 5) node[below left]{$y$} -- (0, -5);
+                        \draw[latex-latex, thick] (5, 0) node[below left]{$x$} -- (-5, 0);
+                        \node[below left] at (0, 0){$O$};
+                        \node[below left] at (1, 0){$1$};
+                        \node[below left] at (2.71828, 0){$e$};
+                        \node[below left] at (-1.414, 0){$-\sqrt{2}$};
+                        \draw[<->, color=blue] (1, 5) node[below right]{$L_1$} -- (1, -5);
+                        \draw[<->, color=red] (2.71828, 5) node[below right]{$L_e$} -- (2.71828, -5);
+                        \draw[<->, color=olive] (-1.414, 5) node[below right]{$L_{-\sqrt{2}}$} -- (-1.414, -5);
+                \end{tikzpicture}
+                \end{center}
         \end{enumerate}
+        \clearpage
 
         \textbf{Solution 2.}\\
         Let $R$ be a relation on $\mathbb{R}^2$ such that
@@ -77,9 +93,22 @@
                 \end{align*}
                 Clearly, each equivalence class is a circle of radius $r = \sqrt{x_1^2 + x_2^2}$ centred at the origin.
                 Such a circle can be denoted by $C_r = \{(x, y) \in \mathbb{R}^2 : x^2 + y^2 = r^2\}$.
-                Therefore, the quotient set of $R$ is given by $$\mathbb{R}/R \;=\; \{C_r : r \geq 0\}.$$
+ 
+                Therefore, the quotient set of $R$ is given by $$\mathbb{R}/R \;=\; \{C_r : r \geq 0\}.$$\\
+                \begin{center}
+                \begin{tikzpicture}[scale=1, transform shape]
+                        \draw[latex-latex, thick] (0, 5) node[below left]{$y$} -- (0, -5);
+                        \draw[latex-latex, thick] (5, 0) node[below left]{$x$} -- (-5, 0);
+                        \node[below left] at (0, 0){$O$};
+                        \node[below right] at (1, 0){$1$};
+                        \node[below right] at (3.14159, 0){$\pi$};
+                        \draw[<->, color=blue] (0, 0) circle (1) (0.7, 0.7) node[above right]{$C_1$};
+                        \draw[<->, color=red] (0, 0) circle (3.14159) (2.2, 2.2) node[above right]{$C_\pi$};
+                \end{tikzpicture}
+                \end{center}
                 
         \end{enumerate}
+        \clearpage
 
         \textbf{Solution 3.}\\
         Let $R$ be a relation on $\mathbb{N}^2$ such that
