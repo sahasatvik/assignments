@@ -137,8 +137,37 @@
                 Also note that $(p , q)\,R\,(1, 1 + (q - p))$. Thus, we have
                 \[
                         [(m, n)] \;=\; \{(1, 1 + (n - m)): m, n \in \mathbb{N}\}
-                \]
+                \]\\
+
+                \begin{center}
+                \begin{tikzpicture}[scale=1, transform shape]
+                        \draw[latex-, thick] (0, 6.5) node[below left]{$y$} -- (0, 0);
+                        \draw[latex-, thick] (6.5, 0) node[below left]{$x$} -- (0, 0);
+                        \node[below left] at (0, 0){$O$};
+                        \foreach \x in {1,...,6}{
+                                \foreach \y in {1,...,6} {
+                                        \draw[fill] (\x, \y) circle (0.05);
+                                }
+                        }
+                        
+                        \draw[color=red, dashed, ->] (1, 1) -- (6.3, 6.3);
+                        \node[below right, color=red] at (4, 4){$[(1, 1)]$};
+                        \foreach \x in {1,...,6} {
+                                \draw[fill, color=red] (\x, \x) circle (0.05);
+                        }
+                        
+                        \draw[color=blue, dashed, ->] (1, 2) -- (5.3, 6.3);
+                        \node[above left, color=blue] at (3, 4){$[(1, 2)]$};
+                        \draw[fill, color=blue] (1, 2) circle (0.05);
+                        \draw[fill, color=blue] (2, 3) circle (0.05);
+                        \draw[fill, color=blue] (2, 3) circle (0.05);
+                        \draw[fill, color=blue] (3, 4) circle (0.05);
+                        \draw[fill, color=blue] (4, 5) circle (0.05);
+                        \draw[fill, color=blue] (5, 6) circle (0.05);
+                \end{tikzpicture}
+                \end{center}
         \end{enumerate}
+        \clearpage
 
         \textbf{Solution 4.}\\
         Let $R$ be a relation on $\mathbb{R}^2\setminus\{(0,0)\}$ such that
@@ -162,7 +191,21 @@
                                 \;&=\; \{(\alpha r, \alpha s) : \alpha, r, s \in \mathbb{R}\setminus\{0\}\}
                 \end{align*}
                 Clearly, each equivalence class $[(r, s)]$ is a line of slope $s/r$, through $(1, s/r)$, excluding the origin in the
-                Cartesian plane.
+                Cartesian plane.\\
+
+                \begin{center}
+                \begin{tikzpicture}[scale=1, transform shape]
+                        \draw[latex-latex, thick] (0, 5) node[below left]{$y$} -- (0, -2);
+                        \draw[latex-latex, thick] (5, 0) node[below left]{$x$} -- (-2, 0);
+                        \node[below left] at (0, 0){$O$};
+                        \node[above left, color=red] at (3, 3){$[(1, 1)]$};
+                        \draw[<->, color=red] (-1.5, -1.5) -- (5, 5);
+                        \node[below right, color=blue] at (3, 1.5){$[(2, 1)]$};
+                        \draw[<->, color=blue] (-1.5, -0.75) -- (5, 2.5);
+                        \draw[color=blue, fill=white] (0, 0) circle (0.1);
+                \end{tikzpicture}
+                \end{center}
+ 
         \end{enumerate}
 
         \textbf{Solution 5.}\\
