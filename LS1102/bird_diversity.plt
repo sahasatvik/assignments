@@ -1,4 +1,6 @@
 set title "IISER Kolkata Birdlife"
+set ylabel "Population size"
+set xlabel "Species"
 set style data histogram
 set style fill solid border -1
 set yrange [0:70]

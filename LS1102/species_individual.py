@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 from os import sys
+from statistics import stdev
 import random
 import math
 
@@ -14,8 +15,12 @@ for i, frequency in enumerate(data):
 def count_unique(l):
     return len(set(l))
 
-for i in range(5, n, 5):
-    s = []
-    for j in range(10):
-        s.append(count_unique(random.sample(individuals, i)))
-    print '{}\t{}'.format(i, sum(s) / 10.0)
+trials = 50
+for i in range(2, n + 2, 2):
+    counts = []
+    for j in range(trials):
+        counts.append(count_unique(random.sample(individuals, i)))
+    s = stdev(counts)
+    if s == 0:
+        s = 1e-12
+    print '{}\t{}\t{}'.format(i, 1.0 * sum(counts) / trials, s)
