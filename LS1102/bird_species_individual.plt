@@ -10,5 +10,5 @@ set output "bird_species_individual.png"
 g(x) = c * (1 - a * exp(-x/k))
 c = 32
 k = 50
-fit g(x) 'bird_species_individual_data' via c, k, a
+fit g(x) "bird_species_individual_data" using 1:2:3 yerrors via c, k, a
 plot "bird_species_individual_data" with yerrorbars lc 2 pt 7 title '', g(x) lw 2 lc 7 title ''
