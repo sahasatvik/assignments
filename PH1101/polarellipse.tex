@@ -1,0 +1,104 @@
+\documentclass[10pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{tikz}
+
+\geometry{a4paper, margin=1in}
+\setlength\parindent{0pt}
+% \renewcommand\qedsymbol{$\blacksquare$}
+
+\begin{document}
+        \par\textbf{IISER Kolkata} \hfill
+        \vspace{3pt}
+        \hrule
+        \vspace{3pt}
+        \begin{center}
+                \LARGE{\textbf{PH 1101 : Mechanics I}}
+        \end{center}
+        \vspace{3pt}
+        \hrule
+        \vspace{3pt}
+        Satvik Saha, \texttt{19MS154}\hfill\today
+        \vspace{20pt}
+
+        We shall show that in polar coordinates, an ellipse is described by the equation
+        \[
+                r (1 - e \cos\theta) \;=\; l,
+        \]
+        where the coordinate system is centred at one of the foci of the ellipse.
+
+        Here, $e$ is the eccentricity of the ellipse, and $l$ is its semi-latus rectum.\\
+
+        Let the foci of the ellipse be $S$ and $S'$. We shall define the ellipse as locus of all points $P$ such that
+        \[
+                SP + S'P \;=\; \text{constant}.
+        \]
+
+        Join $S$ and $S'$, and extend it on both sides so that it cuts the ellipse at $A$ and $A'$.
+
+        \begin{center}
+        \begin{tikzpicture}[scale=0.7]
+                \node[below] at (3, 0){$S$};
+                \draw[fill] (3, 0) circle (0.05);
+                \node[below] at (-3, 0){$S'$};
+                \draw[fill] (-3, 0) circle (0.05);
+                \draw[latex-latex] (-6, 0) -- (6, 0);
+                \draw (0, 0) ellipse (5 and 4);
+                \node[below right] at (5, 0){$A$};
+                \draw[fill] (5, 0) circle (0.05);
+                \node[below left] at (-5, 0){$A'$};
+                \draw[fill] (-5, 0) circle (0.05);
+        \end{tikzpicture}
+        \end{center}
+
+        We must have
+        \begin{align*}
+                SA + S'A \;&=\; \text{constant}\\
+                SA' + S'A' \;&=\; \text{constant}.
+        \end{align*}
+        Note that $S'A = SS' + SA$, and $SA' = SS' + S'A'$. Thus, we must have $SA = S'A'$. Also,
+        \[
+                SA + SS' + S'A' \;=\; \text{constant} \;=\; AA'.
+        \]
+
+        Define $AA' = 2a$. Clearly, $a$ is the semi-major axis of our ellipse.
+        Let the midpoint of $SS'$ be $O$. Define $OS = OS' = s$.\\
+        
+        Construct a perpendicular to $SS'$ through $S$, cutting the ellipse at $L$ and $L'$. Note that $SL$ is the semi-latus rectum
+        $l$ of our ellipse. Join $S'L$.
+
+        \begin{center}
+        \begin{tikzpicture}[scale=0.7]
+                \node[below] at (0, 0){$O$};
+                \draw[fill] (0, 0) circle (0.05);
+                \node[below right] at (3, 0){$S$};
+                \draw[fill] (3, 0) circle (0.05);
+                \node[below] at (-3, 0){$S'$};
+                \draw[fill] (-3, 0) circle (0.05);
+                \draw[latex-latex] (-6, 0) -- (6, 0);
+                \draw (0, 0) ellipse (5 and 4);
+                \node[below right] at (5, 0){$A$};
+                \draw[fill] (5, 0) circle (0.05);
+                \node[below left] at (-5, 0){$A'$};
+                \draw[fill] (-5, 0) circle (0.05);
+                \draw[latex-latex] (3, 5) -- (3, -5);
+                \draw (3, 0.4) -| (3.4, 0);
+                \draw[fill] (3, 3.2) circle (0.05);
+                \node[above right] at (3, 3.2){$L$};
+                \draw[fill] (3, -3.2) circle (0.05);
+                \node[below right] at (3, -3.2){$L'$};
+                \draw (-3, 0) -- (3, 3.2);
+        \end{tikzpicture}
+        \end{center}
+
+        We have $SL + S'L = AA'$. Applying the Pythagorean theorem on $\triangle SLS'$ gives
+        \begin{align*}
+                SS'^2 \;&=\; SL^2 + S'L^2\\
+                (2s)^2 \;&=\; (l)^2 + (2a - l)^2 \\
+                l \;&=\; \frac{(a^2 - s^2)}{a}
+        \end{align*}
+
+
+\end{document}
