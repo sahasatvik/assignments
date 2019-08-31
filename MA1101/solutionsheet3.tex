@@ -1,0 +1,236 @@
+\documentclass[10pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+
+\title{Mathematics I - Problem Sheet III}
+\author{Satvik Saha}
+\date{}
+
+\geometry{a4paper, margin=1in}
+\setlength\parindent{0pt}
+\renewcommand{\labelenumi}{(\roman{enumi})}
+% \renewcommand\qedsymbol{$\blacksquare$}
+
+\begin{document}
+        \par\textbf{IISER Kolkata} \hfill \textbf{Problem Sheet III}
+        \vspace{3pt}
+        \hrule
+        \vspace{3pt}
+        \begin{center}
+                \LARGE{\textbf{MA 1101 : Mathematics I}}
+        \end{center}
+        \vspace{3pt}
+        \hrule
+        \vspace{3pt}
+        Satvik Saha, \texttt{19MS154}\hfill\today
+        \vspace{20pt}
+
+        \textbf{Solution 1.}\\
+        Let $X, Y, Z \neq \emptyset$, let $ f : X \to Y $ and let $ g : Y \to Z $.
+        We have
+        \begin{align*}
+                g\circ f &: X \to Z, \\
+                &x \mapsto  g(f(x))
+        \end{align*}
+        \begin{enumerate}
+                \item If $f$ and $g$ are injective, for arbitrary $x_1, x_2 \in X$,
+                \begin{alignat*}{2}
+                        &&(g\circ f)(x_1) \;&=\; (g \circ f)(x_2) \\
+                        &\Rightarrow\quad& g(f(x_1)) \;&=\; g(f(x_2)) \\
+                        &\Rightarrow\quad& f(x_1) \;&=\; f(x_2) \tag{Injectivity of $g$}\\
+                        &\Rightarrow\quad& x_1 \;&=\; x_2 \tag{Injectivity of $f$}
+                \end{alignat*}
+                Hence, $g\circ f$ is injective. \qed
+
+                \item If $g$ is surjective, it follows that for all $z_i \in Z$, there exists $y_i \in Y$ such that
+                $g(y_i) = z_i$. If $f$ is also surjective, it follows that for all these $y_i$, there exists $x_i \in X$ such that
+                $f(x_i) = y_1$. Hence, for all $z_i \in Z$, there exists $x_i \in X$ such that $(g\circ f)(x_i) = g(f(x_i)) = z_i$.
+                Therefore, $g\circ f$ is surjective. \qed
+
+                \item If $f$ and $g$ are bijective, $g\circ f$ must be injective from (i) and surjective from (ii).
+                Therefore, $g\circ f$ is bijective. \qed
+
+                \item If $g\circ f$ is surjective, it follows that for all $z_i \in Z$, there exists $x_i \in X$ such that
+                $g(f(x_i)) = z_i$. Since $f$ is a function, for all these $x_i$, there must exist $y_i \in Y$ such that
+                $f(x_i) = y_i$. Hence, for all $z_i \in Z$, there exists $y_i \in Y$ such that $g(y_i) = z_i$.
+                Therefore, $g$ is surjective. \qed
+
+                Consider
+                \begin{align*}
+                        f &: \{0, 1, 2\}  \to \{0, 1\},\\
+                        &x \mapsto 0.\\
+                        g &: \{0, 1\} \to \{0\},\\
+                        &x \mapsto 0.
+                \end{align*}
+                Clearly, we have $g\circ f: \{0, 1, 2\} \to \{0\}, x\mapsto 0$ is surjective, yet $f$ is not surjective since 
+                there is no $x \in \{0, 1, 2\}$ such that $f(x) = 1$.
+
+                \item Let $x_1, x_2 \in X$ such that $x_1 \neq x_2$. We have two cases : $f(x_1) = f(x_2)$ or $f(x_1) \neq f(x_2)$.
+                If $f(x_1) = f(x_2) = y \in Y$, we must have $(g\circ f)(x_1) = g(f(x_1)) = g(f(x_2)) = (g\circ f)(x_2)$.
+                This contradicts the injectivity of $g\circ f$. Hence, we must have $f(x_1) \neq f(x_2)$.
+                Therefore, $f$ is injective. \qed
+
+                Consider
+                \begin{align*}
+                        f &: \{0\}  \to \{0, 1\},\\
+                        &x \mapsto 0.\\
+                        g &: \{0, 1\} \to \{0\},\\
+                        &x \mapsto 0.
+                \end{align*}
+                Clearly, we have $g\circ f: \{0\} \to \{0\}, x\mapsto 0$ is injective, yet $g$ is not injective since 
+                $g(0) = g(1) = 0$.
+
+                \item We have $g\circ f$ is injective and $f$ is surjective.
+                Let $y_1, y_2 \in Y$ such that $g(y_1) = g(y_2)$. The surjectivity of $f$ implies that there exist $x_1, x_2 \in X$
+                such that $f(x_1) = y_1$ and $f(x_2) = y_2$. Hence, we have $g(f(x_1)) = g(f(x_2)) \Leftrightarrow (g\circ f)(x_1) = (g\circ f)(x_2)$.
+                The injectivity of $g\circ f$ implies $x_1 = x_2$, from which we have $y_1 = y_2$.
+                Therefore, $g$ is surjective. \qed
+        \end{enumerate}
+        
+        \textbf{Solution 2.}\\ 
+        Let $W, X, Y, Z \neq \emptyset$, and let $f: W\to X$, $g: X\to Y$ and $h: Y\to Z$. We will show that $$(h\circ g)\circ f = h\circ (g\circ f).$$
+
+        Clearly, we have $h\circ g: X \to Z$, hence $(h \circ g)\circ f: W \to Z$. Also, $g\circ f: W\to Y$, hence $h\circ (g\circ f): W \to Z$.
+        Thus, the domains and codomains of both these functions are equal.\\
+
+        Let $w \in W$, $x = f(w) \in X$, $y = g(x) \in Y$, $z = h(y) \in Z$. Thus, $(h\circ g)(x) = h(g(x)) = h(y) = z$, so 
+        $((h\circ g)\circ f)(w) = (h\circ g)(f(w)) = (h\circ g)(x) = z$.
+
+        Again, $(g\circ f)(w) = g(f(w)) = g(x) = y$, so $(h \circ (g\circ f))(w) = h((g\circ f)(w)) = h(y) = z$.
+
+        Hence, for all $w \in W$, $((h\circ g)\circ f)(w) = (h\circ (g\circ f))(w) \in Z$.
+        Therefore, these two functions are equal. \qed
+
+        \textbf{Solution 3.}\\
+        \begin{enumerate}
+                \item We examine
+                \begin{align*}
+                        f&: \mathbb{R} \to \mathbb{R},\\
+                        &x \mapsto x^2 + x.
+                \end{align*}
+                Clearly, $f$ is not injective, since $f(0) = f(-1) = 0$.
+                
+                Note that for all $x \in \mathbb{R}$,
+                \[
+                        f(x) \;=\; x^2 + x 
+                                \;=\; \left(x + \frac{1}{2}\right)^2 - \frac{1}{4}
+                                \;\geq\; -\frac{1}{4}
+                \]
+                Hence, for all $y < -1 /4$, e.g., $y = -1$, there is no $x \in \mathbb{R}$ such that $f(x) = y$.
+                
+                Therefore, $f$ is neither injective, nor surjective. \qed
+                
+                \item We examine
+                \begin{align*}
+                        f&: \mathbb{N} \to \mathbb{N},\\
+                        &n \mapsto \left\lfloor \frac{n+1}{2}  \right\rfloor .
+                \end{align*}
+                Clearly, $f$ is not injective, since $f(1) = f(2) = 1$.
+
+                Note that for all $k \in \mathbb{N}$, $f(2k - 1) = k$. Also, $2k-1 \in \mathbb{N}$.
+
+                Therefore, $f$ is not injective, but is surjective. \qed
+                
+                \item We examine
+                \begin{align*}
+                        f&: \mathbb{R} \to \mathbb{R},\\
+                        &x \mapsto x + \left\lfloor x \right\rfloor .
+                \end{align*}
+
+                Let $x_1, x_2 \in \mathbb{R}$. Thus,
+                \begin{alignat*}{2}
+                        &&f(x_1) \;&=\; f(x_2) \\
+                        &\Rightarrow\quad& x_1 + \lfloor x_1\rfloor \;&=\; x_2 + \lfloor x_2\rfloor \\
+                        &\Rightarrow\quad& x_1 - x_2 \;&=\; -\lfloor x_1\rfloor + \lfloor x_2\rfloor
+                \end{alignat*}
+                It follows that $x_1 - x_2 \in \mathbb{Z}$, so $\lfloor x_1\rfloor = x_1$ and $\lfloor x_2\rfloor = x_2$.
+                Hence, we have $x_1 = x_2$. Therefore, $f$ is injective.
+
+                For $f(x) = 2k + 1 \in \mathbb{Z} \subset \mathbb{R}$, $k \in \mathbb{Z}$, we must have $x + \lfloor x \rfloor = 2k + 1$, so 
+                $x \in \mathbb{Z}$. Thus, $f(x) = 2x = 2k + 1 \Rightarrow x = k + \frac{1}{2} \notin \mathbb{Z}$, a contradiction. Hence, there
+                is no $x \in \mathbb{R}$ such that $f(x) = 2k + 1$, $k \in \mathbb{Z}$.
+                
+                Therefore, $f$ is injective, but not surjective. \qed
+
+                \item We examine
+                \begin{align*}
+                        f&: \mathbb{R} \to \mathbb{R},\\
+                        &x \mapsto x - \left\lfloor x \right\rfloor .
+                \end{align*}
+                Clearly, $f$ is not injective, since $f(0) = f(1) = 0$.
+
+                Note that $\lfloor x\rfloor$ is the \textit{greatest} integer less than or equal to $x$.
+                Let $x - \lfloor x\rfloor = \delta$, where $\delta \in \mathbb{R}$.
+                We must have $\lfloor x\rfloor \leq x$, so $\delta \geq 0$.
+                If $\delta \geq 1$, we would have 
+                $x - (1 + \lfloor x\rfloor) = \delta - 1 \geq 0 \Rightarrow x \geq 1 + \lfloor x\rfloor$, a contradiction.
+                Hence, $\delta < 1$, and $f(x) < 1$ for all $x \in \mathbb{R}$, i.e., there is no $x \in \mathbb{R}$ such that $f(x) = 2$.
+
+                Therefore, $f$ is neither injective, nor surjective. \qed
+
+                \item We examine
+                \begin{align*}
+                        f&: \mathbb{R}\setminus\{1\} \to \mathbb{R},\\
+                        &x \mapsto \frac{x+1}{x-1} .
+                \end{align*}
+
+                Let $x_1, x_2 \in \mathbb{R}\setminus\{1\}$. Thus,
+                \begin{alignat*}{2}
+                        &&f(x_1) \;&=\; f(x_2) \\
+                        &\Rightarrow\quad& \frac{x_1 + 1}{x_1 - 1}  \;&=\; \frac{x_2 + 1}{x_2 - 1} \\
+                        &\Rightarrow\quad& (x_1 + 1)(x_2 - 1)  \;&=\; (x_1 - 1)(x_2 + 1) \tag{$x \neq 1$} \\
+                        &\Rightarrow\quad& x_1x_2 - x_1 + x_2  - 1 \;&=\; x_1x_2 + x_1 - x_2 - 1\\ 
+                        &\Rightarrow\quad& x_1 \;&=\; x_2
+                \end{alignat*}
+                Hence, we have $x_1 = x_2$. Therefore, $f$ is injective.
+
+                Note that for $f(x) = 1 \in \mathbb{R}$, we require $x + 1 = x - 1$, a contradiction. Hence, there is no
+                $x \in \mathbb{R}\setminus\{1\}$ such that $f(x) = 1$.
+
+                Therefore, $f$ is injective, but not surjective. \qed
+
+                \item We examine
+                \begin{align*}
+                        f&: (-1, 1) \to \mathbb{R},\\
+                        &x \mapsto  \frac{x}{1 - |x|}.
+                \end{align*}
+                
+                Let $x_1, x_2 \in (-1, 1)$. Thus,
+                \begin{alignat*}{2}
+                        &&f(x_1) \;&=\; f(x_2) \\
+                        &\Rightarrow\quad& \frac{x_1}{1 - |x_1|} \;&=\; \frac{x_2}{1 - |x_2|} \\
+                        &\Rightarrow\quad& x_1(1 - |x_2|) \;&=\; x_2(1 - |x_1|) \tag{$|x| \neq 1$}\\
+                        &\Rightarrow\quad& x_1 - x_2 \;&=\; x_1|x_2| - x_2|x_1|
+                \end{alignat*}
+                
+                If either $x_1$ or $x_2$, we are forced to have $x_1 = x_2 = 0$.
+                
+                Note that $x_1$ and $x_2$ cannot have opposite signs, since $1 - |x| > 0$ for all $x \in (-1,+1)$.
+
+                We are left with $x_1$ and $x_2$ sharing the same sign. Thus, we have $x_1 / |x_1| = x_2 / |x_2| = \pm 1$, so $x_1|x_2| = x_2|x_1|$,
+                and $x_1 = x_2$.
+
+                In all cases, we have $x_1 = x_2$. Therefore, $f$ is injective. \\
+                
+                We will now show that $f$ is surjective. Let $y = f(x) \in \mathbb{R}$.
+                
+                For $y = 0$, we have $x = 0$.
+                
+                For $y > 0$, we have $x > 0$, so
+                \[
+                y \;=\; \frac{x}{1-x} \Rightarrow x \;=\; \frac{y}{1+y} < 1 \tag{$1 + y > y > 0$}
+                \]
+                Clearly, for every $y > 0$, there exists $x \in (0, 1)$ such that $f(x) = y$.
+
+                For $y < 0$, we have $x < 0$, so
+                \[
+                y \;=\; \frac{x}{1+x} \Rightarrow x \;=\; \frac{y}{1-y} > -1 \tag{$0 > y > y - 1$}
+                \]
+                Again, for every $y < 0$, there exists $x \in (-1, 0)$ such that $f(x) = y$.
+
+                Therefore, $f$ is both injective and surjective. \qed
+
+        \end{enumerate} 
+\end{document}
