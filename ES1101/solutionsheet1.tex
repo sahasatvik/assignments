@@ -4,6 +4,7 @@
 \usepackage{geometry}
 \usepackage{amsmath, amssymb, amsthm}
 \usepackage{array} 
+\usepackage{enumitem}
 
 \geometry{a4paper, margin=1in}
 \setlength\parindent{0pt}
@@ -29,31 +30,84 @@
 
         \problem How do we know that Earth is a zoned planet?
         \solution
+        After calculating the density and the moment of inertia of the rotating Earth, we observe the following discrepancies.
+        \begin{enumerate}[itemsep=0pt, topsep=\parsep]
+                \item The mean density of Earth is $5.5$ g/cm$^{3}$, while that of the crust is $2.7$ g/cm$^3$.
+                \item The rotational moment of inertia of the Earth is $0.331$, while a theoretical calculation assuming a uniform Earth
+                would give $0.4$.
+        \end{enumerate}
+        Further observations, primarily through seismology, reveal that the Earth's density, temperature and material constituents
+        do not remain uniform with depth, but have their own characteristic gradients and discontinuities.
 
         \problem How old is the oldest oceanic and continental crust? Why is the oldest oceanic crust so much younger than the continental crust?
         \solution
+        The oldest oceanic crust is $200$ million years old, while the oldest continental crust is $4.2$ billion years old.\\
+        
+        Oceanic crust is so young because of seafloor spreading. New oceanic crust is formed continuously at mid-oceanic ridges
+        (divergent plate boundaries) from magma, which is then pushed outwards by convection currents in the mantle. The old oceanic
+        crust subducts at ocean-continent, or ocean-ocean plate boundaries. This process is analogous to a system of conveyor belts, in which
+        ocean crust takes a maximum of $200$ million years to travel from a divergent to a convergent plate boundary. This explains
+        the relative youth of oceanic crust.
 
         \problem What are the different types of seismic waves?
         \solution
+        The different type of seismic waves are as follows.
+        \begin{enumerate}[itemsep=0pt, topsep=\parsep]
+                \item Body waves:
+                        \begin{enumerate}[itemsep=0pt, topsep=0pt]
+                                \item Primary (P) waves
+                                \item Secondary or Shear (S) waves
+                        \end{enumerate}
+                \item Surface waves:
+                        \begin{enumerate}[itemsep=0pt, topsep=0pt]
+                                \item Love waves
+                                \item Rayleigh waves
+                        \end{enumerate}
+        \end{enumerate}
 
         \problem State at least two differences between P and S waves.
         \solution
+        \begin{center}
+        \begin{tabular}{p{0.45\linewidth}|p{0.45\linewidth}}
+                \multicolumn{1}{c|}{\textbf{P waves}} & \multicolumn{1}{c}{\textbf{S waves}} \\\hline\\
+                Longitudinal waves -- particles oscillate in a direction parallel to the direction of propagation.
+                        & Transverse waves -- particles oscillate in a plane perpendicluar to the direction of propagation.\\\\
+                Can propagate through both solids and liquids.
+                        & Can propagate through solids, but not liquids.\\
+        \end{tabular}
+        \end{center}
 
         \problem What are the physical properties of the material that controls the propagation of seismic waves?
         \solution
+        The physical properties of the material which control the propagation of seismic waves within it are its density ($\rho$),
+        bulk modulus ($\kappa$) and its shear modulus ($\mu$).
+
+        For example, the velocities of P and S waves are as follows.
+        \[
+                v_p \;=\; \sqrt{\frac{\kappa + \frac{4}{3}\mu}{\rho}} \quad\quad\quad v_s \;=\; \sqrt{\frac{\mu}{\rho}}
+        \]
 
         \problem What are the heat sources present in the Earth?
         \solution
+        The heat sources present in the Earth are as follows.
+        \begin{enumerate}[itemsep=0pt, topsep=\parsep]
+                \item Heat from the accretion and differentiation of the early Earth after its formation.
+                \item Heat from the radiactive deacy of unstable elements in the Earth.
+        \end{enumerate}
 
         \problem What is the pressure at the crust-mantle boundary?\\
-        \textit{(The rate of change of pressure beneath the earth is $\approx 30 \textnormal{ MPa/km}$. $1 \textnormal{ MPa} = 10 \textnormal{ bar}$)} 
+        (\textit{The rate of change of pressure beneath the earth is $30 \textnormal{ MPa/km}$. $1 \textnormal{ MPa} = 10 \textnormal{ bar}$}) 
         \solution
+        Oceanic crust is $6 \text{ km}$ thick, while continental crust is $40 \text{ km}$ thick on average.
+        This gives us core mantle pressures of $1800 \text{ bar}$ and $12000 \text{ bar}$ respectively.
+        
+        The average thickness of crust is $15 \text{ km}$, giving a core-mantle pressure of $4500 \text{ bar}$.
 
         \problem If the focus of an earthquake is at $0^\circ$ from the centre of the Earth, what are the intervals of the shadow zones
         for P and S waves?
         \solution
         The shadow zone intervals for seismic waves are as follows.
-        \begin{enumerate}
+        \begin{enumerate}[itemsep=0pt, topsep=\parsep]
                 \item P waves : $-105^\circ$ to $-142^\circ$ , $+105^\circ$ to $+142^\circ$.
                 \item S waves : $-105^\circ$ to $+105^\circ$.
         \end{enumerate}
