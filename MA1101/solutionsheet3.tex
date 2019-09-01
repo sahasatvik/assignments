@@ -145,7 +145,13 @@
                         &\Rightarrow\quad& x_1 + \lfloor x_1\rfloor \;&=\; x_2 + \lfloor x_2\rfloor \\
                         &\Rightarrow\quad& x_1 - x_2 \;&=\; -\lfloor x_1\rfloor + \lfloor x_2\rfloor
                 \end{alignat*}
-                It follows that $x_1 - x_2 \in \mathbb{Z}$, so $\lfloor x_1\rfloor = x_1$ and $\lfloor x_2\rfloor = x_2$.
+                It follows that $k = x_1 - x_2 \in \mathbb{Z}$, so
+                \begin{align*}
+                \lfloor x_1\rfloor \;&=\; \lfloor k + x_2\rfloor \\
+                        \;&=\; k + \lfloor x_2\rfloor \\
+                        \;&=\; x_1 - x_2 + \lfloor x_2 \rfloor \\
+                x_1 - x_2 \;&=\; \lfloor x_1\rfloor - \lfloor x_2 \rfloor
+                \end{align*}
                 Hence, we have $x_1 = x_2$. Therefore, $f$ is injective.
 
                 For $f(x) = 2k + 1 \in \mathbb{Z} \subset \mathbb{R}$, $k \in \mathbb{Z}$, we must have $x + \lfloor x \rfloor = 2k + 1$, so 
