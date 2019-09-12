@@ -208,14 +208,47 @@
                         \paragraph{Inductive Step}
                         We assume that the statements $P(2), P(3), \dots, P(k)$ are all true. We will show that $P(k + 1)$ is true.
                         \begin{align*}
-                                f_{n + 1} \;&=\; f_{n} + f_{n - 1} \\
-                                        \;&=\; \frac{1}{\sqrt{5}}(\varphi^n - \psi^n) + \frac{1}{\sqrt{5}}(\varphi^{n - 1} + \psi^{n - 1}) \\
-                                        \;&=\; \frac{1}{\sqrt{5}}(\varphi^{n - 1}(\varphi + 1) - \psi^{n - 1}(\psi + 1)) \\
-                                        \;&=\; \frac{1}{\sqrt{5}}(\varphi^{n - 1}(\varphi^2) - \psi^{n - 1}(\psi^2)) \\
-                                        \;&=\; \frac{1}{\sqrt{5}}(\varphi^{n + 1} - \psi^{n + 1})
+                                f_{k + 1} \;&=\; f_{k} + f_{k - 1} \\
+                                        \;&=\; \frac{1}{\sqrt{5}}(\varphi^k - \psi^k) + \frac{1}{\sqrt{5}}(\varphi^{k - 1} + \psi^{k - 1}) \\
+                                        \;&=\; \frac{1}{\sqrt{5}}(\varphi^{k - 1}(\varphi + 1) - \psi^{k - 1}(\psi + 1)) \\
+                                        \;&=\; \frac{1}{\sqrt{5}}(\varphi^{k - 1}(\varphi^2) - \psi^{k - 1}(\psi^2)) \\
+                                        \;&=\; \frac{1}{\sqrt{5}}(\varphi^{k + 1} - \psi^{k + 1})
                         \end{align*}
                         Hence, by the principle of strong induction, $P(n)$ is true for all $n \in \mathbb{N}$.
                         
+                        \item Let $P(n)$ be the statement that for all $n \in \mathbb{N}$,
+                        \[
+                        f_1 + f_3 + \dots + f_{2n - 1} \;=\; f_{2n}
+                        \]
+                        \paragraph{Base Step}
+                        We establish $P(1)$. Clearly, $f_1 = 1 = f_2$. Thus, $P(1)$ is true.
+                        \paragraph{Inductive Step}
+                        We assume that $P(k)$ is true. We will show that $P(k + 1)$ is true.
+                        \begin{align*}
+                                f_1 + f_3 + \dots + f_{2k - 1} + f_{2k + 1} 
+                                        \;&=\; [f_1 + f_3 + \dots + f_{2k - 1}] + f_{2k + 1} \\
+                                        \;&=\; f_{2k} + f_{2k + 1} \\
+                                        \;&=\; f_{2k + 2} \\
+                                        \;&=\; f_{2(k + 1)}
+                        \end{align*}
+                        Hence, by the principle of mathematical induction, $P(n)$ is true for all $n \in \mathbb{N}$.
+
+                        \item Let $P(n)$ be the statement that for all $n \in \mathbb{N}$,
+                        \[
+                        f_2 + f_4 + \dots + f_{2n} \;=\; f_{2n + 1} - 1
+                        \]
+                        \paragraph{Base Step}
+                        We establish $P(1)$. Clearly, $f_2 = 1 = 2 - 1 = f_3 - 1$. Thus, $P(1)$ is true.
+                        \paragraph{Inductive Step}
+                        We assume that $P(k)$ is true. We will show that $P(k + 1)$ is true.
+                        \begin{align*}
+                                f_2 + f_4 + \dots + f_{2k} + f_{2k + 2} 
+                                        \;&=\; [f_2 + f_4 + \dots + f_{2k}] + f_{2k + 2} \\
+                                        \;&=\; f_{2k + 1} - 1 + f_{2k + 2} \\
+                                        \;&=\; f_{2k + 3} - 1 \\
+                                        \;&=\; f_{2(k + 1) + 1} - 1
+                        \end{align*}
+                        Hence, by the principle of mathematical induction, $P(n)$ is true for all $n \in \mathbb{N}$.
                 \end{enumerate}
         \end{enumerate}
 \end{document}
