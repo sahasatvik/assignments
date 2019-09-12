@@ -27,7 +27,7 @@
         Satvik Saha, \texttt{19MS154}\hfill\today
         \vspace{20pt}
 
-        \textbf{Solution 1.}\\
+        \textbf{Solution 1.}
         \begin{enumerate}
                 \item Let $P(n)$ be the statement
                 \[1 + 2 + \dots + n \;=\; \frac{1}{2}n(n + 1) \quad\quad\text{for all }n \in \mathbb{N}.\]
@@ -115,7 +115,7 @@
 
                 Hence, by the principle of mathematical induction, $P(n)$ is true for all $n \in \mathbb{N}$.
         \end{enumerate}
-        \textbf{Solution 2.}\\ 
+        \textbf{Solution 2.}
         \begin{enumerate}
                 \item Let $P(n)$ be the statement that for all $n \in \mathbb{N}$,
                 \[3^n > n^2\]
@@ -167,6 +167,55 @@
                         \;&<\; 2^{2(k + 1) - 2}
                 \end{align*}
                 
-                Hence, by the principle of mathematical induction, $P(n)$ is true for all $n \in \mathbb{N}$.
+                Hence, by the principle of mathematical induction, $P(n)$ is true for all $n \geq 5$, $n \in \mathbb{N}$.
+        \end{enumerate}
+        
+        \clearpage
+        \textbf{Solution 3.}
+        \begin{enumerate}
+                \item Let $P(n)$ be the statement that every $n \geq 2$, $n \in \mathbb{N}$ has a prime divisor.
+                We prove this using the principle of strong mathematical induction.
+                \paragraph{Base Step}
+                We establish $P(2)$. Clearly, $2$ is a prime divisor of itself, so $P(2)$ is true.
+                \paragraph{Inductive Step}
+                We assume that the statements $P(2), P(3), \dots, P(k-1)$ are all true. We will show that $P(k)$ is true.
+
+                If $k \geq 2$ is prime, then we are done, as $k$ is a prime divisor of itself. Otherwise, if
+                $k$ is not prime, then $k = ab$ for some $1 < a, b < k$ and $a, b \in \mathbb{N}$. We see that $a \geq 2$,
+                so by the induction hypothesis, $a$ has a prime divisor $p \in \mathbb{N}$, i.e.,  $a = pc$ for some $c \in \mathbb{N}$.
+                Thus, $k = (pc)b = p(cb)$, and $cb \in \mathbb{N}$, so $p$ is a prime factor of $k$. This proves $P(k)$.
+
+                Hence, by the principle of strong induction, $P(n)$ is true for all $n \geq 2$, $n \in \mathbb{N}$.
+                
+                \item We define the Fibonacci sequence $(f_n)_{n\geq 0}$ as follows.
+                \begin{align*}
+                        f_0 \;&:=\; 0 \\
+                        f_1 \;&:=\; 1 \\
+                        f_n \;&:=\; f_{n - 1} + f_{n - 2}, \quad\quad\text{for all }n \geq 2
+                \end{align*}
+                \begin{enumerate}
+                        \item We wish to show that for all $n \in \mathbb{N}$,
+                        \[f_n \;=\; \frac{1}{\sqrt{5}}\left[ \left(\frac{1 + \sqrt{5}}{2}\right)^{\!\!n} - \left(\frac{1 - \sqrt{5}}{2}\right)^{\!\!n} \right] 
+                        \tag{Binet's formula} \]
+                        We prove this using the principle of strong mathematical induction.
+                        Let $P(n)$ be the aforementioned statement, and let $\varphi = (1 + \sqrt{5})/2$ and $\psi = (1 - \sqrt{5})/2$.
+                        Note that $\varphi$ and $\psi$ both satisfy $x^2 = x + 1$.
+                        \[
+                        \left(\frac{1 \pm \sqrt{5}}{2}\right)^2 \;=\; \frac{6 \pm 2\sqrt{5}}{4} \;=\; \frac{1 \pm \sqrt{5}}{2} + 1
+                        \]
+                        \paragraph{Base Step}
+                        We establish $P(1)$. Clearly, $f_1 = 1 = (\varphi - \psi)/\sqrt{5}$. Thus, $P(1)$ is true.
+                        \paragraph{Inductive Step}
+                        We assume that the statements $P(2), P(3), \dots, P(k)$ are all true. We will show that $P(k + 1)$ is true.
+                        \begin{align*}
+                                f_{n + 1} \;&=\; f_{n} + f_{n - 1} \\
+                                        \;&=\; \frac{1}{\sqrt{5}}(\varphi^n - \psi^n) + \frac{1}{\sqrt{5}}(\varphi^{n - 1} + \psi^{n - 1}) \\
+                                        \;&=\; \frac{1}{\sqrt{5}}(\varphi^{n - 1}(\varphi + 1) - \psi^{n - 1}(\psi + 1)) \\
+                                        \;&=\; \frac{1}{\sqrt{5}}(\varphi^{n - 1}(\varphi^2) - \psi^{n - 1}(\psi^2)) \\
+                                        \;&=\; \frac{1}{\sqrt{5}}(\varphi^{n + 1} - \psi^{n + 1})
+                        \end{align*}
+                        Hence, by the principle of strong induction, $P(n)$ is true for all $n \in \mathbb{N}$.
+                        
+                \end{enumerate}
         \end{enumerate}
 \end{document}
