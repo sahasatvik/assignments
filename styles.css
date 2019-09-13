@@ -16,6 +16,11 @@ a {
 
 .card {
     transition: .2s ease background;
+    flex: 0 1 80%;
+}
+
+.card li:before {
+    content: '-';
 }
 
 #global-container {
@@ -78,19 +83,6 @@ a {
 
 .problem-solution-links {
     float: right;
-}
-
-.card.borderless {
-    border: none;
-    background-color: rgba(0, 0, 0, 0);
-}
-
-.card {
-    flex: 0 1 80%;
-}
-
-.card li:before {
-    content: '-';
 }
 
 @media only screen and (max-width: 600px) {
