@@ -16,7 +16,8 @@ def count_unique(l):
     return len(set(l))
 
 trials = 10
-for i in range(500, n, 500):
+step = 500
+for i in range(step, n, step):
     counts = []
     for j in range(trials):
         counts.append(count_unique(random.sample(individuals, i)))
