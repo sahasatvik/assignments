@@ -15,8 +15,8 @@ for i, frequency in enumerate(data):
 def count_unique(l):
     return len(set(l))
 
-trials = 50
-for i in range(5, n, 5):
+trials = 10
+for i in range(500, n, 500):
     counts = []
     for j in range(trials):
         counts.append(count_unique(random.sample(individuals, i)))
