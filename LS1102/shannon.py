@@ -1,5 +1,10 @@
 #!/usr/bin/env python
 
+# Usage
+#   ./shannon.py [frequencies]
+#
+# frequencies   list (space separated) of frequencies of species
+
 from os import sys
 import math
 

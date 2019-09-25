@@ -1,11 +1,20 @@
 #!/usr/bin/env python
 
+# Usage:
+#   ./species_individual.py trials step [frequencies]
+#
+# trials        number of trials for a given sample size
+# step          incremenent of sample size
+# frequencies   list (space separated) of frequencies of species
+
 from os import sys
 from statistics import stdev
 import random
 import math
 
-data = map(int, sys.argv[1:])
+trials = int(sys.argv[1])
+step = int(sys.argv[2])
+data = map(int, sys.argv[3:])
 n = sum(data)
 
 individuals = []
@@ -15,8 +24,6 @@ for i, frequency in enumerate(data):
 def count_unique(l):
     return len(set(l))
 
-trials = 10
-step = 500
 for i in range(step, n, step):
     counts = []
     for j in range(trials):
