@@ -1,0 +1,9 @@
+set title "IISER Kolkata Birdlife"
+set ylabel "Unique species"
+set xlabel "Abundance (log_2)"
+set yrange [0:12]
+set style data histogram
+set style fill solid border -1
+set term png size 1024,768
+set output "bird_species_abundance.png"
+plot "bird_species_abundance_data" using 2:xtic(1) title '' lc 2
