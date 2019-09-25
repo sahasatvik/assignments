@@ -10,12 +10,16 @@
 from os import sys
 import math
 
-data = map(int, sys.argv[1:])
-n = sum(data)
-h = 0
+def shannon(data):
+    n = sum(data)
+    h = 0
 
-for x in data:
-    p = x * 1.0 / n
-    h += p * math.log(p)
+    for x in data:
+        p = x * 1.0 / n
+        h += p * math.log(p)
 
-print -h
+    return -h
+
+if __name__ == '__main__':
+    data = map(int, sys.argv[1:])
+    print shannon(data)

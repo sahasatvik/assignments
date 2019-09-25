@@ -10,12 +10,16 @@
 from os import sys
 import math
 
-data = map(int, sys.argv[1:])
-n = sum(data)
-d = 0
+def simpson(data):
+    n = sum(data)
+    d = 0
 
-for x in data:
-    p = x * 1.0 / n
-    d += p*p
+    for x in data:
+        p = x * 1.0 / n
+        d += p*p
 
-print d
+    return d
+
+if __name__ == '__main__':
+    data = map(int, sys.argv[1:])
+    print simpson(data)
