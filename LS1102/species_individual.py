@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+# Calculates species-individual curve data by repeated, random sampling.
+
 # Usage:
 #   ./species_individual.py trials step [frequencies]
 #

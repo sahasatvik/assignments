@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 
-# Usage
+# Calculates the simpson index of diversity for given data.
+
+# Usage:
 #   ./simpson.py [frequencies]
 #
 # frequencies   list (space separated) of frequencies of species

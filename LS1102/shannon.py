@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 
-# Usage
+# Calculates the shannon index of diversity for given data.
+
+# Usage:
 #   ./shannon.py [frequencies]
 #
 # frequencies   list (space separated) of frequencies of species
