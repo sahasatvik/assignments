@@ -172,9 +172,6 @@
         \begin{corollary}
                 If $a = [(m, n)] \in \mathbb{Z}$, then $-a = [(n, m)]$.
         \end{corollary}
-        \begin{proof}
-                Clearly, $a + (-a) = [(m + n, n + m)] = \bar{0}$.
-        \end{proof}
         \begin{notation}
                 For $a, b \in \mathbb{Z}$, we write
                 \[
@@ -186,7 +183,7 @@
                         For all $a, b \in \mathbb{Z}$, there exists a unique $x \in \mathbb{Z}$ satisfying $a + x = b$.
         \end{theorem}
         \begin{proof}
-                For the well-defined nature of $+$, there exists a unique $x = b - a = b + (-a) \in \mathbb{Z}$.
+                From the well-defined nature of $+$, there exists a unique $x = b - a = b + (-a) \in \mathbb{Z}$.
                 \begin{align*}
                         a + x \;&=\; a + (b + (-a)) \\
                                 \;&=\; a + ((-a) + b) \\
@@ -277,9 +274,9 @@
                                 \;&=\; a\cdot b + a\cdot c \qedhere
                 \end{align*}
         \end{proof}
-        \begin{corollary}
+        \begin{theorem}
                 For all $a \in \mathbb{Z}$, $a\cdot \bar{0} = \bar{0}$.
-        \end{corollary}
+        \end{theorem}
         \begin{proof}
                 \begin{align*}
                         a\cdot \bar{0} + a\cdot\bar{0} \;&=\; a\cdot (\bar{0} + \bar{0}) \\
@@ -287,9 +284,9 @@
                         a\cdot \bar{0} \;&=\; \bar{0} \qedhere
                 \end{align*}
         \end{proof}
-        \begin{corollary}
+        \begin{theorem}
                 For all $a, b \in \mathbb{Z}$, $(-a)\cdot b = -(a\cdot b)$.
-        \end{corollary}
+        \end{theorem}
         \begin{proof}
                 \begin{align*}
                         (-a)\cdot b + a\cdot b \;&=\; ((-a) + a)\cdot b \\
@@ -298,9 +295,9 @@
                         (-a)\cdot b \;&=\; -(a\cdot b) \qedhere
                 \end{align*}
         \end{proof}
-        \begin{corollary}
+        \begin{theorem}
                 For all $a, b \in \mathbb{Z}$, $(-a)\cdot(-b) = a\cdot b$.
-        \end{corollary}
+        \end{theorem}
         \begin{proof}
                 \begin{align*}
                         (-a)\cdot(-b) + (-(a\cdot b)) \;&=\; (-a)\cdot(-b) + (-a)\cdot b\\
