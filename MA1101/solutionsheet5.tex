@@ -14,6 +14,8 @@
 % \setlength\parskip{5pt}
 \renewcommand{\labelenumi}{(\roman{enumi})}
 \newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}{Corollary}[theorem]
 \theoremstyle{definition}
 \newtheorem*{definition}{Definition}
 \theoremstyle{remark}
@@ -29,6 +31,8 @@
   \normalfont % body font
 }
 \makeatother
+\newcommand{\IdN}{I_{\mathbb{N}}} 
+\newcommand{\IdZ}{I_{\mathbb{Z}}} 
 
 \begin{document}
         \par\textbf{IISER Kolkata} \hfill \textbf{Problem Sheet V}
@@ -115,12 +119,27 @@
                 \end{align*}
                 Therefore, $+$ is commutative.
         \end{proof}
+        
+        \begin{lemma}
+                For all $m, n, k \in \mathbb{N}$, $[(m, n)] = [(m + k, n + k)] \in \mathbb{Z}$.
+        \end{lemma}
+        \begin{proof}
+                It is sufficient to show that $(m, n) \sim_{\mathbb{Z}} (m + k, n + k)$, i.e.
+                $m + n + k = n + m + k$, which is certainly true.
+        \end{proof}
+        \begin{lemma}
+                For all $n \in \mathbb{N}$, $[(n, n)] = \bar{0}$.
+        \end{lemma}
+        \begin{proof}
+                It is sufficient to show that $(n, n) \sim_{\mathbb{Z}} (1, 1)$, i.e.
+                $n + 1 = n + 1$, which is certainly true.
+        \end{proof}
 
         \begin{theorem}
                 For all $a \in \mathbb{Z}$, $\bar{0} + a = a = a + \bar{0}$.
         \end{theorem}
         \begin{proof}
-                Let $a = [(m, n)] \in \mathbb{Z}$. Note that $(m, n) \sim_{\mathbb{Z}} (m + 1, n + 1)$.
+                Let $a = [(m, n)] \in \mathbb{Z}$.
                 \begin{align*}
                         a + \bar{0} \;&=\; [(m, n)] + [(1, 1)] \\
                                 \;&=\; [(m + 1, n + 1)] \\
@@ -149,7 +168,14 @@
         \end{proof}
         \begin{notation}
                 We denote $x$ as $-a$ and say that $-a$ is the \textit{negative} of $a$.
-
+        \end{notation}
+        \begin{corollary}
+                If $a = [(m, n)] \in \mathbb{Z}$, then $-a = [(n, m)]$.
+        \end{corollary}
+        \begin{proof}
+                Clearly, $a + (-a) = [(m + n, n + m)] = \bar{0}$.
+        \end{proof}
+        \begin{notation}
                 For $a, b \in \mathbb{Z}$, we write
                 \[
                 a - b \;:=\; a + (-b).\quad\quad\quad
@@ -221,62 +247,226 @@
                                 \;&=\; b\cdot a
                 \end{align*}
                 Therefore, $\cdot$ is commutative.
-                
         \end{proof}
 
         \begin{theorem}
                 For all $a \in \mathbb{Z}$, $a\cdot\bar{1} = a = \bar{1}\cdot a$.
         \end{theorem}
+        \begin{proof}
+                Let $a = [(m, n)] \in \mathbb{Z}$.
+                \begin{align*}
+                        a\cdot \bar{1} \;&=\; [(m, n)] \cdot [(2, 1)] \\
+                                \;&=\; [(2m + n, m + 2n)] \\
+                                \;&=\; [(m + (m + n), (m + n) + n)] \\
+                                \;&=\; [(m, n)] \\
+                                \;&=\; a \\
+                        a\cdot \bar{1} \;&=\; a \;=\; \bar{1}\cdot a \qedhere
+                \end{align*}
+        \end{proof}
 
         \begin{theorem}[Distributivity]
                 For all $a,b,c \in \mathbb{Z}$, $a\cdot(b + c) = a\cdot b + a\cdot c$.
         \end{theorem}
+        \begin{proof}
+                For $a,b,c \in \mathbb{Z}$, let $a = [(m, n)], b = [(p, q)], c = [(r, s)]$.
+                \begin{align*}
+                        a\cdot (b + c) \;&=\; [(m, n)] \cdot [(p + r, q + s)] \\
+                                \;&=\; [(m(p + r) + n(q + s), m(q + s) + n(p + r))] \\
+                                \;&=\; [(mp + mr + nq + ns, mq + ms + np + nr)] \\
+                                \;&=\; [(mp + nq, mq + np)] + [(mr + ns, ms + nr)] \\
+                                \;&=\; a\cdot b + a\cdot c \qedhere
+                \end{align*}
+        \end{proof}
+        \begin{corollary}
+                For all $a \in \mathbb{Z}$, $a\cdot \bar{0} = \bar{0}$.
+        \end{corollary}
+        \begin{proof}
+                \begin{align*}
+                        a\cdot \bar{0} + a\cdot\bar{0} \;&=\; a\cdot (\bar{0} + \bar{0}) \\
+                                \;&=\; a\cdot\bar{0} \\
+                        a\cdot \bar{0} \;&=\; \bar{0} \qedhere
+                \end{align*}
+        \end{proof}
+        \begin{corollary}
+                For all $a, b \in \mathbb{Z}$, $(-a)\cdot b = -(a\cdot b)$.
+        \end{corollary}
+        \begin{proof}
+                \begin{align*}
+                        (-a)\cdot b + a\cdot b \;&=\; ((-a) + a)\cdot b \\
+                                \;&=\; \bar{0} \cdot b \\
+                                \;&=\; \bar{0}\\
+                        (-a)\cdot b \;&=\; -(a\cdot b) \qedhere
+                \end{align*}
+        \end{proof}
+        \begin{corollary}
+                For all $a, b \in \mathbb{Z}$, $(-a)\cdot(-b) = a\cdot b$.
+        \end{corollary}
+        \begin{proof}
+                \begin{align*}
+                        (-a)\cdot(-b) + (-(a\cdot b)) \;&=\; (-a)\cdot(-b) + (-a)\cdot b\\
+                                \;&=\; (-a)\cdot((-b) + b) \\
+                                \;&=\; (-a)\cdot \bar{0} \\
+                                \;&=\; \bar{0}\\
+                        (-a)\cdot(-b) \;&=\; a\cdot b \qedhere
+                \end{align*}
+        \end{proof}
 
+        \begin{lemma}
+                If $a = [(m, n)] \in \mathbb{Z}$, $a \neq \bar{0}$, then $m \neq n$.
+        \end{lemma}
+        \begin{proof}
+                Assume that $m = n$. Then, we have $(m, n) \sim_{\mathbb{Z}} \bar{0}$,
+                contradicting our premise. Hence, we must have $m\neq n$.
+        \end{proof}
         \begin{theorem}[No zero divisors]
                 For all $a, b \in \mathbb{Z}$ with $a,b \neq \bar{0}$, we have $a\cdot b \neq \bar{0}$.
         \end{theorem}
+        \begin{proof}
+                Let $a = [(m, n)], b = [(p, q)] \in \mathbb{Z}$.
+                Note that $m\neq n$, $p\neq n$, since $a, b \neq \bar{0}$.
+
+                Assume that our theorem is false, i.e. $a\cdot b = \bar{0}$.
+                Then $(mp + nq, mq + np) \sim_{\mathbb{Z}} \bar{0} \Rightarrow mp + nq = mq + np$.
+                One of the following must be true.
+                
+                \par\textbf{Case I:} If $m > n$, there exists $u \in \mathbb{N}$, such that $m = n + u$. Thus, $(n + u)p + nq = (n + u)q + np \Rightarrow np + up + nq = nq + uq + np$.
+                This implies that $up = uq \Rightarrow p = q$, contradicting $p\neq q$.
+                \par\textbf{Case II:} If $n > m$, there exists $v \in \mathbb{N}$, such that $n = m + v$. Thus, $mp + (m + v)q = mq + (m + v)p\Rightarrow mp + mq + vq = mq + mp + vp$.
+                This implies that $vp = vq \Rightarrow p = q$, contradicting $p\neq q$.
+
+                Hence, $a\cdot b \neq \bar{0}$.
+        \end{proof}
 
         \begin{theorem}[Cancellation]
                 For $a, b, c \in \mathbb{Z}$ with $a\neq \bar{0}$, we have $a\cdot b = a\cdot c
                 \Rightarrow b = c$.
         \end{theorem}
+        \begin{proof}
+                For $a,b,c \in \mathbb{Z}$, let $a = [(m, n)], b = [(p, q)], c = [(r, s)]$.
+                We have $m \neq n$.
+                \begin{align*}
+                a\cdot b \;&=\; a\cdot c\\
+                [(mp + nq, mq + np)] \;&=\; [(mr + ns, ms + nr)] \\
+                mp + nq + ms + nr \;&=\; mq + np + mr + ns \\
+                m(p + s) + n (q + r) \;&=\; m(q + r) + n(p + s)
+                \end{align*}
+                
+                Assume that our theorem is false.
+                Thus, $b\neq c$, i.e. $b + (-c) = [(p + s, q + r)] \neq \bar{0} \Rightarrow p + s \neq q + r$.
+                Without loss of generality, let $p + s > q + r$, i.e. $p + s = q + r + x$ for some $x \in \mathbb{N}$.
+
+                Thus, $m(q + r + x) + n(q + r) = m(q + r) + n(q + r + x)$. This implies that
+                $mx = nx \Rightarrow m = n$, which contradicts $m \neq n$.
+
+                Hence, $b = c$.
+        \end{proof}
         
         \begin{definition}[Order]
                 For all $a, b \in \mathbb{Z}$, we say that $a > b$ if $a - b \in \mathbb{Z}^+$.
         \end{definition}
-
+        
+        \begin{lemma}
+        \label{lem:Zplus}
+                If $m, n \in \mathbb{N}$, $m > n$, i.e. $m = n + x$ for $x \in \mathbb{N}$,
+                then $a = [(m, n)] \in \mathbb{Z}^+$.
+        \end{lemma}
+        \begin{proof}
+                We must show that $a = [(n + x, n)] \in \mathbb{Z}^+$, i.e.
+                for some $k \in \mathbb{N}$, $(n + x, n) \sim_{\mathbb{Z}} (k + 1, 1)$, i.e.
+                $n + x + 1 = n + k + 1$. This is clearly true for $k = x$.
+        \end{proof}
         \begin{theorem}
                 For all $a, b \in \mathbb{Z}$, we have $a\cdot b > 0$ if $a, b > 0$ or $a, b < 0$.
         \end{theorem}
+        \begin{proof}
+                If $a, b > \bar{0}$, then $a, b \in \mathbb{Z}^+$. Thus, $a = [(m + 1, 1)]$ and
+                $b = [(n + 1, 1)]$ for some $m, n \in \mathbb{N}$.
+                \begin{align*}
+                        a\cdot b \;&=\; [((m + 1)(n + 1) + (1)(1), (m + 1)1 + 1(n + 1))] \\
+                                \;&=\; [(mn + m + n + 1 + 1, m + 1 + n + 1)] \\
+                                \;&=\; [((m + n + 2) + mn, (m + n + 2))] \in \mathbb{Z}^+ \qedhere
+                \end{align*}
+        \end{proof}
 
         \begin{definition}[Identification map]
                 Define $I_\mathbb{N}\colon \mathbb{N}\to \mathbb{Z}$ by 
                 \[
-                        I_\mathbb{N} \;:=\; [(n + 1, 1)],\quad\text{for all }n \in \mathbb{Z}.
+                        I_\mathbb{N}(n) \;:=\; [(n + 1, 1)],\quad\text{for all }n\in \mathbb{Z}.
                 \]
         \end{definition}
 
         \begin{theorem}
-                $I_{\mathbb{N}}$ is injective.
+                $\IdN$ is injective.
         \end{theorem}
+        \begin{proof}
+                Let $m, n \in \mathbb{N}$
+                \begin{align*}
+                        \IdN(m) \;&=\; \IdN(n) \\
+                        [(m + 1, 1)] \;&=\; [(n + 1, 1)] \\
+                        (m + 1, 1) &\sim_{\mathbb{Z}} (n + 1, 1) \\
+                        m + 1 + 1 \;&=\; n + 1 + 1 \\
+                        m \;&=\; n
+                \end{align*}
+                Hence, $\IdN$ is injective.
+        \end{proof}
 
         \begin{theorem}
-                $I_{\mathbb{N}}(\mathbb{N}) = \mathbb{Z}^+$.
+                $\IdN(\mathbb{N}) = \mathbb{Z}^+$.
         \end{theorem}
+        \begin{proof}
+                We first show that $\IdN(\mathbb{N}) \subseteq \mathbb{Z}^+$.
+                Let $x \in \IdN(\mathbb{N})$. Thus, there exists at least one
+                $k \in \mathbb{N}$ such that $x = \IdN(k) = [(k + 1, 1)]$, which implies that $x \in \mathbb{Z}^+$ by definition.
+
+                Next, we show that $\mathbb{Z}^+ \subseteq \IdN(\mathbb{N})$.
+                Let $x \in \mathbb{Z}^+$. By definition, $x = [(k + 1, 1)]$ for some $k \in \mathbb{N}$. Clearly, $x = \IdN(k) \in \IdN(\mathbb{N})$.
+
+                Hence, we conclude that $\IdN(\mathbb{N}) = \mathbb{Z}^+$.
+        \end{proof}
 
         \begin{theorem}
-                $I_{\mathbb{N}}(1) = \bar{1}$.
+                $\IdN(1) = \bar{1}$.
         \end{theorem}
+        \begin{proof}
+                \[\IdN(1) = [(1 + 1, 1)] = [(2, 1)] = \bar{1} \qedhere\]
+        \end{proof}
 
         \begin{theorem}
-                For all $m, n \in \mathbb{N}$, $I_{\mathbb{N}}(m + n) = I_{\mathbb{N}}(m) + I_{\mathbb{N}}(n)$.
+                For all $m, n \in \mathbb{N}$, $\IdN(m + n) = \IdN(m) + \IdN(n)$.
         \end{theorem}
+        \begin{proof}
+                \begin{align*}
+                        \IdN(m) + \IdN(n) \;&=\; [(m + 1, 1)] + [(n + 1, 1)] \\
+                                \;&=\; [(m + 1 + n + 1, 1 + 1)] \\
+                                \;&=\; [((m + n) + 1, 1)] \\
+                                \;&=\; \IdN(m + n) \qedhere
+                \end{align*}
+        \end{proof}
 
         \begin{theorem}
-                For all $m, n \in \mathbb{N}$, $I_{\mathbb{N}}(m \cdot n) = I_{\mathbb{N}}(m) \cdot I_{\mathbb{N}}(n)$.
+                For all $m, n \in \mathbb{N}$, $\IdN(m \cdot n) = \IdN(m) \cdot \IdN(n)$.
         \end{theorem}
+        \begin{proof}
+                \begin{align*}
+                        \IdN(m) \cdot \IdN(n) \;&=\; [(m + 1, 1)] \cdot [(n + 1, 1)] \\
+                                \;&=\; [((m + 1)(n + 1) + (1)(1), (m + 1)1 + 1(n + 1))] \\
+                                \;&=\; [(mn + m + n + 1 + 1, m + n + 1 + 1)] \\
+                                \;&=\; [(mn + 1, 1)] \\
+                                \;&=\; \IdN(m \cdot n) \qedhere
+                \end{align*}
+        \end{proof}
 
         \begin{theorem}
-                For all $m, n \in \mathbb{Z}$ with $m > n$, $I_{\mathbb{N}}(m) > I_{\mathbb{N}}(n)$.
+                For all $m, n \in \mathbb{Z}$ with $m > n$, $\IdN(m) > \IdN(n)$.
         \end{theorem}
+        \begin{proof}
+                \begin{align*}
+                \IdN(m) - \IdN(n) \;&=\; [(m + 1, 1)] + (-[(n + 1, 1)]) \\
+                        \;&=\; [(m + 1, 1)] + [(1, n + 1)] \\
+                        \;&=\; [(m + 1 + 1, 1 + n + 1)] \\
+                        \;&=\; [(m, n)].
+                \end{align*}
+                From \ref{lem:Zplus}, $[(m, n)] \in \mathbb{Z}^+$.
+                Therefore, $\IdN(m) - \IdN(n) \in \mathbb{Z}^+ \implies \IdN(m) > \IdN(n)$, as desired.
+        \end{proof}
 \end{document}
