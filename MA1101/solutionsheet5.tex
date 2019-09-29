@@ -1,0 +1,282 @@
+\documentclass[10pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{enumitem}
+
+\title{Mathematics I - Problem Sheet V}
+\author{Satvik Saha}
+\date{}
+
+\geometry{a4paper, margin=1in}
+% \setlength\parindent{0pt}
+% \setlength\parskip{5pt}
+\renewcommand{\labelenumi}{(\roman{enumi})}
+\newtheorem{theorem}{Theorem}[section]
+\theoremstyle{definition}
+\newtheorem*{definition}{Definition}
+\theoremstyle{remark}
+\newtheorem*{notation}{Notation}
+% \renewcommand\qedsymbol{$\blacksquare$}
+\makeatletter
+\def\th@plain{%
+  \thm@notefont{}% same as heading font
+  \itshape % body font
+}
+\def\th@definition{%
+  \thm@notefont{}% same as heading font
+  \normalfont % body font
+}
+\makeatother
+
+\begin{document}
+        \par\textbf{IISER Kolkata} \hfill \textbf{Problem Sheet V}
+        \vspace{3pt}
+        \hrule
+        \vspace{3pt}
+        \begin{center}
+                \LARGE{\textbf{MA 1101 : Mathematics I}}
+        \end{center}
+        \vspace{3pt}
+        \hrule
+        \vspace{3pt}
+        Satvik Saha, \texttt{19MS154}\hfill\today
+        \vspace{20pt}
+
+        \section{Integers}
+        \begin{theorem}
+        Define a relation $\sim_\mathbb{Z}$ on $\mathbb{N}\times \mathbb{N}$ as
+        \[(m, n) \sim_\mathbb{Z} (p, q) \quad\text{if}\quad m + q = n + p. \]
+        Then, $\sim_\mathbb{Z}$ is an equivalence relation on $\mathbb{N}\times \mathbb{N}$.
+        \end{theorem}
+        \begin{proof}
+                For an arbitrary $(m, n) \in \mathbb{N}\times \mathbb{N}$, clearly $(m, n) \sim_\mathbb{Z} (m, n)$, hence $\sim_\mathbb{Z} $ is reflexive.
+
+                Again, for arbitrary $(m, n), (p, q) \in \mathbb{N}\times \mathbb{N}$, if
+                $(m, n) \sim_\mathbb{Z} (p, q)$, we have $m + q = n + p$.
+                By the commutativity of addition on natural numbers, $p + n = q + m$, so 
+                $(p, q) \sim_\mathbb{Z} (m, n) $, hence $\sim_\mathbb{Z}$ is symmetric.
+
+                For $(m, n), (p, q), (r, s) \in \mathbb{N}\times \mathbb{N}$, if
+                $(m, n) \sim_{\mathbb{Z}} (p, q)$ and $(p, q) \sim_{\mathbb{Z}} (r, s)$, we have
+                $m + q = n + p$ and $p + s = q + r$. Thus, 
+                $m + q + p + s = n + p + q + r$, so $m + s = n + r$.
+                Thus, $(m, n) \sim_{\mathbb{Z}} (r, s)$, hence $\sim_{\mathbb{Z}}$ is transitive.
+
+                Therefore, $\sim_{\mathbb{Z}}$ is an equivalence relation on $\mathbb{N}\times \mathbb{N}$.
+        \end{proof}
+
+        \begin{notation}
+        Let us set
+        \[
+                \mathbb{Z} \;:=\; (\mathbb{N} \times \mathbb{N})/\sim_\mathbb{Z},\\
+        \]
+        \[
+                \mathbb{Z}^+ \;:=\; \{[(n + 1, 1)] : n \in \mathbb{N}\}, \quad
+                \bar{0} \;:=\; [(1, 1)], \quad
+                \bar{1} \;:=\; [(2, 1)].
+        \]
+        \end{notation}
+
+        \begin{definition}[Addition]
+        For $a = [(m, n)],\; b = [(p, q)] \in \mathbb{Z}$, we define
+        \[
+                a + b \;:=\; [(m + p, n + q)].
+        \]
+        \end{definition}
+        
+        \begin{theorem}
+                Addition $(+)$ is well-defined, associative and commutative.
+        \end{theorem}
+        \begin{proof}
+                First, we show that $+$ is well-defined.
+                Let $a = [(m, n)] = [(m', n')]$, $b = [(p, q)] = [(p', q')] \in \mathbb{Z}$.
+                We claim that $a + b = [(m + p, n + q)] = [(m' + p', n' + q')]$, i.e. $(m + p, n + q) \sim_{\mathbb{Z}} (m' + p', n' + q')$, i.e $m + p + n' + q' = n + q + m'  + p'$.
+                Now, $(m, n) \sim_{\mathbb{Z}} (m' , n')$ and $(p, q) \sim_{\mathbb{Z}} (p', q')$, from which we have $m + n' = n + m'$ and $p + q' = q + p'$.
+                Adding these gives the desired result.
+
+                For $a,b,c \in \mathbb{Z}$, let $a = [(m, n)], b = [(p, q)], c = [(r, s)]$.
+                From the associativity of addition in $\mathbb{N}$,
+                \begin{align*}
+                        (a + b) + c \;&=\; [(m + p, n + q)] + [(r, s)] \\
+                                \;&=\; [((m + p) + r, (n + q) + s)] \\
+                                \;&=\; [(m + (p + r), n + (q + s))] \\
+                                \;&=\; [(m, n)] + [(p + r, q + s)] \\
+                                \;&=\; a + (b + c)
+                \end{align*}
+                Therefore, $+$ is associative.
+
+                From the commutativity of addition in $\mathbb{N}$,
+                \begin{align*}
+                        a + b \;&=\; [(m + p, n + q)] \\
+                                \;&=\; [(p + m, q + n)] \\
+                                \;&=\; b + a
+                \end{align*}
+                Therefore, $+$ is commutative.
+        \end{proof}
+
+        \begin{theorem}
+                For all $a \in \mathbb{Z}$, $\bar{0} + a = a = a + \bar{0}$.
+        \end{theorem}
+        \begin{proof}
+                Let $a = [(m, n)] \in \mathbb{Z}$. Note that $(m, n) \sim_{\mathbb{Z}} (m + 1, n + 1)$.
+                \begin{align*}
+                        a + \bar{0} \;&=\; [(m, n)] + [(1, 1)] \\
+                                \;&=\; [(m + 1, n + 1)] \\
+                                \;&=\; [(m, n)] \\
+                                \;&=\; a \\
+                        a + \bar{0} \;&=\; a \;=\; \bar{0} + a \qedhere
+                \end{align*}
+        \end{proof}
+        
+        \begin{theorem}
+                        For all $a \in \mathbb{Z}$, there exists a unique $x \in \mathbb{Z}$, satisfying $a + x = \bar{0} = x + a$.
+        \end{theorem}
+        \begin{proof}
+                For $a = [m, n] \in \mathbb{Z}$, construct $x = [(n, m)] \in \mathbb{Z}$.
+                Clearly, $a + x = [(m + n, n + m)] = \bar{0}$.
+                From commutativity of $+$, $a + x = \bar{0} = x + a$.
+
+                We now show that $x$ is unique. Let $a + x' = \bar{0} = x' + a$.
+                \begin{align*}
+                        a + x' \;&=\; \bar{0} \\
+                        x + (a + x') \;&=\; x + \bar{0} \\
+                        (x + a) + x' \;&=\; x \\
+                        \bar{0} + x' \;&=\; x \\
+                        x' \;&=\; x     \qedhere
+                \end{align*}
+        \end{proof}
+        \begin{notation}
+                We denote $x$ as $-a$ and say that $-a$ is the \textit{negative} of $a$.
+
+                For $a, b \in \mathbb{Z}$, we write
+                \[
+                a - b \;:=\; a + (-b).\quad\quad\quad
+                \]
+        \end{notation}
+
+        \begin{theorem}
+                        For all $a, b \in \mathbb{Z}$, there exists a unique $x \in \mathbb{Z}$ satisfying $a + x = b$.
+        \end{theorem}
+        \begin{proof}
+                For the well-defined nature of $+$, there exists a unique $x = b - a = b + (-a) \in \mathbb{Z}$.
+                \begin{align*}
+                        a + x \;&=\; a + (b + (-a)) \\
+                                \;&=\; a + ((-a) + b) \\
+                                \;&=\; (a + (-a)) + b \\
+                                \;&=\; \bar{0} + b \\
+                                \;&=\; b \qedhere
+                \end{align*}
+        \end{proof}
+
+        \begin{definition}[Multiplication]
+        For $a = [(m, n)],\; b = [(p, q)] \in \mathbb{Z}$, we define multiplication
+        \[
+                a \cdot b \;:=\; [(mp + nq, mq + np)].
+        \]
+        \end{definition}
+        \begin{theorem}
+                Multiplication $(\cdot)$ is well-defined, associative and commutative.
+        \end{theorem}
+        \begin{proof}
+                First, we show that $\cdot$ is well-defined.
+                Let $a = [(m, n)] = [(m', n')]$, $b = [(p, q)] = [(p', q')] \in \mathbb{Z}$.
+                We claim that $a\cdot b = [(mp + nq, mq + np)] = [(m'p' + n'q', m'q' + n'p')]$,
+                i.e. $(mp + nq, mq + np) \sim_{\mathbb{Z}} (m'p' + n'q', m'q' + n'p')$.
+
+                From $(p, q) \sim_{\mathbb{Z}} (p', q')$,
+                \begin{align*}
+                        p + q' \;&=\; q + p' \\
+                        mp + mq' \;&=\; mq + mp' \\
+                        np + nq' \;&=\; nq + np' \\
+                        mp + nq + mq' + np' \;&=\; mq + np + mp' + nq' \\
+                        (mp + nq, mq + np) &\sim_{\mathbb{Z}} (mp' + nq', mq' + np')
+                \end{align*}
+
+                From $(m, n) \sim_{\mathbb{Z}} (m', n')$,
+                \begin{align*}
+                        m + n' \;&=\; n + m' \\
+                        mp' + n'p' \;&=\; np' + m'p' \\
+                        mq' + n'q' \;&=\; nq' + m'q' \\
+                        mp' + nq' + m'q' + n'p' \;&=\; mq' + np' + m'p' + n'q' \\
+                        (mp' + nq', mq' + np') &\sim_{\mathbb{Z}} (m'p' + n'q', m'q' + n'p')
+                \end{align*}
+                Transitivity of $\sim_{\mathbb{Z}}$ yields the desired result.
+
+                For $a,b,c \in \mathbb{Z}$, let $a = [(m, n)], b = [(p, q)], c = [(r, s)]$.
+                \begin{align*}
+                        (a\cdot b)\cdot c \;&=\; [(mp + nq, mq + np)] \cdot [(r, s)] \\
+                                \;&=\; [((mp + nq)r + (mq + np)s, (mp + nq)s + (mq + np)r)]\\
+                                \;&=\; [(mpr + nqr + mqs + nps, mps + nqs + mqr + npr)]\\
+                        a\cdot (b\cdot c) \;&=\; [(m, n)] \cdot [(pr + qs, ps + qr)] \\
+                                \;&=\; [(m(pr + qs) + n(ps + qr), m(ps + qr) + n(pr + qs))] \\
+                                \;&=\; [(mpr + mqs + nps + nqr, mps + mqr + npr + nqs)]
+                \end{align*}
+                Therefore, $(a\cdot b)\cdot c = a\cdot (b\cdot c)$, i.e. $\cdot$ is associative.
+                
+                \begin{align*}
+                        a\cdot b \;&=\; [(mp + nq, mq + np)] \\
+                                \;&=\; [(pm + qn, pn + qm)] \\
+                                \;&=\; b\cdot a
+                \end{align*}
+                Therefore, $\cdot$ is commutative.
+                
+        \end{proof}
+
+        \begin{theorem}
+                For all $a \in \mathbb{Z}$, $a\cdot\bar{1} = a = \bar{1}\cdot a$.
+        \end{theorem}
+
+        \begin{theorem}[Distributivity]
+                For all $a,b,c \in \mathbb{Z}$, $a\cdot(b + c) = a\cdot b + a\cdot c$.
+        \end{theorem}
+
+        \begin{theorem}[No zero divisors]
+                For all $a, b \in \mathbb{Z}$ with $a,b \neq \bar{0}$, we have $a\cdot b \neq \bar{0}$.
+        \end{theorem}
+
+        \begin{theorem}[Cancellation]
+                For $a, b, c \in \mathbb{Z}$ with $a\neq \bar{0}$, we have $a\cdot b = a\cdot c
+                \Rightarrow b = c$.
+        \end{theorem}
+        
+        \begin{definition}[Order]
+                For all $a, b \in \mathbb{Z}$, we say that $a > b$ if $a - b \in \mathbb{Z}^+$.
+        \end{definition}
+
+        \begin{theorem}
+                For all $a, b \in \mathbb{Z}$, we have $a\cdot b > 0$ if $a, b > 0$ or $a, b < 0$.
+        \end{theorem}
+
+        \begin{definition}[Identification map]
+                Define $I_\mathbb{N}\colon \mathbb{N}\to \mathbb{Z}$ by 
+                \[
+                        I_\mathbb{N} \;:=\; [(n + 1, 1)],\quad\text{for all }n \in \mathbb{Z}.
+                \]
+        \end{definition}
+
+        \begin{theorem}
+                $I_{\mathbb{N}}$ is injective.
+        \end{theorem}
+
+        \begin{theorem}
+                $I_{\mathbb{N}}(\mathbb{N}) = \mathbb{Z}^+$.
+        \end{theorem}
+
+        \begin{theorem}
+                $I_{\mathbb{N}}(1) = \bar{1}$.
+        \end{theorem}
+
+        \begin{theorem}
+                For all $m, n \in \mathbb{N}$, $I_{\mathbb{N}}(m + n) = I_{\mathbb{N}}(m) + I_{\mathbb{N}}(n)$.
+        \end{theorem}
+
+        \begin{theorem}
+                For all $m, n \in \mathbb{N}$, $I_{\mathbb{N}}(m \cdot n) = I_{\mathbb{N}}(m) \cdot I_{\mathbb{N}}(n)$.
+        \end{theorem}
+
+        \begin{theorem}
+                For all $m, n \in \mathbb{Z}$ with $m > n$, $I_{\mathbb{N}}(m) > I_{\mathbb{N}}(n)$.
+        \end{theorem}
+\end{document}
