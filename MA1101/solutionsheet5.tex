@@ -31,8 +31,14 @@
   \normalfont % body font
 }
 \makeatother
-\newcommand{\IdN}{I_{\mathbb{N}}} 
-\newcommand{\IdZ}{I_{\mathbb{Z}}} 
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Zm}{\Z\times(\Z\setminus\{0\})}
+\newcommand{\simZ}{\sim_{\Z}} 
+\newcommand{\simQ}{\sim_{\Q}} 
+\newcommand{\IdN}{I_{\N}} 
+\newcommand{\IdZ}{I_{\Z}} 
 
 \begin{document}
         \par\textbf{IISER Kolkata} \hfill \textbf{Problem Sheet V}
@@ -50,41 +56,41 @@
 
         \section{Integers}
         \begin{theorem}
-        Define a relation $\sim_\mathbb{Z}$ on $\mathbb{N}\times \mathbb{N}$ as
-        \[(m, n) \sim_\mathbb{Z} (p, q) \quad\text{if}\quad m + q = n + p. \]
-        Then, $\sim_\mathbb{Z}$ is an equivalence relation on $\mathbb{N}\times \mathbb{N}$.
+        Define a relation $\simZ$ on $\N\times \N$ as
+        \[(m, n) \simZ (p, q) \quad\text{if}\quad m + q = n + p. \]
+        Then, $\simZ$ is an equivalence relation on $\N\times \N$.
         \end{theorem}
         \begin{proof}
-                For an arbitrary $(m, n) \in \mathbb{N}\times \mathbb{N}$, clearly $(m, n) \sim_\mathbb{Z} (m, n)$, hence $\sim_\mathbb{Z} $ is reflexive.
+                For an arbitrary $(m, n) \in \N\times \N$, clearly $(m, n) \simZ (m, n)$, hence $\simZ $ is reflexive.
 
-                Again, for arbitrary $(m, n), (p, q) \in \mathbb{N}\times \mathbb{N}$, if
-                $(m, n) \sim_\mathbb{Z} (p, q)$, we have $m + q = n + p$.
+                Again, for arbitrary $(m, n), (p, q) \in \N\times \N$, if
+                $(m, n) \simZ (p, q)$, we have $m + q = n + p$.
                 By the commutativity of addition on natural numbers, $p + n = q + m$, so 
-                $(p, q) \sim_\mathbb{Z} (m, n) $, hence $\sim_\mathbb{Z}$ is symmetric.
+                $(p, q) \simZ (m, n) $, hence $\simZ$ is symmetric.
 
-                For $(m, n), (p, q), (r, s) \in \mathbb{N}\times \mathbb{N}$, if
-                $(m, n) \sim_{\mathbb{Z}} (p, q)$ and $(p, q) \sim_{\mathbb{Z}} (r, s)$, we have
+                For $(m, n), (p, q), (r, s) \in \N\times \N$, if
+                $(m, n) \simZ (p, q)$ and $(p, q) \simZ (r, s)$, we have
                 $m + q = n + p$ and $p + s = q + r$. Thus, 
                 $m + q + p + s = n + p + q + r$, so $m + s = n + r$.
-                Thus, $(m, n) \sim_{\mathbb{Z}} (r, s)$, hence $\sim_{\mathbb{Z}}$ is transitive.
+                Thus, $(m, n) \simZ (r, s)$, hence $\simZ$ is transitive.
 
-                Therefore, $\sim_{\mathbb{Z}}$ is an equivalence relation on $\mathbb{N}\times \mathbb{N}$.
+                Therefore, $\simZ$ is an equivalence relation on $\N\times \N$.
         \end{proof}
 
         \begin{notation}
         Let us set
         \[
-                \mathbb{Z} \;:=\; (\mathbb{N} \times \mathbb{N})/\sim_\mathbb{Z},\\
+                \Z \;:=\; (\N \times \N)/\simZ,\\
         \]
         \[
-                \mathbb{Z}^+ \;:=\; \{[(n + 1, 1)] : n \in \mathbb{N}\}, \quad
+                \Z^+ \;:=\; \{[(n + 1, 1)] : n \in \N\}, \quad
                 \bar{0} \;:=\; [(1, 1)], \quad
                 \bar{1} \;:=\; [(2, 1)].
         \]
         \end{notation}
 
         \begin{definition}[Addition]
-        For $a = [(m, n)],\; b = [(p, q)] \in \mathbb{Z}$, we define
+        For $a = [(m, n)],\; b = [(p, q)] \in \Z$, we define
         \[
                 a + b \;:=\; [(m + p, n + q)].
         \]
@@ -95,13 +101,13 @@
         \end{theorem}
         \begin{proof}
                 First, we show that $+$ is well-defined.
-                Let $a = [(m, n)] = [(m', n')]$, $b = [(p, q)] = [(p', q')] \in \mathbb{Z}$.
-                We claim that $a + b = [(m + p, n + q)] = [(m' + p', n' + q')]$, i.e. $(m + p, n + q) \sim_{\mathbb{Z}} (m' + p', n' + q')$, i.e $m + p + n' + q' = n + q + m'  + p'$.
-                Now, $(m, n) \sim_{\mathbb{Z}} (m' , n')$ and $(p, q) \sim_{\mathbb{Z}} (p', q')$, from which we have $m + n' = n + m'$ and $p + q' = q + p'$.
+                Let $a = [(m, n)] = [(m', n')]$, $b = [(p, q)] = [(p', q')] \in \Z$.
+                We claim that $a + b = [(m + p, n + q)] = [(m' + p', n' + q')]$, i.e. $(m + p, n + q) \simZ (m' + p', n' + q')$, i.e $m + p + n' + q' = n + q + m'  + p'$.
+                Now, $(m, n) \simZ (m' , n')$ and $(p, q) \simZ (p', q')$, from which we have $m + n' = n + m'$ and $p + q' = q + p'$.
                 Adding these gives the desired result.
 
-                For $a,b,c \in \mathbb{Z}$, let $a = [(m, n)], b = [(p, q)], c = [(r, s)]$.
-                From the associativity of addition in $\mathbb{N}$,
+                For $a,b,c \in \Z$, let $a = [(m, n)], b = [(p, q)], c = [(r, s)]$.
+                From the associativity of addition in $\N$,
                 \begin{align*}
                         (a + b) + c \;&=\; [(m + p, n + q)] + [(r, s)] \\
                                 \;&=\; [((m + p) + r, (n + q) + s)] \\
@@ -111,7 +117,7 @@
                 \end{align*}
                 Therefore, $+$ is associative.
 
-                From the commutativity of addition in $\mathbb{N}$,
+                From the commutativity of addition in $\N$,
                 \begin{align*}
                         a + b \;&=\; [(m + p, n + q)] \\
                                 \;&=\; [(p + m, q + n)] \\
@@ -121,25 +127,25 @@
         \end{proof}
         
         \begin{lemma}
-                For all $m, n, k \in \mathbb{N}$, $[(m, n)] = [(m + k, n + k)] \in \mathbb{Z}$.
+                For all $m, n, k \in \N$, $[(m, n)] = [(m + k, n + k)] \in \Z$.
         \end{lemma}
         \begin{proof}
-                It is sufficient to show that $(m, n) \sim_{\mathbb{Z}} (m + k, n + k)$, i.e.
+                It is sufficient to show that $(m, n) \simZ (m + k, n + k)$, i.e.
                 $m + n + k = n + m + k$, which is certainly true.
         \end{proof}
         \begin{lemma}
-                For all $n \in \mathbb{N}$, $[(n, n)] = \bar{0}$.
+                For all $n \in \N$, $[(n, n)] = \bar{0}$.
         \end{lemma}
         \begin{proof}
-                It is sufficient to show that $(n, n) \sim_{\mathbb{Z}} (1, 1)$, i.e.
+                It is sufficient to show that $(n, n) \simZ (1, 1)$, i.e.
                 $n + 1 = n + 1$, which is certainly true.
         \end{proof}
 
         \begin{theorem}
-                For all $a \in \mathbb{Z}$, $\bar{0} + a = a = a + \bar{0}$.
+                For all $a \in \Z$, $\bar{0} + a = a = a + \bar{0}$.
         \end{theorem}
         \begin{proof}
-                Let $a = [(m, n)] \in \mathbb{Z}$.
+                Let $a = [(m, n)] \in \Z$.
                 \begin{align*}
                         a + \bar{0} \;&=\; [(m, n)] + [(1, 1)] \\
                                 \;&=\; [(m + 1, n + 1)] \\
@@ -150,14 +156,14 @@
         \end{proof}
         
         \begin{theorem}
-                        For all $a \in \mathbb{Z}$, there exists a unique $x \in \mathbb{Z}$, satisfying $a + x = \bar{0} = x + a$.
+                        For all $a \in \Z$, there exists a unique $x \in \Z$, satisfying $a + x = \bar{0} = x + a$.
         \end{theorem}
         \begin{proof}
-                For $a = [m, n] \in \mathbb{Z}$, construct $x = [(n, m)] \in \mathbb{Z}$.
+                For $a = [(m, n)] \in \Z$, construct $x = [(n, m)] \in \Z$.
                 Clearly, $a + x = [(m + n, n + m)] = \bar{0}$.
                 From commutativity of $+$, $a + x = \bar{0} = x + a$.
 
-                We now show that $x$ is unique. Let $a + x' = \bar{0} = x' + a$.
+                We now show that $x$ is unique. Let $x' \in \Z$, $a + x' = \bar{0} = x' + a$.
                 \begin{align*}
                         a + x' \;&=\; \bar{0} \\
                         x + (a + x') \;&=\; x + \bar{0} \\
@@ -170,31 +176,39 @@
                 We denote $x$ as $-a$ and say that $-a$ is the \textit{negative} of $a$.
         \end{notation}
         \begin{corollary}
-                If $a = [(m, n)] \in \mathbb{Z}$, then $-a = [(n, m)]$.
+                If $a = [(m, n)] \in \Z$, then $-a = [(n, m)]$.
         \end{corollary}
         \begin{notation}
-                For $a, b \in \mathbb{Z}$, we write
+                For $a, b \in \Z$, we write
                 \[
                 a - b \;:=\; a + (-b).\quad\quad\quad
                 \]
         \end{notation}
 
         \begin{theorem}
-                        For all $a, b \in \mathbb{Z}$, there exists a unique $x \in \mathbb{Z}$ satisfying $a + x = b$.
+                        For all $a, b \in \Z$, there exists a unique $x \in \Z$ satisfying $a + x = b$.
         \end{theorem}
         \begin{proof}
-                From the well-defined nature of $+$, there exists a unique $x = b - a = b + (-a) \in \mathbb{Z}$.
+                From the well-defined nature of $+$, there exists a unique $x = b - a = b + (-a) \in \Z$.
                 \begin{align*}
                         a + x \;&=\; a + (b + (-a)) \\
                                 \;&=\; a + ((-a) + b) \\
                                 \;&=\; (a + (-a)) + b \\
                                 \;&=\; \bar{0} + b \\
-                                \;&=\; b \qedhere
+                                \;&=\; b
+                \end{align*}
+                Let $x' \in \Z$, $a + x' = b$.
+                \begin{align*}
+                        a + x' \;&=\; b \\
+                        x + (a + x') \;&=\; x + b \\
+                        (x + a) + x' \;&=\; x + b \\
+                        b + x' \;&=\; b + x \\
+                        x' \;&=\; x \qedhere
                 \end{align*}
         \end{proof}
 
         \begin{definition}[Multiplication]
-        For $a = [(m, n)],\; b = [(p, q)] \in \mathbb{Z}$, we define multiplication
+        For $a = [(m, n)],\; b = [(p, q)] \in \Z$, we define
         \[
                 a \cdot b \;:=\; [(mp + nq, mq + np)].
         \]
@@ -204,30 +218,30 @@
         \end{theorem}
         \begin{proof}
                 First, we show that $\cdot$ is well-defined.
-                Let $a = [(m, n)] = [(m', n')]$, $b = [(p, q)] = [(p', q')] \in \mathbb{Z}$.
+                Let $a = [(m, n)] = [(m', n')]$, $b = [(p, q)] = [(p', q')] \in \Z$.
                 We claim that $a\cdot b = [(mp + nq, mq + np)] = [(m'p' + n'q', m'q' + n'p')]$,
-                i.e. $(mp + nq, mq + np) \sim_{\mathbb{Z}} (m'p' + n'q', m'q' + n'p')$.
+                i.e. $(mp + nq, mq + np) \simZ (m'p' + n'q', m'q' + n'p')$.
 
-                From $(p, q) \sim_{\mathbb{Z}} (p', q')$,
+                From $(p, q) \simZ (p', q')$,
                 \begin{align*}
                         p + q' \;&=\; q + p' \\
                         mp + mq' \;&=\; mq + mp' \\
                         np + nq' \;&=\; nq + np' \\
                         mp + nq + mq' + np' \;&=\; mq + np + mp' + nq' \\
-                        (mp + nq, mq + np) &\sim_{\mathbb{Z}} (mp' + nq', mq' + np')
+                        (mp + nq, mq + np) &\simZ (mp' + nq', mq' + np')
                 \end{align*}
 
-                From $(m, n) \sim_{\mathbb{Z}} (m', n')$,
+                From $(m, n) \simZ (m', n')$,
                 \begin{align*}
                         m + n' \;&=\; n + m' \\
                         mp' + n'p' \;&=\; np' + m'p' \\
                         mq' + n'q' \;&=\; nq' + m'q' \\
                         mp' + nq' + m'q' + n'p' \;&=\; mq' + np' + m'p' + n'q' \\
-                        (mp' + nq', mq' + np') &\sim_{\mathbb{Z}} (m'p' + n'q', m'q' + n'p')
+                        (mp' + nq', mq' + np') &\simZ (m'p' + n'q', m'q' + n'p')
                 \end{align*}
-                Transitivity of $\sim_{\mathbb{Z}}$ yields the desired result.
+                Transitivity of $\simZ$ yields the desired result.
 
-                For $a,b,c \in \mathbb{Z}$, let $a = [(m, n)], b = [(p, q)], c = [(r, s)]$.
+                For $a,b,c \in \Z$, let $a = [(m, n)], b = [(p, q)], c = [(r, s)]$.
                 \begin{align*}
                         (a\cdot b)\cdot c \;&=\; [(mp + nq, mq + np)] \cdot [(r, s)] \\
                                 \;&=\; [((mp + nq)r + (mq + np)s, (mp + nq)s + (mq + np)r)]\\
@@ -247,10 +261,10 @@
         \end{proof}
 
         \begin{theorem}
-                For all $a \in \mathbb{Z}$, $a\cdot\bar{1} = a = \bar{1}\cdot a$.
+                For all $a \in \Z$, $a\cdot\bar{1} = a = \bar{1}\cdot a$.
         \end{theorem}
         \begin{proof}
-                Let $a = [(m, n)] \in \mathbb{Z}$.
+                Let $a = [(m, n)] \in \Z$.
                 \begin{align*}
                         a\cdot \bar{1} \;&=\; [(m, n)] \cdot [(2, 1)] \\
                                 \;&=\; [(2m + n, m + 2n)] \\
@@ -260,12 +274,24 @@
                         a\cdot \bar{1} \;&=\; a \;=\; \bar{1}\cdot a \qedhere
                 \end{align*}
         \end{proof}
-
-        \begin{theorem}[Distributivity]
-                For all $a,b,c \in \mathbb{Z}$, $a\cdot(b + c) = a\cdot b + a\cdot c$.
+        \begin{theorem}
+                For all $a \in \Z$, $a\cdot \bar{0} = \bar{0} = \bar{0}\cdot a$.
         \end{theorem}
         \begin{proof}
-                For $a,b,c \in \mathbb{Z}$, let $a = [(m, n)], b = [(p, q)], c = [(r, s)]$.
+                Let $a = [(m, n)] \in \Z$.
+                \begin{align*}
+                        a\cdot \bar{0} \;&=\; [(m, n)]\cdot [(1, 1)]\\
+                                \;&=\; [(m + n, m + n)] \\
+                                \;&=\; \bar{0} \\
+                        a\cdot \bar{0} \;&=\; \bar{0} \;=\; \bar{0}\cdot a \qedhere
+                \end{align*}
+        \end{proof}
+
+        \begin{theorem}[Distributivity]
+                For all $a,b,c \in \Z$, $a\cdot(b + c) = a\cdot b + a\cdot c$.
+        \end{theorem}
+        \begin{proof}
+                For $a,b,c \in \Z$, let $a = [(m, n)], b = [(p, q)], c = [(r, s)]$.
                 \begin{align*}
                         a\cdot (b + c) \;&=\; [(m, n)] \cdot [(p + r, q + s)] \\
                                 \;&=\; [(m(p + r) + n(q + s), m(q + s) + n(p + r))] \\
@@ -275,17 +301,7 @@
                 \end{align*}
         \end{proof}
         \begin{theorem}
-                For all $a \in \mathbb{Z}$, $a\cdot \bar{0} = \bar{0}$.
-        \end{theorem}
-        \begin{proof}
-                \begin{align*}
-                        a\cdot \bar{0} + a\cdot\bar{0} \;&=\; a\cdot (\bar{0} + \bar{0}) \\
-                                \;&=\; a\cdot\bar{0} \\
-                        a\cdot \bar{0} \;&=\; \bar{0} \qedhere
-                \end{align*}
-        \end{proof}
-        \begin{theorem}
-                For all $a, b \in \mathbb{Z}$, $(-a)\cdot b = -(a\cdot b)$.
+                For all $a, b \in \Z$, $(-a)\cdot b = -(a\cdot b)$.
         \end{theorem}
         \begin{proof}
                 \begin{align*}
@@ -296,7 +312,7 @@
                 \end{align*}
         \end{proof}
         \begin{theorem}
-                For all $a, b \in \mathbb{Z}$, $(-a)\cdot(-b) = a\cdot b$.
+                For all $a, b \in \Z$, $(-a)\cdot(-b) = a\cdot b$.
         \end{theorem}
         \begin{proof}
                 \begin{align*}
@@ -309,37 +325,42 @@
         \end{proof}
 
         \begin{lemma}
-                If $a = [(m, n)] \in \mathbb{Z}$, $a \neq \bar{0}$, then $m \neq n$.
+                If $a = [(m, n)] \in \Z$, $a \neq \bar{0}$, then $m \neq n$.
         \end{lemma}
         \begin{proof}
-                Assume that $m = n$. Then, we have $(m, n) \sim_{\mathbb{Z}} \bar{0}$,
+                Assume that $m = n$. Then, we have $(m, n) \simZ \bar{0}$,
                 contradicting our premise. Hence, we must have $m\neq n$.
         \end{proof}
         \begin{theorem}[No zero divisors]
-                For all $a, b \in \mathbb{Z}$ with $a,b \neq \bar{0}$, we have $a\cdot b \neq \bar{0}$.
+                For all $a, b \in \Z$ with $a,b \neq \bar{0}$, we have $a\cdot b \neq \bar{0}$.
         \end{theorem}
         \begin{proof}
-                Let $a = [(m, n)], b = [(p, q)] \in \mathbb{Z}$.
+                Let $a = [(m, n)], b = [(p, q)] \in \Z$.
                 Note that $m\neq n$, $p\neq n$, since $a, b \neq \bar{0}$.
 
                 Assume that our theorem is false, i.e. $a\cdot b = \bar{0}$.
-                Then $(mp + nq, mq + np) \sim_{\mathbb{Z}} \bar{0} \Rightarrow mp + nq = mq + np$.
+                Then $[(mp + nq, mq + np)] = \bar{0} \Rightarrow mp + nq = mq + np$.
                 One of the following must be true.
                 
-                \par\textbf{Case I:} If $m > n$, there exists $u \in \mathbb{N}$, such that $m = n + u$. Thus, $(n + u)p + nq = (n + u)q + np \Rightarrow np + up + nq = nq + uq + np$.
+                \par\textbf{Case I:} If $m > n$, there exists $u \in \N$, such that $m = n + u$. Thus, $(n + u)p + nq = (n + u)q + np \Rightarrow np + up + nq = nq + uq + np$.
                 This implies that $up = uq \Rightarrow p = q$, contradicting $p\neq q$.
-                \par\textbf{Case II:} If $n > m$, there exists $v \in \mathbb{N}$, such that $n = m + v$. Thus, $mp + (m + v)q = mq + (m + v)p\Rightarrow mp + mq + vq = mq + mp + vp$.
+                \par\textbf{Case II:} If $n > m$, there exists $v \in \N$, such that $n = m + v$. Thus, $mp + (m + v)q = mq + (m + v)p\Rightarrow mp + mq + vq = mq + mp + vp$.
                 This implies that $vp = vq \Rightarrow p = q$, contradicting $p\neq q$.
 
                 Hence, $a\cdot b \neq \bar{0}$.
         \end{proof}
+        \begin{corollary}
+        \label{cor:zero}
+                For all $a, b \in \Z$, if $a\cdot b = \bar{0}$, then $a = \bar{0}$ or 
+                $b = \bar{0}$.
+        \end{corollary}
 
         \begin{theorem}[Cancellation]
-                For $a, b, c \in \mathbb{Z}$ with $a\neq \bar{0}$, we have $a\cdot b = a\cdot c
+                For $a, b, c \in \Z$ with $a\neq \bar{0}$, we have $a\cdot b = a\cdot c
                 \Rightarrow b = c$.
         \end{theorem}
         \begin{proof}
-                For $a,b,c \in \mathbb{Z}$, let $a = [(m, n)], b = [(p, q)], c = [(r, s)]$.
+                For $a,b,c \in \Z$, let $a = [(m, n)], b = [(p, q)], c = [(r, s)]$.
                 We have $m \neq n$.
                 \begin{align*}
                 a\cdot b \;&=\; a\cdot c\\
@@ -350,7 +371,7 @@
                 
                 Assume that our theorem is false.
                 Thus, $b\neq c$, i.e. $b + (-c) = [(p + s, q + r)] \neq \bar{0} \Rightarrow p + s \neq q + r$.
-                Without loss of generality, let $p + s > q + r$, i.e. $p + s = q + r + x$ for some $x \in \mathbb{N}$.
+                Without loss of generality, let $p + s > q + r$, i.e. $p + s = q + r + x$ for some $x \in \N$.
 
                 Thus, $m(q + r + x) + n(q + r) = m(q + r) + n(q + r + x)$. This implies that
                 $mx = nx \Rightarrow m = n$, which contradicts $m \neq n$.
@@ -359,36 +380,40 @@
         \end{proof}
         
         \begin{definition}[Order]
-                For all $a, b \in \mathbb{Z}$, we say that $a > b$ if $a - b \in \mathbb{Z}^+$.
+                For all $a, b \in \Z$, we say that $a > b$ if $a - b \in \Z^+$.
         \end{definition}
         
         \begin{lemma}
         \label{lem:Zplus}
-                If $m, n \in \mathbb{N}$, $m > n$, i.e. $m = n + x$ for $x \in \mathbb{N}$,
-                then $a = [(m, n)] \in \mathbb{Z}^+$.
+                If $m, n \in \N$, $m > n$, i.e. $m = n + x$ for $x \in \N$,
+                then $a = [(m, n)] \in \Z^+$.
         \end{lemma}
         \begin{proof}
-                We must show that $a = [(n + x, n)] \in \mathbb{Z}^+$, i.e.
-                for some $k \in \mathbb{N}$, $(n + x, n) \sim_{\mathbb{Z}} (k + 1, 1)$, i.e.
+                We must show that $a = [(n + x, n)] \in \Z^+$, i.e.
+                for some $k \in \N$, $(n + x, n) \simZ (k + 1, 1)$, i.e.
                 $n + x + 1 = n + k + 1$. This is clearly true for $k = x$.
         \end{proof}
         \begin{theorem}
-                For all $a, b \in \mathbb{Z}$, we have $a\cdot b > 0$ if $a, b > 0$ or $a, b < 0$.
+                For all $a, b \in \Z$, we have $a\cdot b > \bar{0}$ if $a, b > \bar{0}$ or $a, b < \bar{0}$.
         \end{theorem}
         \begin{proof}
-                If $a, b > \bar{0}$, then $a, b \in \mathbb{Z}^+$. Thus, $a = [(m + 1, 1)]$ and
-                $b = [(n + 1, 1)]$ for some $m, n \in \mathbb{N}$.
+                If $a, b > \bar{0}$, then $a, b \in \Z^+$. Thus, $a = [(m + 1, 1)]$ and
+                $b = [(n + 1, 1)]$ for some $m, n \in \N$.
                 \begin{align*}
                         a\cdot b \;&=\; [((m + 1)(n + 1) + (1)(1), (m + 1)1 + 1(n + 1))] \\
                                 \;&=\; [(mn + m + n + 1 + 1, m + 1 + n + 1)] \\
-                                \;&=\; [((m + n + 2) + mn, (m + n + 2))] \in \mathbb{Z}^+ \qedhere
+                                \;&=\; [((m + n + 2) + mn, (m + n + 2))] \in \Z^+ \qedhere
                 \end{align*}
+                Therefore, $a\cdot b > \bar{0}$.
+
+                If $a, b < \bar{0}$, then $\bar{0} - a, \bar{0} - b \in \Z^+$, i.e.
+                $-a, -b > \bar{0}$. Therefore, $(-a)\cdot(-b) > \bar{0} \implies a\cdot b > \bar{0}$
         \end{proof}
 
         \begin{definition}[Identification map]
-                Define $I_\mathbb{N}\colon \mathbb{N}\to \mathbb{Z}$ by 
+                Define $\IdN\colon \N\to \Z$ by 
                 \[
-                        I_\mathbb{N}(n) \;:=\; [(n + 1, 1)],\quad\text{for all }n\in \mathbb{Z}.
+                        \IdN(n) \;:=\; [(n + 1, 1)],\quad\text{for all }n\in \N.
                 \]
         \end{definition}
 
@@ -396,11 +421,11 @@
                 $\IdN$ is injective.
         \end{theorem}
         \begin{proof}
-                Let $m, n \in \mathbb{N}$
+                Let $m, n \in \N$.
                 \begin{align*}
                         \IdN(m) \;&=\; \IdN(n) \\
                         [(m + 1, 1)] \;&=\; [(n + 1, 1)] \\
-                        (m + 1, 1) &\sim_{\mathbb{Z}} (n + 1, 1) \\
+                        (m + 1, 1) &\simZ (n + 1, 1) \\
                         m + 1 + 1 \;&=\; n + 1 + 1 \\
                         m \;&=\; n
                 \end{align*}
@@ -408,17 +433,17 @@
         \end{proof}
 
         \begin{theorem}
-                $\IdN(\mathbb{N}) = \mathbb{Z}^+$.
+                $\IdN(\N) = \Z^+$.
         \end{theorem}
         \begin{proof}
-                We first show that $\IdN(\mathbb{N}) \subseteq \mathbb{Z}^+$.
-                Let $x \in \IdN(\mathbb{N})$. Thus, there exists at least one
-                $k \in \mathbb{N}$ such that $x = \IdN(k) = [(k + 1, 1)]$, which implies that $x \in \mathbb{Z}^+$ by definition.
+                We first show that $\IdN(\N) \subseteq \Z^+$.
+                Let $x \in \IdN(\N)$. Thus, there exists at least one
+                $k \in \N$ such that $x = \IdN(k) = [(k + 1, 1)]$, which implies that $x \in \Z^+$ by definition.
 
-                Next, we show that $\mathbb{Z}^+ \subseteq \IdN(\mathbb{N})$.
-                Let $x \in \mathbb{Z}^+$. By definition, $x = [(k + 1, 1)]$ for some $k \in \mathbb{N}$. Clearly, $x = \IdN(k) \in \IdN(\mathbb{N})$.
+                Next, we show that $\Z^+ \subseteq \IdN(\N)$.
+                Let $x \in \Z^+$. By definition, $x = [(k + 1, 1)]$ for some $k \in \N$. Clearly, $x = \IdN(k) \in \IdN(\N)$.
 
-                Hence, we conclude that $\IdN(\mathbb{N}) = \mathbb{Z}^+$.
+                Hence, we conclude that $\IdN(\N) = \Z^+$.
         \end{proof}
 
         \begin{theorem}
@@ -429,7 +454,7 @@
         \end{proof}
 
         \begin{theorem}
-                For all $m, n \in \mathbb{N}$, $\IdN(m + n) = \IdN(m) + \IdN(n)$.
+                For all $m, n \in \N$, $\IdN(m + n) = \IdN(m) + \IdN(n)$.
         \end{theorem}
         \begin{proof}
                 \begin{align*}
@@ -441,7 +466,7 @@
         \end{proof}
 
         \begin{theorem}
-                For all $m, n \in \mathbb{N}$, $\IdN(m \cdot n) = \IdN(m) \cdot \IdN(n)$.
+                For all $m, n \in \N$, $\IdN(m \cdot n) = \IdN(m) \cdot \IdN(n)$.
         \end{theorem}
         \begin{proof}
                 \begin{align*}
@@ -454,7 +479,7 @@
         \end{proof}
 
         \begin{theorem}
-                For all $m, n \in \mathbb{Z}$ with $m > n$, $\IdN(m) > \IdN(n)$.
+                For all $m, n \in \N$ with $m > n$, $\IdN(m) > \IdN(n)$.
         \end{theorem}
         \begin{proof}
                 \begin{align*}
@@ -463,7 +488,476 @@
                         \;&=\; [(m + 1 + 1, 1 + n + 1)] \\
                         \;&=\; [(m, n)].
                 \end{align*}
-                From \ref{lem:Zplus}, $[(m, n)] \in \mathbb{Z}^+$.
-                Therefore, $\IdN(m) - \IdN(n) \in \mathbb{Z}^+ \implies \IdN(m) > \IdN(n)$, as desired.
+                From \ref{lem:Zplus}, $[(m, n)] \in \Z^+$.
+                Therefore, $\IdN(m) - \IdN(n) \in \Z^+ \implies \IdN(m) > \IdN(n)$, as desired.
         \end{proof}
+
+        \subsection*{Identification}
+        For all $n \in \N$, we shall identify $\IdN(n)$ with $n$.
+        With this identification,
+        \[0 \leftrightarrow \bar{0}\]
+        \[1 \leftrightarrow \bar{1}\]
+        \[\N = \Z^+ \subset \Z\]
+        \[
+        \Z \;=\; \{\,n : n \in \N\,\} \cup
+                \{\,-n : n \in \N\,\} \cup
+                \{\,\bar{0}\,\}
+        \]
+        
+        \section{Rationals}
+        \begin{theorem}
+        Define a relation $\simQ$ on $\Zm)$ as
+        \[(m, n) \simQ (p, q) \quad\text{if}\quad mq = np. \]
+        Then, $\simQ$ is an equivalence relation on $\Zm)$.
+        \end{theorem}
+        \begin{proof}
+                For an arbitrary $(m, n) \in \Zm$, clearly $(m, n) \simQ (m, n)$, hence $\simQ $ is reflexive.
+
+                Again, for arbitrary $(m, n), (p, q) \in \Zm$, if
+                $(m, n) \simQ (p, q)$, we have $mq = np$.
+                By the commutativity of multiplication on integers, $pn = qm$, so 
+                $(p, q) \simQ (m, n) $, hence $\simQ$ is symmetric.
+
+                For $(m, n), (p, q), (r, s) \in \Zm$, if
+                $(m, n) \simQ (p, q)$ and $(p, q) \simQ (r, s)$, we have
+                $mq = np$ and $ps = qr$. Thus, 
+                $mqps = npqr$, so $ms = nr$.
+                Thus, $(m, n) \simQ (r, s)$, hence $\simQ$ is transitive.
+
+                Therefore, $\simQ$ is an equivalence relation on $\Zm)$.
+        \end{proof}
+
+        \begin{notation}
+        Let us set
+        \[
+                \Q \;:=\; (\Zm))/\simQ,\\
+        \]
+        \[
+                \bar{0} \;:=\; [(0, 1)], \quad
+                \bar{1} \;:=\; [(1, 1)].
+        \]
+        \end{notation}
+
+        \begin{definition}[Addition]
+        For $a = [(m, n)],\; b = [(p, q)] \in \Q$, we define
+        \[
+                a + b \;:=\; [(mq + np, nq)].
+        \]
+        \end{definition}
+        
+        \begin{theorem}
+                Addition $(+)$ is well-defined, associative and commutative.
+        \end{theorem}
+        \begin{proof}
+                First, we show that $+$ is well-defined.
+                Let $a = [(m, n)] = [(m', n')]$, $b = [(p, q)] = [(p', q')] \in \Q$.
+                Now, $(m, n) \simQ (m' , n')$ and $(p, q) \simQ (p', q')$, from which we have 
+                $mn' = m'n$ and $pq' = p'q$.
+                We claim 
+                \begin{align*}
+                a + b = [(mq + np, nq)] \;&=\; [(m'q' + n'p', n'q')] \\
+                (mq + np)(n'q') \;&=\; (m'q' + n'p')(nq) \\
+                mn'qq' + nn'pq' \;&=\; m'nqq' + nn'p'q \\
+                qq'(mn' - m'n) \;&=\; nn'(p'q - pq') \\
+                qq'(0) \;&=\; nn'(0)
+                \end{align*}
+                which is clearly true.
+
+                For $a,b,c \in \Z$, let $a = [(m, n)], b = [(p, q)], c = [(r, s)]$.
+                \begin{align*}
+                        (a + b) + c \;&=\; [(mq + np, nq)] + [(r, s)] \\
+                                \;&=\; [((mq + np)s + nq(r), nqs)] \\
+                                \;&=\; [(mqs + nps + nqr, nqs)] \\
+                                \;&=\; [(m)qs + n(ps + qr), nqs] \\
+                                \;&=\; [(m, n)] + [(ps + qr, qs)] \\
+                                \;&=\; a + (b + c)
+                \end{align*}
+                Therefore, $+$ is associative.
+
+                \begin{align*}
+                        a + b \;&=\; [(mq + np, nq)] \\
+                                \;&=\; [(pn + qm, qn)] \\
+                                \;&=\; b + a
+                \end{align*}
+                Therefore, $+$ is commutative.
+        \end{proof}
+        
+        \begin{lemma}
+                For all $(m, n) \in S$, $k \in \Z\setminus\{0\}$,
+                $[(m, n)] = [(mk, nk)] \in \Q$.
+        \end{lemma}
+        \begin{proof}
+                It is sufficient to show that $(m, n) \simQ (mk, nk)$, i.e.
+                $mnk = nmk$, which is certainly true.
+        \end{proof}
+        \begin{lemma}
+                For all $n \in \Z\setminus\{0\}$, $[(n, n)] = \bar{1}$.
+        \end{lemma}
+        \begin{proof}
+                It is sufficient to show that $(n, n) \simQ (1, 1)$, i.e.
+                $n\cdot 1 = n\cdot 1$, which is certainly true.
+        \end{proof}
+
+        \begin{theorem}
+                For all $a \in \Q$, $\bar{0} + a = a = a + \bar{0}$.
+        \end{theorem}
+        \begin{proof}
+                Let $a = [(m, n)] \in \Q$.
+                \begin{align*}
+                        a + \bar{0} \;&=\; [(m, n)] + [(0, 1)] \\
+                                \;&=\; [(m \cdot 1 + n\cdot 0, n \cdot 1)] \\
+                                \;&=\; [(m, n)] \\
+                                \;&=\; a \\
+                        a + \bar{0} \;&=\; a \;=\; \bar{0} + a \qedhere
+                \end{align*}
+        \end{proof}
+        
+        \begin{theorem}
+                        For all $a \in \Q$, there exists a unique $x \in \Q$, satisfying $a + x = \bar{0} = x + a$.
+        \end{theorem}
+        \begin{proof}
+                For $a = [(m, n)] \in \Q$, construct $x = [(-m, n)] \in \Q$.
+                Clearly, $a + x = [(mn + n(-m), nn)] = \bar{0}$.
+                From commutativity of $+$, $a + x = \bar{0} = x + a$.
+
+                We now show that $x$ is unique. Let $x' \in \Q$, $a + x' = \bar{0} = x' + a$.
+                \begin{align*}
+                        a + x' \;&=\; \bar{0} \\
+                        x + (a + x') \;&=\; x + \bar{0} \\
+                        (x + a) + x' \;&=\; x \\
+                        \bar{0} + x' \;&=\; x \\
+                        x' \;&=\; x     \qedhere
+                \end{align*}
+        \end{proof}
+        \begin{notation}
+                We denote $x$ as $-a$ and say that $-a$ is the \textit{negative} of $a$.
+        \end{notation}
+        \begin{corollary}
+                If $a = [(m, n)] \in \Q$, then $-a = [(-m, n)]$.
+        \end{corollary}
+        \begin{notation}
+                For $a, b \in \Q$, we write
+                \[
+                a - b \;:=\; a + (-b).\quad\quad\quad
+                \]
+        \end{notation}
+
+        \begin{theorem}
+                        For all $a, b \in \Q$, there exists a unique $x \in \Q$ satisfying $a + x = b$.
+        \end{theorem}
+        \begin{proof}
+                From the well-defined nature of $+$, there exists a unique $x = b - a = b + (-a) \in \Q$.
+                \begin{align*}
+                        a + x \;&=\; a + (b + (-a)) \\
+                                \;&=\; a + ((-a) + b) \\
+                                \;&=\; (a + (-a)) + b \\
+                                \;&=\; \bar{0} + b \\
+                                \;&=\; b
+                \end{align*}
+                Let $x' \in \Q$, $a + x' = b$.
+                \begin{align*}
+                        a + x' \;&=\; b \\
+                        x + (a + x') \;&=\; x + b \\
+                        (x + a) + x' \;&=\; x + b \\
+                        b + x' \;&=\; b + x \\
+                        -b + (b + x') \;&=\; -b + (b + x) \\
+                        (-b + b) + x' \;&=\; (-b + b) + x \\
+                        \bar{0} + x' \;&=\; \bar{0} + x \\
+                        x' \;&=\; x \qedhere
+                \end{align*}
+        \end{proof}
+
+        \begin{definition}[Multiplication]
+        For $a = [(m, n)],\; b = [(p, q)] \in \Q$, we define
+        \[
+                a \cdot b \;:=\; [(mp, nq)].
+        \]
+        \end{definition}
+        \begin{theorem}
+                Multiplication $(\cdot)$ is well-defined, associative and commutative.
+        \end{theorem}
+        \begin{proof}
+                First, we show that $\cdot$ is well-defined.
+                Let $a = [(m, n)] = [(m', n')]$, $b = [(p, q)] = [(p', q')] \in \Q$.
+                Now, $(m, n) \simQ (m', n')$ and $(p, q) \simQ (p', q')$, from which we have
+                $mn' = m'n$ and $pq' = p'q$.
+                We claim
+                \begin{align*}
+                        a\cdot b = [(mp, nq)] \;&=\; [(m'p', n'q')] \\
+                                (mp)(n'q') \;&=\; (nq)(m'p') \\
+                                (mn')(pq') \;&=\; (m'n)(p'q)
+                \end{align*}
+                which is clearly true.
+
+                For $a,b,c \in \Z$, let $a = [(m, n)], b = [(p, q)], c = [(r, s)]$.
+                \begin{align*}
+                        (a\cdot b)\cdot c \;&=\; [(mp, nq)] \cdot [(r, s)] \\
+                                \;&=\; [((mp)r, (nq)s)]\\
+                                \;&=\; [(mpr, nqs)]\\
+                        a\cdot (b\cdot c) \;&=\; [(m, n)] \cdot [(pr, qs)] \\
+                                \;&=\; [(m(pr), n(qs))] \\
+                                \;&=\; [(mpr, nqs)]
+                \end{align*}
+                Therefore, $(a\cdot b)\cdot c = a\cdot (b\cdot c)$, i.e. $\cdot$ is associative.
+                
+                \begin{align*}
+                        a\cdot b \;&=\; [(mp, nq)] \\
+                                \;&=\; [(pm, qn)] \\
+                                \;&=\; b\cdot a
+                \end{align*}
+                Therefore, $\cdot$ is commutative.
+        \end{proof}
+
+        \begin{theorem}
+                For all $a \in \Q$, $a\cdot\bar{1} = a = \bar{1}\cdot a$.
+        \end{theorem}
+        \begin{proof}
+                Let $a = [(m, n)] \in \Q$.
+                \begin{align*}
+                        a\cdot \bar{1} \;&=\; [(m, n)] \cdot [(q, 1)] \\
+                                \;&=\; [(m\cdot 1, n\cdot 1)] \\
+                                \;&=\; [(m, n)] \\
+                                \;&=\; a \\
+                        a\cdot \bar{1} \;&=\; a \;=\; \bar{1}\cdot a \qedhere
+                \end{align*}
+        \end{proof}
+        \begin{theorem}
+                For all $a \in \Z$, $a\cdot \bar{0} = \bar{0} = \bar{0}\cdot a$.
+        \end{theorem}
+        \begin{proof}
+                Let $a = [(m, n)] \in \Q$.
+                \begin{align*}
+                        a\cdot \bar{0} \;&=\; [(m, n)]\cdot [(0, 1)]\\
+                                \;&=\; [(m\cdot 0, n)] \\
+                                \;&=\; \bar{0} \\
+                        a\cdot \bar{0} \;&=\; \bar{0} \;=\; \bar{0}\cdot a \qedhere
+                \end{align*}
+        \end{proof}
+        
+        \begin{theorem}
+                For all $a \in \Q\setminus\{\bar{0}\}$, there exists a unique $x \in \Q$ satisfying $a\cdot x = \bar{1} = x\cdot a$.
+        \end{theorem}
+        \begin{proof}
+                For $a = [(m, n)] \in \Q\setminus\{\bar{0}\}$, construct $x = [(n, m)] \in \Q$.
+                Clearly, $a\cdot x = [(mn, nm)] = \bar{1}$.
+                From commutativity of $\cdot$, $a\cdot x = \bar{1} = x\cdot a$.
+
+                We now show that $x$ is unique. Let $x' \in \Q$, $a\cdot x' = \bar{1} = x' \cdot a$.
+                \begin{align*}
+                        a\cdot x' \;&=\; \bar{1} \\
+                        x\cdot (a\cdot x') \;&=\; x\cdot\bar{1}\\
+                        (x\cdot a)\cdot x' \;&=\; x \\
+                        \bar{1}\cdot x' \;&=\; x\\
+                        x' \;&=\; x
+                \end{align*}
+        \end{proof}
+        \begin{notation}
+                We denote $x$ as $a^{-1}$ and say that $a^{-1}$ is the \emph{inverse} of $a$.
+        \end{notation}
+
+        \begin{theorem}
+                        For all $a, b \in \Q\setminus\{\bar{0}\}$, there exists a unique $x \in \Q$ satisfying $a \cdot x = b$.
+        \end{theorem}
+        \begin{proof}
+                From the well-defined nature of $\cdot$, there exists a unique $x = a^{-1}\cdot b \in \Q$.
+                \begin{align*}
+                        a \cdot x \;&=\; a \cdot (a^{-1} \cdot b) \\
+                                \;&=\; (a\cdot a^{-1}) \cdot b \\
+                                \;&=\; \bar{1}\cdot b \\
+                                \;&=\; b
+                \end{align*}
+                Let $x' \in \Q$, $a \cdot x' = b$.
+                \begin{align*}
+                        a\cdot x' \;&=\; b \\
+                        x \cdot (a\cdot x') \;&=\; x\cdot b \\
+                        (x\cdot a)\cdot x' \;&=\; x\cdot b \\
+                        b\cdot x' \;&=\; b\cdot x \\
+                        b^{-1}\cdot (b\cdot x') \;&=\; b^{-1}\cdot (b\cdot x) \\
+                        (b^{-1}\cdot b)\cdot x' \;&=\; (b^{-1}\cdot b)\cdot x\\
+                        \bar{1}\cdot x' \;&=\; \bar{1}\cdot x\\
+                        x' \;&=\; x \qedhere
+                \end{align*}
+        \end{proof}
+
+        \begin{theorem}[Distributivity]
+                For all $a,b,c \in \Q$, $a\cdot(b + c) = a\cdot b + a\cdot c$.
+        \end{theorem}
+        \begin{proof}
+                For $a,b,c \in \Q$, let $a = [(m, n)], b = [(p, q)], c = [(r, s)]$.
+                \begin{align*}
+                        a\cdot (b + c) \;&=\; [(m, n)] \cdot [(ps + qr, qs)] \\
+                                \;&=\; [(m(ps + qr), nqs)] \\
+                                \;&=\; [(mps + nqr, nqs)] \\
+                        a\cdot b + a\cdot c \;&=\; [(mp, nq)] + [(mr, ns)] \\
+                                \;&=\; [((mp)(ns) + (nq)(mr), (nq)(ns))] \\
+                                \;&=\; [(mnps + mnqr, nnqs)] \\
+                                \;&=\; [(n(mps + mqr), n(nqs))] \\
+                                \;&=\; [(mps + mqr, nqs)]
+                \end{align*}
+                Hence, $a\cdot (b + c) = a\cdot b + a\cdot c$.
+        \end{proof}
+        \begin{theorem}
+                For all $a, b \in \Q$, $(-a)\cdot b = -(a\cdot b)$.
+        \end{theorem}
+        \begin{proof}
+                \begin{align*}
+                        (-a)\cdot b + a\cdot b \;&=\; ((-a) + a)\cdot b \\
+                                \;&=\; \bar{0} \cdot b \\
+                                \;&=\; \bar{0}\\
+                        (-a)\cdot b \;&=\; -(a\cdot b) \qedhere
+                \end{align*}
+        \end{proof}
+        \begin{theorem}
+                For all $a, b \in \Q$, $(-a)\cdot(-b) = a\cdot b$.
+        \end{theorem}
+        \begin{proof}
+                \begin{align*}
+                        (-a)\cdot(-b) + (-(a\cdot b)) \;&=\; (-a)\cdot(-b) + (-a)\cdot b\\
+                                \;&=\; (-a)\cdot((-b) + b) \\
+                                \;&=\; (-a)\cdot \bar{0} \\
+                                \;&=\; \bar{0}\\
+                        (-a)\cdot(-b) \;&=\; a\cdot b \qedhere
+                \end{align*}
+        \end{proof}
+
+        \begin{lemma}
+                If $a = [(m, n)] \in \Q$, $a \neq \bar{0}$, then $m \neq 0$.
+        \end{lemma}
+        \begin{proof}
+                Assume that $m = 0$. Then, we have $(m, n) \simQ \bar{0}$,
+                contradicting our premise. Hence, we must have $m\neq 0$.
+        \end{proof}
+        \begin{theorem}[No zero divisors]
+                For all $a, b \in \Q$ with $a,b \neq \bar{0}$, we have $a\cdot b \neq \bar{0}$.
+        \end{theorem}
+        \begin{proof}
+                Let $a = [(m, n)], b = [(p, q)] \in \Q$.
+                Note that $m\neq 0$, $p\neq 0$, since $a, b \neq \bar{0}$.
+
+                Assume that our theorem is false, i.e. $a\cdot b = \bar{0}$.
+                Then $[(mp, nq)] = \bar{0} \Rightarrow mp = 0$.
+                
+                From \ref{cor:zero}, $m = 0$ or $p = 0$, which contradicts our premise.
+
+                Hence, $a\cdot b \neq \bar{0}$.
+        \end{proof}
+        \begin{corollary}
+        \label{cor:zeroQ}
+                For all $a, b \in \Q$, if $a\cdot b = \bar{0}$, then $a = \bar{0}$ or 
+                $b = \bar{0}$.
+        \end{corollary}
+
+        \begin{theorem}[Cancellation]
+                For $a, b, c \in \Q$ with $a\neq \bar{0}$, we have $a\cdot b = a\cdot c
+                \Rightarrow b = c$.
+        \end{theorem}
+        \begin{proof}
+                \begin{align*}
+                        a\cdot b \;&=\; a\cdot c\\
+                        a^{-1}\cdot (a\cdot b) \;&=\; a^{-1}\cdot (a\cdot c) \\
+                        (a^{-1}\cdot a)\cdot b \;&=\; (a^{-1}\cdot a)\cdot c\\
+                        b \;&=\; c \qedhere
+                \end{align*}
+        \end{proof}
+        
+        \begin{lemma}
+                For all $a = [(m, n)] \in \Q$, $a = [(-m, -n)]$.
+        \end{lemma}
+        \begin{proof}
+                It is sufficient to show that $(m, n) \simQ (-m, -n)$, i.e.
+                $m(-n) = n(-m)$, which is certainly true.
+        \end{proof}
+
+        \begin{definition}[Order]
+                For all $a = [(m, n)], b = [(p, q)] \in \Q$, $n, q \in \N$, we say that
+                $a > b$ if $mq > np$.
+        \end{definition}
+        
+        \begin{theorem}
+                For all $a, b \in \Q$, we have $a\cdot b > \bar{0}$ if $a, b > \bar{0}$ or $a, b < \bar{0}$.
+        \end{theorem}
+        \begin{proof}
+                Let $a = [(m, n)], b = [(p, q)] \in \Q$, $n, q \in \N$.
+                From $n, q \in \N = \Z^+$ we have $n > 0$ and $q > 0$, so $nq > 0\Rightarrow nq \in \N$.
+
+                If $a, b > \bar{0}$, then $m > 0$ and $p > 0$.
+                Thus, $mp > 0$ which gives $a\cdot b = [(mp, nq)] > 0$.
+
+                If $a, b < 0$, then $0 > a$ and $0 > b$ so $0 > m$ and $0 > p$.
+                Thus, $-m, -n > 0$, so $(-m)(-n) = mn > 0$, which gives $a\cdot b > 0$.
+        \end{proof}
+
+        \begin{definition}[Identification map]
+                Define $\IdZ\colon \Z\to \Q$ by 
+                \[
+                        \IdZ(n) \;:=\; [(n, 1)],\quad\text{for all }n\in \Z.
+                \]
+        \end{definition}
+
+        \begin{theorem}
+                $\IdZ$ is injective.
+        \end{theorem}
+        \begin{proof}
+                Let $m, n \in \Z$.
+                \begin{align*}
+                        \IdZ(m) \;&=\; \IdZ(n) \\
+                        [(m, 1)] \;&=\; [(n, 1)] \\
+                        m\cdot 1\;&=\; n\cdot 1 \\
+                        m \;&=\; n
+                \end{align*}
+                Hence, $\IdZ$ is injective.
+        \end{proof}
+
+        \begin{theorem}
+                $\IdZ(0) = \bar{0}$.
+        \end{theorem}
+        \begin{proof}
+                \[\IdZ(0) = [(0, 1)] = \bar{0} \qedhere\]
+        \end{proof}
+
+        \begin{theorem}
+                $\IdZ(1) = \bar{1}$.
+        \end{theorem}
+        \begin{proof}
+                \[\IdZ(1) = [(1 + 1, 1)] = [(2, 1)] = \bar{1} \qedhere\]
+        \end{proof}
+
+        \begin{theorem}
+                For all $m, n \in \Z$, $\IdZ(m + n) = \IdZ(m) + \IdZ(n)$.
+        \end{theorem}
+        \begin{proof}
+                \begin{align*}
+                        \IdZ(m) + \IdZ(n) \;&=\; [(m, 1)] + [(n, 1)] \\
+                                \;&=\; [(m\cdot 1 + 1\cdot n, 1\cdot 1)] \\
+                                \;&=\; [(m + n, 1)] \\
+                                \;&=\; \IdZ(m + n) \qedhere
+                \end{align*}
+        \end{proof}
+
+        \begin{theorem}
+                For all $m, n \in \Z$, $\IdZ(m \cdot n) = \IdZ(m) \cdot \IdZ(n)$.
+        \end{theorem}
+        \begin{proof}
+                \begin{align*}
+                        \IdZ(m) \cdot \IdZ(n) \;&=\; [(m, 1)] \cdot [(n, 1)] \\
+                                \;&=\; [(m\cdot n, 1\cdot 1)] \\
+                                \;&=\; [(mn, 1)] \\
+                                \;&=\; \IdZ(m \cdot n) \qedhere
+                \end{align*}
+        \end{proof}
+
+        \begin{theorem}
+                For all $m, n \in \Z$ with $m > n$, $\IdZ(m) > \IdZ(n)$.
+        \end{theorem}
+        \begin{proof}
+                We claim $\IdZ(m) > \IdZ(n)$, i.e. $[(m, 1)] > [(n, 1)]$.
+                This is equivalent to $m > n$, which is true.
+        \end{proof}
+        
+        \subsection*{Identification}
+        For all $n \in \Z$, we shall identify $\IdZ(n)$ with $n$.
+        With this identification,
+        \[0 \leftrightarrow \bar{0}\]
+        \[1 \leftrightarrow \bar{1}\]
+        \[\Z \subset \Q\]
 \end{document}
