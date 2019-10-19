@@ -1,0 +1,397 @@
+\documentclass[10pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+
+\title{Mathematics I - Problem Sheet VII}
+\author{Satvik Saha}
+\date{}
+
+\geometry{a4paper, margin=1in}
+\setlength\parindent{0pt}
+\renewcommand{\labelenumi}{(\roman{enumi})}
+% \renewcommand\qedsymbol{$\blacksquare$}
+
+\begin{document}
+        \par\textbf{IISER Kolkata} \hfill \textbf{Problem Sheet VII}
+        \vspace{3pt}
+        \hrule
+        \vspace{3pt}
+        \begin{center}
+                \LARGE{\textbf{MA 1101 : Mathematics I}}
+        \end{center}
+        \vspace{3pt}
+        \hrule
+        \vspace{3pt}
+        Satvik Saha, \texttt{19MS154}\hfill\today
+        \vspace{20pt}
+
+        \textbf{Solution 1.}
+        \begin{enumerate}
+                \item Let $S \subseteq \mathbb{R}$ be a finite set with $n \in \mathbb{N}$ elements.
+                We claim that $S$ has no limit points.
+                We enumerate the elements of $S$ as $x_1, x_2, \dotsc, x_n$.
+                Let $a \in \mathbb{R}$.
+
+                \begin{enumerate}
+                \item   If $a \notin S$, let us choose $|x_i - a| > \epsilon_i > 0$, for all $i = 1,2,\dotsc,n$.
+                        We set $A_i = (a - \epsilon_i, a + \epsilon_i)$ to be the $\epsilon_i$ neighbourhood of $a$.
+                        If $x_i > a$, we have $x_i = a + (x_i - a)> a + \epsilon_i$, and if $x_i < a$, we have $x_i = a - (a - x_i) < a - \epsilon_i$.
+                        Thus, $x_i \notin A_i$.
+
+                        We set $A = \bigcap A_i$.
+                        Since $A$ is the intersection of a finite number of non-empty open intervals, $A$ is also a non-empty open interval.
+
+                        Thus, $x_i \notin A$ for all $x_i \in S$, i.e. $S \cap A = \emptyset$.
+                        Thus, there is no $x \in S$ within the $\epsilon = \min \epsilon_i > 0$ neighbourhood of $a$.
+                        Hence, $a$ is not a limit point.
+                \item   If $a \in S$, without loss of generality, we set $a = x_1$.
+                        We again choose $|x_i - a| > \epsilon_i > 0$, for all $i = 2,3,\dotsc,n$.
+                        We set $A_i = (a - \epsilon_i, a + \epsilon_i)$ to be the $\epsilon_i$ neighbourhood of $a$.
+                        Clearly, $a = x_1 \in A_1$.
+                        Arguing as before, $x_i \notin A_i$ for $i = 2,3,\dotsc,n$.
+
+                        We set $A = \bigcap A_i$.
+                        Thus, $a = x_1 \in A$ and $x_i \notin A$ for $i \neq 1$, i.e. $S \cap A = \{a\}$
+                        Thus, the only $x \in S$ within the $\epsilon = \min \epsilon_i$ neighbourhood of $a$
+                        is $a$.
+                        Hence, $a$ is not a limit point.
+                \end{enumerate}
+                Therefore, any finite set $S$ has no limit points. \qed
+
+                \item Let $S = (0, \infty) \subseteq \mathbb{R}$. We claim that $[0, \infty)$ is the set of all limit points of $S$.
+                Let $a \in \mathbb{R}$.
+                \begin{enumerate}
+                        \item If $a \in [0, \infty)$, let $\epsilon > 0$ be given. Thus, $a \ge 0 \Rightarrow a + \epsilon/2 > 0$,
+                        and $a - \epsilon < a + \epsilon/2 < a + \epsilon$.
+                        Hence, we have found $x = a + \epsilon/2 \in S$ such that $x \in (a - \epsilon, a + \epsilon)$ and $x \neq a$.
+                        Thus, $a$ is a limit point.
+                        
+                        \item If $a \notin [0, \infty)$, i.e. $a < 0$, we choose $\epsilon = -a$. Hence, $(a - \epsilon, a + \epsilon) \cap
+                        S = (2a, 0) \cap (0, \infty) = \emptyset$. Thus, $a$ is not a limit point.
+                \end{enumerate}
+                This proves our claim. \qed
+
+                \item Let $S = [1, 2) \cup \{3\}$. We claim that $[1, 2]$ is the set of all limit points of $S$.
+                Let $a \in \mathbb{R}$.
+                \begin{enumerate}
+                        \item If $a \in [1, 2]$, let $\epsilon > 0$ be given. We set $\epsilon' = \min\{\epsilon, a - 1, 2 - a\}$, and
+                        $x = a + \epsilon'/2$. Thus, $x > a \ge 1$ and $x < a + \epsilon' \le a + (2 - a) = 2$.
+                        Also, $-\epsilon < \epsilon'/2 < \epsilon$.
+                        Hence, we have found $x \in [1, 2] \subset S$ such that $x \in (a - \epsilon, a + \epsilon)$ and
+                        $x \neq a$. Thus, $a$ is a limit point.
+
+                        \item If $a \in \{3\}$, i.e. $a = 3$, we choose $\epsilon = 1 /2 > 0$. Hence,
+                        $(a - \epsilon, a + \epsilon) \cap S = (2.5, 3.5) \cap ([1, 2) \cup \{3\}) = \{3\}$.
+                        Hence, $x \in S$ and $x \in (a - \epsilon, a + \epsilon)$ forces $x = a$.
+                        Thus, $a$ is not a limit point.
+
+                        \item If $a < 1$, we choose $\epsilon = 1 - a$. Hence, $(a - \epsilon, a + \epsilon) \cap S =
+                        (2a - 1, 1) \cap ([1, 2) \cup \{3\}) = \emptyset$. Thus, $a$ is not a limit point.
+
+                        \item If $2 < a < 3$, we choose $\epsilon = \frac{1}{2}\min\{a-2, 3-a\}$. Thus,
+                        $a - \epsilon > a - 2\epsilon \ge a - (a - 2) = 2$ and $a + \epsilon < a + 2\epsilon \le a + (3 - a) = 3$.
+                        Therefore, $(a - \epsilon, a + \epsilon) \subset (2, 3)$.
+                        Hence, $(a - \epsilon, a + \epsilon) \cap S = \emptyset$.
+                        Thus, $a$ is not a limit point.
+
+                        \item If $a > 3$, we choose $\epsilon = a - 3$. Hence, $(a - \epsilon, a + \epsilon) \cap S =
+                        (3, 2a - 3) \cap S = \emptyset$.
+                        Thus, $a$ is not a limit point.
+                \end{enumerate}
+                This proves our claim.\qed
+
+                \item Let $S = [1, 2) \cup (2, 3)$. We claim that $[1, 3]$ is the set of all limit points of $S$.
+                Let $a \in \mathbb{R}$.
+                \begin{enumerate}
+                        \item If $a \in [1, 3]$, let $\epsilon > 0$ be given. We set $\epsilon' = \min\{\epsilon, a - 1, 3 - a\}$,
+                        and $x_- = a - \epsilon'/2$, $x^+ = a + \epsilon'/2$. Thus, $$x_- > a - \epsilon' \ge a - (a - 1) = 1,$$
+                        $$x_- < a \le 3,$$ $$x_+ > a \ge 1,$$ $$x_+ < a + \epsilon' \le a + (3 - a) = 3.$$
+                        Thus, $x_-, x_+ \in (1, 3)$. Since $x_- < x_+$, at least one of them is $x \neq 2$.
+                        Also, $-\epsilon < -\epsilon'/2 < \epsilon'/2 < \epsilon$.
+                        Hence, we have found $x \in (1, 3)\setminus\{2\} \subset S$ such that $x \in (a - \epsilon, a + \epsilon)$ and
+                        $x \neq a$. Thus, $a$ is a limit point.
+
+                        \item If $a < 1$, we choose $\epsilon = 1 - a$. Hence, $(a - \epsilon, a + \epsilon) \cap S = 
+                        (2a - 1, 1) \cap S = \emptyset$. Thus, $a$ is not a limit point.
+
+                        \item If $a > 3$, we choose $\epsilon = a - 3$. Hence, $(a - \epsilon, a + \epsilon) \cap S =
+                        (3, 2a - 3) \cap S = \emptyset$. Thus, $a$ is not a limit point.
+                \end{enumerate}
+                This proves our claim.\qed
+
+                \item Let $S = \{\frac{1}{n}: n \in \mathbb{N}\}$. We claim that $0$ is the only limit point of $S$.
+                Let $a \in \mathbb{R}$.
+                \begin{enumerate}
+                        \item If $a = 0$, let $\epsilon > 0$ be given. By the \emph{Archimedean Property} of the reals,
+                        we choose $n \in \mathbb{N}$ such that $n\epsilon > 1$. Thus, $\frac{1}{n} \in S$ and
+                        $\frac{1}{n} \in (0 - \epsilon, 0 + \epsilon)$. Thus, $0$ is a limit point.
+
+                        \item If $a \ge 1$, we choose $\epsilon = a - 1$. Thus, $(a - \epsilon, a + \epsilon) \cap S = 
+                        (1, 2a - 1) \cap S = \emptyset$, since $S \subset (0, 1]$. Thus, $a$ is not a limit point.
+
+                        \item If $a \in S\setminus\{1\}$, we find $n \in \mathbb{N}$ such that $a = \frac{1}{n}$. We choose
+                        $\frac{1}{n} - \frac{1}{n+1} > \epsilon > 0$. Thus, $a - \epsilon > \frac{1}{n+1}$ and
+                        $a + \epsilon = \frac{2}{n} - \frac{1}{n+1} < \frac{1}{n-1}$, since $n^2 - 1 < n^2$.
+                        Hence, $S \cap (a - \epsilon, a + \epsilon) = \{a\}$.
+                        Thus, $a$ is not a limit point of $S$.
+
+                        \item If $a \in (0, 1]\setminus S$, we find $n \in \mathbb{N}$ such that $\frac{1}{n+1} < a < \frac{1}{n}$.
+                        We choose $\min\{\frac{1}{\frac{1}{n} - a, a - \frac{1}{n + 1}}\} > \epsilon > 0$.
+                        Thus, $a - \epsilon > a - (a - \frac{1}{n+1}) = \frac{1}{n+1}$ and $a + \epsilon < a + (\frac{1}{n} - a) = \frac{1}{n}$.
+                        Hence, $S \cap (a - \epsilon, a + \epsilon) = \emptyset$. Thus, $a$ is not a limit point.
+                        
+                        \item If $a < 0$, we choose $\epsilon = -a$. Hence, $S \cap (a - \epsilon, a + \epsilon) = 
+                        S \cap (2a, 0) = \emptyset$.
+                \end{enumerate}
+                Thus proves our claim.\qed
+
+                \item Let $S = \{\frac{1}{m} + \frac{1}{n}: m,n \in \mathbb{N}\}$. We claim that $\{0\} \cup \{\frac{1}{n}: n \in \mathbb{N}\}$
+                is the set of all limit points of $S$.
+                Let $a \in \mathbb{R}$, $S' = \{\frac{1}{n}: n \in \mathbb{N}\}$.
+                \begin{enumerate}
+                        \item If $a = 0$, let $\epsilon > 0$ be given. We choose $n \in \mathbb{N}$ such that $n\epsilon > 2$.
+                        Thus, $\frac{2}{n} = \frac{1}{n} + \frac{1}{n} \in S$ and $\frac{1}{n} + \frac{1}{n} \in (0-\epsilon, 0+\epsilon)$.
+                        Thus, $0$ is a limit point.
+
+                        \item If $a \in S'$, let $\epsilon > 0$ be given. We find $n \in \mathbb{N}$
+                        such that $a = \frac{1}{n}$.
+                        We choose $k \in \mathbb{N}$ such that $k\epsilon > 1$. Thus, $\frac{1}{n} + \frac{1}{k} \in S$ and 
+                        $a < \frac{1}{n} + \frac{1}{k} < \frac{1}{n} + \epsilon$, so $\frac{1}{n} + \frac{1}{k} \in (a - \epsilon, a + \epsilon)$.
+                        Thus, $a$ is a limit point.
+
+                        \item If $a \notin S', a > 0$, we choose an $\epsilon > 0$ such that $S' \cap (a - \epsilon, a + \epsilon) = \emptyset$.
+                        We can do so since $a$ is not a limit point of $S'$. Also, minimize $\epsilon$ such that $a - \epsilon > 0$.
+
+                        Consider the elements $x = \frac{1}{m} + \frac{1}{n} \in S \cap (a - \epsilon/2, a + \epsilon/2)$, where $m, n \in \mathbb{N}$.
+                        Without loss of generality, let $m \le n$. Thus,
+                        \[
+                        a - \frac{\epsilon}{2} < \frac{1}{n} + \frac{1}{m} < a + \frac{\epsilon}{2}
+                        \]
+                        Since $(a - \epsilon, a + \epsilon)$ has no element of the from $\frac{1}{k}$
+                        where $k \in \mathbb{N}$,
+                        \[
+                        \frac{1}{n} \le \frac{1}{m} \le a - \epsilon
+                        \]
+                        Also,
+                        \[
+                        a - \frac{\epsilon}{2} < \frac{1}{n} + \frac{1}{m} \le \frac{2}{m}
+                        \]
+                        Thus,
+                        \[
+                        \frac{1}{m} > \frac{1}{2}(a - \frac{\epsilon}{2})
+                        \]
+                        This means that there are only a finite number of $m$.
+                        Also,
+                        \[
+                        a - \frac{\epsilon}{2} < \frac{1}{n} + \frac{1}{m} < \frac{1}{n} + a - \epsilon
+                        \]
+                        \[
+                        \frac{1}{n} > \frac{\epsilon}{2}
+                        \]
+                        Thus, there are only a finite number of $n$. This means that there are a finite number of $x$.
+
+                        Hence, $S \cap (a - \epsilon/2, a + \epsilon/2)$ is a finite set.
+                        Hence, $a$ is not a limit point.
+                        
+                        \item If $a < 0$, we choose $\epsilon = -a$. Hence, $S \cap (a - \epsilon, a + \epsilon) = 
+                        S \cap (2a, 0) = \emptyset$.
+                \end{enumerate}
+                This proves our claim.\qed
+        \end{enumerate}
+
+        \textbf{Solution 2.}
+        Note that for any $x \in \mathbb{R}$, $x$ is trivially a limit point of $\mathbb{R}$, since every $\epsilon > 0$ neighbourhood
+        of $\mathbb{R}$ contains infinitely many real numbers other than $x$.
+        In addition, removing a finite number of points from $\mathbb{R}$ means that $x$ is still a limit point of $\mathbb{R}$.
+        \begin{enumerate}
+                \item We have $f\colon \mathbb{R} \to \mathbb{R}$, $f(x) := \lfloor x \rfloor$.
+                We claim that $\lim_{x \to 0} f(x)$ does not exist.
+
+                Suppose not, i.e. $\lim_{x\to 0} f(x) = L$.
+                We find $\delta$ such that
+                \[
+                0 < |x - 0| < \delta \implies |f(x) - L| < \frac{1}{4}
+                \]
+                We choose $0 < x_0 < \min\{1, \delta\}$. Thus, $f(x_0) - f(-x_0) = 1$. Now,
+                \begin{align*}
+                        1 \;&=\; |f(x_0) - f(-x_0)| \\
+                                \;&=\; |(f(x_0) - L) - (f(-x_0) - L)| \\
+                                \;&\le\; |f(x_0) - L| + |f(-x_0) - L| \\
+                                \;&<\; \frac{1}{4} + \frac{1}{4} \\
+                                \;&=\; \frac{1}{2}
+                \end{align*}
+                This is a contradiction, thus proving our claim. \qed
+                
+                \item We have $f\colon \mathbb{R} \to \mathbb{R}$, $f(x) := \lfloor x\rfloor - \lfloor x/3\rfloor$.
+                We claim that $\lim_{x\to 0} f(x) = 0$.
+
+                Let $\epsilon > 0$ be given.
+                We set $\delta = \min\{1, \epsilon\}$.
+ 
+                Then, for all $x \in \mathbb{R}$ satisfying $0 < |x - 0| < \delta$,
+                we have 
+                $|\lfloor x\rfloor - \lfloor x/3\rfloor - 0| = 0 < \epsilon$
+                This proves our claim. \qed
+
+                \item We have $f\colon \mathbb{R}\setminus\{2\} \to \mathbb{R}$, $f(x) = \frac{x^3 - 8}{x - 2}$.
+                We claim that $\lim_{x\to 2} f(x) = 12$.
+
+                Let $\epsilon > 0$ be given.
+                We set $\delta = \min\{1, \epsilon/7\}$.
+
+                Then, for all $x \in \mathbb{R}\setminus\{2\}$ satisfying $0 < |x-2| < \delta$, we have
+                \begin{align*}
+                \left| \frac{x^3 - 8}{x - 2} - 12\right| \;&=\; \left| x^2 + 2x + 4 - 12 \right| \\
+                        \;&=\; \left| x^2 + 2x - 8 \right| \\
+                        \;&=\; \left| (x - 2)(x + 4)\right| \\
+                        \;&=\; \left| x - 2 \right| \left|  x - 2 + 6\right| \\
+                        \;&\le\; \left| x - 2 \right| (\left| x - 2 \right| + 6) \\
+                        \;&<\; \delta (\delta + 6) \\
+                        \;&\le\; \frac{\epsilon}{7} (1 + 6) \\
+                        \;&=\; \epsilon
+                \end{align*}
+                This proves our claim. \qed
+
+                \item We have $f\colon \mathbb{R}\setminus\{0\} \to \mathbb{R}$, $f(x) := x\sin{\frac{1}{x}}$.
+                We claim that $\lim_{x\to 0} f(x) = 0$.
+
+                Let $\epsilon > 0$ be given.
+                We set $\delta = \epsilon$.
+
+                Then, for all $x \in \mathbb{R}\setminus\{0\}$ satisfying $0 < |x - 0| < \delta$, we have
+                $
+                \left| x\sin\frac{1}{x} \right| \le |x| < \epsilon
+                $
+                This proves our claim. \qed
+
+                \item We have $f\colon \mathbb{R}\setminus\{0\} \to \mathbb{R}$, $f(x) := x/|x|$.
+                We claim that $\lim_{x\to 0} f(x)$ does not exist.
+
+                Suppose not, i.e. $\lim_{x\to 0} f(x) = L$.
+                We find $\delta$ such that
+                \[
+                0 < |x - 0| < \delta \implies |f(x) - L| < \frac{1}{2}
+                \]
+                Note that $f(x) - f(-x) = 2$. Thus,
+                \begin{align*}
+                2 \;&=\; \left| f(\delta/2) - f(-\delta/2) \right| \\
+                        \;&=\; \left|  (f(\delta/2) - L) - (f(-\delta/2) - L)\right| \\
+                        \;&\le\; \left|  f(\delta/2) - L\right| + \left| f(-\delta/2) - L\right| \\
+                        \;&<\; \frac{1}{2} + \frac{1}{2} \\
+                        \;&=\; 1
+                \end{align*}
+                This is a contradiction, thus proving our claim. \qed
+        \end{enumerate}
+        
+        \textbf{Solution 2.}
+        Let $\emptyset \neq D \subseteq \mathbb{R}$, $f, g\colon D \to R$ and let $a$ be a limit point of $D$.
+        Let $\lim_{x\to a}$ and $\lim_{x\to a} g(x)$ exist. We write
+        \[
+        \lim_{x\to a} f(x) := L,        \quad\quad\quad \lim_{x\to a} g(x) := M.
+        \]
+        \begin{enumerate}
+                \item We claim that $\lim_{x\to a}(f(x) + g(x)) = L + M$.
+
+                Let $\epsilon > 0$ be given.
+                We find $\delta_f, \delta_g$ such that for all $x \in D$,
+                \[0 < |x - a| < \delta_f \implies |f(x) - L| < \epsilon/2,\]
+                \[0 < |x - a| < \delta_g \implies |g(x) - M| < \epsilon/2.\]
+                We set $\delta = \min\{\delta_f, \delta_g\}$. Then, for all $x \in D$ satisfying
+                $0 < |x - a| < \delta$, we have
+                \begin{align*}
+                |(f(x) + g(x)) - (L + M)| \;&=\; |(f(x) - L) + (g(x) - M)| \\
+                        \;&\le\; |f(x) - L| + |g(x) - M| \\
+                        \;&<\; \epsilon/2 + \epsilon/2 \\
+                        \;&=\; \epsilon
+                \end{align*}
+                This proves our claim. \qed
+
+                \item We claim that for all $\alpha \in \mathbb{R}$, $\lim_{x\to a}(\alpha f(x)) = \alpha L$.
+
+                Let $\epsilon > 0$ be given.
+                If $\alpha \neq 0$, we find $\delta_f$ such that for all $x \in D$,
+                \[0 < |x - a| < \delta_f \implies |f(x) - L| < \epsilon/|\alpha|.\]
+                We set $\delta = \delta_f$. Then, for all $x \in D$ satisfying
+                $0 < |x - a| < \delta$, we have
+                \begin{align*}
+                |\alpha f(x) - \alpha L| \;&=\; |\alpha| |f(x) - L| \\
+                        \;&<\; |\alpha| \frac{\epsilon}{|\alpha|} \\
+                        \;&=\; \epsilon
+                \end{align*}
+
+                If $\alpha = 0$, we trivially have
+                \[0 < |x - a| < \delta = \epsilon \implies |\alpha f(x) - \alpha L| = 0 < \epsilon.\]
+
+                This proves our claim. \qed
+
+                \item We claim that $\lim_{x\to a} f(x)g(x) = LM$. To prove this, we first
+                show that $\lim_{x \to a} (f(x) - L)(g(x) - M) = 0$.
+
+                Let $\epsilon > 0$ be given.
+                We find $\delta_f, \delta_g$ such that for all $x \in D$,
+                \[0 < |x - a| < \delta_f \implies |f(x) - L| < \sqrt{\epsilon},\]
+                \[0 < |x - a| < \delta_g \implies |g(x) - M| < \sqrt{\epsilon}.\]
+
+                We set $\delta = \min\{\delta_f, \delta_g\}$.
+                Then, for all $x \in D$ satisfying $0 < |x - a| < \delta$, we have
+                \begin{align*}
+                |(f(x) - L)(g(x) - M) - 0| \;&=\; |f(x) - L| |g(x) - M| \\
+                        \;&<\; \sqrt{\epsilon} \sqrt{\epsilon} \\
+                        \;&=\; \epsilon
+                \end{align*}
+                Thus, $\lim_{x\to a}(f(x) - L)(g(x) - M) = 0$.\\
+
+                We now show that for a constant function $h\colon D \to \mathbb{R}$, $h(x) = k$,
+                we have $\lim_{x\to a} h(x) = k$.
+
+                Let $\epsilon > 0$ be given. We set $\delta = \epsilon$.
+                Then, for all $x \in D$ satisfying $0 < |x - a| < \delta$, we have
+                $
+                |h(x) - k| \;=\; 0 < \epsilon.
+                $
+                
+                Therefore,
+                \begin{align*}
+                        0 \;&=\;\lim_{x \to a} (f(x) - L)(g(x) - M) \\
+                                \;&=\; \lim_{x \to a} (f(x)g(x) - Lg(x) - Mf(x) + LM) \\
+                                \;&=\; \lim_{x \to a} f(x)g(x) - \lim_{x \to a} Lg(x) - \lim_{x \to a}Mf(x) + \lim_{x \to a} LM \\
+                                \;&=\; \lim_{x \to a} f(x)g(x) - L\lim_{x \to a} g(x) - M\lim_{x \to a}f(x) +  LM \\
+                                \;&=\; \lim_{x \to a} f(x)g(x) - LM - ML + LM \\
+                                \;&=\; \lim_{x \to a} f(x)g(x) - LM \\
+                \end{align*}
+                \[
+                        \lim_{x \to a} f(x)g(x) \;=\; LM
+                \]\qed
+
+                \item We claim that if $M \neq 0$, $\lim_{x \to a} f(x)/ g(x) = L/M$.
+                To prove this, we first show that $\lim_{x \to a} 1/ g(x) = 1/M$.
+
+                Let $\epsilon > 0$ be given.
+                We find $\delta_1, \delta_2$ such that for all $x \in D$,
+                \[0 < |x - a| < \delta_1 \implies |g(x) - M| < \frac{1}{2}|M|,\]
+                \[0 < |x - a| < \delta_2 \implies |g(x) - M| < \frac{1}{2}\epsilon |M|^2.\]
+                
+                We set $\delta = \min\{\delta_1, \delta_2\}$.
+                Then, for all $x \in D$ satisfying $0 < |x - a| < \delta$, we have
+                \begin{align*}
+                        \frac{1}{2}|M| \;&>\; |g(x) - M| \\
+                                \;&\ge\; | |g(x)| - |M| | \\
+                                \;&\ge\; |M| - |g(x)| \\
+                        |g(x)| \;&>\; \frac{1}{2}|M| > 0\\
+                        \frac{1}{|g(x)|} \;&<\; \frac{2}{|M|} \\
+                        \left| \frac{1}{g(x)} - \frac{1}{M} \right| \;&=\; \frac{|g(x) - M|}{|Mg(x)|} \\
+                                \;&=\; |g(x) - M| \frac{1}{|M| |g(x)|} \\
+                                \;&<\;  \frac{1}{2}\epsilon|M|^2 \frac{2}{|M|^2} \\
+                                \;&=\; \epsilon
+                \end{align*}
+                Thus, $\lim_{x \to a} 1 /g(x) \;=\; 1 /M$.
+                Therefore,
+                \begin{align*}
+                        \lim_{x \to a} {f(x)}{g(x)} \;&=\; \lim_{x \to a} f(x) \frac{1}{g(x)}\\
+                                \;&=\; \lim_{x \to a} f(x) \lim_{x \to a} \frac{1}{g(x)} \\
+                                \;&=\; \frac{L}{M}
+                \end{align*}\qed
+        \end{enumerate}
+\end{document}
