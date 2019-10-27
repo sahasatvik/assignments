@@ -1,0 +1,290 @@
+\documentclass[10pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+
+\title{Mathematics I - Problem Sheet VIII}
+\author{Satvik Saha}
+\date{}
+
+\geometry{a4paper, margin=1in}
+\setlength\parindent{0pt}
+\renewcommand{\labelenumi}{(\roman{enumi})}
+% \renewcommand\qedsymbol{$\blacksquare$}
+
+\begin{document}
+        \par\textbf{IISER Kolkata} \hfill \textbf{Problem Sheet VIII}
+        \vspace{3pt}
+        \hrule
+        \vspace{3pt}
+        \begin{center}
+                \LARGE{\textbf{MA 1101 : Mathematics I}}
+        \end{center}
+        \vspace{3pt}
+        \hrule
+        \vspace{3pt}
+        Satvik Saha, \texttt{19MS154}\hfill\today
+        \vspace{20pt}
+
+        \textbf{Solution 1.}
+        Let $\emptyset \neq D \subseteq \mathbb{R}$, let $c \in D$ and let $f\colon D \to \mathbb{R}$ be continuous at $c$ with $f(c) > 0$.
+        We claim that there exists $\delta > 0$ such that \[f(x) > 0, \text{ for all } x \in (c - \delta, c + \delta) \cap D.\]
+
+        Since $f$ is continuous at $c$, we find $\delta_c > 0$ such that
+        \[|f(x) - f(c)| < \frac{1}{2}f(c), \text{ for all } x \in (c - \delta_c, c + \delta_c) \cap D.\]
+
+        Suppose that our claim is false, i.e.\ there exists at least one $x_0 \in (c - \delta_c, c + \delta_c) \cap D$ such that $f(x_0) \le 0$.
+        Then, $f(x_0) - f(c) < 0 \Rightarrow |f(x_0) - f(c)| = f(c) - f(x_0) \ge f(c)$, a contradiction.
+        Hence, setting $\delta = \delta_c$ proves our claim. \qed\\
+        
+        \textbf{Solution 2.}
+        Let $\emptyset \neq D \subseteq \mathbb{R}$, let $c \in D$ and let $f, g\colon D \to R$ be continuous at $c$.
+        \begin{enumerate}
+                \item We claim that $f + g$ is continuous at $c$.
+
+                Let $\epsilon > 0$ be given.
+                We find $\delta_f, \delta_g$ such that for all $x \in D$,
+                \[|x - c| < \delta_f \implies |f(x) - f(c)| < \epsilon/2,\]
+                \[|x - c| < \delta_g \implies |g(x) - g(c)| < \epsilon/2.\]
+                We set $\delta = \min\{\delta_f, \delta_g\}$. Then, for all $x \in D$ satisfying
+                $|x - c| < \delta$, we have
+                \begin{align*}
+                |(f(x) + g(x)) - (f(c) + g(c))| \;&=\; |(f(x) - f(c)) + (g(x) - g(c))| \\
+                        \;&\le\; |f(x) - f(c)| + |g(x) - g(c)| \\
+                        \;&<\; \epsilon/2 + \epsilon/2 \\
+                        \;&=\; \epsilon
+                \end{align*}
+                This proves our claim. \qed
+
+                \item We claim that for all $\alpha \in \mathbb{R}$, $\alpha f$ is continuous at $c$.
+
+                Let $\epsilon > 0$ be given.
+                If $\alpha \neq 0$, we find $\delta_f$ such that for all $x \in D$,
+                \[|x - c| < \delta_f \implies |f(x) - f(c)| < \epsilon/|\alpha|.\]
+                We set $\delta = \delta_f$. Then, for all $x \in D$ satisfying
+                $|x - c| < \delta$, we have
+                \begin{align*}
+                |\alpha f(x) - \alpha f(c)| \;&=\; |\alpha| |f(x) - f(c)| \\
+                        \;&<\; |\alpha| \frac{\epsilon}{|\alpha|} \\
+                        \;&=\; \epsilon
+                \end{align*}
+
+                If $\alpha = 0$, we trivially have
+                \[|x - c| < \delta = \epsilon \implies |\alpha f(x) - \alpha f(c)| = 0 < \epsilon.\]
+
+                This proves our claim. \qed
+
+                \item We claim that $fg$ is continuous at $c$.
+
+                Let $\epsilon > 0$ be given.
+                We find $\delta_1, \delta_2, \delta_3, \delta_4$ such that for all $x \in D$,
+                \[|x - c| < \delta_1 \implies |f(x) - f(c)| < \sqrt{\epsilon/2},\]
+                \[|x - c| < \delta_2 \implies |g(x) - g(c)| < \sqrt{\epsilon/2},\]
+                \[|x - c| < \delta_3 \implies |f(x) - f(c)| < \epsilon/4(1 + |g(c)|),\]
+                \[|x - c| < \delta_4 \implies |g(x) - g(c)| < \epsilon/4(1 + |f(c)|).\]
+
+                We set $\delta = \min\{\delta_1, \delta_2, \delta_3, \delta_4\}$.
+                Then, for all $x \in D$ satisfying $|x - c| < \delta$, we have
+                \begin{align*}
+                |(fg)(x) - (fg)(c)| \;&=\; |f(x)g(x) - f(c)g(c)| \\
+                        \;&=\; |(f(x) - f(c) + f(c))(g(x) - g(c) + g(c)) - f(c)g(c)| \\
+                        \;&=\; |(f(x) - f(c))(g(x) - g(c)) + f(c)(g(x) - g(c)) + g(c)(f(x) - f(c)) + f(c)g(c) - f(c)g(c)| \\
+                        \;&=\; |(f(x) - f(c))(g(x) - g(c)) + f(c)(g(x) - g(c)) + g(c)(f(x) - f(c))| \\
+                        \;&\le\; |f(x) - f(c)| |g(x) - g(c)| + |f(c)| |g(x) - g(c)| + |g(c)| |f(x) - f(c)| \\
+                        \;&<\; \sqrt\frac{\epsilon}{2} \sqrt\frac{\epsilon}{2} + \frac{|f(c)|\epsilon}{4(1 + |f(c|)} 
+                                + \frac{|g(c)|\epsilon}{4(1 + |g(c|)} \\
+                        \;&<\; \frac{\epsilon}{2} + \frac{\epsilon}{4} + \frac{\epsilon}{4} \\
+                        \;&=\; \epsilon
+                \end{align*}
+
+                This proves our claim. \qed
+
+                \item We claim that if $g(c) \neq 0$, $f /g$ is continuous at $c$.
+                To prove this, we first show that $h\colon D \to \mathbb{R}$, $h(x) = 1/g(x)$ is
+                continuous at $c$.
+
+                Let $\epsilon > 0$ be given.
+                We find $\delta_1, \delta_2$ such that for all $x \in D$,
+                \[|x - c| < \delta_1 \implies |g(x) - g(c)| < \frac{1}{2}|g(c)|,\]
+                \[|x - c| < \delta_2 \implies |g(x) - g(c)| < \frac{1}{2}\epsilon |g(c)|^2.\]
+                
+                We set $\delta = \min\{\delta_1, \delta_2\}$.
+                Then, for all $x \in D$ satisfying $|x - c| < \delta$, we have
+                \begin{align*}
+                        \frac{1}{2}|g(c)| \;&>\; |g(x) - g(c)| \\
+                                \;&\ge\; | |g(x)| - |g(c)| | \\
+                                \;&\ge\; |g(c)| - |g(x)| \\
+                        |g(x)| \;&>\; \frac{1}{2}|g(c)| > 0\\
+                        \frac{1}{|g(x)|} \;&<\; \frac{2}{|g(c)|} \\
+                        \left| h(x) - h(c) \right|
+                                \;&=\; \left| \frac{1}{g(x)} - \frac{1}{g(c)} \right| \\
+                                \;&=\; \frac{|g(x) - g(c)|}{|g(c)g(x)|} \\
+                                \;&=\; |g(x) - g(c)| \frac{1}{|g(c)| |g(x)|} \\
+                                \;&<\;  \frac{1}{2}\epsilon|g(c)|^2 \frac{2}{|g(c)|^2} \\
+                                \;&=\; \epsilon
+                \end{align*}
+                Thus, $h$ is continuous at $c$.
+                Therefore, $f /g = fh$ is continuous at $c$. \qed
+        \end{enumerate}
+
+        \textbf{Solution 3.}
+        Let $I \subseteq \mathbb{R}$ be an open interval, let $c \in I$ and let $f, g\colon D \to R$ be differentiable at $c$.
+
+        Note that $f, g$ are continuous at $c$.
+
+        Since $f, g$ are differentiable at $c$, we have the following.
+        \[f'(c) \;=\; \lim_{x \to c} \frac{f(x) - f(c)}{x - c}\]
+        \[g'(c) \;=\; \lim_{x \to c} \frac{g(x) - g(c)}{x - c}\]
+        % Note that $c$ is a limit point of $I$.
+        \begin{enumerate}
+                \item We claim that $f + g$ is differentiable at $c$ and $(f + g)'(c) = f'(c) + g'(c)$.
+
+                Note that
+                \begin{align*}
+                        f'(c) + g'(c) \;&=\; \lim_{x \to c} \frac{f(x) - f(c)}{x - c} + \lim_{x \to c} \frac{g(x) - g(c)}{x - c} \\
+                                \;&=\; \lim_{x \to c} \frac{f(x) - f(c)}{x - c} + \frac{g(x) - g(c)}{x - c} \\
+                                \;&=\; \lim_{x \to c} \frac{(f(x) + g(x)) - (f(c) + g(c))}{x - c} \\
+                                \;&=\; \lim_{x \to c} \frac{(f + g)(x) - (f + g)(c)}{x - c} \\
+                                \;&=\; (f + g)'(c)
+                \end{align*}
+                Hence,
+                \[
+                (f + g)'(c) \;=\; \lim_{x \to c} \frac{(f + g)(x) - (f + g)(c)}{x - c} \;=\; f'(c) + g'(c)
+                \]
+                This proves our claim. \qed
+
+                \item We claim that for all $\alpha \in \mathbb{R}$, $\alpha f$ is differentiable at $c$ and $(\alpha f)'(c) = \alpha f'(c)$.
+
+                Note that
+                \begin{align*}
+                \alpha f'(c) \;&=\; \alpha \lim_{x \to c} \frac{f(x) - f(c)}{x - c} \\
+                        \;&=\; \lim_{x \to c} \frac{\alpha f(x) - \alpha f(c)}{x - c} \\
+                        \;&=\; \lim_{x \to c} \frac{(\alpha f)(x) - (\alpha f)(c)}{x - c} \\
+                        \;&=\; (\alpha f)'(c)
+                \end{align*}
+                Hence,
+                \[
+                (\alpha f)'(c) \;=\; \lim_{x \to c} \frac{(\alpha f)(x) - (\alpha f)(c)}{x - c} \;=\; \alpha f'(c)
+                \]
+
+                This proves our claim. \qed
+
+                \item We claim that $fg$ is differentiable at $c$ and $(fg)'(c) = f'(c)g(c) + f(c)g'(c)$.
+                
+                Note that since $c$ is a limit point of $I$, $f(c) = \lim_{x \to c} f(x)$ and $g(c) = \lim_{x \to c} g(x)$.
+                \begin{align*}
+                        f'(c)g(c) + f(c)g'(c)
+                        \;&=\; g(c) \lim_{x \to c} \frac{f(x) - f(c)}{x - c} + \lim_{x \to c} f(x) \lim_{x \to c} \frac{g(x) - g(c)}{x - c} \\
+                        \;&=\; \lim_{x \to c} \frac{(f(x) - f(c))g(c) + f(x)(g(x) - g(c))}{x - c} \\
+                        \;&=\; \lim_{x \to c} \frac{f(x)g(c) - f(c)g(c) + f(x)g(x) - f(x)g(c)}{x - c} \\
+                        \;&=\; \lim_{x \to c} \frac{f(x)g(x) - f(c)g(c)}{x - c} \\
+                        \;&=\; \lim_{x \to c} \frac{(fg)(x) - (fg)(c)}{x - c} \\
+                        \;&=\; (fg)'(c)
+                \end{align*}
+
+                Hence,
+                \[
+                (fg)'(c) \;=\; \lim_{x \to c} \frac{(fg)(x) - (fg)(c)}{x - c} \;=\; f'(c)g(c) + f(c)g'(c)
+                \]
+
+                This proves our claim. \qed
+
+
+                \item We claim that if $g(c) \neq 0$, $f /g$ is differentiable at $c$ and $(f /g)'(c) = (f'(c)g(c) - f(c)g'(c))/g(c)^2$.
+                To prove this, we first show that $h\colon D \to \mathbb{R}$, $h(x) = 1/g(x)$ is
+                differentiable at $c$ and $h'(c) = -g'(c) /g(c)^2$.
+
+                Note that $h$ is continuous and $c$ is a limit point of $I$, hence $h(c) = \lim_{x \to c} h(x)$.
+                \begin{align*}
+                -\frac{g'(c)}{g(c)^2} \;&=\; -\frac{1}{g(c)^2} \lim_{x \to c} \frac{g(x) - g(c)}{x - c} \\
+                        \;&=\; \frac{1}{g(c)} \lim_{x \to c}\frac{1}{g(x)} \lim_{x \to c} \frac{g(c) - g(x)}{x - c} \\
+                        \;&=\; \lim_{x \to c} \frac{\frac{1}{g(x)} - \frac{1}{g(c)}}{x - c} \\
+                        \;&=\; \lim_{x \to c} \frac{h(x) - h(c)}{x - c} \\
+                        \;&=\; h'(c)
+                \end{align*}
+
+                Hence,
+                \[
+                h'(c) \;=\; -g'(c)/g(c)^2
+                \]
+                Using the product rule,
+                \[
+                (f /g)'(c) \;=\; (fh)'(c) \;=\; f'(c)h(c) + f(c)h'(c) \;=\; f'(c)/g(c) - f(c)g'(c)/g(c)^2
+                \]
+
+                This proves our claim. \qed
+        \end{enumerate}
+        
+        \textbf{Solution 4.}
+        \begin{enumerate}
+                \item We claim that for all $x > 0$,
+                \[ \frac{x}{1 + x} < \ln(1 + x) < x. \]
+
+                Let $f, g\colon (0, \infty) \to \mathbb{R}$ be defined as follows.
+                \[f(x) \;=\; \ln(1 + x) - \frac{x}{1 + x}, \text{ for all } x > 0,\]
+                \[g(x) \;=\; x - \ln(1 + x), \text{ for all } x > 0,\]
+
+                We note that
+                \begin{align*}
+                        f'(x) \;&=\; \frac{1}{1 + x} - \frac{(1 + x) - x}{(1 + x)^2} \\
+                                \;&=\; \frac{(1 + x) - (1 + x) + x}{(1 + x)^2} \\
+                                \;&=\; \frac{x}{(1 + x)^2} \\
+                                \;&>\; 0 \\
+                        g'(x) \;&=\; 1 - \frac{1}{1 + x} \\
+                                \;&=\; \frac{(1 + x) - 1}{1 + x} \\
+                                \;&=\; \frac{x}{1 + x} \\
+                                \;&>\; 0
+                \end{align*}
+
+                Thus, $f$ and $g$ are monotonically increasing on $(0, \infty)$. We can write
+                \begin{align*}
+                        f(x) > \lim_{t \to 0} f(t) = 0 \\
+                        g(x) > \lim_{t \to 0} g(t) = 0
+                \end{align*}
+                Therefore, 
+                \[\ln(1 + x) > \frac{x}{1 + x}\]
+                \[x > \ln(1 + x)\]
+
+                This proves our claim. \qed
+
+                \item We claim that for all $x > 0$,
+                \[ e^x > 1 + x + \frac{1}{2}x^2. \]
+                
+                Let $f\colon [0, x] \to \mathbb{R}$ be defined as $f(t) = e^t$, for all $t \in [0, x]$.
+                Clearly, $f$ is continuous in $[0, x]$ and differentiable in $(0, x)$. Note that $f'(t) = f(t) = e^t$.
+                Hence, $f, f'$ are continuous on $[0, x]$ and $f'' = f$ exists in $(0, x)$.
+
+                Using Taylor's Theorem, we find $c \in (0, x)$ such that
+                \[e^x = e^0 + e^0(x - 0) + \frac{1}{2}e^c(x - 0)^2.\]
+
+                Since, $e^0 = 1$ and $e^c > 1$ for $c > 0$, we have
+                \[e^x > 1 + x + \frac{1}{2}x^2.\]
+
+                This proves our claim. \qed
+
+
+                \item We claim that for all $x, y \in \mathbb{R}$,
+                \[
+                |\sin{x} - \sin{y}| \le |x - y|.
+                \]
+
+                Note that if $x = y$, our claim is trivially true.
+                
+                Without loss of generality, let $x > y$.
+                Let $f, g\colon [x, y] \to \mathbb{R}$ be defined as follows.
+                \[ f(t) \;=\; \sin{t}, \text{ for all } t \in [x, y],\]
+                \[ g(t) \;=\; t, \text{ for all } t \in [x, y].\]
+
+                Clearly, $f$ and $g$ are continuous in $[x, y]$ and differentiable in $(x, y)$.
+                Note that $f'(t) = \cos{t}$ and $g'(t) = 1$.
+
+                Using Cauchy's Mean Value Theorem, we find $c \in (x, y)$ such that.
+                \[(\sin{x} - \sin{y}) \;=\; (x - y)\cos{c}.\]
+
+                Since $\cos{c} \le 1$,
+                \[|\sin{x} - \sin{y}| \le |x - y|.\]
+
+                This proves our claim. \qed
+        \end{enumerate}
+\end{document}
