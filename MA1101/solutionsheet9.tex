@@ -65,17 +65,12 @@
         In either case,
         \[f(y) - f(x) \ge f'(x)(y - x), \text{ for all } x, y \in (a, b).\]
 
-
         We now assume that $(\star)$ holds. We will show that $f$ is convex.
 
-        Let $x, y, z \in (a, b)$, such that $x > y > z$. By Cauchy's Mean Value Theorem, there exist $\alpha, \beta$ such that
-        $\alpha \in (x, y), \beta \in (y, z)$ and
-        \[f(x) - f(y) = f'(\alpha)(x - y)\]
-        \[f(y) - f(z) = f'(\beta)(y - z)\]
-
+        Let $x, y, z \in (a, b)$, such that $x > y > z$.
         Using $(\star)$, we have
-        \[f(x) - f(y) = f'(\alpha)(x - y) \ge f'(y)(x - y)\]
-        \[f(z) - f(y) = f'(\beta)(z - y) \ge f'(y)(z - y)\]
+        \[f(x) - f(y) \ge f'(y)(x - y)\]
+        \[f(z) - f(y) \ge f'(y)(z - y)\]
 
         Rearranging,
         \[\frac{f(x) - f(y)}{x - y} \ge f'(y)\]
