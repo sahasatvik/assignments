@@ -16,6 +16,7 @@
 - Number Systems : [problems](MA1101/problemsheet5.pdf) [solutions](MA1101/solutionsheet5.pdf)
 - Limits : [problems](MA1101/problemsheet7.pdf) [solutions](MA1101/solutionsheet7.pdf)
 - Continuity / differentiability : [problems](MA1101/problemsheet8.pdf) [solutions](MA1101/solutionsheet8.pdf)
+- Inequalities : [problems](MA1101/problemsheet9.pdf) [solutions](MA1101/solutionsheet9.pdf)
 
 ## LS1102 - Biology Laboratory I
 - Diversity (birdlife) : [species](LS1102/bird_diversity.png) [species-individual](LS1102/bird_species_individual.png)
