@@ -1,0 +1,130 @@
+\documentclass[10pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+
+\title{Mathematics I - Problem Sheet IX}
+\author{Satvik Saha}
+\date{}
+
+\geometry{a4paper, margin=1in}
+\setlength\parindent{0pt}
+\renewcommand{\labelenumi}{(\roman{enumi})}
+% \renewcommand\qedsymbol{$\blacksquare$}
+
+\begin{document}
+        \par\textbf{IISER Kolkata} \hfill \textbf{Problem Sheet IX}
+        \vspace{3pt}
+        \hrule
+        \vspace{3pt}
+        \begin{center}
+                \LARGE{\textbf{MA 1101 : Mathematics I}}
+        \end{center}
+        \vspace{3pt}
+        \hrule
+        \vspace{3pt}
+        Satvik Saha, \texttt{19MS154}\hfill\today
+        \vspace{20pt}
+
+        \textbf{Solution 1.}\\
+        Let $a < b$ and let $f\colon [a, b] \to \mathbb{R}$ be convex. We claim that
+        \[\max\{f(a), f(b)\} \ge f(x), \text{ for all } x \in (a, b).\]
+
+        To prove this, let $x \in (a, b)$ be given. We set $M = \max\{f(a), f(b)\}$ and $\lambda = (b - x)/(b - a)$.
+        Clearly, $\lambda > 0$ and $1 - \lambda = (x - a)/(b - a) > 0$, thus $\lambda \in [0, 1]$.
+
+        By the convexity of $f$, we have
+        \begin{align*}
+                f(\lambda a + (1 - \lambda)b) \;&\le\; \lambda f(a) + (1 - \lambda)f(b) \\
+                f(x) \;&\le\; \lambda f(a) + (1 - \lambda)f(b) \\
+                        \;&\le \lambda M + (1 - \lambda)M \\
+                        \;&=\; M
+        \end{align*}
+        This proves the desired statement. \qed\\
+
+        \textbf{Solution 2.}\\
+        Let $a < b$ and let $f \colon (a, b) \to \mathbb{R}$ be differentiable. We claim that $f$ is convex if and only if 
+        
+        \begin{align*}
+        f(y) - f(x) \ge f'(x)(y - x), \text{ for all } x, y \in (a, b) \tag{$\star$}
+        \end{align*}
+
+        To prove this, we first assume that $f$ is convex. We will show that $(\star)$ holds.
+
+        If $x = y$, the result follows trivially. Let $y > x$.
+        We choose $\alpha \in (a, b)$ such that $y > x > \alpha > b$. Using the Rising Slope Theorem, we have
+        \[\frac{f(y) - f(x)}{y - x} \ge \frac{f(x) - f(\alpha)}{x - \alpha}.\]
+        Taking the limit as $\alpha \to x$, we have
+        \[\frac{f(y) - f(x)}{y - x} \ge f'(x).\]
+        Again, if $x > y$, we choose $\beta \in (a, b)$ such that $a > \beta > x > y$. Using the Rising Slope Theorem, we have
+        \[\frac{f(\beta) - f(x)}{\beta - x} \ge \frac{f(x) - f(y)}{x - y}.\]
+        Taking the limit as $\beta \to x$, we have
+        \[f'(x) \ge \frac{f(x) - f(y)}{x - y}.\]
+        
+        In either case,
+        \[f(y) - f(x) \ge f'(x)(y - x), \text{ for all } x, y \in (a, b).\]
+
+
+        We now assume that $(\star)$ holds. We will show that $f$ is convex.
+
+        Let $x, y, z \in (a, b)$, such that $x > y > z$. By Cauchy's Mean Value Theorem, there exist $\alpha, \beta$ such that
+        $\alpha \in (x, y), \beta \in (y, z)$ and
+        \[f(x) - f(y) = f'(\alpha)(x - y)\]
+        \[f(y) - f(z) = f'(\beta)(y - z)\]
+
+        Using $(\star)$, we have
+        \[f(x) - f(y) = f'(\alpha)(x - y) \ge f'(y)(x - y)\]
+        \[f(z) - f(y) = f'(\beta)(z - y) \ge f'(y)(z - y)\]
+
+        Rearranging,
+        \[\frac{f(x) - f(y)}{x - y} \ge f'(y)\]
+        \[\frac{f(z) - f(y)}{z - y} \le f'(y)\]
+
+        This is the same as
+        \[\frac{f(x) - f(y)}{x - y} \ge \frac{f(y) - f(z)}{y - z}.\]
+
+        Therefore, using the Rising Slope Theorem, $f$ is convex.
+
+        This proves the desired result. \qed\\
+
+        
+        \textbf{Solution 3.}\\
+        Let $n \in \mathbb{N}$, let $a_i, \lambda_i > 0$ for all $i = 1, \dotsc, n$, and let $p \ge 1$. We claim that
+        \[\frac{\sum \lambda_i a_i^p}{\sum \lambda_i} \ge \left(\frac{\sum \lambda_i a_i}{\sum \lambda_i}\right)^p.\]
+
+        To prove this, we define $f\colon (0, \infty) \to \mathbb{R}$ by $f(x) := x^p$ for all $x \in (0, \infty)$.
+        Note that $f''(x) = p(p-1)x^p \ge 0$ for all $x \in (0, \infty)$. Hence, $f$ is convex.
+
+        Using Jensen's Inequality on $a_i$, with weights $\lambda_i / \sum \lambda_i$, we have
+        \[f\left(\frac{\sum\lambda_i a_i}{\sum{\lambda_i}}\right) \le \frac{\sum \lambda_i f(a_i)}{\sum \lambda_i},\]
+        from which the desired statement follows directly. \qed\\
+
+        \textbf{Solution 4.}
+        \begin{enumerate}
+                \item Let $a > 0$. We claim that for all $x \ge y > 0$,
+                \[ \frac{a^x - 1}{x} \ge \frac{a^y - 1}{y}. \]
+
+                To prove this, note that when $x = y$, the inequality follows trivially. Assume $x > y$.
+
+                Let $f\colon \mathbb{R} \to \mathbb{R}$ be defined by $f(x) := a^x$ for all $x \in \mathbb{R}$.
+                Note that $f''(x) = a^x (\log{a})^2 \ge 0$ for all $x \in \mathbb{R}$. Hence, $f$ is convex.
+
+                We set $\lambda = y/x$. Note that $\lambda > 0$ and $1 - \lambda = (x - y) / x > 0$. Thus, $\lambda \in [0, 1]$.
+
+                By the convexity of $f$, we have
+                \begin{align*}
+                        f(\lambda x + (1 - \lambda) 0) \;&\le\; \lambda f(x) + (1 - \lambda) f(0) \\
+                        f(y) \;&\le\; \frac{y}{x}f(x) + \frac{(x - y)}{x} f(0) \\
+                        x a^y \;&\le\; y a^x + (x - y) a^0 \\
+                        x a^y - x \;&\le\; y a^x - y \\
+                        \frac{a^y - y}{y} \;&\le\; \frac{a^x - 1}{x}
+                \end{align*}
+                This proves the desired statement. \qed\\
+
+                \item We claim that for all $n \in \mathbb{N}$,
+                \[\left(1 + \frac{1}{n + 1}\right)^{n + 1} \ge \left(1 + \frac{1}{n + 1}\right)^{n + 1}.\]
+
+                This result is trivial. \qed
+        \end{enumerate}
+\end{document}
