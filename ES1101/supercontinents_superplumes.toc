@@ -1,0 +1,6 @@
+\beamer@sectionintoc {1}{Supercontinents}{2}{0}{1}
+\beamer@sectionintoc {2}{Superplumes}{3}{0}{2}
+\beamer@sectionintoc {3}{Seafloor spreading}{5}{0}{3}
+\beamer@sectionintoc {4}{Superplumes - evidence}{7}{0}{4}
+\beamer@sectionintoc {5}{Carbon}{10}{0}{5}
+\beamer@sectionintoc {6}{Black shale}{14}{0}{6}
