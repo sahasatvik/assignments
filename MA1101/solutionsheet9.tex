@@ -118,8 +118,17 @@
                 This proves the desired statement. \qed\\
 
                 \item We claim that for all $n \in \mathbb{N}$,
-                \[\left(1 + \frac{1}{n + 1}\right)^{n + 1} \ge \left(1 + \frac{1}{n + 1}\right)^{n + 1}.\]
+                \[\left(1 + \frac{1}{n + 1}\right)^{n + 1} \ge \left(1 + \frac{1}{n}\right)^{n}.\]
 
-                This result is trivial. \qed
+                To prove this, we apply Bernoulli's inequality on the following.
+                \begin{align*}
+                \frac{\left(1 + \frac{1}{n + 1}\right)^{n+1}}{\left(1 + \frac{1}{n}\right)^n}
+                        \;&=\; \left(\frac{1 + \frac{1}{n + 1}}{1 + \frac{1}{n}}\right)^{n+1}\left(1 + \frac{1}{n}\right) \\
+                        \;&=\; \left(\frac{n(n+1)}{(n+1)^2}\right)^{n+1}\left(1 + \frac{1}{n}\right) \\
+                        \;&=\; \left(1 - \frac{1}{(n+1)^2}\right)^{n+1}\left(1 + \frac{1}{n}\right) \\
+                        \;&\ge\; \left(1 - \frac{n+1}{(n+1)^2}\right)\left(1 + \frac{1}{n}\right) \\
+                        \;&=\; \frac{n}{n+1}\cdot\frac{n+1}{n} \\
+                        \;&=\; 1
+                \end{align*}\qed
         \end{enumerate}
 \end{document}
