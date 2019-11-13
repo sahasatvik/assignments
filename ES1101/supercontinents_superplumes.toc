@@ -4,3 +4,4 @@
 \beamer@sectionintoc {4}{Superplumes - evidence}{8}{0}{4}
 \beamer@sectionintoc {5}{Carbon}{10}{0}{5}
 \beamer@sectionintoc {6}{Black shale}{14}{0}{6}
+\beamer@sectionintoc {7}{Summary}{17}{0}{7}
