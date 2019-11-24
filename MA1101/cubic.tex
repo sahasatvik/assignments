@@ -1,0 +1,143 @@
+\documentclass[10pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+
+\title{Mathematics I - Cubics}
+\author{Satvik Saha}
+\date{}
+
+\geometry{a4paper, margin=1in}
+\setlength\parindent{0pt}
+\renewcommand{\labelenumi}{(\roman{enumi})}
+% \renewcommand\qedsymbol{$\blacksquare$}
+
+\begin{document}
+        \par\textbf{IISER Kolkata} \hfill \textbf{Cubic polynomials}
+        \vspace{3pt}
+        \hrule
+        \vspace{3pt}
+        \begin{center}
+                \LARGE{\textbf{MA 1101 : Mathematics I}}
+        \end{center}
+        \vspace{3pt}
+        \hrule
+        \vspace{3pt}
+        Satvik Saha, \texttt{19MS154}\hfill\today
+        \vspace{20pt}
+        
+        We wish to solve the cubic equation with real coefficients
+        \[ax^3 + 3bx^2 + 3cx + d = 0\]
+        \section{Depressed cubic}
+        Substituting $x = y - \frac{b}{a}$ yields the cubic
+        \[y^3 + 3qy + r = 0\]
+        where $q = (ac - b^2)/a^2$ and $r = (2b^3 - 3abc + a^2d)/a^3$.
+        \section{Cardano's method}
+        We set $y = u + v$. Cubing, we have
+        \[y^3 - 3uvy - (u^3 + v^3) = 0\]
+        
+        Comparing coefficients with our depressed cubic, we have the system of equations
+        \begin{align*}
+        \begin{cases}
+                \quad u^3 + v^3 &= -r \\
+                \quad u^3 v^3 &= -q^3
+        \end{cases}
+        \end{align*}
+        Thus, $u^3$ and $v^3$ are simply roots of the quadratic
+        \[t^3 + rt - q^3 = 0\]
+
+        We set 
+        \[ u^3 = \frac{-r + \sqrt{r^2 + 4q^3}}2 \]
+        \[ v^3 = \frac{-r - \sqrt{r^2 + 4q^3}}2 \]
+        
+        Taking cube roots and selecting appropriate $u$, $v$ which satisfy the original system yields the desired roots of our cubic.
+
+        \section{Identities}
+        Let the roots of our depressed cubic be $\alpha$, $\beta$, $\gamma$. By Vieta's formula, we have
+        \begin{align*}
+        \begin{cases}
+                \quad\alpha + \beta + \gamma &=\; 0 \\
+                \quad\alpha\beta + \beta\gamma + \gamma\alpha &=\; 3q \\
+                \quad\alpha\beta\gamma &=\; -r
+        \end{cases}
+        \end{align*}
+
+        With this, we deduce the following identities.
+        \begin{align*}
+                \sum \alpha^2 \;&=\; \left(\sum\alpha\right)^2 - 2\sum\alpha\beta \\
+                        \;&=\; -6q \\
+                \\
+                \sum \alpha^3 \;&=\; \left(\sum\alpha\right)^3 - 3(\alpha + \beta)(\beta + \gamma)(\gamma + \alpha)\\
+                        \;&=\; -3r \\
+                \\
+                \sum \alpha^2\beta^2 \;&=\ \left(\sum \alpha\beta\right)^2 - 2\sum \alpha^2\beta\gamma \\
+                        \;&=\; (3q)^2 - 2\alpha\beta\gamma\sum\alpha \\
+                        \;&=\; 9q^2 \\
+                \\
+                \sum \alpha^3\beta^3 \;&=\; \left(\sum \alpha \beta\right)^3 - 3\prod(\alpha\beta + \beta\gamma) \\
+                        \;&=\; (3q)^3 - 3\alpha\beta\gamma(\alpha + \beta)(\beta + \gamma)(\gamma + \alpha) \\
+                        \;&=\; 27q^3 + 3r^2\\
+                \\
+                \sum\alpha^2\beta + \sum\alpha\beta^2 \;&=\; \sum \alpha\beta(\alpha + \beta) \\
+                        \;&=\; -\sum\alpha\beta\gamma \\
+                        \;&=\; 3r \\
+                \\
+                \left(\sum\alpha^2\beta\right)\left(\sum\alpha\beta^2\right)
+                        \;&=\; \sum\alpha^3\beta^3 + \sum\alpha^2\beta(\beta\gamma^2 + \gamma\alpha^2) \\
+                        \;&=\; \sum\alpha^3\beta^3 + \sum\alpha^2\beta^2\gamma^2 + \sum\alpha^4\beta\gamma \\
+                        \;&=\; \sum\alpha^3\beta^3 + 3\alpha^2\beta^2\gamma^2 + \alpha\beta\gamma\sum\alpha^3 \\
+                        \;&=\; 27q^3 + 3r^2 + 3r^2 + 3r^2 \\
+                        \;&=\; 27q^3 + 9r^2 \\
+                \\
+                (\alpha - \beta)^2(\beta - \gamma)^2(\gamma - \alpha)^2 \;&=\; \left(\sum\alpha\beta^2 - \sum\alpha^2\beta\right)^2 \\
+                        \;&=\; \left(\sum\alpha\beta^2 + \sum\alpha^2\beta\right)^2 - 4\left(\sum\alpha\beta^2\right)\left(\sum\alpha^2\beta\right)\\
+                        \;&=\; (3r)^2 - 4(27q^3 + 9r^2) \\
+                        \;&=\; -27(4q^3 + r^2) \\
+                \\
+                \sum(\alpha - \beta)(\beta - \gamma) \;&=\; \sum(\alpha\beta - \alpha\gamma - \beta^2 + \beta\gamma) \\
+                        \;&=\; \sum\alpha\beta - \sum\alpha\gamma -\sum\beta^2 + \sum\beta\gamma\\
+                        \;&=\; -\sum\alpha^2 + \sum\alpha\beta \\
+                        \;&=\; 6q + 3q \\
+                        \;&=\; 9q \\
+        \end{align*}
+        \begin{align*}
+                \sum\alpha^4 \;&=\; \left(\sum\alpha^2\right)^2 - 2\sum\alpha^2\beta^2 \\
+                        \;&=\; (-6q)^2 - 2(9q^2) \\
+                        \;&=\; 18q^2 \\
+                \\
+                \sum\alpha^3\beta - \sum\alpha\beta^3 \;&=\; \sum\alpha\beta(\alpha^2 - \beta^2) \\
+                        \;&=\; \sum\alpha\beta(-\gamma)(\alpha - \beta) \\
+                        \;&=\; -\alpha\beta\gamma\sum(\alpha - \beta) \\
+                        \;&=\; 0\\
+                \\
+                \sum\alpha^3\beta \;=\; \sum\alpha\beta^3 \;&=\; \frac{1}{2}\left(\sum\alpha^3\beta + \sum\alpha\beta^3\right) \\
+                        \;&=\; \frac{1}{2}\left(\sum\alpha^3\beta + \sum\alpha^3\gamma\right) \\
+                        \;&=\; \frac{1}{2}\sum\alpha^3(\beta + \gamma) \\
+                        \;&=\; -\frac{1}{2} \sum \alpha^4 \\
+                        \;&=\; -9q^2 \\
+                \\
+        \end{align*}
+
+        \section{Cubic discriminant}
+        We set 
+        \[\Delta \;=\; a^4(\alpha - \beta)^2(\beta - \gamma)^2(\gamma - \alpha)^2 = -27a^4(4q^3 + r^2)\]
+        Now,
+        \begin{align*}
+                a^6(4q^3 + r^2) \;&=\; 4(ac - b^2)^3 + (2b^3 - 3abc + a^2d)^2 \\
+                        \;&=\; 4(ac - b^2)(ac - b^2)^2 + (2b(b^2 - ac) - a(bc - ad))^2 \\
+                        \;&=\; -4(b^2 - ac)(b^2 - ac)^2 + 4b^2(b^2 - ac)^2 - 4ab(b^2 - ac)(bc - ad) + a^2(bc - ad)^2 \\
+                        \;&=\; 4(b^2 - ac)(-(b^2 - ac)^2 + b^2(b^2 - ac) - ab(bc - ad)) + a^2(bc - ad)^2 \\
+                        \;&=\; 4(b^2 - ac)(-b^4 + 2ab^2c - a^2c^2 + b^4 - ab^2c - ab^2c + a^2bd) + a^2(bc - ad)^2 \\
+                        \;&=\; 4(b^2 - ac)(-a^2c^2 + a^2bd) + a^2(bc - ad)^2 \\
+                        \;&=\; -4a^2(b^2 - ac)(c^2 - bd) + a^2(bc - ad)^2
+        \end{align*}
+        Thus,
+        \[\frac{\Delta}{27} \;=\; 4(b^2 - ac)(c^2 - bd) - (bc - ad)^2 = -a^4(4q^3 + r^2)\]
+
+        Clearly, if any two roots of our cubic are equal, we have $\Delta = 0$.
+
+        Conversely, if $\Delta = 0$, our cubic must have a repeated root. Furthermore, this repeated root has to be real,
+        since if it were complex, it's complex conjugate must also be a root, yielding $3$ complex roots to our cubic, which is absurd.
+        Hence, all $3$ roots of our cubic must be real.
+\end{document}
