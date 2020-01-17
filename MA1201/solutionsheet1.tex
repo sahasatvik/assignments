@@ -1,0 +1,270 @@
+\documentclass[10pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+
+\title{Mathematics II - Assignment I}
+\author{Satvik Saha}
+\date{}
+
+\geometry{a4paper, margin=1in}
+\setlength\parindent{0pt}
+\renewcommand{\labelenumi}{(\roman{enumi})}
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+% \renewcommand\qedsymbol{$\blacksquare$}
+
+\begin{document}
+        \par\textbf{IISER Kolkata} \hfill \textbf{Assignment I}
+        \vspace{3pt}
+        \hrule
+        \vspace{3pt}
+        \begin{center}
+                \LARGE{\textbf{MA 1201 : Mathematics II}}
+        \end{center}
+        \vspace{3pt}
+        \hrule
+        \vspace{3pt}
+        Satvik Saha, \texttt{19MS154}\hfill\today
+        \vspace{20pt}
+
+        \textbf{Solution 1.}
+        \begin{enumerate}
+                \item We claim that
+                        \[
+                        \lim_{n\to \infty} \frac{n}{n^2 + 1} \;=\; 0.
+                        \]
+                        To prove this, let $\epsilon > 0$. We seek $k(\epsilon) \in \mathbb{N}$ such that for all $n \ge k$, $n \in \mathbb{N}$,
+                        \[
+                        \left| \frac{n}{n^2 + 1}\right| \;<\; \epsilon.
+                        \]
+                        Now, since $n^2 + 1 > n^2$,
+                        \[
+                        \frac{n}{n^2 + 1} \;<\; \frac{n}{n^2} \;=\; \frac{1}{n}.
+                        \]
+                        Thus, setting $k(\epsilon) = \lfloor 1 /\epsilon\rfloor + 1 > 1 /\epsilon$, for all $n \ge k$,
+                        \[
+                        \frac{n}{n^2 + 1} \;<\; \frac{1}{n}  \;\le\; \frac{1}{k} < \epsilon.
+                        \]
+                        This completes the proof.\qed\\
+                \item We claim that
+                        \[
+                        \lim_{n\to \infty} \frac{2n}{n + 1} \;=\; 2.
+                        \]
+                        To prove this, let $\epsilon > 0$. We seek $k(\epsilon) \in \mathbb{N}$ such that for all $n \ge k$, $n \in \mathbb{N}$,
+                        \[
+                        \left| \frac{2n}{n + 1} - 2\right| \;=\; \frac{2}{n + 1} \;<\; \epsilon.
+                        \]
+                        Now,
+                        \[
+                        \frac{2}{n + 1} \;<\; \frac{2}{n}.
+                        \]
+                        Thus, setting $k(\epsilon) = \lfloor 2 /\epsilon\rfloor + 1 > 2 /\epsilon$ completes the proof.\qed\\
+                \item We claim that
+                        \[
+                        \lim_{n\to \infty} \frac{3n + 1}{2n + 5} \;=\; \frac{3}{2}.
+                        \]
+                        To prove this, let $\epsilon > 0$. We seek $k(\epsilon) \in \mathbb{N}$ such that for all $n \ge k$, $n \in \mathbb{N}$,
+                        \[
+                        \left| \frac{3n + 1}{2n + 5} - \frac{3}{2}\right| \;=\; \frac{13 /2}{2n + 5} \;<\; \epsilon.
+                        \]
+                        Now,
+                        \[
+                        \frac{13 /2}{2n + 5} \;<\; \frac{13}{4n}.
+                        \]
+                        Thus, setting $k(\epsilon) = \lfloor 13 /4\epsilon\rfloor + 1 > 13 /4\epsilon$ completes the proof.\qed\\
+                \item We claim that
+                        \[
+                        \lim_{n\to \infty} \frac{n^2 - 1}{2n^2 + 3} \;=\; \frac{1}{2}.
+                        \]
+                        To prove this, let $\epsilon > 0$. We seek $k(\epsilon) \in \mathbb{N}$ such that for all $n \ge k$, $n \in \mathbb{N}$,
+                        \[
+                        \left| \frac{n^2 - 1}{2n^2 + 3} - \frac{1}{2}\right| \;=\; \frac{5 /2}{2n^2 + 3} \;<\; \epsilon.
+                        \]
+                        Now,
+                        \[
+                        \frac{5 /2}{2n^2 + 3} \;<\; \frac{5}{4n^2} \;\le\; \frac{5}{4n}.
+                        \]
+                        Thus, setting $k(\epsilon) = \lfloor 5 /4\epsilon\rfloor + 1 > 5 /4\epsilon$ completes the proof.\qed\\
+        \end{enumerate}
+
+        \textbf{Solution 2.}
+        Let $x_n \ge 0$ for all $n \in \mathbb{N}$, and $\lim_{n\to\infty} x_n = L$. We claim that $\lim_{n\to\infty} \sqrt{x_n} = \sqrt{L}$.\\
+       
+        To prove this, let $\epsilon > 0$ be given.
+        
+        Note that since $x_n \ge 0$, we must have $L \ge 0$.\footnote[2]{
+        If $L < 0$, we find $k \in \mathbb{N}$ such that for all $n \ge k$, $n \in \mathbb{N}$, $|x_n - L| < -L$.
+        This implies that $L - (-L) < x_n < L + (-L)$, i.e. $2L < x_n < 0$, a contradiction.} \\
+
+        If $L = 0$, then we find $k' \in \mathbb{N} $ such that for all $n \ge k'$, $n \in \mathbb{N}$, $|x_n| < \epsilon^2$.
+        Thus, we have $|\sqrt{x_n}| < \epsilon$ for all $n \ge k'$, as desired.
+        
+
+        Otherwise, $L > 0$.
+        Since $\{x_n\}_n$ converges to $L$, we find $k \in \mathbb{N}$ such that for all $n \ge k$, $n \in \mathbb{N}$,
+        \[
+                |x_n - L| < \sqrt{L}\,\epsilon.
+        \]
+        Now, for all $n \ge k$, $n \in \mathbb{N}$,
+        \[
+                |\sqrt{x_n} - \sqrt{L}| \;=\; \frac{|x_n - L|}{|\sqrt{x_n} + \sqrt{L}|} \;<\;
+                        \frac{\sqrt{L}\,\epsilon}{\sqrt{x_n} + \sqrt{L}} \;\le\; \epsilon.
+        \]
+        This proves our claim.\qed\\
+
+        \textbf{Solution 3.}
+        Let $\lim_{n\to\infty} x_n = L$. We claim that $\lim_{n\to\infty} |x_n| = |L|$.
+
+        To prove this, let $\epsilon > 0$. We find $k \in \mathbb{N}$ such that for all $n \ge k$, $n \in \mathbb{N}$,
+        \[
+                |x_n - L| < \epsilon.
+        \]
+        Now, for all $n \ge k$, $n \in \mathbb{N}$,
+        \[
+                | |x_n| - |L| | \le |x_n - L| < \epsilon.\footnotemark[3]
+        \]\footnotetext[3]{
+        The Triangle Inequality gives \[|x_n| = |(x_n - L) + L| \le |x_n - L| + |L|,\]
+        \[|L| = |(L - x_n) + x_n \le |x_n - L| + |x_n|.\]
+        Thus,
+        \[-|x_n - L| \le |x_n| - |L| \le |x_n - L|.\]}
+        
+        This proves our claim. \qed\\
+
+        The converse of the given statement is false. We supply the counterexample $x_n = (-1)^n$ for all $n \in \mathbb{N}$.
+        The sequence $\{|x_n|\}_n = \{1\}_n$ clearly converges to $1$, yet $\{(-1)^n\}_n$ diverges.\\
+        
+        \clearpage
+        \textbf{Solution 4.}
+        Let $\lim_{n\to\infty} x_n = L$ and $\lim_{n\to\infty} y_n = L$. We claim that $\lim_{n\to\infty} z_n = L$, where $\{z_n\}_n$
+        is the sequence defined by
+        \begin{align*}
+                z_{2n - 1} \;&=\; x_n \\
+                z_{2n} \;&=\; y_n
+        \end{align*}
+        for all $n \in \mathbb{N}$.
+
+        To prove this, let $\epsilon > 0$. We find $k_1, k_2 \in \mathbb{N}$ such that
+        \[|x_n - L| < \epsilon, \quad\text{for all } n \ge k_1, n \in \mathbb{N},\]
+        \[|y_n - L| < \epsilon, \quad\text{for all } n \ge k_2, n \in \mathbb{N}.\]
+        
+        Thus, for all $n \ge \max\{2k_1 - 1, 2k_2\}$, $n \in \mathbb{N}$,
+        \begin{align*}
+                |z_{n} - L| \;&=\; |z_{2m - 1} - L| \;=\; |x_m - L| < \epsilon, \quad\text{if }n\text{ is odd}, \\
+                |z_{n} - L| \;&=\; |z_{2m} - L| \;=\; |y_m - L| < \epsilon, \;\!\quad\quad\text{if }n\text{ is even}.
+        \end{align*}
+        This proves our claim. \qed\\
+
+        \textbf{Solution 5.}
+        \begin{enumerate}
+                \item We claim that
+                \[\lim_{n\to\infty} (2^n + 3^n)^{\frac{1}{n}} \;=\; 3.\]
+                To prove this, we observe that for all $n \in \mathbb{N}$,
+                \[(0 + 3^n)^{\frac{1}{n}} < (2^n + 3^n)^{\frac{1}{n}} < (3^n + 3^n)^{\frac{1}{n}}.\]
+                Taking limits as $n \to \infty$, $(3^n)^{\frac{1}{n}} \to 3$ and $(2\cdot 3^n)^{\frac{1}{n}} \to 1\cdot 3 = 3$.
+                Thus, using the Sandwich Theorem, we conclude that $(2^n + 3^n)^{\frac{1}{n}} \to 3$. \qed\\
+
+                \item We claim that
+                \[
+                \lim_{n\to\infty}\frac{1\cdot 3\cdot 5\cdots (2n - 1)}{2\cdot 4\cdot 6\cdots (2n)} = 0.
+                \]
+                To prove this, we set
+                \[
+                x_n \;=\; \frac{1\cdot 3\cdot 5\cdots (2n - 1)}{2\cdot 4\cdot 6\cdots (2n)} \;=\; \prod_{k = 1}^n \frac{2k - 1}{2k}.
+                \]
+                Now, $(n + 1)^2 = n^2 + 2n + 1 > n^2 + 2n = n(n + 1)$, for all $n \in \mathbb{N}$. Thus, $ \frac{n}{n+1} < \frac{n+1}{n+2}$.
+                Therefore,
+                \[
+                x_n^2   \;=\; \prod_{k = 1}^n \frac{2k - 1}{2k} \cdot \frac{2k - 1}{2k}
+                        \;<\; \prod_{k = 1}^n \frac{2k - 1}{2k} \cdot \frac{2k}{2k + 1}
+                        \;=\; \frac{1}{2n + 1}.
+                \]
+                Using $x_n > 0$, for all $n \in \mathbb{N}$, we have
+                \[
+                0 < x_n < \frac{1}{\sqrt{2n + 1}}.
+                \]
+                Taking limits as $n \to \infty$, $\frac{1}{\sqrt{2n + 1}} \to 0$. Hence, using the Sandwich Theorem,
+                we conclude that $x_n \to 0$. \qed\\
+
+                \textit{Remark.}  We can obtain slightly tighter bounds on $x_n$ by observing that for all $k \in \mathbb{N}$,
+                \[
+                \frac{4k - 3}{4k + 1} \;\le\;\left( \frac{2k - 1}{2k}  \right)^2 \;\le\; \frac{3k - 2}{3k + 1}.
+                \]
+                This gives us
+                \[
+                \prod_{k = 1}^n \frac{4k - 3}{4k + 1} \;\le\; \prod_{k = 1}^n \left(\frac{2k - 1}{2k}\right)^2
+                        \;\le\; \prod_{k = 1}^n \frac{3k - 2}{3k + 1}.
+                \]
+                \[\frac{1}{\sqrt{4n + 1}} \le x_n \le \frac{1}{\sqrt{3n + 1}}.\]
+        \end{enumerate}
+        
+        \clearpage
+
+        \textbf{Solution 6.}
+        Let $\lim_{n\to\infty} x_n = 0$ and $\{y_n\}_n$ be a bounded sequence. We claim that $\lim_{n\to\infty} x_ny_n = 0$.
+        
+        To prove this, let $\epsilon > 0$.
+        Since $\{y_n\}_n$ is bounded, we find $M \in \mathbb{R}$ such that $|y_n| < M$ for all $n \in \mathbb{N}$.
+        Again, since $\{x_n\}_n$ converges to $0$, we find $k \in \mathbb{N}$ such that for all $n \ge k$, $n \in \mathbb{N}$,
+        \[|x_n| < \frac{\epsilon}{|M|}.\]
+        Hence, for all $n \ge k$, $n \in \mathbb{N}$, we have
+        \[|x_ny_n| < |x_n| |M| < \epsilon.\]
+        This proves our claim. \qed\\
+
+        To compute $\lim_{n\to\infty} (-1)^n n / (n^2 + 1)$, we note that the sequence $n/(n^2 + 1) \to 0$ and $(-1)^n$ is bounded.
+        Hence,
+        \[\lim_{n\to\infty} \frac{(-1)^n n}{n^2 + 1} = 0.\]\\
+
+        \textbf{Solution 7.}
+        \begin{enumerate}
+                \item We wish to compute $\lim_{n\to\infty} n^{\frac{1}{n^2}}$.
+                We observe that for all $n \in \mathbb{N}$,
+                \[1 \le  n < 1 + n \le \left(1 + \frac{1}{n}\right)^{n^2}.\]
+                The last inequality follows from the Binomial Theorem. Thus,
+                \[1 \le n^{\frac{1}{n^2}} < 1 + \frac{1}{n}.\]
+                Taking limits as $n \to \infty$, $\frac{1}{n} \to 0$. Hence, using the Sandwich Theorem, we conclude that 
+                $n^{\frac{1}{n^2}} \to 1$. \\
+
+                \item We wsh to compute $\lim_{n\to\infty} (n!)^{\frac{1}{n^2}}$.
+                We observe that for all $n \in \mathbb{N}$,
+                \[1 \le n! \le n^n,\]
+                \[1 \le (n!)^{\frac{1}{n^2}} \le n^{\frac{1}{n}}.\]
+                Taking limits as $n \to \infty$, $n^{\frac{1}{n}} \to 1$, Hence, using the Sandwich Theorem, we conclude that
+                $(n!)^{\frac{1}{n^2}} \to 1$. \\
+        \end{enumerate}
+
+        \textbf{Solution 8.}
+        We claim that the sequence defined by $x_n \;=\; \sin(\frac{n\pi}{2})$, for all $n \in \mathbb{N}$, diverges.
+
+        Suppose not, i.e. the given sequence converges to $L$. Then, we find $k \in \mathbb{N}$ such that for all $n \ge k$, $n \in \mathbb{N}$,
+        \[|x_n - L| < \frac{1}{4}.\]
+        Observe that $x_{4k} = 0$ and  $x_{4k + 1} = 1$. Thus,
+        \[1 = |x_{4k} - x_{4k + 1}| \;\le\; |x_{4k} - L| + |x_{4k + 1} - L| 
+        \;<\; \frac{1}{4} + \frac{1}{4} \;=\; \frac{1}{2}. \]
+        This is a contradiction, thus proving our claim. \qed\\
+        
+        \clearpage
+        \textbf{Solution 9.}
+        \begin{enumerate}
+                \item We show that $\lim_{n\to\infty} (2n)^\frac{1}{n} = 1$.
+                Note that as $n \to \infty$, the sequences $2^{\frac{1}{n}} \to 1$ and $n^{\frac{1}{n}} \to 1$.
+                Hence, their product also converges to $1$. \qed\\
+
+                \item We show that $\lim_{n\to\infty} n^2 /n! = 0$. Note that for all $n \ge 6$, $n \in \mathbb{N}$, we have $n! > n^3$.
+                This is easily shown by induction, since $6! > 6^3$, and if $k! > k^3$, then
+                $(k + 1)! = (k + 1)\cdot k! > (k + 1)k^3 > (k + 1)^3$.
+                The last inequality holds since $k > 5 \implies k^3 > 5k^2 > k^2 + 2k^2 + k^2 > k^2 + 2k + 1$.
+                Hence, for all $n \ge 6$, $n \in \mathbb{N}$, we have
+                \[0 < \frac{n^2}{n!} < \frac{1}{n}.\]
+                Taking limits as $n\to\infty$, $\frac{1}{n} \to 0$. Applying the Sandwich Theorem yields the desired result. \qed\\
+
+                \item We show that $\lim_{n\to\infty} 2^n/n! = 0$ . Note that for all $n \ge 6$, $n \in \mathbb{N}$, we have $(n - 1)! > 2^n$.
+                This is easily shown by induction, since $5! > 2^6$, and if $(k - 1)! > 2^k$, then
+                $k! = k \cdot (k - 1)! > k\cdot 2^k > 2 \cdot 2^k = 2^{k + 1}$. The last inequality holds since $k \ge 6$.
+                Hence, for all $n \ge 6$, $n \in \mathbb{N}$, we have
+                \[
+                0 < \frac{2^n}{n!} < \frac{1}{n}.
+                \]
+                Taking limits as $n\to\infty$, $\frac{1}{n} \to 0$. Applying the Sandwich Theorem yields the desired result. \qed\\
+        \end{enumerate}
+\end{document}
