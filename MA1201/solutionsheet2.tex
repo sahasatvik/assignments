@@ -1,0 +1,162 @@
+\documentclass[10pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+
+\title{Mathematics II - Assignment II}
+\author{Satvik Saha}
+\date{}
+
+\geometry{a4paper, margin=1in}
+\setlength\parindent{0pt}
+\renewcommand{\labelenumi}{(\roman{enumi})}
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+% \renewcommand\qedsymbol{$\blacksquare$}
+
+\begin{document}
+        \par\textbf{IISER Kolkata} \hfill \textbf{Assignment II}
+        \vspace{3pt}
+        \hrule
+        \vspace{3pt}
+        \begin{center}
+                \LARGE{\textbf{MA 1201 : Mathematics II}}
+        \end{center}
+        \vspace{3pt}
+        \hrule
+        \vspace{3pt}
+        Satvik Saha, \texttt{19MS154}\hfill\today
+        \vspace{20pt}
+
+        \textbf{Solution 1.}
+        \begin{enumerate}
+                \item   The sum \(
+                        \sum_{n = 1}^\infty \frac{n}{5n + 11}
+                        \) diverges, since as $n \to \infty$, $\frac{n}{5n + 11} \to \frac{1}{5} \neq 0$.
+                \item   Note that the series $\sum_{n = 0}^\infty r^n$ converges when $0 < r < 1$.
+                        Futhermore, the sum of this series is $\frac{1}{1 - r}$. Hence, the corresponding sums
+                        for $r = \frac{3}{5}$ and $r = \frac{4}{5}$ are $\frac{5}{2}$ and $5$ respectively.
+                        Thus the sum of these two series must converge to $\frac{15}{2}$.
+                \item   Note that
+                        \[
+                        \frac{3^n + 5^n}{4^n} > 1 > 0,
+                        \]
+                        and the series $\sum_{n = 0}^\infty 1$ clearly diverges. Hence, the series $\sum_{n = 0}^\infty \frac{3^n + 5^n}{4^n}$
+                        diverges by the comparison test.
+                \item The sum $\sum_{n = 1}^\infty \sin(n\pi/2)$ diverges, since the limit as $n \to \infty$ of $\sin(n\pi/2)$ does not exist.
+                \item We calculate the partial sums
+                        \begin{align*}
+                                S_n \;&=\; \sum_{k = 1}^n \frac{1}{k^2 + 5k + 6} \\
+                                        \;&=\; \sum_{k = 1}^n \frac{1}{k + 2} - \frac{1}{k + 3} \\
+                                        \;&=\; \frac{1}{3} - \frac{1}{n + 2}.
+                        \end{align*}
+                        Clearly, the sequence of partial sums $\{S_n\}_n$ converges, since as $n \to \infty$, $\frac{1}{n + 2} \to 0$
+                        and $S_n \to \frac{1}{3}$. Hence, the sum of the series is $\frac{1}{3}$.
+                \item We calculate the partial sums
+                        \begin{align*}
+                                S_n \;&=\; \sum_{k = 1}^n \frac{1}{k^2 + 2k} \\
+                                        \;&=\; \frac{1}{2}\sum_{k = 1}^n \frac{1}{k} - \frac{1}{k + 2} \\
+                                        \;&=\; \frac{1}{2} \left( 1 + \frac{1}{2} - \frac{1}{n + 1} - \frac{1}{n + 2} \right).
+                        \end{align*}
+                        As $n \to \infty$, $S_n \to \frac{3}{4}$, which is the sum of the series.
+                \item We calculate the partial sums
+                        \begin{align*}
+                                S_n \;&=\; \sum_{k = 1}^n \frac{1}{k(k + 1)(k + 2)} \\
+                                        \;&=\; \frac{1}{2}\sum_{k = 1}^n \frac{1}{k(k + 1)} - \frac{1}{(k + 1)(k + 2)} \\
+                                        \;&=\; \frac{1}{2}\sum_{k = 1}^n \left(\frac{1}{k} - \frac{1}{k + 1}\right) - \left(\frac{1}{k + 1} - \frac{1}{k + 2}\right) \\
+                                        \;&=\; \frac{1}{2} \left( 1 - \frac{1}{n + 1} - \frac{1}{2} + \frac{1}{n + 2} \right).
+                        \end{align*}
+                        As $n \to \infty$, $S_n \to \frac{1}{4}$, which is the sum of the series.
+                \item For $\sum_{n = 1}^\infty \cos{n}$ to converge, we must have $\cos{n} \to 0$ as $n \to \infty$. This would imply
+                        that $\cos(n + 1) \to 0$, which means $\cos{n}\cos{1} - \sin{n}\sin{1} \to 0$. This requires $\sin{n} \to 0$.
+                        However, $\cos^2{n} + \sin^2{n} = 1$. Thus, taking the limit on the left yields $0$, a conradiction.
+                        Hence, the series diverges.
+        \end{enumerate}
+
+        \textbf{Solution 2.}
+        Let $\{X_n\}_n$, $\{Y_n\}_n$ and $\{Z_n\}_n$ be the sequences of partial sums of the series $\sum_{n = 1}^\infty x_n$,
+        $\sum_{n = 1}^\infty y_n$ and $\sum_{n = 1}^\infty (x_n + y_n)$ respectively.
+
+        We seek series such that $\sum_{n = 1}^\infty x_n$ and $\sum_{n = 1}^\infty (x_n + y_n)$ converge. Thus, as $n \to \infty$,
+        the sequences of partial sums $X_n$ and $Z_n$ must both converge. Now, 
+        \[
+        Z_n - X_n \;=\;\sum_{k = 1}^n (x_n + y_n) - \sum_{k = 1}^n x_n \;=\; \sum_{k = 1}^n y_n \;=\; Y_n.
+        \]
+        Thus, the difference of these convergent sequences of partial sums, which is $Y_n$, must converge. However, this means that
+        the series $\sum_{n = 1}^\infty y_n$ must also converge.
+
+        Hence, it is impossible to choose $x_n$ and $y_n$ as demanded. \\
+
+        \textbf{Solution 3.}
+        \begin{enumerate}
+                \item Note that $n^3 - 5n + 7 = n(n^2 - 5) + 7 > 0$ for all $n \in \mathbb{N}$.
+                        We take the limit
+                        \[
+                        \lim_{n \to \infty} \frac{\frac{n + 8}{n^3 - 5n + 7}}{\frac{1}{n^2}} \;=\; 
+                        \lim_{n \to \infty} \frac{n^3 + 8n^2}{n^3 - 5n + 7} \;=\; 1 \neq 0.
+                        \]
+                        As the series $\sum_{n = 1}^\infty 1 /n^2$ converges, the given series must also converge.
+                \item Note that $n(n + 6)^2  = n^3 + 12n^2 + 36n > n^3 + 2$ for all $n \in \mathbb{N}$.
+                        Thus,
+                        \[
+                                0 \le\frac{1}{\sqrt{n}} \le \frac{n + 6}{\sqrt{n^3 + 2}} .
+                        \]
+                        As the series $\sum_{n = 1}^\infty 1 /\sqrt{n}$ diverges, the given series must also diverge.
+                \item For $n > 20$, each term of the given series is positive. We take the limit
+                        \[
+                        \lim_{n \to \infty} \frac{\sqrt{5n} - 10}{3n + \sqrt{n}} \cdot \frac{\sqrt{n}}{1} \;=\;
+                        \lim_{n \to \infty} \frac{\sqrt{5}n - 10\sqrt{n}}{3n + \sqrt{n}} \;=\; \frac{\sqrt{5}}{3} \neq 0.
+                        \]
+                        As the series $\sum_{n = 1}^\infty 1 /\sqrt{n}$ diverges, the given series must also diverge.
+                \item We use the inequality $\log{x} < x$ for all $x > 0$. Setting $x = \sqrt{n}$, we have $\log{n} < 2\sqrt{n}$ for all
+                        $n \in \mathbb{N}$. Thus,
+                        \[0 \le \frac{\log{n}}{n} \le \frac{2}{n^{3 /2}}.\]
+                        As the series $\sum_{n = 1}^\infty 1 /n^{3 /2}$ converges, the given series must also converge.
+                \item Note that
+                \[
+                        0 \le \sqrt[3]{n^3 + 1} - n \;=\; \frac{1}{\sqrt[3]{(n^3 + 1)^2} + n\sqrt[3]{n^3 + 1} + n^2}
+                        \;<\; \frac{1}{\sqrt[3]{(n^3)^2} + n\sqrt[3]{n^3} + n^2} \;=\; \frac{1}{3n^2}.
+                \]
+                        As the series $\sum_{n = 1}^\infty 1 /n^2$ converges, the given series must also converge.
+                \item Note that
+                \[
+                        0 \le \frac{1}{1 + 2^n} < \frac{1}{2^n}.
+                \]
+                        As the series $\sum_{n = 1}^\infty (1 /2)^n$ converges, the given series must also converge.
+                \item Note that as $n \to \infty$, $2^{-n} \to 0$. Hence, the given series diverges as $1 /(1 + 2^{-n})\to 1$.
+                \item We use the inequality $\sin{x} \ge 2x/\pi$, for all $x \in [0, \pi/2]$. Setting $x = \pi/2n$,
+                        we have \[0 \le \frac{1}{n} \le \sin \frac{\pi}{2n}\] for all $n \in \mathbb{N}$.
+                        As the series $\sum_{n = 1}^\infty 1 /n$ diverges, the given series must also diverge.
+                \item Note that for all $n \in \mathbb{N}$,
+                \[
+                        0\le \frac{1}{4n} \le \frac{n}{(2n - 1)(2n + 1)}.
+                \]
+                        As the series $\sum_{n = 1}^\infty 1 /n$ diverges, the given series must also diverge.
+                \item Note that for all $n \in \mathbb{N}$,
+                \[
+                        \frac{1}{n^{p - 1}} \le \frac{n + 1}{n^p} \le \frac{2}{n^{p - 1}}.
+                \]
+                This means that the given series converges precisely when the series $\sum_{n = 1}^\infty 1 /n^{p - 1}$ converges,
+                i.e. when $p > 2$. Otherwise, it diverges.
+        \end{enumerate}
+
+        \textbf{Solution 4.}
+        Since $a_n, b_n > 0$ for all $n \in \mathbb{N}$, we use the AM-GM inequality to write
+        \[
+                0 \le a_n b_n \le \frac{1}{2}(a_n^2 + b_n^2).
+        \]
+        Note that the series $\sum_{n = 1}^\infty (a_n^2 + b_n^2)/ 2$ converges, since it is a linear combination of two convergent series
+        $\sum_{n = 1}^\infty a_n^2$ and $\sum_{n = 1}^\infty b_n^2$. Hence, the series $\sum_{n = 1}^\infty a_n b_n$ also converges. \qed\\
+        
+        \textbf{Solution 5.}
+        From $\lim_{n \to \infty} a_n/ b_n = +\infty$, we find $k \in \mathbb{N}$ such that for all $n \ge k$, $n \in \mathbb{N}$,
+        $a_n / b_n > G = 1 > 0$. Thus, for all $n\ge k$, we have $0 \le b_n \le a_n$.
+        
+        Hence, the series $\sum_{n = 1}^{\infty} a_n$ diverges if the series $\sum_{n = 1}^\infty b_n$ diverges. \qed\\
+
+        \textbf{Solution 5.} Since $a_n > 0$, we have
+        \[
+                b_n \;=\; \frac{1}{n}\sum_{k = 1}^n a_k \ge \frac{1}{n} \cdot a_1 > 0.
+        \]
+        As the series $\sum_{n = 1}^\infty 1 /n$ diverges, the given series must also diverge. \qed\\
+\end{document}
