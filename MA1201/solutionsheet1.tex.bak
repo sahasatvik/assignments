@@ -225,7 +225,7 @@
                 Taking limits as $n \to \infty$, $\frac{1}{n} \to 0$. Hence, using the Sandwich Theorem, we conclude that 
                 $n^{\frac{1}{n^2}} \to 1$. \\
 
-                \item We wish to compute $\lim_{n\to\infty} (n!)^{\frac{1}{n^2}}$.
+                \item We wsh to compute $\lim_{n\to\infty} (n!)^{\frac{1}{n^2}}$.
                 We observe that for all $n \in \mathbb{N}$,
                 \[1 \le n! \le n^n,\]
                 \[1 \le (n!)^{\frac{1}{n^2}} \le n^{\frac{1}{n}}.\]

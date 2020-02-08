@@ -34,7 +34,7 @@
                         \sum_{n = 1}^\infty \frac{n}{5n + 11}
                         \) diverges, since as $n \to \infty$, $\frac{n}{5n + 11} \to \frac{1}{5} \neq 0$.
                 \item   Note that the series $\sum_{n = 0}^\infty r^n$ converges when $0 < r < 1$.
-                        Furthermore, the sum of this series is $\frac{1}{1 - r}$. Hence, the corresponding sums
+                        Futhermore, the sum of this series is $\frac{1}{1 - r}$. Hence, the corresponding sums
                         for $r = \frac{3}{5}$ and $r = \frac{4}{5}$ are $\frac{5}{2}$ and $5$ respectively.
                         Thus the sum of these two series must converge to $\frac{15}{2}$.
                 \item   Note that
