@@ -1,0 +1,241 @@
+\documentclass[10pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{xcolor}
+
+\title{Mathematics II - Assignment III}
+\author{Satvik Saha}
+\date{}
+
+\geometry{a4paper, margin=1in}
+\setlength\parindent{0pt}
+\renewcommand{\labelenumi}{(\roman{enumi})}
+% \renewcommand\qedsymbol{$\blacksquare$}
+
+\begin{document}
+        \par\textbf{IISER Kolkata} \hfill \textbf{Assignment III}
+        \vspace{3pt}
+        \hrule
+        \vspace{3pt}
+        \begin{center}
+                \LARGE{\textbf{MA 1201 : Mathematics II}}
+        \end{center}
+        \vspace{3pt}
+        \hrule
+        \vspace{3pt}
+        Satvik Saha, \texttt{19MS154}\hfill\today
+        \vspace{20pt}
+
+        \textbf{Solution 1.}
+        Let $\epsilon > 0$. Since $g$ is Riemann integrable on $[a, b]$, we find $\delta_0 \in \mathbb{R}$ such that for all tagged partitions $\dot{P}$ of 
+        $[a, b]$ such that $ \| P  \| \le \delta_0$, we have
+        \[| S(g, \dot{P}) - \int_a^b g | < \frac{\epsilon}2.\]
+        
+        Let $\dot{Q}$ be a tagged partition on $[a, b]$. Note that since $f(x) - g(x) = 0$ everywhere except at $x = c$,
+        \[S(f, \dot{Q}) - S(g, \dot{Q}) \;\le\; |f(c) - g(c)|\|\dot{Q}\|.\]
+        Thus, setting $\delta = \min \{ \delta_0, \;\epsilon / (2|f(c) - g(c)| + 2)\} $, for all partitions such that $\|\dot{P}\| \le \delta$, we have
+        \begin{align*}
+        |S(f, \dot{P}) - \int_a^b g| 
+        \;&=\;   |S(f, \dot{P}) - S(g, \dot{P}) + S(g, \dot{P}) - \int_a^b g| \\
+        \;&\le\; |S(f, \dot{P}) - S(g, \dot{P})| + |S(g, \dot{P}) - \int_a^b g| \\
+        \;&\le\; \frac{|f(c) - g(c)|}{|f(c) - g(c)| + 1}\cdot\frac{\epsilon}2 + \frac{\epsilon}2 \\
+        \;&<\; \epsilon.
+        \end{align*}
+
+        Hence, $f$ is Riemann integrable on $[a, b]$, and
+        \[\int_a^b f \;=\; \int_a^b g.\] \qed\\
+
+        \textbf{Solution 2.}
+        Let $\epsilon > 0$. We seek $k \in \mathbb{N}$ such that for all $n \ge k$, $n \in \mathbb{N}$,
+        \[ |S(f, \dot{P_n}) - \int_a^b f| < \epsilon.\]
+
+        Since $f$ is Riemann integrable, there exists $\delta \in \mathbb{R}$ such that for all partitions $\dot{P}$ such that $\|\dot{P}\| < \delta$,
+        \[|S(f, \dot{P}) - \int_a^b f| < \epsilon.\]
+
+        Note that since $\|\dot{P_n}\| \to 0$ as $n \to \infty$, there exists $k' \in \mathbb{N}$ such that for all $n \ge k'$,
+        $\|\dot{P_n}\| < \delta$.
+
+        Hence, setting $k = k'$ finishes the proof.
+        \[\int_a^b f \;=\; \lim_{n \to \infty} S(f, \dot{P_n}).\] \qed\\
+
+        \textbf{Solution 3.}
+        Let $f\colon [0, 1] \to \mathbb{R}$ be defined such that $f(x) = \frac{1}{2n}$ for all $x = \frac{1}{n}$, $n \in \mathbb{N}$ and
+        $f(x) = 0$ otherwise. We claim that $f$ is Riemann integrable, and that $\int_0^1 f = 0$.
+
+        Let $\epsilon > 0$. We seek $\delta$ such that for all tagged partitions $\dot{P}$ on $[0, 1]$ such that $\|\dot{P}\| < \delta$,
+        we have $|S(f, \dot{P})| < \epsilon$. \\
+
+        We set $E = \{x : x \in [0, 1] \land f(x) \ge \epsilon/2\}$. This set is finite, since there are finitely many natural 
+        numbers $n$ such that $n\epsilon \le 1$. Let $E$ have $k$ elements.
+        
+        Given a partition $\dot{P}$, a point $x \in E$ can
+        be a tag of at most two intervals in $\dot{P}$. Also, $f(x) \le \frac{1}{2}$ for each of these points.
+        The total length of each interval is at most $\|\dot{P}\|$, and there are $k$ such intervals.
+        Hence, the contribution to the Riemann sum over those intervals containing such points is at most $\frac{1}{2}\cdot 2k\cdot \|\dot{P}\|$.
+        
+        In the remaining intervals, each tag $z \in [0, 1]\setminus E$, so $f(z) < \epsilon/2$. The total length of these intervals
+        is at most the length of the domain, i.e. $1$. Hence, their contribution to the Riemann sum is at most $\epsilon/2 \cdot 1$.\\
+        
+        We set $\delta = \epsilon/2k$. Then, for all partitions such that $\|\dot{P}\| < \delta$,
+        \[S(f, \dot{P}) < \frac{1}{2}\cdot 2k\cdot \frac{\epsilon}{2k} + \frac{\epsilon}{2} = \epsilon.\]
+
+        This completes the proof. \qed\\
+
+        \textbf{Solution 4.}
+        \begin{enumerate}
+                \item
+                        \begin{align*}
+                                \lim_{n \to \infty} \sum_{k = 1}^{3n} \frac{1}{n + k}
+                                \;=\; \lim_{n \to \infty} \frac{1}{n}\sum_{k = 1}^{3n} \frac{1}{1 + k /n}
+                                \;=\; \int_0^3 \frac{1}{1 + x} \;\mathrm{d}{x}
+                                \;=\; \log{4}.
+                        \end{align*}
+                \item 
+                        \begin{align*}
+                                \lim_{n \to \infty} \textcolor{red}{\frac{1}{n}}\sum_{k = 1}^{n} \sin{\frac{k\pi}{n}}
+                                \;=\; \int_0^1 \sin(\pi x) \;\mathrm{d}{x}
+                                \;=\; 2.
+                        \end{align*}
+                \item 
+                        \begin{align*}
+                                \lim_{n \to \infty} \sum_{k = 1}^{2n} \frac{n}{n^2 + k^2}
+                                \;=\; \lim_{n \to \infty} \frac{1}{n}\sum_{k = 1}^{2n} \frac{1}{1 + k^2 /n^2}
+                                \;=\; \int_0^2 \frac{1}{1 + x^2} \;\mathrm{d}{x}
+                                \;=\; \arctan{2}.
+                        \end{align*}
+                \item 
+                        \begin{align*}
+                                \lim_{n \to \infty} \prod_{k = 1}^{n} \left(1 + \frac{k}{n}\right)^{1 /n}
+                                \;=\; \exp \lim_{n \to \infty} \frac{1}{n}\sum_{k = 1}^{n} \log\left(1 + \frac{k}{n} \right)
+                                \;=\; \exp \int_0^1 \log(1 + x) \;\mathrm{d}{x}
+                                \;=\; \frac{4}{e}.
+                        \end{align*}
+                \item 
+                        \begin{align*}
+                                \lim_{n \to \infty} \prod_{k = 1}^n \left(1 + \frac{k^2}{n^2}\right)^{k /\color{red}{n^2}}
+                                \;=\; \exp \lim_{n \to \infty} \frac{1}{n} \prod_{k = 1}^n \frac{k}{n} \log\left(1 + \frac{k^2}{n^2}\right)
+                                \;=\; \exp \int_0^1 x \log(1 + x) \;\mathrm{d}x
+                                \;=\; e^{1 /4}.
+                        \end{align*}
+        \end{enumerate}
+        
+        \textbf{Solution 5.}
+        \begin{enumerate}
+                \item We claim that if $f\colon [a, b] \to \mathbb{R}$ is Riemann integrable, then $f$ is bounded.
+
+                Suppose not. Let the Riemann integral of $f$ on $[a, b]$ be $L$. Then, for $\epsilon = 1$, we find $\delta$ such that
+                for all tagged partitions $\dot{P}$ on $[a, b]$ with $\|\dot{P}\| < \delta$, we have $|S(f, \dot{P}) - L| < 1$,
+                i.e. $S(f, \dot{P}) < |L| + 1$.
+
+                Let $Q = \{x_0, x_1, \ldots, x_n\}$ be such a partition, with $\|Q\| < \delta$. Since $f$ is unbounded on $[a, b]$,
+                it must be unbounded on at least one of the subintervals $[x_k, x_{k + 1}]$. Now, we select tags to create the tagged partition
+                $\dot{Q} = \{([x_{i}, x_{i + 1}], \xi_i)\}$. We choose $\xi_k \in [x_k, x_{k + 1}]$ such that
+                \[
+                |f(\xi_k)(x_{k + 1} - x_{k}) > |L| + 1 + |\sum_{i \neq k} f(\xi_i)(x_{i + 1} - x_i)|.
+                \]
+
+                Thus,
+                \[
+                |S(f, \dot{Q})| \;\ge\; |f(\xi_k)(x_{k + 1} - x_k)| - |\sum_{i \neq k} f(\xi_i)(x_{i + 1} - x_i)| \;>\; |L| + 1.
+                \]
+
+                This is a contradiction, which proves our claim. \qed\\
+
+                \item For any tagged partition $\dot{P}$ on $[a, b]$,
+                \[S(f, \dot{P}) \;\le\; \sum_i |f(\xi_i)|(x_{i + 1} - x_{i}) \;\le\; M(b - a).\]
+                Hence, for all $\epsilon > 0$, there exists $\delta$ such that for all such partitions with $\|\dot{P}\| < \delta$,
+                \[ | \;|S(f, \dot{P})| - |\int_a^b f|\; | \;\le\; | S(f, \dot{P}) - \int_a^b f| \;<\; \epsilon\]
+                \[
+                \left|\int_a^b f \right| \;<\; |S(f, \dot{P})| + \epsilon \;<\; M(b - a) + \epsilon.
+                \]
+                Since this holds for all $\epsilon > 0$, we can write
+                \[\left|\int_a^b f \right| \;\le\; M(b - a).\]\qed
+        \end{enumerate}
+
+        \textbf{Solution 6.}
+        \begin{enumerate}
+                \item We have $f\colon [-2, 2] \to \mathbb{R}$,
+                \[
+                        f(x) =
+                        \begin{cases}
+                                3x^2\cos{\displaystyle\frac{\pi}{x^2}} + 2\pi\sin{\displaystyle\frac{\pi}{x^2}}   &       x \in [-2, 2]\setminus\{0\}, \\
+                                0       &       x = 0.
+                        \end{cases}
+                \]
+                We set $F\colon [-2, 2] \to \mathbb{R}$,
+                \[
+                        F(x) =
+                        \begin{cases}
+                                x^3\cos{\displaystyle\frac{\pi}{x^2}}   &       x \in [-2, 2]\setminus\{0\}, \\
+                                0       &       x = 0.
+                        \end{cases}
+                \]
+                Now, $f$ is continuous on $[-2, 2]\setminus\{0\}$, and hence is Riemann integrable. Also, $F$ is continuous on $[-2, 2]$, and
+                $F'(x) = f(x)$ for all $x \in [-2, 2]\setminus\{0\}$. Using the Fundamental Theorem of Calculus,
+                \[\int_{-2}^{+2} f \;=\; F(2) - F(-2) \;=\; 16 \cos{\frac{\pi}{4}}.\]
+
+                \item We have $f\colon [0, 3] \to \mathbb{R}$,
+                \[
+                        f(x) =
+                        \begin{cases}
+                                -x      &       x \in [0, 1], \\
+                                x       &       x \in (1, 3].
+                        \end{cases}
+                \]
+                We set $F\colon [0, 3] \to \mathbb{R}$,
+                \[
+                        F(x) =
+                        \begin{cases}
+                                \frac{-x^2}{2}          &       x \in [0, 1], \\
+                                \frac{x^2}{2} - 1       &      x \in (1, 3].
+                        \end{cases}
+                \]
+                \[\int_{0}^{3} f \;=\; F(3) - F(0) \;=\; \frac{7}{2}.\]
+                
+                \item We have $f\colon [1, 3] \to \mathbb{R}$,
+                \[
+                        f(x) =
+                        \begin{cases}
+                                1       &       x \in [1, 2), \\
+                                2       &       x \in [2, 3), \\
+                                3       &       x = 3
+                        \end{cases}
+                \]
+                We set $F\colon [1, 3] \to \mathbb{R}$,
+                \[
+                        F(x) =
+                        \begin{cases}
+                                x                &       x \in [1, 2), \\
+                                2x - 2           &       x \in [2, 3), \\
+                                3x - 5           &       x = 3. \\
+                        \end{cases}
+                \]
+                \[\int_{1}^{3} f \;=\; F(3) - F(1) \;=\; 3.\]
+        \end{enumerate}
+
+        \textbf{Solution 7.}
+                We have $f\colon [0, 3] \to \mathbb{R}$,
+                \[
+                        f(x) =
+                        \begin{cases}
+                                0       &       x \in [0, 1), \\
+                                x       &       x \in [1, 2), \\
+                                2x      &       x \in [2, 3), \\
+                                3x      &       x = 3
+                        \end{cases}
+                \]
+                We set $F\colon [0, 3] \to \mathbb{R}$,
+                \[
+                        F(x) =
+                        \begin{cases}
+                                0                                       &       x \in [0, 1), \\
+                                \frac{ x^2}{2} - \frac{1}{2}            &       x \in [1, 2), \\
+                                \frac{2x^2}{2} - \frac{5}{2}            &       x \in [2, 3), \\
+                                \frac{3x^2}{2} - \frac{14}{2}           &       x = 3. \\
+                        \end{cases}
+                \]
+                \[\int_{0}^{3} f \;=\; F(3) - F(0) \;=\; \frac{13}{2}.\]
+
+\end{document}
