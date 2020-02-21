@@ -34,8 +34,9 @@
         \[| S(g, \dot{P}) - \int_a^b g | < \frac{\epsilon}2.\]
         
         Let $\dot{Q}$ be a tagged partition on $[a, b]$. Note that since $f(x) - g(x) = 0$ everywhere except at $x = c$,
-        \[S(f, \dot{Q}) - S(g, \dot{Q}) \;\le\; |f(c) - g(c)|\|\dot{Q}\|.\]
-        Thus, setting $\delta = \min \{ \delta_0, \;\epsilon / (2|f(c) - g(c)| + 2)\} $, for all partitions such that $\|\dot{P}\| \le \delta$, we have
+        and $c$ is a tag of at most $2$ intervals,
+        \[S(f, \dot{Q}) - S(g, \dot{Q}) \;\le\; 2|f(c) - g(c)|\|\dot{Q}\|.\]
+        Thus, setting $\delta = \min \{ \delta_0, \;\epsilon / (4|f(c) - g(c)| + 4)\} $, for all partitions such that $\|\dot{P}\| \le \delta$, we have
         \begin{align*}
         |S(f, \dot{P}) - \int_a^b g| 
         \;&=\;   |S(f, \dot{P}) - S(g, \dot{P}) + S(g, \dot{P}) - \int_a^b g| \\
@@ -133,7 +134,7 @@
                 it must be unbounded on at least one of the subintervals $[x_k, x_{k + 1}]$. Now, we select tags to create the tagged partition
                 $\dot{Q} = \{([x_{i}, x_{i + 1}], \xi_i)\}$. We choose $\xi_k \in [x_k, x_{k + 1}]$ such that
                 \[
-                |f(\xi_k)(x_{k + 1} - x_{k}) > |L| + 1 + |\sum_{i \neq k} f(\xi_i)(x_{i + 1} - x_i)|.
+                |f(\xi_k)(x_{k + 1} - x_{k})| > |L| + 1 + |\sum_{i \neq k} f(\xi_i)(x_{i + 1} - x_i)|.
                 \]
 
                 Thus,
