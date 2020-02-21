@@ -69,7 +69,6 @@
         we have $|S(f, \dot{P})| < \epsilon$. \\
 
         We set $E = \{x : x \in [0, 1] \land f(x) \ge \epsilon/2\}$. This set is finite, since there are finitely many natural 
-        numbers $n$ such that $n\epsilon \le 1$. Let $E$ have $k$ elements.
         
         Given a partition $\dot{P}$, a point $x \in E$ can
         be a tag of at most two intervals in $\dot{P}$. Also, $f(x) \le \frac{1}{2}$ for each of these points.
@@ -79,8 +78,15 @@
         In the remaining intervals, each tag $z \in [0, 1]\setminus E$, so $f(z) < \epsilon/2$. The total length of these intervals
         is at most the length of the domain, i.e. $1$. Hence, their contribution to the Riemann sum is at most $\epsilon/2 \cdot 1$.\\
         
-        We set $\delta = \epsilon/2k$. Then, for all partitions such that $\|\dot{P}\| < \delta$,
-        \[S(f, \dot{P}) < \frac{1}{2}\cdot 2k\cdot \frac{\epsilon}{2k} + \frac{\epsilon}{2} = \epsilon.\]
+        We set $\delta = \epsilon/2k$.\footnote{In the case where $k = 0$, i.e. $\epsilon > 1$, the result follows trivially since $f(x) < 1$ for all 
+        $x \in [0, 1]$.}
+        Then, for all partitions such that $\|\dot{P}\| < \delta$,
+        \begin{align*}
+                S(f, \dot{P}) \;&=\; \sum_{\xi_i \in E} f(\xi_i)(x_{i + 1} - x_i) \;+\; \sum_{\xi_i \notin E} f(\xi_i)(x_{i + 1} - x_i) \\
+                        \;&<\; \sum_{\xi_i \in E} \frac{1}{2}\cdot \frac{\epsilon}{2k} \;+\; \sum_{\xi_i \notin E} \frac{\epsilon}{2} \,(x_{i + 1} - x_i) \\
+                        \;&\le\; \frac{1}{2}\cdot \frac{\epsilon}{2k}\cdot 2k \;+\; \frac{\epsilon}{2} \cdot 1 \\
+                        \;&=\; \epsilon.
+        \end{align*}
 
         This completes the proof. \qed\\
 
