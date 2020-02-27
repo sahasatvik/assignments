@@ -1,6 +1,15 @@
 #!/usr/bin/env python2
 # -*- coding: utf-8 -*-
 
+# Calculates the ratio of the number of dark and light pixels in a specified image.
+# The image is converted to black and white, based on a gievn threshold.
+
+# Usage:
+#   ./dark_light_ratio.py image_name [threshold]
+#
+# image_name    filename of image (must be in the same directory)
+# threshold     percentage of grey below which pixels are converted to black
+
 from PIL import Image
 import sys
 

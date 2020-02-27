@@ -1,5 +1,12 @@
 #!/usr/bin/env python
 
+# Calculates the number of samples which fall within classes of width 1
+#
+# Usage example:
+#   cat data | ./tree_canopy_classes.py
+#
+# data      file containing list of values on separate lines
+
 from os import sys
 
 data = map(float, sys.stdin)

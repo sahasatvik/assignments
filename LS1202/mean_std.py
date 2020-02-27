@@ -1,5 +1,12 @@
 #!/usr/bin/env python2
 
+# Calculates the mean and standard deviation of piped input.
+#
+# Usage example:
+#   cat data | ./mean_std.py
+#
+# data      file containing list of values on separate lines
+
 from os import sys
 
 data = map(float, sys.stdin)
