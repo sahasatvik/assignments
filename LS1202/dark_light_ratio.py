@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 # Calculates the ratio of the number of dark and light pixels in a specified image.
-# The image is converted to black and white, based on a gievn threshold.
+# The image is converted to black and white, based on a given threshold.
 
 # Usage:
 #   ./dark_light_ratio.py image_name [threshold]
