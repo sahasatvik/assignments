@@ -1,0 +1,371 @@
+\documentclass[10pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{xcolor}
+
+\title{Mathematics II - Assignment V}
+\author{Satvik Saha}
+\date{}
+
+\geometry{a4paper, margin=1in}
+\renewcommand{\labelenumi}{(\roman{enumi})}
+% \renewcommand\qedsymbol{$\blacksquare$}
+
+\newcounter{prob}
+\def\problem{\stepcounter{prob}\paragraph{Problem \arabic{prob}}}
+\def\solution{\paragraph{Solution}}
+
+\let\vec\mathbf
+
+\begin{document}
+        \par\textbf{IISER Kolkata} \hfill \textbf{Assignment V}
+        \vspace{3pt}
+        \hrule
+        \vspace{3pt}
+        \begin{center}
+                \LARGE{\textbf{MA 1201 : Mathematics II}}
+        \end{center}
+        \vspace{3pt}
+        \hrule
+        \vspace{3pt}
+        Satvik Saha, \texttt{19MS154}\hfill \today
+        \vspace{20pt}
+        
+        \problem Show that the vectors $(a, b)$ and $(c, d)$ in $\mathbb{R}^2$ are linearly independent iff $ad - bc \neq 0$.
+        \solution We first let $(a, b)$ and $(c, d)$ be linearly indepenedent. Now, if $ad - bc = 0$, then
+        without loss of generality, either $a = b = 0$, in which case $(a, b)$ is the zero vector $(0, 0)$,
+        or $a = 0$ and $d = 0$, in which case one of $b$ or $c$ is also $0$, so one of $(a, b)$ and $(c, d)$ is the zero vector $(0, 0)$,
+        or $a = 0$, $d \neq 0$ and $c = 0$, in which case
+        \[
+               d \,(0, b) \;+\; (-b) \,(0, d) \;=\; (0, 0),
+        \]
+        or $a, b, c, d \neq 0$, in which case
+        \[
+                c\,(a, b) \,+\, (-a)\,(c, d) \;=\; (0, 0).
+        \]
+        This is a contradiction, hence we must have $ad - bc \neq 0$.
+
+        Now we assume $ad - bc \neq 0$. If $(a, b)$ and $(c, d)$ were linearly dependent, we find $\lambda$, $\mu$, at least one of
+        which is non-zero, such that
+        \[
+                \lambda (a, b) \,+\, \mu(c, d) \;=\; (0, 0),
+        \]
+        i.e. $\lambda a = - \mu c$ and $\lambda b = -\mu d$. If $\mu = 0$, that forces $a = b = 0$, and hence $ad - bc = 0$.
+        Similary, $\lambda = 0$ forces $c = d = 0$, and hence $ad - bc = 0$.
+        Finally, for $\lambda, \mu \neq 0$, we have
+        \[
+        \lambda\mu(ad - bc) \;=\; (\lambda a)(\mu d) - (-\lambda b)(-\mu c) \;=\; 0,
+        \]
+        and thus $ad - bc = 0$. In all cases, we reach a contradiction. Hence, $(a, b)$ and $(c, d)$ must be linearly independent. \qed
+
+        \problem Show that if $v$ and $w$ are linearly independent vectors in $\mathbb{R}^2$, then so are $v + w$ and $v - w$.
+        \solution We assume the contrary, i.e.\ we find $\lambda$ and $\mu$, at least one of which is non-zero, such that
+        \[
+                \lambda(v + w) + \mu(v - w) \;=\; 0 \implies (\lambda + \mu)v + (\lambda - \mu)w \;=\; \vec{0}.
+        \]
+        The linear independence of $v$ and $w$ demands both $\lambda + \mu = 0$ and $\lambda - \mu = 0$. However, 
+        this is only possible if $\lambda = \mu = 0$. This is a contradiction. Hence, $v + w$ and $v - w$ must be linearly independent. \qed
+
+        \problem Show that the following are bases of $\mathbb{R}^2$.
+                \begin{enumerate}
+                        \item $\{(1, 2),\;(4, 3) \}$.
+                        \item $\{(1, 1),\;(1, -1) \}$.
+                \end{enumerate}
+        \solution
+        \begin{enumerate}
+                \item Let $(a, b) \in \mathbb{R}^2$ be arbitrary. We seek $\lambda, \mu \in \mathbb{R}$ such that
+                \[
+                        \lambda(1, 2) \,+\, \mu(4, 3) \;=\; (a, b).
+                \]
+                Solving the system of equations
+                \begin{align*}
+                \lambda \,+\, 4\mu \;=\; a \\
+                2\lambda \,+\, 3\mu \;=\; b
+                \end{align*}
+                we find $\lambda = (-3a + 4b)/5$ and $\mu = (2a - b)/5$.
+                
+                We now show that this is a unique solution. Let $(\lambda_1, \mu_1)$ and $(\lambda_2, \mu_2)$ be two pairs of solutions
+                to the above system. If
+                \[
+                \lambda_1(1, 2) \,+\, \mu_1(4, 3) \;=\; \lambda_2(1, 2) \,+\, \mu_2(4, 3) \;=\; (a, b),
+                \]
+                then 
+                \[
+                (\lambda_1 - \lambda_2)(1, 2) \,+\, (\mu_1 - \mu_2)(4, 3) \;=\; \vec{0}.
+                \]
+                Using the result in Problem 1, we find that $(1, 2)$ and $(4, 3)$ are linearly independent, since $1\cdot 3 \,-\, 2\cdot 4\neq 0$.
+                Thus, we must have $\lambda_1 - \lambda_2 = \mu_1 - \mu_2 = 0$, thus proving uniqueness.
+
+                Hence, any arbitrary vector in $\mathbb{R}^2$ can be uniquely expressed as a linear combination of the two given vectors, i.e.\ 
+                they comprise a basis of $\mathbb{R}^2$. \qed
+
+                \item Let $(a, b) \in \mathbb{R}^2$ be arbitrary. Again, we seek $\lambda, \mu \in \mathbb{R}$ such that
+                \[
+                        \lambda(1, 1) \,+\, \mu(1, -1) \;=\; (a, b).
+                \]
+                Solving the system of equations
+                \begin{align*}
+                \lambda \,+\, \mu \;=\; a \\
+                \lambda \,-\, \mu \;=\; b
+                \end{align*}
+                we find $\lambda = (a + b)/2$ and $\mu = (a - b)/2$.
+                
+                We now show that this is a unique solution. Let $(\lambda_1, \mu_1)$ and $(\lambda_2, \mu_2)$ be two pairs of solutions
+                to the above system. If
+                \[
+                \lambda_1(1, 1) \,+\, \mu_1(1, -1) \;=\; \lambda_2(1, 1) \,+\, \mu_2(1, -1) \;=\; (a, b),
+                \]
+                then 
+                \[
+                (\lambda_1 - \lambda_2)(1, 1) \,+\, (\mu_1 - \mu_2)(1, -1) \;=\; \vec{0}.
+                \]
+                Using the result in Problem 1, we find that $(1, 1)$ and $(1, -1)$ are linearly independent, since $1\cdot 1 \,-\, 1\cdot (-1) \neq 0$.
+                Thus, we must have $\lambda_1 - \lambda_2 = \mu_1 - \mu_2 = 0$, thus proving uniqueness.
+
+                Hence, any arbitrary vector in $\mathbb{R}^2$ can be uniquely expressed as a linear combination of the two given vectors, i.e.\ 
+                they comprise a basis of $\mathbb{R}^2$. \qed
+        \end{enumerate}
+
+        \problem Show that any set containing 3 vectors in $\mathbb{R}^2$ is linearly dependent. Also show that any linearly independent set
+        of 2 vectors in $\mathbb{R}^2$ is a basis of $\mathbb{R}^2$.
+
+        \solution Let $u, v, w \in \mathbb{R}^2$ be arbitrary, with $u = (u_1, u_2)$, $v = (v_1, v_2)$ and $w = (w_1, w_1)$.
+        Note that if any two of $u, v, w$ are linearly dependent, say $u$ and $v$, then all three are linearly dependent, i.e.\ 
+        if $c_1, c_2 \in \mathbb{R}$, where at least one of them is non-zero, then
+        \[
+                c_1 u \,+\, c_2 v \;=\; 0 \implies c_1 u \,+\, c_2 v + 0w \;=\; \vec{0}.
+        \]
+        Contrapositively, if $u, v, w$ are all linearly indepenedent, then any two of them, say $u$ and $v$, are also linearly independent.
+
+        Assume $u$, $v$ and $w$ are linearly independent. Then, $u$ and $v$ are linearly independent, i.e.\ $\Delta_w = u_1v_2 - u_2v_1 \neq 0$.
+        Consider the system of equations
+        \begin{align*}
+                \lambda u_1 \,+\, \mu v_1 \;&=\; w_1 \\
+                \lambda u_2 \,+\, \mu v_2 \;&=\; w_2 
+        \end{align*}
+        It is easily verified that $\lambda = (w_1v_2 - w_2v_1)/\Delta_w$ and $\mu = (u_1w_2 - u_2w_1)/\Delta_w$ is a solution to the above system.
+        Moreover, since $u$ and $w$ are linearly independent, $\Delta_v = u_1w_2 - u_2w_1 \neq 0$ and since $w$ and $v$ are linearly independent,
+        $\Delta_u = w_1v_2 - w_2v_1 \neq 0$. Thus, $\lambda, \mu \neq 0$. However, this means that
+        \[
+        \lambda u \,+\, \mu v \,-\, w \;=\; \vec{0}.
+        \]
+        This is a contradiction. Hence, any set of 3 vectors in $\mathbb{R}^2$ must be linearly dependent.
+
+        Let $u, v \in \mathbb{R}^2$ be linearly independent. We show that they form a basis of $\mathbb{R}^2$. Let $w \in \mathbb{R}^2$ be arbitrary.
+        Like before, we define
+        \begin{align*}
+                \Delta_w \;&=\; u_1v_2 \,-\, u_2v_1, \\
+                \Delta_v \;&=\; u_1w_2 \,-\, u_2w_1, \\
+                \Delta_u \;&=\; w_1v_2 \,-\, w_2v_1.
+        \end{align*}
+        The linear independence of $u$ and $v$ means that $\Delta_w \neq 0$. Again, it is easily verified that 
+        $\lambda u + \mu v \;=\; w$, where $\lambda = \Delta_u/\Delta_w$ and $\mu = \Delta_v/\Delta_w$.
+        Furthermore, this solution is unique since if
+        \[
+        \lambda_1 u \,+\, \mu_1 v \;=\; \lambda_2 u \,+\, \mu_2 v \;=\;w,
+        \]
+        then we must have
+        \[
+        (\lambda_1 - \lambda_2) u \,+\, (\mu_1 - \mu_2) v \;=\; \vec{0}.
+        \]
+        The linear independence of $u$ and $v$ demands $\lambda_1 - \lambda_2 = \mu_1 - \mu_2 = 0$.
+
+        Hence, an arbitrary vector in $w \in \mathbb{R}^2$ can always be uniquely represented as a linear combination of two linearly
+        independent vectors $u, v \in \mathbb{R}^2$, i.e.\ $\{u, v\}$ form a basis of $\mathbb{R}^2$.
+
+        \problem Let $T\colon \mathbb{R}^2 \to \mathbb{R}^3$, $T(x_1, x_2) = (x_1, x_2, 0)$. Show that $T$ is linear and find the matrix of 
+        $T$ with respect to the standard bases of $\mathbb{R}^2$ and $\mathbb{R}^3$.
+        \solution Let $x_1, x_2, y_1, y_2, c \in \mathbb{R}$ be arbitrary. We verify
+        \[
+                T(\vec{x}) + T(\vec{y}) \;=\; (x_1, x_2, 0) + (y_1, y_2, 0) \;=\; (x_1 + y_1, x_2 + y_2, 0) \;=\; T(x_1 + y_1, x_2 + y_2) \;=\; T(\vec{x} + \vec{y}),
+        \]
+        \[
+                c T(\vec{x}) \;=\; c (x_1, x_2, 0) \;=\; (cx_1, cx_2, 0) \;=\; T(cx_1, cx_2) \;=\; T(c\vec{x}).
+        \]
+        Hence, $T$ is linear. Let $V \;=\; \{\vec{v_1}, \vec{v_2}\}$ and $W \;=\; \{\vec{w_1}, \vec{w_2}, \vec{w_3}\}$ be the standard
+        bases of $\mathbb{R}^2$ and $\mathbb{R}^3$ respectively. Then,
+        \[
+        [T]_V^W \;=\; \left([T(\vec{v_1})]_W \quad [T(\vec{v_2})]_W\right) \;=\; (T(1, 0) \quad T(0, 1)) \;=\; 
+        \begin{pmatrix}
+        1 & 0 \\ 0 & 1 \\ 0 & 0
+        \end{pmatrix}.
+        \]
+        
+        \problem Let $T\colon \mathbb{R}^2 \to \mathbb{R}^2$, $T(x_1, x_2) = (2x_1, -3x_2)$. Show that $T$ is linear and find the matrix of 
+        $T$ with respect to the standard basis of $\mathbb{R}^2$.
+        \solution Let $x_1, x_2, y_1, y_2, c \in \mathbb{R}$ be arbitrary. We verify
+        \[
+                T(\vec{x}) + T(\vec{y}) \;=\; (2x_1, -3x_2) + (2y_1, -3y_2) \;=\; (2x_1 + 2y_1, -3x_2 -3y_2) \;=\; T(x_1 + y_1, x_2 + y_2) \;=\; T(\vec{x} + \vec{y}),
+        \]
+        \[
+                c T(\vec{x}) \;=\; c (2x_1, -3x_2) \;=\; (2cx_1, -3cx_2, 0) \;=\; T(cx_1, cx_2) \;=\; T(c\vec{x}).
+        \]
+        Hence, $T$ is linear. Clearly,
+        \[
+        [T] \;=\; (T(1, 0) \quad T(0, 1)) \;=\; 
+        \begin{pmatrix}
+        2 & 0 \\ 0 & -3
+        \end{pmatrix}.
+        \]
+        
+        \problem Let $T\colon \mathbb{R}^2 \to \mathbb{R}^3$, $T(x, y) = (x, x + y, y)$. Find the matrix of 
+        $T$ with respect to the standard bases of $\mathbb{R}^2$ and $\mathbb{R}^3$.
+        \solution 
+        Let $V \;=\; \{\vec{v_1}, \vec{v_2}\}$ and $W \;=\; \{\vec{w_1}, \vec{w_2}, \vec{w_3}\}$ be the standard
+        bases of $\mathbb{R}^2$ and $\mathbb{R}^3$ respectively. Then,
+        \[
+        T(\vec{v_1}) \;=\; \begin{pmatrix}1\\1\\0\end{pmatrix}, \quad
+        T(\vec{v_2}) \;=\; \begin{pmatrix}0\\1\\1\end{pmatrix}.
+        \]
+        Thus,
+        \[
+        [T] \;=\; (T(\vec{v_1}) \quad T(\vec{v_2})) \;=\;
+        \begin{pmatrix}
+        1 & 0 \\ 1 & 1 \\ 0 & 1
+        \end{pmatrix}.
+        \]
+
+        \problem
+        \begin{enumerate}
+                \item Show that $\{(2, 1, 1), (1, 2, 2), (1, 1, 1)\}$ is linearly dependent in $\mathbb{R}^3$.
+                \item Show that $\{(1, 2, 2), (2, 1, 2), (2, 2, 1)\}$ is linearly independent in $\mathbb{R}^3$.
+                \item Show that $\{(0, 1, 1), (1, 0, 1), (1, 1, 0)\}$ is a basis of $\mathbb{R}^3$.
+        \end{enumerate}
+        \solution
+        \begin{enumerate}
+                \item We supply the relation
+                \[
+                \begin{pmatrix}2\\1\\1\end{pmatrix} + \begin{pmatrix}1\\2\\2\end{pmatrix} - 3\begin{pmatrix}1\\1\\1\end{pmatrix} \;=\; \vec{0}.
+                \]
+
+                \item Let $c_1, c_2, c_3 \in \mathbb{R}$ such that
+                \[
+                c_1\begin{pmatrix}1\\2\\2\end{pmatrix} +
+                c_2\begin{pmatrix}2\\1\\2\end{pmatrix} +
+                c_3\begin{pmatrix}2\\2\\1\end{pmatrix} \;=\; \vec{0}.
+                \]
+                We obtain the system of linear equations
+                \begin{align*}
+                        c_1 + 2c_2 + 2c_3 \;&=\; 0, \tag{1}\\
+                        2c_1 + c_2 + 2c_3 \;&=\; 0, \tag{2}\\
+                        2c_1 + 2c_2 + c_3 \;&=\; 0. \tag{3}
+                \end{align*}
+                Now, (1) + (2) - $\frac{3}{2}$(3) gives $\frac{5}{2}c_3 \;=\; 0$. Hence, from (1) and (2), $c_1 = -2c_2 = -2(-2c_1)$, from
+                which we have $c_1 = c_2 = c_3 = 0$. 
+                Moreover, Cramer's rule tells us that this solution is unique, since the determinant
+                \[
+                \begin{vmatrix}
+                        1 & 2 & 2 \\ 2 & 1 & 2\\ 2 & 2 & 1
+                \end{vmatrix} \;=\; (1 + 8 + 8) - (4 + 4 + 4) \;=\; 5 \neq 0.
+                \]
+                This proves that the given set of vectors are linearly independent.
+                
+                \item Let $c_1, c_2, c_3 \in \mathbb{R}$ such that
+                \[
+                c_1\begin{pmatrix}0\\1\\1\end{pmatrix} +
+                c_2\begin{pmatrix}1\\0\\1\end{pmatrix} +
+                c_3\begin{pmatrix}1\\1\\0\end{pmatrix} \;=\; \vec{0}.
+                \]
+                We obtain the system of linear equations
+                \begin{align*}
+                        c_2 + c_3 \;&=\; 0, \tag{1}\\
+                        c_1 + c_3 \;&=\; 0, \tag{2}\\
+                        c_1 + c_2 \;&=\; 0. \tag{3}
+                \end{align*}
+                Now, (1) + (2) - (3) gives $2c_3 \;=\; 0$. Hence, from (1) and (2), $c_1 = c_2 = c_3 = 0$. 
+                Moreover, Cramer's rule tells us that this solution is unique, since the determinant
+                \[
+                \begin{vmatrix}
+                        0 & 1 & 1 \\ 1 & 0 & 1\\ 1 & 1 & 0
+                \end{vmatrix} \;=\; (0 + 1 + 1) - (0 + 0 + 0) \;=\; 2 \neq 0.
+                \]
+                This proves that the given set of vectors are linearly independent.
+
+                Let $v = (v_1, v_2, v_3) \in \mathbb{R}^3$ be arbitrary. We seek $a_1, a_2, a_3 \in \mathbb{R}$ such that
+                \[
+                a_1\begin{pmatrix}0\\1\\1\end{pmatrix} +
+                a_2\begin{pmatrix}1\\0\\1\end{pmatrix} +
+                a_3\begin{pmatrix}1\\1\\0\end{pmatrix} \;=\; v.
+                \]
+                Like before, this is equivalent to solving the system of linear equations
+                \begin{align*}
+                        a_2 + a_3 \;&=\; v_1, \\
+                        a_1 + a_3 \;&=\; v_2, \\
+                        a_1 + a_2 \;&=\; v_3,
+                \end{align*}
+                whose solution exists and is unique from Cramer's rule. It is easily verified that 
+                \begin{align*}
+                        2a_1 \;&=\; -v_1 + v_2 + v_3, \\
+                        2a_2 \;&=\; v_1 - v_2 + v_3, \\
+                        2a_3 \;&=\; v_1 + v_2 - v_3.
+                \end{align*}
+                Hence, any vector $v \in \mathbb{R}^3$ is uniquely expressible in terms of the given vectors, which proves that they
+                are a basis of $\mathbb{R}^3$.
+        \end{enumerate}
+
+        \problem Let $T, S\colon \mathbb{R}^2 \to \mathbb{R}^2$ be defined by $T(x, y) \;=\; (x, 0)$ and $S(x, y) \;=\; (0, y)$, where
+        $x, y \in \mathbb{R}$. Find the mappings $S\circ T$ and $T\circ S$. Let $[L]$ be the matrix representation of a linear
+        mapping $L$ in the standard basis. Check that $[S \circ T] = [S]\,[T]$, with respect to the standard basis of $\mathbb{R}^2$.
+
+        \solution
+        Let $x, y \in \mathbb{R}$ be arbitrary. We have $(S\circ T), (T\circ T)\colon \mathbb{R}^2 \to \mathbb{R}^2$,
+        \[
+        (S \circ T)(x, y) \;=\; S(T(x, y)) \;=\; S(x, 0) \;=\; (0, 0), 
+        \]
+        \[
+        (T \circ S)(x, y) \;=\; T(S(x, y)) \;=\; T(0, y) \;=\; (0, 0).
+        \]
+        In the standard basis of $\mathbb{R}^2$,
+        \begin{align*}
+                T(1, 0) \;=\; (1, 0),    && T(0, 1) \;=\; (0, 0), \\
+                S(1, 0) \;=\; (0, 0),    && S(0, 1) \;=\; (0, 1), \\
+                (S\circ T)(1, 0) \;=\; (0, 0), && (S\circ T)(0, 1) \;=\; (0, 0).
+        \end{align*}
+        Hence,
+        \begin{align*}
+                [T] \;=\; \begin{pmatrix} 1 & 0 \\ 0 & 0 \end{pmatrix}, &&
+                [S] \;=\; \begin{pmatrix} 0 & 0 \\ 0 & 1 \end{pmatrix}, &&
+                [S\circ T] \;=\; \begin{pmatrix} 0 & 0 \\ 0 & 0 \end{pmatrix}.
+        \end{align*}
+        It is easily verified that
+        \[
+        \begin{pmatrix} 0 & 0 \\ 0 & 1 \end{pmatrix}\begin{pmatrix} 1 & 0 \\ 0 & 0 \end{pmatrix} \;=\; \begin{pmatrix} 0 & 0 \\ 0 & 0 \end{pmatrix}.
+        \]
+        Hence, $[S\circ T] \;=\; [S]\, [T]$.
+
+        \problem Let $T\colon \mathbb{R}^3 \to \mathbb{R}^2$, such that $T(x, y, z) \;=\; (3x - 2y + z, x - 3y - 2z)$, for
+        $x, y, z \in \mathbb{R}^3$. Find $[T]$ with respect to the standard bases of $\mathbb{R}^3$ and $\mathbb{R}^2$.
+
+        \solution We calculate
+        \begin{align*}
+        T(1, 0, 0) \;=\; (3, 1), && T(0, 1, 0) \;=\; (-2, -3), && T(0, 0, 1) \;=\; (1, -2).
+        \end{align*}
+        Hence, we have
+        \[
+        [T] \;=\; \begin{pmatrix} 3 & -2 & 1 \\ 1 & -3 & -2\end{pmatrix}.
+        \]
+
+        \problem Let $T\colon \mathbb{R}^3 \to \mathbb{R}^2$, and let $\beta \;=\; \{(0, 1, 1), (1, 0, 1), (1, 1, 0)\}$ and
+        $\gamma \;=\; \{(1, 0), (1, 1)\}$ be bases of $\mathbb{R}^3$ and $\mathbb{R}^2$ respectively. Let 
+        \[
+        [T]_\beta^\gamma \;=\; \begin{pmatrix} 1 & 2 & 4 \\ 2 & 1 & 0 \end{pmatrix}
+        \]
+        be the matrix representation of $T$ in the bases $\beta$ and $\gamma$. Find $T(x, y, z)$.
+
+        \solution
+        We have
+        \begin{align*}
+                [T(0, 1, 1)]_\gamma \;&=\; (1, 2) && &[T(1, 0, 1)]_\gamma \;&=\; (2, 1) && &[T(1, 1, 0)]_\gamma \;&=\; (4, 0) \\
+                T(0, 1, 1) \;&=\; (1, 0) + 2(1, 1) && &T(1, 0, 1) \;&=\; 2(1, 0) + (1, 1) && &T(1, 1, 0) \;&=\; 4(1, 0) \\
+                T(0, 1, 1) \;&=\; (3, 2) && &T(1, 0, 1) \;&=\; (3, 1) && &T(1, 1, 0) \;&=\; (4, 0)
+        \end{align*}
+
+        We reuse the calculation in Problem 8(iii) to note that the coordiantes of an arbitrary vector $v = (x, y, z) \in \mathbb{R}^3$,
+        in the basis $\beta$ are given by $[v]_\beta = ((y + z - x)/2, (x + z - y)/2, (x + y - z)/2)$. Hence,
+        \[
+        T(x, y, z) \;=\;  \frac{1}{2}(y + z - x)\,(3, 2) + \frac{1}{2}(x + z - y)\, (3, 1) + \frac{1}{2}(x + y - z)\, (4, 0)
+                \;=\; \left(2x + 2y + z, \frac{1}{2}(-x + y + 3z)\right).
+        \]
+\end{document}

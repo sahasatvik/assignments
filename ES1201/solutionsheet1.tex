@@ -1,0 +1,135 @@
+\documentclass[10pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{array} 
+\usepackage{enumitem}
+\usepackage{siunitx}
+
+\geometry{a4paper, margin=1in}
+\setlength\parindent{0pt}
+% \renewcommand\qedsymbol{$\blacksquare$}
+\newcolumntype{L}{l@{\quad\quad}}
+\newcounter{prob}
+\def\problem{\stepcounter{prob}\paragraph{Problem \arabic{prob}}}
+\def\solution{\\\\\textbf{Solution }}
+
+\begin{document}
+        \par\textbf{IISER Kolkata} \hfill \textbf{Assignment I}
+        \vspace{3pt}
+        \hrule
+        \vspace{3pt}
+        \begin{center}
+                \LARGE{\textbf{ES1201 : Earth System Processes}}
+        \end{center}
+        \vspace{3pt}
+        \hrule
+        \vspace{3pt}
+        Satvik Saha, \texttt{19MS154}\hfill\today
+        \vspace{20pt}
+
+        \problem List the four layers of Earth's atmosphere. How are they defined? Explain the thermal variation for each layer.
+        \solution The four layers of the Earth's atmosphere are demarcated by the variation of temperature within them.
+        \begin{enumerate}[label=(\roman*), itemsep=0pt, topsep=\parsep]
+                \item \textit{Troposphere.} This layer extends from the surface to \SI{\sim 15}{\kilo\metre} near the equator and 
+                \SI{\sim 10}{\kilo\metre} near the poled. Temperature decreases with increase in altitude.
+                \item \textit{Stratosphere.} This layer extends from the top of the troposphere to \SI{50}{\kilo\metre}.
+                Temperature increases with increase in altitude.
+                \item \textit{Mesosphere.} This layer extends from the top of the stratosphere to \SI{90}{\kilo\metre}.
+                Temperatur decreases with altitude.
+                \item \textit{Thermosphere.} This layer extends beyond the top of the mesosphere.
+                Temperature increases with increase in altitude.
+        \end{enumerate}
+
+        \paragraph{}
+        These different trends in temperature can be explained by the different dominant modes of heating and heat transfer, and different gaseous
+        composition in different layers. We start with the Earth's surface, which is heated by around half of all incoming solar radiation.
+        This energy tries to escape into space as infrared radiation, but cannot penetrate the lower atmosphere easily because of absorption
+        by greenhouse gases and clouds. Thus, the mode of convection dominates heat transfer in the troposhere.
+        Hence, temperature decreases as the distance from the heated Earth surface increases.
+        \paragraph{}
+        Temperatures start increasing again in the stratosphere because of the presence of atmospheric ozone, which peaks at around
+        \SI{30}{\kilo\metre}. This absorbs ultraviolet radiation, which is available higher up. Maximum heating is thus seen at
+        \SI{50}{\kilo\metre}. Atmospheric ozone concentration drops off above the stratosphere, so this heating effect decreases, causing
+        a temperature decrease in the mesosphere. In the thermosphere, the absorption of short wave ultraviolet radiation, this time
+        by molecular oxygen, leads to an increase in temperature.
+        
+        \problem Identify two physical processes by which gases can absorb infrared radiation. Give examples of each process.
+        \solution Gas molecules can absorb radiation by changing their {\it rate of rotation} or their {\it amplitude of vibration}.
+        \paragraph{}
+        A molecule is permitted to have certain discrete rotational frequencies, as governed by quantum mechanics. Each of these is
+        associated with a certain amount of energy. When incident infrared radiation has exactly the right amount of energy,
+        corresponding to the difference between two allowed rotational frequency energies, the molecule abosrbs the radiation
+        i.e. the molecule absorbs a single photon of light.
+        Analogously, molecules vibrate in different ways, and have discrete permitted amplitudes of vibration, each associated with 
+        an energy level. The molecule can thus `jump' between energy levels when it absorbs or emits photons with energy exactly equal
+        to the difference between the two energy levels.
+        \paragraph{}
+        For example, water molecules are capable of absorbing radiation with wavelength \SI{12}{\micro\metre} and above, due
+        to their mode of rotation. This effect, when oberved in the Earth's atmosphere, is called the H\textsubscript{2}O rotation band.
+        Carbon dioxide molecules have three modes of vibration, one of which is a bending mode. This allows the absorption of
+        infrared radiation of wavelength \SI{15}{\micro\metre}, which when observed in the Earth's atmosphere is also given its own band.
+
+        \problem Explain the physical causes of the greenhouse effect. Why are O\textsubscript{2} and N\textsubscript{2} not greenhouse gases?
+        \solution The greenhouse effect is caused by the absorption of infrared radiation by certain gases in the atmosphere, called 
+        greenhouse gases. These gas molecules absorb IR radiation by processes explained in the preceding answer. Hence, each 
+        gas molecule is associated with a certain wavelength `window' where it can efficiently absorb radiation. \\
+        Dioxygen and dinitrogen are perfectly symmetric diatomic molecules, and hence show no separation of charge within their molecules.
+        As a result, they do not interact well with electric and magnetic fields. Hence, electromagnetic radiation like infrared
+        radiation pass through unabsorbed, and these molecules do not contribute much to the greenhouse effect.\\
+        Note that although carbon dioxide is a symmetric molecule, it is capable of bending while vibrating, which leads to 
+        asymmetry.
+
+        \problem Given that a \SI{300}{\kelvin} blackbody radiates its peak energy at the wavelength of about \SI{10}{\mm}, at what wavelength
+        would a \SI{900}{\kelvin} blackbody radiate its peak energy?
+        \solution We use Wien's Law, which states that the wavelength at which a blackbody emits the maximum amount of radiation flux
+        is inversely proportional to its absolute temperature.
+        \[
+        \lambda_{max} \;\propto\; \frac{1}{T}.
+        \]
+
+        Applying this formula directly to the given problem,
+        \[
+        \lambda_{max, 900K} \;=\; \frac{T_{300K}}{T_{900K}}\cdot\lambda_{max, 300K} \;=\; \frac{10}{3}\; \SI{}{\mm}.
+        \]
+        
+        Hence, a \SI{900}{\kelvin} blackbody emits its peak energy at a wavelength of approximately \SI{3.3}{\mm}.
+
+        \problem Venus and Mars orbit the Sun at average distances of \SI{0.72}{AU} and \SI{1.52}{AU}, respectively.
+        What is the solar flux at each planet? Venus has a planetary albedo of 0.8, and Mars has an albedo of 0.22.
+        Determine the effective radiating temperatures of these planets.
+        \solution We use the inverse square law, which states that the solar flux $S$ received by a planet is inversely proportional
+        to the square of its radial distance $r$ from the Sun.
+        \[
+        S \;\propto\; \frac{1}{r^2}.
+        \]
+
+        Using the fact that the solar flux received by the Earth is \SI{1366}{\watt\per\metre^2}, we have
+        \begin{align*}
+                S_{\text{Venus}} \;&=\; \frac{1366}{0.72^2} \;=\; \SI{2635}{\watt\per\metre^2},\\
+                S_{\text{Mars}} \;&=\; \frac{1366}{1.52^2} \;=\; \SI{591}{\watt\per\metre^2}.
+        \end{align*}
+
+        The effective radiating tempertaure $T$ of a planet can be obtained by assuming them to be blackbodies, then using
+        the Stefan-Boltzmann Law to balance the incoming and outgoing radiation energies. A blackbody with radius $R$ emits 
+        radiation at a rate $4\pi R^2\cdot \sigma T^4$, since it emits radiation proportional to the fourth power of its effective radiating
+        temperature equally in all directions. However, a planet absorbs incoming solar radiation only from one direction,
+        from which it has a projected area of only $\pi R^2$. Hence, the planet absorbs radiation at a rate $\pi R^2\cdot S$.
+        The albedo $A$ simply means that a portion of this energy, $\pi R^2\cdot SA$, is reflected back into space. Putting this together,
+        \[
+        4\pi R^2\cdot \sigma T^4 \;=\; \pi R^2\,S \,-\, \pi R^2\,SA,
+        \]
+        \[
+        T \;=\; \sqrt[4]{\frac{S}{4\sigma}(1 - A)}.
+        \]
+
+        Plugging in known values, with the Stefan-Boltzmann constant $\sigma = $ \SI{5.67e-8}{\watt\per\metre^2\per\kelvin^4},
+        \begin{align*}
+                T_{\text{Venus}} \;&=\; \SI{220}{\kelvin}, \\
+                T_{\text{Mars}} \;&=\; \SI{212}{\kelvin}.
+        \end{align*}
+        We note that these are lower than Earth's effective radiating temperature \SI{255}{\kelvin} --- Venus has a far higher albedo than
+        Earth, and Mars has a far lower incoming solar flux. Also, these values do not reflect the surface temperatures of these planets.
+        For example, Venus has a significantly higher surface tempertaure due to the greenhouse gas effect.
+\end{document}

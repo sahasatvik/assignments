@@ -1,0 +1,249 @@
+\documentclass[10pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+% \usepackage{physics}
+\DeclareMathOperator{\Real}{Re}
+
+\title{Mathematical Methods I - Assignment I}
+\author{Satvik Saha}
+\date{}
+
+\geometry{a4paper, margin=1in}
+\setlength\parindent{0pt}
+\renewcommand{\labelenumi}{(\roman{enumi})}
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+% \renewcommand\qedsymbol{$\blacksquare$}
+
+\begin{document}
+        \par\textbf{IISER Kolkata} \hfill \textbf{Assignment I}
+        \vspace{3pt}
+        \hrule
+        \vspace{3pt}
+        \begin{center}
+                \LARGE{\textbf{MA 1202 : Mathematical Methods I}}
+        \end{center}
+        \vspace{3pt}
+        \hrule
+        \vspace{3pt}
+        Satvik Saha, \texttt{19MS154}\hfill April 21, 2020
+        \vspace{20pt}
+
+        \paragraph{Problem 1A.} Solve the following second order differential equation by the method of undetermined coefficients.
+        \[y''(x) \,-\, 7y'(x) \,+\, 12y \;=\; 8\sin{x} \,+\, \exp{3x}.\]
+        
+        \textbf{Solution 1A.}
+        We first solve the homogenous differential equation for the complementary solution $y_C(x)$.
+        \[
+        y''(x) \,-\, 7y'(x) \,+\, 12y \;=\; 0.
+        \]
+        This is a second order ODE with constant coefficients. Its characteristic polynomial is
+        \[f(t) \;=\; t^2 \,-\, 7t \,+\, 12 \;=\; (t - 3)(t - 4).\]
+        The roots of $f$ are clearly $3$ and $4$. We thus set
+        \[
+        y_C(x) \;=\; A\exp{3x} \,+\, B\exp{4x}.
+        \]
+        We verify that $\{e^{3x}, e^{4x}\}$ indeed comprise a fundamental set of (linearly independent) solutions of the homogenous ODE
+        by calculating the Wronskian
+        \[
+        W\left(e^{3x}, e^{4x}\right)(x) \;=\; 
+        \begin{vmatrix}
+        e^{3x}    &       e^{4x} \\
+        3e^{3x}   &       4e^{4x}
+        \end{vmatrix} \;=\; e^{7x},
+        \]
+        which is clearly non-zero over the reals.
+        
+        To solve for the particular solution $y_P(x)$, using the method of undetermined coefficients, we set
+        \[y_P(x) \;=\; C\sin{x} \,+\, D\cos{x} \,+\, Ex\exp{3x}.\]
+        
+        {\it We choose a guess of $xe^{3x}$ to account for the fact that $e^{3x}$ is part of the complementary solution.
+        Otherwise, the $e^{3x}$ term would vanish on the LHS, but not on the RHS.}\\
+        
+        Plugging this into the original ODE, we obtain
+        \[
+        (-C +7D + 12C)\sin{x} \,+\, (-D - 7C + 12D)\cos{x} \,+\, E(9x + 6 - 21x - 7 + 12x)\exp{3x}
+        \]
+        \[
+        \;=\; (11C + 7D)\sin{x} + (-7C + 11D)\cos{x} - E\exp{3x}
+        \]
+        Comparing coefficients, 
+        \begin{align*}
+                11C \,+\, 7D  \;&=\; 8 \\
+                -7C \,+\, 11D \;&=\; 0 \\
+                E \;&=\; -1,
+        \end{align*}
+        which yields $C = 44 / 85$ and $D = 28 / 85$.
+
+        Hence, the solution to the ODE is given by $y(x) = y_C(x) + y_P(x)$, i.e.
+        \[
+        y(x) \;=\; Ae^{3x} \,+\, Be^{4x} \,+\, \frac{44}{85}\sin{x} \,+\, \frac{28}{85}\cos{x} \,-\, xe^{3x}. \tag{\star}
+        \]
+        \clearpage
+
+        \paragraph{Problem 1B.} Solve the same differential equation by the method of variation of parameters.
+
+        \textbf{Solution 1B.} We have already solved the homogeneous ODE for the complementary solution $y_C(x)$.
+        We set $y_P(x) \;=\; u(x)e^{3x} + v(x)e^{4x} \;=\; uy_1 + vy_2$.
+        We also stipulate that $u'y_1 + v'y_2 = 0$, i.e. $u' = -v'e^{x}$.
+        Hence, $y_P'(x) \;=\; uy_1' + vy_2'$, and $y_P''(x) \;=\; u'y_1' + uy_1'' + v'y_2' + vy_2''$.
+
+        Plugging this into the original differential equation, and acknowledging that $y_1, y_2$ are solutions of the homogenous ODE gives
+        \[
+        u'y_1' + v'y_2'  \;=\; 8\sin{x} + e^{3x} \;=\; g(x).
+        \]
+        Together with $u'y_1 + v'y_2 = 0$, we obtain
+        \[
+        u'(x) \;=\; -\frac{y_2 g(x)}{y_1y_2' - y_1'y_2} \;=\; -\frac{y_2 g(x)}{W(y_1, y_2)}.
+        \]
+        Solving this for $u$ yields
+        \[
+        u(x) \;=\; -\int e^{4x} (8\sin{x} + e^{3x}) e^{-7x} \:dx \;=\; -\int 8\sin{x}\,e^{-3x} + 1 \:dx
+        \]
+        
+        To calculate the trigonometric integral, we set 
+        \begin{align*}
+        I \;&=\; \int \cos{bx}\,e^{ax} \:dx \,+\, i\int \sin{bx}\,e^{ax} \:dx \\
+        \;&=\; \int e^{ibx}e^{ax} \:dx \\
+        \;&=\; \frac{1}{a + ib}e^{ax}e^{ibx} \\
+        \;&=\; \frac{a - ib}{a^2 + b^2} \,(\cos{bx} + i\sin{bx})e^{ax} \\
+        \;&=\; \frac{1}{a^2 + b^2}\, (a\cos{x} + b\sin{x})e^{ax} \,+\, \frac{1}{a^2 + b^2}\,(-b\cos{x} + a\sin{x})ie^{ax}.
+        \end{align*}
+        Equating real and imaginary parts gives us the desired result.
+        {\it We ignore constants of integration as the resulting terms will be absorbed back into the complementary solution.}
+
+        Hence, 
+        \[
+        u(x) \;=\; -x \,+\, 8\cdot\frac{1}{10}\cos{x}\,e^{-3x} \,+\, 8\cdot\frac{3}{10}\sin{x}\,e^{-3x}
+        \]
+
+        Similarly,
+        \[
+        v'(x) \;=\; -u'(x)e^{-x} \;=\; e^{4x} (8\sin{x} + e^{3x}) e^{-7x} e^{-x}.
+        \]
+        \begin{align*}
+        v(x) \;&=\; \int 8\sin{x}\,e^{-4x} + e^{-x} \:dx\\
+        \;&=\; -e^{-x} -8\cdot\frac{1}{17}\cos{x}\,e^{-4x} -8\cdot\frac{4}{17}\sin{x}\,e^{-4x}.
+        \end{align*}
+
+        Hence,
+        \begin{align*}
+        y_P(x) \;&=\; -xe^{3x} + 8\cdot\frac{1}{10}\cos{x} + 8\cdot\frac{3}{10}\sin{x} - e^{3x} - 8\cdot\frac{1}{17}\cos{x} - 8\cdot\frac{4}{17}\sin{x} \\
+        \;&=\; -e^{3x} - xe^{3x} + \frac{28}{85}\cos{x} + \frac{44}{85}\sin{x}.
+        \end{align*}
+
+        Putting this together with the complementary solution, and absorbing the extra $e^{3x}$ term, we obtain the same general solution as before,
+        \[
+        y(x) \;=\; A'e^{3x} \,+\, Be^{4x} \,+\, \frac{44}{85}\sin{x} \,+\, \frac{28}{85}\cos{x} \,-\, xe^{3x}. \tag{\star}
+        \]
+        \clearpage
+
+        \paragraph{Problem 2.} Find the general solution of the equation of motion of a forced oscillator with damping, described by the
+        second order differential equation 
+        \[
+        \ddot{x} \,+\, 2\gamma\dot{x} \,+\, \omega_0^2x \;=\; \frac{F_0}{m}e^{i\omega t}.
+        \]
+        Show that the maximum amplitude of the steady state vibration is given by
+        \[
+        x_{max}\Big|_{\omega = \omega_0} \;=\; \frac{F_0}{2m\gamma\omega_0}.
+        \]
+
+        \textbf{Solution 2.}
+        We first solve the homogeneous ODE for the complementary solution $x_C(t)$,
+        \[
+        \ddot{x} \,+\, 2\gamma\dot{x} \,+\, \omega_0^2 \;=\; 0.
+        \]
+        The characteristic polynomial is given by
+        \[
+        f(s) \;=\; s^2 \,+\, 2\gamma s \,+\, \omega_0^2.
+        \]
+        This has roots
+        \[
+        s_{+/-} \;=\; -\gamma \,\pm\,\sqrt{\gamma^2 - \omega_0^2}.
+        \]
+
+        Hence, for unequal roots, i.e. $\gamma^2 - \omega_0^2 \neq 0$, we have
+        \[
+        x_C(t) \;=\; \left(Ae^{\sqrt{\gamma^2 - \omega_0^2} t} \,+\, Be^{-\sqrt{\gamma^2 - \omega_0^2} t}\right)e^{-\gamma t}.
+        \]
+        For equal roots, i.e. $\gamma^2 - \omega_0^2 = 0$, we have
+        \[
+        x_C(t) \;=\; \left(A \,+\, Bt\right)e^{-\gamma t}.
+        \]
+
+        We consider 2 cases. {\it{We assume real coefficients, positive $\gamma$.}}
+        \paragraph{Case I.} $\gamma^2 - \omega_0^2 \neq 0$.
+
+        We use the method of undetermined coefficients to construct a particular solution $y_P(t)$.
+        \[
+        x_P(t) \;=\; Ce^{i\omega t}.
+        \]
+        Plugging this into the original ODE yields
+        \[
+        (-\omega^2 \,+\, 2i\gamma\omega \,+\, \omega_0^2)Ce^{i\omega t} \;=\; \frac{F_0}{m}e^{i\omega t}.
+        \]
+        \[
+        C \;=\; \frac{F_0}{m((\omega_0^2 - \omega^2) + 2i\gamma\omega)}.
+        \]
+
+        Hence,
+        \[
+        x(t) \;=\; \left(Ae^{\sqrt{\gamma^2 - \omega_0^2} t} \,+\, Be^{-\sqrt{\gamma^2 - \omega_0^2} t}\right)e^{-\gamma t}
+                \,+\, \frac{F_0}{m((\omega_0^2 - \omega^2) + 2i\gamma\omega)}e^{i\omega t}.
+        \]
+        
+        \paragraph{Case II.} $\gamma^2 - \omega_0^2 = 0$.
+        
+        The particular solution remains the same.
+        Hence,
+        \[
+        x(t) \;=\; (A + Bt)e^{-\gamma t}
+                \,+\, \frac{F_0}{m((\omega_0^2 - \omega^2) + 2i\gamma\omega)}e^{i\omega t}.
+        \]
+
+        
+        Note that for real valued coefficients, as $t \to \infty$, $x_C(t) \to 0$. Hence, the steady state response is 
+        governed by the particluar solution. Now,
+
+        \[
+        \Real\, x_P(t) \;=\; \frac{F_0}{m((\omega_0^2 - \omega^2)^2 + 4\gamma^2\omega^2)}
+                \left((\omega_0^2 - \omega^2) \cos{\omega t} + 2\gamma\omega\sin{\omega t}\right).
+        \]
+
+        Setting
+        \[
+                \phi \;=\; \arctan\left(\frac{2\gamma\omega}{\omega_0^2 - \omega^2}\right),
+        \]
+        we obtain
+        \[
+        \Real\, x_P(t\to\infty) \;\approx\; \frac{F_0}{m\sqrt{(\omega_0^2 - \omega^2)^2 + 4\gamma^2\omega^2}} \cos(\omega t - \phi).
+        \]
+        
+        Clearly, the amplitude of steady state oscillation is maximized when the denominator is minimized. Setting
+        $\frac{\partial}{\partial \omega} ((\omega_0^2 - \omega)^2 + 4\gamma^2\omega^2)= 0$, we have
+        \[
+        -4(\omega_0^2 - \omega^2)\omega + 8\gamma^2\omega \;=\; 0,
+        \]
+        \[
+        \omega \;=\; \omega_R \;=\; \sqrt{\omega_0^2 - 2\gamma^2}.
+        \]
+        This is the resonant angular frequency of the system. Also, assuming real, positive $\omega_R$, i.e. a sufficiently underdamped system,
+        \[
+        \frac{\partial^2}{\partial\omega^2} ((\omega_0^2 - \omega^2)^2 + 4\gamma^2\omega^2) \;=\; -4\omega_0^2 + 12\omega^2 + 8\gamma^2,
+        \]
+        \[
+        \frac{\partial^2}{\partial\omega^2} ((\omega_0^2 - \omega^2)^2 + 4\gamma^2\omega^2)\Big|_{\omega = \omega_R} \;=\;
+                8\omega_0^2 - 16\gamma^2 \;=\; 8\omega_R^2 > 0.
+        \]
+
+        Hence, the maximum amplitude at steady state is
+        \[
+        x_{\max} \;=\; \frac{F_0}{2m\gamma\sqrt{\omega_0^2 - \gamma^2}}.
+        \]
+
+        For very weak damping, $\omega_R \to \omega_0$, and thus
+        \[
+        x_{\max} \;\approx\; \frac{F_0}{2m\gamma\omega_0}.
+        \]
+\end{document}
