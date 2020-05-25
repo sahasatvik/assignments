@@ -1,0 +1,457 @@
+\documentclass[10pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{xcolor}
+
+\title{Mathematics II - Assignment VI}
+\author{Satvik Saha}
+\date{}
+
+\geometry{a4paper, margin=1in}
+\setlength\parindent{0pt}
+\renewcommand{\labelenumi}{(\roman{enumi})}
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+% \renewcommand\qedsymbol{$\blacksquare$}
+
+\begin{document}
+        \par\textbf{IISER Kolkata} \hfill \textbf{Assignment VI}
+        \vspace{3pt}
+        \hrule
+        \vspace{3pt}
+        \begin{center}
+                \LARGE{\textbf{MA 1201 : Mathematics II}}
+        \end{center}
+        \vspace{3pt}
+        \hrule
+        \vspace{3pt}
+        Satvik Saha, \texttt{19MS154}\hfill\today
+        \vspace{20pt}
+
+        \section*{Excercise 5 (S.K. Mapa)}
+        \paragraph{Problem 1.} Prove that the following sets are enumerable.
+        \begin{enumerate}
+                \item The set of all integral multiples of 5.
+                \item The set of all integral powers of 2.
+                \item The set of all ordered pairs $\{(m, n): m \in \mathbb{Z}, n \in \mathbb{Z}\}$.
+        \end{enumerate}
+        \paragraph{Solution 1.}
+        We first supply the bijection $f\colon \mathbb{Z} \to \mathbb{N}$, defined as
+        \[
+        f(k) \;=\; \begin{cases}
+                2k + 1          &       k \geq 0 \\
+                -2k             &       k < 0
+        \end{cases}, \quad\quad\text{ for all } k \in \mathbb{Z}.
+        \]
+        Clearly, $f$ is injective, since for $f(k_1) = f(k_2) = n$, where $k_1, k_2 \in \mathbb{Z}$, $k_1$ and $k_2$ must either
+        both be non-negative or both be negative, since $n$ is either odd or even respectively. This directly implies that $k_1 = k_2$.
+        Again, $f$ is surjective, since for arbitrary $n \in \mathbb{N}$, we have $n = f((n - 1) / 2)$ if $n$ is odd, and $n = f(-n / 2)$,
+        if $n$ is even. This proves that $f$ is both injective and surjective, hence, $f$ is bijective, with a well defined inverse
+        $f^{-1}\colon \mathbb{N}\to \mathbb{Z}$.
+        Hence, $\mathbb{Z}$ is enumerable.
+        \begin{enumerate}
+                \item Let $S = \{5k: k \in \mathbb{Z}\}$ be the set of all integral multiples of 5. Clearly, $S \subseteq \mathbb{Z}$,
+                since for any $a = 5k \in S$, where $k \in \mathbb{Z}$, we must have $a \in \mathbb{Z}$. Hence, $S$ is an infinite subset of
+                the enumerable set $\mathbb{Z}$, and is hence enumerable.
+
+                \item Let $T = \{2^k : k \in \mathbb{Z}\}$ be the set of all integral powers of 2. We supply the bijection
+                $h \colon \mathbb{Z} \to T$, $h(k) = 2^k$ for all $k \in \mathbb{Z}$. Clearly, for $h(k_1) = h(k_2)$, we must have
+                $2^{k_1} = 2^{k_2} \implies k_1 = k_2$, and for all $s \in T$, there exists $k \in \mathbb{Z}$ such that $s = 2^k$.
+                Thus, we have the bijection $(f \circ h^{-1})\colon T \to \mathbb{N}$, thus proving that $T$ and $\mathbb{N}$ are equipotent.
+                Hence, $T$ is enumerable.
+
+                \item We supply the bijection $g\colon \mathbb{Z}^2 \to \mathbb{N}^2$,
+                \[
+                g(k_1, k_2) \;=\; (f(k_1),\, f(k_2)), \quad\quad\text{ for all } (k_1, k_2) \in \mathbb{Z}^2.
+                \]
+                Clearly, $g$ is injective since for $g(k_1, k_2) = g(k_3, k_4)$, we must have $f(k_1) = f(k_3)$ and $f(k_2) = f(k_4)$.
+                The bijectivity of $f$ guarantees that $(k_1, k_2) = (k_3, k_4)$. Also, $g$ must be bijective since for any $(m, n) \in \mathbb{N}^2$,
+                we set $k_1 = f^{-1}(m)$, $k_2 = f^{-1}(n)$, so that $g(k_1, k_2) = (m, n)$ and $(k_1, k_2) \in \mathbb{Z}^2$.
+
+                Now, $\mathbb{N}^2$ is enumerable. To show this, we supply the injection $h\colon \mathbb{N}^2\to \mathbb{N}$,
+                \[
+                h(m, n) \;=\; 2^m 3^n, \quad\quad\text{ for all }(m, n) \in \mathbb{N}^2.
+                \]
+                Clearly, $h$ is injective since for $h(m_1, n_1) = h(m_2, n_2)$, we have $2^{m_1}3^{n_1} = 2^{m_2}3^{n_2} = k$, and thus
+                $(m_1, n_1) = (m_2, n_2)$ by the unique factorisation of $k$. Thus, setting $h(\mathbb{N}^2) = B$, 
+                we have $B \subseteq \mathbb{N}$, and the bijection $h'\colon \mathbb{N}^2 \to B$.
+                Also, $B$ is infinite.
+                Hence, $B$ is enumerable. The bijections $h'$ and $g$ show that $\mathbb{N}^2$ must
+                be enumerable, hence $\mathbb{Z}^2$ must also be enumerable.
+                \[
+                \mathbb{Z}^2 \xrightarrow{\quad g\quad} \mathbb{N}^2 \xrightarrow{\quad h'\quad} B \subseteq \mathbb{N}.
+                \]
+        \end{enumerate}
+
+        \paragraph{Problem 2.} Prove that the set of all closed and bounded intervals of the form $[a, b] = \{x \in \mathbb{R}: a \leq x \leq b\}$
+        with rational endpoints $a, b$ is enumerable.
+        \paragraph{Solution 2.} Let $S$ be the set of all closed and bounded intervals $[a, b]$, where $a \leq b$, $a, b$ \in $\mathbb{Q}$.
+        We construct $f\colon S \to \mathbb{Q}^2$,
+        \[
+        f([a, b]) \;=\; (a, b), \quad\quad\text{ for all }a\leq b, \text{ where }a, b \in \mathbb{Q}.
+        \]
+        Clearly, $f$ is injective, since for $f([a, b]) = f([c, d])$, we must have $(a, b) = (c, d)$, hence $[a, b] = [c, d]$.
+        Thus, $f'\colon S \to T$ is a bijection, where $f(S) = T \subseteq \mathbb{Q}^2$, so $S$ and $T$ are equipotent.
+        Also, $T$ is clearly infinite, so $T$ is an infinite subset of $\mathbb{Q}^2$.
+
+        Now, $\mathbb{Q}$ is enumerable, so there exists a bijection $g\colon \mathbb{Q} \to \mathbb{N}$.
+        We thus construct the bijection $h\colon \mathbb{Q}^2 \to \mathbb{N}^2$, $h(a, b) = (g(a), g(b))$, for all $a, b \in \mathbb{Q}$.
+        We have already shown that $\mathbb{N}^2$ is enumerable. Hence, $\mathbb{Q}^2$ is enumerable, so $T$ is enumerable, and therefore
+        $S$ is enumerable.
+
+        \paragraph{Problem 3.}
+        Prove that the set of all circles in a plane having rational radii and centres with rational coordinates is enumerable.
+        \paragraph{Solution 3.}
+        Let $C$ be the set of all such circles. Clearly, a circle is fully determined by its radius and the $x$ and $y$ coordinates of its
+        centre. Hence, we have the injection $f\colon C \to \mathbb{Q}^3$, $f(C_{rxy}) = (r, x, y)$, for all circles $C_{rxy} \in C$.
+        Here, $C_{rxy}$ is the circle with radius $r \geq 0$, centred at $(x, y)$.
+        Note that $f$ is an injection since $(r, x, y)$ can describe at most one circle.
+        Thus, $f'\colon C \to S$ is a bijection, where $S = f(C) \subseteq \mathbb{Q}^3$. Note that $S$ is an infinite set, since $C$ is
+        infinite.
+
+        Now, we know that $\mathbb{Q}^2$ and $\mathbb{Q}$ are both enumerable, hence equipotent, so there exists a bijection
+        $g\colon \mathbb{Q}^2 \to \mathbb{Q}$. We thus construct the bijection
+        $h\colon \mathbb{Q}^3 \to \mathbb{Q}$, $h(a, b, c) \;=\; g(g(a, b), c)$. This means that $\mathbb{Q}^3$ is also enumerable.
+        Hence, $S$ must also be enumerable, so $C$ is also enumerable.
+
+        \paragraph{Problem 4.} Prove that the Cartesian product of two enumerable sets is enumerable.
+        \paragraph{Solution 4.} Let $A = \{a_1, a_2, \dots, a_n, \dots\}$ and $B = \{b_1, b_2, \dots, b_n, \dots\}$ be two arbitrary
+        enumerable sets.
+        We let $A_i \;=\; \{(a_i, b_1), (a_i, b_2), \dots\}$ for all $i \in \mathbb{N}$. Clearly, $A_i$ is enumerable, beacuse of the
+        existence of the bijection $f\colon \mathbb{N} \to A_i$, $f(n) = (a_i, b_n)$. Also, $A_i$ is infinite since $B$ is infinite.
+
+        Now, the Cartesian product of $A$ and $B$ can be written as $A\times B = \bigcup_{i\in \mathbb{N}} A_i$. This is the union
+        of the inifinitely many enumerable sets $A_i$, and is hence enumerable.
+
+        \paragraph{Problem 5.} Let $S$ be an enumerable set and $T$ be an infinite non-enumerable subset of $\mathbb{R}$. Show that
+        \begin{enumerate}
+                \item $S\cup T$ is non-enumerable.
+                \item $S \cap T$ is at most enumerable.
+                \item $S - T$ is at most enumerable.
+                \item $T - S$ is non-enumerable.
+        \end{enumerate}
+        \paragraph{Solution 5.}
+        \begin{enumerate}
+                \item Assume that $S \cup T$ is enumerable. This would imply that $T \subseteq S \cup T$, an infinite subset
+                of the enumerable set $S\cup T$, is enumerable. This is a contradiction, hence, $S\cup T$ is non-enumerable.
+
+                \item Let $S = \{x_1, x_2, \dots , x_n, \dots\}$. We construct the mapping $f \colon S \cap T \to \mathbb{N}$,
+                \[
+                f(x) \;=\; n, \quad\quad\text{ for all } x = x_n \in S \cap T.
+                \]
+                This function is well defined, since every element $x \in S\cap T$ must belong to $S$. Also, 
+                if $f(y) = f(z) = n$, then we must have $y = x_n = z$, so $f$ is an injection. Thus,
+                $f'\colon S\cap T\to V$ is a bijection, where $V = f(S\cap T) \subseteq \mathbb{N}$.
+                $V$ is a subset of the countable subset $\mathbb{N}$, hence is countable. Therefore, $S\cap T$, which is equipotent to $V$,
+                must also be countable, i.e.\ at most enumerable.
+
+                \item Let $S = \{x_1, x_2, \dots, x_n, \dots\}$. We again construct the mapping $f\colon S - T \to \mathbb{N}$,
+                \[
+                f(x) \;=\; n, \quad\quad\text{ for all } x = x_n \in S - T.
+                \]
+                This function is well defined, since every element $x \in S - T$ must belong to $S$. Also, 
+                if $f(y) = f(z) = n$, then we must have $y = x_n = z$, so $f$ is an injection. Thus,
+                $f'\colon S - T \to U$ is a bijection, where $U = f(S - T) \subseteq \mathbb{N}$.
+                $U$ is a subset of the countable subset $\mathbb{N}$, hence is countable. Therefore, $S - T$, which is equipotent to $U$,
+                must also be countable, i.e.\ at most enumerable.
+
+                \item Assume that $T - S$ is enumerable. Then, the union of the two enumerable sets $T - S$ and $S$, which is
+                simply $S \cup T$, must also be enumerable. This is a contradiction. Hence, $T - S$ is non-enumerable.
+        \end{enumerate}
+
+        \paragraph{Problem 6.} Prove that the sets $A$ and $B$ are equipotent.
+        \begin{enumerate}
+                \item $A = \{x \in \mathbb{R}: 0 \leq x \leq 1\}$, $B = \{x \in \mathbb{R}: 0 \leq x < 1\}$.
+                \item $A = \{x \in \mathbb{R}: 0 \leq x \leq 1\}$, $B = \{x \in \mathbb{R}: a \leq x \leq b\}$.
+                \item $A = \{x \in \mathbb{R}: 0 \leq x \leq 1\}$, $B = \{x \in \mathbb{R}: 0 < x < 1\}$.
+                \item $A = \{x \in \mathbb{R}: x \geq 1\}$, $B = \{x \in \mathbb{R}: x > 1\}$.
+        \end{enumerate}
+        \paragraph{Solution 1.}
+        \begin{enumerate}
+                \item We supply the bijection $f\colon [0, 1] \to [0, 1)$,
+                \[
+                f(x) \;=\; \begin{cases}
+                        \frac{1}{n + 1} & x = \frac{1}{n} \text{ for any } n \in \mathbb{N}\\
+                        x               & x \neq \frac{1}{n} \text { for any } n \in \mathbb{N}
+                \end{cases}, \quad\quad \text{ for all }x \in [0, 1].
+                \]
+                Note that $0 \leq f(x) < 1$, so $f([0, 1]) \in [0, 1)$. Now, if $f(x) = f(y) = z$, either $z$ is of the form $\frac{1}{n + 1}$ for
+                $n \in \mathbb{N}$, in which case $x = y = \frac{1}{n}$, or $x = y = z$ otherwise. This, $f$ is injective.
+                In addition, let $z \in [0, 1)$ be arbitrary. If $z$ is of the form $\frac{1}{n + 1}$ for some $n \in \mathbb{N}$, we have found
+                $f(\frac{1}{n}) = z$, $\frac{1}{n} \in [0, 1]$. Otherwise, $f(z) = z$, where $z \in [0, 1]$.
+                Hence, $f\colon A\to B$ is a bijection, proving that $A$ and $B$ are equipotent.
+
+                Note that there is no $x \in [0, 1]$ such that $f(x) = 1$, since $f(1) = \frac{1}{2}$, and for all $y \in [0, 1)$,
+                $f(y)$ is either $\frac{1}{n + 1} < 1$, or $f(y) = y < 1$.
+
+                \item We supply the bijection $f\colon [0, 1]\to [a, b]$,
+                \[
+                f(x) \;=\; a \,+\, (b - a)x, \quad\quad\text{ for all }x \in [0, 1].
+                \]
+                Clearly, if $f(x) = f(y)$, then $a + (b-a)x = a + (b-a)y \implies x = y$. Also, for arbitrary $z \in [a, b]$, we find
+                $x = (z - a)/(b - a) \in [0, 1]$ such that $f(x) = z$. Note that $a \leq z \leq b \implies 0 \leq z - a \leq b - a$.
+                Hence, $f\colon A\to B$ is a bijection, proving that $A$ and $B$ are equipotent.
+                
+                \item We supply the bijection $f\colon (0, 1) \to [0, 1]$,
+                \[
+                h(x) \;=\; \begin{cases}
+                        0               &       x = \frac{1}{2} \\
+                        1               &       x = \frac{1}{3} \\
+                        \frac{1}{n - 2} &       x = \frac{1}{n} \text{ for any } n > 3, n \in \mathbb{N} \\
+                        x               &       x \neq \frac{1}{n} \text{ for any } n \in \mathbb{N}
+                \end{cases}, \quad\quad\text{ for all }x \in (0, 1).
+                \]
+                Note that if $h(x) = h(y) = z$, either $z = 0 \implies x = y = \frac{1}{2}$, or $z = 1 \implies x = y = \frac{1}{3}$,
+                or $z = \frac{1}{n}$ for $n > 3$ $\implies x = y = \frac{1}{n-2}$, or none of the above, in which case $x = y = z$ again.
+                Thus, $h$ is injective.
+                
+                In addition, for arbitrary $z \in \{0, 1\}$, we find $h(\frac{1}{2}) = 0$, $h(\frac{1}{3}) = 1$. For $z \in (0, 1)$, where
+                $z$ is of the form $\frac{1}{n}$ for $n \in \mathbb{N}$, we have $h(\frac{1}{n + 2}) = z$. For $z \in (0, 1)$, $z \neq \frac{1}{n}$,
+                we have $h(z) = z$. This, $h$ is surjective.
+                Hence, $f\colon B\to A$ is a bijection, proving that $A$ and $B$ are equipotent.
+
+                \item We supply the bijection $f\colon [1, \infty) \to (1, \infty)$,
+                \[
+                f(x) \;=\; \begin{cases}
+                        x + 1   &       x \in \mathbb{N} \\
+                        x       &       x \notin \mathbb{N}
+                \end{cases}, \quad\quad\text{ for all }x \in [1, \infty).
+                \]
+                Clearly, if $f(x) = f(y) = z$, either $z$ is an integer or not, and in either case, $x = y$, so $f$ is injective.
+                Also, for arbitrary $z \in (1, \infty)$, if $z$ is an integer, we have $f(z - 1) = z$, where $z - 1 \geq 1$.
+                Otherwise, $f(z) = z$, where $z > 1$. Thus, $f$ is surjective.
+                Hence, $f\colon A\to B$ is a bijection, proving that $A$ and $B$ are equipotent.
+        \end{enumerate}
+
+        \section*{Exercises (Bartle and Sherbert)}
+        \paragraph{Problem 1.} Prove that a non-empty set $T_1$ is finite if and only if there is a bijection from $T_1$ onto a finite set $T_2$.
+        \paragraph{Solution 1.} First, let $f\colon T_1 \to T_2$ be a bijection, where $T_2$ is finite. We claim that $T_1$ is finite.
+        Since $T_1$ is non-empty, $T_2$ cannot be empty. Let $T_2$ have $n$ elements.
+        The finiteness of $T_2$ implies the existence of a bijection $g\colon \mathbb{N}_n \to T_2$, where $\mathbb{N}_n = \{1, 2, \dots, n\}$.
+        Hence, we construct the bijection $h\colon \mathbb{N}_n \to T_1$, defined by $h = f^{-1} \circ g$. This proves that $T_2$ has $n$ elements,
+        and hence is finite.\\
+
+        Now let $T_1$ be non-empty and finite, with $n \in \mathbb{N}$ elements. Then, we have the bijection $f\colon \mathbb{N}_n \to T_1$,
+        whose inverse $f^{-1}\colon T_1 \to \mathbb{N}_n$ is also a bijection. Setting $T_2 = \mathbb{N}_n$, which is a finite set, we are done.
+
+        \paragraph{Problem 2.} Prove the following.
+        \begin{enumerate}
+                \item If $A$ is a set with $m \in \mathbb{N}$ elements and $C\subseteq A$ is a set with 1 element, then $A\setminus C$ is a set
+                with $m - 1$ elements.
+                \item If $C$ is an infinite set and $B$ is a finite set, then $C\setminus B$ is an infinite set.
+        \end{enumerate}
+        \paragraph{Solution 2.}
+        \begin{enumerate}
+                \item Let $f\colon \mathbb{N}_m \to A$ and $g\colon \{1\} \to C$ be bijections.
+                Let $c \in C$ be the element $c = g(1)$. Let $k = f^{-1}(c)$.
+                Then, we construct the bijection
+                $h\colon \mathbb{N}_{m-1} \to A\setminus C$,
+                \[
+                h(n) \;=\; \begin{cases}
+                        f(n)    &       n = 1, 2, \dots, k-1 \\
+                        f(n + 1)&       n = k, k + 1, \dots, m-1
+                \end{cases}.
+                \]
+                Note that $f(n) \in A$ for all $n \in \mathbb{N}_{m}$, and if $n \neq k$, then $f(n) \neq f(k)$ from the injectivity of $f$, so
+                $f(n) \notin C$. Hence, the function is well defined.
+
+                We now show that this is indeed a bijection. Let $a \neq b$, where $a, b \in \mathbb{N}_{m - 1}$.
+                If $a < k$ and $b < k$, then $h(a) = f(a)$, $h(b) = f(b)$, so $h(a) \neq h(b)$ by the injectivity of $f$.
+                Similarly, if $a \geq k$ and $b \geq k$, then $h(a) = f(a + 1)$ , $h(b) = f(b + 1)$, so $h(a) \neq h(b)$.
+                Finally, if $a \geq k$ and $b < k$, then $a + 1 > k > b$, so again $h(a) \neq h(b)$. Thus, $h$ is injective.
+                Now, let $p \in A\setminus C$ be arbitrary. We set $n = f^{-1}(p)$. If $n < k$, then $h(n) = p$, and if $n > k$, 
+                then $h(n - 1) = p$. We cannot have $n = k$, since that would imply that $f(n) = p = f(k) = c \notin A\setminus C$. Thus,
+                $f$ is also surjective, hence bijective.
+
+                Hence, $A\setminus C$ has $m - 1$ elements.
+
+                We also note the trivial case of $m = 1$, i.e. there exists only one element $x = f(1) \in A$, hence the only
+                subset $C \subseteq A$ having only one element is $C = A = \{x\}$, so $A\setminus C = \emptyset$, which has $m - 1 = 0$ elements.
+
+                \item We show the result by induction on the number of elements in $B$. If $B$ is empty, $C\setminus B = C$, and the result is trivial.
+                We establish the base case with $B$ containing 1 element, $x \in B$. Now, if $x \notin C$, $C\setminus B = C$ again.
+                Otherwise, $x \in C$, so $C\setminus B = C\setminus\{x\}$.
+                If this were finite, containing $m$ elements (say), then $(C\setminus\{x\}) \cup \{x\} = C$
+                would have to contain $m + 1$ elements, and thus be finite as well. This is a contradiction, so $C\setminus B$ is always infinite
+                when $B$ contains exactly $1$ element.
+
+
+                Now, suppose that $C\setminus B$ is infinite for all infinite sets $C$, and for all finite sets $B$ containing exactly 
+                $n$ elements. We now choose an arbitrary finite set $D$ containing $n + 1$ elements. Let $x\in D$ be an arbitrary element.
+                Set $F = D\setminus\{x\}$. Thus, $F$ contains $n$ elements (by our previous result).
+                Note that $C\setminus D = (C\setminus F)\setminus\{x\}$.
+                Now, $C\setminus F$ is infinite by our induction hypothesis. Call this set $G$.
+                We have already shown that $G\setminus\{x\}$ is infinite for any infinite set $G$. Hence,
+                $C\setminus D$ is infinite for all finite sets $D$ containing $n + 1$ elements.
+
+                This completes the proof by induction.
+        \end{enumerate}
+
+        \paragraph{Problem 3.} Let $S = \{1, 2\}$ and $T = \{a, b, c\}$.
+        \begin{enumerate}
+                \item Determine the number of different injections from $S$ into $T$.
+                \item Determine the number of differnet surjections from $T$ onto $S$.
+        \end{enumerate}
+        \paragraph{Solution 3.}
+        \begin{enumerate}
+                \item Let $f\colon S \to T$ be an injection. Each element of $S$ must be have a unique image in $T$, 
+                and each element of $T$ can have at most one pre-image in $S$. Hence, there are $3\times 2 = 6$ injections.
+
+                \item Let $g\colon T \to S$ be a surjection. Each element of $S$ must have at least one pre-image in $T$.
+                There are $2^3 = 8$ functions from $T$ to $S$, of which $1$ maps all elements to $\{1\}$, and $1$ maps all elements
+                to $\{2\}$. Hence, there are $8 - 2 = 6$ surjections.
+        \end{enumerate}
+
+        \paragraph{Problem 4.} Exhibit a bijection between $\mathbb{N}$ and the set of all odd integers greater than 13.
+        \paragraph{Solution 4.} We supply the bijection $f\colon \mathbb{N} \to \{15, 17, \dots\}$,
+        \[
+                f(n) \;=\; 2n + 13, \quad\quad\text{ for all }n \in \mathbb{N}.
+        \]
+        Clearly, if $p \neq q$, then $f(p) = 2p + 13 \neq 2q + 13 = f(q)$, so $f$ is injective.
+        Also, for arbitrary $m = 2k + 1$, $m > 13$, $k \in \mathbb{N}$, we must have $k > 6$. Thus, we find $n = (m - 13) / 2 \in \mathbb{N}$,
+        such that $f(n) = m$. Hence, $f$ is also surjective, and is thus a bijection.
+
+        \paragraph{Problem 5.} Give an explicit definition of a bijection $f$ from $\mathbb{N}$ onto $\mathbb{Z}$.
+        \paragraph{Solution 5.} We have $f\colon \mathbb{N} \to \mathbb{Z}$,
+        \[
+                f(n) \;=\; \begin{cases}
+                        n/2     &       n \text{ is even}\\
+                        -(n - 1)/2 &    n \text{ is odd}
+                \end{cases}.
+        \]
+        
+        \paragraph{Problem 6.} Exhibit a bijection between $\mathbb{N}$ and a proper subset of itself.
+        \paragraph{Solution 6.} We could reuse the solution from Problem 4. Alternatively, we supply the bijection $g\colon \mathbb{N} \to \mathbb{N}
+        \setminus\{1\}$,
+        \[
+                f(n) \;=\; n + 1, \quad\quad\text{ for all }n \in \mathbb{N}.
+        \]
+        Clearly, if $p \neq q$, then $f(p) = p + 1 \neq q + 1 = f(q)$. Also, for arbitrary $m \in \mathbb{N}\setminus\{1\}$, we find
+        $n = m - 1 \in \mathbb{N}$ such that $f(n) = m$. Hence, $f$ is a bijection.
+
+        \paragraph{Problem 7.} Prove that a set $T_1$ is denumerable if and only if there is a bijection from $T_1$ onto a denumerable set $T_2$.
+        \paragraph{Solution 7.} First, let $f\colon T_1 \to T_2$ be a bijection, where $T_2$ is denumerable.
+        Then, there exists a bijection $g\colon \mathbb{N} \to T_2$, so the mapping $f^{-1}\circ g\colon \mathbb{N} \to T_2$ is a bijection.
+        Hence, $T_1$ is also denumerable.\\
+
+        Now, let $T_1$ be denumerable. Thus, we have a bijection $f\colon \mathbb{N} \to T_1$, whose inverse $f^{-1}\colon T_1 \to \mathbb{N}$
+        is also a bijection. Since $\mathbb{N}$ is denumerable, we are done.
+        
+        \paragraph{Problem 8.} Give an example of a countable collection of finite sets whose union is not finite.
+        \paragraph{Solution 8.} Let $N_i = \{i\}$, where $i \in \mathbb{N}$. Clearly, each such set is finite,
+        with exactly 1 element. Now, the collection of all such sets,
+        $M = \{N_i: i \in \mathbb{N}\} = \{\{1\}, \{2\}, \dots\}$ is countable. We supply the bijection
+        $f\colon \mathbb{N} \to M$, $f(n) = N_n$, for all $n \in \mathbb{N}$.
+        However, the union of all $N_i$ is simply $\bigcup_{i \in \mathbb{N}}N_i = \{1, 2, \dots\} = \mathbb{N}$, which is infinite.
+
+        \paragraph{Problem 9.} Prove in detail that if $S$ and $T$ are denumerable, then $S\cup T$ is denumerable.
+        \paragraph{Solution 9.}
+        Let $f\colon \mathbb{N} \to S$ and $g\colon \mathbb{N} \to T$ be bijections. We identify the elements
+        $x_k = f(k)$ and $y_k = g(k)$ for all $n \in \mathbb{N}$, i.e.\ we write $S = \{x_1, x_2, \dots\}$ and $T = \{y_1, y_2, \dots\}$.
+        Now, we consider two cases. \\
+        
+        \textbf{Case I.} $S \cup T = \emptyset$. We construct the bijection $h\colon \mathbb{N} \to S\cup T$,
+        \[
+                h(n) \;=\; \begin{cases}
+                        f((n + 1)/2)    &       n\text{ is odd}\\
+                        g(n / 2)        &       n\text{ is even}
+                \end{cases}.
+        \]
+        Clearly, $h$ is injective since if $a \neq b$, then the injectivity of $f$ and $g$, together with the disjointedness of $S$ and $T$
+        means that $h(a) \neq h(b)$. Also, for arbitrary $z \in S \cup T$, we must have exactly one of the following: $z = x_i\in S$, so $h(2i - 1) = z$,
+        or $z = y_j \in T$, so $h(2j) = z$. Thus, $S\cup T$ is denumerable.\\
+        \textbf{Case II.} $S \cup T \neq \emptyset$. We set $A_1 = A$, $B_1 = B\setminus A$. Then, $A_1 \cap B_1 = \emptyset$, $A_1 \cup B_1 = A \cup B$,
+        and $A_1$ is denumerable. Now, $B_1 \subseteq B$ is a subset of a countable set $B$, so is either finite or denumerable.
+        If $B_1$ is denumerable, then we have $A_1, B_1$ denumerable, so $A \cup B = A_1 \cup B_1$ is denumerable by Case I.
+        Otherwise, $B_1$ is finite. Let $B_1 = \{b_1, b_2, \dots, b_m\}$ have $m$ elements.
+        Let $A_1 = \{a_1, a_2, \dots\}$
+        We construct the bijection $G\colon \mathbb{N} \to A_1\cup B_1$,
+        \[
+                F(n) \;=\; \begin{cases}
+                        b_n             &       n = 1, 2, \dots m \\
+                        a_{n - m}       &       n = m + 1, m + 2, \dots
+                \end{cases}, \quad\quad\text{ for all }n \in \mathbb{N}.
+        \]
+        Hence, $A \cup B$ is denumerable.
+
+        \paragraph{Problem 10.}
+        \begin{enumerate}
+                \item If $(m, n)$ is the 6th point down the 9th diagonal entry of the array (in the given figure), calculate
+        its number according to the given counting method.
+                \item Given that $h(m, 3) = 19$, find $m$.
+        \end{enumerate}
+        \paragraph{Solution 10.}
+        \begin{enumerate}
+                \item The first point in the 9th diagonal of the figure is $(1, 9)$. Moving down 6 points, the sum of the coordinates remains
+                contant while the column number increases, so we have $(m, n) = (6, 4)$. Thus, we calculate
+                $h(6, 4) = \frac{1}{2}\cdot 8 \cdot 9 + 6 = 42$.
+
+                \item Given that $h(m, 3) = \frac{1}{2}(m + 3 - 2)(m + 3 - 1) + m = 19$, we calculate
+                $\frac{1}{2}(m^2 + 3m + 2) + m = \frac{1}{2}(m^2 + 5m + 2) = 19 \implies m^2 + 5m - 36 = 0$.
+                For $m \in \mathbb{N}$, we must have $m = 4$.
+        \end{enumerate}
+         
+        \paragraph{Problem 11.} Determine the number of elements in $\mathcal{P}(S)$, the collection of all subsets of $S$, for each of the
+        following sets.
+        \begin{enumerate}
+                \item $S \;=\; \{1, 2\}$.
+                \item $S \;=\; \{1, 2, 3\}$.
+                \item $S \;=\; \{1, 2, 3, 4\}$.
+        \end{enumerate}
+        \paragraph{Solution 11.}
+        \begin{enumerate}
+                \item We simply count $\mathcal{P}(S) \;=\; \{\emptyset, \{1\}, \{2\}, \{1, 2\}\}$. Hence,
+                there are 4 elements.
+                \item For every element $T$ in the previous power set, we include both $T$ and $T \cup \{3\}$ this time.
+                Hence, we have twice the number of elements in $\mathcal{P}(S)$, i.e.\ 8 elements.
+                \item Again, we have twice the number of element in $\mathcal{P}(S)$ as before, i.e.\ 16 elements.
+        \end{enumerate}
+
+        \paragraph{Problem 12.} Use mathematical induction to show that if the set $S$ has $n$ elements, then $\mathcal{P}(S)$ has $2^n$ elements.
+        \paragraph{Solution 12.} We establish the base case with $n = 1$. Let the set $S \;=\; \{x_1\}$. Then, 
+        $\mathcal{P}(S) = \{\emptyset, \{x_1\}\}$ has exactly $2 = 2^1$ elements.\\
+
+        Now, assume that the given statement holds true for some $k \in \mathbb{N}$. Thus, for any set $S$ with $k$ elements,
+        $\mathcal{P}(S)$ contains $2^k$ elements. Let $T$ be a finite set of $k + 1$ elements, and let $x \in T$ be an element of $T$.
+        Now, $P = \mathcal{P}(T\setminus\{x\})$ has $2^k$ elements, since $T\setminus\{x\}$ has $k$ elements.
+        We construct $Q = \{A \cup \{x\}: A \in P\}$, and claim that $P \cap Q = \emptyset$. Indeed, for arbitrary $p \in P$, 
+        $x\notin p$ but $x \in q$ for all $q \in Q$. Thus, $P \cup Q$ has $2\cdot 2^k$ elements, since each element in $Q$ has a one-to-one
+        correspondence with each element in $P$.\\
+
+        Now, each element $p \in P$ is a subset of $T$, and so is every element $q \in Q$. Hence, $P\cup Q \subseteq \mathcal{P}(T)$.
+        Also, for any arbitrary element $s \in \mathcal{P}(T)$, we must have one of the following: $x \notin s$, in which case
+        $s \in P$, or $x \in s$, in which case $s \in Q$. Thus, $\mathcal{P}(T) \subseteq P \cup Q$. Hence, 
+        $\mathcal{P}(T) = P \cup Q$, and has precisely $2^{k + 1}$ elements. This completes the proof by induction.
+
+        \paragraph{Problem 13.} Prove that the collection $\mathcal{F}(\mathbb{N})$ of all finite subsets of $\mathbb{N}$ is countable.
+        \paragraph{Solution 13.} We construct the injection $f\colon \mathcal{F}(\mathbb{N}) \to \mathbb{N}$, $f(\emptyset) = 1$,
+        \[
+                f(S) \;=\; \prod_{n \in S} p_n, \quad\quad\text{ for all } S \in \mathcal{F}(\mathbb{N})\setminus\{\emptyset\},
+        \]
+        where $p_k$ is the $k$th prime number. The uniqueness of the prime factorisation of natural numbers guarantees that 
+        $f$ is injective.
+        Thus, $\mathcal{F}(\mathbb{N})$  is countable. \\
+
+
+        We can do even better with the bijection $g\colon \mathcal{F}(\mathbb{N}) \to \mathbb{N}$, $g(\emptyset) = 1$,
+        \[
+                g(S) \;=\; 1 + \sum_{n \in S} 2^{n - 1}, \quad\quad\text{ for all } S \in \mathcal{F}(\mathbb{N})\setminus\{\emptyset\}.
+        \]
+        The bijectivity of $g$ is a consequence of the uniqueness of representation of the natural numbers in binary.
+
+        \section*{Cantor's Diagonal Argument}
+        We show that the collection of all sequences of natural numbers $S$, or equivalently $\mathbb{N}\times\mathbb{N}\times\mathbb{N}\times\dots$,
+        is uncountable.
+
+        Assume that $S$ is countable. Note that $S$ must be infinite, because $(n, 0, 0, \dots) \in S$ for all $n \in \mathbb{N}$.
+        Hence, $S$ must be enumerable. Let $f\colon \mathbb{N} \to S$ be a bijection. We thus enumerate every element of 
+        $S$ as $s_n = f(n) \in S$ for all $n \in \mathbb{N}$. We notate $s_n(k)$ to be the $k$th element of the sequence $s_n$.
+        We construct the sequence, $s_0$, in the following way: $s_0\colon \mathbb{N}\to \mathbb{N}$,
+        \[
+                s_0(k) \;=\; s_k(k) + 1, \quad\quad\text{ for all } k\in \mathbb{N}.
+        \]
+        Now, $s_0$ is clearly a sequence of natural numbers, so $s_0 \in S$. Thus, from the bijectivity of $f$, $s_0$ has a unique inverse,
+        $f^{-1}(s_0) = c$. This would imply that $s_0 = s_c$, i.e.\ $s_0(c) = s_c(c)$. However, $s_0(c) = s_c(c) + 1$ by definition.
+        This is a contradiction. Hence, $S$ is uncountable.
+\end{document}

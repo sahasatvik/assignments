@@ -1,0 +1,166 @@
+\documentclass[10pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+% \usepackage{physics}
+\DeclareMathOperator{\Real}{Re}
+
+\title{Mathematical Methods I - Assignment II}
+\author{Satvik Saha}
+\date{}
+
+\geometry{a4paper, margin=1in}
+\setlength\parindent{0pt}
+\renewcommand{\labelenumi}{(\roman{enumi})}
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+% \renewcommand\qedsymbol{$\blacksquare$}
+
+\newcounter{prob}
+\def\problem{\stepcounter{prob}\paragraph{Problem \arabic{prob}}}
+\def\solution{\paragraph{Solution}}
+
+\begin{document}
+        \par\textbf{IISER Kolkata} \hfill \textbf{Assignment II}
+        \vspace{3pt}
+        \hrule
+        \vspace{3pt}
+        \begin{center}
+                \LARGE{\textbf{MA 1202 : Mathematical Methods I}}
+        \end{center}
+        \vspace{3pt}
+        \hrule
+        \vspace{3pt}
+        Satvik Saha, \texttt{19MS154}\hfill\today
+        \vspace{20pt}
+        
+        \problem Determine the first three terms of each fundamental solution of the ODE
+        \[
+                y'' \,-\, xy \;=\; 0,
+        \]
+        by assuming a power series expansion around the point $x_0 = 2$.
+
+        \solution
+        Note that $x_0 = 2$ is a regular point.
+
+        We propose a solution of the form
+        \[
+        y(x) \;=\; \sum_{n = 0}^\infty a_n (x - 2)^n.
+        \]
+        Hence,
+        \[
+        y'(x) \;=\; \sum_{n = 1}^\infty n a_n (x - 2)^{n - 1}, \quad\quad y''(x) \;=\; \sum_{n = 2}^\infty n(n - 1)a_n (x - 2)^{n - 2}.
+        \]
+        Plugging this into the ODE,
+        \[
+        \sum_{n = 2}^\infty n(n - 1)a_n (x - 2)^{n - 2} \;-\; x\sum_{n = 0}^\infty a_n (x-2)^n \;=\; 0.
+        \]
+        After some manipulation,
+        \[
+        \sum_{n = 2}^\infty n(n - 1)a_n (x - 2)^{n - 2} \;-\; (x - 2 + 2)\sum_{n = 0}^\infty a_n (x-2)^n \;=\; 0,
+        \]
+        \[
+        \sum_{n = 2}^\infty n(n - 1)a_n (x - 2)^{n - 2} \;-\; \sum_{n = 0}^\infty a_n (x-2)^{n + 1}  \,-\, 2\sum_{n = 0}^\infty a_n(x-2)^n\;=\; 0.
+        \]
+        Shifting indices,
+        \[
+        \sum_{n = 0}^\infty (n + 2)(n + 1) a_{n + 2}(x-2)^n \;-\; \sum_{n = 1}^\infty a_{n - 1}(x-2)^n \,-\, 2\sum_{n = 0}^\infty a_n(x-2)^n \;=\; 0.
+        \]
+        \[
+        2a_2 \,-\, 2a_0 \,+\, \sum_{n = 1}^\infty \left[(n + 2)(n + 1) a_{n + 2} \;-\; a_{n - 1} \,-\, 2a_n \right](x-2)^n \;=\; 0.
+        \]
+
+        Setting coefficients to zero, we have
+        \begin{align*}
+                2a_2 \,-\, 2a_0 \;&=\; 0       & n &= 0 \\
+                (n+2)(n+1)a_{n + 2} - a_{n - 1} - 2a_n \;&=\; 0         & n &= 1, 2, 3, \dots
+        \end{align*}
+        Thus,
+        \begin{align*}
+                a_0 \;&=\; a_2          &n&=0\\
+                6a_3 \;&=\; a_0 + 2a_1      &n& = 1\\
+                12a_4 \;&=\; a_1 + 2a_2     &n& = 2
+        \end{align*}
+        Thus,
+        \begin{align*}
+                y(x) \;&=\; a_0 \,+\, a_1(x-2) \,+\, a_2(x-2)^2 \,+\, a_3(x-2)^3 \,+\, a_4(x-2)^4 \,+\, \dots\\
+                        \;&=\; a_0 + a_1(x-2) \,+\, a_0(x-2)^2 \,+\, \left( \frac{a_0}{6} + \frac{a_1}{3}\right)(x-2)^3 \,+\, 
+                                \left( \frac{a_1}{12} + \frac{a_0}{6} \right)(x-2)^4 \,+\, \dots \\
+                        \;&=\; a_0 \left[1 + (x - 2)^2 + \frac{1}{6}(x-2)^3 + \frac{1}{6}(x-2)^4 + \dots\right] + 
+                                a_1\left[(x-2) + \frac{1}{3}(x-2)^3 + \frac{1}{12}(x-2)^4 + \dots\right].
+        \end{align*}
+
+        Hence, our fundamental solutions are
+        \begin{align*}
+                y_1(x) \;&=\; 1 \,+\, (x-2)^2 \,+\, \frac{1}{6}(x-2)^3 \,+\, \dots\\
+                y_2(x) \;&=\; (x-2) \,+\, \frac{1}{3}(x-2)^3 \,+\, \frac{1}{12}(x-2)^4 \,+\, \dots
+        \end{align*}
+
+        
+        \problem Solve the indicial equation, assuming a power series expansion near the regular singulat point $x_0=0$, obtained from the ODE
+        \[
+                x^2 y'' \,+\, \left(x^2 + \frac{5}{36}\right)y \;=\; 0.
+        \]
+
+        Find the first three terms for the power series expansion of the fundamental solution corresponding to the largest root of the 
+        indicial equation.
+
+        \solution
+        We note that the limit
+        \[
+        \lim_{x \to 0} x^2 \cdot\frac{x^2 + \frac{5}{36}}{x^2} \;=\; \frac{5}{36}
+        \]
+        is finite.
+
+        We propose a solution of the form
+        \[
+        y(x) \;=\; x^r\sum_{n = 0}^\infty a_n x^n.
+        \]
+        Hence,
+        \[
+        y'(x) \;=\; \sum_{n = 0}^\infty (n + r) a_n x^{n  + r - 1}, \quad\quad y''(x) \;=\; \sum_{n = 0}^\infty (n + r)(n + r - 1)a_n x^{n + r - 2}.
+        \]
+        Plugging this into our equation, we have
+        \[
+        \sum_{n = 0}^{\infty}(n + r)(n + r - 1)a_n x^{n + r} \,+\, \sum_{n = 0}^\infty a_n x^{n + r + 2} \,+\,
+        \frac{5}{36}\sum_{n = 0}^\infty a_n x^{n + r} \;=\; 0.
+        \]
+        Shifting indices and rearranging,
+        \[
+        \sum_{n = 0}^\infty (n + r)(n + r - 1)a_n x^{n + r} \,+\, \sum_{n = 2}^\infty a_{n - 2} x^{n + r} \,+\, \frac{5}{36}\sum_{n = 0}^\infty a_n x^{n + r} \;=\;0.
+        \]
+        \[
+        \left[r(r-1)a_0 + (r+1)r a_1x + \frac{5}{36}a_0 + \frac{5}{36}a_1x\right]x^r + \sum_{n = 2}^\infty \left[ (n + r)(n + r - 1)a_n  + a_{n - 2} + \frac{5}{36}a_n \right] x^{n + r} \;=\;0.
+        \]
+        Our indicial equation thus is
+        \[
+        r(r-1) \,+\, \frac{5}{36} \;=\; 0.
+        \]
+        This has roots
+        \[
+        r_+ \;=\; \frac{5}{6}\, \quad\quad r_- \;=\; \frac{1}{6}.
+        \]
+        We choose $r = r_+ = 5 / 6$. Setting coefficients to zero, we have the relations
+        \begin{align*}
+                55a_1 \,+\, 5a_1 \;&=\; 0,       &&\\
+                (6n + 5)(6n - 1)a_n \,+\, 36 a_{n-2} \,+\, 5a_n \;&=\; 0, &&n \geq 2.
+        \end{align*}
+        Hence,
+        \begin{align*}
+                55a_1 + 5a_1 \;=\; 0 \implies a_1 \;&=\; 0 \\
+                187a_2 + 36a_0 + 5a_2 \;=\; 0 \implies a_2 \;&=\; \frac{3}{16}a_0\\
+                391a_3 + 36a_1 + 5a_3 \;=\; 0 \implies a_3 \;&=\; 0\\
+                667a_4 + 36a_2 + 5a_4 \;=\; 0 \implies a_4 \;&=\; \frac{3}{56}a_2 \;=\; \frac{9}{896}a_0
+        \end{align*}
+        More generally, $a_{n} = 3a_{n-2}/(3n^2 + 2n)$ for all $n \geq 2$, so all odd terms vanish.
+
+        Hence, the corresponding solution is 
+        \begin{align*}
+                y(x) \;&=\; x^{r_+}(a_0 + a_1x + a_2x^2 + a_3 x^3 + a_4x^2 + \dots) \\
+                        \;&=\; a_0 x^{5 /6}\left(1 - \frac{3}{16}x^2 + \frac{9}{896} x^4 + \dots\right).
+        \end{align*}
+        The fundamental solution is thus
+        \[
+                y_+(x) \;=\; x^{5 /6}\left(1 - \frac{3}{16}x^2 + \frac{9}{896} x^4 + \dots\right).
+        \]
+\end{document}
