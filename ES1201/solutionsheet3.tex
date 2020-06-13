@@ -1,0 +1,194 @@
+\documentclass[10pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{array} 
+\usepackage{enumitem}
+\usepackage{siunitx}
+\usepackage{graphicx}
+\usepackage{caption}
+
+\geometry{a4paper, margin=1in}
+\setlength\parindent{0pt}
+% \renewcommand\qedsymbol{$\blacksquare$}
+\newcolumntype{L}{l@{\quad\quad}}
+\newcounter{prob}
+\def\problem{\stepcounter{prob}\paragraph{Problem \arabic{prob}}}
+\def\solution{\\\\\textbf{Solution }}
+
+\begin{document}
+        \par\textbf{IISER Kolkata} \hfill \textbf{Assignment III}
+        \vspace{3pt}
+        \hrule
+        \vspace{3pt}
+        \begin{center}
+                \LARGE{\textbf{ES1201 : Earth System Processes}}
+        \end{center}
+        \vspace{3pt}
+        \hrule
+        \vspace{3pt}
+        Satvik Saha, \texttt{19MS154}\hfill\today
+        \vspace{20pt}
+
+        \problem Explain the effects of surface wind pattern on the oceanic circulation.
+        \solution Surface winds drag surface ocean water along their path due to friction, giving rise to drift currents. This is complicated by the 
+        Coriolis effect, which causes drift currents to deviate by approximately \SI{20}{\degree} from the direction of the wind (rightwards in the
+        Northern hemisphere, leftwards in the Southern hemisphere). The propagation of this deflection downwards due to friction between layers of
+        water leads to a phenomenon called the Ekman spiral, discussed in the next answer. \\
+
+        Surface winds also lead to the formation of circular surface circulation patterns called gyres. For example, in the tropics in the Northern
+        hemisphere, trade winds over the oceans blowing from the north-east produce westward flowing waters. When these encounter a continent boundary,
+        they are forced north and south. The current flowing north eventually leaves the tropics and comes under the westerlies, which drive the
+        waters eastwards. These similarly strike another continent boundary, and the southward portion of the deflected current completes the cycle.
+        This gyre was a clockwise one -- an analogous process forms an anticlockwise gyre in the Southern hemisphere.
+
+
+        \problem What is the Ekman spiral?
+        Explain why Ekman transport occurs and what role it plays in producing oceanic gyres in the surface waters of the subtropical oceans.
+        \solution The Ekman spiral is a phenomenon involving varying velocities of water layers with depth, caused by the combined effect of 
+        surface winds and the Coriolis force. As explained previously, the surface layer of water generally moves at an angle of around
+        \SI{20}{\degree} from the wind direction. Now, the layer below this one also has a tendency to move in this direction, due
+        to friction with the upper layer. Because some kinetic energy is lost from friction (as heat), this layer moves more slowly.
+        The Coriolis force further acts on this layer, so it deviates even more from the wind direction. This effect propagates
+        downwards, with lower layers dragged along by upper layers, so the velocities of water decrease in magnitude and their deviation
+        increases with depth, forming a spiral. \\
+
+        Ekman transport is the net movement of water caused by the Ekman spiral effect. When all the movements of the layers in the spiral are added,
+        we see that the net movement of water is perpendicular to the direction of surface wind (rightwards in the North, leftwards in the South).
+        Thus, we see that in a gyre (as described in the previous answer), the surface water moves in a circular path (clockwise in the North,
+        anticlockwise in the South) while the net movement of water is actually inwards, into the center of the gyre.  Thus, water masses
+        converge here. Near the equator, we have ocean currents flowing westwards due to the northeast and southeast trade winds. This means
+        that due to Ekman transport, the net movement of water is perpendicular, i.e.\ polewards. Thus, the water masses diverge here.
+
+
+        \problem What is upwelling and where does it occur? Does Ekman transport play a role in upwelling and downwelling? Please explain.
+        \solution The rise of ocean water from lower layers to the surface is called upwelling. Typically, this water is cooler than surface
+        water. This happens when surface water diverges, forcing water from below to replace it.\\
+
+        Similarly, downwelling is the sinking of surface water to lower levels. This happens when surface water converges and accumulates, forcing
+        it to move downwards. \\
+
+        We have already seen than Ekman transport leads to convergence of water towards the center of gyres. Thus, there are sites of downwelling.
+        Also, we know that Ekman transport leads to divergence of west-flowing water near the equator. Thus, upwelling occurs here.
+
+
+        \problem Explain the different characteristics of western and eastern boundary currents.
+        \solution Boundary currents are the currents in the outermost parts of a gyre. Typically, the western boundary current is narrower
+        and faster than the esatern boundary current, which is spread out over a broader region and has slower moving water. \\
+
+        This phenomenon can be explained using the concept of vorticity -- the tendency of a fluid to rotate. This must be conserved throughout the
+        flow of water. In the Northern hemisphere, the tendency of water to rotate anticlockwise increases with latitude; in the Southern hemisphere,
+        the clockwise rotation increases with latitude. This is caused by earth's rotation, and is hence called planetary vorticity.
+        The anticlockwise rotation tendency is chosen to be positive vorticity. In addition, varying velocities of water across the breadth
+        of a current can cause it's flow to curl in a particular direction, i.e.\ into the side with the slower moving water. This is called
+        current shear. This, together with additional sources of vorticity such as surface winds, comprises the relative vorticity. When
+        the planetary vorticity is added, we obtain the absolute vorticity.\\
+        
+        Consider a gyre in the Northern hemisphere.
+        The northeast trade winds and the westerlies produce a clockwise rotation of water, i.e.\ a negative vorticity.
+        Now, when water flows along a coastline, friction causes the water closer to shore to slow down relative to the water further away.
+        This current shear thus causes an anticlockwise tendency, i.e.\ increases the positive relative vorticity of water on both the 
+        eastern and western boundaries. However, water flowing along the western boundary flows northwards, where the planetary vorticity is
+        more positive. To conserve vorticity, the relative vorticity of the water has a negative contribution. On the other hand,
+        water flows southwards along the eastern boundary, so the decrease in planetary vorticity is compensated by the increase in positive
+        relative vorticity. To balance vorticities along both boundaries, we must have a greater positive vorticity contribution from current 
+        shear on the western boundary compared to the eastern boundary. Thus, the western boundary current must be narrower and deeper,
+        maximizing friction, while the eastern boundary current is broader and slower, with minimum coastline interaction. \\
+
+        This asymmetry is analogously reflected in the Southern hemisphere.
+
+        \problem Explain the physics of geostrophic currents.
+        \solution Geostrophic currents circle sites of convergence and divergence. They are formed by the balance of the Coriolis force
+        and the pressure gradient force. The pressure gradient force is simply the tendency of water to flow down slopes due to gravity. In regions of
+        convergence, the accumulated water causes slight changes in elevation of the ocean level (few metres per 100 or 100,000 km).
+        Thus, this water tries to flow downwards, away from the zone of convergence. For example, the center of a gyre is a region of convergence,
+        so the water-level in the center of the ocean is slightly higher. This elevated water is pulled away from the center by gravity and is deflected
+        by the Coriolis force. When these two balance, the net movement of water is perpendicular to the water-level gradient (or the pressure
+        gradient force). Hence, this flow is geostrophic. As a result, the net movement of water is approximately parallel to the slope,
+        clockwise in the North and anticlockwise in the South.
+
+        \problem Explain the Southern Oscillation.
+        What happens to atmospheric and oceanic circulation in the tropical pacific during an ENSO event?
+        How is the biological productivity affected during this (ENSO) event?
+        \solution Southern Oscillations refers to the periodic oscillation in sea level pressures in the tropical Pacific.
+        Sea Surface Temperature (SST) data shows that the western part of this ocean has the highest temperatures on the globe, hence
+        experience intense atmospheric convection. We know that this rising air forms Hadley cells by moving polewards, but there is also a
+        flow of air in the east-west direction, along the equator. The eastward component crosses the Pacific and subsides when it
+        hits South America. There is an accompanying westwards flow along the surface across the Pacific, completing the cycle. This
+        atmospheric cycle is called Walker circulation. Now, this surface westward wind causes a westward ocean current, and thus the
+        accumulation of warm surface water in the western part of the Pacific. Thus, the western Pacific has a thicker layer
+        of surface water than the eastern Pacific. The thinner surface water in the east means that it becomes a site of upwelling of
+        colder water from underneath, which is rich in nutrients. This promotes biological productivity and a large fish population. \\
+
+        The breakdown of this normal pattern is called an El Ni\~{n}o Southern Oscillation (ENSO). This can happen when the easterly winds are not
+        as strong as usual. In this case, the accumulated warm surface water in the west flows back to the east in the from of a Kelvin wave.
+        This takes around 60 days. This means that the regions of warmest ocean temperatures shift to the central Pacific. This in turn
+        dirsupts the atmospheric circulation, since the major sites of convection now lie over the central Pacific, from where the rising air travels
+        eastwards as well as westwards and meet over Africa. Usually, the region in the west Pacific (Australia, Indonesia) experiences
+        low atmospheric pressure, and the regions in the central and east Pacific experience high pressure. This means convection and rainfall
+        over Australia and Indonesia in the summer, along with Africa and the Amazon Basin. The west slope of the Andes remains dry.
+        During an ENSO event, this pattern reverses, so rainfall over Australia and Indonesia decreases. Thus, there is drought in these
+        areas along with America, Brazil, and Africa while the western slopes of the Andes (Ecuador, Peru) and the central Pacific experience
+        an increase in rainfall. \\
+
+        An ENSO event also shuts off upwelling in the east, causing great loss in biological productivity.
+        Lots of marine organisms die due to the lack of nutrients, and so do associated predators such as birds which feed on them. \\
+
+
+        \problem Explain the differences among the pycnocline, the halocline, and the thermocline.
+        \solution The pycnocline, halocline and thermocline describe the boundary between the surface zone and the deep ocean, in terms of
+        density, salinity and temperature gradients respectively. \\
+
+        Ocean water is layered such that denser water is deeper. The density of water depends broadly on salinity (directly proportional) and
+        temperature (maximum density at \SI{4}{\celsius}). The top 60-100 m of water is generally well mixed due to wind, and is hence
+        called the surface zone. The density of water here is low. The transition zone between this layer and the deep ocean is about \SI{1}{\kilo\metre}
+        deep, and exhibits a rapid increase in density with depth. This sharp increase in density is called the pycnocline. If this change
+        is dominated by a rapid salinity increase, it is called the halocline; if instead it is dominated by a temperature decrease, it
+        is called the thermocline.
+
+
+        \problem Explain the processes that drive the circulation of the deep ocean.
+        \solution Deep ocean circulation is driven by density gradients in water, caused by differences in salinity and temperature. Thus, it
+        is called thermohaline circulation. Sea salt, which mainly consists of chloride, sodium, sulphate, magnesium, calcium and potassium,
+        is introduced by weathering of crustal rocks. The salinity of an ocean can increase by the evaporation of ocean water, which leaves the
+        salts behind. It can be removed by marine organisms, chemical reactions on the seafloor, or by sea spray. Other variations are 
+        caused by precipitation, the formation and melting of sea ice, and river runoffs. These changes in salinity means that ocean water
+        of different densities are layered by depth. The densest water lies at the bottom, making the vertical structure of ocean water quite stable.
+        There is very little horizontal variation in density, but this is enough to drive currents.\\
+
+        The process of thermohaline circulation begins with the formation of bottom water, which is dense (cold and salty). This is typically
+        formed at high latitudes in the margins of sea ice, where the water is cold. The formation of sea ice floating on the surface means
+        that salt is left behind in the ocean, as salt crystals do not fit in the ice. This cold, saline water sinks,
+        slowly flowing downwards and towards the equator. This mixes with other bottom water and eventually reaches sites of upwelling.
+
+
+        \problem Explain the bottom-water formation and its importance for driving deep ocean circulation.
+        \solution Bottom water is generally formed in high latitudes, near the poles. Surface water is cooled below its freezing point
+        (\SI{-1.9}{\celsius}), which is less than usual because of the presence of dissolved salts. This freezes and forms a layer of
+        ice which floats on the surface. Now, salts do not fit well in the structure of ice crystals, so they are left behind and accumulate
+        in the water beneath. Thus, a layer of saline, cold (hence very dense) water is formed just below the ice. This sinks and flows down
+        the slope of the ocean basin and spreads towards the equator. This water is called bottom water. As it moves, its dissolved oxygen content
+        decreases, while its dissolved carbon-dioxide content and nutrient levels increase. It mixes with other bottom water and
+        rises to the surface at sites of upwelling. The sinking water at the poles is replaced by poleward flowing warm water from the equatorial
+        regions. Thus, this completes a thermohaline cycle or conveyor belt. \\
+        
+        For example, Antarctic Bottom Water (AABW) form in the Weddell Sea and flows north into the ocean basins of the Pacific, Atlantic and
+        Indian oceans. North Atlantic Deep Water (NADW) is formed in the Arctic Ocean off the coast of Greenland and flows into the western
+        part of the North Atlantic Ocean, where it joins the AABW.
+
+
+        \problem Explain the linking of thermohaline and wind-driven surface ocean circulation.
+        What is meant by thermohaline conveyor belt?
+        \solution The thermohaline conveyor belt is the circulation of water between the major ocean basins across the globe. This consists
+        of both surface and deep water circulation, which are linked by upwelling and downwelling. This conveyor belt plays a major role in 
+        the recycling of ocean nutrients and the distribution of heat energy, thus affecting our climate. \\
+
+        On a broad scale, surface winds drive the circulation of surface ocean water, transport warm water from the equator towards the poles
+        and create sites of upwelling and downwelling via convergence and divergence of water. Thermohaline circulation transports deep water
+        from the poles towards the equator, which rises to the surface and completes the cycle. Broadly speaking, deep water
+        from the Arctic flows into the North Atlantic, meets deep water from the Antarctic, then flows south and around Antarctica in the 
+        Antarctic Circumpolar Current. This branches off into the Indian and Pacific oceans, where upwelling brings it to the surface.
+        Surface currents bring this water back into the North Atlantic, completing the circulation.
+
+\end{document}

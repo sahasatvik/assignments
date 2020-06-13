@@ -1,0 +1,114 @@
+\documentclass[10pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{array} 
+\usepackage{enumitem}
+\usepackage{siunitx}
+\usepackage{chemformula}
+% \usepackage{graphicx}
+% \usepackage{caption}
+
+\geometry{a4paper, margin=1in}
+\setlength\parindent{0pt}
+% \renewcommand\qedsymbol{$\blacksquare$}
+\newcolumntype{L}{l@{\quad\quad}}
+\newcounter{prob}
+\def\problem{\stepcounter{prob}\paragraph{Problem \arabic{prob}}}
+\def\solution{\\\\\textbf{Solution }}
+
+\begin{document}
+        \par\textbf{IISER Kolkata} \hfill \textbf{Assignment IV}
+        \vspace{3pt}
+        \hrule
+        \vspace{3pt}
+        \begin{center}
+                \LARGE{\textbf{ES1201 : Earth System Processes}}
+        \end{center}
+        \vspace{3pt}
+        \hrule
+        \vspace{3pt}
+        Satvik Saha, \texttt{19MS154}\hfill\today
+        \vspace{20pt}
+        
+        \problem Comment on the uniform values of measured abundances of highly siderophilic elements in the mantle. 
+        Explain the set of conditions/reasons for that.
+        \solution The uniformity of highly siderophilic elements in the mantle, such as \ch{Os}, \ch{Ir}, \ch{Pt}, \ch{Au}, \ch{Pd}, etc.\ 
+        can be explained by the \textit{late veneer model} -- essentially, all siderophilic elements were removed from the mantle
+        during core formation, and the current levels have been reached by other processes, such as bombardment by meteorites. \\
+
+        It was earlier thought that the equilibration of the iron-rich core and the silicate-rich mantle took place under low temperature and pressure
+        (surface-like) conditions. Thus, the segregation of the core would strip out most of the siderophilic elements from the mantle, bringing
+        their concentrations to between $10^{-5}$ and $10^{-6}$ of the chondritic abundance, with different elements having different abundances.
+        However, this predicted value is too low; the actual abundance is around \SI{2e-3} relative to chondrites, and remains uniform across the highly
+        siderophilic elements. Thus, we must abandon the low temperature and pressure assumption. Experimentally obtained partition coefficients
+        can be used to test other starting conditions, but only data for \ch{Re} is available. Besides, siderophilic behaviour (related to the 
+        partition coefficient) differs greatly among the different elements under low temperature and pressure conditions, so the uniformity of their
+        abundance remains unexplained.\\
+
+        Thus, alternate models such as an incomplete/inefficient partitioning of the core, or the partitioning of a sulphur rich liquid metal core
+        and a silicate mantle were proposed. The late veneer model seems to be the most promising. It assumes that the highly siderophilic elements
+        were more or less completely partitioned into the core, and then later added to the mantle via meteorites.
+        These meteorites would have to largely have the same, chondritic proportions of siderophilic elements, thus explaining the
+        uniformity of abundances in the mantle. \\
+
+        Now, the partitioning of moderately siderophilic elements during core formation was likely not as efficient as that of highly siderophilic
+        elements, so their concentrations would remain higher. Thus, the later addition of meteoritic material would not affect these values
+        significantly, and so we may consider their present abundances to reflect those after core formation. This allows us to pinpoint
+        the temperature and pressure conditions during partitioning. \ch{Ni} and \ch{Co} are two such moderately siderophilic elements whose
+        relative abundances are known today, around $10^{-1}$ relative to chondrites. To reach this value, the ratio of their partition
+        coefficients must be around $1.1$. Both these elements become less siderophilic with increase in temperature and pressure at different rates,
+        so there is one common pressure (\SI{28}{\giga\pascal}) where we have $D_{\ch{Ni}} / D_{\ch{Co}} = 1.1$. This confirms that
+        the metal-silicate equilibration and core segregation took place under high temperature and pressure conditions. \\
+
+        The pressure of \SI{28}{\giga\pascal} indicates a depth of around \SIrange{900}{1000}{\km}. Thus, it was suggested that during the time
+        of equilibration, the upper mantle formed a molten magma ocean and the lower mantle was solid. Droplets of metal would
+        rain down the magma ocean, stripping out siderophiles under differing temperatures and pressures. These would then reach the boundary
+        between the upper and lower mantle, where the molten metal would collect in pools. The equilibration between these pools and the upper
+        mantle would result in the currently observed siderophilic compositions. With time, large globules (diapirs) would split off from the pool
+        and sink down the lower mantle and into the (still forming) core.
+
+        \clearpage
+        \problem Explain the radioactive system of \ch{Hf}-\ch{W} used to understand the partition of the core and mantle.
+        Predict the age of core formation. 
+        \solution The \ch{Hf}-\ch{W} system is particularly useful in determining the time of partitioning of the core and mantle beacuse
+        of two reasons -- they partition differently in metal-silicate differentiation, and the $\beta$-decay of \ch{^{182}Hf} to \ch{^{182}W}
+        has a relatively short half-life of \SI{8.9} million years. Both these elements are refractory, and hence accreted to Earth in the same
+        proportion as in chondritic meteorites. Thus, their proportions in the Bulk Silicate Earth (BSE) are well known. \\
+
+        To quantify the deviation of \ch{^{182}W} present in a given sample, relative to the BSE, we use a metric called $\varepsilon\ch{^{182}W}$.
+        The amount of \ch{^{182}W}, which is a daughter product of the parent \ch{^{182}Hf}, is compared to the \ch{^{184}W} isotope of tungsten.
+        This is representative of the \ch{^{182}Hf}/\ch{^{182}W} originally present in the sample before decay. Since these ratios are of
+        the order of magnitude of $10^{-4}$, we define
+        \[
+        \varepsilon\ch{^{182}W} \;=\; \left[\frac{\left(\displaystyle{\ch{^{182}W}}/{\ch{^{184}W}}\right)_\text{sample}}
+                                                {\left(\displaystyle{\ch{^{182}W}}/{\ch{^{184}W}}\right)_\text{BSE}}
+                                                \,-\, 1\right] \times 10^4.
+        \]
+
+        Now, hafnium is lithophilic and would thus partition into the silicate mantle, while tungsten is siderophilic and would thus partition
+        into the metallic core during core formation. Thus, depending on the time of partitioning, we have two scenarios.
+        \begin{enumerate}[label=(\roman*), itemsep=0pt, topsep=\parsep]
+        \item \textit{Early core formation:} Here, the core partitions from the mantle before most of the hafnium has had time to decay.
+                During fractionation, there is very little \ch{^{182}W} formed as a product of $\beta$-decay, and both isotopes of tungsten
+                segregate in the same ratio.
+                Therefore, the \ch{^{182}W}/\ch{^{184}W} ratio in the mantle and core both remain similar to the original (chondritic) value initially.
+                However, most of the \ch{^{182}Hf} would remain in the mantle due to its lithophilic nature. Over time, this would
+                decay into \ch{^{182}W}, raising the \ch{^{182}W}/\ch{^{184}W} ratio of the mantle (BSE) above both the core and the chondritic values.
+                {\it (This ratio in the core would also increase because of the presence of some amount of \ch{^{182}Hf}, but not as quickly
+                as in the mantle.)}
+
+        \item \textit{Late core formation:} Here, the core partitions from the mantle after most of the hafnium decays into \ch{^{182}W}.
+                Thus, the \ch{^{182}W}/\ch{^{184}W} ratio in the undifferentiated earth and the chondritic meteorites evolve in parallel
+                and remain similar. During differentiation, both isotopes of tungsten partition into the core equally well, further
+                preserving their ratio. Thus, the \ch{^{182}W}/\ch{^{184}W} ratio in the BSE would remain the same as that of chondritic meteorites.
+        \end{enumerate}
+
+        Measurements show that $\varepsilon\ch{^{182}W}$ of chondritic meteorites falls around $-2$. Thus, the \ch{^{182}W}/\ch{^{184}W} ratio
+        in the BSE is indeed higher than in chondritic meteorites. This indicates an early core formation. As a very rough estimate,
+        using only the fact that $\varepsilon\ch{^{182}W}$ is negative, we can say that the core formed within 10 half-lives, i.e.\ 
+        \SI{90} million years of the start of the Solar system. More careful calculations yield a range of \SIrange{30}{50}{million} years
+        after the start of the Solar system.
+
+\end{document}

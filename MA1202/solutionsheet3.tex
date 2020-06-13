@@ -1,0 +1,111 @@
+\documentclass[10pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+% \usepackage{physics}
+% \usepackage{esint}
+\DeclareMathOperator{\Real}{Re}
+
+\title{Mathematical Methods I - Assignment III}
+\author{Satvik Saha}
+\date{}
+
+\geometry{a4paper, margin=1in}
+\setlength\parindent{0pt}
+\renewcommand{\labelenumi}{(\roman{enumi})}
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+% \renewcommand\qedsymbol{$\blacksquare$}
+
+\newcounter{prob}
+\def\problem{\stepcounter{prob}\paragraph{Problem \arabic{prob}}}
+\def\solution{\paragraph{Solution}}
+
+\begin{document}
+        \par\textbf{IISER Kolkata} \hfill \textbf{Assignment III}
+        \vspace{3pt}
+        \hrule
+        \vspace{3pt}
+        \begin{center}
+                \LARGE{\textbf{MA 1202 : Mathematical Methods I}}
+        \end{center}
+        \vspace{3pt}
+        \hrule
+        \vspace{3pt}
+        Satvik Saha, \texttt{19MS154}\hfill\today
+        \vspace{20pt}
+
+        \problem Check whether the function $f$, defined by 
+        \[
+                f(x, y) \;=\; \frac{x - 1 - iy}{(x - 1)^2 + y^2},
+        \]
+        is analytic by the following methods.
+        \begin{enumerate}
+                \item Using the Cauchy-Riemann equations.
+                \item Expressing $f$ in the form $f(x, y) \equiv g(z, \bar{z})$.
+        \end{enumerate}
+        \textit{Here, $x = \Re(z)$ and $y = \Im(z)$ for $z \in \mathbb{C}$.} 
+        \solution Note that using the identity $a^2 + b^2 = (a + ib)(a - ib)$, we have
+        \[
+        f(x, y) \;=\; \frac{1}{x - 1 + iy},
+        \]
+        which is not defined at $z = 1$, i.e.\ $(x, y) = (1, 0)$.
+        \begin{enumerate}
+                \item We write
+                \[
+                f(x, y) \;=\; u(x, y) \,+\, iv(x, y),
+                \]
+                where
+                \[
+                u(x, y) \;=\; \frac{x - 1}{(x - 1)^2 + y^2}, \quad\text{ and }\quad v(x, y) \;=\; \frac{-y}{(x - 1)^2 + y^2} .
+                \]
+                Note that both $u$ and $v$ are continuous except at $z = 1$, where they are both undefined. Otherwise, on $z \in \mathbb{C}\setminus\{1\}$,
+                we demand
+                \[
+                \frac{\partial u}{\partial x} \;=\; \frac{\partial v}{\partial y}, \quad\text{ and }\quad
+                \frac{\partial u}{\partial y} \;=\; -\frac{\partial v}{\partial x}.
+                \]
+                Indeed, notating $h_X \equiv {\partial h}/{\partial X}$, we have
+                \begin{align*}
+                u_x \;&=\; \frac{[(x - 1)^2 + y^2] - [2(x - 1)(x - 1)]}{[(x - 1)^2 + y^2]^2} \;=\; \frac{-(x-1)^2 + y^2}{[(x - 1)^2 + y^2]^2} \\
+                v_y \;&=\; \frac{-[(x-1)^2 + y^2] - [-y(2y)]}{[(x-1)^2 + y^2]^2} \;=\; \frac{-(x-1)^2 + y^2}{[(x-1)^2 + y^2]^2} \\\\ 
+                u_y \;&=\; \frac{0 - [(x - 1)(2y)]}{[(x - 1)^2 + y^2]^2} \;=\; \frac{-2(x - 1)y}{[(x - 1)^2 + y^2]^2} \\
+                v_x \;&=\; \frac{0 - [-2y(x - 1)]}{[(x - 1)^2 + y^2]^2}  \;=\; \frac{2(x - 1)y}{[(x - 1)^2 + y^2]^2} 
+                \end{align*}
+                Thus, $u_x = v_y$ and $u_y = -v_x$ for all $z \in \mathbb{C}\setminus\{1\}$. Hence, $f$ is analytic on $\mathbb{C}\setminus\{1\}$.
+
+                \item Writing $z = x + iy$, we have
+                \[
+                f(z) \;=\; \frac{\bar{z} - 1}{(z - 1)(\bar{z} - 1)} \;=\; \frac{1}{z - 1}.
+                \]
+                We see that $f \equiv g(z, \bar{z})$ is free of the second complex variable $\bar{z}$, so $f_{\bar{z}} = 0$. Hence,
+                $f$ is analytic on $\mathbb{C}\setminus\{1\}$.
+        \end{enumerate}
+
+        \problem Compute the contour integral
+        \[
+                \oint_C \frac{z \exp{z}}{z^2 + 1} \:\mathrm{d}z,
+        \]
+        where $C$ is a circle of radius $2$, centered at $0$, and oriented counterclockwise.
+        \solution We carry out the partial fraction decomposition
+        \[
+        \frac{z}{z^2 + 1} \;=\; \frac{1}{2}\,\frac{(z + i) + (z - i)}{(z + i)(z - i)} \;=\; \frac{1}{2}\left[\frac{1}{z - i} \,+\, \frac{1}{z + i}\right].
+        \]
+
+        Thus, we split our integral
+        \[
+        I \;=\; \oint_C \frac{z \exp{z}}{z^2 + 1} \:\mathrm{d}z \;=\; \frac{1}{2}\oint_C \frac{\exp{z}}{z - i} \:\mathrm{d}z 
+                \,+\, \frac{1}{2}\oint_C \frac{\exp{z}}{z + i} \:\mathrm{d}z \;=\; \frac{1}{2}I_1 \,+\, \frac{1}{2}I_2.
+        \]
+
+        Note that $\exp(z)$ is analytic, and $C$ contains both $i$ and $-i$. Thus, Cauchy's Integral Formula yields
+        \[
+        I_1 \;=\; 2\pi i \exp(i), \quad\quad I_2 \;=\; 2\pi i \exp(-i).
+        \]
+
+        Using $e^{i\varphi} + e^{-i\varphi} = 2\cos{\varphi}$ yields 
+        \[
+        I \;=\; 2 \pi i \cos{1}.
+        \]
+        
+\end{document}
