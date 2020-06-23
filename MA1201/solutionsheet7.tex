@@ -1,0 +1,444 @@
+\documentclass[10pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{xcolor}
+
+\title{Mathematics II - Assignment VII}
+\author{Satvik Saha}
+\date{}
+
+\geometry{a4paper, margin=1in}
+\setlength\parindent{0pt}
+\renewcommand{\labelenumi}{(\roman{enumi})}
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+% \renewcommand\qedsymbol{$\blacksquare$}
+
+\begin{document}
+        \par\textbf{IISER Kolkata} \hfill \textbf{Assignment VII}
+        \vspace{3pt}
+        \hrule
+        \vspace{3pt}
+        \begin{center}
+                \LARGE{\textbf{MA 1201 : Mathematics II}}
+        \end{center}
+        \vspace{3pt}
+        \hrule
+        \vspace{3pt}
+        Satvik Saha, \texttt{19MS154}\hfill\today
+        \vspace{20pt}
+
+        \section*{Section 2.5 (Distance Preserving Maps)}
+        \paragraph{Problem 1.} Construct a rotation $D_{x,\phi}$ which maps $(1, 2)$ and $(4, 6)$ respectively onto $(5, 2)$
+        and $(8, -2)$ respectively.
+        \paragraph{Solution 1.}
+        Let the points $P = (1, 2)$ and $Q = (4, 6)$ be mapped to $P' = (5, 2)$ and $Q' = (8, -2)$ respectively.
+        Consider the vector $u = PQ = (3, 4)$ in $\mathbb{R}^2$. Under the isometry $D_{x,\phi}$, this gets transformed
+        into the vector $v = P'Q' = (3, -4)$. The angle by which $u$ rotates into $v$ must be precisely the angle $\phi$.
+        Thus, $\phi = -2\arccos(3 /5)$. \\
+
+        Let $x = (x_1, x_2)$ be the center of rotation. Thus, we must have equal distances  $Px = P'x$ and $Qx = Q'x$.
+        The first forces $x_1 = 3$. Thus, from the second condition, we must have $(4-3)^2 + (6-x_2)^2 = (8-3)^2 + (-2-x_2)^2$,
+        which rearranges to $(6 - x_2)^2 - (-2-x_2)^2 = 24$. Using the difference of squares, $(4 - 2x_2)(8) = 24$, thus
+        $x_2 = \frac{1}{2}$. Hence, $x = (3, \frac{1}{2})$. \\
+
+        Thus, the required isometry is $D_{(3, 1 /2), -2\arccos(3 /5)}$.
+
+        \paragraph{Problem 2.}
+        \begin{enumerate}
+                \item Give the coordinate representation of $D_{(1, 6), \pi /6}$.
+                \item Give the coordinate representation of the reflection in the line $L_{1,2,-1}$.
+                \item Find an $x$ so that $D_{(3, 2),\theta} = D_\theta \circ T_x$, where $\theta$ is such that
+                $\cos\theta = 3 / 5$ and $\sin\theta = 4 /5$.
+        \end{enumerate}
+        \paragraph{Solution 2.}
+        \begin{enumerate}
+        \item 
+        Note that $D_{x,\phi} = T_x \circ D_\phi \circ T_{-x}$. Setting $x = (1, 6)$ and $\phi = \pi /6$, we thus construct the following maps.
+        \textit{Note that $\cos\phi = \sqrt{3} /2$ and $\sin\phi = 1 /2$.} 
+        \begin{align*}
+                T_{-x}&\colon \mathbb{R}^2 \to \mathbb{R}^2, && (\xi_1,\xi_2) \mapsto \left(\xi_1 - 1,\, \xi_2 - 6\right), \\
+                D_\phi\circ T_{-x}&\colon \mathbb{R}^2 \to \mathbb{R}^2, &&
+                        (\xi_1,\xi_2) \mapsto \left(\frac{\sqrt{3}}{2}(\xi_1 - 1) - \frac{1}{2}\left(\xi_2 - 6\right),\, 
+                                                                \frac{1}{2}(\xi_1 - 1) + \frac{\sqrt{3}}{2}\left(\xi_2 - 6\right)\right), \\
+                T_x \circ D_\phi\circ T_{-x}&\colon \mathbb{R}^2 \to \mathbb{R}^2, &&
+                        (\xi_1,\xi_2) \mapsto \left(\frac{\sqrt{3}}{2}(\xi_1 - 1) - \frac{1}{2}\left(\xi_2 - 6\right) + 1,\, 
+                                                                \frac{1}{2}(\xi_1 - 1) + \frac{\sqrt{3}}{2}\left(\xi_2 - 6\right) + 6\right).
+        \end{align*}    
+        Thus, the desired isometry is 
+        \[
+        D_{x,\phi}\colon \mathbb{R}^2 \to \mathbb{R}^2, \quad (\xi_1, \xi_2) \mapsto 
+                                \left(\frac{\sqrt{3}}{2}\xi_1 - \frac{1}{2}\xi_2 + \frac{1}{2}(8 - \sqrt{3}),\;
+                                \frac{1}{2}\xi_1 + \frac{\sqrt{3}}{2}\xi_2 + \frac{1}{2}(11 - 6\sqrt{3}) \right).
+        \]
+
+
+        \item The given line $L = L_{1,2,-1}$ is described by
+        \[
+                \xi_1 + 2\xi_2 -1 \;=\; 0.
+        \]
+        Its perpendicular distance from the origin is simply $d = 1 /\sqrt{1^2 + 2^2} = 1 /\sqrt{5}$, along the
+        vector $\hat{n} = (1, 2) / \sqrt{1^2 + 2^2} = (1 /\sqrt{5}, 2 /\sqrt{5})$. Thus, the reflection of the origin lies
+        at $2 d \hat{n} = (2 / 5, 4 / 5)$. \\
+
+        Now, note that the desired reflection is an isometry, and hence is a mapping of the form
+        \[R_L\colon \mathbb{R}^2\to \mathbb{R}^2,\quad (\xi_1, \xi_2) \mapsto (a_1\xi_1 + b_1\xi_2 + c_1,\, a_2\xi_1 + b_2\xi_2 + c_2).\]
+        We have already established that $R_L(0, 0) = (2 /5, 4 /5)$, hence $c_1 = 2 /5$ and $c_2 = 4 /5$.
+        Now, we simply choose two other points on the line $L$, say $(0, 1 /2)$ and $(1, 0)$, which must be fixed points under the reflection.
+        Thus, $b_1 / 2 + 2 / 5 = 0$, $b_2 / 2 + 4 / 5 = 1 / 2$, $a_1 + 2 / 5 = 1$ and $a_2 + 4 / 5 = 0$.
+        Hence, we obtain
+        \[R_L\colon \mathbb{R}^2\to \mathbb{R}^2,\quad (\xi_1, \xi_2) \mapsto \left(\frac{3}{5}\xi_1 -\frac{4}{5}\xi_2 + \frac{2}{5},\,
+                -\frac{4}{5}\xi_1 - \frac{3}{5}\xi_2 + \frac{4}{5}\right).\]
+
+
+        \item The given isometry is $D_\theta\circ T_x$.
+        Since this is to be equivalent to $D_{(3, 2),\theta}$, this isometry must have the fixed point $(3, 2)$, the center of rotation.
+        Thus, $(D_\theta\circ T_x)(3, 2) = (3, 2)$.
+        Applying $D_{-\theta}$ on both sides and using $D_{-\theta} \circ D_{\theta} = \text{Id}$, we have
+        \[T_x(3, 2) = D_{-\theta}(3, 2) = \left(\frac{3}{5}\cdot 3 + \frac{4}{5}\cdot 2, -\frac{4}{5}\cdot 3 + \frac{3}{5}\cdot 2\right)
+                = \left(\frac{17}{5}, -\frac{6}{5}\right) = \left(3 + \frac{2}{5}, 2 - \frac{16}{5}\right). \]
+        By comparison with $T_x(3, 2) = (3 + x_1, 2 + x_2)$, we must have $x = (2 /5, -16 /5)$. \\
+        
+        Note that we have used $D_{-\theta}(\xi_1, \xi_2) = (\xi_1\cos\theta + \xi_2\sin\theta, -\xi_1\sin\theta + \xi_2\cos\theta)$.
+        \end{enumerate} 
+
+        \paragraph{Problem 3.} Determine the geometric forms of the mappings
+        \begin{enumerate}
+                \item $(\xi_1, \xi_2) \mapsto (\frac{8}{17}\xi_1 + \frac{15}{17}\xi_2 - 1, \frac{15}{17}\xi_1 - \frac{8}{17}\xi_2 + 3)$.
+                \item $(\xi_1, \xi_2) \mapsto (\frac{3}{5}\xi_1 + \frac{4}{5}\xi_2 - 10, -\frac{4}{5}\xi_1 + \frac{3}{5}\xi_2 - 1)$.
+        \end{enumerate}
+        \paragraph{Solution 3.}
+        \begin{enumerate}
+                \item The transformation matrix of the given mapping is 
+                $
+                \begin{bmatrix}
+                        {8}/{17} & {15}/{17}  \\ {15}/{17} & -{8}/{17}
+                \end{bmatrix}
+                $,
+                which clearly represents a reflection. Thus, the given mapping is a glide reflection.
+                Note that the determinant of the matrix is $-1$.
+                \item The transformation matrix of the given mapping is 
+                $
+                \begin{bmatrix}
+                        {3}/{5} & {4}/{5}  \\ -{4}/{5} & {3}/{5}
+                \end{bmatrix}
+                $,
+                which clearly represents a rotation by the angle $\theta = -\arccos\frac{3}{5}$.
+                The point about which the rotation takes place is the fixed point of the isometry, i.e.\ we solve
+                \begin{align*}
+                        \frac{3}{5}\xi_1 \,+\, \frac{4}{5}\xi_2 \,-\, 10 \;&=\; \xi_1 \\
+                        -\frac{4}{5}\xi_1 \,+\, \frac{3}{5}\xi_2 \,-\,\;\: 1\;&=\; \xi_2
+                \end{align*}
+                This yields $x_0 = (-6, 19 /2)$. Thus, the given mapping is the (clockwise) rotation $D_{x_0, \theta}$.
+                Note that the determinant of the matrix is $+1$.
+        \end{enumerate}
+
+        \paragraph{Problem 4.} Show that if $ABC$ and $PQR$ are triangles in $\mathbb{R}^2$ such that $|AB| = |PQ|$, 
+        $|BC| = |QR|$ and $|CA| = |RP|$, then there is an isometry $f$ on the plane which maps $A$, $B$, $C$ onto
+        $P$, $Q$, $R$ respectively. When is such an $f$ unique?
+        \paragraph{Solution 4.} We show the existence of $f$ by construction. Let $v = AP$ be the vector stretching from
+        $A$ to $P$. Thus, applying the isometry $T_v$ maps the points $(A, B, C)$ to $(P, B_1, C_1)$.
+        Now, the isometry preserves distances, so $|PB_1| = |AB| = |PQ|$. This means that $B_1$ and $Q$ lie on the 
+        same circle centred at $P$, with radius $|AB|$. Hence, there exists an angle $\theta$ between $PB_1$ and $PQ$ such that
+        the rotation $D_{P, \theta}$ maps the points $(P, B_1, C_1)$ to $(P, Q, C_2)$. Again, 
+        note that $|PC_2| = |PC_1| = |AC| = |PR|$, and $|QC_2| = |B_1C1| = |BC| = |QR|$. Hence, $C_2$ lies on the intersection
+        of the circles centred at $P$ and $Q$ with radii $|PR|$ and $|QR|$ respectively. These circles must intersect,
+        since we know that the point $R$ exists. If these circles intersect once, this forces $C_2 = R$ and we are done.
+        Otherwise, the circles intersect twice. Either $C_2 = R$, or $C_2$ and $R$ are reflections of each other in the line $L$ containing the 
+        segment $PQ$. Hence, the application of a final reflection $R_L$ maps $(P, Q, C_2)$ to $(P, Q, R)$.
+        Since the composition of isometries is also an isometry, we have $f = R_{L}\circ D_{P,\theta}\circ T_v$
+        (or $f = D_{P,\theta}\circ T_v$ if $C_2 = R$) which is the isometry we seek. \\
+
+        Note that if $A$, $B$, and $C$ are collinear, then so are $P$, $Q$ and $R$.
+        In this case, the isometry $f' = R_{L} \circ f$ is a different isometry which also has the desired properties,
+        since $P$, $Q$, $R$ all lie on the line $L$ and hence are fixed points of $R_L$. \\
+        Otherwise, let $f_1$ and $f_2$ be two isometries which map $(A, B, C, X)$ to $(P, Q, R, X_1)$ and $(P, Q, R, X_2)$ respectively,
+        where $X$ is an arbitrary point in $\mathbb{R}^2$. Clearly, if $X$ is one of $A$, $B$ or $C$, we must have $X_1 = X_2$.
+        If not, note that we must have $|AX| = |PX_1| = |PX_2|$, $|BX| = |QX_1| = |QX_2|$ and $|CX| = |RX_1| = |RX_2|$,
+        so $P$, $Q$ and $R$ are all equidistant from $X_1$ and $X_2$. If $X_1 \neq X_2$, this forces $P$, $Q$, $R$ to lie
+        on the same line (the locus of points equidistant from two points is a line), which is a contradiction. Hence,
+        $X_1 = X_2$ for all $X \in \mathbb{R}^2$. This means that we must have $f_1 = f_2$. \\
+
+        Thus, the isometry between $(A, B, C)$ and $(P, Q, R)$ is unique iff $A$, $B$ and $C$ are noncollinear. \\
+
+        (\textit{
+        Let $P = (p_1, p_2)$ and $Q = (q_1, q_2)$ be two different points in $\mathbb{R}^2$. If $X = (x_1, x_2)$ is to be equidistant from
+        $P$ and $Q$, then $(p_1 - x_1)^2 + (p_2 - x_2)^2 = (q_1 - x_1)^2 + (q_2 - x_2^2)$. Rearranging,
+        $x_1^2 + x_2^2 - 2p_1x_1 - 2p_2x_2 + p_1^2 + p_2^2 = x_1^2 + x_2^2 - 2q_1x_1 - 2q_2x_2 + q_1^2 + q_2^2$,
+        i.e.\ $2(q_1 - p_1)x_1 + 2(q_2 - p_2)x_2 = q_1^2 - p_1^2 + q_2^2 - p_2^2$. Since $p_1\neq q_1$ or $q_2 \neq q_1$, this is the 
+        equation of a line.
+        }) 
+        
+
+        \section*{Section 2.6 (Conic Sections)}
+        \paragraph{Problem 1.} Describe the geometric form of the following curves.
+        \begin{enumerate}
+                \item $\xi_1^2 + 6\xi_1\xi_2 + 9\xi_2^2 + 5\xi_1 + 2\xi_2 + 11 = 0$.
+                \item $4\xi_1^2 + 4\xi_1\xi_2 - 10\xi_1 + 8\xi_2 + 15 = 0$.
+                \item $\xi_1^2 + \xi_1\xi_2 + \xi_2^2 = 3$.
+                \item $5\xi_1^2 + 6\xi_1\xi_2 + 5\xi_2^2 - 256 = 0$.
+                \item $\xi_1^2 - 2\xi_1\xi_2 + \xi_2^2 = 9$.
+        \end{enumerate}
+        \paragraph{Solution 1.}
+        \begin{enumerate}
+                \item 
+                We have
+                \[Q\colon (\xi_1, \xi_2) \mapsto \xi_1^2 + 6\xi_1\xi_2 + 9\xi_2^2 + 5\xi_1 + 2\xi_2 + 11
+                \;=\; (f(x) \,|\, x) + 2(b\,|\,x) + 11.\]
+                The matrix of the quadratic part is $ A =
+                \begin{bmatrix}
+                        1& 3 \\ 3& 9
+                \end{bmatrix}$, whose eigenvalues satisfy $(\lambda - 1)(\lambda - 9) = 9$. Thus, the only non-zero eigenvalue is $\lambda = 10$,
+                whose corresponding eigenvector $x_1 = (x_{11}, x_{12})$ satisfies $(x_{11} + 3x_{12}, 3x_{11} + 9x_{12}) = (10x_{11}, 10x_{12})$.
+                We choose $x_1 = (1, 3) / \sqrt{1^2 + 3^2} = (1 /\sqrt{10}, 3 /\sqrt{10})$.
+                The vector orthogonal to $x_1$ is given by $x_2 = D_{\pi/2}(x_1) = (-3 /\sqrt{10}, 1 /\sqrt{10})$.
+                Thus, changing basis to $x_1, x_2$, we have
+                \begin{align*}
+                Q(\eta_1x_1 + \eta_2x_2)
+                        \;&=\; \lambda\eta_1^2 + \frac{1}{\sqrt{10}}(5\cdot 1 - 3\cdot 2)\eta_1 + \frac{1}{\sqrt{10}}(-5\cdot 3 + 2\cdot 1)\eta_2 + 11 \\
+                        \;&=\; 10\eta_1^2 + \frac{11}{\sqrt{10}}\eta_1 - \frac{13}{\sqrt{10}}\eta_2 + 11 \\
+                        \;&=\; 10\left(\eta_1 + \frac{11}{20\sqrt{10}}\right)^2 - \frac{13}{\sqrt{10}}\left(\eta_2 - \frac{4279\sqrt{10}}{5200}\right)
+                \end{align*}
+                Thus, the given curve is the parabola
+                \[
+                10\zeta_1^2 \,-\, \frac{13}{\sqrt{10}}\zeta_2 \;=\; 0.
+                \]
+                This is also apparent upon noting that $\det(A) = 0$, which indicates one zero eigenvalue.
+                
+
+                \item 
+                We have
+                \[Q\colon (\xi_1, \xi_2) \mapsto 4\xi_1^2 + 4\xi_1\xi_2 - 10\xi_1 + 8\xi_2 + 15 = 0
+                \;=\; (f(x) \,|\, x) + 2(b\,|\,x) + 11.\]
+                The matrix of the quadratic part is $ A = 
+                \begin{bmatrix}
+                        4& 2 \\ 2& 0
+                \end{bmatrix}$, whose eigenvalues satisfy $(\lambda - 4)\lambda = 4$. Thus, we have the eigenvalues $\lambda_{1,2} = 2 \pm 2\sqrt{2}$.
+                The first eigenvector thus satisfies $2x_{11} = (2 + 2\sqrt{2})x_{12}$,
+                so we choose $x_1 = (1 + \sqrt{2}, 1) / \sqrt{(1 + \sqrt{2})^2 + 1^2} = (1 + \sqrt{2}, 1)/\sqrt{4 + 2\sqrt{2}}$
+                and $x_2 = D_{\pi/2}(x_1) = (-1, 1 + \sqrt{2})/\sqrt{4 + 2\sqrt{2}}$.
+                Thus, changing basis to $x_1, x_2$, we have
+                \begin{align*}
+                Q(\eta_1x_1 + \eta_2x_2)
+                        \;&=\; \lambda_1\eta_1^2 + \lambda_2\eta_2^2 + \frac{1}{\sqrt{4 + 2\sqrt{2}}}(-10\cdot(1 + \sqrt{2}) + 8)\eta_1 
+                                + \frac{1}{\sqrt{4 + 2\sqrt{2}}}(10\cdot 1 + 8(1 + \sqrt{2}))\eta_2 + 15 \\
+                        \;&=\; (2 + 2\sqrt{2})\eta_1^2 + (2 - 2\sqrt{2})\eta_2^2 + \frac{(-2 - 10\sqrt{2})\eta_1 + 
+                                (18 + 8\sqrt{2})\eta_2}{\sqrt{4 + 2\sqrt{2}}} + 15 \\
+                        \;&=\; (2\sqrt{2} + 2) \left(\eta_1 - \frac{1 + 5\sqrt{2}}{(2 + \sqrt{2})\sqrt{4 + \sqrt{2}}} \right)^2 
+                             - (2\sqrt{2} - 2) \left(\eta_2 + \frac{9 + 4\sqrt{2}}{(2 - \sqrt{2})\sqrt{4 + \sqrt{2}}} \right)^2
+                          \\ &\quad\quad + 15 - \frac{(1 + 5\sqrt{2})^2}{(2 + 2\sqrt{2})^2(4 + 2\sqrt{2})} 
+                                     - \frac{(9 + 4\sqrt{2})^2}{(2 - 2\sqrt{2})^2(4 + 2\sqrt{2})}
+                \end{align*}
+                Thus, the given curve is the hyperbola
+                \[
+                (2\sqrt{2} + 2)\zeta_1^2 \,-\, (2\sqrt{2} - 2)\zeta_2^2 + k \;=\; 0,
+                \]
+                for non-zero $k$.
+                This is also apparent upon noting that $\det(A) < 0$, which indicates eigenvalues of opposing sign.
+                
+
+                \item 
+                We have
+                \[Q\colon (\xi_1, \xi_2) \mapsto \xi_1^2 + \xi_1\xi_2 + \xi_2^2 - 3
+                \;=\; (f(x) \,|\, x) - 3.\]
+                The matrix of the quadratic part is $ A = 
+                \begin{bmatrix}
+                        1& 1 /2 \\ 1 /2& 1
+                \end{bmatrix}$, whose eigenvalues satisfy $(\lambda - 1)^2 = 1 /4$. Thus, we have the eigenvalues $\lambda_1 = 1 /2$ and
+                $\lambda_2 = 3 /2$. The first eigenvector $x_1$ satisfies $x_{11} + x_{12}/2 = (1 /2)x_{11}$, so we choose $x_{1} = (1, 1)/\sqrt{2}$
+                and $x_2 = D_{\pi/2}(x_1) = (-1, 1)/\sqrt{2}$.
+                Thus, changing basis to $x_1, x_2$, we have
+                \begin{align*}
+                Q(\eta_1x_1 + \eta_2x_2)
+                        \;&=\; \lambda_1\eta_1^2 + \lambda_2\eta_2^2 - 3 \\
+                        \;&=\; \frac{1}{2}\eta_1^2 \,+\, \frac{3}{2}\eta_2^2 - 3
+                \end{align*}
+                Thus, the given curve is the ellipse
+                \[
+                \frac{1}{2}\zeta_1^2 \,+\, \frac{3}{2}\zeta_2^2 \,-\, 3 \;=\; 0.
+                \]
+                This is also apparent upon noting that $\det(A) > 0$, which indicates eigenvalues of the same sign.
+
+                \item 
+                We have
+                \[Q\colon (\xi_1, \xi_2) \mapsto 5\xi_1^2 + 6\xi_1\xi_2 + 5\xi_2^2 - 256
+                \;=\; (f(x) \,|\, x) - 256.\]
+                The matrix of the quadratic part is $ A = 
+                \begin{bmatrix}
+                        5& 3 \\ 3& 5
+                \end{bmatrix}$, whose eigenvalues satisfy $(\lambda - 5)^2 = 9$. Thus, we have the eigenvalues $\lambda_1 = 2$ and
+                $\lambda_2 = 8$. The first eigenvector $x_1$ satisfies $5x_{11} + 3x_{12} = 2x_{11}$, so we choose $x_{1} = (1, -1)/\sqrt{2}$
+                and $x_2 = D_{\pi/2}(x_1) = (1, 1)/\sqrt{2}$.
+                Thus, changing basis to $x_1, x_2$, we have
+                \begin{align*}
+                Q(\eta_1x_1 + \eta_2x_2)
+                        \;&=\; \lambda_1\eta_1^2 + \lambda_2\eta_2^2 - 256 \\
+                        \;&=\; 2\eta_1^2 \,+\, 8\eta_2^2 - 256
+                \end{align*}
+                Thus, the given curve is the ellipse
+                \[
+                2\zeta_1^2 \,+\, 8\zeta_2^2 \,-\, 256 \;=\; 0.
+                \]
+                This is also apparent upon noting that $\det(A) > 0$, which indicates eigenvalues of the same sign.
+                
+
+                \item 
+                Note that the given curve is of the form
+                \[
+                (\xi_1 - \xi_2)^2 - 3^2 \;=\; 0.
+                \]
+                Using the difference of squares and separating factors, we obtain the pair of parallel straight lines
+                \begin{align*}
+                        \xi_1 - \xi_2 + 3 \;&=\; 0, \\
+                        \xi_1 - \xi_2 - 3 \;&=\; 0.
+                \end{align*}
+                Note that the transformation matrix of the quadratic has a determinant of zero.
+                Thus, these parallel straight lines may be interpreted as a degenerate parabola.
+        \end{enumerate}
+
+        
+        \section*{Problem Set 6.1 (Introduction to Eigenvalues)}
+        \paragraph{Problem 6.}
+        Find the eigenvalues of $A$, $B$, $AB$ and $BA$.
+        \[
+        A = \begin{bmatrix}
+                1 & 0 \\ 1 & 1
+        \end{bmatrix}, \quad
+        B = \begin{bmatrix}
+                1 & 2 \\ 0 & 1
+        \end{bmatrix}, \quad
+        AB = \begin{bmatrix}
+                1 & 2 \\ 1 & 3
+        \end{bmatrix}, \quad
+        BA = \begin{bmatrix}
+                3 & 2 \\ 1 & 1
+        \end{bmatrix}.
+        \]
+        \begin{enumerate}
+                \item Are the eigenvalues of $AB$ equal to the eigenvalues of $A$ times the eigenvalues of $B$?
+                \item Are the eigenvalues of $AB$ equal to the eigenvalues of $BA$?
+        \end{enumerate}
+        \paragraph{Solution 6.}
+        The eigenvalues of a $2\times 2$ matrix $\begin{bmatrix}
+                a & b \\ c & d
+        \end{bmatrix}$ are simply roots of the characteristic polynomial \[f(t) = (a - t)(d - t) - bc = t^2 - (a + d)t + (ad - bc).\]
+        Thus, we calculate
+        \begin{align*}
+                f_A(t) \;&=\; t^2 - 2t + 1 = 0, && \lambda_A = 1. \\
+                f_B(t) \;&=\; t^2 - 2t + 1 = 0, && \lambda_B = 1. \\
+                f_{AB}(t) \;&=\; t^2 - 4t + 1 = 0, && \lambda_{AB} = 2 \pm \sqrt{3}. \\
+                f_{BA}(t) \;&=\; t^2 - 4t + 1 = 0, && \lambda_{BA} = 2 \pm \sqrt{3}.
+        \end{align*}
+        \begin{enumerate}
+                \item Note that the eigenvalues of $AB$ are \textit{not} the product of eigenvalues of $A$ and $B$.
+                \item The eigenvalues of $AB$ in this particular case are indeed the eigenvalues of $BA$. However,
+                they do not share the same corresponding eigenvectors (this is obvious when solving $(AB)v = (BA)v = \lambda v$, which forces $v = 0$).
+        \end{enumerate}
+
+
+
+        \paragraph{Problem 14.}
+        Solve $\det(Q - \lambda I) = 0$ by the quadratic formula to reach $\lambda = \cos\theta \pm i\sin\theta$.
+        \[
+        Q = \begin{bmatrix}
+                \cos\theta & -\sin\theta \\ \sin\theta & \cos\theta
+        \end{bmatrix}.
+        \]
+        Note that $Q$ rotates the $xy$ plane by the angle $\theta$, with no real $\lambda$'s.
+        Find the eigenvectors of $Q$ by solving $(Q - \lambda I)x = 0$.
+        \paragraph{Solution 14.}
+        Using the identity $\sin^2\theta + \cos^2\theta = 1$, we have
+        \[
+        f(t) \;=\; t^2 - (2\cos\theta)t + (\cos^2\theta + \sin^2\theta) = 0, \quad\quad 
+                \lambda_{\pm} \;=\; \frac{1}{2}(2\cos\theta \pm \sqrt{4\cos^2\theta - 4}) = \cos\theta \pm i\sin\theta.
+        \]
+        Clearly, the eigenvalues $\lambda_{\pm}$ are not real (except when $\theta = n\pi$, which corresponds either to a half turn, or the identity). \\
+
+        To solve for the eigenvectors,
+        \[
+        Q - \lambda_{\pm}I \;=\; \begin{bmatrix}
+                \mp i\sin\theta & -\sin\theta \\ \sin\theta & \mp i\sin\theta
+        \end{bmatrix}
+        \;=\; \sin\theta \begin{bmatrix}
+                \mp i & 1 \\ 1 & \mp i
+        \end{bmatrix}
+        \]
+        Thus, for eigenvalue $\lambda_+ = \cos\theta + i\sin\theta$,
+        \[
+                (Q - \lambda_+I)v_+ \;=\; 0, \quad\quad \sin\theta \begin{bmatrix}
+                        -i & 1 \\ 1 & -i
+                \end{bmatrix} \begin{bmatrix}
+                        v_{+1} \\ v_{+2}
+                \end{bmatrix} \;=\; 0, \quad\quad
+                v_{+1} \;=\; iv_{+2}.
+        \]
+        For eigenvalue $\lambda_- = \cos\theta - i\sin\theta$,
+        \[
+                (Q - \lambda_-I)v_- \;=\; 0, \quad\quad \sin\theta \begin{bmatrix}
+                        i & 1 \\ 1 & i
+                \end{bmatrix} \begin{bmatrix}
+                        v_{-1} \\ v_{-2}
+                \end{bmatrix} \;=\; 0, \quad\quad
+                v_{-1} \;=\; -iv_{-2}.
+        \]
+        Thus, we choose
+        \[
+                v_+ \;=\; \begin{bmatrix}
+                        i \\ 1
+                \end{bmatrix}, \quad\quad
+                v_- \;=\; \begin{bmatrix}
+                        -i \\ 1
+                \end{bmatrix}.
+        \]
+
+
+
+        \paragraph{Problem 17.}
+        The sum of the diagonal entries (the \textit{trace}) equals the sum of the eigenvalues.
+        \[
+        A = \begin{bmatrix}
+                a & b \\ c & d
+        \end{bmatrix}
+        \text { has } \det(A - \lambda I) = \lambda^2 - (a + d)\lambda + (ad - bc) = 0.
+        \]
+        Using the quadratic formula, find the eigenvalues.
+        Find their sum. If $\lambda_1 = 3$ and $\lambda_2 = 4$, find $\det(A - \lambda I)$.
+        \paragraph{Solution 17.}
+        Using the quadratic formula, we write the roots of the given characteristic polynomial as follows.
+        \[
+        \lambda_\pm \;=\; \frac{1}{2}\left((a + d) \pm \sqrt{(a + d)^2 - 4(ad - bc)}\right)
+         \;=\; \frac{1}{2}\left((a + d) \pm \sqrt{(a - d)^2 + 4bc}\right).
+        \]
+        Their sum $\lambda_+ + \lambda_- = a + d = \mathrm{trace}(A)$. \\
+        
+        If $\lambda_1 = 3$ and $\lambda_2 = 4$, then note that these are roots of $\det(A - \lambda I)$. Thus,
+        \[
+        \det(A - \lambda I) \;=\; (\lambda - 3)(\lambda - 4) \;=\; \lambda^2 - 7\lambda + 12.
+        \]
+
+
+        \paragraph{Problem 25.}
+        Suppose $A$ and $B$ have the same eigenvalues $\lambda_1, \dots, \lambda_n$ with the same independent eigenvectors $x_1, \dots, x_n$.
+        Then, show that $A = B$.
+        \paragraph{Solution 25.}
+        Note that since $A$ and $B$ have $n$ eigenvalues and independent eigenvectors, we must have $\dim(A) = \dim(B) = n$.
+        Also note that since all eigenvectors $v_i \in V$ are independent, they comprise a basis of the $n$ dimensional vector space $V$.
+        Let $x \in V$ be arbitrary. Thus, $x$ has a unique representation in the basis $\{v_1, \dots, v_n\}$. For scalars
+        $c_1,\dots,c_n$,
+        \[
+        x = c_1v_1 + \dots + c_nv_n.
+        \]
+        Now, we compute the products
+        \begin{align*}
+        Ax \;&=\; A(c_1v_1 + \dots + c_nv_n) \;=\; c_1(Av_1) + \dots + c_n(Av_n) \;=\; c_1\lambda_1v_1 + \dots + c_n\lambda_nv_n. \\
+        Bx \;&=\; B(c_1v_1 + \dots + c_nv_n) \;=\; c_1(Bv_1) + \dots + c_n(Bv_n) \;=\; c_1\lambda_1v_1 + \dots + c_n\lambda_nv_n.
+        \end{align*}
+        We use the fact that $Av_i = \lambda_iv_i = Bv_i$. Thus, $Ax = Bx$ for all $x \in V$. Hence, we must have $A = B$. \\
+        
+        Specifically, we let $x_i$ be such that its $i$\textsuperscript{th} coordinate is $1$ and all other entries are $0$.
+        Then $Ax_i = A_i$ and $Bx_i = B_i$, where $A_i$ and $B_i$ are the $i$\textsuperscript{th} columns of $A$ and $B$.
+        Thus, since $Ax_i = Bx_i$ for all $i = 1, \dots, n$, we see that $A$ and $B$ are equal column by column. Hence, $A = B$.
+        
+
+\end{document}
