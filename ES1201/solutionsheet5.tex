@@ -1,0 +1,80 @@
+\documentclass[10pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{array} 
+\usepackage{enumitem}
+\usepackage{siunitx}
+\usepackage{chemformula}
+% \usepackage{graphicx}
+% \usepackage{caption}
+
+\geometry{a4paper, margin=1in}
+\setlength\parindent{0pt}
+% \renewcommand\qedsymbol{$\blacksquare$}
+\newcolumntype{L}{l@{\quad\quad}}
+\newcounter{prob}
+\def\problem{\stepcounter{prob}\paragraph{Problem \arabic{prob}}}
+\def\solution{\\\\\textbf{Solution }}
+
+\begin{document}
+        \par\textbf{IISER Kolkata} \hfill \textbf{Assignment V}
+        \vspace{3pt}
+        \hrule
+        \vspace{3pt}
+        \begin{center}
+                \LARGE{\textbf{ES1201 : Earth System Processes}}
+        \end{center}
+        \vspace{3pt}
+        \hrule
+        \vspace{3pt}
+        Satvik Saha, \texttt{19MS154}\hfill\today
+        \vspace{20pt}
+
+        \problem What are the conditions that determine whether a planet retains or loses a gas from its atmosphere over geological time?
+        What system of gases is used to obtain information about the early atmosphere, during the formation of the earth?
+        \solution The retention of atmospheric gases is based on the strength of the planet's gravitational field, as well as the temperature
+        of the given gas in the upper atmosphere. While gas molecules are in constant motion, the gravitational field ensures that it doesn't
+        escape. However, a sufficiently fast/energetic particle can escape a planet's gravitational influence completely. The minimum
+        velocity which a particle must possess in order to do so is called the escape velocity for a planet, and is given by
+        \[
+                v_{esc} \;=\; \sqrt{\frac{2GM}{r}.}
+        \]
+        Here, $M$ is the mass of the planet and $r$ is its radius. Now, molecules of gas move randomly, with different particles
+        having different velocities, but their \textit{average} speed is related to the temperature of the gas by
+        \[
+                v_{avg} \;=\; \sqrt{\frac{8k_BT}{\pi m}}.
+        \]
+        Here, $m$ is the mass of one gas molecule and $T$ is the temperature of the gas. Note that this is expected of an ideal gas,
+        but real gases follow similar behaviour. Thus, we are also only concerned with temperatures in the upper atmosphere, where
+        molecules are unlikely to collide with each other and are thus free to escape purely by virtue of their speed.
+        Now, the actual speeds of gas molecules lie on a Maxwell distribution, so some are faster
+        and some are slower than $v_{avg}$. If a sufficient fraction of them exceed the escape velocity $v_{esc}$ of a planet,
+        then that particular gas will be lost over time. We know that for retention over geologic time, of the order of the age of the Solar System,
+        we must have $v_{avg} < v_{esc} /6$. Using this criterion for different gases (which have different molecular weights, hence different
+        $v_{avg}$ for the same temperature), we can determine which gases are retained by a planet from its mass, radius and
+        upper atmosphere temperature. \\
+
+        The \ch{^{40}K}-\ch{^{40}Ar} and \ch{^{129}I}-\ch{^{129}Xe} systems are of particular interest in studying the evolution of the early atmosphere.
+        These radioactive systems proceed with half lives of \SI{1.28}{} billion years and \SI{15.7}{} million years respectively.
+        Thus, these systems allow us to determine both long term and early phase evolution of the Earth's atmosphere, and pinpoint
+        degassing events. Essentially, the Earth's mantle had low ratios of \ch{I/Xe} and \ch{K/Ar} in the early stage.
+        Thus, the ratios of the daughter products, the gases \ch{Xe} and \ch{Ar} would increase in the mantle over time at a steady rate.
+        If a degassing event occurs, then these gases would be lost to the atmosphere, causing the parent/daughter ratio in the mantle
+        to abruptly increase. We can measure this by considering the amount of mantle-bound daughter isotope, relative to a non-radiogenic isotope.
+        With decay of the parent, this ratio increases in the mantle over time steadily. As soon as there is a degassing event, both
+        radiogenic and non-radiogenic gases enter the atmosphere and the ratios in the mantle abruptly change, subsequently increasing at a much
+        faster rate. The ratio in the atmosphere thus follows a different path from the ratio in the mantle.
+        Note that the parent materials are preferentially retained in the mantle during this process. This is analogous to 
+        the \ch{Hf}-\ch{W} radiogenic system. \\
+
+        The different timescales of both systems allow us to consider two scenarios: degassing before the complete decay of \ch{^{129}I},
+        or after the complete decay of \ch{^{129}I}. In the first case, the \ch{^{129}Xe}/\ch{^{130}Xe} ratios in the mantle and atmosphere
+        deviate from each other from the time of degassing. In the second case, they remain the same in the mantle and atmosphere as
+        the parent has had time to completely decay. Observations show high \ch{^{129}Xe}/\ch{^{130}Xe} and \ch{^{40}Ar}/\ch{^{36}Ar}
+        ratios in the mantle relative to the atmosphere, which shows that about 80\% of the Earth's atmosphere must have outgassed
+        early in its history, within tens of millions of years after accretion. This method has also been used to show that
+        over 99\% of the Earth's early atmosphere was lost within the first \SI{100}{} million years.
+
+\end{document}
