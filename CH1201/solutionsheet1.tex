@@ -1,0 +1,175 @@
+\documentclass[10pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{array} 
+\usepackage{enumitem}
+\usepackage{siunitx}
+
+\geometry{a4paper, margin=1in}
+\setlength\parindent{0pt}
+% \renewcommand\qedsymbol{$\blacksquare$}
+\newcolumntype{L}{l@{\quad\quad}}
+\newcounter{prob}
+\def\problem{\stepcounter{prob}\paragraph{Problem \arabic{prob}}}
+\def\solution{\\\\\textbf{Solution }}
+
+\begin{document}
+        \par\textbf{IISER Kolkata} \hfill \textbf{Assignment IV}
+        \vspace{3pt}
+        \hrule
+        \vspace{3pt}
+        \begin{center}
+                \LARGE{\textbf{CH1201 : General Physical Chemistry}}
+        \end{center}
+        \vspace{3pt}
+        \hrule
+        \vspace{3pt}
+        Satvik Saha, \texttt{19MS154}\hfill\today
+        \vspace{20pt}
+
+        \problem What happens when the vapour pressure of a liquid is equal to the external pressure?
+        \solution We know that the vapour pressure of a liquid varies non-linearly with temperature according to the Clausius-Clapyron equation,
+        \[
+        \frac{\mathrm{d} p}{\mathrm{d}T} \;=\; \frac{\Delta H_v}{T\Delta v} > 0.
+        \]
+        Here, $\Delta H_v$ is the specific latent heat of vapourisation and $\Delta v$ is the change in specific volume during the phase transition from
+        liquid to vapour. Thus, the vapour pressure increases with increase in temperature. \\
+
+        When the vapour pressure becomes equal to the external pressure, the liquid is said to boil. Bubbles of vapour are able to form within the
+        bulk of the liquid and this marks the phase transition from a liquid to vapour. The temperature at which this happens is called the boiling
+        point of the liquid.
+
+        \problem What is angle of contact of a liquid? On what factors does the angle of contact depend?
+        \solution The angle of contact between a liquid and a solid is the angle between the tangen tot the liquid drawn at the point of contact
+        and the surface of the solid inside the liquid. This is specific to that particular liquid-solid pair. It depends on the following factors.
+        \begin{enumerate}[label=(\roman*), itemsep=0pt, topsep=\parsep]
+                \item The nature of the solid surface.
+                \item The nature of the liquid.
+                \item The value of the interfacial tension.
+                \item The temperature of the system.
+        \end{enumerate}
+        For example, consider a droplet of liquid on top of a solid surface, with the top exposed to air. We denote $\gamma_{la}$ to be the 
+        surface tension along the liquid-air boundary, and similarly $\gamma_{ls}$ and $\gamma_{as}$ to be the surface tensions along the 
+        liquid-solid and air-solid boundaries respectively. The former is directed upwards, at an angle $\theta$ with the solid surface, 
+        while the latter two act opposite to one another along the solid surface. At equilibrium, the forces along the solid surface balance,
+        and we obtain
+        \[
+                \gamma_{as} \;=\; \gamma_{ls} \,+\, \gamma_{la}\cos{\theta}.
+        \]
+        Here, $\theta$ is the angle of contact.
+        
+        \problem What is the fluidity of a liquid? On what factors does it depend?
+        \solution The fluidity of a liquid, $\phi$, is the reciprocal of its dynamic viscosity $\eta$. While viscosity is a measure of a liquid's
+        resistance to deformation/flow, fluidity is a measure of its flowing capacity. Fluidity depends on the following factors.
+        \begin{enumerate}[label=(\roman*), itemsep=0pt, topsep=\parsep]
+                \item \textit{Size of molecules:} Liquids with larger/heavier molecules have less fluidity than those with smaller/lighter molecules. 
+                \item \textit{Shape of molecules:} Liquids with spherical molecules have greater fluidity than those with planar/irregular molecules. 
+                \item \textit{Impurities:} The presence of impurities decreases the fluidity of a liquid. 
+        \end{enumerate}
+
+        \problem What is the difference between nematic, smectic and cholesteric liquid crystals? Name two molecules in each category.
+        \solution These molecules are calamitic (rod-like) liquid crystals. Nematic liquid crystals show a thread-like structure, which is visible under
+        polarized light (not X-rays). They are orientationally ordered, i.e.\ when stress is applied, their planar structure is lost but the molecules
+        remain oriented together.\\
+
+        Cholesteric liquid crystals are a class of nematic crystals which also show a colour effect under polarized light.
+        This is because of the presence of chiral groups, which gives a helical twist to the orientation of the long axis of the molecules. \\
+
+        Smectic liquid crystals are both orientationally and translationally ordered. When stress is applied, the different layers glide over each
+        other, and the orientation of molecules within a layer is preserved. Smectic liquid crystals can be identified by both polarized light
+        and by X-rays. \\
+
+        Examples of each are as follows.
+        \begin{enumerate}[label=(\roman*), itemsep=0pt, topsep=\parsep]
+                \item \textit{Nematic (ordinary):} p-azoxy anisole, p-methoxy cinnamic acid.
+                \item \textit{Cholesteric:} hydroxypropyl cellulose, cholesteryl benzoate.
+                \item \textit{Smectic:} Ethyl p-azoxy benzoate, Ethyl p-azoxy cinnamate.
+        \end{enumerate}
+        
+
+        \problem The surface tension of ethyl acetate ($T_C = \SI{523}{\kelvin}$) is \SI{25}{dyne\per\cm} at \SI{0}{\celsius}.
+        Estimate its value at \SI{50}{\celsius}.
+        \solution We use the E\"otv\"os-Ramsay-Shields equation
+        \[
+        \gamma(MV)^{2 /3} \;\propto\; T_C - T - \SI{6}{\kelvin}.
+        \]
+        Note that \SI{523}{\kelvin} = \SI{250}{\celsius}. Thus,
+        \[
+        \gamma_{\SI{50}{\celsius}} \;=\; \gamma_{\SI{0}{\celsius}}\cdot\frac{250 - 50 - 6}{250 - 0 - 6} \;=\; 25\times\frac{194}{244} \;=\; 
+                \SI{20}{dyne\per\cm}.
+        \]
+
+        \problem If the levels of water and benzene that rose in the same capillary are \SI{9.9}{\cm} and \SI{4.5}{\cm} respectively,
+        calculate the surface tension of benzene. Also calculate the radius of the tube.
+        Given that $\gamma_\text{water} = \SI{72.75}{dyne\per\cm}$ at \SI{20}{\celsius}, and the densities of water and benzene are
+        \SI{0.9982e3}{\kg\per\m^3} and \SI{0.8785e3}{\kg\per\m^3} respectively.
+        \solution We use the formula 
+        \[
+                \gamma \;=\; \frac{1}{2}r\rho gh,
+        \]
+        where $r$ is the radius of the tube, $\rho$ is the density of the liquid and $h$ is the height of the liquid column.
+        Thus, we have
+        \[\gamma_\text{benzene} \;=\; \gamma_\text{water}\cdot\frac{(\rho h)_\text{benzene}}{(\rho h)_\text{water}}
+                \;=\; 72.75\times\frac{0.8785 \times 4.5}{0.9982 \times 9.9} \;=\; \SI{29.10}{dyne\per\cm}.\]
+        
+        Note that \SI{1}{dyne\per\cm} = \SI{1e-3}{\newton\per\m}.
+        Thus, the radius of the capillary is simply
+        \[
+        r \;=\; \left.\frac{2\gamma}{\rho gh}\;\right|_\text{water} \;=\; \frac{2\times 72.75\times 10^{-3}}{\SI{0.9982e3}{}\times 9.8\times \SI{9.9e-2}{}}
+                \;=\; \SI{0.15}{\mm}.
+        \]
+
+        \problem A liquid $\mathcal{A}$ has half the surface tension and twice the density of liquid $\mathcal{B}$ at \SI{25}{\celsius}.
+        If in a capillary the rise is \SI{10}{\cm} for liquid $\mathcal{A}$ , what will the rise of liquid $\mathcal{B}$ be at \SI{25}{\celsius}? 
+        \solution For a given capillary tube, we have $h \propto {\gamma}/{\rho}$. Thus,
+        \[
+        h_\mathcal{B} \;=\; h_\mathcal{A}\cdot\frac{\gamma_\mathcal{B}}{\gamma_\mathcal{A}}\cdot\frac{\rho_\mathcal{A}}{\rho_\mathcal{B}}
+                \;=\; h_\mathcal{A}\cdot \frac{2}{1}\cdot \frac{2}{1} \;=\; 4 h_\mathcal{A} \;=\; \SI{40}{\cm}.
+        \]
+
+        \problem The viscosities of water are \SI{0.018}{poise} and \SI{0.009}{poise} at \SI{0}{\celsius} and \SI{25}{\celsius} respectively.
+        Calculate the average value of viscosity activation energy, assuming it to be constant over this temperature.
+        \solution We use the relation
+        \[
+        \eta \;\propto\; \exp\left(\frac{E_\text{viscosity}}{RT}\right).
+        \]
+        Thus,
+        \[
+        \frac{\eta_1}{\eta_2} \;=\; \exp\left(\frac{E_\text{viscosity}}{R}\left[\frac{1}{T_1} - \frac{1}{T_2}\right]\right) .
+        \]
+        Substituting,
+        \[
+        \frac{0.018}{0.009} \;=\; \exp\left(\frac{E_\text{viscosity}}{8.314}\left[\frac{1}{273} - \frac{1}{298}\right]\right),
+        \]
+        \[
+        E_\text{viscosity} \;=\; 8.314\times\frac{273\times 298}{298 - 273}\times \log{2} \;=\; \SI{18.75}{\kilo\joule\per\mole}.
+        \]
+
+        \problem What will be the pressure inside a soap bubble of radius \SI{0.1}{\mm} kept in air?
+        Given that $\gamma_\text{soap water} = \SI{150}{dyne\per\cm}$ and atmospheric pressure is \SI{760}{\mm} of Hg.
+        \solution
+        Note that 760 mm of Hg = \SI{1.013e5}{\pascal}.
+        We use the relation
+        \[
+                p \;=\; p_0 \,+\, \frac{4\gamma}{r} \;=\; p_0 + \frac{4 \times 150}{0.1} \;=\; p_0 +\SI{6000}{\pascal} \;=\; \SI{1.073e5}{\pascal}.
+        \]
+
+        \problem In the absolute method of determination of the viscosity coefficient $\eta$ using the Poiseuille equation, what should the error in the
+        radius be if the error in $\eta$ is to be kept within \SI{4}{\percent}?
+        \solution From Poiseuille's equation,
+        \[
+        \eta \;=\; \frac{\pi r^4 \Delta{p}}{8Ql},
+        \]
+        where $Q$ is the volumetric rate of flow. Thus, we can write
+        \[ \frac{\delta\eta}{\eta} \;=\; 4 \frac{\delta r}{r} \,+\, \frac{\delta(\Delta p)}{\Delta p} \,+\, \frac{\delta Q}{Q} \,+\, \frac{\delta l}{l}
+                \;\geq\; 4 \frac{\delta r}{r}.      
+        \]
+        We do this by taking logarithms, differentiating, and considering absolute values of deviations $\delta x$.
+        Hence, the relative error must be bound by
+        \[
+        \frac{\delta r}{r} \;\leq\; \frac{1}{4}\frac{\delta\eta}{\eta} \;=\; \SI{1}{\percent}.
+        \]
+
+\end{document}

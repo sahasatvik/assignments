@@ -1,0 +1,258 @@
+\documentclass[10pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{array} 
+\usepackage{enumitem}
+\usepackage{siunitx}
+\usepackage{chemformula}
+
+\geometry{a4paper, margin=1in}
+\setlength\parindent{0pt}
+% \renewcommand\qedsymbol{$\blacksquare$}
+\newcolumntype{L}{l@{\quad\quad}}
+\newcounter{prob}
+\def\problem{\stepcounter{prob}\paragraph{Problem \arabic{prob}}}
+\def\solution{\\\\\textbf{Solution }}
+
+\begin{document}
+        \par\textbf{IISER Kolkata} \hfill \textbf{Assignment V}
+        \vspace{3pt}
+        \hrule
+        \vspace{3pt}
+        \begin{center}
+                \LARGE{\textbf{CH1201 : General Physical Chemistry}}
+        \end{center}
+        \vspace{3pt}
+        \hrule
+        \vspace{3pt}
+        Satvik Saha, \texttt{19MS154}\hfill\today
+        \vspace{20pt}
+
+        \textit{Note:} All logarithms are natural unless specified otherwise.
+
+        \problem Distinguish between the {\it molecularity} and {\it order} of a chemical reaction.
+        For which type of reactions are the order and molecularity the same?
+        \solution The \textit{molecularity} of a reaction is the number of particles (atoms/molecules/ions) which must collide simultaneously
+        together for the formation of the products. Consider a reaction with reactants $A_1, A_1, \dots, A_n$. At a given temperature,
+        the rate of this reaction can be written in the form $R = k[A_1]^{\alpha_1}[A_2]^{\alpha_2}\dots[A_n]^{\alpha_n}$, where the 
+        exponents $\alpha_i$ are all determined experimentally. Each exponent $\alpha_i$ is called the \textit{order} of the reaction with respect to 
+        the corresponding reactant $A_i$. The sum of these exponents $\alpha_1 + \alpha_2 + \dots \alpha_n$ is called the \textit{order} of
+        the chemical reaction. \\
+
+        The order and molecularity of a chemical reaction are equal when the reaction is \textit{elementary}, i.e.\ it proceeds in a single
+        step exactly as written in the chemical equation. For example, consider the reaction \ch{a A + b B -> c C + dD}.
+        If this proceeds in a single step, with exactly $a$ molecules of $A$ colliding with $b$ molecules of $B$, to produce
+        the products as written, we expect the rate law to have the form $R = k[A]^a[B]^b$. In this case, both order and molecularity
+        of the reaction are $a + b$.
+
+        \problem While it is expected that a large amount of substance would take a longer time to decompose, the dependence of the half-life
+        ($t_{1/2}$) on the initial concentration does not indicate this in general. Explain.
+        \solution We first derive the general expression for the half life of an $n^\text{th}$ order reaction, governed by
+        $-\mathrm{d}{x} /\mathrm{d}{t} \;=\; kx^n $. When $n = 1$, it is easily seen that $x(t) = x_0 e^{-kt}$ is the unique solution.
+        Otherwise, rearranging and integrating, we have $1 /x^{n-1} = 1 /x_0^{n-1} + (n-1)kt$. Substituting $x = x_0 /2$, we have
+        \begin{align*}
+        t_{1 /2} \;&=\; \frac{\log{2}}{k}, & n = 1,\\
+        t_{1 /2} \;&=\; \frac{2^{n-1} - 1}{(n-1)k}\cdot \frac{1}{x_0^{n-1}} \;\propto\; \frac{1}{x_0^{n-1}}, & n > 1.
+        \end{align*}
+        Thus, the half life of a reaction generally decreases with the increase in initial concentration of the reactant, and is a contstant
+        for first order reactions. Hence, a larger initial concentration generally means that the reaction proceeds faster, i.e.\ 
+        the substance decomposes quickly. \\
+
+        We may explain this qualitatively by noting that with a higher initial concentration, reactant particles are more abundant
+        and hence have a greater probability of colliding with each other and proceeding with the reaction. This makes the process faster.
+        In the special case of the first order reaction, each particle decomposes independently of each other,
+        and hence has a mean lifespan of $1 /k$. Here, the initial concentration has no effect on the half life.
+
+        \problem For a chemical reaction, the rate constant is given by $k = \SI{1.5e-3}{\per\s}$ at \SI{25}{\celsius}.
+        If the initial concentration of the reactant is \SI{0.5}{\mole\per\litre}, determine the rate of the reaction after \SI{30}{\minute}.
+        \solution Note that the given reaction must be of the first order, since the rate constant has dimension $T^{-1}$. Let the
+        concentration of the only reactant be expressed by $x(t)$. Thus, we have
+        \[
+        -\frac{\mathrm{d} x}{\mathrm{d}t} \;=\; kx.
+        \]
+        Integrating, and setting $x_0 = x(0)$, we have
+        \[
+                x(t) \;=\; x_0 e^{-kt}.
+        \]
+        Plugging in $t = \SI{30}{min} = \SI{1800}{\s}$, we have 
+        \[
+                x(\SI{30}{\min}) \;=\; 0.5 \times e^{- 1.5\times 10^{-3} \times 1800} \;=\; \SI{0.034}{\mole\per\litre}.
+        \]
+
+        Thus, the rate of the reaction is given by
+        \[
+                R \;=\; k x \;=\; 1.5\times 10^{-3} \times 0.034 \;=\; \SI{5.04e-5}{\mole\per\litre\per\s}.
+        \]
+
+        \problem The rate expression for the reaction \ch{A_{(g)} + B_{(g)} -> C_{(g)}} is given by $R = k [A]^{\frac{1}{2}}\, [B]^{2}$.
+        What changes in rate will occur if the initial concentrations of A and B increase by factors of 4 and 2 respectively?
+        \solution Using proportionality, we have
+        \[R' \;=\; R \times 4^{\frac{1}{2}} \times 2^{2} \;=\; 8R.\]
+        Hence, the rate of the reaction increases by a factor of 8.
+
+        \problem Show that the concentration of the product P for a first order irreversible reaction during the initial period (time $t$ is very small)
+        is given by the equation $[P] \;=\; [A]_0\, (kt - \frac{1}{2}k^2t^2)$.
+        \solution For the irreversible reaction \ch{A ->[ k ] P}, we have
+        \[
+        \frac{\mathrm{d} [P]}{\mathrm{d}t} \;=\; -\frac{\mathrm{d} [A]}{\mathrm{d}t} \;=\; k[A].
+        \]
+        Rearranging and integrating over time,
+        \[
+        \int_{[A]_0}^{[A]} \frac{\mathrm{d}{[A]}}{[A]} \;=\; - \int_0^t k \mathrm{d}{t},   
+        \]
+        \[
+        \log\frac{[A]}{[A]_0} \;=\; -kt.
+        \]
+
+        Note that if $n$ moles of A react, we must end up with the same number of moles of P. Thus, $[P] = [A]_0 - [A]$.
+        Plugging this in,
+        \[
+        [P] \;=\; [A]_0 (1 - e^{-kt}).
+        \]
+        We now use the Taylor expansion $e^x = 1 + x + \frac{1}{2}x^2 + O(x^3)$, which serves as an good approximation for small $x$.
+        Thus, for small $t$, we have
+        \[
+        [P] \;=\; [A]_0 \left(kt - \frac{1}{2}k^2t^2 \right).
+        \]
+
+        \problem Prove that the half-life ($t_{1/2}$) of a first order chemical reaction varies with temperature according to $\log{t_{1/2}} \propto 1 /T$.
+        \solution First, we derive the expression for $t_{1 /2}$ for a first order reaction. We demand that after one half-life,
+        the concentration of the reactant halves. Thus, using our previously derived expression $x = x_0 e^{-kt}$, we see that
+        when $x = x_0 / 2$,
+        \[t_{1 /2} \;=\; \frac{\log{2}}{k}.\]
+        Now, we invoke the Arrhenius equation which says that the rate constant $k$ varies with temperature $T$ as
+        \[k \;=\; A e^{-E_a /RT},\]
+        where $E_a$ is the activation energy, assumed to be contstant with temperature.
+        This means that $\log{k} = -\left(\frac{1}{T}\right)\frac{E_a}{R} + \log{A}$, which is approximately proportional to $-1 /T$.
+        Combining this with $t_{1 /2} \propto 1 / k$, we have $\log{t_{1 / 2}} = \log\log{2} - \log{k}$, which is approximately
+        \[
+        \log{t_{1 /2}} \;\stackrel{?}{\propto}\; -\log{k} \;\stackrel{?}{\propto}\; \frac{1}{T}.
+        \]
+        More accurately, a graph of $\log{t_{1 /2}}$ versus $1 /T$ will be linear, with a positive slope,
+        since
+        \[
+        \log{t_{1 /2}} \;=\; \log\log{2} - \log{A} + \left( \frac{1}{T}  \right)\frac{E_a}{R}.
+        \]
+
+        \problem For a chemical reaction at \SI{60}{\celsius}, a plot of the inverse of the reactant concentration $(1 / [A])$ versus time 
+        is a straight line with a slope of \SI{4e-2}{\litre\per\mole\per\s}. Calculate the time required (in seconds) for 1.0 M of reactant
+        to decrease to 0.25 M.
+        \solution We denote $[A] = x(t)$. Since the plot of $1 /x$ versus $t$ is a straight line, we must have $1 /x = bt + c$, for constants
+        $b$ and $c$. Differentiating, $-\mathrm{d}{x}/ x^2 = b\,\mathrm{d}{t}$, i.e.\ $-{\mathrm{d} x}/{\mathrm{d}t} = bx^2$.
+        Thus, this reaction is of the second order, with rate constant $b$ equal to the slope of the plot. \\
+        To calulate the time taken, we simply use the equation of the straight line, $\Delta{(1 /x)}= b\Delta{t}  $. Thus,
+        \[
+        \Delta{t} \;=\; \frac{1}{b} \left[ \frac{1}{x_f} - \frac{1}{x_0} \right]
+                \;=\; \frac{1}{4\times10^{-2}} \left[ \frac{1}{0.25} - \frac{1}{1.0} \right] 
+                \;=\; 25 \times 3 \;=\; \SI{75}{\s}.
+        \]
+
+        \problem Ethyl acetate undergoes hydrolysis reaction in presence of \ch{NaOH} in an ethanol-water mixture at \SI{30}{\celsius}.
+        In an experiment in which \SI{0.05}{\mole\, \dm^{-3}} of each reactant was present at time $t = 0$, the time for half change was
+        \SI{1800}{\s} and the time for three-quarters change was \SI{5400}{\s}. Deduce the order of the reaction and calculate the rate constant.
+        How much time is required to complete 10\% of the reaction?
+        \solution
+        For a general $n^\text{th}$ order reaction, we use the integrated rate law, $1 /x^{n-1} = 1 /x_0^{n-1} + (n-1)kt$.
+        Substituting $x = x_0 /2$ and $x = x_0 /4$, which represent the half and three-quarter reaction points respectively, we obtain
+        \[
+        \frac{t_{1 /2}}{t_{3 /4}} \;=\; \frac{1}{2^{n-1} + 1}.
+        \]
+        Thus, we have $2^{n-1} + 1 = 5400 /1800 = 3$. Hence, $n = 2$, and the reaction is of the second order. Using $x_0 = 0.05$, we have
+        \[
+        k \;=\; \frac{1}{t_{1 /2} x_0} \;=\; \frac{1}{1800 \times 0.05} \;=\; \SI{1.1e-2}{\litre\per\mole\per\s}.
+        \]
+
+        For 10\% of the reaction, we substitute $x = 9x_0 / 10 = 0.045$ to obtain
+        \[
+        t \;=\; \frac{1}{k} \left[ \frac{1}{x} - \frac{1}{x_0} \right] \;=\; 90\times \left[ \frac{1}{0.045} - \frac{1}{0.05} \right]
+                \;=\; \SI{200}{\s}.
+        \]
+
+        \problem In a gaseous reaction, when the inverse of the pressure of the reactant is plotted against time, a straight line is obtained with
+        intercept \SI{150}{\per\bar} and slope \SI{2e-3}{\per\bar\per\s}. Calculate the half-life for the reaction.
+        \solution We denote the pressure of the gas as $p$. We have $1 /p = kt + 1 /p_0$, where $p_0$ is the initial pressure.
+        It is given that $1 /p_0 = \SI{150}{\per\bar}$, the intercept of the plot. Like before, differentiating and rearranging
+        yields $-\mathrm{d}{p}/\mathrm{d}{t} = kp^2$, a second order rate law with rate constant $k$ equal to the slope of the plot.
+        When $p = p_0 /2$, we have
+        \[
+        t_{1 /2} \;=\; \frac{1}{k p_0} \;=\; \frac{150}{2\times 10^{-3}} \;=\; \SI{75e3}{\s}.
+        \]
+
+        \problem In the first order reaction \ch{A <=>[ k1 ][ k_{-1} ] B}, the initial concentration of A and B are [A]$_0$ and 0 respectively.
+        At equilibrium the concentration of A and B becomes [A]$_e$ and [B]$_e$ respectively.
+        Derive an expression for the time taken by B to attain a concentration equal to 0.5[B]$_e$.
+        For this reaction at \SI{75}{\celsius}, let $k_1 = \SI{1.2e-3}{\per\s}$ and $k_{-1} = \SI{3.3e-2}{\min^{-1}}$.
+        Find the time required to produce B to half of its equilibrium concentration.
+        \solution We denote $[A] = x(t)$ and $[B] = y(t)$. Note that at any point, the amount of B produced must equal the amount of
+        A reacted, i.e.\ $y = x_0 - x$. We thus write
+        \[
+        \frac{\mathrm{d} y}{\mathrm{d}t} \;=\; k_1 x \,-\, k_{-1}y \;=\; -(k_1 + k_{-1})y + k_1x_0.
+        \]
+        Rearranging and integrating,
+        \[
+        \int_0^y \frac{\mathrm{d}{y}}{(k_1 + k_{-1})y - k_1x_0} \;=\; -\int_0^t \mathrm{d}{t},
+        \]
+        \[
+        \log \frac{k_1x_0 - (k_1 + k_{-1})y}{k_1x_0}  \;=\; -(k_1 + k_{-1})t.
+        \]
+        At equilibrium, we must have $\mathrm{d}{y}/ \mathrm{d}{t} = 0$, thus $k_1x_0 = (k_1 + k_{-1})y_e$. Plugging this in,
+        \[\log\frac{y_e}{y_e - y} \;=\; (k_1 + k_{-1})t.\]
+        Hence, when $y = y_e / 2$, we have
+        \[
+        (k_1 + k_{-1})t_{1 / 2} \;=\; \log\frac{y_e}{y_e - \frac{1}{2}y_e} \;=\; \log{2}.
+        \]
+        Rearranging,
+        \[
+        t_{1 /2} \;=\; \frac{\log 2}{k_1 + k_{-1}}.
+        \]
+        Plugging in the given values for $k_1$ and $k_{-1}$, and using \SI{60}{\min^{-1}} = \SI{1}{\per\s}, we have
+        \[
+        t_{1 /2} \;=\; \frac{\log{2}}{1.2\times 10^{-3} + 0.55\times 10^{-3}} \;=\; \SI{396}{\s} \;=\; \SI{6}{\min}\:\SI{36}{\s}.
+        \]
+
+        \problem For a parallel reaction with $k_1$ and $k_2$ equal to \SI{3.42e-2}{\per\min} and \SI{1.14e-2}{{\per\min}} respectively,
+        calculate the percentage of A converted into B and C, and also find the ratio of [B] and [C] after \SI{20}{\min}.
+        \ch{A ->[ k_1 ] B} and \ch{A ->[ k_2 ] C} are in parallel.
+        (\textit{We relabel $k_1'$ to $k_2$ for convenience.})
+        \solution 
+        We denote $[A] = x(t)$, $[B] = y(t)$ and $[C] = z(t)$.
+        For a parallel reaction, we write
+        \[
+        -\frac{\mathrm{d}x}{\mathrm{d}t} \;=\; \frac{\mathrm{d} y}{\mathrm{d}t} \,+\, \frac{\mathrm{d} z}{\mathrm{d}t} \;=\; k_1x \,+\, k_2x
+                \;=\; (k_1 + k_2)x.
+        \]
+        This is equivalent to the standard result $x(t) = x_0e^{-(k_1 + k_2)t}$. Thus,
+        \[
+        \frac{\mathrm{d} y}{\mathrm{d}t} \;=\; k_1x_0e^{-(k_1 + k_2)t},\quad\quad\text{and}\quad\quad
+                \frac{\mathrm{d} z}{\mathrm{d}t} \;=\; k_2x_0e^{-(k_1 + k_2)t}.
+        \]
+        Rearranging and integrating,
+        \[
+        y(t) \;=\; \frac{k_1}{k_1 + k_2} x_0(1 - e^{-(k_1 + k_2)t}), \quad\quad\text{and}\quad\quad
+                z(t) \;=\; \frac{k_2}{k_1 + k_2} x_0(1 - e^{-(k_1 + k_2)t}).
+        \]
+        As $t \to \infty$, we have
+        \[
+        y_{\infty} \;=\; \frac{k_1}{k_1 + k_2} x_0,  \quad\quad\text{and}\quad\quad z_{\infty} \;=\; \frac{k_2}{k_1 + k_2}x_0.
+        \]
+
+        Plugging in the given values for $k_1$ and $k_2$, we have
+        \[
+        y_\infty \;=\; \frac{3.42}{3.42 + 1.14} x_0 \;=\; 0.75 x_0,\quad\quad\text{and}\quad\quad
+                z_\infty \;=\; \frac{1.14}{3.42 + 1.14} x_0 \;=\; 0.25x_0.
+        \]
+        Thus, \SI{75}{\percent} of A gets converted into B, and the remaining \SI{25}{\percent} gets converted into C.
+        Also, note that at any time, $y/ z = k_1 / k_2 = 3$. Hence, after \SI{20}{\min}, the ratio of concentrations of B and C is 3.
+
+        \problem The decomposition of ozone, \ch{2 O_3 <> 3 O_2}, is observed to obey the rate law $R = k[\ch{O_3}]^2\, [\ch{O_2}]^{-1}$.
+        Suggest a mechanism that agrees with the rate law.
+        \solution We propose the mechanism
+        \[ \ch{O_3 <=>[ k_1 ][ k_{-1} ] O_2 + O},   \]
+        \[ \ch{O_3 + O ->[ k_2 ] 2 O_2}. \]
+        At equilibrium, the rates of the forward and backward reactions in the first step are equal, and thus $k_1[O_3] = k_{-1}[O_2][O]$.
+        The rate of formation of \ch{O_2} in the second step is given by $k_2[O_3][O]$.
+        Substituting for $[O]$, we have $R = (k_1 k_2 /k_{-1})\cdot [O_3]^2 /[O_2]$.
+        Setting $k = k_1 k_2 /k_{-1}$, we obtain the desired rate equation.
+\end{document}
