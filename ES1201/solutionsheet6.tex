@@ -1,0 +1,126 @@
+\documentclass[10pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{array} 
+\usepackage{enumitem}
+\usepackage{siunitx}
+\usepackage{chemformula}
+
+\geometry{a4paper, margin=1in}
+\setlength\parindent{0pt}
+% \renewcommand\qedsymbol{$\blacksquare$}
+\newcolumntype{L}{l@{\quad\quad}}
+\newcounter{prob}
+\def\problem{\stepcounter{prob}\paragraph{Problem \arabic{prob}}}
+\def\solution{\\\\\textbf{Solution }}
+
+\begin{document}
+        \par\textbf{IISER Kolkata} \hfill \textbf{Assignment VI}
+        \vspace{3pt}
+        \hrule
+        \vspace{3pt}
+        \begin{center}
+                \LARGE{\textbf{ES1201 : Earth System Processes}}
+        \end{center}
+        \vspace{3pt}
+        \hrule
+        \vspace{3pt}
+        Satvik Saha, \texttt{19MS154}\hfill\today
+        \vspace{20pt}
+
+        \problem Explain briefly why the source of major fraction of Earth's water seems to be from meteorites but not from comets.
+        \solution To make this conclusion, we make use of the measured deuterium to hydrogen (D/H) ratios in water.
+        This ratio can be used as a `signature', and we have found that the bulk earth and early carbonaceous meteorites have
+        similar values (around $150\times 10^{-6}$ in the bulk earth). This value in comets is much higher (around $310\times 10^{-6}$),
+        thus making them an unlikely source of the majority of Earth's water.
+
+        \problem It is believed that the early Earth atmosphere was not as reducing as the gas mixture of Miller-Urey Experiment. Explain.
+        \solution The early atmosphere is thought to have oxidized over time with the escape of atomic hydrogen. Essentially,
+        volcanos do not generally emit reducing gases like ammonia and methane in quantities required by the Miller-Urey experiment,
+        and these gases would anyways be photolyzed by the solar UV radiation, leaving behind nitrogen and carbon-dioxide gases.
+        The carbon from carbonaceous meteorites would indeed be released during impacts as carbon-monoxide and methane, but these too
+        would be irreversably oxidized by hydroxyl radicals (released by photolysis of water by UV radiation) to form carbon-dioxide.
+        Note that this is possible because of the absence of atmospheric oxygen and ozone. All of the atomic hydrogen released in
+        these processes would escape into space. Thus, the early atmosphere could not have been as strongly reducing as suggested by
+        Miller-Urey.
+
+        \problem Explain nitrogen-fixation and briefly discuss the role of cyanobacteria in N-fixation and photosynthesis.
+        \solution Nitrogen fixation is the process by which natural processes or lifeforms convert molecular nitrogen
+        into fixed nitrogen -- nitrogeous compounds, such as ammonia and various nitrates. This is essential as most organisms can only use 
+        fixed nitrogen to make organic molecules like proteins and nucleic acids. There are two major ways this happens today: lightning
+        and marine organisms (mostly cyanobacteria). The immense heat supplied by ightning triggers the reaction of nearby nitrogen and oxygen, producing
+        nitric oxide, which subsequently oxidizes to nitric acid in the atmosphere. This rains down and dissociates in water into hydrogen
+        and nitrate ions.
+        \[\ch{N_2 + O_2 -> 2 NO}\]
+        \[\ch{HNO_3 <-> H^+  + NO_3^-}\]
+        The early atmosphere did not have enough oxygen for the same mechanism. However, there is an alternate reaction with carbon-dioxide which
+        achieves a similar effect.
+        \[\ch{N_2 + 2 CO_2 -> 2 NO + 2 CO}\]
+        Also, prokaryotes, not cyanobacteria, were likely the first organisms to supply fixed nitrogen.
+        There is an opposing process of bacterial denitrification which maintains balance by releasing nitrogen back into the atmosphere.\\
+
+        In addition to their contribution in nitrogen fixation, cyanobacteria were likely the first photosynthetic organisms. These
+        organisms released molecular oxygen into the atmosphere, thus leading to the Great Oxidation Event.
+        \[\ch{CO_2 + H_2O -> CH_2O + O_2}\]
+        The fact that cyanobacteria are able to do both is remarkable since the enzyme \textit{nitrogenase}, which is used to reduce molecular nitrogen,
+        is poisoned by oxygen. Thus, they developed solutions to safely deal with oxygen produced during photosynthesis. One way was to create
+        separate compartments (heterocysts) devoted solely to nitrogen fixation. Another was to photosynthesize only during the day and
+        fix nitrogen at night. Cyanobacteria are also closely related to chloroplasts in plants today, which are thought to have come from
+        an endosymbiotic event in the past. A prokaryotic cell must have been engulfed by another cell and entered a symbiotic relationship,
+        supplying oxygen to its host via photosynthesis in exchange for nutrients.
+
+        \problem Briefly explain the role of greenhouse gases in the early Earth atmosphere when the luminosity of Sun was 30\% less than that
+        of today (Faint Young Sun).
+        \solution The Faint Young Sun paradox raises the following question: how did the early earth remain warm enough to support liquid water,
+        which we know must have been present as it's essential for life? Solutions include a lower planetary albedo during that time (which is
+        unlikely as this requires a near zero albedo) and geothermal heat (which is not sufficient, and would require orders of magnitude more
+        heat flux than the current value). The most likely solution involves a greater greenhouse effect in those times. Increased
+        levels of greenhouse gases would be trap enough solar energy to keep temperatures above the freezing point of water. We know that ammonia was 
+        abundant, but would be rapidly destroyed by UV radiation. Thus, it has been suggested that \ch{CO_2} and \ch{CH_4} were the major
+        contributers. The carbonate-silicate cycle relies on silicate weathering on land to remove atmospheric \ch{CO_2} --
+        since continents were smaller, this means that \ch{CO_2} levels would have been higher. In addition, the impact of planetesimals
+        as well as volcanic eruptions would have released plenty of \ch{CO_2}. Similarly, \ch{CH_4} could have been released by impacts
+        or by serpentinization of the seafloor. This is helped by methanogenic bacteria which converted atmospheric hydrogen and
+        carbon-dioxide into methane. \\
+
+        Note that the carbonate-silicate cycle has a strong negatove feedback loop which stabilizes global temperatures: high \ch{CO_2} levels
+        and high temperatures increase the rate of silicate weathering, thus balancing volcanic outgassing. Similarly,
+        low \ch{CO_2} levels and low temperatures would decrease the rate of silicate weathering, allowing \ch{CO_2} from volcanos to 
+        accumulate until it's balanced by the loss due to weathering.
+        Methane also contributes to an anti-greenhouse effect by forming an organic haze which absorbs visible light and reflects
+        IR radiation away from the Earth.
+
+        \problem Discuss briefly the carbonate-silicate cycle for balancing \ch{CO_2} in the atmosphere over long timescales.
+        \solution The carbonate-silicate cycle describes the inorganic processes by which carbon-dioxide exits and enters the atmosphere over
+        geologic time. Carbon-dioxide is removed from the atmosphere via rainwater, in the form of carbonic acid. This acid is very weak,
+        but it's enough to dissolve carbonate and silicate rocks into their constituent ions, which are carried off into the oceans
+        by rivers. For example, consider calcium silicate.
+        \[
+        \ch{CaSiO_3 + H_2O + 2 CO_2 -> Ca^{2+} + SiO2 + 2 HCO_3^-}
+        \]
+        Marine organisms use these materials to build their shells and skeletons. This is called carbonate precipitation.
+        \[
+        \ch{Ca^{2+} + 2 HCO_3^- -> CaCO_3 + CO_2 + H_2O}
+        \]
+        Thus, there is a net removal of \ch{CO_2} (two molecules used, one released). When these marine organisms die, their remains
+        fall to the ocean floor, which thus acts as a storehouse for carbon-dioxide. \\
+
+        With time, the action of plate tectonics carries old seafloor to subduction zones, where all the carbonate is forced into the mantle.
+        Under high pressure and temperature conditions deep within the mantle, this reacts with silica and releases carbon-dioxide.
+        \[
+        \ch{CaCO_3 + SiO2 -> CaSiO_3 + CO_2}
+        \]
+        This carbon-dioxide eventually finds its way out into the atmosphere via volcanism, thermal vents, or springs, thus completing the cycle. \\
+
+        The carbonate-silicate cycle is connected with a strong negative feedback loop, as explained in the previous answer. The rate at which
+        carbon-dioxide is bound is proportional to the available land surface. Higher temperatures also increase the rate of silicate weathering.
+        For example, if \ch{CO_2} levels rise, the greenhouse effect causes global temperatures to rise, increasing precipitation and silicate weathering.
+        This increases the rate of removal of atmospheric \ch{CO_2}, thus restoring balance.
+        Similarly, lower \ch{CO_2} levels decrease global temperatures, decrease precipitation and silicate weathering and thus
+        decrease the rate of atmospheric \ch{CO_2} removal, allowing volcanism to catch up and restore \ch{CO_2} levels.
+        Thus this stabilizing effect has earned the carbonate-silicate cycle the name `Earth's thermostat'.
+
+
+\end{document}
