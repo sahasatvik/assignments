@@ -17,14 +17,14 @@
     <link rel="stylesheet" href="https://sahasatvik.github.io/cards.css">
     <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body class="dark-theme">
     <div id="global-container">
         <div id="logo-container">
             <img id="logo" src="https://sahasatvik.github.io/logo_alpha.svg" alt="" onmouseup="toggleTheme()"/>
             <div id="assignments">Assignments</div>
         </div>
         <div id="y1s2-card-container" class="card-container">
-            <div id="ch1201" class="card card-dark borderless">
+            <div id="ch1201" class="card borderless">
                 <div class="card-title">
                     CH1201 - General Physical Chemistry
                 </div>
@@ -44,7 +44,7 @@
                     </li>
                 </ul>
             </div> 
-            <div id="ch1202" class="card card-dark borderless">
+            <div id="ch1202" class="card borderless">
                 <div class="card-title">
                     CH1202 - Chemistry Laboratory II
                 </div>
@@ -77,7 +77,7 @@
                     </li>
                 </ul>
             </div> 
-            <div id="es1201" class="card card-dark borderless">
+            <div id="es1201" class="card borderless">
                 <div class="card-title">
                     ES1201 - Earth System Processes
                 </div>
@@ -120,7 +120,7 @@
                     </li>
                 </ul>
             </div> 
-            <div id="ma1201" class="card card-dark borderless">
+            <div id="ma1201" class="card borderless">
                 <div class="card-title">
                     MA1201 - Mathematics II
                 </div>
@@ -166,7 +166,7 @@
                     </li>
                 </ul>
             </div> 
-            <div id="ma1202" class="card card-dark borderless">
+            <div id="ma1202" class="card borderless">
                 <div class="card-title">
                     MA1202 - Mathematical Methods I
                 </div>
@@ -194,7 +194,7 @@
         </div>
         <div class="separator"></div>
         <div id="y1s1-card-container" class="card-container">
-            <div id="ch1101" class="card card-dark borderless">
+            <div id="ch1101" class="card borderless">
                 <div class="card-title">
                     CH1101 - Elements of Chemistry
                 </div>
@@ -222,7 +222,7 @@
                     </li>
                 </ul>
             </div>
-            <div id="es1101" class="card card-dark borderless">
+            <div id="es1101" class="card borderless">
                 <div class="card-title">
                     ES1101 - Earth and Planetary Sciences
                 </div>
@@ -243,7 +243,7 @@
                     </li>
                 </ul>
             </div>
-            <div id="ma1101" class="card card-dark borderless">
+            <div id="ma1101" class="card borderless">
                 <div class="card-title">
                     MA1101 - Mathematics I
                 </div>
@@ -312,7 +312,7 @@
                     </li>
                 </ul>
             </div> 
-            <div id="ls1102" class="card card-dark borderless">
+            <div id="ls1102" class="card borderless">
                 <div class="card-title">
                     LS1102 - Biology Laboratory I
                 </div>
@@ -352,8 +352,6 @@
         </div>
     </div>
     <script type="text/javascript" charset="utf-8">
-
-        var x = document.getElementsByClassName("card");
         var light;
         
         try {
@@ -364,20 +362,12 @@
         }
         
         function lightTheme() {
-            document.getElementById("logo").classList.add("inverted");
-            for (var i = 0; i < x.length; i++) {
-                x[i].classList.remove("card-dark");
-            }
-            document.body.style.backgroundColor = "#f2f2f2";
-            document.getElementById("assignments").style.color = "#1d1f21";
+            document.body.classList.remove("dark-theme");
+            document.body.classList.add("light-theme");
         }
         function darkTheme() {
-            document.getElementById("logo").classList.remove("inverted");
-            for (var i = 0; i < x.length; i++) {
-                x[i].classList.add("card-dark");
-            }
-            document.body.style.backgroundColor = "#1d1f21";
-            document.getElementById("assignments").style.color = "#ffffff";
+            document.body.classList.remove("light-theme");
+            document.body.classList.add("dark-theme");
         }
         function toggleTheme() {
             light = !light;
@@ -390,6 +380,7 @@
                 localStorage.setItem("light", JSON.stringify(light));
             } catch (err) {}
         }
+        
         refreshTheme();
     </script>
 </body>

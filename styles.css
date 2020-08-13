@@ -6,7 +6,10 @@
     font-family: "Roboto Mono", monospace;
 }
 
-body {
+body.light-theme {
+    background-color: #f2f2f2;
+}
+body.dark-theme {
     background-color: #1d1f21;
 }
 
@@ -48,6 +51,12 @@ a {
     font-family: 'Josefin Sans', monospace;
     font-weight: 300;
     font-size: 3.5rem;
+}
+
+.light-theme #assignments {
+    color: #1d1f21;
+}
+.dark-theme #assignments {
     color: #ffffff;
 }
 
@@ -66,11 +75,11 @@ a {
     margin-bottom: .5em;
 }
 
-#logo.inverted, #logo:hover {
+.light-theme #logo, #logo:hover {
     filter: invert(100%);
 }
 
-#logo.inverted:hover {
+.light-theme #logo:hover {
     filter: invert(0%);
 }
 
