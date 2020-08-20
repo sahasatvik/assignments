@@ -510,7 +510,7 @@ pre[class*="language-"] {
 <p>A <em>ring</em> is a set \(R\) with two binary operations \(+\) and \(\times\) (addition and multiplication) such that \((R, +)\) is an abelian group, \((R, \times)\) is a monoid and \(\times\) is distributive over \(+\).</p>
 
 <ul>
-<li><strong>Distributivity</strong>: \(a \times (b + c) = (a \times b) + (a \times c)\) for all \(a, b, c \in R\).</li>
+<li><strong>Distributivity</strong>: \(a \times (b + c) = (a \times b) + (a \times c)\) and \((b + c) \times a = (b \times a) + (c \times a)\) for all \(a, b, c \in R\).</li>
 </ul>
 
 <p>The additive and multiplicative identites of \(R\) are denoted by \(0_R\) and \(1_R\) respectively.</p>
@@ -563,7 +563,13 @@ Indeed, after \(n\) iterations of this algorithm, the error is at most \(1/4^n\)
 <li><strong>Greatest Lower Bound</strong>: An ordered set \(S\) has the greatest lower bound property if \(\inf E\) exists for every non-empty subset \(E \subseteq S\) which is bounded below.</li>
 </ul>
 
-<p>These two properties are equivalent. Let \(S\) have the least upper bound property, and let \(E \subseteq\) be bounded below. Let \(L\) be the set of all lower bounds of \(L\). Then \(L \neq \emptyset\), and every element of \(E\) is an upper bound of \(L\). Also, from the least upper bound property of \(S\), \(\sup L\) mst exist in \(S\). Thus, \(\inf E = \sup L\) for all non-empty \(E \subseteq S\) bounded below, so \(S\) also has the greatest lower bound property. The converse follows similarly.</p>
+<p>These two properties are equivalent. Let \(S\) have the least upper bound property, and let \(E \subseteq S\) be bounded below. Let \(L\) be the set of all lower bounds of \(L\). Then \(L \neq \emptyset\), and every element of \(E\) is an upper bound of \(L\). Also, from the least upper bound property of \(S\), \(\sup L\) mst exist in \(S\).
+Note that for all \(s \in S\), if \(s &lt; \sup L\), then there exists \(l \in L, l &gt; s\) so \(s\) is not an upper bound of \(L\), hence \(s \notin E\).
+The contrapositive of this is that for every \(s \in E\), we must have \(s \geq \sup L\). This means that \(\sup L\) is a lower bound of \(E\), so \(\sup L \in L\).
+Also, \(\sup L\) is an upper bound of \(L\), so \(y \leq \sup L\) for all \(y \in L\).
+This means that \(\sup L \geq y\) for all lower bounds \(y\in L\) of \(E\).
+Thus, \(\inf E = \sup L\) for all non-empty \(E \subseteq S\) bounded below, so \(S\) also has the greatest lower bound property. 
+The converse follows similarly.</p>
 
 <p>Note that \(\R\) contains \(\Q\) as a subfield. The rationals \(\Q\) do <em>not</em>
 have the least upper bound property. For example, the set \(\{x\in\Q: x^2 &lt; 2\}\) may have upper bounds in \(\Q\), but has no <em>least</em> upper bound in \(\Q\).</p>
