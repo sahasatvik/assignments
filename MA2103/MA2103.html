@@ -531,6 +531,40 @@ Putting these together and using \(\lapl{T} = \divg{\grad{T}}\) yields the resul
 <p>Note that for anisotropic materials, \(\kappa\) is a second order tensor and hence doesn&#39;t commute with the divergence.
 \[ \rho\sigma\ppt{T} = \divg{(\kappa\grad{T})}. \]</p>
 
+<h4 id="toc_4">Diffusion Equation</h4>
+
+<p>The heat equation more generally describes the phenomenon of <em>diffusion</em>, when \(\alpha\) is replaced by a scalar constant \(D\) and \(T\) is replaced by the density of the diffusing material \(\phi\).</p>
+
+<p>\[ \ppt{\phi} = D\lapl{\phi}. \]</p>
+
+<h4 id="toc_5">Random walks</h4>
+
+<p>The diffusion equation can also be used to describe the phenomenon of random walks, such as Brownian motion, by setting \(\phi = P(\ve{x}, t)\) to the probability of finding the walker at position \(\ve{x}\) at time \(t\).</p>
+
+<p>Consider a random walk in one dimension, where the walker takes time \(\tau\) per step of length \(\ell\). The probability \(p\) that the walker steps to the right is constant, so the probability \(q\) that the walker steps left is simply \(1 - p\). In this discrete case, we set \(P_n(m)\) to be the probability of finding the walker at position \(x = m\ell\) at time \(t = n\tau\). Clearly, the walker can arrive at step \(m\) only if it stepped rightwards from \(m-1\) or leftwards from \(m+1\), so
+\[ P_{n + 1}(m) = pP_n(m-1) + qP_n(m+1). \]</p>
+
+<p>In the special case that a leftward and rightward step are equally likely, <em>i.e.</em> \(p = q = 1/2\), 
+\[ P_{n+1}(m) - P_n(m) = \frac12(P_n(m+1) - P_n(m)) - \frac12 (P_n(m) - P_n(m - 1)). \]
+In the limit of large \(n\), we can approximate these quantities as differentials. Thus, using \(\delta n = \delta t /\tau\) and \(\delta m = \delta x /\ell\), we obtain
+\[ \tau\ppt{P} = \frac{\ell^2}{2}\pp[2]{P}{x}. \]</p>
+
+<p>With some rearrangement and setting \(\ell^2/2\tau = D\), we identify this as the diffusion equation.</p>
+
+<blockquote>
+<p><strong>Question</strong>: In the limiting process, the ratio \(\ell^2/\tau\) is held constant. This seems to imply that the speed of the particle \(\ell/\tau\) blows up. How do we reconcile this?</p>
+</blockquote>
+
+<h3 id="toc_6">Laplace&#39;s Equation</h3>
+
+<p>\[ \lapl{\phi}(\ve{x}) = 0. \]
+This equation is often used to describe various physical potentials \(\phi(\ve{x})\), such as gravitational or electrostatic potential in regions without matter or charge respectively.</p>
+
+<h3 id="toc_7">Poisson&#39;s Equation</h3>
+
+<p>\[ \lapl{\phi(\ve{x})} = f(\ve{x}). \]
+This equation is often used to describe potentials in the presence of some &#39;source&#39;, such as gravitational or electrostatic potentials in the presence of matter or charge. Here, \(f(\ve{x})\) is often called the <em>source density</em>. Note that this is a special case of the heat equation where the function \(T(\ve{x})\) is independent of time.</p>
+
 
 
 <script type="text/javascript">
