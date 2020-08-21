@@ -5,7 +5,7 @@
 
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>MA1203</title>
+<title>MA2101</title>
 
 
 <style type="text/css">
@@ -468,38 +468,119 @@ pre[class*="language-"] {
 
 <body>
 
-<h1 id="toc_0">Mathematical Methods II</h1>
+<h1 id="toc_0">Analysis I</h1>
+
+<h3 id="toc_1">Course Content</h3>
+
+<ol>
+<li>Real Numbers</li>
+<li>Sequences and Series</li>
+<li>Point-set Topology on \(\mathbb{R}\)</li>
+<li>Limits</li>
+<li>Continuity</li>
+</ol>
 
 <p>\(
-\newcommand\C{\mathbb{C}}
 \newcommand\R{\mathbb{R}}
 \newcommand\Q{\mathbb{Q}}
 \newcommand\Z{\mathbb{Z}}
 \newcommand\N{\mathbb{N}}
-\newcommand\ve[1]{\boldsymbol{#1}}
-\newcommand\ppx[1]{\frac{\partial #1}{\partial x}}
-\newcommand\ppt[1]{\frac{\partial #1}{\partial t}}
-\newcommand\pp[3][]{\frac{\partial^{#1}{#2}}{\partial {#3}^{#1}}}
 \)</p>
 
-<h2 id="toc_1">Partial Differential Equations</h2>
+<h2 id="toc_2">Groups, Rings and Fields</h2>
 
-<h3 id="toc_2">Wave Equation</h3>
+<p>A <em>binary operation</em> \(f\) on a set \(S\) is a mapping \(f\colon S\times S \to S\).</p>
 
-<p>\[ \ddot{u} = c^2 \nabla^2{u}. \]
-In one dimension, this reduces to
-\[ \pp[2]{u}{t} = c^2 \pp[2]{u}{x}. \]</p>
+<p>A group \(G\) is a set with a binary operation \(*\) which satisfies the following axioms.</p>
 
-<h3 id="toc_3">Heat Equation</h3>
+<ul>
+<li><strong>Associativity</strong>: \(a * (b * c) = (a * b) * c\) for all \(a, b, c \in G\).</li>
+<li><strong>Identity</strong>: There exists an element \(i_G \in G\) such that \(a * i_G = a\) for all \(a \in G\).</li>
+<li><strong>Inverse</strong>: For every \(a \in G\), there exists \(b \in G\) such that \(a * b = i_G\).</li>
+</ul>
 
-<p>\[ \ppt{T} = \alpha \nabla^2 T. \]</p>
+<p>A structure \((G, *)\) which only satisfies <em>associativity</em> is called a <em>semigroup</em>. A semigroup with an <em>identity</em> element is called a <em>monoid</em>.</p>
 
-<p>We start with Fourier&#39;s Law, \(\ve{q} = -\kappa \nabla T\). The conservation
-of heat tells us that rate of change of internal heat per volume is given by \(\nabla\cdot \ve{q} = -\rho\sigma\,(\partial{T}/\partial{t}) = 0\).
-Putthing these together yields the result, with \(\alpha = \kappa/\rho\sigma\).</p>
+<p>An <em>abelian group</em> also satisfies the axiom of <em>commutativity</em>.</p>
 
-<p>In one dimension, this reduces to
-\[ \ppt{T} = \alpha \pp[2]{T}{x}. \]</p>
+<ul>
+<li><strong>Commutativity</strong>: \(a * b = b * a\) for all \(a, b \in G\).</li>
+</ul>
+
+<p>A <em>ring</em> is a set \(R\) with two binary operations \(+\) and \(\times\) (addition and multiplication) such that \((R, +)\) is an abelian group, \((R, \times)\) is a monoid and \(\times\) is distributive over \(+\).</p>
+
+<ul>
+<li><strong>Distributivity</strong>: \(a \times (b + c) = (a \times b) + (a \times c)\) and \((b + c) \times a = (b \times a) + (c \times a)\) for all \(a, b, c \in R\).</li>
+</ul>
+
+<p>The additive and multiplicative identites of \(R\) are denoted by \(0_R\) and \(1_R\) respectively.</p>
+
+<p>If \(\times\) is commutative, \((R, +, \times)\) is called a <em>commutative ring</em>.</p>
+
+<p>A <em>field</em> \(F\) is a commutative ring which is also an abelian group under multiplication.</p>
+
+<p>An <em>ordered field</em> \(F\) is also an ordered set such that for all \(a, b, c \in F\),</p>
+
+<ul>
+<li>If \(a &gt; b\), then \(a + c &gt; b + c\).</li>
+<li>If \(a &gt; 0\) and \(b &gt; 0\), then \(ab &gt; 0\).</li>
+</ul>
+
+<h2 id="toc_3">Real Numbers</h2>
+
+<p>The real numbers are a <em>complete, ordered field</em>.</p>
+
+<h3 id="toc_4">Constructing \(\sqrt{2}\)</h3>
+
+<p>The irrational number \(\sqrt{2}\) can be approximated by the rationals with arbitrary precision. This is done iteratively, using the <em>AM-GM-HM</em> inequality to generate sequences of rationals converging to \(\sqrt{2}\).
+We define the sequences
+\(\{u_n\}_{n=0}^\infty\) and \(\{l_n\}_{n=0}^\infty\) as follows.
+\[ u_0 = 2, \quad\quad l_0 = 1. \]
+\[ u_{n+1} = \frac{u_n + l_n}{2}, \quad\quad l_{n+1} = \frac{2}{\frac{1}{u_n} + \frac{1}{l_n}}. \]</p>
+
+<p>Note that \(u_{n+1}l_{n+1} = u_nl_n\), so \(u_nl_n = 2\). Thus, \(u_{n+1} &gt; \sqrt{2} &gt; l_{n+1}\) by \(AM &gt; GM &gt; HM\). Also, \(u_{n+1} &lt; u_n\) and \(l_{n+1} &gt; l_n\), so by iterating successively over \(n\), we construct the sequence of rational numbers
+\[ u_0 &gt; u_1 &gt; \dots &gt; u_n &gt; u_{n+1} &gt; \sqrt{2} &gt; l_{n+1} &gt; l_n &gt; \dots &gt; l_1 &gt; l_0. \]</p>
+
+<p>To put strict bounds on our approximation, we calculate the difference \(R_{n+1} = u_{n+1} - l_{n+1}\).
+\[ R_{n+1} = u_{n+1} - l_{n+1} = \frac{u_n + l_n}{2} - \frac{2u_nl_n}{u_n + l_n} = \frac{(u_n - l_n)^2}{2(u_n + l_n)}.\]</p>
+
+<p>Since \(u_n + l_n &gt; 2l_0 = 2\), we have \(R_{n+1} &lt; R_{n}^2 / 4\). Also, \(u_n - l_n &lt; u_0 - l_0 = 1\), so \(R_{n + 1}/R_{n} &lt; 1/4\). Thus, \(R_n \to 0\) as \(n \to \infty\), so we can approximate \(\sqrt{2}\) with arbitrary precision.
+Indeed, after \(n\) iterations of this algorithm, the error is at most \(1/4^n\).</p>
+
+<h3 id="toc_5">Properties of real numbers</h3>
+
+<p>These two properties follow from the fact that \(\R\) is an <em>ordered set</em>.</p>
+
+<ul>
+<li><strong>Trichotomy</strong>: Exactly one of the following is true for all \(x, y \in \R\): \(x &lt; y\), \(x = y\), \(x &gt; y\).</li>
+<li><strong>Transitivity</strong>: If \(a &gt; b\) and \(b &gt; c\), then \(a &gt; c\) for all \(a, b, c \in \R\).</li>
+</ul>
+
+<p>The real numbers are also <em>complete</em>, <em>i.e.</em>, \(\R\) has the <em>least upper bound</em> property.</p>
+
+<ul>
+<li><strong>Least Upper Bound</strong>: An ordered set \(S\) has the least upper bound property if \(\sup E\) exists for every non-empty subset \(E \subseteq S\) which is bounded above.</li>
+<li><strong>Greatest Lower Bound</strong>: An ordered set \(S\) has the greatest lower bound property if \(\inf E\) exists for every non-empty subset \(E \subseteq S\) which is bounded below.</li>
+</ul>
+
+<p>These two properties are equivalent. Let \(S\) have the least upper bound property, and let \(E \subseteq S\) be bounded below. Let \(L\) be the set of all lower bounds of \(L\). Then \(L \neq \emptyset\), and every element of \(E\) is an upper bound of \(L\). Also, from the least upper bound property of \(S\), \(\sup L\) mst exist in \(S\).
+Note that for all \(s \in S\), if \(s &lt; \sup L\), then there exists \(l \in L, l &gt; s\) so \(s\) is not an upper bound of \(L\), hence \(s \notin E\).
+The contrapositive of this is that for every \(s \in E\), we must have \(s \geq \sup L\). This means that \(\sup L\) is a lower bound of \(E\), so \(\sup L \in L\).
+Also, \(\sup L\) is an upper bound of \(L\), so \(y \leq \sup L\) for all \(y \in L\).
+This means that \(\sup L \geq y\) for all lower bounds \(y\in L\) of \(E\).
+Thus, \(\inf E = \sup L\) for all non-empty \(E \subseteq S\) bounded below, so \(S\) also has the greatest lower bound property. 
+The converse follows similarly.</p>
+
+<p>Note that \(\R\) contains \(\Q\) as a subfield. The rationals \(\Q\) do <em>not</em>
+have the least upper bound property. For example, the set \(\{x\in\Q: x^2 &lt; 2\}\) may have upper bounds in \(\Q\), but has no <em>least</em> upper bound in \(\Q\).</p>
+
+<ul>
+<li><strong>\(\Z\) is unbounded in \(\R\)</strong>: To prove this, assume to the contrary that \(\Z\) in bounded in \(\R\). Then, \(\Z\) has a supremum in \(\R\), say \(\alpha = \sup \Z\). Now, \(\alpha - 1/2\) is not an upper bound of \(\Z\), so there exists \(n \in Z\) such that \(\alpha - 1/2 \le n\). This means that \(\alpha &lt; n + 1 \in \Z\), which is a contradiction.</li>
+<li><strong>Archimedean property</strong>: For all \(x, y \in R\), \(x \neq 0\), there exists \(n \in \N\) such that \(nx &gt; y\). Note that if this was false, then \(y/x\) would be an upper bound of \(\Z\), which is a contradiction.</li>
+<li><strong>\(\Q\) is dense in \(\R\)</strong>: Between any two distinct real numbers, there exists a rational number. Let \(x, y \in \R\) with \(x &lt; y\). We find \(n \in \Z\) such that \(n(y - x) &gt; 1\). Note that \(n \neq 0\). We find the smallest integer \(m \in \Z\) such that
+\(nx &lt; m\). Thus, \(m - 1 \leq nx &lt; m\). Using \(1 + nx &lt; ny\), we have \(nx &lt; m \leq 1 + nx &lt; ny\), so \(x &lt; m/n &lt; y\) as desired.</li>
+<li><strong>Existence and Uniqueness of positive \(n^\text{th}\) roots</strong>: For every positive integer \(n\) and every positive real number \(x\), there exists a unique positive real number \(y\) such that \(y^n = x\).</li>
+</ul>
 
 
 
