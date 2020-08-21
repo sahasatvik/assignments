@@ -480,9 +480,32 @@ pre[class*="language-"] {
 \newcommand\ppx[1]{\frac{\partial #1}{\partial x}}
 \newcommand\ppt[1]{\frac{\partial #1}{\partial t}}
 \newcommand\pp[3][]{\frac{\partial^{#1}{#2}}{\partial {#3}^{#1}}}
+\newcommand\norm[1]{\left\lVert#1\right\rVert}
+\newcommand\grad[1]{\ve{\nabla}#1}
+\newcommand\divg[1]{\ve{\nabla}\cdot#1}
+\newcommand\curl[1]{\ve{\nabla}\times#1}
+\newcommand\lapl[1]{\nabla^2 #1}
 \)</p>
 
 <h2 id="toc_1">Partial Differential Equations</h2>
+
+<p>A partial differential equation typically involves a number of variables \(x_1, \dots, x_n\), an unknown multivariable function \(u(x_1, \dots, x_n)\) as well as its partial derivatives with respect to these variables.</p>
+
+<p>\[ f\left(x_1, \dots, x_n; u_{x_1}, \dots, u_{x_n}; u_{x_1x_1} \dots, u_{x_1x_n}; \dots\right) = 0. \]</p>
+
+<p>Here, we use the notation
+\[ u_{x_i} = \pp{u}{x_i}, \quad u_{x_ix_j} = \pp{}{x_j}\left(\pp{u}{x_i}\right), \quad\dots.\]
+We may also use Newton&#39;s notation specifically to denote derivatives with respect to time.
+\[ \dot{u} = \ppt{u}, \quad \ddot{u} = \pp[2]{u}{t}, \quad\dots. \]
+The special operator \(\grad{} = \sum \partial/\partial{x_i}\ve{e^i}\) is often used to define the <em>gradient</em>, <em>divergence</em>, and <em>Laplacian</em>  of scalar and vector fields. Let \(u(\ve{x})\) be a scalar field and \(\ve{q}(\ve{x})\) be a vector field, and let \(\{\ve{e^i}\}\) be our standard basis.
+\[ \begin{align}
+\grad{u} &amp;= \sum_i \pp{u}{x_i} \ve{e^i}. \tag{Gradient} \\
+\divg{\ve{q}} &amp;= \sum_i \pp{q_i}{x_i}. \tag{Divergence} \\
+\lapl{u} &amp;= \sum_i \pp[2]{u}{x_i}. \tag{Laplacian}
+\end{align} \]
+Another quantity called the <em>curl</em> is only defined in \(\R^3\) as follows.
+\[ \curl{\ve{q}} = \sum_i \epsilon_{ijk}\pp{q_i}{x_j}\ve{e^k}. 
+\tag{Curl} \]</p>
 
 <h3 id="toc_2">Wave Equation</h3>
 
@@ -490,16 +513,23 @@ pre[class*="language-"] {
 In one dimension, this reduces to
 \[ \pp[2]{u}{t} = c^2 \pp[2]{u}{x}. \]</p>
 
+<p>A class of solutions is given by \(u(x, t) = A\cos(\omega (t - x/c) + \phi)\).</p>
+
 <h3 id="toc_3">Heat Equation</h3>
 
-<p>\[ \ppt{T} = \alpha \nabla^2 T. \]</p>
+<p>\[ \ppt{T} = \alpha \lapl{T}. \]</p>
 
-<p>We start with Fourier&#39;s Law, \(\ve{q} = -\kappa \nabla T\). The conservation
-of heat tells us that rate of change of internal heat per volume is given by \(\nabla\cdot \ve{q} = -\rho\sigma\,(\partial{T}/\partial{t}) = 0\).
-Putthing these together yields the result, with \(\alpha = \kappa/\rho\sigma\).</p>
+<p>We start with Fourier&#39;s Law, which states that the local heat flux density \(\ve{q}\) is related to the gradient of the temperature as \(\ve{q} = -\kappa \nabla T\). 
+This means that the rate of flow of heat energy per unit area is proportional to the negative gradient of temperature locally, <em>i.e.</em> heat flows in the direction of <em>decreasing</em> temperature, proportional to the thermal conductivity \(\kappa\) of the material, which is a simple scalar for isotrpic materials.</p>
+
+<p>The law of conservation of heat tells us that rate of change of internal heat per volume is given by \(\nabla\cdot \ve{q} = -\rho\sigma\,(\partial{T}/\partial{t}) = 0\). This means that the rate of flow of heat away from a region is proportional to the rate of <em>decrease</em> in temperature of that region with time, <em>i.e.</em> loss of heat energy in a volume is directly proportional to the decrease in temperature via \(Q = \rho\sigma V\Delta{T}\). Note that \(\rho\) is the density of the material and \(\sigma\) is its specific heat capacity.
+Putting these together and using \(\lapl{T} = \divg{\grad{T}}\) yields the result, with \(\alpha = \kappa/\rho\sigma\).</p>
 
 <p>In one dimension, this reduces to
 \[ \ppt{T} = \alpha \pp[2]{T}{x}. \]</p>
+
+<p>Note that for anisotropic materials, \(\kappa\) is a second order tensor and hence doesn&#39;t commute with the divergence.
+\[ \rho\sigma\ppt{T} = \divg{(\kappa\grad{T})}. \]</p>
 
 
 
