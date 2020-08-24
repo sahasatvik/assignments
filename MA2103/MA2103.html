@@ -764,19 +764,46 @@ Thus, our PDE can be written as
 <p>Since both sides are functions of separate variables, they must be constant, say \(\lambda\). Thus, we have the system of ODES
 \[ X&#39;&#39;(x) = \lambda X(x), \quad\quad Y&#39;&#39;(y)  = -\lambda Y(y). \]
 Now, we use the symmetry of our boundary conditions to conclude that
-\[ X(x) = A_x\sin(n\pi x/a), \quad\quad Y(y) = A_y\cosh(n\pi y/a). \]
-We have implicitly chosen \(\lambda &lt; 0\), specifically \(\lambda = -(n\pi/a)^2\).</p>
+\[ X(x) = A_x\sin(n\pi x/a), \quad\quad Y(y) = A_y\exp(-n\pi y/a). \]
+We have implicitly chosen \(\lambda &lt; 0\), specifically \(\lambda = -(n\pi/a)^2\).
+Note that we have chosen \(\exp(-n\pi y/a)\) to satisfy the boundary condition \(T(x, y) \to 0\) as \(y \to \infty\).</p>
 
-<p>Note that this alone does not solve our equation. Instead, we take a superposition of all such solutions, with \(n \in \N\).
+<p>This alone does not solve our equation. Instead, we take a superposition of all such solutions, with \(n \in \N\).
 Thus,</p>
 
-<p>\[ T(x, y) = \sum_{n = 1}^\infty A_n \sin(n\pi x/a)\cosh(n\pi y/a). \]</p>
+<p>\[ T(x, y) = \sum_{n = 1}^\infty A_n \sin(n\pi x/a)\exp(-n\pi y/a). \]</p>
 
-<p>Clearly, \(T(0, y) = T(a, y) = 0\). Thus, we must choose \(A_n\) such that \(T(x, 0) = T_0\) and \(T(x, \infty) = 0\).</p>
+<p>Clearly, \(T(0, y) = T(a, y) = 0\). Thus, we must choose \(A_n\) such that \(T(x, 0) = T_0\). Note that
+\[ T(x, 0) = \sum_{n=1}^{\infty} A_n\sin(n\pi x/a) = \sum_{n=-\infty}^\infty U_n\,e^{in\pi x/a}. \]
+Make the substitution \(\varphi = \pi x/a\).
+Now, we use the identity
+\[ \frac{1}{2\pi}\int_0^{2\pi} e^{in\varphi} \:d\varphi = 
+\begin{cases}1, &amp; \text{if }\, n = 0 \\
+0, &amp; \text{if }\, n \neq 0
+\end{cases}
+\]
+Thus,
+\[ U_n = \frac{1}{a}\int_0^{a} T(x, 0)\, e^{-in\pi x/a} \:dx \;=\; \frac{T_0}{in\pi}(1 - e^{-in\pi}).
+\]</p>
+
+<p>Thus,
+\[ A_n = 2iU_{n} \;=\; \frac{2T_0}{n\pi}(1 - \cos(n\pi)). \]</p>
+
+<p>This gives us our solution,
+\[ T(x, y) = \sum_{n = 1}^\infty \;\frac{2T_0}{n\pi}(1 - \cos(n\pi)) \sin(n\pi x/a)\exp(-n\pi y/a). \]</p>
 
 <blockquote>
-<p>Laplace&#39;s Equation in 2D can be elegantly solved in <em>complex analysis</em>. Note that all analytic functions satisfy the Cauchy-Riemann equations, so if \(f = u + iv\) is analytic, for real functions \(u, v\), then \( u_x = v_y\) and \(u_y = -v_x\). Thus, \(u_{xx} = v_{yx} = v_{xy} = -u_{yy}\), with an analogous process for \(v_{xx} = -v_{yy}\). Thus, both \(u\) and \(v\) satisfy Laplace&#39;s equation, and are called <em>harmonic functions</em>. Our initial problem thus reduces to finding some analytic function \(f\) which satisfies the given boundary conditions. </p>
+<p>Laplace&#39;s Equation in 2D can be elegantly solved using <em>complex analysis</em>. Note that all analytic functions satisfy the Cauchy-Riemann equations, so if \(f = u + iv\) is analytic, for real functions \(u, v\), then \( u_x = v_y\) and \(u_y = -v_x\). Thus, \(u_{xx} = v_{yx} = v_{xy} = -u_{yy}\), with an analogous process for \(v_{xx} = -v_{yy}\). Thus, both \(u\) and \(v\) satisfy Laplace&#39;s equation, and are called <em>harmonic functions</em>. Our initial problem thus reduces to finding some analytic function \(f\) which satisfies the given boundary conditions.</p>
 </blockquote>
+
+<h4 id="toc_10">Fourier Series</h4>
+
+<p>The Fourier series of an integrable function \(f\) with period \(T\) is given by</p>
+
+<p>\[ f(x) = \frac{a_0}{2} \,+\, \sum_{n = 1}^\infty a_n\cos\frac{n\pi x}{T} \,+\, \sum_{n = 1}^\infty b_n\sin\frac{n\pi x}{T}, \]
+where the Fourier coefficients \(a_n\) and \(b_n\) are given by
+\[ a_n = \frac{2}{T} \int_0^T f(x) \cos\frac{n\pi x}{T} \:dx,
+\quad\quad b_n = \frac{2}{T} \int_0^T f(x) \sin\frac{n\pi x}{T} \:dx.\]</p>
 
 
 
