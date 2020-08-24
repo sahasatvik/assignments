@@ -743,6 +743,41 @@ This equation is often used to describe various physical potentials \(\phi(\ve{x
 <p>\[ \lapl{\phi(\ve{x})} = f(\ve{x}). \]
 This equation is often used to describe potentials in the presence of some &#39;source&#39;, such as gravitational or electrostatic potentials in the presence of matter or charge. Here, \(f(\ve{x})\) is often called the <em>source density</em>. Note that this is a special case of the heat equation where the function \(T(\ve{x})\) is independent of time.</p>
 
+<h2 id="toc_8">Solving PDE&#39;s</h2>
+
+<h4 id="toc_9">Separation of Variables</h4>
+
+<p>Consider the region \(D = \{(x, y) \in \R^2 : 0 \leq x \leq a, 0 \leq y \}\). We model the temperature in this region \(T(x, y)\) using the PDE
+\[ \lapl{T} = \pp[2]{T}{x} + \pp[2]{T}{y} = 0. \]</p>
+
+<p>We first look for <em>boundary conditions</em>. Let \(T(x, 0) = T_0\)
+and \(T(x, \infty) = T(0, y) = T(a, y) = 0\). These are called <em>Dirichlet conditions</em>.</p>
+
+<blockquote>
+<p>There are other sorts of boundary conditions too. For example, <em>Neumann conditions</em> specify the fluxes (derivatives) at the boundaries instead of the function values.</p>
+</blockquote>
+
+<p>We assume that the function \(T\) can be separated into functions of single variables, <em>i.e.</em> \(T(x, y) = X(x)Y(y)\).
+Thus, our PDE can be written as
+\[ \frac{X&#39;&#39;(x)}{X(x)} = - \frac{Y&#39;&#39;(y)}{Y(y)}. \]</p>
+
+<p>Since both sides are functions of separate variables, they must be constant, say \(\lambda\). Thus, we have the system of ODES
+\[ X&#39;&#39;(x) = \lambda X(x), \quad\quad Y&#39;&#39;(y)  = -\lambda Y(y). \]
+Now, we use the symmetry of our boundary conditions to conclude that
+\[ X(x) = A_x\sin(n\pi x/a), \quad\quad Y(y) = A_y\cosh(n\pi y/a). \]
+We have implicitly chosen \(\lambda &lt; 0\), specifically \(\lambda = -(n\pi/a)^2\).</p>
+
+<p>Note that this alone does not solve our equation. Instead, we take a superposition of all such solutions, with \(n \in \N\).
+Thus,</p>
+
+<p>\[ T(x, y) = \sum_{n = 1}^\infty A_n \sin(n\pi x/a)\cosh(n\pi y/a). \]</p>
+
+<p>Clearly, \(T(0, y) = T(a, y) = 0\). Thus, we must choose \(A_n\) such that \(T(x, 0) = T_0\) and \(T(x, \infty) = 0\).</p>
+
+<blockquote>
+<p>Laplace&#39;s Equation in 2D can be elegantly solved in <em>complex analysis</em>. Note that all analytic functions satisfy the Cauchy-Riemann equations, so if \(f = u + iv\) is analytic, for real functions \(u, v\), then \( u_x = v_y\) and \(u_y = -v_x\). Thus, \(u_{xx} = v_{yx} = v_{xy} = -u_{yy}\), with an analogous process for \(v_{xx} = -v_{yy}\). Thus, both \(u\) and \(v\) satisfy Laplace&#39;s equation, and are called <em>harmonic functions</em>. Our initial problem thus reduces to finding some analytic function \(f\) which satisfies the given boundary conditions. </p>
+</blockquote>
+
 
 
 <script type="text/javascript">
