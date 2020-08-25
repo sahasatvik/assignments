@@ -643,14 +643,14 @@ pre[class*="language-"] {
 We may also use Newton&#39;s notation specifically to denote derivatives with respect to time.
 \[ \dot{u} = \ppt{u}, \quad \ddot{u} = \pp[2]{u}{t}, \quad\dots. \]</p>
 
-<p>The special operator \(\grad{} = \sum \partial/\partial{x_i}\ve{e^i}\) is often used to define the <em>gradient</em>, <em>divergence</em>, and <em>Laplacian</em>  of scalar and vector fields. Let \(u(\ve{x})\) be a scalar field and \(\ve{q}(\ve{x})\) be a vector field, and let \(\{\ve{e^i}\}\) be our standard basis.
+<p>The special operator \(\grad{} = \sum \partial/\partial{x_i}\ve{e_i}\) is often used to define the <em>gradient</em>, <em>divergence</em>, and <em>Laplacian</em>  of scalar and vector fields. Let \(u(\ve{x})\) be a scalar field and \(\ve{q}(\ve{x})\) be a vector field, and let \(\{\ve{e_i}\}\) be our standard basis.
 \[ \begin{align}
-\grad{u} &amp;= \sum_i \pp{u}{x_i} \ve{e^i}. \tag{Gradient} \\
+\grad{u} &amp;= \sum_i \pp{u}{x_i} \ve{e_i}. \tag{Gradient} \\
 \divg{\ve{q}} &amp;= \sum_i \pp{q_i}{x_i}. \tag{Divergence} \\
 \lapl{u} &amp;= \sum_i \pp[2]{u}{x_i}. \tag{Laplacian}
 \end{align} \]
 Another quantity called the <em>curl</em> is only defined in \(\R^3\) as follows.
-\[ \curl{\ve{q}} = \sum_i \epsilon_{ijk}\pp{q_i}{x_j}\ve{e^k}. 
+\[ \curl{\ve{q}} = \sum_i \epsilon_{ijk}\pp{q_i}{x_j}\ve{e_k}. 
 \tag{Curl} \]</p>
 
 <h3 id="toc_2">Wave Equation</h3>
