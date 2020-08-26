@@ -753,9 +753,7 @@ This naturally leads to the idea that linear combinations of vectors form subspa
 
 <p>Let \(V\) be a vector space over the field \(F\).
 We define the <em>span</em> of a set of vectors \(W = \{\w_1, \w_2, \dots\} \subseteq V\) as follows.
-\[ \span{W} = \{\lambda_1\w_1 + \lambda_2\w_2 + \dots : \w_i \in V, \lambda_i \in F\}. \]</p>
-
-<p>A set of vectors \(\{\w_i\}\) is said to be <em>linearly independent</em> if there do not exist scalars \(0 \neq \lambda_i \in F\) such that \( \lambda_1\w_1 + \lambda_2\w_2 + \dots = \ve0\).</p>
+\[ \span{W} = \{\lambda_1\w_1 + \lambda_2\w_2 + \dots + \lambda_n\w_n: \w_i \in V, \lambda_i \in F\}. \]</p>
 
 <p>It is easily verified that for any set of vectors \(W\subseteq V\), \(\span{W}\) forms a subspace of \(V\).</p>
 
@@ -765,10 +763,14 @@ We define the <em>span</em> of a set of vectors \(W = \{\w_1, \w_2, \dots\} \sub
 <li>\(\span\emptyset = \{\ve{0}\}\).</li>
 <li>\(\span(\span S) = \span{S}\). Note that \(\span W = W\) iff \(W\) is a subspace.</li>
 <li>\(\span W_1 \subseteq \span W_2\) if \(W_1 \subseteq W_2\).</li>
+<li>\(\span(W_1 \cup W_2) = \span(W_1) + \span(W_2)\).</li>
+<li>\(\span(W_1 \cap W_2) \subseteq \span(W_1) \cap \span(W_2)\).</li>
 </ul>
 
-<p>We say that a vector space \(V\) is <em>generated</em> by \(W \subseteq V\) if
-\(V = \span{W}\).</p>
+<p>We say that a vector space \(V\) is <em>generated</em> by \(W \subseteq V\) if \(V = \span{W}\).</p>
+
+<p>A set of vectors \(W \subseteq V\) is said to be <em>linearly dependent</em> if there exist distinct vectors \(\w_1, \w_2, \dots, \w_n \in W\) and scalars \(\lambda_i \in F\), not all zero, such that \[\lambda_1\w_1 + \lambda_2\w_2 + \dots + \lambda_n\w_n = \ve0.\]
+A set of vectors \(W \subseteq V\) is said to be <em>linearly independent</em> if it is not linearly dependent.</p>
 
 
 
