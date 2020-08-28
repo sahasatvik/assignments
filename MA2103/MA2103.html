@@ -792,9 +792,7 @@ Thus,
 
 <p>\[ T(x, y) = \sum_{n = 1}^\infty \;\frac{2T_0}{n\pi}(1 - \cos(n\pi)) \sin(n\pi x/a)\exp(-n\pi y/a). \]</p>
 
-<blockquote>
-<p>Laplace&#39;s Equation in 2D can be elegantly solved using <em>complex analysis</em>. Note that all analytic functions satisfy the Cauchy-Riemann equations, so if \(f = u + iv\) is analytic, for real functions \(u, v\), then \( u_x = v_y\) and \(u_y = -v_x\). Thus, \(u_{xx} = v_{yx} = v_{xy} = -u_{yy}\), with an analogous process for \(v_{xx} = -v_{yy}\). Thus, both \(u\) and \(v\) satisfy Laplace&#39;s equation, and are called <em>harmonic functions</em>. Our initial problem thus reduces to finding some analytic function \(f\) which satisfies the given boundary conditions.</p>
-</blockquote>
+<!-- Laplace's Equation in 2D can be elegantly solved using *complex analysis*. Note that all analytic functions satisfy the Cauchy-Riemann equations, so if $f = u + iv$ is analytic, for real functions $u, v$, then $ u_x = v_y$ and $u_y = -v_x$. Thus, $u_{xx} = v_{yx} = v_{xy} = -u_{yy}$, with an analogous process for $v_{xx} = -v_{yy}$. Thus, both $u$ and $v$ satisfy Laplace's equation, and are called *harmonic functions*. Our initial problem thus reduces to finding some analytic function $f$ which satisfies the given boundary conditions. -->
 
 <h4 id="toc_10">Fourier Series</h4>
 
@@ -816,6 +814,17 @@ where the Fourier coefficients \(a_n\) and \(b_n\) are given by
 \end{cases},\quad\quad
 a_n = 2\operatorname{Re}c_n, \quad b_n = -2\operatorname{Im}c_n.
 \]</p>
+
+<h4 id="toc_11">Laplace&#39;s Equation on a rectangular domain</h4>
+
+<p>Let \(f\colon D \to \R\) be defined on the rectangular domain 
+\[D = \{(x, y) \in \R^2: 0 \leq x \leq a, 0 \leq y \leq b\}\]
+satisfying Laplace&#39;s equation on the interior, <em>i.e.</em> \[\lapl{f} = 0,\] and the Dirichlet boundary conditions \(f(x, 0) = g(x)\), \(f(x, b) = f(0, y) = f(a, y) = 0\), where \(g\colon [0, a] \to \R\).</p>
+
+<p>The solution is given by
+\[ f(x, y) = \sum_{n = 1}^\infty A_n \sin\frac{n\pi x}{a}\sinh\frac{n\pi(b - y)}{a},\]
+where the Fourier coefficients are given by
+\[ A_n \sinh\frac{n \pi b}{a} = \frac{2}{a}\int_0^a g(x)\sin\frac{n\pi x}{a} \:dx. \]</p>
 
 
 
