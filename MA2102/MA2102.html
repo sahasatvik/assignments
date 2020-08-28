@@ -755,13 +755,13 @@ This naturally leads to the idea that linear combinations of vectors form subspa
 We define the <em>span</em> of a set of vectors \(W \subseteq V\) as follows.
 \[ \span{W} = \{\lambda_1\w_1 + \lambda_2\w_2 + \dots + \lambda_n\w_n: \w_i \in W, \lambda_i \in F\}. \]</p>
 
-<p>It is easily verified that for any set of vectors \(W\subseteq V\), \(\span{W}\) forms a subspace of \(V\).</p>
+<p>It is easily verified that for any set of vectors \(W\subseteq V\), \(\span{W}\) forms a subspace of \(V\). Furthermore, \(\span W\) is the <em>smallest subspace</em> of \(V\) containing \(W\).</p>
 
 <p>Some other properties of the span are</p>
 
 <ul>
 <li>\(\span\emptyset = \{\ve{0}\}\).</li>
-<li>\(\span(\span S) = \span{S}\). Note that \(\span W = W\) iff \(W\) is a subspace.</li>
+<li>\(\span(\span S) = \span{S}\). Note that \(\span W = W\) <em>iff</em> \(W\) is a subspace.</li>
 <li>\(\span W_1 \subseteq \span W_2\) if \(W_1 \subseteq W_2\).</li>
 <li>\(\span(W_1 \cup W_2) = \span(W_1) + \span(W_2)\).</li>
 <li>\(\span(W_1 \cap W_2) \subseteq \span(W_1) \cap \span(W_2)\).</li>
@@ -769,8 +769,47 @@ We define the <em>span</em> of a set of vectors \(W \subseteq V\) as follows.
 
 <p>We say that a vector space \(V\) is <em>generated</em> by \(W \subseteq V\) if \(V = \span{W}\).</p>
 
+<h3 id="toc_8">Linear dependence and independence</h3>
+
 <p>A set of vectors \(W \subseteq V\) is said to be <em>linearly dependent</em> if there exist distinct vectors \(\w_1, \w_2, \dots, \w_n \in W\) and scalars \(\lambda_i \in F\), not all zero, such that \[\lambda_1\w_1 + \lambda_2\w_2 + \dots + \lambda_n\w_n = \ve0.\]
 A set of vectors \(W \subseteq V\) is said to be <em>linearly independent</em> if it is not linearly dependent.</p>
+
+<p>We can easily show that if \(S^* = S \setminus\{\v\}\), where \(\v\) is a linearly dependent element of \(S\), \(\span S = \span S^*\).
+Contrapositively, if \(S\) is a linearly independent set, then for any subset \(T \subset S\), \(\span T \subset \span S\).</p>
+
+<blockquote>
+<p><strong>Note</strong>: The empty set \(\emptyset\) is linearly independent.</p>
+</blockquote>
+
+<p>For any linearly independent subset \(S \subset V\) and \(v \in V\setminus S\), the set \(S \cup \{\v\}\) is linearly independent <em>iff</em> \(\v \notin \span S\).<br>
+\((\Leftarrow)\) Let \(\v \notin \span S\). For \(\v_i \in S\),
+if \(\lambda_i \in F\) are not all zero and 
+\[ \lambda_1\v_1 + \dots + \lambda_n\v_n + \lambda\v = \ve0, \]
+then \(\lambda\) must be non-zero because of the linear independence of \(S\). This would mean that
+\[ \v = \frac{1}{\lambda}(\lambda_1\v_1 + \dots + \lambda_n\v_n) \in \span S, \]
+which is a contradiction. Thus, there are no \(\v_i \in S\cup \{v\}\) such that a non-trivial linear combination gives \(\ve 0\), so \(S\cup\{\v\}\) is linearly independent.<br>
+\((\Rightarrow)\) Let \(S\cup\{\v\}\) be linearly independent. Suppose that \(\v \in \span S\), <em>i.e.</em> for some \(\v_i \in S \cup \{v\}\), \(\lambda_i \in F\),
+\[ \lambda_1\v_1 + \dots + \lambda_n\v_n = v. \]
+However, by taking \(\v\) to the LHS, we have found a non-trivial linear combination of vectors giving \(\ve0\), which contradicts the linear independence of \(S\cup\{\v\}\). Thus, \(\v\notin\span S\).</p>
+
+<h3 id="toc_9">Basis</h3>
+
+<p>A <em>basis</em> \(\beta\) of a vector space \(V\) is a subset such that \(\beta\) is linearly independent and \(\span\beta = V\).</p>
+
+<ul>
+<li>The zero vector space \(\{\ve0\}\) is its own basis.</li>
+<li>The set of vectors \(\ve{e}_i = (\delta_{ij})_{j}^T\), <em>i.e.</em> the column vector with \(1\) in the \(i^\text{th}\) entry and \(0\) in the rest, is called the <em>standard basis</em> of \(\R^n\).</li>
+<li>The set of polynomials \(\beta = \{1, x, x^2, \dots\}\) is a basic of the space of real polynomials \(P(\R)\).</li>
+</ul>
+
+<p>Note that if \(\beta\) is a finite basis of \(V\), then every \(\v \in V\) can be expressed <em>uniquely</em> as 
+\[ \v = \lambda_1\v_1 + \dots + \lambda_n\v_n, \]
+for \(\v_i \in \beta\), \(\lambda_i \in F\).
+To show this, suppose that for \(\v_i \in \beta\)
+\[ \v = \sum\lambda_i\v_i = \sum\mu_i\v_i \]
+for scalars \(\lambda_i, \mu_i \in F\). Thus,
+\[ (\lambda_1 - \mu_1)\v_1 + \dots + (\lambda_n - \mu_n)\v_n = \ve0. \]
+The linear independence of \(\beta\) forces \(\lambda_i = \mu_i\).</p>
 
 
 
