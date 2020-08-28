@@ -781,15 +781,15 @@ Contrapositively, if \(S\) is a linearly independent set, then for any subset \(
 <p><strong>Note</strong>: The empty set \(\emptyset\) is linearly independent.</p>
 </blockquote>
 
-<p>For any linearly independent subset \(S \subset V\) and \(v \in V\setminus S\), the set \(S \cup \{\v\}\) is linearly independent <em>iff</em> \(\v \notin \span S\).<br>
+<p>For any linearly independent subset \(S \subset V\) and \(\v \in V\setminus S\), the set \(S \cup \{\v\}\) is linearly independent <em>iff</em> \(\v \notin \span S\).<br>
 \((\Leftarrow)\) Let \(\v \notin \span S\). For \(\v_i \in S\),
 if \(\lambda_i \in F\) are not all zero and 
 \[ \lambda_1\v_1 + \dots + \lambda_n\v_n + \lambda\v = \ve0, \]
 then \(\lambda\) must be non-zero because of the linear independence of \(S\). This would mean that
 \[ \v = \frac{1}{\lambda}(\lambda_1\v_1 + \dots + \lambda_n\v_n) \in \span S, \]
-which is a contradiction. Thus, there are no \(\v_i \in S\cup \{v\}\) such that a non-trivial linear combination gives \(\ve 0\), so \(S\cup\{\v\}\) is linearly independent.<br>
-\((\Rightarrow)\) Let \(S\cup\{\v\}\) be linearly independent. Suppose that \(\v \in \span S\), <em>i.e.</em> for some \(\v_i \in S \cup \{v\}\), \(\lambda_i \in F\),
-\[ \lambda_1\v_1 + \dots + \lambda_n\v_n = v. \]
+which is a contradiction. Thus, there are no \(\v_i \in S\cup \{\v\}\) such that a non-trivial linear combination gives \(\ve 0\), so \(S\cup\{\v\}\) is linearly independent.<br>
+\((\Rightarrow)\) Let \(S\cup\{\v\}\) be linearly independent. Suppose that \(\v \in \span S\), <em>i.e.</em> for some \(\v_i \in S\), \(\lambda_i \in F\),
+\[ \lambda_1\v_1 + \dots + \lambda_n\v_n = \v. \]
 However, by taking \(\v\) to the LHS, we have found a non-trivial linear combination of vectors giving \(\ve0\), which contradicts the linear independence of \(S\cup\{\v\}\). Thus, \(\v\notin\span S\).</p>
 
 <h3 id="toc_9">Basis</h3>
@@ -799,7 +799,7 @@ However, by taking \(\v\) to the LHS, we have found a non-trivial linear combina
 <ul>
 <li>The zero vector space \(\{\ve0\}\) is its own basis.</li>
 <li>The set of vectors \(\ve{e}_i = (\delta_{ij})_{j}^T\), <em>i.e.</em> the column vector with \(1\) in the \(i^\text{th}\) entry and \(0\) in the rest, is called the <em>standard basis</em> of \(\R^n\).</li>
-<li>The set of polynomials \(\beta = \{1, x, x^2, \dots\}\) is a basic of the space of real polynomials \(P(\R)\).</li>
+<li>The set of polynomials \(\beta = \{1, x, x^2, \dots\}\) is a basis of the space of real polynomials \(P(\R)\).</li>
 </ul>
 
 <p>Note that if \(\beta\) is a finite basis of \(V\), then every \(\v \in V\) can be expressed <em>uniquely</em> as 
@@ -807,7 +807,7 @@ However, by taking \(\v\) to the LHS, we have found a non-trivial linear combina
 for \(\v_i \in \beta\), \(\lambda_i \in F\).
 To show this, suppose that for \(\v_i \in \beta\)
 \[ \v = \sum\lambda_i\v_i = \sum\mu_i\v_i \]
-for scalars \(\lambda_i, \mu_i \in F\). Thus,
+for scalars \(\lambda_i, \mu_i \in F\). Transferring all terms to one side,
 \[ (\lambda_1 - \mu_1)\v_1 + \dots + (\lambda_n - \mu_n)\v_n = \ve0. \]
 The linear independence of \(\beta\) forces \(\lambda_i = \mu_i\).</p>
 
