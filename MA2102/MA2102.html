@@ -814,8 +814,8 @@ The linear independence of \(\beta\) forces \(\lambda_i = \mu_i\).</p>
 <h4 id="toc_10">Constructing a basis</h4>
 
 <p>Given any finite \(S \subseteq V\) such that \(\span S = V\), there exists a basis \(\beta\) of \(V\), where \(\beta \subseteq S\).
-Note that the case \(S = \emptyset\) is trivial. Now, for non-empty \(S\), choose \(\u_1 \in S\), and note that \(\{\u_1\}\) is linearly independent. If possible, choose \(\u_2 \in S\) such that \(\{\u_1, u_2\}\) is also linearly independent. Note that if this is <em>not</em> possible, that would mean that for any \(\v \in S\setminus\{\u_1\}\), the set \(\{\u_1, \v\}\) is linearly dependent, <em>i.e.</em> \(\lambda_1\u_1 + \lambda\v = 0\). Since \(\lambda\neq 0\), we must have \(\v \in \span\{\u_1\}\), so \(\span \{\u_1\} = \span S = V\).
-We may repeat this process until we have no more choices, and we end up with the basis \(\beta = \{u_1, \dots, \u_k\}\). This is indeed a basis, since at the end, either \(\beta = S\) in which case we are done, or for any \(\v\in S\setminus\beta\), the set \(\beta\cup\{\v\}\) is linearly dependent, so \(\v\in\span S\) and thus \(\span\beta = \span S = V\).</p>
+Note that the case \(S = \emptyset\) is trivial. Now, for non-empty \(S\), choose \(\u_1 \in S\), and note that \(\{\u_1\}\) is linearly independent. If possible, choose \(\u_2 \in S\) such that \(\{\u_1, \u_2\}\) is also linearly independent. Note that if this is <em>not</em> possible, that would mean that for any \(\v \in S\setminus\{\u_1\}\), the set \(\{\u_1, \v\}\) is linearly dependent, <em>i.e.</em> \(\lambda_1\u_1 + \lambda\v = 0\). Since \(\lambda\neq 0\), we must have \(\v \in \span\{\u_1\}\), so \(\span \{\u_1\} = \span S = V\).
+We may repeat this process until we have no more choices, and we end up with the basis \(\beta = \{\u_1, \dots, \u_k\}\). This is indeed a basis, since at the end, either \(\beta = S\) in which case we are done, or for any \(\v\in S\setminus\beta\), the set \(\beta\cup\{\v\}\) is linearly dependent, so \(\v\in\span S\) and thus \(\span\beta = \span S = V\).</p>
 
 <p>We say that a vector space \(V\) is <em>infinite dimensional</em> if it has no finite basis.</p>
 
@@ -824,7 +824,18 @@ We may repeat this process until we have no more choices, and we end up with the
 <p>Let \(V\) be a vector space that is spanned by a finite set \(S\) of size \(n\). Let \(L\) be a linearly independent set of size \(m\).
 Then, we must have \(m \leq n\). Furthermore, there exists \(T \subseteq S\) of size \(n - m\) such that \(T \cup L\) spans \(V\).</p>
 
-<p>We may also rephrase our proposition as \(L\) can always be extended to a basis and \(S\) can always be reduced to a basis.</p>
+<p>To prove this, suppose \(S = \{\v_1, \dots, \v_n\}\) and
+\(L = \{\u_1, \dots, \u_m\}\). Note that \(\v_i, \u_i \neq \ve0\).
+We write
+\[ \u_m = a_1\v_1 + \dots + a_n\v_n \]
+for \(a_i \in F\). Note that \(a_i\) are not all zero. Without loss of generality, let \(a_n \neq 0\). We thus write
+\[ \v_n = \frac{1}{a_n}(\u_m - a_1\v_1 - \dots - a_{n-1}\v_{n-1}). \]
+Setting \(S_1 = \{\v_1, \dots, \v_{n-1}, \u_m\}\), we see that \(\v_n \in \span S_1\). Thus, \(S_1\) spans \(V\).</p>
+
+<p>We iterate the same process to obtain the sets \(S_i = \{\v_1, \dots\v_{n - i}, \u_{m - i + 1}, \dots, \u_{m}\}\). Note that in each case, \(\span S_i = V\). At some point, this process stops. If \(m &gt; n\), then \(S_n = \{\u_{m-n+1}, \dots, \u_m\}\subset L\). On the other hand, \(S_n\) spans \(V\), so the left over elements in \(L\) are non-trivial linear combinations of elements in \(S_n\). This contradicts the linear independence of \(L\).
+Thus, we must have \(m \leq n\), and we end up with \(S_m = \{\v_1, \dots, \v_{n-m}, \u_1, \dots, \u_m\}\) \(= \{\v_1, \dots, \v_{n-m}\} \cup L\) which spans \(V\).</p>
+
+<p>We may also rephrase our proposition as follows: \(L\) can always be extended to a basis and \(S\) can always be reduced to a basis.</p>
 
 <p>The Replacement Theorem immediately implies that any two finite bases \(\beta\), \(\gamma\) of \(V\) have the same size. This number is called the <em>dimension</em> of the vector space over the field \(F\), denoted \(\dim_F V\).</p>
 
@@ -833,6 +844,7 @@ Then, we must have \(m \leq n\). Furthermore, there exists \(T \subseteq S\) of 
 <ul>
 <li>Any spanning set \(S\) of \(V\) contains at least \(n\) elements. If \(S\) is of size \(n\), then \(S\) is a basis.</li>
 <li>Any linearly independent subset containing \(n\) elements is a basis.</li>
+<li>Any subspace \(W\) has dimension \(\dim W \leq n\). If \(\dim W = n\), then \(W = V\).</li>
 </ul>
 
 <blockquote>
@@ -845,6 +857,17 @@ Choose \(\alpha_1, \dots, \alpha_n, \alpha_{n+1} \in [a, b]\). We claim that the
 \[ \lambda_1 g_{\alpha_1} + \dots + \lambda_{n+1} g_{\alpha_{n + 1}} = \ve{0}. \]
 This must hold when evaluated at each of the \(\alpha_i\), which immediately gives \(\lambda_i = 0\). Thus, we have found a linearly independent subset of \(\mathscr{F}\) of size \(n + 1\), which is a contradiction.</p>
 </blockquote>
+
+<h3 id="toc_12">Direct sums</h3>
+
+<p>Let \(V\) be a vector space, and let \(W_1, W_2\) be subspaces. If \(W_1 \cap W_2 = \{\ve0\}\), we denote \(W_1 \oplus W_2\) as the <em>direct sum</em> of the two vector spaces, which is simply \(W_1 + W_2\).</p>
+
+<p>In general, \(W_1 + W_2\) is a vector subspace where \(W_1\) and \(W_2\) are subspaces.</p>
+
+<p>We note that
+\[ \dim{W_1 \oplus W_2} = \dim W_1 + \dim W_2. \]</p>
+
+<p>Any \(\v \in W_1 \oplus W_2\) is <em>uniquely</em> expressible as the sum \(\w_1 + \w_2\), where \(\w_1 \in W_1\) and \(\w_2 \in W_2\). It is also true that if \(\v \in W_1 + W_2\) is uniquely expressible, then \(W_1 \cap W_2 = \{\ve0\}\).</p>
 
 
 
