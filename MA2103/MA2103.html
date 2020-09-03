@@ -621,9 +621,14 @@ pre[class*="language-"] {
 \newcommand\Z{\mathbb{Z}}
 \newcommand\N{\mathbb{N}}
 \newcommand\ve[1]{\boldsymbol{#1}}
+\newcommand\x{\ve{x}}
+\newcommand\r{\ve{r}}
 \newcommand\ppx[1]{\frac{\partial #1}{\partial x}}
 \newcommand\ppt[1]{\frac{\partial #1}{\partial t}}
 \newcommand\pp[3][]{\frac{\partial^{#1}{#2}}{\partial {#3}^{#1}}}
+\newcommand\ddx[1]{\frac{d #1}{d x}}
+\newcommand\ddt[1]{\frac{d #1}{d t}}
+\newcommand\dd[3][]{\frac{d^{#1}{#2}}{d {#3}^{#1}}}
 \newcommand\norm[1]{\left\lVert#1\right\rVert}
 \newcommand\grad[1]{\ve{\nabla}#1}
 \newcommand\divg[1]{\ve{\nabla}\cdot#1}
@@ -663,16 +668,16 @@ In one dimension, this reduces to
 
 <h3 id="toc_3">Heat Equation</h3>
 
-<p>\[ \ppt{T} = \alpha \lapl{T}. \]</p>
+<p>\[ \ppt{T} = \alpha^2 \lapl{T}. \]</p>
 
 <p>We start with Fourier&#39;s Law, which states that the local heat flux density \(\ve{q}\) is related to the gradient of the temperature as \(\ve{q} = -\kappa \nabla T\). 
 This means that the rate of flow of heat energy per unit area is proportional to the negative gradient of temperature locally, <em>i.e.</em> heat flows in the direction of <em>decreasing</em> temperature, proportional to the thermal conductivity \(\kappa\) of the material, which is a simple scalar for isotropic materials.</p>
 
 <p>The law of conservation of heat tells us that rate of change of internal heat per volume is given by \(\nabla\cdot \ve{q} = -\rho\sigma\,(\partial{T}/\partial{t}) = 0\). This means that the rate of flow of heat away from a region is proportional to the rate of <em>decrease</em> in temperature of that region with time, <em>i.e.</em> loss of heat energy in a volume is directly proportional to the decrease in temperature via \(Q = \rho\sigma V\Delta{T}\). Note that \(\rho\) is the density of the material and \(\sigma\) is its specific heat capacity.
-Putting these together and using \(\lapl{T} = \divg{\grad{T}}\) yields the result, with \(\alpha = \kappa/\rho\sigma\).</p>
+Putting these together and using \(\lapl{T} = \divg{\grad{T}}\) yields the result, with \(\alpha^2 = \kappa/\rho\sigma\).</p>
 
 <p>In one dimension, this reduces to
-\[ \ppt{T} = \alpha \pp[2]{T}{x}. \]</p>
+\[ \ppt{T} = \alpha^2 \pp[2]{T}{x}. \]</p>
 
 <p>Note that for anisotropic materials, \(\kappa\) is a second order tensor and hence doesn&#39;t commute with the divergence.
 \[ \rho\sigma\ppt{T} = \divg{(\kappa\grad{T})}. \]</p>
@@ -825,6 +830,33 @@ satisfying Laplace&#39;s equation on the interior, <em>i.e.</em> \[\lapl{f} = 0,
 \[ f(x, y) = \sum_{n = 1}^\infty A_n \sin\frac{n\pi x}{a}\sinh\frac{n\pi(b - y)}{a},\]
 where the Fourier coefficients are given by
 \[ A_n \sinh\frac{n \pi b}{a} = \frac{2}{a}\int_0^a g(x)\sin\frac{n\pi x}{a} \:dx. \]</p>
+
+<h4 id="toc_12">Heat flow equation</h4>
+
+<p>We seek a solution \(u(\x, t)\) to 
+\[ \lapl{u} = \frac{1}{\alpha^2} \ppt{u}. \]
+We perform a partial separation of variables by writing \(u(\x, t) = F(\x) T(t)\). Thus, the spatial and temporal parts of the PDE separate, yielding
+\[ \frac{1}{F} \lapl{F} = \frac{1}{\alpha^2 T} \ddt{T} = -k^2. \]
+We choose \(-k^2\) to ensure that our solution does not diverge as \(t \to \infty\). The temporal part is easily solved as \(T(t) = \exp(-k^2\alpha^2 t)\). The spatial part satisfies
+\[ \lapl{F} + k^2F = 0. \]
+To solve this, we require two boundary (spatial) conditions, as well as an initial (temporal) condition.</p>
+
+<p>Suppose that our problem is one-dimensional, and \(u(x, 0) = u_0(x)\), \(u(0, t) = 0\) and \(u(\ell, t) = 0\).</p>
+
+<p>For example, if we demand a steady state at \(t = 0\) with \(u(0, 0) = 0\) and \(u(\ell, 0) = T_0\), we have the solution to \(\partial^2 u /\partial u^2 = 0\),
+\[ u_0(x) = T_0 \frac{x}{\ell}. \]</p>
+
+<p>Note that the spatial equation admits solutions of the form \(A\cos{kx} + B\sin{kx}\). The cosine part is discarded, and we must have \(k = n\pi /\ell\). Thus,
+\[ u(x, t) = \sum_{n = 1}^\infty A_n \sin\frac{n\pi x}{\ell}\,\exp\left(-k^2\alpha^2 t\right). \]
+The coefficients \(A_n\) are determined by setting \(t = 0\), where \(u = u_0\). Thus,
+\[ A_n = \frac{2}{\ell}\int_0^\ell u_0(x) \sin\frac{n\pi x}{\ell}\: dx. \]</p>
+
+<p>Suppose that we further demand a steady state as \(t \to \infty\), where \(u(0, \infty) = T_1\) and \(u(\ell, \infty) = T_2\). Then, this steady state has a solution \(u_f\) where
+\[ u_f(x) = (T_2 - T_1)\frac{x}{\ell} + T_1. \]
+Thus, our solution is the superposition
+\[ u(x, t) = u_f(x) \,+\, \sum_{n = 1}^\infty B_n \sin\frac{n\pi x}{\ell}\,\exp\left(-k^2\alpha^2 t\right). \]
+The coefficients \(B_n\) are given by
+\[ B_n = \frac{2}{\ell}\int_0^\ell (u_0(x) - u_f(x))\sin\frac{n\pi x}{\ell}\: dx. \]</p>
 
 
 
