@@ -626,6 +626,11 @@ pre[class*="language-"] {
 \newcommand\Q{\mathbb{Q}}
 \newcommand\Z{\mathbb{Z}}
 \newcommand\N{\mathbb{N}}
+\newcommand\ve[1]{\boldsymbol{#1}}
+\newcommand\norm[1]{\left\Vert #1 \right\Vert}
+\def\u{\ve{u}}
+\def\v{\ve{v}}
+\def\w{\ve{w}}
 \)</li>
 </ol>
 
@@ -735,6 +740,64 @@ have the least upper bound property. For example, the set \(\{x\in\Q: x^2 &lt; 2
 \(nx &lt; m\). Thus, \(m - 1 \leq nx &lt; m\). Using \(1 + nx &lt; ny\), we have \(nx &lt; m \leq 1 + nx &lt; ny\), so \(x &lt; m/n &lt; y\) as desired.</li>
 <li><strong>Existence and Uniqueness of positive \(n^\text{th}\) roots</strong>: For every positive integer \(n\) and every positive real number \(x\), there exists a unique positive real number \(y\) such that \(y^n = x\).</li>
 </ul>
+
+<h3 id="toc_6">Extended real numbers system</h3>
+
+<p>We introduce two new symbols \(\infty\) and \(-\infty\) to \(\R\). Preserving the original order,
+\[ -\infty &lt; x &lt; \infty \]
+for all \(x \in \R\). We also define the following conventions.</p>
+
+<ul>
+<li>\(x + \infty = \infty\), \(x - \infty = -\infty\).</li>
+<li>\(x / \pm\infty = 0\).</li>
+<li>If \(x &gt; 0\), \(x \cdot \infty = \infty\). If \(x &lt; 0\), then \(x \cdot \infty = -\infty\).</li>
+</ul>
+
+<h2 id="toc_7">Point set topology on \(\R\)</h2>
+
+<p>We define <em>open</em> and <em>closed intervals</em> as follows.
+\[ (a, b) = \{x \in \R: a &lt; x &lt; b\}, \]
+\[ [a, b] = \{x \in \R: a \leq x \leq b\}. \]</p>
+
+<p>An <em>\(n\)-cell</em> is the Cartesian product of \(n\) closed intervals.</p>
+
+<p>A <em>metric space</em> is a set \(M\) with a metric or a distance function \(d\colon M\times M \to \R\) such that for all \(x, y, z \in M\),</p>
+
+<ul>
+<li><strong>Symmetry</strong>: \(d(x, y) = d(y, x)\),</li>
+<li><strong>Non-negativity</strong>: \(d(x, y) \geq 0\). Equality <em>iff</em> \(x = y\).</li>
+<li><strong>Triangle inequality</strong>: \(d(x, z) \leq d(x, y) + d(y, z)\).</li>
+</ul>
+
+<p>An <em>open ball</em> of radius \(r\) in a metric space \((M, d)\) centred at a point \(x\) is the set of all \(y\) such that \(d(x, y) &lt; r\). This is denoted as \(B_r(x)\).<br>
+A <em>closed ball</em> of radius \(r\) in a metric space \((M, d)\) centred at a point \(x\) is the set of all \(y\) such that \(d(x, y) \leq r\).</p>
+
+<p>An open ball \(B_r(x)\) is also called a neighbourhood \(N_r(x)\) of \(x\).</p>
+
+<p>A <em>convex set</em> \(E\) is such that for any \(x, y \in E\),
+\[ tx + (1 - t)y \in E, \]
+for all \(t \in [0, 1]\). Open balls, closed balls, and \(n\)-cells are all convex sets.</p>
+
+<p>A <em>bounded set</em> \(S \subseteq M\) is such that there exists \(x \in M\) and some radius \(r &gt; 0\) where \(S \subseteq B_r(x)\).</p>
+
+<p>A point \(\ell \in M\) is a <em>closure point</em> of \(S \subseteq \R\) if every neighbourhood of \(\ell\) contains at least one point of \(S\). The set of all closure points of \(S\) is called its <em>closure</em>, denoted by \(\bar{S}\).
+A <em>closed set</em> is such that \(S = \bar{S}\).</p>
+
+<p>A subset \(S\) of a metric space is <em>dense</em> in \(M\) if \(\bar{S} = M\).</p>
+
+<p>A <em>limit point</em> \(\ell\) of \(S \subseteq M\) is such that every neighbourhood of \(\ell\) contains at least one point of \(S\) different from itself.
+Every closure point of \(S\) which is not a limit point of \(S\) is called an <em>isolated point</em>.</p>
+
+<p>Note that every neighbourhood of a limit point of \(S\) contains infinitely many points of \(S\). As a corollary, finite subsets of a metric space have no limit points.</p>
+
+<p>An <em>interior point</em> \(p \in S\) is such that for some \(r &gt; 0\), there is a neighbourhood \(B_r(p) \subseteq S\). The set of all interior points of \(S\) is called its <em>interior</em>, denoted by \(S^0\).
+An <em>open set</em> is such that \(S = S^0\).</p>
+
+<p>Note that every neighbourhood is an open set.</p>
+
+<p>The <em>boundary</em> \(\partial S\) of \(S\) is the set of all points in its closure not in its interior. Thus, \(\partial S = \bar{S} \setminus S^0\).</p>
+
+<p>A set \(S\) is open <em>iff</em> its complement is open. As a corollary, a set is open <em>iff</em> its complement is closed.</p>
 
 
 
