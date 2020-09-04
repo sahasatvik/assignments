@@ -841,22 +841,49 @@ We choose \(-k^2\) to ensure that our solution does not diverge as \(t \to \inft
 \[ \lapl{F} + k^2F = 0. \]
 To solve this, we require two boundary (spatial) conditions, as well as an initial (temporal) condition.</p>
 
-<p>Suppose that our problem is one-dimensional, and \(u(x, 0) = u_0(x)\), \(u(0, t) = 0\) and \(u(\ell, t) = 0\).</p>
-
-<p>For example, if we demand a steady state at \(t = 0\) with \(u(0, 0) = 0\) and \(u(\ell, 0) = T_0\), we have the solution to \(\partial^2 u /\partial u^2 = 0\),
+<p>Suppose that our problem is one-dimensional, and \(u(x, 0) = u_0(x)\), \(u(0, t) = 0\) and \(u(\ell, t) = 0\).
+For example, if we demand a steady state at \(t = 0\) with \(u(0, 0) = 0\) and \(u(\ell, 0) = T_0\), we have the solution to \(\partial^2 u /\partial u^2 = 0\),
 \[ u_0(x) = T_0 \frac{x}{\ell}. \]</p>
 
 <p>Note that the spatial equation admits solutions of the form \(A\cos{kx} + B\sin{kx}\). The cosine part is discarded, and we must have \(k = n\pi /\ell\). Thus,
-\[ u(x, t) = \sum_{n = 1}^\infty A_n \sin\frac{n\pi x}{\ell}\,\exp\left(-k^2\alpha^2 t\right). \]
+\[ u(x, t) = \sum_{n = 1}^\infty A_n \sin\frac{n\pi x}{\ell}\,\exp\left(-k_n^2\alpha^2 t\right). \]
 The coefficients \(A_n\) are determined by setting \(t = 0\), where \(u = u_0\). Thus,
 \[ A_n = \frac{2}{\ell}\int_0^\ell u_0(x) \sin\frac{n\pi x}{\ell}\: dx. \]</p>
 
 <p>Suppose that we further demand a steady state as \(t \to \infty\), where \(u(0, \infty) = T_1\) and \(u(\ell, \infty) = T_2\). Then, this steady state has a solution \(u_f\) where
 \[ u_f(x) = (T_2 - T_1)\frac{x}{\ell} + T_1. \]
 Thus, our solution is the superposition
-\[ u(x, t) = u_f(x) \,+\, \sum_{n = 1}^\infty B_n \sin\frac{n\pi x}{\ell}\,\exp\left(-k^2\alpha^2 t\right). \]
+\[ u(x, t) = u_f(x) \,+\, \sum_{n = 1}^\infty B_n \sin\frac{n\pi x}{\ell}\,\exp\left(-k_n^2\alpha^2 t\right). \]
 The coefficients \(B_n\) are given by
 \[ B_n = \frac{2}{\ell}\int_0^\ell (u_0(x) - u_f(x))\sin\frac{n\pi x}{\ell}\: dx. \]</p>
+
+<h4 id="toc_13">Heat flow equation with insulated boundaries</h4>
+
+<p>Suppose we are given the Neumann conditions \(u&#39;(0, t) = u&#39;(\ell, t) = 0\), together with the initial conditions \(u(x, 0) = u_0(x)\). We proceed in the same vein as before, but this time we discard the <em>sine</em> part of the spatial solution, since upon differentiation, it becomes a cosine and fails to satisfy the boundary conditions. Thus, we have
+\[ u(x, t) = \frac{A_0}{2} \,+\, \sum_{n = 1}^\infty A_n \cos\frac{n\pi x}{\ell}\,\exp\left(-k^2\alpha^2 t\right). \]</p>
+
+<p>Like before, the coefficients \(A_n\) are given by
+\[ A_n = \frac{2}{\ell}\int_0^\ell u_0(x) \cos\frac{n\pi x}{\ell}\: dx. \]</p>
+
+<h4 id="toc_14">Schrodinger equation</h4>
+
+<p>\[ -\frac{\hbar^2}{2m}\lapl\Psi(\x, t) + V(\x)\Psi(\x, t) = i\hbar \ppt{} \Psi(\x, t). \]
+We perform a partial separation of variables \(\Psi(\x, t) = \psi(\x)T(t)\), so
+\[ -\frac{\hbar^2}{2m} \frac{1}{\psi}\lapl{\psi} + V = {i\hbar} \frac{1}{T}\ppt{}T = \text{constant } (E). \]
+The constant \(E\) has an interpretation in terms of energy.
+The temporal part is solved by \(T(t) = \exp(-iEt/\hbar)\).
+The spatial part of the equation becomes
+\[ -\frac{\hbar^2}{2m}\lapl{\psi} + V\psi = E\psi, \]
+which is called the time-independent Schrodinger equation.</p>
+
+<p>Consider the particle in a box problem in one dimension, with \(V(x) = 0\) when \(0 \leq x \leq \ell\), and \(\infty\) everywhere else. The time independent Schrodinger equation is solved by \(\psi(x) = A\cos{kx} + B\sin{kx}\), where \(k^2 = 2mE/\hbar^2\).</p>
+
+<p>Outside the box, \(\Psi\) must vanish. Let our initial conditions be \(\Psi(x, 0) = \psi_0(x)\), and let our boundary conditions be \(\Psi(0, t) = \Psi(\ell, t) = 0\).
+This leads us to discard the cosine part of our spatial solution, and \(k = n\pi/\ell\). Note that this means that
+\[ E_n = \frac{\hbar^2 \pi^2 n^2}{2m\ell^2}. \] Putting this together,
+\[ \Psi(x, t) = \sum_{n = 1}^\infty A_n \sin\frac{n\pi x}{\ell}\, \exp(-i E_n t/\hbar). \]
+The coefficients \(A_n\) are given by
+\[ A_n = \frac{2}{\ell}\int_0^\ell \psi_0(x) \sin\frac{n\pi x}{\ell}\: dx. \]</p>
 
 
 
