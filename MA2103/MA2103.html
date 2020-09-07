@@ -831,7 +831,7 @@ satisfying Laplace&#39;s equation on the interior, <em>i.e.</em> \[\lapl{f} = 0,
 where the Fourier coefficients are given by
 \[ A_n \sinh\frac{n \pi b}{a} = \frac{2}{a}\int_0^a g(x)\sin\frac{n\pi x}{a} \:dx. \]</p>
 
-<h4 id="toc_12">Heat flow equation</h4>
+<h3 id="toc_12">Heat flow equation</h3>
 
 <p>We seek a solution \(u(\x, t)\) to 
 \[ \lapl{u} = \frac{1}{\alpha^2} \ppt{u}. \]
@@ -860,12 +860,26 @@ The coefficients \(B_n\) are given by
 <h4 id="toc_13">Heat flow equation with insulated boundaries</h4>
 
 <p>Suppose we are given the Neumann conditions \(u&#39;(0, t) = u&#39;(\ell, t) = 0\), together with the initial conditions \(u(x, 0) = u_0(x)\). We proceed in the same vein as before, but this time we discard the <em>sine</em> part of the spatial solution, since upon differentiation, it becomes a cosine and fails to satisfy the boundary conditions. Thus, we have
-\[ u(x, t) = \frac{A_0}{2} \,+\, \sum_{n = 1}^\infty A_n \cos\frac{n\pi x}{\ell}\,\exp\left(-k^2\alpha^2 t\right). \]</p>
+\[ u(x, t) = \frac{A_0}{2} \,+\, \sum_{n = 1}^\infty A_n \cos\frac{n\pi x}{\ell}\,\exp\left(-k_n^2\alpha^2 t\right). \]</p>
 
 <p>Like before, the coefficients \(A_n\) are given by
 \[ A_n = \frac{2}{\ell}\int_0^\ell u_0(x) \cos\frac{n\pi x}{\ell}\: dx. \]</p>
 
-<h4 id="toc_14">Schrodinger equation</h4>
+<h4 id="toc_14">Heat flow equation with periodic boundaries</h4>
+
+<p>Suppose we are given that \(u(x, 0) = u_0(x)\), \(u(-\ell, t) = u(+\ell, t)\), and \(u&#39;(-\ell, t) = u&#39;(+\ell, t)\). We perform partial separation of variables as usual, with \(T(t) = \exp(-k^2\alpha^2t)\).
+Note that \(u\) is defined on the domain \([-\ell, +\ell]\times[0, \infty)\).</p>
+
+<p>Our spatial solution \(F(x) = c_1\cos{kx} + c_2\sin{kx}\) only satisfies the boundary conditions when \(\sin{k\ell} = 0\), thus \(k = n\pi/\ell\). We do not however discard any terms here, so our general solution is of the form
+\[ u(x, t) = \frac{A_0}{2} \,+\, \sum_{n = 1}^\infty A_n \cos\frac{n\pi x}{\ell}\,\exp\left(-k_n^2\alpha^2 t\right)
+\,+\, \sum_{n = 1}^\infty B_n \sin\frac{n\pi x}{\ell}\,\exp\left(-k_n^2\alpha^2 t\right). \]</p>
+
+<p>The coefficients \(A_n\) and \(B_n\) are determined at \(t = 0\) as usual.</p>
+
+<p>\[ A_n = \frac{1}{\ell} \int_{-\ell}^{+\ell} u_0(x) \cos\frac{n\pi x}{\ell} \:dx,
+\quad\quad B_n = \frac{1}{\ell} \int_{-\ell}^{+\ell} u_0(x) \sin\frac{n\pi x}{\ell} \:dx.\]</p>
+
+<h4 id="toc_15">Schr&ouml;dinger equation</h4>
 
 <p>\[ -\frac{\hbar^2}{2m}\lapl\Psi(\x, t) + V(\x)\Psi(\x, t) = i\hbar \ppt{} \Psi(\x, t). \]
 We perform a partial separation of variables \(\Psi(\x, t) = \psi(\x)T(t)\), so
@@ -874,9 +888,9 @@ The constant \(E\) has an interpretation in terms of energy.
 The temporal part is solved by \(T(t) = \exp(-iEt/\hbar)\).
 The spatial part of the equation becomes
 \[ -\frac{\hbar^2}{2m}\lapl{\psi} + V\psi = E\psi, \]
-which is called the time-independent Schrodinger equation.</p>
+which is called the time-independent Schr&ouml;dinger equation.</p>
 
-<p>Consider the particle in a box problem in one dimension, with \(V(x) = 0\) when \(0 \leq x \leq \ell\), and \(\infty\) everywhere else. The time-independent Schrodinger equation is solved by \(\psi(x) = A\cos{kx} + B\sin{kx}\), where \(k^2 = 2mE/\hbar^2\).</p>
+<p>Consider the particle in a box problem in one dimension, with \(V(x) = 0\) when \(0 \leq x \leq \ell\), and \(\infty\) everywhere else. The time-independent Schr&ouml;dinger equation is solved by \(\psi(x) = A\cos{kx} + B\sin{kx}\), where \(k^2 = 2mE/\hbar^2\).</p>
 
 <p>Outside the box, \(\Psi\) must vanish. Let our initial conditions be \(\Psi(x, 0) = \psi_0(x)\), and let our boundary conditions be \(\Psi(0, t) = \Psi(\ell, t) = 0\).
 We discard the cosine part of our spatial solution, and must have \(k = n\pi/\ell\). Note that we can write
