@@ -626,6 +626,7 @@ pre[class*="language-"] {
 \def\v{\ve{v}}
 \def\w{\ve{w}}
 \def\span{\operatorname{span}}
+\def\Id{\operatorname{Id}}
 \)</p>
 
 <h2 id="toc_1">Fields</h2>
@@ -878,6 +879,38 @@ This must hold when evaluated at each of the \(\alpha_i\), which immediately giv
 \[ [\u] + [\v] = [\u + \v], \quad\quad \lambda[\v] = [\lambda\v]. \]</p>
 
 <p>Note that we must verify that these operations are well defined, since there are many choices for \(\v\) for a fixed equivalence class \([\v]\). Suppose \([\v] = [\v&#39;]\) and \([\u] = [\u&#39;]\). This means that \(\v - \v&#39; \in W\) and \(\u - \u&#39; \in W\). Thus, \(\u + \v \sim_W \u&#39; + \v&#39;\) since \((\u - \u&#39;) + (\v - \v&#39;) \in W\). This means that \([\u + \v] = [\u&#39;] + [\v&#39;]\). Similarly, \([\lambda\v] = [\lambda\v&#39;]\) since \(\lambda\v - \lambda\v&#39; = \lambda(\v - \v&#39;) \in W\).</p>
+
+<h3 id="toc_14">Linear maps</h3>
+
+<p>A linear map \(t\colon V \to W\) between vector spaces (over a field \(F\)) is such that \(T(\v + \w) = T(\v) + T(\w)\) and \(T(\lambda\v) = \lambda T(\v)\) for all \(\v, \w \in V\) and scalars \(\lambda\).</p>
+
+<p>This immediately forces the following properties.</p>
+
+<ul>
+<li>\(T(\ve0_V) = \ve0_W\)</li>
+<li>\(T(\lambda_1\v_1 + \dots + \lambda_n\v_n) = \lambda_1T(\v_1) + \dots + \lambda_nT(\v_n)\).</li>
+</ul>
+
+<p>The following are all linear maps.</p>
+
+<ul>
+<li><strong>Zero/trivial map</strong>: \(0\colon V\to W\), \(\v \mapsto \ve0\).</li>
+<li><strong>Identity map</strong>: \(\Id\colon V\to V\), \(\v \mapsto \v\).</li>
+<li><strong>Scaling</strong>: \(T\colon \R\to\R\), \(x \mapsto cx\) for some fixed \(c\).</li>
+</ul>
+
+<blockquote>
+<p>Indeed, <em>all</em> linear maps from \(\R\) to \(\R\) are scaling maps.</p>
+</blockquote>
+
+<ul>
+<li><strong>Dilation</strong>: \(T\colon V\to V\), \(\v \mapsto c\v\) for some fixed \(c \in F\).</li>
+<li><strong>Matrices</strong>: \(L_A\colon \R^n\to\R^m\), \(\v\mapsto A\v\) for some \(A \in M_{m\times n}(\R)\).</li>
+<li><strong>Reflections</strong>: For example, a reflection of \(\R^2\) about the \(x\)-axis. Note that this is a linear map of order 2, <em>i.e.</em> \(T\circ T = \Id\). Note that reflections about lines <em>not</em> through the origin are not linear maps, since the zero vector must map to itself.</li>
+<li><strong>Rotations</strong>: As before, the rotation must be about the zero vector.</li>
+<li><strong>Projections</strong>: For example, the projection of \(\R^2\) onto the \(x\)-axis. Note that projections are of the form \(T\circ T = T\).</li>
+<li><strong>Inclusions</strong>: For example, \(T\colon \R\to\R^2\), \(x\mapsto(x, mx)\).</li>
+</ul>
 
 
 
