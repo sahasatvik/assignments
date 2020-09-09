@@ -788,16 +788,27 @@ A <em>closed set</em> is such that \(S = \bar{S}\).</p>
 <p>A <em>limit point</em> \(\ell\) of \(S \subseteq M\) is such that every neighbourhood of \(\ell\) contains at least one point of \(S\) different from itself.
 Every closure point of \(S\) which is not a limit point of \(S\) is called an <em>isolated point</em>.</p>
 
-<p>Note that every neighbourhood of a limit point of \(S\) contains infinitely many points of \(S\). As a corollary, finite subsets of a metric space have no limit points.</p>
+<blockquote>
+<p>Note that every neighbourhood of a limit point of \(S\) contains infinitely many points of \(S\).
+Suppose \(\ell\) is a limit point of \(S\), and suppose that the neighbourhood \(N\) of \(\ell\) contains finitely many points in \(S\) apart from \(\ell\). Thus, we can enumerate \((N\cap S)\setminus\{\ell\} = \{s_1, \dots, s_n\}\). Note that if \(d(s, \ell) &gt; d(s_i, \ell)\), the neighbourhood \(N_{r_i}(\ell)\) does not contain \(s\), where \(r_i = d(s_i, \ell)\). Thus, by setting
+\[ r = \min d(s_i, \ell) &gt; 0,\]
+the neighbourhood \(N_r(\ell)\) contains none of \(s_i\). This is a contradiction.</p>
+</blockquote>
+
+<blockquote>
+<p>As a corollary, finite subsets of a metric space have no limit points.  </p>
+</blockquote>
 
 <p>An <em>interior point</em> \(p \in S\) is such that for some \(r &gt; 0\), there is a neighbourhood \(B_r(p) \subseteq S\). The set of all interior points of \(S\) is called its <em>interior</em>, denoted by \(S^0\).
 An <em>open set</em> is such that \(S = S^0\).</p>
 
+<blockquote>
 <p>Note that every neighbourhood is an open set.</p>
+</blockquote>
 
 <p>The <em>boundary</em> \(\partial S\) of \(S\) is the set of all points in its closure not in its interior. Thus, \(\partial S = \bar{S} \setminus S^0\).</p>
 
-<p>A set \(S\) is open <em>iff</em> its complement is open. As a corollary, a set is open <em>iff</em> its complement is closed.</p>
+<p>A set \(S\) is open <em>iff</em> its complement is closed. As a corollary, a set is closed <em>iff</em> its complement is open.</p>
 
 
 
