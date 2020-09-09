@@ -1,0 +1,105 @@
+\documentclass[10pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{bm}
+
+\title{Analysis I - Assignment II}
+\author{Satvik Saha}
+\date{}
+
+\geometry{a4paper, margin=1in}
+\setlength\parindent{0pt}
+\renewcommand{\labelenumi}{(\alph{enumi})}
+% \renewcommand\qedsymbol{$\blacksquare$}
+\newcounter{prob}
+\def\problem{\stepcounter{prob}\paragraph{Exercise \arabic{prob}}}
+\def\solution{\paragraph{Solution}}
+
+\begin{document}
+        \par\textbf{IISER Kolkata} \hfill \textbf{Assignment II}
+        \vspace{3pt}
+        \hrule
+        \vspace{3pt}
+        \begin{center}
+                \LARGE{\textbf{MA 2101 : Analysis I}}
+        \end{center}
+        \vspace{3pt}
+        \hrule
+        \vspace{3pt}
+        Satvik Saha, \texttt{19MS154}, Group C\hfill\today
+        \vspace{20pt}
+
+        \problem Show that for every real number $r$, there exists an integer such that $n \leq r < n + 1$.
+        \solution Supoose that there is no $n \in \mathbb{Z}$ such that $n \leq r < n + 1$ for some $r \in \mathbb{R}$.
+        Note that the integers are unbounded below, so there exists some $m \in \mathbb{Z}$ such that $m \leq r$.
+        By our assumption, we cannot have $r < m + 1$, so instead $m + 1 \leq r$. Let this be our base case.
+
+        Now, let $k \in \mathbb{Z}$ be such that $m \leq k \leq r$. Again, $r < k + 1$ would contradict our assumption, so $k + 1 \leq r$.
+
+        Thus, we have shown by induction that all integers $n \geq m$ are bounded above by $r$. Additionally, the other integers $n' < m < r$
+        anyways. Thus, $n \leq r$ for all $n \in \mathbb{Z}$, which is absurd since the integers are unbounded above.
+        This proves the given statement.
+
+        \problem Show that between any two rational numbers, there exists an irrational number.
+        \solution Without loss of generality, let $p, q \in \mathbb{Q}$ such that $p > q$.
+        Note that $2 > \sqrt{2} > 1$, so $0 < 1 /\sqrt{2} < 1$ and $0 < (p - q) /\sqrt{2} < p - q$.
+        Adding $q$ to both sides,
+        \[
+                q < q \,+\, \frac{p - q}{\sqrt{2}} < p.
+        \]
+        Note that the irrationality of $q + (p - q)/\sqrt{2}$ follows directly from the irrationality of $\sqrt{2}$.
+
+        \problem Show that in a group, every element has a unique inverse.
+        \solution Let $(G, *)$ be a group with identity $e \in G$, and let $a \in G$ be arbitrary. Clearly, $a$ must have an inverse
+        in $G$. Suppose $a', a'' \in G$ are two such inverses. Thus,
+        \[
+                a' * a = e = a * a', \quad\text{ and }\quad a'' * a = e = a * a''.
+        \]
+        Now, we evaluate
+        \begin{align*}
+                a' \;&=\; a' * e \tag{Identity} \\
+                        \;&=\; a' * (a * a'') \tag{Composition with inverse} \\
+                        \;&=\; (a' * a) * a'' \tag{Associativity} \\
+                        \;&=\; e * a''          \tag{Composition with inverse} \\
+                        \;&=\; a''      \tag{Identity}
+        \end{align*}
+        Thus, $a' = a''$ for all inverses of $a$. In other words, the inverse of $a$ is unique.
+
+        \problem Let $T \subset \mathbb{R}$ be bounded and let $S = \{|x - y| : x, y \in T\}$. Show that $\sup S = \sup T - \inf T$.
+        \solution We assume that $T$ is non-empty.
+        Note that $T$ is a bounded subset of $\mathbb{R}$, so $\sup T$ and $\inf T$ exist by the completeness of $\mathbb{R}$.
+        Without loss of generality, let $x, y \in T$ such that $x \geq y$. Then, $|x - y| \leq x - y \leq \sup T - \inf T$,
+        since $x \leq \sup T$ and $y \geq \inf T$\footnote{The analogous case with $x < y$ shows that $|x - y| = -x + y \leq -\inf T + \sup T$.}.
+        Hence, $S$ is a subset of $\mathbb{R}$ bounded above, so $\sup S$ exists. We claim that $\sup S = \sup T - \inf T$.
+        Thus, for any $\epsilon > 0$, we must find $s \in S$ such that $\sup T - \inf T - \epsilon < s \leq \sup T - \inf T$. \\
+        Now, from the properties of the supremum and infinum, we choose $x', y' \in T$ such that $\sup T - \epsilon /2 < x' \leq \sup T$
+        and $\inf T \leq y' < \inf T + \epsilon /2$. Thus, $x' - y' > \sup T - \inf T - \epsilon$. Thus,
+        without loss of generality\footnote{If $y' > x'$, we can simply swap the roles of $x'$ and $y'$, since
+        $\sup T - \epsilon /2 < x' < y' \leq \sup T$ and $\inf T \leq x' < y' < \inf T + \epsilon /2$.}, we have $ s = |x' - y'| \in S$
+        and $\sup T - \inf T - \epsilon < s \leq \sup T - \inf T$. Thus, $\sup T - \inf T$ is indeed the least upper bound of $S$,
+        and is thus equal to its supremum.
+
+        \problem Find the supremum and infimum of the set $S = \{m/(m + n) : m, n \in \mathbb{N}\}$.
+        \solution We claim that $\inf S = 0$ and $\sup S = 1$. First, note that 
+        \[
+                0 \;<\; \frac{m}{m + n} \;<\; \frac{m}{m} = 1,
+        \]
+        for all $m, n \in \mathbb{N}$. Thus, $S$ is bounded, so its supremum and infimum exist by the completeness of $\mathbb{R}$.
+        Also, we must have $\sup S \leq 1$ and $\inf S \geq 0$. We must now show that for any upper bound $1 > \alpha \in \mathbb{R}$
+        and for any lower bound $0 < \beta \in \mathbb{R}$ of $S$, there exist $x, y \in S$ such that
+        \[
+                0 \;<\; x \;<\; \beta, \quad\text{ and }\quad \alpha \;<\; y \;<\; 1.
+        \]
+        Clearly, $1 /2 = 1 /(1 + 1) \in S$, so $\beta < 1 /2 < 1$ and $\alpha > 1 /2 > 0$.
+
+        On the other hand, the rationals $\mathbb{Q}$ are dense in the reals, so between any two real numbers, there exists a rational
+        number $p /q$ for $p, q \in \mathbb{Z}$, $q \neq 0$. Thus, we find rationals $0 < a /b < \beta < 1$ and $0 < \alpha < c /d < 1$,
+        so $0 < a < b$ and $0 < c < d$ for $a, b, c, d \in \mathbb{N}$. Thus, $0 < b - a \in \mathbb{N}$ and $0 < d - c \in \mathbb{N}$.
+        We thus set
+        \[
+                x = \frac{a}{a + (b - a)} \in S, \quad\quad\quad y = \frac{c}{c + (d - c)} \in S,
+        \]
+        completing the proof.
+\end{document}

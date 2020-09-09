@@ -1,0 +1,169 @@
+\documentclass[10pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{bm}
+
+\title{Analysis I - Assignment I}
+\author{Satvik Saha}
+\date{}
+
+\geometry{a4paper, margin=1in}
+\setlength\parindent{0pt}
+\renewcommand{\labelenumi}{(\alph{enumi})}
+% \renewcommand\qedsymbol{$\blacksquare$}
+\newcounter{prob}
+\def\problem{\stepcounter{prob}\paragraph{Exercise \arabic{prob}}}
+\def\solution{\paragraph{Solution}}
+
+\begin{document}
+        \par\textbf{IISER Kolkata} \hfill \textbf{Assignment I}
+        \vspace{3pt}
+        \hrule
+        \vspace{3pt}
+        \begin{center}
+                \LARGE{\textbf{MA 2101 : Analysis I}}
+        \end{center}
+        \vspace{3pt}
+        \hrule
+        \vspace{3pt}
+        Satvik Saha, \texttt{19MS154}, Group C\hfill\today
+        \vspace{20pt}
+
+        \problem Show that $\sqrt{2} + \sqrt{3}$ is not rational.
+        \solution Assume to the contrary that $\sqrt{2} + \sqrt{3}$ is rational. We write $\sqrt{2} + \sqrt{3} = p /q$ for
+        $p, q \in \mathbb{Z}$ and $q \neq 0$.
+        Then $(\sqrt{2} + \sqrt{3})^2 = 5 + 2\sqrt{6} = p^2 / q^2$ is also rational, and so is $\sqrt{6} = (p^2 - 5q^2)/2q^2$. \\
+
+        Let $\sqrt{6} = a/b$ where $a, b \in \mathbb{Z}$, $b \neq 0$, and $\gcd(a, b) = 1$.
+        Squaring and rearranging, we have $a^2 = 6b^2$. Since $6b^2$ is even, so is $a^2$, and so is $a$ (this follows since $2$ is a prime).
+        Thus, we write $a = 2c$ for some integer $c$, hence $4c^2 = 6b^2 \implies 2c^2 = 3b^2$. Now, $2c^2$ is even, so $3b^2$ must be even
+        as well. However, we already know that $a$ is even and shares no common factors with $b$. Thus, $b$ must be odd, and so is $3b^2$.
+        This is a contradiction. Thus, $\sqrt{6}$ cannot be rational, so $\sqrt{2} + \sqrt{3} \notin \mathbb{Q}$.
+
+        \problem Let $a$ be a real number such that $a > 1$ and let $S = \{a^n : n \in \mathbb{N}\}$. Show that the set $S$ has no upper bound.
+        \solution Since $a > 1$, we write $a = 1 + x$ for some positive real $x$, then expand $(1 + x)^n$  using the binomial theorem to obtain
+        the inequality
+        \[
+                a^n \;=\; 1 + nx + \frac{1}{2}n(n-1)x + \cdots + x^n \;>\; nx.
+        \]
+        Now, suppose that $S$ is bounded above by some real number $\beta$. Clearly, $\beta > 1$ since $a^n > 1$.
+        This would imply that $\beta > a^n > nx$ for all $n \in \mathbb{N}$. Thus, $n < \beta / x$ for all $n \in \mathbb{N}$, which
+        is absurd, since $\mathbb{N}$ is unbounded in $\mathbb{R}$. Thus, $S$ has no upper bound in the reals.
+
+        \problem Show that $\mathbb{N}$, the set of natural numbers, has the LUB property.
+        \solution Let $\emptyset \neq E \subseteq \mathbb{N}$. be bounded above.
+        The Well-Ordering Principle tells us that $E$ is bounded below as well, so the set $E$ is finite.
+        We show that $E$ has a supremum, and that it is contained within $E$, by induction on the cardinality of $E$.
+        As a base case, suppose $E$ has exactly one element, so $E = \{x_0\}$.
+        We claim that $\sup E$ exists and that $\sup E = x_0 = \max E$.
+        This is clearly true since $x \leq x_0$ for all $x \in E$, and if $y \in \mathbb{N}$ is an upper bound of $E$,
+        $x \leq y$ for all $x \in E$, so $x_0 \leq y$ in particular. Hence, $x_0$ is the maximum of the singleton $E$. \\
+
+        We now assume that $\max E$ exists for all finite subsets of $\mathbb{N}$ bound above containing exactly $k$ elements.
+        Let $\emptyset \neq D \subseteq \mathbb{N}$ containing exactly $k + 1$ elements be arbitrary. We choose and fix an arbitrary $d \in D$,
+        then set $D' = D\setminus\{d\}$. Clearly, $D'$ contains exactly $k$ elements, so $d' = \max D'$ exists.
+
+        Now, if $d > d'$, then $d > d' \geq x'$ for all $x' \in D'$, so $d \geq x$ for all $x \in D$. Also, if $y \in \mathbb{N}$
+        is an upper bound of $D$, then $x \leq y$ for all $x \in D$, so $d \leq y$ in particular. Thus, $d = \sup D = \max D$.
+        
+        Otherwise, if $d \leq d'$, then $d' \geq x$ for all $x \in D$. Again, if $y \in \mathbb{N}$ is an upper bound of $D$,
+        then $x \leq y$ for all $x \in D$, so $d' \leq y$ in particular. Thus, $d' = \sup{D} = \max{D}$. Hence,
+        every subset of $\mathbb{N}$ containing $k + 1$ elements and bound above has a maximum. \\
+        
+        Therefore, by induction on $k$, all non-empty subsets of $\mathbb{N}$ bound above have a supremum. Thus, the set $\mathbb{N}$ has the
+        LUB property.
+
+        \problem We know that if we input any positive natural number in a calculator and keep on pressing the square root button, finally we get $1$.
+        Show that if you do this experiment on an $n$-digit calculator, then starting with some positive number, the number of times you need to
+        press the square root button to reach $1$ is at most 
+        \[
+                1 + \left\lfloor \log_2(n + 1) - \log_2{\log_{10}\left( 1 + \frac{1}{10^{n-1}} \right)} \right\rfloor.
+        \]
+
+        \solution 
+        \textsc{Note}: We assume that the calculator displays the first \textbf{truncated} $n$ digits of the \textbf{true value}.
+        We do not take into account rounding errors introduced between steps. On the other hand, such errors can only truncate/round down
+        the intermediate numbers, so our result still serves as an upper bound on the required number of steps. \\
+
+        Let the number initially entered be $x > 1$. After $m$ presses of the square root button, we obtain the number $x^{1 /2^m}$.
+        Now, our calculator displays only $n$ digits, so the number 
+        \[
+                \underbrace{1.000\dots 0}_{n\text{ digits}}abc\dots
+        \]
+        is displayed as simply $1.000\dots 0$ when truncated. Note that this number is at most $1 + 1 / 10^{n - 1} := L$.
+        Suppose our calculator finally displays $1.000\dots 0$, whereas the true answer is some $y < L$.
+        Now, the calculator must have displayed some number not equal to $1$ on the previous step, so $y^2 \geq L$.
+        We now traceback the process of taking square roots by squaring $y$ $m$ times, to obtain the initial number $y^{2^m} \geq L^{2^m / 2}$.
+        Now, since our calculator only holds $n$ digits, this initial number can be at most
+        \[
+                \underbrace{999\dots 9}_{n\text{ digits}},
+        \]
+        which is simply $10^n - 1$. Thus, we demand $y^{2^m} \leq 10^n - 1$, or
+        \begin{align*}
+                L^{2^m / 2} \;&<\; 10^n \\
+                2^{m-1}\log_{10}{L} \;&<\; n, \\
+                m - 1 \,+\, \log_2\log_{10}{L} \;&<\; \log_2{n}, \\
+                m - 1 \;&<\; \log_2{n} - \log_2\log_{10}{L}, \\
+                m - 1 \;&<\; 1 + \left\lfloor \log_2{n} - \log_2\log_{10}{L}\right\rfloor, \\
+                m \;&\leq\; 1 + \left\lfloor \log_2{n} - \log_2\log_{10}{L}\right\rfloor,
+        \end{align*}
+        as desired. Here, have used the inequalities $x < 1 + \lfloor x\rfloor$ for $x \in \mathbb{R}$, and $p - 1 < q \implies p \leq q$ for
+        $p, q \in \mathbb{Z}$. \\
+        % This follows since $\lfloor x\rfloor$ is the
+        % greatest integer $n$ \textit{less than or equal to} $x$. Thus, $\lfloor x\rfloor \leq x$. If $1 + \lfloor x\rfloor \geq x$, then we find
+        % \\
+        
+        Note that under our assumptions, if we start with $x < 1$, the result $x^{1 /2^m}$ will always be of the form $0.abc\dots$,
+        which when truncated is never of the form equal to $1.000\dots$.
+
+        If, however, we allow the number
+        \[
+                \underbrace{0.999\dots 9}_{n\text{ digits}}5abc\dots
+        \]
+        to be rounded up to $1$, then we proceed with a similar argument as above. Note that this number is at least
+        $1 - 1 / 10^{n - 1} + 5 / 10^n = 1 - 5 /10^{n}:= M$.
+        Our final result must be some $w > M$, such that $w^2 \leq M$. Our initial value $w^{2^m}$ must have been at least
+        \[
+                \underbrace{0.000\dots 1}_{n\text{ digits}},
+        \]
+        which is simply $1 /10^{n - 1}$. Thus, we demand $w^{2^m} \geq 10^{-n + 1}$, or
+        \begin{align*}
+                M^{2^m / 2} \;&\geq\; 10^{-n + 1} \\
+                2^{m-1}\log_{10}{M} \;&\geq\; -n + 1, \\
+                2^{m-1}\log_{10}(1 /M) \;&\leq\; n - 1 < n, \\
+                m - 1 \,+\, \log_2\log_{10}(1 /M) \;&<\; \log_2n, \\
+                m - 1 \;&<\; \log_2n - \log_2\log_{10}(1 /M), \\
+                m \;&\leq\; 1 + \left\lfloor \log_2{n} - \log_2\log_{10}(1 /M)\right\rfloor.
+        \end{align*}
+        Note that for all $0 < \epsilon < 1 /2$, we have $1 < 1 /(1 - \epsilon) < 1 + 2\epsilon$.
+        This is equivalent to $(1 - \epsilon)(1 + 2\epsilon) = 1 + \epsilon - 2\epsilon^2 = 1 + \epsilon(1 - 2\epsilon)> 1$,
+        which is clearly true since $\epsilon < 1 /2$.
+        Thus, $1 < 1 /M = 1 /(1 - 5 /10^n) < 1 + 2\cdot 5 /10^n = 1 + 1 /10^{n-1} = L$, so $\log_{10}(1 /M) < \log_{10}{L}$. Thus, 
+        the bound on $m$ we obtain for $x < 1$ is weaker than the one for $x > 1$. Hence, our first result holds.
+
+        \problem Let $S$ be a non-empty subset of the reals such that each element of $S$ is greater than or equal to $1$, and let
+        $T = \{1 / s : s \in S\}$. Then show that
+        \begin{enumerate}
+                \item $\sup{T} \leq \inf{S}$.
+                \item $(\sup{T}) \cdot (\inf{S}) = 1$.
+        \end{enumerate}
+        \solution Note that $s \geq 1$, so $1 /s \leq 1$ for all $s \in S$. Thus, $S$ and $T$ are non-empty subsets of $\mathbb{R}$, where
+        $S$ is bound below by $1$ and $T$ is bound above by $1$, so $\sup{T}$ and $\inf{S}$ exist in $\mathbb{R}$.
+        \begin{enumerate}
+                \item First, note that $\inf{S} \geq 1$. This is true because $1$ is a lower bound of $S$, so by definition, $\inf{S} \geq l$
+                for all lower bounds $l$ of $S$. Similarly, we also conclude that $\sup{T} \leq 1$, since $1$ is an upper bound of $T$
+                so $\sup{T} \leq u$ for all upper bounds $u$ of $T$. Putting these together, $\sup{T} \leq 1 \leq \inf{S}$.
+
+                \item First, note that $\inf{S} \leq s$ for all $s \in S$, so $1 /\inf{S} \geq 1 /s$ for all $s \in S$. Now, for each $t \in T$,
+                there exists $s' \in S$ such that $t = 1 /s'$, therefore $1 /\inf{S} \geq t$ for all $t \in T$. In other words, $1 /\inf{S}$ is an
+                upper bound of $T$, so $1 /\inf{S} \geq \sup{T}$, since $\sup{T}$ is the least upper bound.
+                Similarly, note that $\sup{T} \geq t$ for all $t \in T$, so $1 /\sup{T} \leq 1 /t$ for all $t \in S$. Again, for each $s \in S$,
+                there exists $t'$ in $T$ such that $s = 1 /t'$, so $1 /\sup{T} \leq s$ for all $s \in S$. Thus, $S$ is bound below by $1 /\sup{T}$,
+                so $1 /\sup{T} \leq \inf{S}$.
+
+                These two inequalities read $\sup{T}\cdot\inf{S} \leq 1 \leq \sup{T}\cdot\inf{S}$. Thus, by trichotomy, we must have
+                $\sup{T}\cdot\inf{S} = 1$ as desired.
+        \end{enumerate}
+\end{document}

@@ -1,0 +1,226 @@
+\documentclass[10pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{bm}
+\usepackage{cancel}
+\usepackage{xcolor}
+
+\title{Mechanics II - Exercises}
+\author{Satvik Saha}
+\date{}
+
+\geometry{a4paper, margin=1in}
+\setlength\parindent{0pt}
+\renewcommand{\labelenumi}{(\roman{enumi})}
+\renewcommand\CancelColor{\color{red}}
+% \renewcommand\qedsymbol{$\blacksquare$}
+\let\vec\boldsymbol
+\newcommand{\uveci}{{\bm{\hat{\textnormal{\bfseries\i}}}}}
+\newcommand{\uvecj}{{\bm{\hat{\textnormal{\bfseries\j}}}}}
+\newcommand{\uveck}{{\bm{\hat{\textnormal{\bfseries k}}}}}
+\newcommand\norm[1]{\left\lVert#1\right\rVert}
+\newcommand\grad[1]{\vec{\nabla}#1}
+\newcommand\divg[1]{\vec{\nabla}\cdot#1}
+\newcommand\curl[1]{\vec{\nabla}\times#1}
+\newcommand\pp[2]{\frac{\partial #1}{\partial #2}}
+
+\newcounter{prob}
+\def\problem{\stepcounter{prob}\paragraph{Exercise \arabic{prob}}}
+\def\solution{\paragraph{Solution}}
+
+\begin{document}
+        \par\textbf{IISER Kolkata} \hfill \textbf{Exercises}
+        \vspace{3pt}
+        \hrule
+        \vspace{3pt}
+        \begin{center}
+                \LARGE{\textbf{PH 2102 : Mechanics II}}
+        \end{center}
+        \vspace{3pt}
+        \hrule
+        \vspace{3pt}
+        Satvik Saha, \texttt{19MS154}, Group E\hfill\today
+        \vspace{20pt}
+
+        \problem Explicitly prove that the two ways of writing $\vec{A}\cdot\vec{B}$ and $\vec{A}\times\vec{B}$ are equivalent.
+        \begin{align*}
+                \vec{A}\cdot\vec{B} \;&=\; A_xB_x + A_yB_y + A_zB_z, \\
+                \vec{A}\cdot\vec{B} \;&=\; \norm{\vec{A}} \norm{\vec{B}}\cos\theta. \\
+                \vec{A}\times\vec{B} \;&=\; (A_yB_z - A_zB_y)\uveci + (A_zB_x - A_xB_z)\uvecj + (A_xB_y - A_y B_x)\uveck, \\
+                \norm{\vec{A}\times\vec{B}} \;&=\; \norm{\vec{A}} \norm{\vec{B}} \sin\theta.
+        \end{align*}
+
+        \solution First, we show that
+        \[
+                \vec{A}\cdot\vec{B}  \;=\; A_xB_x + A_yB_y + A_zB_z \;=\; \norm{\vec{A}}\norm{\vec{B}} \cos\theta \\
+        \]
+        
+        Start with $\vec{A}\cdot\vec{B} = A_xB_x + A_yB_y + A_zB_z$.
+        Then, $\norm{\vec{A}}^2 = \vec{A}\cdot\vec{A} = A_x^2 + A_y^2 + A_z^2$ and $\norm{\vec{B}}^2 = \vec{B}\cdot\vec{B} = B_x^2 + B_y^2 + B_z^2$.
+
+        Construct $\vec{C} = \vec{A} - \vec{B}$. Thus, the lengths $\norm{\vec{A}}$, $\norm{\vec{B}}$ and $\norm{\vec{C}}$ form a triangle.
+        Applying the cosine rule yields
+        \[
+        \norm{\vec{C}}^2 \;=\; \norm{\vec{A}}^2 + \norm{\vec{B}}^2 - 2\norm{\vec{A}}\norm{\vec{B}}\cos\theta.
+        \]
+        On the other hand, by the laws of vector arithmetic, we have
+        \begin{align*}
+                \norm{\vec{C}}^2 \;&=\; \vec{C}\cdot\vec{C} \\
+                        \;&=\; (\vec{A} - \vec{B})\cdot(\vec{A} - \vec{B}) \\
+                        \;&=\; \vec{A}\cdot\vec{A} - \vec{A}\cdot\vec{B} - \vec{B}\cdot\vec{A} + \vec{B}\cdot\vec{B} \\
+                \norm{\vec{C}}^2 \;&=\; \norm{\vec{A}}^2 + \norm{\vec{B}}^2 - 2\vec{A}\cdot\vec{B}.
+        \end{align*}
+        Comparing and equating the two expressions for $\norm{\vec{C}}^2$, we obtain $\vec{A}\cdot\vec{B} = \norm{\vec{A}}\norm{\vec{B}}\cos\theta$.
+
+        Now, start with
+        \[
+                \vec{A}\times\vec{B} \;=\; (A_yB_z - A_zB_y)\uveci + (A_zB_x - A_xB_z)\uvecj + (A_xB_y - A_y B_x)\uveck. \\
+        \]
+        Taking norms and squaring,
+        \begin{align*}
+                \norm{\vec{A}\times\vec{B}}^2 \;&=\; \sum_{cyc} (A_yB_z - A_zB_y)^2 \\
+                        \;&=\; \sum_{cyc} (A_y^2B_z^2 + A_z^2B_y^2 - 2A_yA_zB_yB_z) \\
+                        \;&=\; A_x^2(B_y^2 + B_z^2) + A_y^2(B_x^2 + B_z^2) + A_z^2(B_x^2 + B_y^2) - 2\sum_{cyc} A_yA_zB_yB_z \\
+                        \;&=\; (A_x^2 + A_y^2 + A_z^2)(B_x^2 + B_y^2 + B_z^2) - (A_x^2B_x^2 + A_y^2B_y^2 + A_z^2B_z^2) - 2\sum_{cyc} A_yB_yA_zB_z \\
+                        \;&=\; (A_x^2 + A_y^2 + A_z^2)(B_x^2 + B_y^2 + B_z^2) - (A_xB_x + A_yB_y + A_zB_z)^2.
+        \end{align*}
+        Also, note that
+        \begin{align*}
+                \norm{\vec{A}}^2\norm{\vec{B}}^2\sin^2\theta \;&=\; \norm{\vec{A}}^2\norm{\vec{B}}^2 (1 - \cos^2\theta) \\
+                        \;&=\; \norm{\vec{A}}^2\norm{\vec{B}}^2 - (\vec{A}\cdot\vec{B})^2 \\
+                        \;&=\; (A_x^2 + A_y^2 + A_z^2)(B_x^2 + B_y^2 + B_z^2) - (A_xB_x + A_yB_y + A_zB_z)^2.
+        \end{align*}
+        Thus, we have $\norm{\vec{A}\times\vec{B}} = \norm{\vec{A}}\norm{\vec{B}}\sin\theta$.
+
+
+        \problem 
+        \begin{enumerate}
+                \item Show that $\curl(\grad{\phi}) = \vec{0}$ when $\phi(\vec{r}) = 1 / r$.
+                \item Show that $\curl(\grad{\phi}) = \vec{0}$ in general for any $\phi(x,y,z)$.
+                \item Show that $\divg(\curl{\vec{A}}) = 0$ in general for any $\vec{A}(x,y,z)$.
+        \end{enumerate}
+        \solution
+        \begin{enumerate}
+                \item Note that
+                \[
+                        \phi(x,y,z) \;=\; \frac{1}{\sqrt{x^2 + y^2 + z^2}}.
+                \]
+                We calculate
+                \begin{align*}
+                        \grad{\phi(x, y, z)} \;&=\; \frac{\partial \phi}{\partial x}\uveci \,+\,
+                                                        \frac{\partial \phi}{\partial y}\uvecj \,+\, \frac{\partial \phi}{\partial z}\uveck \\
+                                \;&=\; -\frac{x}{(x^2 + y^2 + z^2)^{3 / 2}}\uveci - 
+                                                \frac{y}{(x^2 + y^2 + z^2)^{3 / 2}}\uvecj - \frac{z}{(x^2 + y^2 + z^2)^{3 / 2}}\uveck
+                \end{align*}
+                Now,
+                \begin{align*}
+                        (\curl{\grad{\phi}})_x \;&=\; \frac{\partial}{\partial y} \left[ \frac{-z}{(x^2 + y^2 + z^2)^{3 / 2}}\right] 
+                                - \frac{\partial}{\partial z} \left[ \frac{-y}{(x^2 + y^2 + z^2)^{3 / 2}}\right] \\
+                                \;&=\; \frac{3yz}{(x^2 + y^2 + z^2)^{5 / 2}} - \frac{3zy}{(x^2 + y^2 + z^2)^{5 / 2}} \\
+                                \;&=\; 0.
+                \end{align*}
+                Similarly,
+                \begin{align*}
+                        (\curl{\grad{\phi}})_y \;&=\; \frac{\partial}{\partial z} \left[ \frac{-x}{(x^2 + y^2 + z^2)^{3 / 2}}\right] 
+                                - \frac{\partial}{\partial x} \left[ \frac{-z}{(x^2 + y^2 + z^2)^{3 / 2}}\right] \;=\; 0. \\
+                        (\curl{\grad{\phi}})_z \;&=\; \frac{\partial}{\partial x} \left[ \frac{-y}{(x^2 + y^2 + z^2)^{3 / 2}}\right] 
+                                - \frac{\partial}{\partial y} \left[ \frac{-x}{(x^2 + y^2 + z^2)^{3 / 2}}\right] \;=\; 0.
+                \end{align*}
+                Thus, we have $\curl{\grad{\phi}} = \vec{0}$ in this instance.
+
+                \item We use the formula
+                \[
+                        \frac{\partial^2 \phi}{\partial x \partial y} \;=\; \frac{\partial^2 \phi}{\partial y \partial x}.
+                \]
+                Thus,
+                \begin{align*}
+                        (\curl{\grad{\phi}})_x \;&=\; \frac{\partial}{\partial y} (\grad{\phi})_z - \frac{\partial}{\partial z} (\grad{\phi})_y 
+                                \;=\; \cancel{\frac{\partial^2 \phi}{\partial y \partial z} - \frac{\partial^2 \phi}{\partial z \partial y} }
+                                \;=\; 0.
+                \end{align*}
+                Similarly,
+                \begin{align*}
+                        (\curl{\grad{\phi}})_y 
+                                \;&=\; \cancel{\frac{\partial^2 \phi}{\partial z \partial x} - \frac{\partial^2 \phi}{\partial x \partial z}} \;=\; 0. \\
+                        (\curl{\grad{\phi}})_z 
+                                \;&=\; \cancel{\frac{\partial^2 \phi}{\partial x \partial y} - \frac{\partial^2 \phi}{\partial y \partial x}} \;=\; 0.
+                \end{align*}
+                Thus, we have $\curl{\grad{\phi}} = \vec{0}$ in general.
+
+                \item We have
+                \[
+                        \curl{\vec{A}} \;=\; \left(\frac{\partial A_z}{\partial y} - \frac{\partial A_y}{\partial z}\right)\uveci + 
+                                \left(\frac{\partial A_x}{\partial z} - \frac{\partial A_z}{\partial x}\right)\uvecj + 
+                                \left(\frac{\partial A_y}{\partial x} - \frac{\partial A_x}{\partial y}\right)\uveck.
+                \]
+                Thus,
+                \begin{align*}
+                        \divg{(\curl{\vec{A}})} \;&=\;
+                                \frac{\partial}{\partial x}\left(\frac{\partial A_z}{\partial y} - \frac{\partial A_y}{\partial z}\right) + 
+                                \frac{\partial}{\partial y}\left(\frac{\partial A_x}{\partial z} - \frac{\partial A_z}{\partial x}\right) + 
+                                \frac{\partial}{\partial z}\left(\frac{\partial A_y}{\partial x} - \frac{\partial A_x}{\partial y}\right) \\
+                        \;&=\;  \cancel{\frac{\partial^2 A_x}{\partial y \partial z} - \frac{\partial^2 A_x}{\partial z \partial y}} + 
+                                \cancel{\frac{\partial^2 A_y}{\partial z \partial x} - \frac{\partial^2 A_y}{\partial x \partial z}} + 
+                                \cancel{\frac{\partial^2 A_z}{\partial x \partial y} - \frac{\partial^2 A_z}{\partial y \partial x}} \\
+                        \;&=\; 0.
+                \end{align*}
+        \end{enumerate}
+
+        \problem Prove the invariance of 
+        \[
+                \curl{\vec{E}} + \pp{\vec{B}}{t} \;=\; 0
+        \]
+        for the same field configutation and charge movement as in the given example.
+        \solution Recall that in frame $S$, we have a charge $q$ with velocity $\vec{v} = v\uveci$ experiencing fields $\vec{E} = E \uvecj$
+        and $\vec{B} = B\uveck$. In the frame $S'$ which moves with constant velocity $\vec{V} = V\uveci$ with respect to $S$, the transformed
+        quantities are $\vec{v}'$, $\vec{E}'$ and $\vec{B}'$.
+        Special Relativity demands that the coordinates transform as follows.
+        \begin{align*}
+                x' &= \gamma(x - Vt), \\
+                y' &= y, \\
+                z' &= z, \\
+                t' &= \gamma(t - Vx/c^2),
+        \end{align*}
+        where $\gamma = 1 /\sqrt{1 - V^2 /c^2}$.
+        Furthermore, we state without proof that the fields transform as
+        \begin{align*}
+        {E} &= \gamma({E}' + V{B}'), \\
+        {B} &= \gamma({B}' + V{E}' /c^2).
+        \end{align*}
+
+        In our given configuration, $E_x = E_z = 0$ and $B_z = B_y = 0$. Also, we are only concerned with the variation along $\uveci$,
+        so $E, B$ are purely functions of $x, t$. Thus, all we must verify is that the following equation is invariant.
+        \[
+                \pp{E}{x} + \pp{B}{t} \;=\; 0.
+        \]
+        We calculate
+        \begin{align*}
+                \pp{x'}{x} &= \gamma, \quad\quad\quad \pp{x'}{t} = -\gamma V, \\
+                \pp{t'}{x} &= -\gamma\frac{V}{c^2}, \quad\; \pp{t'}{t} = \gamma.
+        \end{align*}
+        Thus, the differential operators transform as follows.
+        \begin{align*}
+                \pp{}{x} &= \pp{x'}{x}\pp{}{x'} + \pp{t'}{x}\pp{}{t'}
+                        = \gamma\pp{}{x'} - \gamma\frac{V}{c^2}\pp{}{t'} \\
+                \pp{}{t} &= \pp{x'}{t}\pp{}{x'} + \pp{t'}{t}\pp{}{t'}
+                        = -\gamma V\pp{}{x'} + \gamma\pp{}{t'} 
+        \end{align*}
+        We then substitute our formulae for $E, B$ in terms of $E', B'$ into the given equation, along with the transformed differential operators.
+        \begin{align*}
+                \pp{E}{x} + \pp{B}{t} &= 0 \\
+                \left[\gamma\pp{}{x'} - \gamma\frac{V}{c^2}\pp{}{t'}\right](\gamma E' + \gamma VB') +
+                        \left[-\gamma V\pp{}{x'} + \gamma\pp{}{t'}\right]\left(\gamma B' + \gamma\frac{V}{c^2}E'\right) &= 0, \\
+                \left(\gamma^2 - \gamma^2\frac{V^2}{c^2}\right)\pp{E'}{x'} +
+                        \cancel{\left(-\gamma^2\frac{V}{c^2} + \gamma^2\frac{V}{c^2}\right)}\pp{E'}{t'} +
+                        \cancel{\left(\gamma^2V - \gamma^2V\right)}\pp{B'}{x'} + \left(-\gamma^2\frac{V^2}{c^2} +
+                        \gamma^2\right)\pp{B'}{t'} &= 0,\\
+                \left(\gamma^2 - \gamma^2\frac{V^2}{c^2}\right)\pp{E'}{x'} + \left(-\gamma^2\frac{V^2}{c^2} + \gamma^2\right)\pp{B'}{t'} &= 0.
+        \end{align*}
+        Using the fact thet $\gamma^2(1 - V^2 /c^2) = 1$ (assuming $V < c$), we obtain the transformed equation
+        \[
+                \pp{E'}{x'} + \pp{B'}{t'} = 0,
+        \]
+        as desired.
+\end{document}

@@ -1,0 +1,273 @@
+\documentclass[10pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{bm}
+\usepackage{cancel}
+\usepackage{xcolor}
+
+\title{Mathematical Methods II - Assignment I}
+\author{Satvik Saha}
+\date{}
+
+\geometry{a4paper, margin=1in}
+\setlength\parindent{0pt}
+\renewcommand{\labelenumi}{(\roman{enumi})}
+\renewcommand\CancelColor{\color{red}}
+% \renewcommand\qedsymbol{$\blacksquare$}
+\newcommand\ve[1]{\boldsymbol{#1}}
+\newcommand\ppx[1]{\frac{\partial #1}{\partial x}}
+\newcommand\ppt[1]{\frac{\partial #1}{\partial t}}
+\newcommand\pp[3][]{\frac{\partial^{#1}{#2}}{\partial {#3}^{#1}}}
+\newcommand\ddx[1]{\frac{d #1}{d x}}
+\newcommand\ddt[1]{\frac{d #1}{d t}}
+\newcommand\dd[3][]{\frac{d^{#1}{#2}}{d {#3}^{#1}}}
+\newcommand\norm[1]{\left\lVert#1\right\rVert}
+\newcommand\grad[1]{\ve{\nabla}#1}
+\newcommand\divg[1]{\ve{\nabla}\cdot#1}
+\newcommand\curl[1]{\ve{\nabla}\times#1}
+\newcommand\lapl[1]{\nabla^2 #1}
+
+\begin{document}
+        \par\textbf{IISER Kolkata} \hfill \textbf{Assignment I}
+        \vspace{3pt}
+        \hrule
+        \vspace{3pt}
+        \begin{center}
+                \LARGE{\textbf{MA 2102 : Mathematical Methods II}}
+        \end{center}
+        \vspace{3pt}
+        \hrule
+        \vspace{3pt}
+        Satvik Saha, \texttt{19MS154}\hfill\today
+        \vspace{20pt}
+        \subsection*{Partial Differential Equations (M.L. Boas, Chapter 13)}
+        \paragraph{Section 1. Problem 4.} Obtain the heat flow equation
+        \[
+                \lapl{u} \;=\; \frac{1}{\alpha^2}\pp[2]{u}{t}
+        \] as follows. The quantity of heat $Q$ flowing across a surface is proportional to the normal component of the (negative) temperature gradient,
+        $(-\grad{T})\cdot\ve{n}$. Apply the discussion of the flow of water in Chapter 6 to the flow of heat.
+        Thus, show that the rate of gain of heat per unit volume per unit time is proportional to $\divg{\grad{T}}$.
+        But $\partial T /\partial t$ is proportional to this gain in heat, Thus show that $T$ satisfies the given heat equation. \\
+
+        \textit{Solution.} Analogous to the case of flowing water, it is helpful to define a quantity called the heat flux density $\ve{q}$,
+        which is the rate of flow of heat per unit area. We know that this is proportional to the negative gradient of the temperature,
+        so $\ve{q} = -\kappa\grad{T}$. This is called Fourier's Law. For isotropic materials, the thermal conductivity $\kappa$ is a simple scalar.
+        Now, given some surface $S$, the rate of flow of heat per unit area locally is proportional to the normal component of the heat flux,
+        i.e. $\ve{q}\cdot\ve{n}$.
+        This is indeed similar to the given equation in Chapter 6, where the role of $\ve{q}$ is played by the velocity of water $\ve{v}$. \\
+
+        We proceed similarly by considering an elemental volume, a cuboid with sides $dx$, $dx$, $dz$. With an appropriate orientation
+        of the coordinate axes, the normal vectors to the faces of the cuboid are simply the unit vectors $\ve{\hat{i}}$, $\ve{\hat{j}}$
+        and $\ve{\hat{k}}$ (and their negatives). Thus, through the faces perpendicular to the $x$-axis, which have area $dy\,dz$,
+        the rate of flow of heat is $(\ve{q}\cdot\ve{\hat{i}})dydz = q_x dy dz$. However, $q_x$ at the two opposing faces are different,
+        say by a quantity $dq_x$ which we approximate using a Taylor series.
+        \[
+                q_x\big|_{\text{face 1}} = q_x\big|_{\text{face 2}} + (dx)\pp{q_x}{x}\bigg|_{\text{face 2}} +\; O((dx)^2).
+        \]
+        Ignoring the higher order terms in $dx$, we obtain
+        \[
+                dq_x = q_x\big|_{\text{face 1}} - q_x\big|_{\text{face 2}} = \left(\pp{q_x}{x}\right)dx.
+        \]
+        Thus, the net flow (inflow minus outflow) through these faces is given by $(\partial q_x /\partial x)dxdydz$.
+        Doing the same for the remaining faces and adding up the flow rates must precisely yield the rate of loss of heat from our elemental volume,
+        due to the conservation of heat. Thus,
+        \[
+                \pp{}{t}Q \;=\; -\left(\pp{q_x}{x} + \pp{q_y}{y} + \pp{q_z}{z}\right)dx dy dz \;=\; -\divg{\ve{q}}\, dV.
+        \]
+        Here, $Q$ is the internal heat in the elemental volume. On the other hand, we know that the rate of heat transfer in a material is related to the
+        change in its temperature via the specific heat capacity $\sigma$ by $\delta Q = \sigma d m\, dT = \sigma\rho dV\, dT$, where $\rho$
+        is the density of the material. Thus,
+        \[
+                \pp{}{t}(\sigma \rho T) dV \;=\; -\divg{\ve{q}}\, dV.
+        \]
+        Assuming that $\sigma, \rho$ remain constant and substituting our result from Fourier's Law yields
+        \[
+                \sigma\rho\pp{}{t}T \;=\; \kappa\divg{\grad{T}}.
+        \]
+        Setting $\alpha^2 = \kappa /\sigma\rho$ and recognizing $\divg{\grad{T}} = \lapl{T}$ gives us the heat equation.
+        \[
+                \frac{1}{\alpha^2}\ppt{}T \;=\; \lapl{T}.
+        \]
+
+        \paragraph{Section 2. Problem 5.} Show that the solutions of 
+        \[
+                \frac{1}{X} \dd[2]{}{x}X(x) = - \frac{1}{Y} \dd[2]{}{y}Y(y) = -k^2
+        \]
+        can also be written as
+        \[
+                X(x) = \begin{cases}e^{ikx} \\ e^{-ikx}\end{cases}, \quad\quad
+                Y(y) = \begin{cases}\sinh{ky} \\ \cosh{ky}\end{cases}.
+        \]
+        Also show that these solutions are equivalent to 
+        \[
+                X(x) = \begin{cases}\sin{kx} \\ \cos{kx}\end{cases}, \quad\quad
+                Y(y) = \begin{cases}e^{ky} \\ e^{-ky}\end{cases}.
+        \]
+        if $k$ is real and
+        \[
+                X(x) = \begin{cases}e^{kx} \\ e^{-kx}\end{cases}, \quad\quad
+                Y(y) = \begin{cases}\sin{ky} \\ \cos{ky}\end{cases}.
+        \]
+        if $k$ is purely imaginary. Also show that $X = \sin{k(x - a)}$, $Y = \sinh{k(y - b)}$ are solutions. \\
+
+        \textit{Solution.} Our equations can be simply written as 
+        \[
+                X'' = -k^2 X, \quad\quad Y'' = k^2 Y.
+        \]
+        It only remains to substitute the proposed solutions. It is indeed true that
+        \begin{align*}
+                \dd[2]{}{x}e^{ikx} &= -k^2 e^{ikx}, & \dd[2]{}{y}\sinh{ky} &= k^2\sinh{ky}, \\
+                \dd[2]{}{x}e^{-ikx} &= -k^2 e^{-ikx}, & \dd[2]{}{y}\cosh{ky} &= k^2\cosh{ky}.
+        \end{align*}
+        The equivalences follow from the fact that linear combinations of solutions to our ODES are also solutions.
+        When $k$ is real,
+        \begin{align*}
+                \sin{kx} &= \frac{1}{2i}(e^{ikx} - e^{-ikx}), & \cos{kx} = \frac{1}{2}(e^{ikx} + e^{-ikx}), \\
+                e^{ky} &= \sinh{y} + \cosh{y}, & e^{-ky} = -\sinh{y} + \cosh{y}.
+        \end{align*}
+        When $k$ is purely imaginary, say $k = i\ell$ for real $\ell$, we have
+        \begin{align*}
+                e^{ikx} &= e^{-\ell x}, & e^{-ikx} &= e^{\ell x}, \\
+                \sinh{ky} &= \frac{1}{2}(e^{i\ell y} - e^{-i\ell y}) = i\sin{\ell y}, & 
+                        \cosh{ky} &= \frac{1}{2}(e^{i\ell y} + e^{-i\ell y}) = \cos{\ell y}.
+        \end{align*}
+        Thus, for purely imaginary $k$, the roles of $x$ and $y$ seem to have flipped. This is equivalent to choosing $+k^2$
+        as our constant after separation instead of $-k^2$.
+        Finally, we see that
+        \[
+                \dd[2]{}{x}\sin{k(x - a)} = -k^2\sin{k(x - a)}, \quad\quad \dd[2]{}{y}\sinh{k(y - b)} = k^2\sinh{k(y - b)}.
+        \]
+        All of the above follows from the fact that the derivatives follow the cycle
+        \[
+                \sin{x} \rightarrow \cos{x} \rightarrow -\sin{x} \rightarrow -\cos{x},
+        \]
+        \[
+                \sinh{x} \leftrightarrow \cosh{x},
+        \]
+        
+        \clearpage
+        \paragraph{Problem 13.} Find the steady-state temperature distribution in a rectangular plate covering the area $0 < x < 10$, $0 < y < 20$,
+        if the two adjacent sides along the axes are held at temperatures $T = x$ and $T = y$ and the other two sides at $0$. \\
+
+        \textit{Solution.} We construct two solutions, $f$ and $g$ where $f$ is zero on all boundaries eccept the $y = 0$ boundary,
+        and $g$ is zero on all boundaries eccept the $x = 0$ boundary. In both cases, we perform the standard separation of variables
+        to obtain
+        \[
+                \frac{1}{X}\dd[2]{}{x}X = -\frac{1}{Y}\dd[2]{}{y}Y = \text{constant}.
+        \]
+        Now, in the case of $f$, we demand a periodic solution for $X$, so we choose a negative constant. Thus,
+        \[
+                X_f(x) = A\sin{k_f x} + B\cos{k_f x}, \quad\quad Y_f(y) = Ce^{k_f y} + De^{-k_f y}.
+        \]
+        Using $X_f(0) = X_f(10) = 0$, we have $B = 0$ and $k_f = n \pi / 10$. From $Y_f(20) = 0$, we choose $Y_f(y) = \sinh{k_f(20 - y)}$.
+        Thus, our solution is of the form
+        \[
+                f(x, y) \;=\; \sum_{n = 1}^\infty A_n \sin{\frac{n\pi x}{10}}\sinh{\frac{n \pi (20 - y)}{10}}.
+        \]
+        At $y = 0$, we demand $f(x, 0) = x$. We end up with a sine series, whose coefficients $A_n$ satisfy
+        \[
+                A_n\sinh\frac{20 n \pi}{10} = \frac{2}{10}\int_{0}^{10} x \sin\frac{n\pi x}{10} \:dx =
+                        - \frac{20\cos{n\pi}}{n\pi}.
+        \]
+        We have used the identity
+        \[
+                \int x\sin{ax}\:dx = \frac{1}{a^2}(\sin{ax} - ax\cos{ax}).
+        \]
+        We follow an analogous process for $g$, essentially switching the roles of $x$ and $y$ to obtain
+        \[
+                g(x, y) \;=\; \sum_{n = 1}^\infty B_n \sin{\frac{n\pi y}{20}}\sinh{\frac{n \pi (10 - x)}{20}}.
+        \]
+        At $x = 0$, we demand $g(0, y) = y$. Thus, 
+        \[
+                B_n\sinh\frac{10 n \pi}{20} = \frac{2}{20}\int_{0}^{20} y \sin\frac{n\pi y}{20} \:dy =
+                        - \frac{40\cos{n\pi}}{n\pi}.
+        \]
+        Hence, our solution is simply the sum $f + g$, so 
+        \begin{align*}
+                T(x, y) \;=\; &\sum_{n = 1}^\infty \frac{-20\cos{n\pi}}{n\pi}\left\{\sinh{2n\pi}\right\}^{-1}
+                                        \sin{\frac{n\pi x}{10}}\sinh{\frac{n \pi (20 - y)}{10}} \\
+                        &+\, \sum_{n = 1}^\infty \frac{-40\cos{n\pi}}{n\pi}\left\{\sinh\frac{n\pi}{2}\right\}^{-1}
+                                        \sin{\frac{n\pi y}{20}}\sinh{\frac{n \pi (10 - x)}{20}}.
+        \end{align*}
+
+        \paragraph{Problem 14.} Find the steady-state temperature distribution in a semi-infinite plate of width 10 cm if the two long
+        sides are insulated, the far end (at $\infty$) is at $0$, and the bottom edge is at $T = f(x) = x - 5$. Repeat for
+        $f(x) = x$ at $y = 0$ and find the value of $T$ for large $y$. \\
+
+        \textit{Solution.} After performing separation of variables, we choose
+        \[
+                X(x) = A\sin{k x} + B\cos{k x}, \quad\quad Y(y) = Ce^{k y} + De^{-k y}.
+        \]
+        Now, since $T \to 0$ as $y \to \infty$, we must have $C = 0$. The fact that the left and right boundaries are insulated means that
+        $\partial T /\partial x = 0$, which requires $X'(x) = Ak\cos{kx} - Bk\sin{kx} = 0$ at $x = 0, 10$. Thus, $A = 0$ and $k = n \pi /10$.
+        Putting this together, we have
+        \[
+                T(x, y) = \frac{A_0}{2} \,+\, \sum_{n = 1}^\infty A_n \cos\frac{n \pi x}{10}e^{-n\pi y /10},
+        \]
+        where the coefficients $A_n$ are given by
+        \[
+                A_n = \frac{2}{10} \int_0^{10} (x - 5) \cos\frac{n\pi x}{10}\: dx.
+        \]
+        Note that $A_0$ vanishes. Otherwise, we have
+        \[
+                A_{n \geq 1} = -\frac{20}{\pi^2 n^2}(1 - \cos{n\pi}).
+        \]
+        We have used the identity
+        \[
+                \int x\cos{ax}\: dx = \frac{1}{a^2}(\cos{ax} + ax \sin{ax}).
+        \]
+        Thus,
+        \[
+                T(x, y) = \sum_{n = 1}^\infty \frac{-20}{\pi^2n^2}(1 - \cos{n\pi}) \cos\frac{n\pi x}{10} e^{-n\pi y /10}.
+        \]
+        Note that as $y \to \infty$, $T \to 0$ as desired. \\
+
+        In the second case, where $f(x) = x$, we use the same reasoning as before to obtain $X(x)$. For $y \to \infty$, we assume that
+        the temperature is finite, and this is enough to justify the same choice $Y(y) = e^{-ky}$ as before. Thus, the only difference
+        in our new solution lies in the coefficients $A_n$.
+        \[
+                A_n = \frac{2}{10} \int_0^{10} x \cos\frac{n\pi x}{10}\: dx.
+        \]
+        This time, $A_0$ does \textit{not} vanish, and is instead equal to $10$. The remaining coefficients $A_{n \geq 1}$ remain identical,
+        so the final solution is given by
+        \[
+                \tilde{T}(x, y) = 5 \,+\, \sum_{n = 1}^\infty \frac{-20}{\pi^2n^2}(1 - \cos{n\pi}) \cos\frac{n\pi x}{10} e^{-n\pi y /10}.
+        \]
+        Here, as $y \to \infty$, we see that $\tilde{T} \to 5$. This is easily explained by noting that a constant function is a solution of
+        Laplace's equation. Thus, by adding a constant temperature of $5$ degrees to the entire plate in the first problem, we obtain the required
+        boundary conditions in the second problem and do not change the insulation requirement. We may also interpret this as performing a
+        change in units of temperature, effectively shifting all values up by $5$.
+
+
+        \paragraph{Problem 16.} Show that there is only one function $u$ which takes given values on the (closed) boundary of a region and
+        satisfies Laplace’s equation $\lapl{u} = 0$ in the interior of the region. \\
+
+        \textit{Solution.} Let the interior of the region be labeled $D$, and let the boundary conditions be given such that $u = f(\ve{x})$,
+        for $\ve{x}$ on the boundary $\partial D$. We select two solutions $u_1$ and $u_2$, and construct $U = u_1 - u_2$. Note that
+        by the linearity of the Laplacian,
+        \[ \lapl{U} = \lapl{(u_1 - u_2)} = \lapl{u_1} - \lapl{u_2} = 0\]
+        in the interior $D$, and $U = u_1 - u_2 = f - f = 0$ on the boundary $\partial D$.
+
+        We now invoke Green's first identity,
+        \[
+                \int_D \phi\lapl\psi - \grad\phi\cdot\grad\psi\: dV \;=\; \oint_{\partial D} (\phi\grad\psi) \cdot\ve{n}\: dS.
+        \]
+        Setting $U = \phi = \psi$, we have
+        \[
+                \int_D U\lapl{U} - \norm{\grad{U}}^2 \: dV \;=\; \oint_{\partial D} (U\grad{U})\cdot\ve{n}\: dS = 0,
+        \]
+        since $U = 0$ on the boundary. Also, $\lapl{U} = 0$ in the interior, so
+        \[
+                \int_D \norm{\grad{U}}^2\: dV \;=\; 0.
+        \]
+        This is possible only if $\grad{U} = 0$ everywhere in the interior. Now, choose a point $\ve{y} \in \partial D$, and let $\ve{x} \in D$
+        be arbitrary. We choose a path $\gamma$ from $\ve{y}$ to $\ve{x}$.
+        By the Fundamental Theorem of Calculus for line integrals, we have
+        \[
+                U(\ve{x}) - U(\ve{y}) \;=\; \int_\gamma (\grad U)\cdot\:d\ve{\ell} = 0.
+        \]
+        Thus, we have $U(\ve{x}) = U(\ve{y}) = 0$ for all $\ve{x} \in D$. Hence. $u_1 = u_2$ everywhere, so the solution to Laplace's equation
+        is unique.
+\end{document}
