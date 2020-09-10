@@ -899,6 +899,21 @@ We discard the cosine part of our spatial solution, and must have \(k = n\pi/\el
 The coefficients \(A_n\) are given by
 \[ A_n = \frac{2}{\ell}\int_0^\ell \psi_0(x) \sin\frac{n\pi x}{\ell}\: dx. \]</p>
 
+<h3 id="toc_16">Wave equation</h3>
+
+<p>We seek a solution \(u(\x, t)\) to
+\[ \lapl{u} = \frac{1}{v^2}\pp[2]{u}{t}. \]
+Like before, we perform a partial separation of variables \(u(\x, t) = X(\x) T(t)\). Thus,
+\[ \frac{1}{X} \lapl{X} = \frac{1}{v^2 T} \dd[2]{T}{t} = -k^2. \]
+Suppose our problem is posed in one dimension. Upon setting \(kv = \omega\), we obtain the familiar ODEs
+\[ \dd[2]{}{x}X + k^2 X = 0, \quad\quad \dd[2]{}{t} T + \omega^2 T = 0. \]
+It will turn out that \(v\) represents the velocity of the wave, \(\lambda = 2\pi /k\) represents the wavelength, and \(f = \omega/2\pi\) represents the frequency.</p>
+
+<p>Suppose that the string is tied down at the ends, so \(u(0, 0) = u(\ell, 0) = 0\) and we have the initial shape \(u(x, 0) = u_0(x)\). This eliminates the cosine term in \(X\). Now, if the velocity of the string at \(t = 0\) is zero, then we eliminate the sine term in \(T\). Thus, we have
+\[ u(x, t) = \sum_{n = 1}^\infty A_n\sin\frac{n\pi x}{\ell}\cos\frac{n\pi v t}{\ell}.\]
+If instead we were given initial conditions where the velocity of the wave is specified, <em>i.e.</em> \(u&#39;(x, 0) = v(x)\), and the string is perfectly flat initially, then we have
+\[ u(x, t) = \sum_{n = 1}^\infty A_n\sin\frac{n\pi x}{\ell}\sin\frac{n\pi v t}{\ell}.\]</p>
+
 
 
 <script type="text/javascript">
