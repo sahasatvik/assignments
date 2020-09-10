@@ -815,20 +815,34 @@ An <em>open set</em> is such that \(S = S^0\).</p>
 <p>Let \(S\) be a set and let \(E_i\) be subsets of \(S\). Then,
 \[ \left(\bigcup E_i \right)^c = \bigcap E_i^c\, \quad\quad \left(\bigcap E_i \right)^c = \bigcup E_i^c. \]</p>
 
-<p>Let \(\{O_i\}\) be a collection of open sets. Then, \(\cup_i O_i\) is open.
-It immediately follows that the complement \(\cap_i O_i^c\) is closed.</p>
+<p>Let \(\{\mathcal{O}_i\}\) be a collection of open sets. Then, \(\cup_i \mathcal{O}_i\) is open.
+It immediately follows that the complement \(\cap_i \mathcal{O}_i^c\) is closed.</p>
 
-<p>Let \(\{C_i\}\) be a collection of closed sets. Then, \(\cap_i C_i\) is closed. Note that this follows since the complement \(\cup_i C_i^c\) is open (remember that \(C_i^c\) are all open).</p>
+<p>Let \(\{\mathcal{C}_i\}\) be a collection of closed sets. Then, \(\cap_i \mathcal{C}_i\) is closed. Note that this follows since the complement \(\cup_i \mathcal{C}_i^c\) is open (remember that \(\mathcal{C}_i^c\) are all open).</p>
 
-<p>Let \(\{O_i\}\) be a <em>finite</em> collection of open sets. Then, \(\cap_i O_i\) is open.</p>
+<p>Let \(\{\mathcal{O}_i\}\) be a <em>finite</em> collection of open sets. Then, \(\cap_i \mathcal{O}_i\) is open.</p>
 
 <blockquote>
-<p>For infinitely many open sets, consider \(O_n = (-1/n, 1/n)\) for \(n \in \N\).</p>
+<p>For infinitely many open sets, consider \(\mathcal{O}_n = (-1/n, 1/n)\) for \(n \in \N\).</p>
 </blockquote>
 
-<p>Let \(\{C_i\}\) be a <em>finite</em> collection of closed sets. Then, \(\cup_i C_i\) is closed.</p>
+<p>Let \(\{\mathcal{C}_i\}\) be a <em>finite</em> collection of closed sets. Then, \(\cup_i \mathcal{C}_i\) is closed.</p>
 
 <p>Let \(S\subseteq\R\) be closed. Then, if \(S\) is bounded above, it has a maximum. If it is bounded below, it has a minimum.</p>
+
+<h3 id="toc_9">Subspace topology</h3>
+
+<p>Let \((M, d)\) be a metric space and let \(S \subset M\). Then \(T \subseteq S\) is open in \(S\) <em>iff</em> \(T = S \cap A\) is open for some open subset \(A\) of \(M\).</p>
+
+<p>An <em>open cover</em> of \(S \subseteq M\) is a collection of open subsets of \(M\) whose union is \(S\).</p>
+
+<p>A subset \(K \subseteq M\) is called <em>compact</em> if every open cover of \(K\) contains a finite subcover. For example, any finite set is compact.</p>
+
+<p>Let \(S \subset M\). A set \(K \subseteq S\) is compact in \(S\) <em>iff</em> \(K\) is compact in \(M\).</p>
+
+<blockquote>
+<p>Recall that the same does not hold for openness. For example, \(\R\) is open in \(\R\), but not in \(\R^2\).</p>
+</blockquote>
 
 
 
