@@ -666,6 +666,11 @@ In one dimension, this reduces to
 
 <p>A class of solutions is given by \(u(x, t) = A\cos(\omega (t - x/c) + \phi)\).</p>
 
+<p>Solutions in one dimension general look like \(f(x - vt)\). This represents a wave travelling in the positive \(x\) direction, while \(g(x + vt)\) represents a wave travelling in the opposite direction.</p>
+
+<p>Suppose we choose two solutions \(\cos(k(x - vt))\) and \(\cos(k(x + vt))\). Their sum is simply \(2\sin{kx}\sin{kvt}\).
+This is called a standing wave, since the nodes do not change with time.</p>
+
 <h3 id="toc_3">Heat Equation</h3>
 
 <p>\[ \ppt{T} = \alpha^2 \lapl{T}. \]</p>
@@ -913,6 +918,8 @@ It will turn out that \(v\) represents the velocity of the wave, \(\lambda = 2\p
 \[ u(x, t) = \sum_{n = 1}^\infty A_n\sin\frac{n\pi x}{\ell}\cos\frac{n\pi v t}{\ell}.\]
 If instead we were given initial conditions where the velocity of the wave is specified, <em>i.e.</em> \(u&#39;(x, 0) = v(x)\), and the string is perfectly flat initially, then we have
 \[ u(x, t) = \sum_{n = 1}^\infty A_n\sin\frac{n\pi x}{\ell}\sin\frac{n\pi v t}{\ell}.\]</p>
+
+<p>Consider one of the fundamental solutions in this superposition, which for fixed \(x\) is a sinusoidal wave of frequency \(f_n = nv/2\ell\). For \(n = 1\), this is called the <em>fundamental tone</em> and for higher \(n\), these are called <em>harmonics</em>. Each of these &#39;separated solutions&#39; is a normal mode, which together forms an eigenbasis of all possible superpositions/solutions.</p>
 
 
 
