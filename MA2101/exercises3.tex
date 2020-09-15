@@ -1,0 +1,184 @@
+\documentclass[10pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{bm}
+
+\title{Analysis I - Assignment III}
+\author{Satvik Saha}
+\date{}
+
+\geometry{a4paper, margin=1in}
+\setlength\parindent{0pt}
+\renewcommand{\labelenumi}{(\alph{enumi})}
+% \renewcommand\qedsymbol{$\blacksquare$}
+\newcounter{prob}
+\def\problem{\stepcounter{prob}\paragraph{Exercise \arabic{prob}}}
+\def\solution{\paragraph{Solution}}
+
+\begin{document}
+        \par\textbf{IISER Kolkata} \hfill \textbf{Assignment III}
+        \vspace{3pt}
+        \hrule
+        \vspace{3pt}
+        \begin{center}
+                \LARGE{\textbf{MA 2101 : Analysis I}}
+        \end{center}
+        \vspace{3pt}
+        \hrule
+        \vspace{3pt}
+        Satvik Saha, \texttt{19MS154}, Group C\hfill\today
+        \vspace{20pt}
+
+        \problem Show that every nonnegative integer $n$ has a decimal expansion of the form
+        \[
+                n = a_k10^k + a_{k - 1}10^{k - 1} + \dots + a_0,
+        \]
+        with $a_0, \dots, a_k \in \{0, \dots 9\}$.
+
+        \solution We first state and prove Euclid's Division Algorithm. Let $a, b$ be nonnegative integers, $b \neq 0$. Then there exist unique integers
+        $q, r$ such that $a = bq + r$ and $0 \leq r < b$. To prove this, consider the set $S = \{a - qb : a - qb \geq 0, q \in \mathbb{Z}\}$.
+        Now, $a = a - 0b \in S$, so $S$ is a non-empty set of nonnegative integers. Thus, it has a minimal element (Well Ordering Principle),
+        say $r = a - qb \geq 0$ for some $q \in \mathbb{Z}$. Thus, $a = bq + r$. Now, if $r \geq b$, then $r - b = a - (q + 1)b \geq 0$,
+        which contradicts the minimalilty of $r$ in $S$. This forces $0 \leq r < b$.
+
+        We must now show that $q, r$ are unique. Let $a = bq' + r'$ for some integers $q', r'$ where $0 \leq r' < b$.
+        Now, $b(q - q') + (r - r') = a - a = 0$, so $b(q - q') = r'- r$. Suppose $q - q' \neq 0$. Then, $|b(q - q')| > |b| = b$,
+        but we already have $|r' - r| < b$, which is a contradiction. Hence, $q = q'$, so $r = r'$ and our solution is unique. \\
+
+        Note that if $a = 0$, then $q = r = 0$. Otherwise, $0 < a = bq + r < bq + b = b(q + 1)$, so $q \geq 0$. Thus, it is possible to
+        reiterate this process by using $q$ as our new $a$.\\
+
+        With this, we supply an algorithm to obtain the coefficients $a_i$. Set $n = n_0$. If $n = 0$, then we are done, trivially ($a_0 = k = 0$).
+        Otherwise, use Euclid's Division Algorithm to write $n_i = 10n_{i + 1} + a_i$ and iterate over $i \in \{0, 1, 2, \dots, k\}$
+        while $n_i$ is positive.
+        This process must terminate, since $n_{i + 1} = (n_i - a_i) /10 < n_i$, and the number of integers between $0$ and $n_0$ is finite.
+        Thus, we obtain the integers $\{a_i\}$ where $0 \leq a_i < 10$, and
+        \[
+                n = a_0 + 10n_1 = a_0 + 10(a_1 + 10n_2) = \dots = a_0 + 10(a_1 + 10(a_2 + \dots 10(a_{k - 1} + 10n_k)\dots)).
+        \]
+        We iterated while $n_i$ was positive, so when we stopped, $n_k > 0$, and $n_{k + 1} \leq 0$. We have already shown that the quotient $q \geq 0$
+        when $a > 0$, so $n_{k + 1} \geq 0$. This forces $n_{k + 1} = 0$, so $n_k = 10(0) + a_k = a_k$, where $0 < a_k < 10$.
+        Thus, we distribute terms to obtain
+        \[
+                n = a_0 + 10a_1 + 10^2a_2 + \dots + 10^k a_k,
+        \]
+        as desired. Note that this also establishes the uniqueness of this representation, since any representation in base $10$ demands
+        $n = a_0 + 10(a_1 + 10a_2 + 10^2a_3 + \dots + 10^{k-1}a_k)$, where $0 \leq a_0 < 10$. Euclid's Division Algorithm guarantees
+        the uniqueness of $a_0$ as well as the quotient $n_1 = a_1 + 10a_2 + \dots + 10^{k - 1}a_k$, upon which we recursively repeat the same argument.
+
+
+        \problem Let $A, B \subset \mathbb{Q}$ be two non-empty subsets such that every rational number is either in $A$ or in $B$, 
+        and if $a \in A$ and $b \in B$, then $a < b$. Prove that there is a unique real number $\alpha$ such that every rational number
+        less than $\alpha$ is in $A$ and every rational number greater than $\alpha$ is in $B$.
+        
+        \solution Note that $A$ and $B$ are subsets of $\mathbb{R}$. Since $B$ is non-empty, we choose some $b \in B$ which 
+        is an upper bound for $A$ since $a < b$ for all $a \in A$. Thus, $A$ has a supremum. We claim that $\alpha = \sup{A}$ satisfies the 
+        desired properties, i.e.\ if $x < \alpha < y$ for some $x, y \in \mathbb{Q}$, then $x \in A$ and $y \in B$. \\
+
+        Let $x < \alpha$ for $x \in \mathbb{Q}$. This must be in exactly one of $A$ and $B$. If it were in $B$, then for any $a \in A$,
+        we have $a < x$. Thus, $x$ is an upper bound of $A$. On the other hand, $\alpha$ is the least upper bound, so we must have
+        $\alpha \leq x$, which is a contradiction. Thus, $x \in A$.
+
+        Let $\alpha < y$ for $y \in \mathbb{Q}$. Again, this must be in exactly one of $A$ and $B$. If it were in $A$, that would
+        force $y \leq \alpha$ since $\alpha$ is an upper bound, which is a contradiction. Thus, $y \in B$. \\
+
+        It remains to show that $\alpha$ is unique. Suppose $\beta \in \mathbb{R}$ also satisfies the desired properties.
+        If $\beta < \alpha$, then we find a rational number $p$ such that $\beta < p < \alpha$ using the density of the rationals in the reals.
+        This is a contradiction, since $p < \alpha$ implies that $p \in A$, but $\beta < p$ implies that $p \in B$.
+        Similarly, if $\beta > \alpha$, we find a rational number $q$ such that $\beta > q > \alpha$, which is a contradiction again,
+        since $\beta > q$ implies that $q \in A$ but $q > \alpha$ implies that $q \in B$.
+        Thus, the only possibility is $\alpha = \beta$. Hence, the real number satisfying the desired properties is unique.
+
+
+        \problem Let $x$ be a positive real number and let 
+        \[
+                S_x = \{x, x^{1 /2}, x^{1 /3}, \dots, x^{1 /n}, \dots\}.
+        \]
+        Show that $\inf{S_x} = 1$ if $x \geq 1$ and $\sup{S_x} = 1$ if $x \leq 1$.
+
+        \solution Note that $S_x \subset \mathbb{R}$. First, we take the case that $x > 1$.
+        Note that $x^{1 /n} > 1$ because
+        \[
+                \left(\underbrace{(x^{1 /n})\dots(x^{1 /n})}_{n \text{ times}}\right)^n =
+                \underbrace{(x^{1 /n})^n\dots(x^{1 /n})^n}_{n \text{ times}} = x^n
+        \] by commutativity of multiplication. From the uniqueness of positive $n^\text{th}$ roots, we have
+        \[
+                \underbrace{(x^{1 /n})\dots(x^{1 /n})}_{n\text{ times}} = x > 1,
+        \]
+        which is only possible if $x^{1 /n} > 1$. This means that $S_x$ is bounded below, and thus has an infimum. We now show that $\inf{S_x} = 1$,
+        i.e.\ given any $\epsilon > 0$, we must find some $s \in S_x$ such that $1 < s < 1 + \epsilon$.
+        By the Archimedean property, we find $n \in \mathbb{N}$ such that $n\epsilon > x$, and we claim that $1 < x^{1 /n} < 1 + \epsilon$.
+        To prove this, set $x^{1 /n} = 1 + h$, where $h > 0$. Using the binomial theorem,
+        \[
+                x = (x^{1 /n})^n = (1 + h)^n = 1 + nh + \frac{1}{2}n(n-1)h^2 + \dots > 1 + nh > nh.
+        \]
+        Thus, $h < x/n < \epsilon$, so $1 < x^{1 /n} < 1 + x/n < 1 + \epsilon$ as desired. \\
+
+        If $x < 1$, note that $1 /x > 1$, so $\inf{S_{1 /x}} = 1$. By a similar argument as before, we have $x^{1 /n} < 1$ for all $n \in \mathbb{N}$,
+        so $S_x$ is bounded above and has a supremum. Also, note that $S_{1 /x} = \{1 /s: s \in S_x\}$ because $1 /x^{1 /n} = (1 /x)^{1 /n}$.
+        Using the property proved in Assignment I, Exercise 5, we must have $(\sup S_x)\cdot(\inf S_{1 /x}) = 1$, thus
+        $\sup{S_x} = 1$. \\
+
+        In the special case that $x = 1$, note that the positive $n^\text{th}$ root of $1$ are all $1$ as $1^n = 1$ for all $n \in \mathbb{N}$.
+        Thus, $S_1 = \{1\}$, whose supremum and infimum are both trivially $1$.
+
+        \problem
+        \begin{enumerate}
+                \item For $\alpha, \beta \in \mathbb{Q}$ with $\alpha < \beta$ and for $x \in \mathbb{R}_{>1}$, show that $x^\alpha < x^\beta$.
+                \solution Let $\alpha = m / q$ and $\beta = n / q$, for integers $m, n, q$, where $q > 0$ is chosen as a common denominator.
+                Note that we must have $m < n$. Also note that for any $y > 1$, we must have $y^{1 /q} > 1$, because
+                \[
+                        (y^{1 /p})^p = \underbrace{(y^{1 /q})\dots(y^{1 /q})}_{q\text{ times}} = y > 1.
+                \]
+                Note that by definition, $y^{1 /p}$ is the unique positive real $r$ such that $r^p = y$. Now, since $n - m > 0$, we have
+                \[
+                        x^{n - m} = \underbrace{(x)\dots(x)}_{n-m\text{ times}} > 1.
+                \]
+                Hence, $x^{(n - m) /q} > 1$. Now, using the definition $x^{a /b} = (x^a)^{1 /b}$, we have
+                \[
+                        x^{(n - m) /q} = (x^{n - m})^{1 /q} = (x^{n} x^{-m})^{1 /q} = x^{n /q} x^{-m /q} = x^\beta x^{-\alpha} > 1.
+                \]
+                Since, $x^{-\alpha} = 1 /x^{\alpha}$, we multiply $x^\alpha$ on both sides, obtaining $x^\beta > x^{\alpha}$, as desired.
+                
+
+                \item For $a, b \in \mathbb{R}$ with $a > 0$, let 
+                \[
+                        a^b := \sup\{a^t: t \in \mathbb{Q}, t < b\}.
+                \]
+                For $x, y \in \mathbb{R}$ with $x > 1$ and $y > 0$, let 
+                \[
+                        \log_{x}{y} := \sup\{s: s\in \mathbb{Q}, x^s < y\}.
+                \]
+                Show that
+                \[
+                        x^{\log_x{y}} = y.
+                \]
+
+                \solution Let $x, y \in \mathbb{R}$ be fixed. We must show that $\sup{S} = y$, where
+                \[
+                        S = \{x^t: t \in \mathbb{Q}, t < \sup\{s: s\in \mathbb{Q}, x^s < y\}\}.
+                \]
+                Also set
+                \[
+                        T = \{s: s\in \mathbb{Q}, x^s < y\}.
+                \]
+                Pick an arbitrary element from $S$, say $x^{t}$ for some $t \in \mathbb{Q}$. Note that $t < \sup{T}$, so 
+                there exists an element of $T$, say some $s \in \mathbb{Q}$, such that $t < s \leq \sup{T}$. Thus, from our previous
+                exercise, we have $x^t < x^s$. Also, since $s \in T$, we have $x^s < y$. Thus, $x^t < y$ for all elements $x^t \in S$,
+                so $y$ is indeed an upper bound of $S$. This means that $S$ has a supremum $\sup{S} \leq y$.
+                Note that since $x > 1$, any $x^t > 0$, so $\sup{S} > 0$. \\
+                
+                Suppose that $0 < \sup{S} = y' < y$. Then, $1< y /y'$, so from Exercise 3, we find $n \in \mathbb{N}$ such that
+                \[ 1 < x^{1 /n} < \frac{y}{y'},\]
+                i.e.\ $x^{1 /n}y' < y$. Now, we pick $t \in \mathbb{Q}$ such that 
+                \[ \sup T - \frac{1}{n} < t \leq \sup T. \]
+                Note that this means that $t \in T$, and that $\sup{T} < t + 1 /n \notin T$. Thus, $x^t \in S$, so $x^t \leq \sup{S} = y'$.
+                Thus, $x^{t + 1 /n} \leq x^{1 /n}y' < y$. However, this means that $t + 1 /n \in T$, which is a contradiction.
+                Thus, there exist no such $y'$, so $\sup{S} \geq y \geq \sup{S}$, proving that $\sup{S} = y$.
+
+                
+        \end{enumerate}
+
+\end{document}
