@@ -5,7 +5,7 @@
 
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>MA2101</title>
+<title>MA2101-2</title>
 
 
 <style type="text/css">
@@ -634,124 +634,96 @@ pre[class*="language-"] {
 \)</li>
 </ol>
 
-<h2 id="toc_2">Groups, Rings and Fields</h2>
+<h2 id="toc_2">Point set topology on \(\R\)</h2>
 
-<p>A <em>binary operation</em> \(f\) on a set \(S\) is a mapping \(f\colon S\times S \to S\).</p>
+<p>We define <em>open</em> and <em>closed intervals</em> as follows.
+\[ (a, b) = \{x \in \R: a &lt; x &lt; b\}, \]
+\[ [a, b] = \{x \in \R: a \leq x \leq b\}. \]</p>
 
-<p>A group \(G\) is a set with a binary operation \(*\) which satisfies the following axioms.</p>
+<p>An <em>\(n\)-cell</em> is the Cartesian product of \(n\) closed intervals.</p>
 
-<ul>
-<li><strong>Associativity</strong>: \(a * (b * c) = (a * b) * c\) for all \(a, b, c \in G\).</li>
-<li><strong>Identity</strong>: There exists an element \(i_G \in G\) such that \(a * i_G = a\) for all \(a \in G\).</li>
-<li><strong>Inverse</strong>: For every \(a \in G\), there exists \(b \in G\) such that \(a * b = i_G\).</li>
-</ul>
-
-<p>A structure \((G, *)\) which only satisfies <em>associativity</em> is called a <em>semigroup</em>. A semigroup with an <em>identity</em> element is called a <em>monoid</em>.</p>
-
-<p>An <em>abelian group</em> also satisfies the axiom of <em>commutativity</em>.</p>
+<p>A <em>metric space</em> is a set \(M\) with a metric or a distance function \(d\colon M\times M \to \R\) such that for all \(x, y, z \in M\),</p>
 
 <ul>
-<li><strong>Commutativity</strong>: \(a * b = b * a\) for all \(a, b \in G\).</li>
+<li><strong>Symmetry</strong>: \(d(x, y) = d(y, x)\),</li>
+<li><strong>Non-negativity</strong>: \(d(x, y) \geq 0\). Equality <em>iff</em> \(x = y\).</li>
+<li><strong>Triangle inequality</strong>: \(d(x, z) \leq d(x, y) + d(y, z)\).</li>
 </ul>
 
-<p>A <em>ring</em> is a set \(R\) with two binary operations \(+\) and \(\times\) (addition and multiplication) such that \((R, +)\) is an abelian group, \((R, \times)\) is a monoid and \(\times\) is distributive over \(+\).</p>
+<p>An <em>open ball</em> of radius \(r\) in a metric space \((M, d)\) centred at a point \(x\) is the set of all \(y\) such that \(d(x, y) &lt; r\). This is denoted as \(B_r(x)\).<br>
+A <em>closed ball</em> of radius \(r\) in a metric space \((M, d)\) centred at a point \(x\) is the set of all \(y\) such that \(d(x, y) \leq r\).</p>
 
-<ul>
-<li><strong>Distributivity</strong>: \(a \times (b + c) = (a \times b) + (a \times c)\) and \((b + c) \times a = (b \times a) + (c \times a)\) for all \(a, b, c \in R\).</li>
-</ul>
+<p>An open ball \(B_r(x)\) is also called a neighbourhood \(N_r(x)\) of \(x\).</p>
 
-<p>The additive and multiplicative identities of \(R\) are denoted by \(0_R\) and \(1_R\) respectively.</p>
+<p>A <em>convex set</em> \(E\) is such that for any \(x, y \in E\),
+\[ tx + (1 - t)y \in E, \]
+for all \(t \in [0, 1]\). Open balls, closed balls, and \(n\)-cells are all convex sets.</p>
 
-<p>If \(\times\) is commutative, \((R, +, \times)\) is called a <em>commutative ring</em>.</p>
+<p>A <em>bounded set</em> \(S \subseteq M\) is such that there exists \(x \in M\) and some radius \(r &gt; 0\) where \(S \subseteq B_r(x)\).</p>
 
-<p>A <em>field</em> \(F\) is a commutative ring such that the non-zero elements form an abelian group under multiplication.</p>
+<p>A point \(\ell \in M\) is a <em>closure point</em> of \(S \subseteq \R\) if every neighbourhood of \(\ell\) contains at least one point of \(S\). The set of all closure points of \(S\) is called its <em>closure</em>, denoted by \(\bar{S}\).
+A <em>closed set</em> is such that \(S = \bar{S}\).</p>
 
-<p>An <em>ordered field</em> \(F\) is also an ordered set such that for all \(a, b, c \in F\),</p>
+<p>A subset \(S\) of a metric space is <em>dense</em> in \(M\) if \(\bar{S} = M\).</p>
 
-<ul>
-<li>If \(a &gt; b\), then \(a + c &gt; b + c\).</li>
-<li>If \(a &gt; 0\) and \(b &gt; 0\), then \(ab &gt; 0\).</li>
-</ul>
+<p>A <em>limit point</em> \(\ell\) of \(S \subseteq M\) is such that every neighbourhood of \(\ell\) contains at least one point of \(S\) different from itself.
+Every closure point of \(S\) which is not a limit point of \(S\) is called an <em>isolated point</em>.</p>
 
 <blockquote>
-<p>The ordered field \(\Z/p\Z\) is an important example. Not that \(\Z/n\Z\) are <em>not</em> fields in general.</p>
+<p>Note that every neighbourhood of a limit point of \(S\) contains infinitely many points of \(S\).
+Suppose \(\ell\) is a limit point of \(S\), and suppose that the neighbourhood \(N\) of \(\ell\) contains finitely many points in \(S\) apart from \(\ell\). Thus, we can enumerate \((N\cap S)\setminus\{\ell\} = \{s_1, \dots, s_n\}\). Note that if \(d(s, \ell) &gt; d(s_i, \ell)\), the neighbourhood \(N_{r_i}(\ell)\) does not contain \(s\), where \(r_i = d(s_i, \ell)\). Thus, by setting
+\[ r = \min d(s_i, \ell) &gt; 0,\]
+the neighbourhood \(N_r(\ell)\) contains none of \(s_i\). This is a contradiction.</p>
 </blockquote>
 
 <blockquote>
-<p><strong>Question</strong>: Can a nontrivial finite abelian group be ordered?<br>
-<em>Response</em>: No. Let \((G, +)\) be a group with \(n &gt; 1\) elements, and select two members such that \(a &gt; b\). We thus have the chain of terms
-\[ nb &lt; a + (n-1)b &lt; 2a + (n-2)b + \dots + (n-1)a + b &lt; na. \]
-Thus, we have generated \(n+1\) distinct elements in \(G\), which is a contradiction!<br>
-Note that we simply denote \(na = \underbrace{a + \dots + a}_{n \text{ times}}\).</p>
+<p>As a corollary, finite subsets of a metric space have no limit points.  </p>
 </blockquote>
 
-<h2 id="toc_3">Real Numbers</h2>
+<p>An <em>interior point</em> \(p \in S\) is such that for some \(r &gt; 0\), there is a neighbourhood \(B_r(p) \subseteq S\). The set of all interior points of \(S\) is called its <em>interior</em>, denoted by \(S^0\).
+An <em>open set</em> is such that \(S = S^0\).</p>
 
-<p>The real numbers are a <em>complete, ordered field</em>.</p>
+<blockquote>
+<p>Note that every neighbourhood is an open set.</p>
+</blockquote>
 
-<h3 id="toc_4">Constructing \(\sqrt{2}\)</h3>
+<p>The <em>boundary</em> \(\partial S\) of \(S\) is the set of all points in its closure not in its interior. Thus, \(\partial S = \bar{S} \setminus S^0\).</p>
 
-<p>The irrational number \(\sqrt{2}\) can be approximated by the rationals with arbitrary precision. This is done iteratively, using the <em>AM-GM-HM</em> inequality to generate sequences of rationals converging to \(\sqrt{2}\).
-We define the sequences
-\(\{u_n\}_{n=0}^\infty\) and \(\{l_n\}_{n=0}^\infty\) as follows.
-\[ u_0 = 2, \quad\quad l_0 = 1. \]
-\[ u_{n+1} = \frac{u_n + l_n}{2}, \quad\quad l_{n+1} = \frac{2}{\frac{1}{u_n} + \frac{1}{l_n}}. \]</p>
+<p>A set \(S\) is open <em>iff</em> its complement is closed. As a corollary, a set is closed <em>iff</em> its complement is open.</p>
 
-<p>Note that \(u_{n+1}l_{n+1} = u_nl_n\), so \(u_nl_n = 2\). Thus, \(u_{n+1} &gt; \sqrt{2} &gt; l_{n+1}\) by \(AM &gt; GM &gt; HM\). Also, \(u_{n+1} &lt; u_n\) and \(l_{n+1} &gt; l_n\), so by iterating successively over \(n\), we construct the sequence of rational numbers
-\[ u_0 &gt; u_1 &gt; \dots &gt; u_n &gt; u_{n+1} &gt; \sqrt{2} &gt; l_{n+1} &gt; l_n &gt; \dots &gt; l_1 &gt; l_0. \]</p>
+<h4 id="toc_3">De Morgan&#39;s Laws</h4>
 
-<p>To put strict bounds on our approximation, we calculate the difference \(R_{n+1} = u_{n+1} - l_{n+1}\).
-\[ R_{n+1} = u_{n+1} - l_{n+1} = \frac{u_n + l_n}{2} - \frac{2u_nl_n}{u_n + l_n} = \frac{(u_n - l_n)^2}{2(u_n + l_n)}.\]</p>
+<p>Let \(S\) be a set and let \(E_i\) be subsets of \(S\). Then,
+\[ \left(\bigcup E_i \right)^c = \bigcap E_i^c\, \quad\quad \left(\bigcap E_i \right)^c = \bigcup E_i^c. \]</p>
 
-<p>Since \(u_n + l_n &gt; 2l_0 = 2\), we have \(R_{n+1} &lt; R_{n}^2 / 4\). Also, \(u_n - l_n &lt; u_0 - l_0 = 1\), so \(R_{n + 1}/R_{n} &lt; 1/4\). Thus, \(R_n \to 0\) as \(n \to \infty\), so we can approximate \(\sqrt{2}\) with arbitrary precision.
-Indeed, after \(n\) iterations of this algorithm, the error is at most \(1/4^n\).</p>
+<p>Let \(\{\mathcal{O}_i\}\) be a collection of open sets. Then, \(\cup_i \mathcal{O}_i\) is open.
+It immediately follows that the complement \(\cap_i \mathcal{O}_i^c\) is closed.</p>
 
-<h3 id="toc_5">Properties of real numbers</h3>
+<p>Let \(\{\mathcal{C}_i\}\) be a collection of closed sets. Then, \(\cap_i \mathcal{C}_i\) is closed. Note that this follows since the complement \(\cup_i \mathcal{C}_i^c\) is open (remember that \(\mathcal{C}_i^c\) are all open).</p>
 
-<p>These two properties follow from the fact that \(\R\) is an <em>ordered set</em>.</p>
+<p>Let \(\{\mathcal{O}_i\}\) be a <em>finite</em> collection of open sets. Then, \(\cap_i \mathcal{O}_i\) is open.</p>
 
-<ul>
-<li><strong>Trichotomy</strong>: Exactly one of the following is true for all \(x, y \in \R\): \(x &lt; y\), \(x = y\), \(x &gt; y\).</li>
-<li><strong>Transitivity</strong>: If \(a &gt; b\) and \(b &gt; c\), then \(a &gt; c\) for all \(a, b, c \in \R\).</li>
-</ul>
+<blockquote>
+<p>For infinitely many open sets, consider \(\mathcal{O}_n = (-1/n, 1/n)\) for \(n \in \N\).</p>
+</blockquote>
 
-<p>The real numbers are also <em>complete</em>, <em>i.e.</em>, \(\R\) has the <em>least upper bound</em> property.</p>
+<p>Let \(\{\mathcal{C}_i\}\) be a <em>finite</em> collection of closed sets. Then, \(\cup_i \mathcal{C}_i\) is closed.</p>
 
-<ul>
-<li><strong>Least Upper Bound</strong>: An ordered set \(S\) has the least upper bound property if \(\sup E\) exists for every non-empty subset \(E \subseteq S\) which is bounded above.</li>
-<li><strong>Greatest Lower Bound</strong>: An ordered set \(S\) has the greatest lower bound property if \(\inf E\) exists for every non-empty subset \(E \subseteq S\) which is bounded below.</li>
-</ul>
+<p>Let \(S\subseteq\R\) be closed. Then, if \(S\) is bounded above, it has a maximum. If it is bounded below, it has a minimum.</p>
 
-<p>These two properties are equivalent. Let \(S\) have the least upper bound property, and let \(E \subseteq S\) be bounded below. Let \(L\) be the set of all lower bounds of \(L\). Then \(L \neq \emptyset\), and every element of \(E\) is an upper bound of \(L\). Also, from the least upper bound property of \(S\), \(\sup L\) must exist in \(S\).
-Note that for all \(s \in S\), if \(s &lt; \sup L\), then there exists \(l \in L, l &gt; s\) so \(s\) is not an upper bound of \(L\), hence \(s \notin E\).
-The contrapositive of this is that for every \(s \in E\), we must have \(s \geq \sup L\). This means that \(\sup L\) is a lower bound of \(E\), so \(\sup L \in L\).
-Also, \(\sup L\) is an upper bound of \(L\), so \(y \leq \sup L\) for all \(y \in L\).
-This means that \(\sup L \geq y\) for all lower bounds \(y\in L\) of \(E\).
-Thus, \(\inf E = \sup L\) for all non-empty \(E \subseteq S\) bounded below, so \(S\) also has the greatest lower bound property. 
-The converse follows similarly.</p>
+<h3 id="toc_4">Subspace topology</h3>
 
-<p>Note that \(\R\) contains \(\Q\) as a subfield. The rationals \(\Q\) do <em>not</em>
-have the least upper bound property. For example, the set \(\{x\in\Q: x^2 &lt; 2\}\) may have upper bounds in \(\Q\), but has no <em>least</em> upper bound in \(\Q\).</p>
+<p>Let \((M, d)\) be a metric space and let \(S \subset M\). Then \(T \subseteq S\) is open in \(S\) <em>iff</em> \(T = S \cap A\) is open for some open subset \(A\) of \(M\).</p>
 
-<ul>
-<li><strong>\(\Z\) is unbounded in \(\R\)</strong>: To prove this, assume to the contrary that \(\Z\) in bounded in \(\R\). Then, \(\Z\) has a supremum in \(\R\), say \(\alpha = \sup \Z\). Now, \(\alpha - 1/2\) is not an upper bound of \(\Z\), so there exists \(n \in Z\) such that \(\alpha - 1/2 \le n\). This means that \(\alpha &lt; n + 1 \in \Z\), which is a contradiction.</li>
-<li><strong>Archimedean property</strong>: For all \(x, y \in R\), \(x \neq 0\), there exists \(n \in \N\) such that \(nx &gt; y\). Note that if this was false, then \(y/x\) would be an upper bound of \(\Z\), which is a contradiction.</li>
-<li><strong>\(\Q\) is dense in \(\R\)</strong>: Between any two distinct real numbers, there exists a rational number. Let \(x, y \in \R\) with \(x &lt; y\). We find \(n \in \Z\) such that \(n(y - x) &gt; 1\). Note that \(n \neq 0\). We find the smallest integer \(m \in \Z\) such that
-\(nx &lt; m\). Thus, \(m - 1 \leq nx &lt; m\). Using \(1 + nx &lt; ny\), we have \(nx &lt; m \leq 1 + nx &lt; ny\), so \(x &lt; m/n &lt; y\) as desired.</li>
-<li><strong>Existence and Uniqueness of positive \(n^\text{th}\) roots</strong>: For every positive integer \(n\) and every positive real number \(x\), there exists a unique positive real number \(y\) such that \(y^n = x\).</li>
-</ul>
+<p>An <em>open cover</em> of \(S \subseteq M\) is a collection of open subsets of \(M\) whose union is \(S\).</p>
 
-<h3 id="toc_6">Extended real number system</h3>
+<p>A subset \(K \subseteq M\) is called <em>compact</em> if every open cover of \(K\) contains a finite subcover. For example, any finite set is compact.</p>
 
-<p>We introduce two new symbols \(\infty\) and \(-\infty\) to \(\R\). Preserving the original order,
-\[ -\infty &lt; x &lt; \infty \]
-for all \(x \in \R\). We also define the following conventions.</p>
+<p>Let \(S \subset M\). A set \(K \subseteq S\) is compact in \(S\) <em>iff</em> \(K\) is compact in \(M\).</p>
 
-<ul>
-<li>\(x + \infty = \infty\), \(x - \infty = -\infty\).</li>
-<li>\(x / \pm\infty = 0\).</li>
-<li>If \(x &gt; 0\), \(x \cdot \infty = \infty\). If \(x &lt; 0\), then \(x \cdot \infty = -\infty\).</li>
-</ul>
+<blockquote>
+<p>Recall that the same does not hold for openness. For example, \(\R\) is open in \(\R\), but not in \(\R^2\).</p>
+</blockquote>
 
 
 
