@@ -5,7 +5,7 @@
 
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>MA2103</title>
+<title>MA2103-2</title>
 
 
 <style type="text/css">
@@ -637,267 +637,38 @@ pre[class*="language-"] {
 \newcommand\E[1]{\langle #1\rangle}
 \)</p>
 
-<h2 id="toc_1">Partial Differential Equations</h2>
+<h2 id="toc_1">Fourier Series</h2>
 
-<p>A partial differential equation typically involves a number of variables \(x_1, \dots, x_n\), an unknown multivariable function \(u(x_1, \dots, x_n)\) as well as its partial derivatives with respect to these variables.</p>
-
-<p>\[ f\left(x_1, \dots, x_n; u_{x_1}, \dots, u_{x_n}; u_{x_1x_1} \dots, u_{x_1x_n}; \dots\right) = 0. \]</p>
-
-<p>Here, we use the notation
-\[ u_{x_i} = \pp{u}{x_i}, \quad u_{x_ix_j} = \pp{}{x_j}\left(\pp{u}{x_i}\right), \quad\dots.\]
-We may also use Newton&#39;s notation specifically to denote derivatives with respect to time.
-\[ \dot{u} = \ppt{u}, \quad \ddot{u} = \pp[2]{u}{t}, \quad\dots. \]</p>
-
-<p>The special operator \(\grad{} = \sum \partial/\partial{x_i}\ve{e_i}\) is often used to define the <em>gradient</em>, <em>divergence</em>, and <em>Laplacian</em>  of scalar and vector fields. Let \(u(\ve{x})\) be a scalar field and \(\ve{q}(\ve{x})\) be a vector field, and let \(\{\ve{e_i}\}\) be our standard basis.
-\[ \begin{align}
-\grad{u} &amp;= \sum_i \pp{u}{x_i} \ve{e_i}. \tag{Gradient} \\
-\divg{\ve{q}} &amp;= \sum_i \pp{q_i}{x_i}. \tag{Divergence} \\
-\lapl{u} &amp;= \sum_i \pp[2]{u}{x_i}. \tag{Laplacian}
-\end{align} \]
-Another quantity called the <em>curl</em> is only defined in \(\R^3\) as follows.
-\[ \curl{\ve{q}} = \sum_i \epsilon_{ijk}\pp{q_i}{x_j}\ve{e_k}. 
-\tag{Curl} \]</p>
-
-<h3 id="toc_2">Wave Equation</h3>
-
-<p>\[ \ddot{u} = c^2 \nabla^2{u}. \]
-In one dimension, this reduces to
-\[ \pp[2]{u}{t} = c^2 \pp[2]{u}{x}. \]</p>
-
-<p>A class of solutions is given by \(u(x, t) = A\cos(\omega (t - x/c) + \phi)\).</p>
-
-<p>Solutions in one dimension general look like \(f(x - vt)\). This represents a wave travelling in the positive \(x\) direction, while \(g(x + vt)\) represents a wave travelling in the opposite direction.</p>
-
-<p>Suppose we choose two solutions \(\cos(k(x - vt))\) and \(\cos(k(x + vt))\). Their sum is simply \(2\sin{kx}\sin{kvt}\).
-This is called a standing wave, since the nodes do not change with time.</p>
-
-<h3 id="toc_3">Heat Equation</h3>
-
-<p>\[ \ppt{T} = \alpha^2 \lapl{T}. \]</p>
-
-<p>We start with Fourier&#39;s Law, which states that the local heat flux density \(\ve{q}\) is related to the gradient of the temperature as \(\ve{q} = -\kappa \nabla T\). 
-This means that the rate of flow of heat energy per unit area is proportional to the negative gradient of temperature locally, <em>i.e.</em> heat flows in the direction of <em>decreasing</em> temperature, proportional to the thermal conductivity \(\kappa\) of the material, which is a simple scalar for isotropic materials.</p>
-
-<p>The law of conservation of heat tells us that rate of change of internal heat per volume is given by \(\nabla\cdot \ve{q} = -\rho\sigma\,(\partial{T}/\partial{t}) = 0\). This means that the rate of flow of heat away from a region is proportional to the rate of <em>decrease</em> in temperature of that region with time, <em>i.e.</em> loss of heat energy in a volume is directly proportional to the decrease in temperature via \(Q = \rho\sigma V\Delta{T}\). Note that \(\rho\) is the density of the material and \(\sigma\) is its specific heat capacity.
-Putting these together and using \(\lapl{T} = \divg{\grad{T}}\) yields the result, with \(\alpha^2 = \kappa/\rho\sigma\).</p>
-
-<p>In one dimension, this reduces to
-\[ \ppt{T} = \alpha^2 \pp[2]{T}{x}. \]</p>
-
-<p>Note that for anisotropic materials, \(\kappa\) is a second order tensor and hence doesn&#39;t commute with the divergence.
-\[ \rho\sigma\ppt{T} = \divg{(\kappa\grad{T})}. \]</p>
-
-<h4 id="toc_4">Diffusion Equation</h4>
-
-<p>The heat equation more generally describes the phenomenon of <em>diffusion</em>, when \(\alpha\) is replaced by a scalar constant \(D\) and \(T\) is replaced by the density of the diffusing material \(\phi\).</p>
-
-<p>\[ \ppt{\phi} = D\lapl{\phi}. \]</p>
-
-<h4 id="toc_5">Random walks</h4>
-
-<p>The diffusion equation can also be used to describe the phenomenon of random walks, such as Brownian motion, by setting \(\phi = P(\ve{x}, t)\) to the probability of finding the walker at position \(\ve{x}\) at time \(t\).</p>
-
-<p>Consider a random walk in one dimension, where the walker takes time \(\tau\) per step of length \(\ell\). The probability \(p\) that the walker steps to the right is constant, so the probability \(q\) that the walker steps left is simply \(1 - p\). In this discrete case, we set \(P_n(m)\) to be the probability of finding the walker at position \(x = m\ell\) at time \(t = n\tau\). Clearly, the walker can arrive at step \(m\) only if it stepped rightwards from \(m-1\) or leftwards from \(m+1\), so
-\[ P_{n + 1}(m) = pP_n(m-1) + qP_n(m+1). \]</p>
-
-<p>In the special case that a leftward and rightward step are equally likely, <em>i.e.</em> \(p = q = 1/2\), 
-\[ P_{n+1}(m) - P_n(m) = \frac12(P_n(m+1) - P_n(m)) - \frac12 (P_n(m) - P_n(m - 1)). \]
-In the limit of large \(n\), we can approximate these quantities as differentials. Thus, using \(\delta n = \delta t /\tau\) and \(\delta m = \delta x /\ell\), we obtain
-\[ \tau\ppt{P} = \frac{\ell^2}{2}\pp[2]{P}{x}. \]</p>
-
-<p>With some rearrangement and setting \(\ell^2/2\tau = D\), we identify this as the diffusion equation.</p>
-
-<blockquote>
-<p><strong>Question</strong>: What does this PDE look like for \(p \neq q\)?<br>
-<em>Response</em>: Note that in the discrete case, the probability function \(P_n\) can be shown to form a Binomial distribution \(B(a, p)\). This is true because the probability of reaching position \(m\) from \(0\) in \(n\) steps along a single path with \(a\) steps to the right and \(b = n - a\) steps to the left is simply \(p^aq^b\). This is true of every path of this form, of which there are \(n!/(a!b!)\). Also, we must have exactly \(m\) more steps to the right than to the left, so \(a = (n + m)/2\), \(b = (n - m)/2\). Thus,
-\[ P_n(m) = p_n(a) = \binom{n}{a}\,p^aq^{n-a}. \]
-Note that \(p_n(a)\) is simply the coefficient of \(x^a\) in the binomial expansion \((px + q)^n\), so by setting \(x=1\), we verify that the sum of probabilities over all \(a\), ranging from \(0\) to \(n\) is exactly \(1\).
-The expectation value of the number of rightward steps is simply \(\E{a} = np\), so the expected position of the walker is \(\E{m} = 2\E{a} - n = n(p - q)\), so \(\E{x} = n(p - q)\ell = (p-q)t\ell/\tau = vt\).
-\[ v = (p-q)\frac{\ell}{\tau}, \quad\quad D = 2pq\frac{\ell^2}{\tau}. \]
-Here, we set \(v\) to be the <em>drift velocity</em> of the walker.
-The variance of \(a\) is simply \(npq\), so \(\E{(m - \E{m})^2} = \E{m^2} - \E{m}^2 = 4npq\). Thus, the variance of the \(x\) coordinate is given by \(4npq\ell^2 = 4pqt\ell^2/\tau = 2Dt\).</p>
-
-<p>A famous consequence of this this that when \(p = q = 1/2\), the expected value of the squared displacement from the origin is given by \(\E{m^2} = n\). Thus, the expected <em>distance</em> from the origin is simply \(\sqrt{t\ell^2/\tau}\).</p>
-
-<p>By performing the limit to the continuum \((\ell, \tau) \to (0, 0)\) on the rate equation while keeping \(v\) and \(D\) constant, we obtain the equation of diffusion
-\[ \ppt{P} = -v\ppx{P} + D\pp[2]{P}{x}. \]
-One solution of this equation is the Gaussian distribution
-\[ P(x, t) = \frac{1}{\sqrt{4\pi Dt}}\exp\left(\frac{-(x - vt)^2}{4Dt}\right), \]
-with the initial value \(P(x, 0) = \delta(x)\).<br>
-The above equation is also easily generalized to higher dimensions.</p>
-</blockquote>
-
-<blockquote>
-<p><strong>Question</strong>: In the limiting process, the ratio \(\ell^2/\tau\) is held constant. This seems to imply that the speed/drift velocity of the particle \(\ell/\tau\) blows up. How do we reconcile this?</p>
-</blockquote>
-
-<blockquote>
-<p><strong>Question</strong>: How does this general equation for random walks relate to the diffusion of particles?<br>
-<em>Response</em>: For a large collection of particles performing such a random walk, it is clear that the density of molecules \(n(\ve{x}, t)\) is simply proportional to the probability of a molecule being at \((\ve{x}, t)\), so \(n(\ve{x}, t) = n_{tot}P(\ve{x}, t)\). We define the current density of particles \(\ve{j}(\ve{x}, t)\) and note that analogous to Fourier&#39;s law, particles tend to move from regions of higher density to regions of lower density. This is called Fick&#39;s law, which states
-\[ \ve{j}(\ve{x}, t) = -D\, \grad{n}(\ve{r}, t). \]
-The constant streaming of particles with a drift velocity \(\ve{v}\) introduces an additional flux term, so 
-\[ \ve{j}(\ve{x}, t) = \ve{v}n(\ve{x}, t) - D\, \grad{n}(\ve{r}, t). \]
-The conservation of the number of particles is expressed by the continuity equation
-\[ \ppt{}n(\ve{x}, t) + \divg{\ve{j}(\ve{x}, t)} = 0. \]
-Plugging in the expression for \(\ve{j}(\ve{x}, t)\) yields
-\[ \ppt{}n(\ve{x}, t) = -\ve{v}\cdot\grad{n(\ve{x}, t)} \,+\, D\,\lapl{n(\ve{x}, t)}. \]</p>
-</blockquote>
-
-<h3 id="toc_6">Laplace&#39;s Equation</h3>
-
-<p>\[ \lapl{\phi}(\ve{x}) = 0. \]
-This equation is often used to describe various physical potentials \(\phi(\ve{x})\), such as gravitational or electrostatic potential in regions without matter or charge respectively.</p>
-
-<h3 id="toc_7">Poisson&#39;s Equation</h3>
-
-<p>\[ \lapl{\phi(\ve{x})} = f(\ve{x}). \]
-This equation is often used to describe potentials in the presence of some &#39;source&#39;, such as gravitational or electrostatic potentials in the presence of matter or charge. Here, \(f(\ve{x})\) is often called the <em>source density</em>. Note that this is a special case of the heat equation where the function \(T(\ve{x})\) is independent of time.</p>
-
-<h2 id="toc_8">Solving PDE&#39;s</h2>
-
-<h4 id="toc_9">Separation of Variables</h4>
-
-<p>Consider the region \(D = \{(x, y) \in \R^2 : 0 \leq x \leq a, 0 \leq y \}\). We model the temperature in this region \(T(x, y)\) using the PDE
-\[ \lapl{T} = \pp[2]{T}{x} + \pp[2]{T}{y} = 0. \]</p>
-
-<p>We first look for <em>boundary conditions</em>. Let \(T(x, 0) = T_0\)
-and \(T(x, \infty) = T(0, y) = T(a, y) = 0\). These are called <em>Dirichlet conditions</em>.</p>
-
-<blockquote>
-<p>There are other sorts of boundary conditions too. For example, <em>Neumann conditions</em> specify the fluxes (derivatives) at the boundaries instead of the function values.</p>
-</blockquote>
-
-<p>We assume that the function \(T\) can be separated into functions of single variables, <em>i.e.</em> \(T(x, y) = X(x)Y(y)\).
-Thus, our PDE can be written as
-\[ \frac{X&#39;&#39;(x)}{X(x)} = - \frac{Y&#39;&#39;(y)}{Y(y)}. \]</p>
-
-<p>Since both sides are functions of separate variables, they must be constant, say \(\lambda\). Thus, we have the system of ODES
-\[ X&#39;&#39;(x) = \lambda X(x), \quad\quad Y&#39;&#39;(y)  = -\lambda Y(y). \]
-Now, we use the symmetry of our boundary conditions to conclude that
-\[ X(x) = A_x\sin(n\pi x/a), \quad\quad Y(y) = A_y\exp(-n\pi y/a). \]
-We have implicitly chosen \(\lambda &lt; 0\), specifically \(\lambda = -(n\pi/a)^2\).
-Note that we have chosen \(\exp(-n\pi y/a)\) to satisfy the boundary condition \(T(x, y) \to 0\) as \(y \to \infty\).</p>
-
-<p>This alone does not solve our equation. Instead, we take a superposition of all such solutions, with \(n \in \N\).
-Thus,</p>
-
-<p>\[ T(x, y) = \sum_{n = 1}^\infty A_n \sin(n\pi x/a)\exp(-n\pi y/a). \]</p>
-
-<p>Clearly, \(T(0, y) = T(a, y) = 0\). Thus, we must choose \(A_n\) such that \(T(x, 0) = T_0\). Note that
-\[ T(x, 0) = \sum_{n=1}^{\infty} A_n\sin(n\pi x/a). \]
-Thus,
-\[ A_n = \frac{2}{a}\int_0^{a} T(x, 0)\, \sin{n\pi x/a} \:dx \;=\; \frac{2T_0}{n\pi}(1 - \cos(n\pi)). \]</p>
-
-<p>This gives us our solution,</p>
-
-<p>\[ T(x, y) = \sum_{n = 1}^\infty \;\frac{2T_0}{n\pi}(1 - \cos(n\pi)) \sin(n\pi x/a)\exp(-n\pi y/a). \]</p>
-
-<!-- Laplace's Equation in 2D can be elegantly solved using *complex analysis*. Note that all analytic functions satisfy the Cauchy-Riemann equations, so if $f = u + iv$ is analytic, for real functions $u, v$, then $ u_x = v_y$ and $u_y = -v_x$. Thus, $u_{xx} = v_{yx} = v_{xy} = -u_{yy}$, with an analogous process for $v_{xx} = -v_{yy}$. Thus, both $u$ and $v$ satisfy Laplace's equation, and are called *harmonic functions*. Our initial problem thus reduces to finding some analytic function $f$ which satisfies the given boundary conditions. -->
-
-<h4 id="toc_10">Fourier Series</h4>
-
-<p>The Fourier series of an integrable function \(f\) with period \(T\) is given by</p>
+<p>Recall that the Fourier series of an integrable function \(f\) with period \(T\) is given by</p>
 
 <p>\[ f(x) = \frac{a_0}{2} \,+\, \sum_{n = 1}^\infty a_n\cos\frac{n\pi x}{T} \,+\, \sum_{n = 1}^\infty b_n\sin\frac{n\pi x}{T}, \]
 where the Fourier coefficients \(a_n\) and \(b_n\) are given by
 \[ a_n = \frac{2}{T} \int_0^T f(x) \cos\frac{n\pi x}{T} \:dx,
 \quad\quad b_n = \frac{2}{T} \int_0^T f(x) \sin\frac{n\pi x}{T} \:dx.\]</p>
 
-<h4 id="toc_11">Laplace&#39;s Equation on a rectangular domain</h4>
+<p>Alternatively, we may write
+\[ f(x) = \sum_{n = -\infty}^\infty c_n e^{2\pi inx/T},\quad\quad c_n = \frac{1}{T}\int_0^T f(x)\, e^{-2\pi inx/T} \:dx.\]
+This follows because
+\[ \frac{1}{2\pi}\int_0^{2\pi} e^{in\varphi} \:d\varphi = 
+\begin{cases}1, &amp; \text{if }\, n = 0 \\
+0, &amp; \text{if }\, n \neq 0
+\end{cases}
+\]</p>
 
-<p>Let \(f\colon D \to \R\) be defined on the rectangular domain 
-\[D = \{(x, y) \in \R^2: 0 \leq x \leq a, 0 \leq y \leq b\}\]
-satisfying Laplace&#39;s equation on the interior, <em>i.e.</em> \[\lapl{f} = 0,\] and the Dirichlet boundary conditions \(f(x, 0) = g(x)\), \(f(x, b) = f(0, y) = f(a, y) = 0\), where \(g\colon [0, a] \to \R\).</p>
+<p>The coefficients \(a_n, b_n, c_n\) are related as follows.
+\[ c_n = \begin{cases}
+\frac{1}{2}a_n - \frac{1}{2}ib_n, &amp; n \geq 1 \\
+\frac{1}{2}a_0, &amp; n = 1 \\
+\frac{1}{2}a_{|n|} + \frac{1}{2}ib_{|n|}, &amp; n \leq 1
+\end{cases},\quad\quad
+a_n = 2\operatorname{Re}c_n, \quad b_n = -2\operatorname{Im}c_n.
+\]</p>
 
-<p>The solution is given by
-\[ f(x, y) = \sum_{n = 1}^\infty A_n \sin\frac{n\pi x}{a}\sinh\frac{n\pi(b - y)}{a},\]
-where the Fourier coefficients are given by
-\[ A_n \sinh\frac{n \pi b}{a} = \frac{2}{a}\int_0^a g(x)\sin\frac{n\pi x}{a} \:dx. \]</p>
+<h4 id="toc_2">Average value of a function</h4>
 
-<h3 id="toc_12">Heat flow equation</h3>
-
-<p>We seek a solution \(u(\x, t)\) to 
-\[ \lapl{u} = \frac{1}{\alpha^2} \ppt{u}. \]
-We perform a partial separation of variables by writing \(u(\x, t) = F(\x) T(t)\). Thus, the spatial and temporal parts of the PDE separate, yielding
-\[ \frac{1}{F} \lapl{F} = \frac{1}{\alpha^2 T} \ddt{T} = -k^2. \]
-We choose \(-k^2\) to ensure that our solution does not diverge as \(t \to \infty\). The temporal part is easily solved as \(T(t) = \exp(-k^2\alpha^2 t)\). The spatial part satisfies
-\[ \lapl{F} + k^2F = 0. \]
-To solve this, we require two boundary (spatial) conditions, as well as an initial (temporal) condition.</p>
-
-<p>Suppose that our problem is one-dimensional, and \(u(x, 0) = u_0(x)\), \(u(0, t) = 0\) and \(u(\ell, t) = 0\).
-For example, if we demand a steady state at \(t = 0\) with \(u(0, 0) = 0\) and \(u(\ell, 0) = T_0\), we have the solution to \(\partial^2 u /\partial u^2 = 0\),
-\[ u_0(x) = T_0 \frac{x}{\ell}. \]</p>
-
-<p>Note that the spatial equation admits solutions of the form \(A\cos{kx} + B\sin{kx}\). The cosine part is discarded, and we must have \(k = n\pi /\ell\). Thus,
-\[ u(x, t) = \sum_{n = 1}^\infty A_n \sin\frac{n\pi x}{\ell}\,\exp\left(-k_n^2\alpha^2 t\right). \]
-The coefficients \(A_n\) are determined by setting \(t = 0\), where \(u = u_0\). Thus,
-\[ A_n = \frac{2}{\ell}\int_0^\ell u_0(x) \sin\frac{n\pi x}{\ell}\: dx. \]</p>
-
-<p>Suppose that we further demand a steady state as \(t \to \infty\), where \(u(0, \infty) = T_1\) and \(u(\ell, \infty) = T_2\). Then, this steady state has a solution \(u_f\) where
-\[ u_f(x) = (T_2 - T_1)\frac{x}{\ell} + T_1. \]
-Thus, our solution is the superposition
-\[ u(x, t) = u_f(x) \,+\, \sum_{n = 1}^\infty B_n \sin\frac{n\pi x}{\ell}\,\exp\left(-k_n^2\alpha^2 t\right). \]
-The coefficients \(B_n\) are given by
-\[ B_n = \frac{2}{\ell}\int_0^\ell (u_0(x) - u_f(x))\sin\frac{n\pi x}{\ell}\: dx. \]</p>
-
-<h4 id="toc_13">Heat flow equation with insulated boundaries</h4>
-
-<p>Suppose we are given the Neumann conditions \(u&#39;(0, t) = u&#39;(\ell, t) = 0\), together with the initial conditions \(u(x, 0) = u_0(x)\). We proceed in the same vein as before, but this time we discard the <em>sine</em> part of the spatial solution, since upon differentiation, it becomes a cosine and fails to satisfy the boundary conditions. Thus, we have
-\[ u(x, t) = \frac{A_0}{2} \,+\, \sum_{n = 1}^\infty A_n \cos\frac{n\pi x}{\ell}\,\exp\left(-k_n^2\alpha^2 t\right). \]</p>
-
-<p>Like before, the coefficients \(A_n\) are given by
-\[ A_n = \frac{2}{\ell}\int_0^\ell u_0(x) \cos\frac{n\pi x}{\ell}\: dx. \]</p>
-
-<h4 id="toc_14">Heat flow equation with periodic boundaries</h4>
-
-<p>Suppose we are given that \(u(x, 0) = u_0(x)\), \(u(-\ell, t) = u(+\ell, t)\), and \(u&#39;(-\ell, t) = u&#39;(+\ell, t)\). We perform partial separation of variables as usual, with \(T(t) = \exp(-k^2\alpha^2t)\).
-Note that \(u\) is defined on the domain \([-\ell, +\ell]\times[0, \infty)\).</p>
-
-<p>Our spatial solution \(F(x) = c_1\cos{kx} + c_2\sin{kx}\) only satisfies the boundary conditions when \(\sin{k\ell} = 0\), thus \(k = n\pi/\ell\). We do not however discard any terms here, so our general solution is of the form
-\[ u(x, t) = \frac{A_0}{2} \,+\, \sum_{n = 1}^\infty A_n \cos\frac{n\pi x}{\ell}\,\exp\left(-k_n^2\alpha^2 t\right)
-\,+\, \sum_{n = 1}^\infty B_n \sin\frac{n\pi x}{\ell}\,\exp\left(-k_n^2\alpha^2 t\right). \]</p>
-
-<p>The coefficients \(A_n\) and \(B_n\) are determined at \(t = 0\) as usual.</p>
-
-<p>\[ A_n = \frac{1}{\ell} \int_{-\ell}^{+\ell} u_0(x) \cos\frac{n\pi x}{\ell} \:dx,
-\quad\quad B_n = \frac{1}{\ell} \int_{-\ell}^{+\ell} u_0(x) \sin\frac{n\pi x}{\ell} \:dx.\]</p>
-
-<h4 id="toc_15">Schr&ouml;dinger equation</h4>
-
-<p>\[ -\frac{\hbar^2}{2m}\lapl\Psi(\x, t) + V(\x)\Psi(\x, t) = i\hbar \ppt{} \Psi(\x, t). \]
-We perform a partial separation of variables \(\Psi(\x, t) = \psi(\x)T(t)\), so
-\[ -\frac{\hbar^2}{2m} \frac{1}{\psi}\lapl{\psi} + V = {i\hbar} \frac{1}{T}\ppt{}T = \text{constant } (E). \]
-The constant \(E\) has an interpretation in terms of energy.
-The temporal part is solved by \(T(t) = \exp(-iEt/\hbar)\).
-The spatial part of the equation becomes
-\[ -\frac{\hbar^2}{2m}\lapl{\psi} + V\psi = E\psi, \]
-which is called the time-independent Schr&ouml;dinger equation.</p>
-
-<p>Consider the particle in a box problem in one dimension, with \(V(x) = 0\) when \(0 \leq x \leq \ell\), and \(\infty\) everywhere else. The time-independent Schr&ouml;dinger equation is solved by \(\psi(x) = A\cos{kx} + B\sin{kx}\), where \(k^2 = 2mE/\hbar^2\).</p>
-
-<p>Outside the box, \(\Psi\) must vanish. Let our initial conditions be \(\Psi(x, 0) = \psi_0(x)\), and let our boundary conditions be \(\Psi(0, t) = \Psi(\ell, t) = 0\).
-We discard the cosine part of our spatial solution, and must have \(k = n\pi/\ell\). Note that we can write
-\[ E_n = \frac{\hbar^2 \pi^2 n^2}{2m\ell^2}. \] Putting this together,
-\[ \Psi(x, t) = \sum_{n = 1}^\infty A_n \sin\frac{n\pi x}{\ell}\, \exp(-i E_n t/\hbar). \]
-The coefficients \(A_n\) are given by
-\[ A_n = \frac{2}{\ell}\int_0^\ell \psi_0(x) \sin\frac{n\pi x}{\ell}\: dx. \]</p>
-
-<h3 id="toc_16">Wave equation</h3>
-
-<p>We seek a solution \(u(\x, t)\) to
-\[ \lapl{u} = \frac{1}{v^2}\pp[2]{u}{t}. \]
-Like before, we perform a partial separation of variables \(u(\x, t) = X(\x) T(t)\). Thus,
-\[ \frac{1}{X} \lapl{X} = \frac{1}{v^2 T} \dd[2]{T}{t} = -k^2. \]
-Suppose our problem is posed in one dimension. Upon setting \(kv = \omega\), we obtain the familiar ODEs
-\[ \dd[2]{}{x}X + k^2 X = 0, \quad\quad \dd[2]{}{t} T + \omega^2 T = 0. \]
-It will turn out that \(v\) represents the velocity of the wave, \(\lambda = 2\pi /k\) represents the wavelength, and \(f = \omega/2\pi\) represents the frequency.</p>
-
-<p>Suppose that the string is tied down at the ends, so \(u(0, 0) = u(\ell, 0) = 0\) and we have the initial shape \(u(x, 0) = u_0(x)\). This eliminates the cosine term in \(X\). Now, if the velocity of the string at \(t = 0\) is zero, then we eliminate the sine term in \(T\). Thus, we have
-\[ u(x, t) = \sum_{n = 1}^\infty A_n\sin\frac{n\pi x}{\ell}\cos\frac{n\pi v t}{\ell}.\]
-If instead we were given initial conditions where the velocity of the wave is specified, <em>i.e.</em> \(u&#39;(x, 0) = v(x)\), and the string is perfectly flat initially, then we have
-\[ u(x, t) = \sum_{n = 1}^\infty A_n\sin\frac{n\pi x}{\ell}\sin\frac{n\pi v t}{\ell}.\]</p>
-
-<p>Consider one of the fundamental solutions in this superposition, which for fixed \(x\) is a sinusoidal wave of frequency \(f_n = nv/2\ell\). For \(n = 1\), this is called the <em>fundamental tone</em> and for higher \(n\), these are called <em>harmonics</em>. Each of these &#39;separated solutions&#39; is a normal mode, which together forms an eigenbasis of all possible superpositions/solutions.</p>
+<p>The mean value of \(f\) on a domain \((a, b)\) is defined as
+\[ \E{f} = \frac{1}{b - a}\int_a^b f(t)\: dt.\]
+Note that for a periodic function, this is precisely the constant term in its Fourier series, namely \(a_0 /2\) or \(c_0\).</p>
 
 
 
