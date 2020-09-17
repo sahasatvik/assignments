@@ -703,7 +703,7 @@ It immediately follows that the complement \(\cap_i \mathcal{O}_i^c\) is closed.
 
 <p>Let \(S\subseteq\R\) be closed. Then, if \(S\) is bounded above, it has a maximum. If it is bounded below, it has a minimum.</p>
 
-<h3 id="toc_3">Subspace topology</h3>
+<h3 id="toc_3">Compact sets</h3>
 
 <p>Let \((M, d)\) be a metric space and let \(S \subset M\). Then \(T \subseteq S\) is open in \(S\) <em>iff</em> \(T = S \cap A\) is open for some open subset \(A\) of \(M\).</p>
 
@@ -724,6 +724,18 @@ It immediately follows that the complement \(\cap_i \mathcal{O}_i^c\) is closed.
 <p>The intersection of a closed set and a compact set is compact.</p>
 
 <p>For any collection of compact subsets of \(\{K_j\}\) such that the intersection of any finite sub-collection is nonempty, the intersection of all of them is also nonempty.</p>
+
+<p>Given a collection of closed intervals \(\{I_j\}\) in \(\R\) such that \(I_{n + 1} \subseteq I_n\) for all \(n \in \N\), the intersection of all of them is nonempty. The same holds even if \(\{I_j\}\) are a collection of \(n\)-cells.</p>
+
+<p>Every infinite subset of a compact set \(K\) has a limit point in \(K\).</p>
+
+<p>Every \(n\)-cell is compact.</p>
+
+<h4 id="toc_4">Bolzano-Weierstrass Theorem</h4>
+
+<p>Every bounded infinite subset of \(\R^n\) has a limit point in \(\R^n\).</p>
+
+<p>To prove this, given an infinite bounded subset \(S \subseteq \R^n\), we construct an \(n\)-cell \(I\) around it, so \(S \subset I\). Now, \(I\) is compact, so \(S\) must have a limit point in \(I\), hence a limit point in \(\R^n\).</p>
 
 
 
