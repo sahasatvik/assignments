@@ -670,6 +670,28 @@ a_n = 2\operatorname{Re}c_n, \quad b_n = -2\operatorname{Im}c_n.
 \[ \E{f} = \frac{1}{b - a}\int_a^b f(t)\: dt.\]
 Note that for a periodic function, this is precisely the constant term in its Fourier series, namely \(a_0 /2\) or \(c_0\).</p>
 
+<p>For example, the averages of the square of the sine and cosine functions are
+\[ \frac{1}{2\pi}\int_0^{2\pi} \sin^2{t}\:dt = \frac{1}{2\pi}\int_0^{2\pi} \cos^2{t}\:dt = \frac{1}{2}. \]</p>
+
+<p>A curious case arises for products of sinusoidal functions.
+\[ 
+\begin{align}
+\frac{1}{2\pi}\int_0^{2\pi} \sin{mx}\sin{nx}\:dt &amp;= 
+\begin{cases}\frac{1}{2}, &amp; \text{if }\, m = n \neq 0 \\
+0, &amp; \text{if }\, m \neq n \text{ or } m = n = 0
+\end{cases} \\
+\frac{1}{2\pi}\int_0^{2\pi} \cos{mx}\cos{nx}\:dt &amp;= 
+\begin{cases}
+1, &amp; \text{if }\, m = n = 0 \\
+\frac{1}{2}, &amp; \text{if }\, m = n \neq 0 \\
+0, &amp; \text{if }\, m \neq n \\
+\end{cases} \\
+\frac{1}{2\pi}\int_0^{2\pi} \sin{mx}\cos{nx}\:dt &amp;= 0.
+\end{align}
+\]
+We thus define the inner product for two functions \(f\) and \(g\) over an interval \([a, b]\).
+\[ \E{f, g} = \frac{1}{b - a}\int_a^b f(t)g(t)\:dt. \]</p>
+
 
 
 <script type="text/javascript">
