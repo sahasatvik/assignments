@@ -1,0 +1,135 @@
+\documentclass[10pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{bm}
+
+\title{Analysis I - Assignment IV}
+\author{Satvik Saha}
+\date{}
+
+\geometry{a4paper, margin=1in}
+\setlength\parindent{0pt}
+\renewcommand{\labelenumi}{(\alph{enumi})}
+% \renewcommand\qedsymbol{$\blacksquare$}
+\newcounter{prob}
+\def\problem{\stepcounter{prob}\paragraph{Exercise \arabic{prob}}}
+\def\solution{\paragraph{Solution}}
+\def\cl{\operatorname{cl}}
+
+\begin{document}
+        \par\textbf{IISER Kolkata} \hfill \textbf{Assignment IV}
+        \vspace{3pt}
+        \hrule
+        \vspace{3pt}
+        \begin{center}
+                \LARGE{\textbf{MA 2101 : Analysis I}}
+        \end{center}
+        \vspace{3pt}
+        \hrule
+        \vspace{3pt}
+        Satvik Saha, \texttt{19MS154}, Group C\hfill\today
+        \vspace{20pt}
+
+        \problem Show that no interval in $\mathbb{R}$ is a union of two disjoint nonempty open sets.
+
+        \solution Let $I \subseteq \mathbb{R}$ be an interval such that $I = A \cup B$ where $A$ and $B$ are disjoint, nonempty open sets.
+        Pick $a \in A$ and $b \in B$, and without loss of generality\footnote{If $a > b$, just swap the roles of $A$ and $B$.
+        Note that $a \neq b$ since $A$ and $B$ share no common elements.} let $a < b$.
+        We construct the set
+        \[
+                S = \{x: a \leq x \leq b, x \in A\} = [a, b] \cap A.
+        \]
+        Note that $S \subseteq \mathbb{R}$ is bound above and below, and $a \in S$, so $S$ has a supremum, say $\gamma = \sup{S}$.
+        We have the restriction $a \leq \gamma \leq b$.
+        Since $a, b \in I$, every element in between them must be in $I$ since it is an interval. Thus, $\gamma \in I$. This means that
+        $\gamma$ must be in exactly one of $A$ and $B$. \\
+
+        Suppose $\gamma \in A$. This means that $\gamma \neq b$, so $b - \gamma > 0$. Also, from the openness of $A$, we find $r > 0$ such that
+        $(\gamma - r, \gamma + r) \subseteq A$. Setting $\epsilon = \min(r, b - \gamma)$, we see that $\gamma' = \gamma + \epsilon /2 \in A$,
+        and $a \leq \gamma < \gamma' < b$, so $\gamma' \in S$. This is a contradicts the fact that $\gamma = \sup{S}$. \\
+
+        Similarly, suppose $\gamma \in B$. This means that $\gamma \neq a$, so $\gamma - a > 0$. Also, from the openness of $B$, we find $r > 0$ such that
+        $(\gamma - r, \gamma + r) \subseteq B$. Setting $\epsilon = \min(r, \gamma - a)$, we see that $\gamma' = \gamma - \epsilon /2 \in B$,
+        and $a < \gamma' < \gamma \leq b$, so $\gamma' \in S$. This means that there are no elements of $A$ between $\gamma'$ and $\gamma$,
+        which means that $\gamma'$ is also an upper bound of $S$. This again contradicts the fact that $\gamma = \sup{S}$ is the lowest upper bound. \\
+
+        Thus, we conclude that $\gamma \notin A$ and $\gamma \notin B$, so $\gamma \notin A \cup B = I$, which is absurd.
+        Thus, it is impossible to choose such $A$ and $B$, and this proves the desired statement.
+
+
+        \problem Given $n \in \mathbb{N}$, construct a bounded set $S_n \in \mathbb{R}$ which has exactly $n$ limit points.
+
+        \solution Let $A_m = \{m + \frac{1}{n}: n > 1, n \in \mathbb{N}\}$. Clearly, $A_m$ is bound by $m$ and $m + 1$. We claim that
+        \[
+                S_n = \bigcup_{m = 1}^n A_m
+        \]
+        has exactly $n$ limit points. \\
+        
+        Suppose $x \in \{1, \dots, n\}$. Then, for any neighbourhood $(x - \epsilon, x + \epsilon)$, we find $k \in \mathbb{N}$ such that
+        $k\epsilon > 1$ using the Archimedean principle. Thus, $x - \epsilon < x + \frac{1}{k} < x + \epsilon$, so this neighbourhood
+        of $x$ contains the point $x + \frac{1}{k} \in A_x \subseteq S_n$, which means that $x$ is a limit point of $S_n$. \\
+
+        Suppose $x \in S_n\setminus\{1, \dots, n\}$. We find $m, n \in \mathbb{N}$, $n > 1$ such that $x = m + 1 /n$. Now,
+        \[
+                \left|\frac{1}{n} - \frac{1}{n+1}\right| = \frac{1}{n(n + 1)} < \frac{1}{n(n-1)} = \left|\frac{1}{n-1} + \frac{1}{n}\right|.
+        \]
+        Thus, setting $\epsilon = \frac{1}{n} - \frac{1}{n + 1}$, we see that $(x - \epsilon, x + \epsilon) \cap S_n = \{x\}$, which 
+        means that $x$ is not a limit point of $S_n$. \\
+
+        Suppose $x \notin S_n$. Note that the largest element of $S_n$ is $n + \frac{1}{2}$, so if $x > n + \frac{1}{2}$, we set
+        $\epsilon = (x - n - \frac{1}{2}) /2$. Every element of $S_n$ is greater than $1$, so if $x < 1$, set $\epsilon = (1 - x)/2$.
+        In both cases, we find that $(x - \epsilon, x + \epsilon) \cap S_n = \emptyset$.
+        Otherwise, note that $x$ cannot be an integer, since the only integers between $1$ and $n + \frac{1}{2}$ are already in $S_n$.
+        Thus, we find $m \in \mathbb{N}$ such that $m < x < m + 1$, i.e.\ $m = \lfloor x\rfloor$. Note that $m \in \{1, \dots n\}$.
+        If $x \geq m + \frac{1}{2}$, set $\epsilon = (m + 1 - x) /3$, and note that $(x - \epsilon, x + \epsilon) \cap S_n = \emptyset$.
+        Otherwise, $m < x < m + \frac{1}{2}$, so set $\epsilon = (x - m) /2$.
+        Any points of $S_n$ in the interval $(x - \epsilon, x + \epsilon)$ must be of the form $m + \frac{1}{k}$,
+        where $m + \frac{1}{k} > x - \epsilon = (x + m) /2$, so $1 /k > (x - m)/2$, so $k < 2 /(x - m)$. Thus, there are finitely many
+        such $k$, so $(x - \epsilon, x + \epsilon) \cap S_n$ is finite, which means that $x$ is not a limit point of $S_n$. \\
+        
+        This covers all possible cases of $x \in \mathbb{R}$, so we have proved that $S_n$ has exactly $n$ limit points.
+        
+
+        \problem Let $(M, d)$ be a metric space and $A, B$ be two subsets of $M$. Show that $\cl(A \cap B) \subseteq \cl(A) \cap \cl(B)$.
+        Is it always true that $\cl(A \cap B) = \cl(A) \cap \cl(B)$?
+
+        \solution Given $A, B \subseteq M$, let $x\in \cl(A \cap B)$. Thus, every neighbourhood of $x$ contains at least one point of $A \cap B$.
+        This point is in both $A$ and $B$.
+        This means that every neighbourhood of $x$ contains a point in $A$, so $x$ is a closure point of $A$. Similarly, every neighbourhood
+        of $x$ contains a point in $B$, so $x$ is a closure point of $B$. Thus, $x \in \cl(A)$ and $x \in \cl(B)$, so $x \in \cl(A) \cap \cl(B)$.
+        This proves that $\cl(A \cap B) \subseteq \cl(A) \cap \cl(B)$. \\
+
+        It is not always true that $\cl(A \cap B) = \cl(A) \cap \cl(B)$. For example, let $A = (0, 1)$ and $B = (1, 2)$ be subsets of $\mathbb{R}$
+        with the usual topology. Then $\cl(A) = [0, 1]$, $\cl(B) = [1, 2]$ and $\cl(A \cap B) = \cl(\emptyset) = \emptyset$,
+        while $\cl(A) \cap \cl(B) = \{1\}$.
+
+        \problem Let $(M, d)$ be a metric space and $A, B$ be two subsets of $M$. Show that $\cl(A \cup B) = \cl(A) \cup \cl(B)$.
+        
+        \solution First, let $x \in \cl(A)$. Then, $x$ is a closure point of $A$, so every neighbourhood of $x$ contains
+        some point in $A$, which is also a point in $A \cup B$. Thus, $x$ is a closure point of $A \cup B$, so $\cl(A) \subseteq \cl(A \cup B)$.
+        A similar argument with $B$ shows that $\cl(B) \subseteq \cl(A \cup B)$. Thus, $\cl(A) \cup \cl(B) \subseteq \cl(A \cup B)$. \\
+
+        Now, let $x \in \cl(A \cup B)$. Let $(A \cup B)'$ denote the set of limit points of $A \cup B$.
+        We thus have $\cl(A \cup B) = A \cup B \cup (A \cup B)'$.
+        If $x \in A \cup B$, then we are done, since in that case, $x$ is in one of $A$ or $B$, which are included in their closures,
+        so either $x \in \cl(A)$ or $x \in \cl(B)$.
+
+        Otherwise, $x \in (A \cup B)'$, i.e.\ $x$ is a limit point of $ A\cup B$. 
+        In this case, every neighbourhood of $x$ contains infinitely many elements of $A \cup B$.
+        Consider the neighbourhoods $N_{\epsilon_n}(x)$ of size $\epsilon_n = 1 /n > 0$.
+        In each of these neighbourhoods, we find a point $y_n \in A \cup B$.
+        Suppose that $x \notin \cl(A)$. This means that for some $k \in \mathbb{N}$, the $\epsilon_k$ neighbourhood of
+        $x$ contains no points in $A$. Thus, $y_k \in B$.
+        However, since $N_{\epsilon_{n + 1}} \subseteq N_{\epsilon_{n}}$ for all $n \in \mathbb{N}$, this forces $y_{k + 1} \in B$.
+        By induction, all $y_{n \geq k} \in B$, so $x \in \cl(B)$. This follows because every neighbourhood larger than $\epsilon_k$
+        contains $y_k$, and for all smaller $\epsilon$ neighbourhoods, there exists $n \in \mathbb{N}$ such that 
+        $1 /k = \epsilon_k \geq \epsilon > 1 /n$, so $N_{\epsilon} \supseteq N_{\epsilon_n}$ which contains $y_n \in B$, since $n \geq k$.
+        Thus, in all cases, $x \in \cl(A) \cup \cl(B)$, so $\cl(A\cup B) \subseteq \cl(A) \cup \cl(B)$. \\
+
+        Hence, both inclusions prove that $\cl(A\cup B) = \cl(A) \cup \cl(B)$.
+
+
+
+\end{document}
