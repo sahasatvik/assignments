@@ -778,6 +778,42 @@ This map is well-defined and surjective, and we can show that this is a linear i
 \[ [\v]^\beta = (\lambda_1 \; \dots \; \lambda_n)^T \]
 is called the coordinate vector of \(\v\) with respect to the ordered basis \(\beta\).</p>
 
+<h4 id="toc_8">Matrix representation</h4>
+
+<p>Let \(T\colon V \to W\) be a linear map, and let \(\beta = \{v_1, \dots, \v_n \}\) and \(\gamma = \{\w_1, \dots, \w_m\}\) be ordered bases for \(V\) and \(W\) respectively. Note that
+\[ T(\v_j) = \sum_{i = 1}^m a_{ij} \w_i, \]
+for unique scalars \(a_{ij}\). Thus, these scalars form an \(m \times n\) matrix \(A = [a_{ij}]\).</p>
+
+<p>We seek a relationship between \([\v]^\beta\) and \([T\v]^\gamma\).
+Suppose \(\v = x_1\v_1 + \dots x_n\v_n\). Then,
+\[
+\begin{align}
+T(\v) &amp;= x_1T(\v_1) + \dots + x_nT(\v_n) \\
+    &amp;= \sum_{i}x_1a_{i1}\w_1 + \dots + \sum_{i}x_na_{in}\w_i \\
+    &amp;= \sum_{i, j}x_ja_{ij}\w_i.
+\end{align}
+\]
+Therefore,
+\[ [T\v]^\gamma = \left(\sum_{j}a_{1j}x_j\; \dots\; \sum_{j}a_{mj}x_j\right)^T = A[\v]^\beta. \]</p>
+
+<p>We call the matrix \(A\) the matrix representation of \(T\) with respect to \(\beta\) and \(\gamma\). We write \(A = [T]_\beta^\gamma\). Thus,
+\[ [T\v]^\gamma \;=\; [T]_\beta^\gamma\,[\v]^\beta. \]
+Note that 
+\[ [T]_\beta^\gamma \;=\; \Big(\;[T\v_1]_\gamma \quad\cdots\quad [T\v_n]_\gamma\;\Big). \]
+By convention, if \(\beta = \gamma\), we simply write \([T]_\beta^\gamma = [T]_\beta\).</p>
+
+<p>For example, the identity map \(\Id\colon V \to V\), where \(\beta = \{\v_1, \dots, \v_n\}\) is an ordered basis of \(V\), has the matrix representation \(I_n\) which is simply the \(n \times n\) identity matrix.</p>
+
+<p>Suppose \(T\colon V \to V\) for some finite dimensional vector space \(V\).
+We choose a basis \(\{\v_1, \dots \v_k\}\) of the null space \(\kernel{T}\).
+We extend this to an ordered basis \(\beta = \{\v_1, \dots, \v_k, \v_{k + 1}, \dots, \v_n\}\) of \(V\). Set \(\w_j = T(\v_j)\) for \(j &gt; k\). Thus, the set \(L = \{\w_{k + 1}, \dots, \w_n\}\) is linearly independent. Indeed, \(L\) is a basis of the range of \(T\), <em>i.e.</em> \(\image{T}\) which has dimension \(n - k\). Thus, we extend this to the basis \(\gamma = \{\w_1, \dots, \w_k, \w_{k + 1}, \dots, \w_n\}\) of \(V\). Therefore, we obtain
+\[ [T]_\beta^\gamma = \begin{pmatrix}0_{k\times k} &amp; 0_{k\times(n - k)} \\
+0_{(n-k)\times k} &amp; I_{n-k}\end{pmatrix}.\]</p>
+
+<p>It can be shown that the space \(\L(V, W)\) is isomorphic to \(M_{m\times n}(F)\), where \(V\) and \(W\) are finite dimensional vector spaces. Simply consider the map
+\[ \Phi\colon\L(V, W) \to M_{m\times n}(F), \quad T \mapsto [T]_\beta^\gamma, \]
+where \(\beta\) and \(\gamma\) are ordered bases of \(V\) and \(W\) respectively.</p>
+
 
 
 <script type="text/javascript">
