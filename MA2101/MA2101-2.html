@@ -737,6 +737,24 @@ It immediately follows that the complement \(\cap_i \mathcal{O}_i^c\) is closed.
 
 <p>To prove this, given an infinite bounded subset \(S \subseteq \R^n\), we construct an \(n\)-cell \(I\) around it, so \(S \subset I\). Now, \(I\) is compact, so \(S\) must have a limit point in \(I\), hence a limit point in \(\R^n\).</p>
 
+<h4 id="toc_5">Cantor Intersection Theorem</h4>
+
+<p>If \(\{S_m\}_{m \in \N}\) is a collection of bounded nonempty closed sets such that \(S_{m + 1} \subseteq S_m\) for all \(m \in \N\), then \(\bigcap_{m \in \N} S_m \neq \emptyset\).</p>
+
+<p>To prove this, note that either all \(S_m\) are infinite, or some \(S_{m_0}\) is finite. If the latter is true, then in order for all \(S_{m &gt; m_0}\) to be nonempty, there must be some \(S_{n &gt; m_0} \neq \emptyset\) such that all subsequent sets \(S_{m \geq n} = S_n\). This is because the number of elements in each \(S_{m &gt; m_0}\) must decrease or stay constant, but never reach zero. Thus, the intersection of all \(S_m\) is simply \(S_n\), which is nonempty.</p>
+
+<p>In the case where all \(S_m\) are infinite, choose \(A = \{a_1, a_2, \dots\}\) where \(a_i \in S_i\) are distinct for all \(i \in \N\). Since \(A \subseteq S_1\), it is bounded. Thus, by the Bolzano-Weierstrass theorem, we find a limit point \(\ell\) of \(A\) in \(\R\). Since \(A\setminus(A \cap S_n)\) is finite, it follows that \(\ell\) is a limit point of \(A \cap S_n\). Thus, \(\ell\) is a limit point of the closed set \(S_n\), for all \(n \in \N\). Hence, \(\ell \in S_n\) for all \(n \in \N\).</p>
+
+<h4 id="toc_6">Heine-Borel Theorem</h4>
+
+<p>For \(S \subset \R^n\), the following are equivalent.</p>
+
+<ol>
+<li>\(S\) is closed and bounded</li>
+<li>\(S\) is compact.</li>
+<li>Every infinite subset of \(S\) has a limit point in \(S\).</li>
+</ol>
+
 
 
 <script type="text/javascript">
