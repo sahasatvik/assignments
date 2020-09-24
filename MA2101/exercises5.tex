@@ -1,0 +1,142 @@
+\documentclass[10pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{bm}
+
+\title{Analysis I - Assignment V}
+\author{Satvik Saha}
+\date{}
+
+\geometry{a4paper, margin=1in}
+\setlength\parindent{0pt}
+\renewcommand{\labelenumi}{(\roman{enumi})}
+% \renewcommand\qedsymbol{$\blacksquare$}
+\newcounter{prob}
+\def\problem{\stepcounter{prob}\paragraph{Exercise \arabic{prob}}}
+\def\solution{\paragraph{Solution}}
+% \def\cl{\operatorname{cl}}
+\newcommand\cl[1]{\overline{#1}}
+% \def\int{\operatorname{int}}
+\newcommand\inte[1]{{#1}^0}
+\def\O{\mathcal{O}}
+
+\begin{document}
+        \par\textbf{IISER Kolkata} \hfill \textbf{Assignment V}
+        \vspace{3pt}
+        \hrule
+        \vspace{3pt}
+        \begin{center}
+                \LARGE{\textbf{MA 2101 : Analysis I}}
+        \end{center}
+        \vspace{3pt}
+        \hrule
+        \vspace{3pt}
+        Satvik Saha, \texttt{19MS154}, Group C\hfill\today
+        \vspace{20pt}
+
+        \problem Find two collections of nonempty sets $\{I_n\}_{n \in \mathbb{N}}$ and $\{J_n\}_{n \in \mathbb{N}}$ in $\mathbb{R}$
+        with $I_{n + 1} \subset I_n$ and $J_{n + 1} \subset J_n$ for all $n \in \mathbb{N}$ such that
+        \begin{enumerate}
+                \item Each set $I_n$ is closed and $\bigcap_{n \in \mathbb{N}} I_n = \emptyset$.
+                \item Each set $J_n$ is bounded and $\bigcap_{n \in \mathbb{N}} J_n = \emptyset$.
+        \end{enumerate}
+
+        \solution
+        \begin{enumerate}
+                \item Let $I_n = [n, \infty)$ for all $n \in \mathbb{N}$.
+                Note that all $I_n$ are closed, since if there was a limit point $x \notin I_n$, then $x < n$.
+                Setting $r = (n - x)/2$, we see that $B_r(x) \cap I_n = \emptyset$, which is a contradiction. \\
+                
+                Let
+                \[
+                        \bigcap_{n \in \mathbb{N}} I_n = S,
+                \]
+                and suppose $x \in S$. This means that $x \in I_n$ for all $n \in \mathbb{N}$, which requires $x > n$ for all $n \in \mathbb{N}$.
+                This is absurd since the natural numbers are unbounded. Thus, $S = \emptyset$.
+
+                \item Let $J_n = (0, 1 /n)$ for all $n \in \mathbb{N}$.
+                Note that each $J_n$ is an open interval in $\mathbb{R}$, or an open ball of radius $1 /2n$ centred at $1 /2n$, and is hence an 
+                open set in $\mathbb{R}$. \\
+
+                Let
+                \[
+                        \bigcap_{n \in \mathbb{N}} J_n = S,
+                \]
+                and suppose $x \in S$. This means that $x \in J_n$ for all $n \in \mathbb{N}$, which requires $0 < x < 1 /n$ for all $n \in \mathbb{N}$.
+                This means that $n < 1 /x$ for all $n \in \mathbb{N}$, which is again absurd since the natural numbers are unbounded.
+                Thus, $S = \emptyset$.
+        \end{enumerate}
+
+        \problem Let $(M, d)$ be a metric space and let $A \subseteq M$. Prove that the boundary of $A$ is given by the intersection of the closure
+        of $A$ with the closure of $A^c$.
+
+        \solution Let $\partial A$ denote the boundary of $A$. We first show that $\partial A \subseteq \cl{ A } \cap \cl{ A^c }$.
+        Pick $x \in \partial A$. By definition, $x \in \cl{ A }\setminus\inte{ A }$. This means that there is no neighbourhood of $x$
+        wholly contained within $A$.
+        In other words, every neighbourhood of $x$ contains points in $A^c$, so $x \in \cl{ A^c }$. Thus, $x \in \cl{ A } \cap \cl{ A^c }$, 
+        so $\partial A \subseteq \cl{ A } \cap \cl{ A^c }$.\\
+
+        We now show that $\cl{ A } \cap \cl{ A^c } \subseteq \partial A$. Pick $x \in \cl{ A } \cap \cl{ A^c }$. This means that every neighbourhood
+        of $x$ contains points both from $A$ and $A^c$, so it is not an interior point of $A$. Thus, $x \in \cl{ A }\setminus\inte{ A }$,
+        which means that $x \in \partial A$. Thus, $\cl{ A } \cap \cl{ A^c } \subseteq \partial A$. \\
+
+        Both inclusions show that $\partial A = \cl{ A } \cap \cl{ A^c }$, as desired.
+
+        \problem Show that the set $[0, \sqrt{2}) \cap \mathbb{Q}$ is a closed set in $\mathbb{Q}$ but not compact.
+
+        \solution We first show that $S = [0, \sqrt{2}) \cap \mathbb{Q}$ is closed in $\mathbb{Q}$. Suppose that $x \notin S$, $x \in \mathbb{Q}$
+        is a limit point of $S$. If $x < 0$, then set $r = -x /2 > 0$, so $B_{r}(x) \cap S = (3 x/2, x/2) \cap [0, \sqrt{2}) 
+        \cap \mathbb{Q} = \emptyset$.
+        If $x > \sqrt{2}$, then set $r = (x - \sqrt{2}) /2$, so $B_r(x) \cap S = ((x + \sqrt{2})/2, (3x -\sqrt{2})/2) \cap [0, \sqrt{2})
+        \cap \mathbb{Q} = \emptyset$. In both cases, we reach a contradiction, which means that no limit points of $S$ exist outside
+        $S$ in $\mathbb{Q}$. Thus, $S$ is closed in $\mathbb{Q}$. \\ 
+
+        We now show that $S$ is not compact. It is sufficient\footnote{
+                Recall that a set $S \subseteq T$ is compact in $T \subset M$ iff it is compact in $M$.
+        } to show that $S$ is not compact in $\mathbb{R} \supset \mathbb{Q}$.
+        Define $\O_n = (0, \sqrt{2} - \frac{1}{n})$ for all $n \in \mathbb{N}$, and $\O_0 = (-\frac{1}{4}, \frac{1}{4})$.
+        Note that $0 \in \O_0$, and for every $x \in (0, \sqrt{2})$, $x \in \O_n$ for some $n$.
+        This is true because for every $0 < x < \sqrt{2}$, we can write $x = \sqrt{2} - \epsilon$ for $\epsilon > 0$,
+        so from the Archimedean property, we choose $n > 1 /\epsilon$. Thus, $0 < x = \sqrt{2} - \epsilon < \sqrt{2} - \frac{1}{n}$,
+        so $x \in \O_n$. Also, all $\O_n$ are open intervals in $\mathbb{R}$,
+        hence open sets. Thus $\{\O_n\}_{n = 0}^\infty$ is an open cover of $[0, \sqrt{2})$, hence an open cover of $S$. \\
+
+        Suppose $\{\O_n\}_{n = 0}^\infty$ admits a finite subcover, $\{\O_n\}_{n \in J}$ for some finite indexing set
+        of integers $J$. Set $m = \max{J}$. Clearly $m \neq 0$, since the set $\O_0$ does not cover $S$ (note that $1 \notin \O_0$).
+        From the density of the rational in the reals, we can choose a rational number $p$ such that
+        $\sqrt{2} - \frac{1}{m} < p < \sqrt{2}$. Thus, $p \in S$, but $p \notin \O_m$. Also, note that 
+        $\O_{n + 1} \supset \O_{n}$ for all $n \in \mathbb{N}$, so $p \notin \O_n$ for any $n \in J$.
+        In addition, $p > \sqrt{2} - 1 > \frac{1}{4}$, so $p \notin \O_0$. Thus, $p$ is not contained in any finite subcover
+        of $\{\O_n\}_{n = 0}^\infty$, so $S$ is not compact.
+
+
+%         Consider the sequence defined by
+%         \[
+%                 a_1 = 1, \qquad a_{n + 1} = a_n\;\frac{a_n^2 + 6}{3a_n^2 + 2} = a_n + 2a_n\;\frac{2 - a_n^2}{3a_n^2 + 2},
+%                         \qquad\text{for all }n \in \mathbb{N}.
+%         \]
+%         Note that $a_1 \in S$. Suppose $a_n \in S$. Note that $a_{n + 1}$ is clearly rational. Also, $a_n^2 < 2$, so
+%         $a_n < a_{n + 1}$. The claim that $a_{n + 1} < \sqrt{2}$ is equivalent to writing $a_n^2(a_n^2 + 6)^2 < 2(3a_n^2 + 2)^2$,
+%         which is equivalent to $a_n^6 + 12a_n^4 + 36a_n^2 < 18a_n^4 + 24a_n^2 + 8$, which is equivalent to
+%         $a_n^6 - 6a_n^4 + 12a_n^2 - 8 < 0$, which is equivalent to $(a_n^2 - 2)^3 < 0$, which is clearly true.
+%         Thus, $a_{n + 1} \in S$.
+
+        \problem Let $A$ and $B$ be compact subsets of a metric space $(M, d)$. Show that both $A \cup B$ and $A \cap B$ are compact.
+
+        \solution We first show that $A \cup B$ is compact.
+        % Let $\{\O_n\}_{n \in J}$ be an open cover of $A \cup B$, for some indexing
+        % set $J$. Note that $A \subseteq A\cup B$ and $B \subseteq A\cup B$, so $\{\O_n\}_{n \in J}$ also covers each of them.
+        % From the compactness of $A$, we obtain a finite subcover $\{\O_n\}_{n \in I_A}$ for some finite set $I_A \subseteq J$.
+        % Similarly, from the compactness of $B$, we obtain a finite subcover $\{\O_n\}_{n \in I_B}$ for some finite set $I_B \subseteq J$.
+        % Thus, $\{\O_n\}_{n \in I}$ where $I = I_A \cup I_B$ is a finite subcover of $A \cup B$.
+        % This shows that $A \cup B$ is compact. \\
+        Note that any open cover $\mathcal{C}$ of $A \cup B$ is also an open cover of $A$ and an open cover of $B$, since $A \subseteq A \cup B$
+        and $B \subseteq A \cup B$. Thus, $\mathcal{C}$ admits a finite subcover of $A$ as well as a finite subcover of $B$.
+        The union of these is a finite subcover of $A \cup B$, which proves that it is compact. \\
+
+        We now show that $A \cap B$ is compact. Note that $A$ is closed in $M$, since it is compact.
+        Since the intersection of a closed set and a compact set is compact, $A \cap B \subseteq A$ is compact.
+
+\end{document}
