@@ -814,6 +814,26 @@ We extend this to an ordered basis \(\beta = \{\v_1, \dots, \v_k, \v_{k + 1}, \d
 \[ \Phi\colon\L(V, W) \to M_{m\times n}(F), \quad T \mapsto [T]_\beta^\gamma, \]
 where \(\beta\) and \(\gamma\) are ordered bases of \(V\) and \(W\) respectively.</p>
 
+<blockquote>
+<p><strong>Question</strong>: What is the matrix representation of the differentiation map,
+\[ \mathscr{D}\colon P_3(\R) \to P_2(\R), \quad p \mapsto p&#39;, \]
+under the standard bases \(\beta = \{1, x, x^2, x^3\}\) and \(\gamma = \{1, x, x^2\}\)?<br>
+<em>Response</em>: It is easily seen that
+\[ [\mathscr{D}]_\beta^\gamma = 
+\begin{pmatrix}
+0 &amp; 1 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 2 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 3
+\end{pmatrix}.\]
+This is because \(a + bx + cx^2 + dx^3 \mapsto b + 2cx + 3dx^2\).
+Thus, \(1 \mapsto \ve{0}\), \(x \mapsto 1\), \(x^2 \mapsto 2x\) and \(x^3 \mapsto 3x^2\).</p>
+
+<p>By reshaping the differentiation map so that \(\mathscr{D}\colon P_3(\R) \to P_3(\R)\), then \([\mathscr{D}]_\beta\) simply acquires an additional row  filled with zeros.
+\[ [\mathscr{D}]_\beta = 
+\begin{pmatrix}
+0 &amp; 1 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 2 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 3 \\ 0 &amp; 0 &amp; 0 &amp; 0
+\end{pmatrix}.\]
+Note that the determinant of \([\mathscr{D}]_\beta\) is zero, so \(\mathscr{D}\) is not an isomorphism.</p>
+</blockquote>
+
 
 
 <script type="text/javascript">
