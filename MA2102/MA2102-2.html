@@ -834,6 +834,38 @@ Thus, \(1 \mapsto \ve{0}\), \(x \mapsto 1\), \(x^2 \mapsto 2x\) and \(x^3 \mapst
 Note that the determinant of \([\mathscr{D}]_\beta\) is zero, so \(\mathscr{D}\) is not an isomorphism.</p>
 </blockquote>
 
+<h2 id="toc_9">Dual spaces</h2>
+
+<p>Let \(V\) be a vector space over \(\R\). The <em>dual</em> of \(V\), denoted as \(V^*\), is defined to be \(\L(V, \R)\).</p>
+
+<p>Note that if \(V\) is finite dimensional, then the dimensions of \(V\) and \(V^*\) are the same.</p>
+
+<blockquote>
+<p>Consider a linear map \(T\colon \R^n \to \R\). Suppose \(T(\e_i) = \lambda_i\). Then,
+\[ T(\v) = v_1T(\e_1) + \dots + v_nT(\e_n) = \lambda_1v_1 + \dots + \lambda_nv_n. \]
+Thus, we can identify \(V\) with the vector \(\Lambda = (\lambda_1, \dots, \lambda_n)\). This defines a map from \((\R^n)^*\) to \(\R^n\).</p>
+
+<p>Define the projection maps
+\[ T_i\colon \R^n \to \R, \quad (v_1, \dots, v_n) \mapsto v_i. \]
+Thus,
+\[ T(\v) = \lambda_1v_1 + \dots + \lambda_nv_n = \lambda_1T_1(\v) + \dots + \lambda_nT_n(\v). \]
+Thus, \(\{T_1, \dots, T_n\}\) forms a basis of \((\R^n)^*\). The elements of this space are called <em>covectors</em> or <em>linear functionals</em>.</p>
+</blockquote>
+
+<blockquote>
+<p>Choose an ordered basis \(\beta = \{\v_1, \dots, \v_n\}\) of \(\v\). Define the linear maps
+\[ \v_i^*\colon V \to \R, \quad \lambda_1\v_1 + \dots + \lambda_n\v_n \mapsto \lambda_i. \]
+It can be shown that \(\beta^* = \{\v_1^*, \dots, \v_n^*\}\) is a basis of \(V^*\). This is because for arbitrary \(\v^* \in V\), pick \(\v = \lambda_1\v_1 + \dots + \lambda_n\v_n\). Since \(\lambda_i = \v_i^*\v\), we have
+\[ \v^*\v = \lambda_1\v^*\v_1 + \dots + \lambda_n\v^*\v_n = (\v^*\v_1)\v_1^*\v + \dots + (\v^*\v_n)\v_n^*\v. \]
+Thus, \(\v^*\) is a linear combination of \(\{\v_i^*\}\), with coefficients \(\mu_i = \v^*\v_i\).
+\[ \v^* = \mu_1\v_1^* + \dots + \mu_n\v_n^*. \]
+Note that \(\v_i^*\v_j = \delta_{ij}\).</p>
+</blockquote>
+
+<p>Consider the linear map
+\[ T_\beta\colon V \to V^*, \quad \lambda_1\v_1 + \dots + \lambda_n\v_n \mapsto \lambda_1\v_1^* + \dots + \lambda_n\v_n^*. \] 
+It can be shown that this is a linear isomorphism.</p>
+
 
 
 <script type="text/javascript">
