@@ -628,6 +628,28 @@ pre[class*="language-"] {
 
 <h2 id="toc_1">Sequences</h2>
 
+<p>A <em>sequence</em> is a function whose domain is the set of natural numbers.
+The values of the function are called terms of the sequence.
+\[ \alpha\colon\N \to S,\quad n \mapsto \alpha_n.\]
+We denote \(\alpha_n = \alpha(n)\), and denote the whole sequence as \(\{\alpha_n\}\) or \((\alpha_n)_{n \in \N}\).</p>
+
+<p>If the image of \(\alpha\) is bounded below or above, we say that the sequence is <em>bounded</em> below or above. If the sequence is bounded both below and above, then we say that the sequence is <em>bounded</em>.</p>
+
+<p>A sequence \(\{\alpha_n\}\) in a metric space \((M, d)\) is said to <em>converge</em> to a point \(p \in M\), written \(\alpha_n \to p\), if for every \(r &gt; 0\), there exists \(N \in \N\) such that for all \(n \geq N\), we have \(\alpha_n \in B_r(p)\).</p>
+
+<p>Note that a sequence converges to a point \(p\) <em>iff</em> \(p\) is a limit point of the set \(\{\alpha_1, \alpha_2, \dots\}\). We write
+\[ \lim_{n \to \infty} \alpha_n = p. \]</p>
+
+<p>Also note that if \(\alpha_n \to p\) in \(M\), then the sequence \(d(\alpha_n, p) \to 0\) in \(\R\).</p>
+
+<p>A <em>divergent</em> sequence is one which does not converge.</p>
+
+<p>If \(\alpha_n \to a\) and \(\alpha_n \to b\) in a metric space \((M, d)\), then \(a = b\).</p>
+
+<p>If \(\alpha_n\) converges, then \(\alpha_n\) is bounded.</p>
+
+<p>If \(\ell\) is a limit point of \(S\), then there is a sequence \(\{s_n\}\) in \(S\) such that \(s_n \to \ell\).</p>
+
 
 
 <script type="text/javascript">
