@@ -894,6 +894,8 @@ Evaluating the left hand side on the basis vectors \(\{1, x\}\), we see that \(a
 This gives \(p_1 = 2 - 2x\) and \(p_2 = -1/2 + x\). This is indeed the required basis of \(P_1(\R)\).</p>
 </blockquote>
 
+<h3 id="toc_10">Dual maps</h3>
+
 <p>Let \(T\colon V \to W\) be a linear map. We define its <em>dual</em> \(T^*\), such that 
 \[ T^*\colon W^* \to V^*, \quad L \mapsto L\circ T. \]
 It is easily verified that \(T^*\) is linear.</p>
@@ -904,7 +906,24 @@ It is easily verified that \(T^*\) is linear.</p>
 <p>Consider the evaluation map
 \[ \Phi\colon V \to V^{**}, \quad \v \mapsto \ev_\v. \]
 When \(V\) is finite dimensional, \(\Phi\) is a linear isomorphism.
-Thus, there is a way of identifying elements \(\v \in V\) with the elements of the double dual</p>
+Thus, there is a way of identifying elements \(\v \in V\) with the elements of the double dual.</p>
+</blockquote>
+
+<p>Let \(T\colon V \to W\) be a linear map. If \(\beta\) and \(\gamma\) are ordered bases of \(V\) and \(W\) respectively, then
+\[ \left([T]_\beta^\gamma\right)^T = [T^*]_{\beta^*}^{\gamma^*}. \]</p>
+
+<p>It can be seen from this that the ranks of \(T\) and \(T^*\) are the same.</p>
+
+<blockquote>
+<p>Consider the conjugation map
+\[ T\colon \C \to \C, \quad z \mapsto \bar{z}. \]
+Let \(\beta = \{1, i\} = \{\e_1, \e_2\}\) be the standard basis.
+The dual basis \(\beta^* = \{\e_1^*, \e_2^*\}\) satisfy \(\e_i^*\e_j = \delta_{ij}\).
+Thus, \(\e_1^*(a + ib) = a\) and \(\e_2^*(a + ib) = b\). Note that
+\[ T^*(\e_i^*)(\e_j) = \e_i^*(T(\e_j)). \]
+This means that 
+\[ [T]_\beta = \begin{pmatrix}1 &amp; 0\\ 0 &amp; -1\end{pmatrix}, \qquad
+[T^*]_{\beta^*} = \begin{pmatrix}1 &amp; 0\\ 0 &amp; -1\end{pmatrix}. \]</p>
 </blockquote>
 
 
