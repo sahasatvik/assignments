@@ -1,0 +1,265 @@
+\documentclass[10pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{bm}
+\usepackage{cancel}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{hyperref}
+
+\title{Mathematical Methods II - Assignment IV}
+\author{Satvik Saha}
+\date{}
+
+\geometry{a4paper, margin=1in}
+\setlength\parindent{0pt}
+\renewcommand{\labelenumi}{(\alph{enumi})}
+\renewcommand\CancelColor{\color{red}}
+% \renewcommand\qedsymbol{$\blacksquare$}
+\newcommand\ve[1]{\boldsymbol{#1}}
+\newcommand\ppx[1]{\frac{\partial #1}{\partial x}}
+\newcommand\ppt[1]{\frac{\partial #1}{\partial t}}
+\newcommand\pp[3][]{\frac{\partial^{#1}{#2}}{\partial {#3}^{#1}}}
+\newcommand\ddx[1]{\frac{d #1}{d x}}
+\newcommand\ddt[1]{\frac{d #1}{d t}}
+\newcommand\dd[3][]{\frac{d^{#1}{#2}}{d {#3}^{#1}}}
+\newcommand\norm[1]{\left\lVert#1\right\rVert}
+\newcommand\grad[1]{\ve{\nabla}#1}
+\newcommand\divg[1]{\ve{\nabla}\cdot#1}
+\newcommand\curl[1]{\ve{\nabla}\times#1}
+\newcommand\lapl[1]{\nabla^2 #1}
+
+\begin{document}
+        \par\textbf{IISER Kolkata} \hfill \textbf{Assignment IV}
+        \vspace{3pt}
+        \hrule
+        \vspace{3pt}
+        \begin{center}
+                \LARGE{\textbf{MA 2102 : Mathematical Methods II}}
+        \end{center}
+        \vspace{3pt}
+        \hrule
+        \vspace{3pt}
+        Satvik Saha, \texttt{19MS154}\hfill\today
+        \vspace{20pt}
+        \subsection*{Fourier Series and Transforms (M.L. Boas, Chapter 7)}
+        \paragraph{Section 3. Problem 5.} Using the definition of a periodic function, show that a sum of terms corresponding to a fundamental
+        musical tone and its overtones has the period of the fundamental. \\
+
+        \textit{Solution.} Let the fundamental tone be the function $f\colon \mathbb{R} \to \mathbb{R}$.
+        The harmonics are simply $f_n(t) = f(nt)$ for non-zero integers $n$. Suppose that $f$ has a period $p$, so for all $t \in \mathbb{R}$,
+        \[
+                f(t) = f(t + p).
+        \]
+        We first prove that $f(t) = f(t + kp)$ for all $k \in \mathbb{N}$. The base case of $k=1$ follows directly from the definition.
+        Suppose that this holds for some $k' \in \mathbb{N}$, i.e.\ $f(t + k'p) = f(t)$. Then, 
+        \[
+                f(t + (k' + 1)p) = f((t + k'p) + p) = f(t + k'p) = f(t).
+        \]
+        Thus, the desired statement is true by induction.
+        We also note that $f(t - kp) = f((t - kp) + kp) = f(t)$, so our statement is also true for all negative integers $k$.
+        Now, note that
+        \[
+                f_n(t + p) = f(n(t + p)) = f(nt + np) = f(nt) = f_n(t).
+        \]
+        Thus, by definition, the harmonics $f_n$ are also periodic with period $p$, the same as the fundamental.
+        Now consider an arbitrary linear combination of harmonics, 
+        \[
+                g = \lambda_1f_1 + \lambda_2f_2 + \dots + \lambda_mf_m,
+        \]
+        where $m$ is the highest harmonic present and $\lambda_i$ are real scalars. Thus,
+        \[
+                g(t + p) = \sum_{n = 1}^m \lambda_n f_n(t + p) = \sum_{n = 1}^m \lambda_nf_n(t) = g(t).
+        \]
+        Thus, $g$ is periodic with period $p$, the same as the fundamental tone.
+
+        We further consider an infinite sum,
+        \[
+                g = \sum_{n = 1}^\infty \lambda_nf_n.
+        \]
+        If $g$ is well defined on its domain, i.e.\ the sum always converges, we can apply exactly the same argument as before 
+        `in the limit $m \to \infty$' (essentially taking a limit of partial sums $g_m$, all of which satisfy $g_m(t) = g_m(t + p)$)
+        to conclude that $g$ still has a period $p$.
+
+        \paragraph{Section 4. Problem 13.} Show that
+        \[
+                \int_a^b \sin^2{kx}\: dx = \int_a^b \cos^2{kx}\: dx = \frac{1}{2}(b - a),
+        \]
+        if $k(b - a)$ is an integral multiple of $\pi$, or if $kb$ and $ka$ are both integral multiples of $\pi /2$. \\
+
+        \textit{Solution.} For the first case, suppose $k(b - a) = n\pi$ for some intger $n$.
+        If $n = 0$, either $b - a = 0$ in which case the equality is trivial, or $k = 0$, in which case it is false.
+        Otherwise, we use the substitution $nu = kx$ to write
+        \[
+                I = \int_a^b \sin^2{kx}\: dx = \frac{n}{k}\int_{a\pi/(b-a)}^{b\pi/(b-a)} \sin^2{nu}\: du, \qquad
+                J = \int_a^b \cos^2{kx}\: dx = \frac{n}{k}\int_{a\pi/(b-a)}^{b\pi/(b-a)} \cos^2{nu}\: du.
+        \]
+        Note that $\sin^2{nx}$ and $\cos^2{nx}$ have periods of $\pi$, because $\sin(nx + n\pi) = (-1)^n\sin{x}$ and $\cos(nx + n\pi) = (-1)^n\cos{x}$.
+        Also, $\sin^2(nx) = \sin^2(-nx)$ and $\cos^2(nx) = \cos^2(-nx)$, so
+        \[
+                \int_0^{\pi}\sin^2{nx}\:dx = \frac{1}{2}\int_{-\pi}^{\pi} \sin^2{nx}\:dx = \frac{\pi}{2}, \qquad
+                \int_0^{\pi}\cos^2{nx}\:dx = \frac{1}{2}\int_{-\pi}^{\pi} \cos^2{nx}\:dx = \frac{\pi}{2}.
+        \]
+        Note that for any periodic function $f$ with period $\beta$,
+        \begin{align*}
+                \int_\alpha^{\alpha + \beta} f(t)\:dt
+                        &= \int_{0}^{\beta}f(t)\;dt + \int_{\beta}^{\alpha + \beta}f(t)\;dt - \int_{0}^{\alpha}f(t)\;dt \\
+                        &= \int_0^\beta f(t)\:dt + \int_{\beta - \beta}^{\alpha + \beta - \beta} f(t + \beta)\:dt - \int_{0}^{\alpha} f(t)\:dt \\
+                        &= \int_0^\beta f(t)\:dt + \int_0^\alpha f(t)\;dt - \int_0^\alpha f(t)\:dt \\
+                        &= \int_0^\beta f(t)\:dt.
+        \end{align*}    
+        Thus, for any $\alpha$,
+        \[
+                \int_\alpha^{\alpha + \pi} \sin^2{nu}\:du = \int_\alpha^{\alpha + \pi} \cos^2{nu}\:du = \frac{\pi}{2}.
+        \]
+        Specifically, we set $\alpha = a\pi/(b-a)$, noting that $a\pi/(b-a) + \pi = b\pi/(b-a)$, so it follows that
+        \[
+                I = J = \frac{n\pi}{2k} = \frac{1}{2}(b - a).\tag*{\qed}
+        \]\\ 
+
+        Now consider the case $ka = m\pi /2$, $kb = n\pi/2$ for integers $m, n$. If $m = n$, the integrals are trivially zero.
+        Otherwise, we use the substitution $u = kx$ to write
+        \[
+                I = \int_a^b \sin^2{kx}\: dx = \frac{1}{k}\int_{m\pi/2}^{n\pi/2} \sin^2{u}\: du, \qquad
+                J = \int_a^b \cos^2{kx}\: dx = \frac{1}{k}\int_{m\pi/2}^{n\pi/2} \cos^2{u}\: du.
+        \]
+        Suppose $n > m$. Thus, our integral splits into the sums
+        \[
+                I = \frac{1}{k}\sum_{\ell = m}^{n-1} \int_{\ell\pi/2}^{(\ell + 1)\pi/2} \sin^2{u}\: du, \qquad
+                J = \frac{1}{k}\sum_{\ell = m}^{n-1} \int_{\ell\pi/2}^{(\ell + 1)\pi/2} \cos^2{u}\: du.
+        \]
+        Again, if $n < m$, we write
+        \[
+                I = -\frac{1}{k}\sum_{\ell = n}^{m-1} \int_{\ell\pi/2}^{(\ell + 1)\pi/2} \sin^2{u}\: du, \qquad
+                J = -\frac{1}{k}\sum_{\ell = n}^{m-1} \int_{\ell\pi/2}^{(\ell + 1)\pi/2} \cos^2{u}\: du.
+        \]
+        In either case, we have a sum of $|n - m|$ terms. \\
+
+        Now, note that the substitution $u = \pi/2 - x$ yields
+        \[
+                \int_0^{\pi/2} \sin^2{x}\:dx = -\int_{\pi/2}^0\sin^2(\pi/2 - u)\:du = \int_0^{\pi/2}\cos^2{x}\:dx.
+        \]
+        Thus,
+        \[
+                \int_0^{\pi/2} \sin^2{x}\:dx = \int_0^{\pi/2}\cos^2{x}\:dx = \frac{1}{2}\int_0^{\pi/2} \sin^2{x} + \cos^2{x}\:dx = 
+                        \frac{1}{2}\int_0^{\pi/2}dx = \frac{\pi}{4}.
+        \]
+        Also, since $\sin^2(x + n\pi/2) = \sin^2{x}$, $\cos^2(x + n\pi/2) = \cos^2{x}$ for even $n$ and 
+        $\sin^2(x + n\pi/2) = \cos^2{x}$, $\cos^2(x + n\pi/2) = \sin^2{x}$ for odd $n$, we have
+        \[
+                \int_{\ell\pi/2}^{(\ell + 1)\pi/2} \sin^2{x}\:dx = \int_{0}^{\pi/2} \sin^2(x + \ell\pi/2)\:dx = \frac{\pi}{4},
+        \]
+        \[
+                \int_{\ell\pi/2}^{(\ell + 1)\pi/2} \cos^2{x}\:dx = \int_{0}^{\pi/2} \cos^2(x + \ell\pi/2)\:dx = \frac{\pi}{4}.
+        \]
+        Thus, each term in the sums $I$ and $J$ is simply $\pi/4$, which means that
+        \[
+                I = J = \frac{(n - m)\pi}{4k} = \frac{1}{2}(b - a).\tag*{\qed}
+        \]
+
+        \paragraph{Section 5. Problem 2.} Expand the following periodic function as a Fourier series.
+        \[
+                f(x) = \begin{cases}
+                        0, & -\pi < x < 0,      \\
+                        1, & 0 < x < \pi/2,     \\
+                        0, & \pi/2 < x < \pi.
+                \end{cases}
+        \]
+        
+        \textit{Solution.} We write
+        \[
+                f(x) = a_0 \,+\, \sum_{n = 1}^\infty a_n\cos{nx} + b_n\sin{nx}.
+        \]
+        The coefficients are calculated as
+        \[
+                a_0 = \frac{1}{2\pi}\int_{-\pi}^{+\pi} f(x)\:dx = \frac{1}{2\pi}\cdot \frac{\pi}{2} = \frac{1}{4}.
+        \]
+        For $n > 0$,
+        \begin{align*}
+                a_n &= \frac{1}{\pi}\int_{-\pi}^{+\pi} f(x)\cos{nx}\:dx = \frac{1}{\pi}\int_{0}^{\pi/2}\cos{nx}\:dx = \frac{1}{n\pi}\sin\frac{n\pi}{2}, \\
+                b_n &= \frac{1}{\pi}\int_{-\pi}^{+\pi} f(x)\sin{nx}\:dx = \frac{1}{\pi}\int_{0}^{\pi/2}\sin{nx}\:dx = 
+                        \frac{1}{n\pi}\left(1 - \cos\frac{n\pi}{2}\right).
+        \end{align*}
+        Note that $a_{2n}$ vanish. The sequences repeat $n\pi a_n = 1, 0, -1, 0, \dots$ and $n\pi b_n = 1, 2, 1, 0, \dots$.
+        \[
+                f(x) = \frac{1}{4} \,+\, \sum_{n = 1}^\infty \left[ \frac{1}{n\pi}\sin\frac{n\pi}{2}\cos{nx} + 
+                        \frac{1}{n\pi}\left(1 - \cos\frac{n\pi}{2}\right)\sin{nx} \right].
+        \]
+        
+        \paragraph{Problem 7.} Expand the following periodic function as a Fourier series.
+        \[
+                f(x) = \begin{cases}
+                        0, & -\pi < x < 0,      \\
+                        x, & 0 < x < \pi.
+                \end{cases}
+        \]
+        
+        \textit{Solution.} We write
+        \[
+                f(x) = a_0 \,+\, \sum_{n = 1}^\infty a_n\cos{nx} + b_n\sin{nx}.
+        \]
+        The coefficients are calculated as
+        \[
+                a_0 = \frac{1}{2\pi}\int_{-\pi}^{+\pi} f(x)\:dx = \frac{1}{2\pi}\int_0^\pi x\:dx = \frac{1}{2\pi}\cdot \frac{\pi^2}{2} = \frac{\pi}{4}.
+        \]
+        For $n > 0$,
+        \begin{align*}
+                a_n &= \frac{1}{\pi}\int_{-\pi}^{+\pi} f(x)\cos{nx}\:dx 
+                        = \frac{1}{\pi}\int_0^\pi x\cos{nx}\:dx 
+                        = \cancel{\frac{1}{n\pi}x\sin{nx}\Big|_0^\pi} - \frac{1}{n\pi}\int_0^\pi \sin{nx}\:dx 
+                        = -\frac{1}{n^2\pi}(1 - \cos{n\pi}), \\
+                b_n &= \frac{1}{\pi}\int_{-\pi}^{+\pi} f(x)\sin{nx}\:dx 
+                        = \frac{1}{\pi}\int_0^\pi x\sin{nx}\:dx 
+                        = -\frac{1}{n\pi}x\cos{nx}\Big|_0^\pi + \cancel{\frac{1}{n\pi}\int_0^\pi \cos{nx}\:dx }
+                        = -\frac{1}{n}\cos{n\pi}, \\
+        \end{align*}
+        Note that $a_{2n}$ vanish. The sequences repeat $n^2\pi a_n = -2, 0, -2, 0, \dots$ and $n\pi b_n = 1, -1, 1, -1, \dots$.
+        \[
+                f(x) = \frac{\pi}{4} \,+\, \sum_{n = 1}^\infty\left[ -\frac{1}{n^2\pi}(1 - \cos{n\pi})\cos{nx} - \frac{1}{n}\cos{n\pi}\sin{nx} \right].
+        \]
+
+        \paragraph{Problem 11.} Expand the following periodic function as a Fourier series.
+        \[
+                f(x) = \begin{cases}
+                        0, & -\pi < x < 0,      \\
+                        \sin{x}, & 0 < x < \pi.
+                \end{cases}
+        \]
+        
+        \textit{Solution.} We write
+        \[
+                f(x) = a_0 \,+\, \sum_{n = 1}^\infty a_n\cos{nx} + b_n\sin{nx}.
+        \]
+        The coefficients are calculated as
+        \[
+                a_0 = \frac{1}{2\pi}\int_{-\pi}^{+\pi} f(x)\:dx = \frac{1}{2\pi}\int_0^\pi \sin{x}\:dx = \frac{1}{2\pi}\cdot 2 = \frac{1}{\pi}.
+        \]
+        For $n > 0$,
+        \begin{align*}
+                a_n = \frac{1}{\pi}\int_{-\pi}^{+\pi} f(x)\cos{nx}\:dx 
+                        = \frac{1}{\pi}\int_0^\pi \sin{x}\cos{nx}\:dx 
+                        &= \frac{1}{2\pi}\int_0^\pi \sin{(n + 1)x} - \sin{(n - 1)x}\:dx \\
+                        &= \frac{1}{2\pi}\left[-\frac{1}{n+1}\cos{(n+1)\pi} + \frac{1}{n-1}\cos{(n-1)\pi} - \frac{2}{n^2 - 1}\right] \\
+                        &= \frac{1}{2\pi}\left[-((-1)^n + 1)\frac{2}{n^2 - 1}\right] \\
+                        &= \begin{cases}
+                                0, & n \text{ odd}, \\
+                                -2 /(n^2 - 1)\pi, & n \text{ even}.
+                        \end{cases} \\
+                b_n = \frac{1}{\pi}\int_{-\pi}^{+\pi} f(x)\sin{nx}\:dx 
+                        = \frac{1}{\pi}\int_0^\pi \sin{x}\sin{nx}\:dx 
+                        &= \frac{1}{2\pi}\int_{-\pi}^\pi \sin{x}\sin{nx}\:dx  \\
+                        &= \begin{cases}
+                                1 /2, & n = 1, \\
+                                0, & n > 1.
+                        \end{cases} \\
+        \end{align*}
+        Thus,
+        \[
+                f(x) = \frac{1}{\pi} \,+\, \frac{1}{2}\sin{x} \,-\, \frac{2}{\pi}\sum_{n = 1}^\infty \frac{1}{4n^2 - 1}\cos{2nx}.
+        \]
+
+\end{document}

@@ -1,0 +1,291 @@
+\documentclass[10pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{bm}
+\usepackage{cancel}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{hyperref}
+
+\title{Mathematical Methods II - Assignment V}
+\author{Satvik Saha}
+\date{}
+
+\geometry{a4paper, margin=1in}
+\setlength\parindent{0pt}
+\renewcommand{\labelenumi}{(\alph{enumi})}
+\renewcommand\CancelColor{\color{red}}
+% \renewcommand\qedsymbol{$\blacksquare$}
+\newcommand\ve[1]{\boldsymbol{#1}}
+\newcommand\ppx[1]{\frac{\partial #1}{\partial x}}
+\newcommand\ppt[1]{\frac{\partial #1}{\partial t}}
+\newcommand\pp[3][]{\frac{\partial^{#1}{#2}}{\partial {#3}^{#1}}}
+\newcommand\ddx[1]{\frac{d #1}{d x}}
+\newcommand\ddt[1]{\frac{d #1}{d t}}
+\newcommand\dd[3][]{\frac{d^{#1}{#2}}{d {#3}^{#1}}}
+\newcommand\norm[1]{\left\lVert#1\right\rVert}
+\newcommand\grad[1]{\ve{\nabla}#1}
+\newcommand\divg[1]{\ve{\nabla}\cdot#1}
+\newcommand\curl[1]{\ve{\nabla}\times#1}
+\newcommand\lapl[1]{\nabla^2 #1}
+
+\begin{document}
+        \par\textbf{IISER Kolkata} \hfill \textbf{Assignment V}
+        \vspace{3pt}
+        \hrule
+        \vspace{3pt}
+        \begin{center}
+                \LARGE{\textbf{MA 2102 : Mathematical Methods II}}
+        \end{center}
+        \vspace{3pt}
+        \hrule
+        \vspace{3pt}
+        Satvik Saha, \texttt{19MS154}\hfill\today
+        \vspace{20pt}
+        \subsection*{Fourier Series and Transforms (M.L. Boas, Chapter 7)}
+        
+        \paragraph{Section 6. Problem 14} Use the Fourier expansion of the following function (as seen in problem 5.7),
+        \[
+                f(x) = \begin{cases}
+                        0, & -\pi < x < 0,      \\
+                        x, & 0 < x < \pi.
+                \end{cases},
+        \]
+        to show that $S = \sum_{\text{odd }n} 1 /n^2 = \pi^2 /8$. 
+        Try $x = 0, \pi, \pi/2$.\\
+        
+        \textit{Solution.} We recall that the Fourier expansion of $f$ is given by
+        \[
+                f(x) = \frac{\pi}{4} \,+\, \sum_{n = 1}^\infty\left[ -\frac{1}{n^2\pi}(1 - \cos{n\pi})\cos{nx} - \frac{1}{n}\cos{n\pi}\sin{nx} \right].
+        \]
+        Now, note that $f$ satisfies the Dirichlet conditions, since it is a single-valued periodic function of period $2\pi$,
+        defined between $-\pi$ and $+\pi$, has a finite number of extrema, with a finite number of discontinuities (at $0$ and $\pi$).
+        Also,
+        \[
+                \int_{-\pi}^{+\pi} |f(x)|\: dx = \int_{0}^\pi x\:dx = \frac{\pi^2}{2},
+        \]
+        which is finite. Hence, our Fourier series does indeed converge to $f$. Furthermore, the series at the discontinuities $0$ and $\pi$
+        converges to the average of the left and right hand limits, i.e.\ to the midpoints of the jump discontinuities.
+        Thus,
+        \[
+                f(0) = \frac{1}{2}\left[\lim_{x\to 0^-} f(x) + \lim_{x \to 0^+} f(x)\right] = \frac{1}{2}[0 + 0] = 0.
+        \]
+        \[
+                f(\pi) = \frac{1}{2}\left[\lim_{x\to \pi^-} f(x) + \lim_{x \to \pi^+} f(x)\right] = \frac{1}{2}[\pi + 0] = \frac{\pi}{2}.
+        \]
+
+        Thus, we first set $x = 0$. Then, all sine terms vanish and all the cosines become unity. Note that $1 - \cos{n\pi}$ vanishes for
+        even $n$ and becomes $2$ for odd $n$, so we obtain
+        \[
+                f(0) = 0 = \frac{\pi}{4} - \frac{2}{\pi}\sum_{\text{odd }n} \frac{1}{n^2}.
+        \]
+        Rearranging, $S = (\pi/4)(\pi/2) = \pi^2 /8$. \\
+
+        We may also try $x = \pi$, in which case the sines vanish again, and the cosines follow $\cos{n\pi} = (-1)^n$.
+        Thus, $\sum_{\text{odd }n} (-1)^n /n^2 = -S$, so we have
+        \[
+                f(\pi) = \frac{\pi}{2} = \frac{\pi}{4} + \frac{2}{\pi}\sum_{\text{odd }n} \frac{1}{n^2}.
+        \]
+        Rearranging, we again obtain $S = (\pi /4)(\pi /2) = \pi^2 /8$. \\
+
+        Finally, when $x = \pi/2$, the cosines vanish and the sines follow $\sin{n\pi /2} = 1, 0, -1, 0, \dots$. 
+        Thus, we get an alternating sum
+        \[
+                f(\pi/2) = \frac{\pi}{2} = \frac{\pi}{4} - \sum_{\text{odd }n} (-1)^n \frac{(-1)^{(n + 1)/2}}{n} 
+                        = \frac{\pi}{4} + 1 - \frac{1}{3} + \frac{1}{5} - \frac{1}{7} + \dots
+        \]
+        Thus, we obtain
+        \[
+                \frac{\pi}{4} = 1 - \frac{1}{3} + \frac{1}{5} - \frac{1}{7} + \dots
+        \]\\
+        
+        As a side note, from $\sum_{\text{odd }n} 1 /n^2 = \pi^2 /8$, we see that 
+        \[
+                \sum_{\text{even }n} \frac{1}{n^2} = \frac{1}{4}\sum_{n = 1}^\infty \frac{1}{n^2} = \frac{1}{4}\sum_{\text{even }n} \frac{1}{n^2}
+                        + \frac{1}{4}\sum_{\text{odd }n} \frac{1}{n^2} = \frac{1}{4}\sum_{\text{even }n} \frac{1}{n^2} + \frac{\pi^2}{32}.
+        \]
+        Rearranging, $\sum_{\text{even }n} 1 /n^2 = (4 /3)(\pi^2 / 32) = \pi^2 /24$. Adding on the odd terms, we get
+        \[
+                \sum_{n = 1}^\infty \frac{1}{n^2} = \frac{\pi^2}{6}.
+        \]
+        The computation of this particular infinite sum is famously known as the Basel problem.
+
+
+        \paragraph{Section 7. Problem 2.} Expand the following periodic function as a Fourier series.
+        \[
+                f(x) = \begin{cases}
+                        0, & -\pi < x < 0,      \\
+                        1, & 0 < x < \pi/2,     \\
+                        0, & \pi/2 < x < \pi.
+                \end{cases}
+        \]
+        
+        \textit{Solution.} We write
+        \[
+                f(x) = \sum_{n = -\infty}^{+\infty} c_n e^{inx}.
+        \]
+        The coefficients for $n \neq 0$ are calculated as
+        \[
+                c_n = \frac{1}{2\pi} \int_{-\pi}^{+\pi} f(x)e^{-inx}\:dx = \frac{1}{2\pi in} \left[1 - e^{-in\pi /2}\right].
+        \]
+        When $n = 0$,
+        \[
+                c_0 = \frac{1}{2\pi}\int_{-\pi}^{+\pi} f(x)\:dx = \frac{1}{2\pi}\cdot \frac{\pi}{2} = \frac{1}{4}.
+        \]
+        Thus,
+        \[
+                f(x) = \frac{1}{4} \,+\, \frac{1}{2\pi i}\sum_{\substack{n = -\infty \\n \neq 0}}^{+\infty} \frac{1}{n}\left[1 - e^{-in\pi /2}\right]e^{inx}.
+        \]
+        We can rewrite this as
+        \begin{align*}
+                f(x) \;&=\; \frac{1}{4} + \frac{1}{2\pi i}\sum_{n = 1}^{\infty} \frac{1}{n}\left[1 - e^{-in\pi/2}\right]e^{inx} - 
+                                \frac{1}{n}\left[1 - e^{in\pi/2}\right]e^{-inx} \\
+                        \;&=\; \frac{1}{4} + \frac{1}{2\pi i} \sum_{n = 1}^\infty \frac{1}{n}\left[ e^{inx} - e^{-inx}\right] - 
+                                \frac{1}{n}\left[e^{in(x - \pi /2)} - e^{-in(x - \pi /2)}\right] \\
+                        \;&=\; \frac{1}{4} + \sum_{n = 1}^\infty \left[\frac{1}{n\pi}\sin{nx} - \frac{1}{n\pi}\sin(nx - n\pi/2)\right] \\
+                        \;&=\; \frac{1}{4} + \sum_{n = 1}^\infty \left[\frac{1}{n\pi}\sin{nx} - 
+                                \frac{1}{n\pi}\cos\frac{n\pi}{2}\sin{nx} + \frac{1}{n\pi}\sin\frac{n\pi}{2}\cos{nx}\right] \\
+                        \;&=\; \frac{1}{4} + \sum_{n = 1}^\infty \left[ \frac{1}{n\pi}\sin\frac{n\pi}{2}\cos{nx} + 
+                        \frac{1}{n\pi}\left(1 - \cos\frac{n\pi}{2}\right)\sin{nx} \right].
+        \end{align*}
+        This is precisely what we obtained earlier in (5.2).
+        
+        \paragraph{Problem 7.} Expand the following periodic function as a Fourier series.
+        \[
+                f(x) = \begin{cases}
+                        0, & -\pi < x < 0,      \\
+                        x, & 0 < x < \pi.
+                \end{cases}
+        \]
+        
+        \textit{Solution.} We write
+        \[
+                f(x) = \sum_{n = -\infty}^{+\infty} c_n e^{inx}.
+        \]
+        The coefficients for $n \neq 0$ are calculated as
+        \[
+                c_n = \frac{1}{2\pi} \int_{-\pi}^{+\pi} f(x)e^{-inx}\:dx = -\frac{1}{2\pi in}\pi e^{-in\pi} + \frac{1}{2\pi i n}\int_0^\pi e^{-inx}\:dx
+                        = -\frac{1}{2in}e^{-in\pi} + \frac{1}{2\pi n^2}\left[e^{-in\pi} - 1\right].
+        \]
+        When $n = 0$,
+        \[
+                c_0 = \frac{1}{2\pi}\int_{-\pi}^{+\pi} f(x)\:dx = \frac{1}{2\pi}\cdot \frac{\pi^2}{2} = \frac{\pi}{4}.
+        \]
+        Thus,
+        \[
+                f(x) = \frac{\pi}{4} - \sum_{\substack{n = -\infty\\ n \neq 0}}^{+\infty} \left[\frac{1}{2in}e^{-in\pi} - 
+                        \frac{1}{2\pi n^2}e^{-in\pi} + \frac{1}{2\pi n^2} \right]e^{inx}.
+        \]
+        We can rewrite this as 
+        \begin{align*}
+                f(x) \;&=\; \frac{\pi}{4} - \sum_{n = 1}^\infty \frac{1}{2in}\left[e^{in(x - \pi)} - e^{-in(x - \pi)}\right] -
+                        \frac{1}{2\pi n^2}\left[e^{in(x - \pi)} + e^{-in(x - \pi)}\right] + \frac{1}{2\pi n^2}\left[e^{inx} - e^{-inx}\right] \\
+                        \;&=\; \frac{\pi}{4} - \sum_{n = 1}^\infty \frac{1}{n}\sin(nx - n\pi) -
+                                \frac{1}{\pi n^2}\cos(nx - n\pi) + \frac{1}{\pi n^2}\cos{nx} \\
+                        \;&=\; \frac{\pi}{4} - \sum_{n = 1}^\infty \frac{1}{n}\cos{n\pi}\sin{nx} -
+                                \frac{1}{\pi n^2}\cos{n\pi}\cos{nx} + \frac{1}{\pi n^2}\cos{nx} \\
+                        \;&=\; \frac{\pi}{4} - \sum_{n = 1}^\infty\left[ \frac{1}{\pi n^2}(1 - \cos{n\pi})\cos{nx} + \frac{1}{n}\cos{n\pi}\sin{nx} \right].
+        \end{align*}
+        This is precisely what we obtained earlier in (5.7).
+
+        \paragraph{Problem 11.} Expand the following periodic function as a Fourier series.
+        \[
+                f(x) = \begin{cases}
+                        0, & -\pi < x < 0,      \\
+                        \sin{x}, & 0 < x < \pi.
+                \end{cases}
+        \]
+        
+        \textit{Solution.} We write
+        \[
+                f(x) = \sum_{n = -\infty}^{+\infty} c_n e^{inx}.
+        \]
+        The coefficients for $n \neq 0, \pm 1$ are calculated as
+        \begin{align*}
+                c_n = \frac{1}{2\pi} \int_{-\pi}^{+\pi} f(x)e^{-inx}\:dx &= \frac{1}{4\pi i}\int_0^\pi (e^{ix} - e^{-ix}) e^{-inx}\: dx 
+                        &= -\frac{1}{4\pi}\left[\frac{e^{i\pi(1 - n)} - 1}{1 - n} + \frac{e^{-i\pi(1 + n)} - 1}{1 + n}\right].
+        \end{align*}
+        For odd $n$, note that $c_n = 0$. Thus,
+        \[
+                c_{2n} = \frac{1}{2\pi}\left[\frac{1}{1 - 2n} + \frac{1}{1 + 2n}\right] = -\frac{1}{\pi}\cdot \frac{1}{4n^2 - 1}.
+        \]
+        When $n = 0$,
+        \[
+                c_0 = \frac{1}{2\pi}\int_{-\pi}^{+\pi} f(x)\:dx = \frac{1}{2\pi}\cdot 2 = \frac{1}{\pi}.
+        \]
+        When $n = 1$,
+        \[
+                c_1 = \frac{1}{4\pi i}\int_{0}^{\pi} (e^{ix} - e^{-ix})e^{-ix}\:dx = \frac{1}{4\pi i}\left[\pi - \frac{1}{2i}e^{-2\pi i} + 
+                        \frac{1}{2i}\right] = \frac{1}{4i}.
+        \]
+        When $n = -1$,
+        \[
+                c_{-1} = \frac{1}{4\pi i}\int_{0}^{\pi} (e^{ix} - e^{-ix})e^{ix}\:dx = \frac{1}{4\pi i}\left[-\pi + \frac{1}{2i}e^{-2\pi i} - 
+                        \frac{1}{2i}\right] = -\frac{1}{4i}.
+        \]
+        Thus,
+        \[
+                f(x) = \frac{1}{\pi} + \frac{1}{4i}e^{ix} - \frac{1}{4i}e^{-ix} - \frac{1}{\pi}\sum_{\substack{n = -\infty\\ n \neq 0}}^{+\infty} 
+                        \frac{1}{4n^2 - 1}e^{2inx}.
+        \]
+        We can rewrite this as 
+        \begin{align*}
+                f(x) \;&=\; \frac{1}{\pi} + \frac{1}{2}\cdot \frac{1}{2i}(e^{ix} - e^{-ix}) - \frac{2}{\pi}\sum_{n = 1}^\infty
+                        \frac{1}{2}\cdot \frac{1}{4n^2 - 1}(e^{2inx} + e^{-2inx}) \\
+                        \;&=\; \frac{1}{\pi} + \frac{1}{2}\sin{x} - \frac{2}{\pi}\sum_{n = 1}^\infty \frac{1}{4n^2 - 1}\cos{2nx}.
+        \end{align*}
+        This is precisely what we obtained earlier in (5.11).
+        
+        \paragraph{Section 8. Problem 7.} Expand the following periodic function as a Fourier series.
+        \[
+                f(x) = \begin{cases}
+                        0, & -\ell < x < 0,      \\
+                        x, & 0 < x < \ell.
+                \end{cases}
+        \]
+        
+        \textit{Solution.} We write
+        \[
+                f(x) = \sum_{n = -\infty}^{+\infty} c_n e^{inx /\ell} = a_0 + \sum_{n = 1}^\infty a_n\cos\frac{n\pi x}{\ell} + b_n\sin\frac{n\pi x}{\ell}.
+        \]
+        The coefficients $c_n$ for $n \neq 0$ are calculated as
+        \[
+                c_n = \frac{1}{2\ell} \int_{-\ell}^{+\ell} f(x)e^{-in\pi x /\ell}\:dx
+                        = -\frac{1}{2\pi in}\ell e^{-in\pi} + \frac{1}{2\pi in}\int_0^\ell e^{-in\pi x/\ell}\:dx
+                        = -\frac{\ell}{2\pi in}e^{-in\pi} + \frac{\ell}{2\pi^2 n^2}\left[e^{-in\pi} - 1\right].
+        \]
+        When $n = 0$,
+        \[
+                c_0 = a_0 = \frac{1}{2\ell}\int_{-\ell}^{+\ell} f(x)\:dx = \frac{1}{2\ell}\cdot \frac{\ell^2}{2} = \frac{\ell}{4}.
+        \]
+        Thus,
+        \[
+                f(x) = \frac{\ell}{4} - \frac{\ell}{\pi}\sum_{\substack{n = -\infty\\ n \neq 0}}^{+\infty} \left[\frac{1}{2in}e^{-in\pi} - 
+                        \frac{1}{2\pi n^2}e^{-in\pi} + \frac{1}{2\pi n^2} \right]e^{in\pi x/\ell}.
+        \]
+        
+        The coefficients $a_n$ and $b_n$ are calculated for $n > 0$ as,
+        \begin{align*}
+                a_n &= \frac{1}{\ell}\int_{-\ell}^{+\ell} f(x)\cos\frac{n\pi x}{\ell}\:dx 
+                        = \frac{1}{\ell}\int_0^\ell x\cos\frac{n\pi x}{\ell}\:dx 
+                        = \cancel{\frac{1}{n\pi}x\sin\frac{n\pi x}{\ell}\Big|_0^\ell} - \frac{1}{n\pi}\int_0^\ell \sin\frac{n\pi x}{\ell}\:dx 
+                        = -\frac{\ell}{n^2\pi^2}(1 - \cos{n\pi}), \\
+                b_n &= \frac{1}{\ell}\int_{-\ell}^{+\ell} f(x)\sin\frac{n\pi x}{\ell}\:dx 
+                        = \frac{1}{\ell}\int_0^\ell x\sin\frac{n\pi x}{\ell}\:dx 
+                        = -\frac{1}{n\pi}x\cos\frac{n\pi x}{\ell}\Big|_0^\ell + \cancel{\frac{1}{n\pi}\int_0^\ell \cos\frac{n\pi x}{\ell}\:dx }
+                        = -\frac{\ell}{n\pi}\cos{n\pi}, \\
+        \end{align*}
+        Thus,
+        \[
+                f(x) = \frac{\ell}{4} \,-\, \frac{\ell}{\pi}\sum_{n = 1}^\infty\left[ \frac{1}{n^2\pi}(1 - \cos{n\pi})\cos\frac{n\pi x}{\ell} + 
+                        \frac{1}{n}\cos{n\pi}\sin\frac{n\pi x}{\ell} \right].
+        \]
+
+        Note that our new solutions are precisely the old ones, scaled by $\ell/\pi$ and with the substitution $x \mapsto \pi x/\ell$.
+        This is because our new function is merely the old one scaled by a factor of $\ell/\pi$ along both axes.
+
+\end{document}
