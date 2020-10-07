@@ -624,6 +624,7 @@ pre[class*="language-"] {
 \def\u{\ve{u}}
 \def\v{\ve{v}}
 \def\w{\ve{w}}
+\def\C{\mathcal{C}}
 \)</p>
 
 <h2 id="toc_1">Sequences</h2>
@@ -673,6 +674,17 @@ We denote \(\alpha_n = \alpha(n)\), and denote the whole sequence as \(\{\alpha_
 <p>Every compact subset of a metric space is Cauchy complete.</p>
 
 <p>All Euclidean spaces are Cauchy complete.</p>
+
+<h3 id="toc_4">Constructing the real numbers</h3>
+
+<p>Let \(\C\) denote the set of all rational Cauchy sequences. Let \(\{\alpha_n\}, \{\beta_n\} \in \C\). We say that the sequences \(\{\alpha_n\} \sim \{\beta_n\}\) if \(|\alpha_n - \beta_n| \to 0\). It is easily verified that \(\sim\) is an equivalence relation.</p>
+
+<p>We define \(\R\) as the quotient space of this relation, <em>i.e.</em>
+\[ \R = \C /\sim. \]</p>
+
+<p>The rationals are embedded in the usual way, and addition and multiplication are defined termwise.</p>
+
+<p>The order on \(\R\) is defined as follows: \(\{\alpha_n\} &gt; \{\beta_n\}\) if there exists \(N\) such that \(\alpha_n &gt; \beta_n\) for all \(n \geq N\), and \(|\alpha_n - \beta_n| \not\to 0\).</p>
 
 
 
