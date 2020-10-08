@@ -675,7 +675,11 @@ We denote \(\alpha_n = \alpha(n)\), and denote the whole sequence as \(\{\alpha_
 
 <p>All Euclidean spaces are Cauchy complete.</p>
 
-<h3 id="toc_4">Constructing the real numbers</h3>
+<h4 id="toc_4">Cauchy criterion</h4>
+
+<p>A sequence in a Euclidean space \(\R^n\) converges <em>iff</em> it is Cauchy.</p>
+
+<h3 id="toc_5">Constructing the real numbers</h3>
 
 <p>Let \(\C\) denote the set of all rational Cauchy sequences. Let \(\{\alpha_n\}, \{\beta_n\} \in \C\). We say that the sequences \(\{\alpha_n\} \sim \{\beta_n\}\) if \(|\alpha_n - \beta_n| \to 0\). It is easily verified that \(\sim\) is an equivalence relation.</p>
 
@@ -685,6 +689,36 @@ We denote \(\alpha_n = \alpha(n)\), and denote the whole sequence as \(\{\alpha_
 <p>The rationals are embedded in the usual way, and addition and multiplication are defined termwise.</p>
 
 <p>The order on \(\R\) is defined as follows: \(\{\alpha_n\} &gt; \{\beta_n\}\) if there exists \(N\) such that \(\alpha_n &gt; \beta_n\) for all \(n \geq N\), and \(|\alpha_n - \beta_n| \not\to 0\).</p>
+
+<h4 id="toc_6">Completeness of the reals</h4>
+
+<p>Let \(S\) be a nonempty subset of \(\Q\) and let \(u_1\in \Q\) be an upper bound of \(S\). Let \(s\in S\) and let \(\ell_1 \in \Q\) be such that \(\ell_1 &lt; s\). We define two rational Cauchy sequences \(\{u_n\}\) and \(\{\ell_n\}\) as follows
+\[ \begin{align}
+u_{n + 1} &amp;= \begin{cases}
+    (u_n + \ell_n)/2, &amp;\text{if this is an upper bound of }S, \\
+    u_n, &amp;\text{otherwise}
+\end{cases},\\
+\ell_{n + 1} &amp;= \begin{cases}
+    (u_n + \ell_n)/2, &amp;\text{if this is not an upper bound of }S, \\
+    \ell_n, &amp;\text{otherwise}
+\end{cases}.
+\end{align}\]
+It follows that all \(u_n\) are upper bounds of \(S\), and none of \(\ell_n\) are.</p>
+
+<p>Suppose \(\{u_n\} &lt; \{s_n\}\) for some \(\{s_n\} \in S\). This would mean that for some sufficiently large \(n_0\), \(u_{n_0} &lt; s_{n_0}\), which is a contradiction. Thus, \(\{u_n\}\) is an upper bound of \(S\).</p>
+
+<p>Also note that
+\[ u_n - \ell_n = \frac{u_1 - \ell_1}{2^{n - 1}}, \]
+so \(\{u_n\} \sim \{\ell_n\}\). Thus, \(\{u_n\} = \{\ell_n\}\) in \(\R\).</p>
+
+<p>Let \(\{a_n\} \in \R\) be an upper bound of \(S\) such that \(\{a_n\} &lt; \{u_n\}\). It follows that \(\{a_n\} &lt; \{\ell_n\}\) in \(\R\). This implies that there exists \(\epsilon &gt; 0\) and \(N_1 \in \N\) such that 
+\[ \ell_n - a_n &gt; \epsilon, \]
+for all \(n \geq N_1\). Since \(\{\ell_n\}\) is a Cauchy sequence, there exists \(N_2 \in \N\) such that for all \(m, n \geq N_2\), \(|\ell_m - \ell_n| &lt; \epsilon/2\). Thus, setting \(N = \max(N_1, N_2)\), we see that for all \(n \geq N\), we have
+\[ \ell_n - \ell_N &lt; \epsilon/2. \]
+Therefore,
+\[\ell_n - a_n \geq (\ell_N - \ell_n) - (\ell_n - a_n) &gt; \epsilon/2, \]
+for all \(n \geq N\). This means that \(\{a_n\}\) is greater than the constant sequence \(\{\ell_N\}\). However, \(\ell_N\) was not an upper bound of \(S\), so neither can \(\{a_n\}\) be an upper bound of \(S\), which is a contradiction. Thus, \(\{u_n\}\) is the least upper bound of \(S\).
+This shows that \(\R\) has the least upper bound property, <em>i.e.</em> \(\R\) is complete.</p>
 
 
 
