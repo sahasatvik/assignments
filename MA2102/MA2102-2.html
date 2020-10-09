@@ -955,6 +955,41 @@ If \(\gamma = \{\v_1&#39;, \dots, \v_n&#39;\}\) and the entries of \([T]\) are \
 \[ \phi_\gamma^{-1}(\v_j) = \phi_\gamma^{-1}(a_{1j}\v_1&#39; + \dots + a_{nj}\v_n&#39;) = a_{ij}\e_1 + \dots + a_{nj}\e_n. \]
 This means that \([T]\) is precisely \([\Id]_\beta^\gamma\).</p>
 
+<h4 id="toc_12">Invertible maps</h4>
+
+<p>A linear map \(T\colon V \to W\) is called <em>invertible</em> if there exists \(S\colon W \to V\) such that \(S\circ V = I_V\) and \(V\circ S = I_W\).
+Note that this implies that both \(S\) and \(T\) must be bijections.
+Thus, \(T\) is just a linear isomorphism, with \(S = T^{-1}\).</p>
+
+<p>Note that if \(V\) is finite dimensional and \(T\colon V \to W\) is invertible, then the dimensions of \(V\) and \(W\) are equal.</p>
+
+<p>A matrix \(A \in M_{m\times n}(\R)\) is called invertible if there exists \(B \in M_{n\times m}(\R)\) such that \(AB = I_m\), and \(BA = I_n\).</p>
+
+<p>Note that if \(A\) is invertible, it must be a square matrix, <em>i.e.</em> \(m = n\).
+To show this, suppose that \(B\) is an inverse of \(A\). It can be shown that \(B\) is unique.
+\[ B = BI_m = BAB&#39; = I_nB&#39; = B&#39;. \]
+Define the linear maps
+\[ L_A\colon \R^n \to \R^m, \qquad L_B\colon \R^m \to \R^n, \]
+via the matrices acting on vectors. With respect to the standard bases \(\beta_k\) of \(\R^k\), \([L_A] = A\) and \([L_B] = B\). Moreover, \(L_A\circ L_B = \Id\) and \(L_B \circ L_A = \Id\). Thus, the Rank Nullity theorem guarantees that \(m = n\).</p>
+
+<p>Suppose \(T\colon V\to W\) and \(S\colon U \to V\) are invertible. Then, </p>
+
+<ul>
+<li>\((T\circ S)^{-1} = S^{-1}\circ T^{-1}\).</li>
+<li>\((T^{-1})^{-1} = T\).</li>
+</ul>
+
+<p>Let \(V\) and \(W\) be finite dimensional vector spaces with ordered bases \(\beta\) and \(\gamma\). If \(T\colon V \to W\) is a linear map, then \(T\) is invertible <em>iff</em> \([T]_\beta^\gamma\) is invertible. Moreover, \([T^{-1}]_\gamma^\beta = ([T]_\beta^\gamma)^{-1}\).</p>
+
+<p>Consider \(T\colon V\to V\) for finite dimensional \(V\) with bases \(\beta\) and \(\gamma\). Then,
+\[ Q [T]_\beta Q^{-1} = [T]_\gamma, \]
+where \(Q = [I_V]_\beta^\gamma\). Note that \([T]_\beta\) is invertible <em>iff</em> \([T]_\gamma\) is invertible.</p>
+
+<h4 id="toc_13">Similarity</h4>
+
+<p>Matrices \(A, B \in M_n(\R)\) are said to be similar if there exists an invertible matrix \(Q \in M_n(\R)\) such that \(Q A Q^{-1} = B\).
+Note that similarity is an equivalence relation.</p>
+
 
 
 <script type="text/javascript">
