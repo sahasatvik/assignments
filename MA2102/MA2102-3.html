@@ -5,7 +5,7 @@
 
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>MA2102-2</title>
+<title>MA2102-3</title>
 
 
 <style type="text/css">
@@ -635,295 +635,72 @@ pre[class*="language-"] {
 \def\ev{\operatorname{ev}}
 \)</p>
 
-<h2 id="toc_1">Linear maps</h2>
+<h2 id="toc_1">Change of basis</h2>
 
-<p>A linear map \(T\colon V \to W\) between vector spaces (over a field \(F\)) is such that \(T(\v + \w) = T(\v) + T(\w)\) and \(T(\lambda\v) = \lambda T(\v)\) for all \(\v, \w \in V\) and scalars \(\lambda\).</p>
+<p>Let \(U\), \(V\), \(W\), \(X\) be finite dimensional vector spaces with ordered bases \(\alpha, \beta, \gamma\) and \(\delta\) respectively.</p>
 
-<p>This immediately forces the following properties.</p>
+<p>If \(S\colon V \to W\) and \(T\colon W \to X\), then
+\[ [T\circ S]_\beta^\delta = [T]_\gamma^\delta [S]_\beta^\gamma. \]</p>
 
-<ul>
-<li>\(T(\ve0_V) = \ve0_W\)</li>
-<li>\(T(\lambda_1\v_1 + \dots + \lambda_n\v_n) = \lambda_1T(\v_1) + \dots + \lambda_nT(\v_n)\).</li>
-</ul>
+<p>If \(R\colon U \to V\), then
+\[ ([T]_\gamma^\delta [S]_\beta^\gamma) [R]_\alpha^\beta = [T]_\gamma^\delta ([S]_\beta^\gamma [R]_\alpha^\beta). \]</p>
 
-<p>The following are all linear maps.</p>
-
-<ul>
-<li><strong>Zero/trivial map</strong>: \[\mathbb{O}\colon V\to W, \quad\v \mapsto \ve0.\]</li>
-<li><strong>Identity map</strong>: \[\Id\colon V\to V,\quad \v \mapsto \v.\]</li>
-<li><strong>Scaling</strong>: For some fixed scalar \(c\), \[T\colon \R\to\R, \quad x \mapsto cx. \]</li>
-</ul>
-
-<blockquote>
-<p>Indeed, <em>all</em> linear maps from \(\R\) to \(\R\) are scaling maps.</p>
-</blockquote>
-
-<ul>
-<li><strong>Dilation</strong>: For some fixed \(c \in F\),
-\[T\colon V\to V,\quad \v \mapsto c\v.\]</li>
-<li><strong>Matrices</strong>: For some \(A \in M_{m\times n}(\R)\),
-\[L_A\colon \R^n\to\R^m,\quad \v\mapsto A\v.\]</li>
-<li><strong>Reflections</strong>: For example, a reflection of \(\R^2\) about the \(x\)-axis. Note that this is a linear map of order 2, <em>i.e.</em> \(T\circ T = \Id\). Note that reflections about lines <em>not</em> through the origin are not linear maps, since the zero vector must map to itself.</li>
-<li><strong>Rotations</strong>: As before, the rotation must be about the zero vector.</li>
-<li><strong>Projections</strong>: For example, the projection of \(\R^2\) onto the \(x\)-axis. Note that projections are of the form \(T\circ T = T\).</li>
-<li><strong>Inclusions</strong>: For example, \[T\colon \R\to\R^2,\quad x\mapsto(x, mx).\]</li>
-<li><strong>Differentiation</strong>: \[\mathscr{D}\colon P_n(\R) \to P_n(\R), \quad p \mapsto p&#39;.\]</li>
-<li><strong>Integration</strong>: \[\mathscr{I}\colon C(\R) \to \R, \quad f \mapsto \int_0^1 f(t)\:dt,\]
-Another integration map, this time between polynomials is \[\mathscr{I}\colon P(\R) \to P(\R), \quad p(x) \mapsto \int_0^x p(t)\:dt.\]</li>
-<li><strong>Linear combination</strong>: Given \(\v_1, \dots, \v_n \in V\),
-\[ T\colon \R^n \to V, \quad (\lambda_1, \dots, \lambda_n) \mapsto \lambda_1\v_1 + \dots + \lambda_n\v_n. \]
-Note that if \(\{\v_i\}\) is linearly independent, then this linear map is also injective.
-Again, if \(\{\v_i\}\) spans \(V\), then this linear map is also surjective. Thus, \(T\) is a linear bijection when we choose \(\{\v_i\}\) as a basis of \(V\).</li>
-<li><strong>Quotient</strong>: Given a subspace \(W\subseteq V\),
-\[ Q\colon V \to V/W, \quad \v \mapsto [\v] = \v + W.\]
-Note that \(Q\) is surjective by construction.</li>
-</ul>
-
-<p>Note that any linear combination of linear maps is also a linear map. This hints at the fact that the set of all linear maps between \(V\) and \(W\) forms a vector space of its own.</p>
-
-<h4 id="toc_2">Rank and Nullity</h4>
-
-<p>Let \(T\colon V\to W\) be a linear map. The <em>null space</em> or <em>kernel</em> of \(T\) is the set of all vectors in \(V\) which get mapped to \(\ve0_W\). The <em>range</em> or <em>image</em> of \(T\) is the set of all vectors in \(W\) which have a pre-image in \(V\).
-\[ \begin{align}\kernel{T} &amp;= \{\v \in V: T(\v) = \ve0_W\}, \\
-\image{T} &amp;= \{T(\v): \v \in V\}. \end{align} \]
-It is easily verified that \(\kernel{T}\) and \(\image{T}\) are subspaces of \(V\).</p>
-
-<p>If \(V\) is finite dimensional, we define the <em>nullity</em> of \(T\) as the dimension of its kernel, and the <em>rank</em> of \(T\) as the dimension of its image.</p>
-
-<p>Note that if \(T\) is injective, \(\kernel{T} = \{\ve0_W\}\). Also, if \(\kernel{T} = \{\ve0_W\}\), given any \(\v_1, \v_2 \in V\) such that \(T(\v_1) = T(\v_2)\), we have \(T(\v_1 - \v_2) = \ve0\), which forces \(\v_1 - \v_2 = \ve0_W\), <em>i.e.</em> \(T\) is injective. Thus, a linear map is injective <em>iff</em> its nullity is zero.</p>
-
-<h4 id="toc_3">Rank-Nullity Theorem</h4>
-
-<p>Let \(V\) be a finite dimensional vector space and let \(T\colon V\to W\) be a linear map. Then,
-\[ \dim(V) = \dim(\image{T}) + \dim(\kernel{T}). \]
-In other words, the dimension \(n\) of \(V\) is precisely the sum of the rank and nullity of \(T\).</p>
-
-<p>As a corollary, suppose that \(\dim{V} = \dim{W}\), where \(V\) is finite dimensional. Then, the linear map \(T\colon V \to W\) is injective <em>iff</em> \(T\) is surjective.</p>
-
-<p>Consider a linear bijection \(L\colon V \to V\). Note that the inverse map \(L^{-1}\) is also linear. With this, we begin our proof of the theorem.</p>
-
-<p>Let \(k = \dim(\kernel{T}) \leq \dim(V) = n\), and let \(\{\v_1, \dots \v_k\}\) be a basis of \(\kernel{T}\). Using the Replacement Theorem, we extend this basis to of \(V\), \(\beta = \{\v_1, \dots, \v_k, \v_{k + 1}, \dots, \v_n\}\).
-Note that \(\{T(\v_{1}), \dots, T(\v_n)\}\) spans \(\image{T}\). For \(i = 1, \dots, k\), \(T(\v_i) = \ve0\). Thus, we claim that \(\{T(\v_{k + 1}), \dots, T(\v_n)\}\) is a basis of \(\image{T}\). To do this, it is sufficient to show that this set is linearly independent. Suppose that for \(\lambda_i \in F\),
-\[ \lambda_{k + 1}T(\v_{k + 1}) + \dots + \lambda_nT(\v_n) = \ve0. \]
-Using linearity, we see that \(T(\sum {\lambda_i\v_i}) = \ve0\).
-We thus find \(\mu_1, \dots, \mu_k\) such that
-\[ \lambda_{k + 1}\v_{k + 1} + \dots + \lambda_n\v_n = \ve0 = \mu_1\v_1 + \dots + \mu_k\v_k. \]
-From the linear independence of \(\beta\), we see that \(\lambda_i = \mu_i = 0\), so the set \(\{\v_{k + 1}, \dots, \v_{n}\}\) is linearly independent, hence a basis of \(\image{T}\). Thus, \(\dim(\image{T}) = n - k\), which proves the theorem.</p>
-
-<h4 id="toc_4">Vector spaces of linear maps</h4>
-
-<p>We denote
-\[ \L(V, W) = \{T\colon V \to W, T \text{ is a linear map}\}.\]
-We also use the shorthand \(\L(V, V) = \L(V)\).</p>
-
-<p>It is easily seen that \(\L(V, W)\) is a vector space, with the standard definitions of addition and scaling of functions. The zero map \(\mathbb{O}\) is its additive identity.</p>
-
-<blockquote>
-<p><strong>Question</strong>: What is the dimension of \(\L(\R, \R^n)\)?<br>
-<em>Response</em>: Consider \(T \in \L(\R, \R^n)\). Since \(\{1\}\) is a basis of \(\R\), \(T\) is fully determined by \(T(1)\). Thus, we look at the evaluation map
-\[ \ev\colon \L(\R, \R^n) \to \R^n, \quad T \mapsto T(1). \]
-This is clearly a linear map. Furthermore, we note that \(\ev\) is a bijection, since there is always a linear map \(T\) such that \(T(1) = \v\) given any \(\v \in \R^n\), namely \(T(\lambda) = \lambda\v\) for all \(\lambda \in R\). Also, this is the only possible map because of the linearity of \(T\). This means that \(\ev^{-1}\) is also a linear bijection. Thus, we have an identification between elements of \(\L(\R, \R^n)\) and \(\R^n\), in the form of the <em>linear isomorphism</em> \(\ev\). We will later see that this means \(\dim\L(\R, \R^n) = n\).</p>
-</blockquote>
-
-<blockquote>
-<p>Note that we can similarly identify elements of \(\L(\R^n, \R^m)\) with elements of \(M_{m\times n}(\R)\).</p>
-</blockquote>
-
-<h3 id="toc_5">Linear isomorphisms</h3>
-
-<p>A <em>linear isomorphism</em> \(T\colon V \to W\) is a linear map which is injective and surjective.</p>
-
-<p>Two vector spaces are called <em>isomorphic</em> if there exists a linear isomorphism between them.</p>
-
-<p>Note that isomorphism is an equivalence relation. Every vector space is isomorphic to itself (reflexivity), if \(V\) is isomorphic to \(W\), then \(W\) is isomorphic to \(V\) (symmetry), and if \(V\), \(W\) and \(W\), \(U\) are isomorphic, then so are \(V\), \(U\) (transitivity).
-Thus, we can partition the set of all vector spaces over a field \(F\) using this relation. We will see that vector spaces in the same equivalence class share the same dimension.</p>
-
-<p>Let \(T \in \L(V, W)\). If \(\{\w_1, \dots, \w_n\} \subset W\) is linearly independent, and \(T\) is surjective, with \(T(\v_i) = \w_i\), then the set \(\{\v_1, \dots, \v_n\}\) is also linearly independent.
-If \(\{\v_1, \dots, \v_n\} \subset V\) is linearly independent, and \(T\) is injective with \(T(\v_i) = \w_i\), then the set \(\{\w_1, \dots, \w_n\}\) is linearly independent. Both follow immediately by applying the linearity of \(T\) on the linear combinations \(\sum \mu_i\v_i\) and \(\sum \lambda_i\w_i\).</p>
-
-<p>If \(T\) is a linear isomorphism, and \(\{\v_1, \dots, \v_n\}\) is a basis of \(V\), then \(\{\w_1, \dots, \w_n\}\) where \(T(\v_i) = \w_i\) is a basis of \(W\). The converse is also true, since \(T^{-1}\) is also a linear isomorphism. Specifically, \(\dim{V} = \dim{W}\), if either one has been shown to be finite dimensional.</p>
-
-<h4 id="toc_6">Ordered Basis</h4>
-
-<p>Let \(V\) be a finite dimensional vector space. An ordered basis of \(V\) is a basis \(\beta\) of \(V\), endowed with a specific order.</p>
-
-<p>We show that any two vector spaces of the same finite dimension (over the same field) are isomorphic. To prove this, suppose \(V\) and \(W\) have the same finite dimension \(n\), and let \(\beta = \{\v_1, \dots \v_n\}\) and \(\gamma = \{\w_1, \dots, \w_n\}\) be ordered bases of them respectively.
-Define the linear map \(T\colon V \to W\) by first declaring \(\v_i \mapsto \w_i\). Note that since we want \(T\) to be linear, we also require
-\[ \lambda_1\v_1 + \dots + \lambda_n\v_n \mapsto \lambda_1\w_1 + \dots + \lambda_n\w_n. \]
-Note that this makes \(T\) well-defined on \(V\). This is because every vector in \(V\) can be written as a linear combination of the basis vectors \(\{\v_i\}\), and uniquely so. Again, \(T\) is also surjective, since any vector in \(W\) can be written as a linear combination of the basis vectors \(\{\w_i\}\), so its pre-image in \(V\) is the linear combination of the basis vectors \(\{\v_i\}\) with the same coefficients. From the Rank-Nullity Theorem, we see that \(T\) must also be injective. Thus, \(T\) is a linear isomorphism.</p>
-
-<p>As a corollary, any vector space \(V\) of dimension \(n\) over \(\R\) is isomorphic to \(\R^n\). If we choose the standard basis \(\{\e_1, \dots, \e_n\}\) and an ordered basis \(\beta = \{\v_1, \dots, \v_n\}\) of \(V\), we see that
-\[ T\colon \R^n \to V,\quad T(\lambda_1, \dots, \lambda_n) = \lambda_1\v_1 + \dots + \lambda_n\v_n \]
-is a linear isomorphism.</p>
-
-<p>Let \(T\colon V\to W\) be a linear map. If we denote the range of \(T\) as \(\image{T}\), note that \(T\colon V \to \image(T)\) is surjective. Denote the null space of \(T\) as \(\kernel{T}\).
-Consider the map 
-\[\T\colon V/\kernel{T} \to \image{T}, \quad [\v] \mapsto T(\v).\]
-We see that this is well-defined. Note that \([\v_1] = [\v_2]\) <em>iff</em> \(\v_1 - \v_2 \in N(T)\). This means that \(T(\v_1 - \v_2) = \ve0\), so \(\T[\v_1] - \T[\v_2] = \ve0\). All these implications were bidirectional, so we have also shown that \(\T\) is injective. The surjectiveness of of \(\T\) follows from the surjectiveness of \(T\) by construction.
-It also follows that \(\T\) is linear, so \(\T\) is a linear isomorphism.</p>
-
-<p>If \(V\) is finite dimensional, then \(\image{T}\) is the span of \(T(\v_i)\) for the finite basis \(\{\v_i\}\) of \(V\), so \(\image{T}\) is also finite dimensional. As \(\kernel{T}\) is a subspace of \(V\), it is also finite dimensional. It can be shown that \(\dim(V/\kernel{T}) = \dim(V) - \dim(\kernel{T})\). Thus, we obtain
-\[ \dim(V) - \dim(\kernel{T}) = \dim(\image{T}). \]</p>
-
-<blockquote>
-<p>Note that \(V/W\) can be finite dimensional even if \(V\) and \(W\) are not.
-Consider \(V = P(\R)\) and let \(W \subset V\) be the set of polynomials with no constant term. Thus, each element of \(V/W\) is of the form \([\lambda]\) for a constant \(\lambda\), since all polynomials in \(V\) having the same constant term are equivalent. Define
-\[ T\colon V/W \to \R, \quad [p(x)] \mapsto p(0). \]
-This map is well-defined and surjective, and we can show that this is a linear isomorphism. Thus, \(V/W\) has a dimension of \(1\).</p>
-</blockquote>
-
-<h4 id="toc_7">Coordinate vectors</h4>
-
-<p>Given a finite dimensional vector space \(V\) with an ordered basis \(\beta = \{\v_1, \dots, \v_n\}\), we can uniquely write every \(\v \in V\) as a linear combination \( \lambda_1\v_n + \dots + \lambda_n\v_n\). Then,
-\[ [\v]^\beta = (\lambda_1 \; \dots \; \lambda_n)^T \]
-is called the coordinate vector of \(\v\) with respect to the ordered basis \(\beta\).</p>
-
-<h4 id="toc_8">Matrix representation</h4>
-
-<p>Let \(T\colon V \to W\) be a linear map, and let \(\beta = \{v_1, \dots, \v_n \}\) and \(\gamma = \{\w_1, \dots, \w_m\}\) be ordered bases for \(V\) and \(W\) respectively. Note that
-\[ T(\v_j) = \sum_{i = 1}^m a_{ij} \w_i, \]
-for unique scalars \(a_{ij}\). Thus, these scalars form an \(m \times n\) matrix \(A = [a_{ij}]\).</p>
-
-<p>We seek a relationship between \([\v]^\beta\) and \([T\v]^\gamma\).
-Suppose \(\v = x_1\v_1 + \dots x_n\v_n\). Then,
-\[
-\begin{align}
-T(\v) &amp;= x_1T(\v_1) + \dots + x_nT(\v_n) \\
-    &amp;= \sum_{i}x_1a_{i1}\w_1 + \dots + \sum_{i}x_na_{in}\w_i \\
-    &amp;= \sum_{i, j}x_ja_{ij}\w_i.
-\end{align}
-\]
-Therefore,
-\[ [T\v]^\gamma = \left(\sum_{j}a_{1j}x_j\; \dots\; \sum_{j}a_{mj}x_j\right)^T = A[\v]^\beta. \]</p>
-
-<p>We call the matrix \(A\) the matrix representation of \(T\) with respect to \(\beta\) and \(\gamma\). We write \(A = [T]_\beta^\gamma\). Thus,
-\[ [T\v]^\gamma \;=\; [T]_\beta^\gamma\,[\v]^\beta. \]
+<p>Let \(T\colon V \to V\), and let \(\beta, \gamma\) be two ordered bases of \(V\). Then,
+\[ [\Id]_\beta^\gamma [\Id]_\gamma^\beta = [\Id]_\gamma^\gamma = I_n. \]
 Note that 
-\[ [T]_\beta^\gamma \;=\; \Big(\;[T\v_1]_\gamma \quad\cdots\quad [T\v_n]_\gamma\;\Big). \]
-By convention, if \(\beta = \gamma\), we simply write \([T]_\beta^\gamma = [T]_\beta\).</p>
-
-<p>For example, the identity map \(\Id\colon V \to V\), where \(\beta = \{\v_1, \dots, \v_n\}\) is an ordered basis of \(V\), has the matrix representation \(I_n\) which is simply the \(n \times n\) identity matrix.</p>
-
-<p>Suppose \(T\colon V \to V\) for some finite dimensional vector space \(V\).
-We choose a basis \(\{\v_1, \dots \v_k\}\) of the null space \(\kernel{T}\).
-We extend this to an ordered basis \(\beta = \{\v_1, \dots, \v_k, \v_{k + 1}, \dots, \v_n\}\) of \(V\). Set \(\w_j = T(\v_j)\) for \(j &gt; k\). Thus, the set \(L = \{\w_{k + 1}, \dots, \w_n\}\) is linearly independent. Indeed, \(L\) is a basis of the range of \(T\), <em>i.e.</em> \(\image{T}\) which has dimension \(n - k\). Thus, we extend this to the basis \(\gamma = \{\w_1, \dots, \w_k, \w_{k + 1}, \dots, \w_n\}\) of \(V\). Therefore, we obtain
-\[ [T]_\beta^\gamma = \begin{pmatrix}0_{k\times k} &amp; 0_{k\times(n - k)} \\
-0_{(n-k)\times k} &amp; I_{n-k}\end{pmatrix}.\]</p>
-
-<p>It can be shown that the space \(\L(V, W)\) is isomorphic to \(M_{m\times n}(F)\), where \(V\) and \(W\) are finite dimensional vector spaces. Simply consider the map
-\[ \Phi\colon\L(V, W) \to M_{m\times n}(F), \quad T \mapsto [T]_\beta^\gamma, \]
-where \(\beta\) and \(\gamma\) are ordered bases of \(V\) and \(W\) respectively.</p>
-
-<blockquote>
-<p><strong>Question</strong>: What is the matrix representation of the differentiation map,
-\[ \mathscr{D}\colon P_3(\R) \to P_2(\R), \quad p \mapsto p&#39;, \]
-under the standard bases \(\beta = \{1, x, x^2, x^3\}\) and \(\gamma = \{1, x, x^2\}\)?<br>
-<em>Response</em>: It is easily seen that
-\[ [\mathscr{D}]_\beta^\gamma = 
-\begin{pmatrix}
-0 &amp; 1 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 2 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 3
-\end{pmatrix}.\]
-This is because \(a + bx + cx^2 + dx^3 \mapsto b + 2cx + 3dx^2\).
-Thus, \(1 \mapsto \ve{0}\), \(x \mapsto 1\), \(x^2 \mapsto 2x\) and \(x^3 \mapsto 3x^2\).</p>
-
-<p>By reshaping the differentiation map so that \(\mathscr{D}\colon P_3(\R) \to P_3(\R)\), then \([\mathscr{D}]_\beta\) simply acquires an additional row  filled with zeros.
-\[ [\mathscr{D}]_\beta = 
-\begin{pmatrix}
-0 &amp; 1 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 2 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 3 \\ 0 &amp; 0 &amp; 0 &amp; 0
-\end{pmatrix}.\]
-Note that the determinant of \([\mathscr{D}]_\beta\) is zero, so \(\mathscr{D}\) is not an isomorphism.</p>
-</blockquote>
-
-<h2 id="toc_9">Dual spaces</h2>
-
-<p>Let \(V\) be a vector space over \(\R\). The <em>dual</em> of \(V\), denoted as \(V^*\), is defined to be \(\L(V, \R)\).</p>
-
-<p>Note that if \(V\) is finite dimensional, then the dimensions of \(V\) and \(V^*\) are the same.</p>
-
-<blockquote>
-<p>Consider a linear map \(T\colon \R^n \to \R\). Suppose \(T(\e_i) = \lambda_i\). Then,
-\[ T(\v) = v_1T(\e_1) + \dots + v_nT(\e_n) = \lambda_1v_1 + \dots + \lambda_nv_n. \]
-Thus, we can identify \(V\) with the vector \(\Lambda = (\lambda_1, \dots, \lambda_n)\). This defines a map from \((\R^n)^*\) to \(\R^n\).</p>
-
-<p>Define the projection maps
-\[ T_i\colon \R^n \to \R, \quad (v_1, \dots, v_n) \mapsto v_i. \]
+\[ [\Id]_\gamma^\beta [T]_\gamma^\gamma = [T]_\gamma^\beta,\qquad [T]_\gamma^\gamma [\Id]_\beta^\gamma = [T]_\beta^\gamma. \]
 Thus,
-\[ T(\v) = \lambda_1v_1 + \dots + \lambda_nv_n = \lambda_1T_1(\v) + \dots + \lambda_nT_n(\v). \]
-Thus, \(\{T_1, \dots, T_n\}\) forms a basis of \((\R^n)^*\). The elements of this space are called <em>covectors</em> or <em>linear functionals</em>.</p>
-</blockquote>
+\[ [T]_\beta = [\Id]_\gamma^\beta[T]_\gamma [\Id]_\beta^\gamma. \]</p>
+
+<p>The matrix \([\Id]_\beta^\gamma\) is called the <em>change of basis matrix</em>. It expresses the basis vectors of \(\beta\) in terms of \(\gamma\).</p>
+
+<p>Recall the linear isopmorphisms
+\[ \phi_\beta\colon \R^n \to V, \quad (\lambda_1, \dots, \lambda_n) \mapsto \lambda_1\v_1 + \dots + \lambda_n\v_n, \]
+where \(\beta = \{\v_i\}\).
+Now consider the linear map
+\[ T\colon \R^n \to \R^n, \quad T = \phi_\gamma^{-1}\circ \phi_\beta. \]
+We wish to compute \([T]\), with respect to the standard basis of \(\R^n\). Thus, the \(j^\text{th}\) column of \([T]\) is simply \(T(\e_j) = \phi_\gamma^{-1}\circ \phi_\beta(\e_j) = \phi_\gamma^{-1}(\v_j)\).
+If \(\gamma = \{\v_1&#39;, \dots, \v_n&#39;\}\) and the entries of \([T]\) are \(a_{ij}\), then
+\[ \phi_\gamma^{-1}(\v_j) = \phi_\gamma^{-1}(a_{1j}\v_1&#39; + \dots + a_{nj}\v_n&#39;) = a_{ij}\e_1 + \dots + a_{nj}\e_n. \]
+This means that \([T]\) is precisely \([\Id]_\beta^\gamma\).</p>
+
+<h4 id="toc_2">Invertible maps</h4>
+
+<p>A linear map \(T\colon V \to W\) is called <em>invertible</em> if there exists \(S\colon W \to V\) such that \(S\circ V = I_V\) and \(V\circ S = I_W\).
+Note that this implies that both \(S\) and \(T\) must be bijections.
+Thus, \(T\) is just a linear isomorphism, with \(S = T^{-1}\).</p>
+
+<p>Note that if \(V\) is finite dimensional and \(T\colon V \to W\) is invertible, then the dimensions of \(V\) and \(W\) are equal.</p>
+
+<p>A matrix \(A \in M_{m\times n}(\R)\) is called invertible if there exists \(B \in M_{n\times m}(\R)\) such that \(AB = I_m\), and \(BA = I_n\).</p>
+
+<p>Note that if \(A\) is invertible, it must be a square matrix, <em>i.e.</em> \(m = n\).
+To show this, suppose that \(B\) is an inverse of \(A\). It can be shown that \(B\) is unique.
+\[ B = BI_m = BAB&#39; = I_nB&#39; = B&#39;. \]
+Define the linear maps
+\[ L_A\colon \R^n \to \R^m, \qquad L_B\colon \R^m \to \R^n, \]
+via the matrices acting on vectors. With respect to the standard bases \(\beta_k\) of \(\R^k\), \([L_A] = A\) and \([L_B] = B\). Moreover, \(L_A\circ L_B = \Id\) and \(L_B \circ L_A = \Id\). Thus, the Rank Nullity theorem guarantees that \(m = n\).</p>
+
+<p>Suppose \(T\colon V\to W\) and \(S\colon U \to V\) are invertible. Then, </p>
+
+<ul>
+<li>\((T\circ S)^{-1} = S^{-1}\circ T^{-1}\).</li>
+<li>\((T^{-1})^{-1} = T\).</li>
+</ul>
+
+<p>Let \(V\) and \(W\) be finite dimensional vector spaces with ordered bases \(\beta\) and \(\gamma\). If \(T\colon V \to W\) is a linear map, then \(T\) is invertible <em>iff</em> \([T]_\beta^\gamma\) is invertible. Moreover, \([T^{-1}]_\gamma^\beta = ([T]_\beta^\gamma)^{-1}\).</p>
+
+<p>Consider \(T\colon V\to V\) for finite dimensional \(V\) with bases \(\beta\) and \(\gamma\). Then,
+\[ Q [T]_\beta Q^{-1} = [T]_\gamma, \]
+where \(Q = [I_V]_\beta^\gamma\). Note that \([T]_\beta\) is invertible <em>iff</em> \([T]_\gamma\) is invertible.</p>
+
+<h4 id="toc_3">Similarity</h4>
+
+<p>Matrices \(A, B \in M_n(\R)\) are said to be similar if there exists an invertible matrix \(Q \in M_n(\R)\) such that \(Q A Q^{-1} = B\).
+Note that similarity is an equivalence relation.</p>
 
 <blockquote>
-<p>Choose an ordered basis \(\beta = \{\v_1, \dots, \v_n\}\) of \(\v\). Define the linear maps
-\[ \v_i^*\colon V \to \R, \quad \lambda_1\v_1 + \dots + \lambda_n\v_n \mapsto \lambda_i. \]
-It can be shown that \(\beta^* = \{\v_1^*, \dots, \v_n^*\}\) is a basis of \(V^*\). This is because for arbitrary \(\v^* \in V\), pick \(\v = \lambda_1\v_1 + \dots + \lambda_n\v_n\). Since \(\lambda_i = \v_i^*\v\), we have
-\[ \v^*\v = \lambda_1\v^*\v_1 + \dots + \lambda_n\v^*\v_n = (\v^*\v_1)\v_1^*\v + \dots + (\v^*\v_n)\v_n^*\v. \]
-Thus, \(\v^*\) is a linear combination of \(\{\v_i^*\}\), with coefficients \(\mu_i = \v^*\v_i\).
-\[ \v^* = \mu_1\v_1^* + \dots + \mu_n\v_n^*. \]
-Note that \(\v_i^*\v_j = \delta_{ij}\).</p>
-</blockquote>
-
-<p>Consider the linear map
-\[ T_\beta\colon V \to V^*, \quad \lambda_1\v_1 + \dots + \lambda_n\v_n \mapsto \lambda_1\v_1^* + \dots + \lambda_n\v_n^*. \] 
-It can be shown that this is a linear isomorphism.</p>
-
-<blockquote>
-<p>Suppose \(V = \R^n\). Define
-\[ \v^*\colon\R^n \to \R, \quad \w \mapsto \v\cdot\w = \sum v_iw_i. \]
-It is easily verified that \(\v^*\) is a linear map. Thus, all \(\v^*\) for all \(\v\) are dual vectors of \(\R^n\).</p>
-</blockquote>
-
-<blockquote>
-<p>Suppose \(V\) is the set of all continuous functions \(f\colon [0, 2\pi] \to \R\). Consider the linear maps
-\[ S_n\colon V \to \R, \quad f\mapsto \frac{1}{2\pi}\int_0^{2\pi} f(t)\sin{nt}\:dt, \]
-\[ C_n\colon V \to \R, \quad f\mapsto \frac{1}{2\pi}\int_0^{2\pi} f(t)\cos{nt}\:dt. \]
-These numbers, \(\{C_n(f), S_n(f)\}_{n \in \Z}\), are called the <em>Fourier coefficients</em> of \(f\).</p>
-</blockquote>
-
-<blockquote>
-<p>Suppose \(V = P_1(\R)\). Consider the linear maps
-\[ f_1\colon V \to \R, \quad p \mapsto \int_0^1 p(t)\:dt, \]
-\[ f_2\colon V \to \R, \quad p \mapsto \int_0^2 p(t)\:dt. \]
-Note that \(\{1, x\}\) is a basis of \(P_1(\R)\). Now, \(f_1(1) = 1\), \(f_1(x) = 1/2\), \(f_2(1) = 2\), \(f_2(x) = 2\).</p>
-
-<p>We claim that \(\{f_1, f_2\}\) is a basis of \(V^*\). It suffices to show that \(f_1\) and \(f_2\) are linearly independent. Suppose \(af_1 + bf_2 = 0\) for scalars \(a, b\).
-Evaluating the left hand side on the basis vectors \(\{1, x\}\), we see that \(a + 2b = 0\) and \(a/2 + 2b = 0\), from which is follows that \(a, b = 0\). This proves our claim.</p>
-
-<p><strong>Question</strong>: Is there a basis \(\{p_1, p_2\}\) of \(P_1(\R)\) such that \(\{f_1, f_2\}\) is the dual basis?<br>
-<em>Response</em>: We seek \(p_1 = a + bx\), \(p_2 = c + dx\) such that \(p_1^* = f_1\) and \(p_2^* = f_2\). This means that \(f_ip_j = \delta_{ij}\). This requires
-\[ a + b/2 = 1, \quad 2a + 2b = 0, \quad c + d/2 = 0, \quad 2c + 2d = 1. \]
-This gives \(p_1 = 2 - 2x\) and \(p_2 = -1/2 + x\). This is indeed the required basis of \(P_1(\R)\).</p>
-</blockquote>
-
-<h3 id="toc_10">Dual maps</h3>
-
-<p>Let \(T\colon V \to W\) be a linear map. We define its <em>dual</em> \(T^*\), such that 
-\[ T^*\colon W^* \to V^*, \quad L \mapsto L\circ T. \]
-It is easily verified that \(T^*\) is linear.</p>
-
-<p>Consider \(V^{**} = (V^*)^* = \L(\L(V, \R), \R)\), the <em>double dual</em> of \(V\). Each of its elements is the linear map \(L\colon V^* \to \R\). For example, let \(\v \in V\). The evaluation map \(\ev_\v\colon V^* \to \R, T \mapsto T(\v)\) is an element of the double dual of \(V\).</p>
-
-<blockquote>
-<p>Consider the evaluation map
-\[ \Phi\colon V \to V^{**}, \quad \v \mapsto \ev_\v. \]
-When \(V\) is finite dimensional, \(\Phi\) is a linear isomorphism.
-Thus, there is a way of identifying elements \(\v \in V\) with the elements of the double dual.</p>
-</blockquote>
-
-<p>Let \(T\colon V \to W\) be a linear map. If \(\beta\) and \(\gamma\) are ordered bases of \(V\) and \(W\) respectively, then
-\[ \left([T]_\beta^\gamma\right)^T = [T^*]_{\beta^*}^{\gamma^*}. \]</p>
-
-<p>It can be seen from this that the ranks of \(T\) and \(T^*\) are the same.</p>
-
-<blockquote>
-<p>Consider the conjugation map
-\[ T\colon \C \to \C, \quad z \mapsto \bar{z}. \]
-Let \(\beta = \{1, i\} = \{\e_1, \e_2\}\) be the standard basis.
-The dual basis \(\beta^* = \{\e_1^*, \e_2^*\}\) satisfy \(\e_i^*\e_j = \delta_{ij}\).
-Thus, \(\e_1^*(a + ib) = a\) and \(\e_2^*(a + ib) = b\). Note that
-\[ T^*(\e_i^*)(\e_j) = \e_i^*(T(\e_j)). \]
-This means that 
-\[ [T]_\beta = \begin{pmatrix}1 &amp; 0\\ 0 &amp; -1\end{pmatrix}, \qquad
-[T^*]_{\beta^*} = \begin{pmatrix}1 &amp; 0\\ 0 &amp; -1\end{pmatrix}. \]</p>
+<p>\(Q\) is not unique. If \(QAQ^{-1} = B\), then it follows that \((\lambda Q)A(\lambda Q)^{-1} = B\) for non-zero \(\lambda\).</p>
 </blockquote>
 
 
