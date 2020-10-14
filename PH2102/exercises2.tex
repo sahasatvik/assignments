@@ -1,0 +1,162 @@
+\documentclass[10pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{bm}
+\usepackage{cancel}
+\usepackage{xcolor}
+
+\title{Mechanics II - Exercises}
+\author{Satvik Saha}
+\date{}
+
+\geometry{a4paper, margin=1in}
+\setlength\parindent{0pt}
+\renewcommand{\labelenumi}{(\roman{enumi})}
+\renewcommand\CancelColor{\color{red}}
+% \renewcommand\qedsymbol{$\blacksquare$}
+\let\vec\boldsymbol
+\newcommand{\uveci}{{\bm{\hat{\textnormal{\bfseries\i}}}}}
+\newcommand{\uvecj}{{\bm{\hat{\textnormal{\bfseries\j}}}}}
+\newcommand{\uveck}{{\bm{\hat{\textnormal{\bfseries k}}}}}
+\newcommand\norm[1]{\left\lVert#1\right\rVert}
+\newcommand\grad[1]{\vec{\nabla}#1}
+\newcommand\divg[1]{\vec{\nabla}\cdot#1}
+\newcommand\curl[1]{\vec{\nabla}\times#1}
+\newcommand\pp[2]{\frac{\partial #1}{\partial #2}}
+
+\newcounter{prob}
+\def\problem{\stepcounter{prob}\paragraph{Exercise \arabic{prob}}}
+\def\solution{\paragraph{Solution}}
+\setcounter{prob}{2}
+
+\begin{document}
+        \par\textbf{IISER Kolkata} \hfill \textbf{Exercises}
+        \vspace{3pt}
+        \hrule
+        \vspace{3pt}
+        \begin{center}
+                \LARGE{\textbf{PH 2102 : Mechanics II}}
+        \end{center}
+        \vspace{3pt}
+        \hrule
+        \vspace{3pt}
+        Satvik Saha, \texttt{19MS154}, Group E\hfill\today
+        \vspace{20pt}
+
+        \problem A rod of length $L_0$ moves with a speed $v$ along the $x$-axis, making an angle $\theta_0$ to the axis. Find (a) the
+        length of the rod with respect to a stationary observer and (b) the angle relative to a stationary $x$-axis.
+
+        \solution We let $S(x, y)$ be the stationary frame and let $S'(x', y')$ be the frame of the moving rod.
+        Note that the frame $S'$ moves with a velocity $\vec{v} = v\uveci$ with respect to frame $S$.
+        Suppose that in $S'$, one end of the rod is fixed at the origin and the other is at coordinates $(x_0', y_0')$.
+        We infer that $L_0 = \sqrt{x_0'^2 + y_0'^2}$. Now, we can apply the Lorentz transformations for the spatial coordinates
+        \[
+                x' = \gamma(x - vt), \qquad y' = y, \qquad z' = z.
+        \]
+        Note that these follow since the relative motion between $S$ and $S'$ is purely directed along the $x$-axis.
+        Thus, at some given time $t$, the coordinates of $(x_0', y_0')$ are $(x_0'/\gamma + vt, y_0)$ in $S$, and the origin $(0', 0')$ of $S'$
+        is at $(vt, 0)$ in $S$. Thus, the length of the rod in the stationary frame $S$ is simply $L = \sqrt{(x_0'/\gamma)^2 + y_0'^2}$.
+        By introducing a third point in $S'$, the point of projection of the far end of the rod onto the $x$-axis $(x_0', 0)$, we
+        see that this transforms to $(x_0 /\gamma + vt, 0)$ in $S$. Thus, it is immediately clear that only lengths along the $x$-axis
+        are contracted, which justifies the approach of taking components along axes and treating them separately.
+        This allows us to use the length contraction formulae to directly write $\Delta x = \Delta x' /\gamma$ and $\Delta y = \Delta y'$.
+        Recognizing $x_0' = L_0\cos\theta_0$ and $y_0' = L_0\sin\theta_0$, we have
+        \[
+                L = \sqrt{L_0^2(1 - \beta^2)\cos^2\theta_0 + L_0^2\sin^2\theta_0} = L_0\sqrt{1 - \beta^2\cos^2\theta_0}, \tag{a}
+        \]
+        where $\beta = v /c$, $\gamma = 1 /\sqrt{1 - \beta^2}$. Note that the presence of the $\beta\cos\theta_0$ term indicates that
+        we could have solved our problem in another way, taking components of the velocity along axes along and perpendicular to the rod. \\
+
+        It is also important to note that the rod does indeed remain linear in both frames. To see this, take an intermediate point on the rod in $S'$,
+        say $(\lambda,\; y_0'\lambda /x_0')$.
+        This transforms to $(\lambda /\gamma + vt,\; y_0'\lambda/x_0') \equiv (x, y)$ in $S$, which clearly describes
+        a straight line passing through $(vt, 0)$ and $(x_0'/\gamma + vt, y_0')$.
+        \[
+                \gamma(x - vt) = \lambda = \frac{x_0'}{y_0'}y \implies y = \gamma\frac{y_0'}{x_0'}(x - vt).
+        \]
+        Note that the slope of the rod has changed -- it is now $\gamma y_0' /x_0'$.
+        Thus, the inclination $\theta$ of the rod in the stationary frame $S$ is steeper.
+        \[
+                \theta = \arctan\left(\gamma\frac{y_0'}{x_0'}\right) = \arctan\left(\gamma \tan\theta_0\right). \tag{b}
+        \]
+
+        \problem Show that infinite velocity in $S$ implies infinite velocity in $S'$, where $S$ and $S'$ are two frames
+        moving with a constant velocity with respect to each other.
+
+        \solution Let the velocities in question be $\vec{u}$ and $\vec{u}'$ in the frames $S$ and $S'$.
+        Suppose $S'$ is moving with velocity $\vec{v}$ with respect to $S$.
+        We can always choose our coordinate system such that $\vec{v}$ is directed along the $x$-axis in both frames.
+        Thus, using our velocity addition formulae, we have
+        \[
+                u_x = \frac{u_x' + v}{1 + vu_x'/c^2}, \qquad u_y = \frac{u_y'}{\gamma(1 + vu_x'/c^2)}, \qquad u_z = \frac{u_z'}{\gamma(1 + vu_x'/c^2)}.
+        \]
+        Suppose $\vec{u}'$ is finite. Thus, all three components $u_x'$, $u_y'$ and $u_z'$ must be finite, since
+        \[
+                \norm{\vec{u}'} = \sqrt{u_x'^2 + u_y'^2 + u_z'^2} > |u_x'|,
+        \]
+        and so on for each component. Thus, all the numerators of $u_x$, $u_y$, $u_z$ are finite. Also note that $1 + u_x' v/c^2 > 0$, and 
+        $\gamma = 1 /\sqrt{1 - v^2 /c^2}$ is real and non-zero.
+        This is true because the framework of Special Relativity demands $|u_x'| \leq c$ and $|v| < c$, otherwise our
+        transformation equations would fail.
+        Thus, each of the components $u_x$, $u_y$, $u_z$ is finite, from which we see that $\vec{u}$ is finite.
+        The contrapositive of this statement is that if $\vec{u}$ were infinite, then $\vec{u}'$ would also be infinite.
+
+        \problem Consider a light beam passing through a horizontal column of water moving with velocity $v$ in the positive $x$ direction.
+        (a) Determine the speed $u$ of light measured in the lab frame when the beam travels in the same direction as the flow of water.
+        (b) Obtain this velocity in the first order approximation for $v \ll c$.
+
+        \solution Let the frame of the lab be $S$. The frame of the water $S'$ moves with velocity $v$ with respect to $S$.
+        In this frame $S'$, we know that the speed of light in the water is given by $u' = c / n$, where $n$ is the refractive index of water.
+        Transforming to frame $S$ while noting that all quantities are directed along the $x$ axis, we see that
+        \[
+                u \;=\; \frac{u' + v}{1 + uv/c^2} \;=\; \frac{c/n + v}{1 + v/nc}. \tag{a}
+        \]
+        When $v \ll c$, we can approximate $(1 + v/nc)^{-1} = 1 - v/nc + v^2 /n^2c^2 - \dots \approx 1 - v/nc$.
+        Thus, we obtain the first order approximation
+        \[
+                u \;\approx\; \left(\frac{c}{n} + v\right)\left(1 - \frac{v}{nc}\right) \;=\; \frac{c}{n} + v - \frac{v}{n^2} - \cancel{\frac{v^2}{nc}}
+                        \;\approx\; \frac{c}{n} + v\left(1 - \frac{1}{n^2}\right). \tag{b}
+        \]
+
+        \problem Suppose we discover a particle with $v > c$ with a relativistic mass $m_v$. What can we say about its properties?
+
+        \solution We note that the usual expression relating rest mass and relativistic mass,
+        \[
+                m_v = \gamma m_0 = \frac{m_0}{\sqrt{1 - v^2 /c^2}},
+        \]
+        makes little sense here since $\sqrt{1 - v^2 /c^2}$ is now purely imaginary.
+        Indeed, the momentum $p = m_v v$ also becomes purely imaginary, so $E = \sqrt{(pc)^2 + (m_v c^2)^2}$ is also purely imaginary.
+        Thus, these physical quantities loes their ordinary meanings with regards to this particle. \\
+
+        Pick an inertial frame moving with velocity $u$ in the same direction as our particle. In that frame, the particle will move with speed
+        \[
+                v' = \frac{v - u}{1 - uv/c^2}.
+        \]
+        Since we only have access to inertial frames such that $|u| < c$, yet $v > c$, the quantity $v - u$ can never vanish, i.e.\ 
+        there is no frame in which the particle will appear to be at rest relative to us.
+        Hence, our particle has no proper `rest mass', which is in accordance with our previous observation that $m_0$ must be imaginary.
+        Furthermore, it ought to be possible for us to choose $u = c^2 / v < c$. In this case, $v' \to \pm\infty$ (positive when approaching 
+        from the left, negative when approaching from the right). In other words, the speed of the particle can be made as large
+        desired, simply by choosing $u$ appropriately. Additionally, the velocity of the particle changes direction (sign) on either
+        side of $u = c^2 /v$.
+
+        \problem For a particle in motion, $E = 110$ MeV. Suppose its rest mass is $100$ MeV$/c^2$. What is its velocity in units of $c$?
+
+        \solution Using $E = \gamma m_0 c^2$, where $\gamma = 1 /\sqrt{1 - v^2 /c^2}$, we square and rearrange to obtain
+        \[
+                v = c\;\sqrt{1 - \frac{m_0^2 c^4}{E^2}} = c\;\sqrt{1 - \frac{100^2}{110^2}} \approx 0.42\,c.
+        \]
+
+        \problem If $h = 6.626 \times 10^{-34}$ Js, and the wavelength of a sodium light is $5800$ angstrom, what is the relativistic
+        mass of a photon corresponding to such light?
+
+        \solution The energy of the photon is given by $E = hc /\lambda$. We also know that the relativistic mass $m$ of the photon is related to 
+        its energy as $E = mc^2$. Thus, we obtain
+        \[
+                m = \frac{h}{c\lambda} = \frac{6.626 \times 10^{-34}}{5800 \times 10^{-10} \times 299792458} \approx 3.81 \times 10^{-36}\text{ kg}.
+        \]
+        Alternatively, we may calculate $E = hc/\lambda \approx 3.42 \times 10^{-19}$ J $\approx 2.14$ eV, so $m \approx 2.14$ eV$/c^2$.
+
+\end{document}

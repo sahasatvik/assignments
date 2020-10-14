@@ -1,0 +1,121 @@
+\documentclass[10pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{bm}
+\usepackage{cancel}
+\usepackage{xcolor}
+
+\title{Mechanics II - Exercises}
+\author{Satvik Saha}
+\date{}
+
+\geometry{a4paper, margin=1in}
+\setlength\parindent{0pt}
+\renewcommand{\labelenumi}{(\roman{enumi})}
+\renewcommand\CancelColor{\color{red}}
+% \renewcommand\qedsymbol{$\blacksquare$}
+\let\vec\boldsymbol
+\newcommand{\uveci}{{\bm{\hat{\textnormal{\bfseries\i}}}}}
+\newcommand{\uvecj}{{\bm{\hat{\textnormal{\bfseries\j}}}}}
+\newcommand{\uveck}{{\bm{\hat{\textnormal{\bfseries k}}}}}
+\newcommand\norm[1]{\left\lVert#1\right\rVert}
+\newcommand\grad[1]{\vec{\nabla}#1}
+\newcommand\divg[1]{\vec{\nabla}\cdot#1}
+\newcommand\curl[1]{\vec{\nabla}\times#1}
+\newcommand\pp[2]{\frac{\partial #1}{\partial #2}}
+\newcommand\dd[2]{\frac{d #1}{d #2}}
+
+\renewcommand\v{\vec{v}}
+\renewcommand\u{\vec{u}}
+\renewcommand\a{\vec{a}}
+
+\newcounter{prob}
+\def\problem{\stepcounter{prob}\paragraph{Exercise \arabic{prob}}}
+\def\solution{\paragraph{Solution}}
+\setcounter{prob}{8}
+
+\begin{document}
+        \par\textbf{IISER Kolkata} \hfill \textbf{Exercises}
+        \vspace{3pt}
+        \hrule
+        \vspace{3pt}
+        \begin{center}
+                \LARGE{\textbf{PH 2102 : Mechanics II}}
+        \end{center}
+        \vspace{3pt}
+        \hrule
+        \vspace{3pt}
+        Satvik Saha, \texttt{19MS154}, Group E\hfill\today
+        \vspace{20pt}
+
+        \problem Show that $u^\mu\cdot u^\mu = 1$, where $u^\mu = (\gamma,\, \gamma \v /c)$.
+
+        \solution From the definition of the dot product,
+        \begin{align*}
+                u^\mu\cdot u^\mu \;&=\; u^0u^0 - u^1u^1 - u^2u^2 - u^3u^3 \\
+                        \;&=\; \gamma^2 - \gamma^2(v_x^2 + v_y^2 + v_z^2)/c^2 \\
+                        \;&=\; \gamma^2 (1 - v^2 /c^2) \\
+                        \;&=\; 1.
+        \end{align*}
+        The last line follows since $\gamma = 1 /\sqrt{1 - v^2 /c^2}$.
+
+        \problem Show that $u^\mu \cdot a^\mu = 0$, where $a^\mu = du^\mu /ds$.
+
+        \solution We know that $x^\mu = (ct,\,x,\,y,\,z)$. In the frame of proper time, the particle is at rest, so from the invariance of the
+        spacetime interval $ds$,
+        \[
+                ds^2 = c^2dt^2 - dx^2 - dy^2 - dz^2 = c^2d\tau^2.
+        \]
+        This means that $ds = c\, d\tau$, where $\tau$ is the proper time. Also, $d\tau = dt\sqrt{1 - (dx^2 + dy^2 + dz^2)/dt^2} = dt\sqrt{1 - v^2 /c^2}$,
+        where $v$ is the speed of the body. Thus, using the differential $dx^\mu = (c\, dt, dx, dy, dz)$, we have
+        \[
+                u^\mu = \dd{}{s}x^\mu = \dd{\tau}{s}\dd{t}{\tau}\dd{}{t} x^\mu = \frac{\gamma}{c}\left(c,\,v_x,\,v_y,\,v_z\right) =
+                        \left(\gamma,\,\frac{\gamma}{c}\v\right).
+        \]
+        To proceed further, we will need to calculate $d\gamma /dt$.
+        \[
+                \dd{}{t}\frac{1}{\sqrt{1 - v^2 /c^2}} = -\frac{1}{2}\cdot\frac{1}{(1 - v^2 /c^2)^{3 /2}}\cdot\left(-\frac{2\v}{c^2}\right) \cdot\dd{}{t}\v
+                        = \frac{\gamma^3}{c^2} \v\cdot\a. 
+        \]
+        This follows since $v^2 = \v\cdot\v$. The quantity $\a$ is the ordinary acceleration in 3 space.
+        We take the derivative of $u^\mu$ in the same manner as before, obtaining
+        \[
+                a^\mu = \dd{}{s}u^\mu = \frac{\gamma}{c}\dd{}{t}\left[\frac{\gamma}{c} (c,\,\v )\right] = \frac{\gamma}{c^2}\dd{\gamma}{t}(c,\,\v) + 
+                        \frac{\gamma^2}{c^2}\dd{}{t}(c,\,\v) = \frac{\gamma^4}{c^4}\v\cdot\a(c,\,\v) + \frac{\gamma^2}{c^2}(0,\,\a).
+        \]
+        Simplifying, we obtain
+        \[
+                a^\mu = \left(\frac{\gamma^4}{c^3}\v\cdot \a,\; \frac{\gamma^4}{c^4}(\v\cdot\a)\v + \frac{\gamma^2}{c^2}\a\right).
+        \]
+        Thus, we see that
+        \[
+                u^\mu\cdot a^\mu = \frac{\gamma^5}{c^3}\v\cdot\a - \frac{\gamma^5}{c^5}(\v\cdot\a)(\v\cdot\v) - \frac{\gamma^3}{c^3}(\v\cdot\a)
+                        = \frac{\gamma^3}{c^3}(\v\cdot\a)\left[\gamma^2 - \gamma^2 \frac{v^2}{c^2} - 1\right] = 0.
+        \]
+        The last equality follows because $\gamma^2 (1 - v^2 /c^2) = 1$.
+
+        \problem Show that \[
+                mc \dd{}{s}x^\mu \;=\; p^\mu.
+        \]
+
+        \solution We know that $dx^\mu = (c\, dt,\,dx,\,dy,\,dz)$. We also know that if $\tau$ represents the proper time, then $ds = c\, d\tau$.
+        Thus,
+        \[
+                \dd{}{s}x^\mu = \dd{\tau}{s}\dd{}{\tau}x^\mu = \frac{1}{c} \left( c\dd{t}{\tau},\,\dd{x}{\tau},\,\dd{y}{\tau},\,\dd{z}{\tau} \right).
+        \]
+        In addition, we know that $d\tau = dt \sqrt{1 - v^2 /c^2} = dt /\gamma$, where $v^2 = (dx^2 + dy^2 + dz^2) /dt^2$ is the square of the speed
+        of the particle $m$. Thus,
+        \[
+                \dd{x}{\tau} = \dd{t}{\tau} \dd{x}{t} = \gamma v_x, \qquad
+                \dd{y}{\tau} = \dd{t}{\tau} \dd{y}{t} = \gamma v_y, \qquad
+                \dd{z}{\tau} = \dd{t}{\tau} \dd{z}{t} = \gamma v_z.
+        \]
+        Thus, since $\vec{p} = m\gamma \v$, we have
+        \[
+                mc\dd{}{s}x^\mu = \left( \gamma mc,\,\gamma mv_x,\,\gamma mv_y,\,\gamma mv_z \right) = \left(\frac{E}{c},\,\vec{p}\right) = p^\mu.
+        \]
+        The second equality follows since $E = \gamma mc^2$.
+
+\end{document}
