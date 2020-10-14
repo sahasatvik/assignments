@@ -633,6 +633,8 @@ pre[class*="language-"] {
 \def\L{\mathscr{L}}
 \def\T{\mathscr{T}}
 \def\ev{\operatorname{ev}}
+\def\trace{\operatorname{trace}}
+\def\diag{\operatorname{diag}}
 \)</p>
 
 <h2 id="toc_1">Change of basis</h2>
@@ -664,7 +666,7 @@ If \(\gamma = \{\v_1&#39;, \dots, \v_n&#39;\}\) and the entries of \([T]\) are \
 \[ \phi_\gamma^{-1}(\v_j) = \phi_\gamma^{-1}(a_{1j}\v_1&#39; + \dots + a_{nj}\v_n&#39;) = a_{ij}\e_1 + \dots + a_{nj}\e_n. \]
 This means that \([T]\) is precisely \([\Id]_\beta^\gamma\).</p>
 
-<h4 id="toc_2">Invertible maps</h4>
+<h3 id="toc_2">Invertible maps</h3>
 
 <p>A linear map \(T\colon V \to W\) is called <em>invertible</em> if there exists \(S\colon W \to V\) such that \(S\circ V = I_V\) and \(V\circ S = I_W\).
 Note that this implies that both \(S\) and \(T\) must be bijections.
@@ -694,13 +696,48 @@ via the matrices acting on vectors. With respect to the standard bases \(\beta_k
 \[ Q [T]_\beta Q^{-1} = [T]_\gamma, \]
 where \(Q = [I_V]_\beta^\gamma\). Note that \([T]_\beta\) is invertible <em>iff</em> \([T]_\gamma\) is invertible.</p>
 
-<h4 id="toc_3">Similarity</h4>
+<h3 id="toc_3">Similarity</h3>
 
 <p>Matrices \(A, B \in M_n(\R)\) are said to be similar if there exists an invertible matrix \(Q \in M_n(\R)\) such that \(Q A Q^{-1} = B\).
 Note that similarity is an equivalence relation.</p>
 
 <blockquote>
 <p>\(Q\) is not unique. If \(QAQ^{-1} = B\), then it follows that \((\lambda Q)A(\lambda Q)^{-1} = B\) for non-zero \(\lambda\).</p>
+</blockquote>
+
+<h4 id="toc_4">Trace</h4>
+
+<p>The <em>trace</em> of a <em>square matrix</em> is simply the sum of its diagonal elements. \[ \trace(A) = a_{11} + a_{22} + \dots + a_{nn}. \]</p>
+
+<p>Let \(T\colon V \to V\) be a linear map. Let \(V\) be of dimension \(n\) and let \(\beta\) be an ordered basis of \(V\). The <em>trace</em> of the <em>linear map</em> \(T\) is defined as \(\trace [T]_\beta\).</p>
+
+<p>Note that \(\trace{T}\) is well-defined, since \(\trace [T]_\beta\) will be the same regardless of our choice of \(\beta\). To show this, we prove the cyclic property of trace: for \(A, B, C \in M_n(F)\), we have
+\[ \trace(ABC) = \trace(BCA) = \trace(CAB). \]
+First, we compute
+\[ \trace(AB) = \sum_{ij} a_{ij}b_{ji} = 
+    \sum_{ji}b_{ji}a_{ij} = \trace(BA). \]
+Now, note that
+\[ \trace(ABC) = \trace((A)(BC)) = \trace((BC)(A)) = \trace(BCA). \]
+Similarly,
+\[ \trace(BCA) = \trace((B)(CA)) = \trace((CA)(B)) = \trace(CAB). \]</p>
+
+<p>Now, note that of \(\beta\) and \(\gamma\) are two ordered bases of \(V\), we can find \(Q\) such that \([T]_\beta = Q [T]_\gamma Q^{-1}\). Indeed, \(Q = [I_V]_\gamma^\beta\). Thus,
+\[ \trace[T]_\beta = \trace(Q[T]_\gamma Q^{-1}) = \trace([T]_\gamma Q^{-1}Q) = \trace[T]_\gamma. \]
+In general, similar matrices have the same trace, <em>i.e.</em> the trace is conjugation invariance.</p>
+
+<blockquote>
+<p>Let \(P\colon V\to V\) be a projection map, <em>i.e.</em> a linear map such that \(P^2 = P\). Note that \(\v = (v - P\v) + P\v\) is a decomposition into \(\kernel(P)\) and \(\image(P)\). If \(\v \in \kernel(P) \cap \image(P)\), then \(P\v = \ve0\) and \(\v = P\w\) for some \(\w\in V\). Thus,
+\[ \v = P\w = P^2\w = P\v = \ve0. \]
+Thus, \(V = \kernel{P}\oplus\image{P}\).</p>
+
+<p>Now, if \(\dim\image{P} = k\) and \(\dim\kernel{P} = n - k\), we can choose bases \(\{\v_1,\dots, \v_k\}\) of \(\image{P}\) and \(\{\u_1, \dots, \u_{n - k}\}\) of \(\kernel{P}\). Their union \(\beta\) must be a basis of \(V\).
+Since \(\v_i = P\w_i\) for some \(\w_i \in V\), we must have
+\[ P\v_i = P^2\w_i = P\w_i = \v_i. \]</p>
+
+<p>With this, we construct the matrix \([P]_\beta\).
+\[ [P]_\beta = \begin{pmatrix} I_k &amp; 0_{k\times(n - k)} \\ 0_{(n - k)\times k} &amp; 0_{(n - k)\times(n - k)}
+\end{pmatrix}. \]
+Thus, \(\trace{P} = \operatorname{rank}{P} = k\).</p>
 </blockquote>
 
 
