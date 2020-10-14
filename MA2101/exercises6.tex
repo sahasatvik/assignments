@@ -1,0 +1,173 @@
+\documentclass[10pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{bm}
+
+\title{Analysis I - Assignment VI}
+\author{Satvik Saha}
+\date{}
+
+\geometry{a4paper, margin=1in}
+\setlength\parindent{0pt}
+\renewcommand{\labelenumi}{(\roman{enumi})}
+% \renewcommand\qedsymbol{$\blacksquare$}
+\newcounter{prob}
+\def\problem{\stepcounter{prob}\paragraph{Exercise \arabic{prob}}}
+\def\solution{\paragraph{Solution}}
+% \def\cl{\operatorname{cl}}
+\newcommand\cl[1]{\overline{#1}}
+% \def\int{\operatorname{int}}
+\newcommand\inte[1]{{#1}^\circ}
+\newcommand\norm[1]{\lVert #1 \rVert}
+\def\O{\mathcal{O}}
+\def\C{\mathcal{C}}
+
+\begin{document}
+        \par\textbf{IISER Kolkata} \hfill \textbf{Assignment VI}
+        \vspace{3pt}
+        \hrule
+        \vspace{3pt}
+        \begin{center}
+                \LARGE{\textbf{MA 2101 : Analysis I}}
+        \end{center}
+        \vspace{3pt}
+        \hrule
+        \vspace{3pt}
+        Satvik Saha, \texttt{19MS154}, Group C\hfill\today
+        \vspace{20pt}
+
+        \problem Using only the definition of an ordered field, show that if $x, y \in \mathbb{R}$ with $x > y > 0$, then
+        \[
+                \sqrt{x} > \sqrt{y}.
+        \]
+
+        \solution Note that $\sqrt{x} > 0$ and $\sqrt{y} > 0$, since if either were equal to $0$, then one of $x$ and $y$ would be zero.
+        Also, $\sqrt{x} \neq \sqrt{y}$ since if it were, then $x = \sqrt{x}\sqrt{x} = \sqrt{y}\sqrt{y} = y$.
+        Suppose that $\sqrt{x} < \sqrt{y}$. Then, $\sqrt{y} - \sqrt{x} > 0$ and $\sqrt{y} + \sqrt{x} > 0$, so
+        \[
+                (\sqrt{y} - \sqrt{x})(\sqrt{y} + \sqrt{x}) \;=\; y - x > 0,
+        \]
+        which is a contradiction. Thus, we must have $\sqrt{x} > \sqrt{y}$.
+
+        \problem Show that $\mathbb{Q}$ is neither open nor closed in the Euclidean space $\mathbb{R}$.
+
+        \solution We know that between two reals, there exists a rational real as well as an irrational real\footnote{This is true because given
+        $x, y \in \mathbb{R}$, $x < y$, we can choose rationals $p, q$ such that $x < p < y$ and $x < p < q < y$, using the density of the rationals
+        in the reals. We also pick a rational $s$ such that $p - \sqrt{2} < s < q - \sqrt{2}$, and it is easily verified that $s + \sqrt{2}$
+        is irrational.}.
+        Thus, if $p \in \mathbb{Q}$ were an interior point of $\mathbb{Q}$, there would exist $r > 0$ such that $B_r(q) \subseteq \mathbb{Q}$.
+        This is impossible since there exists an irrational number $x \notin \mathbb{Q}$ between $p$ and $p + r$.
+        Thus, $p \notin \inte{\mathbb{Q}}$, so $\mathbb{Q}$ is not open. \\
+
+        Again, if $\mathbb{Q}$ were closed, then $S = \mathbb{R}\setminus\mathbb{Q}$ must be open. If $x \in S$ were an interior point
+        of $S$, then there would exist $r > 0$ such that $B_r(x) \subseteq S$. This is also impossible, since there exists a rational
+        number $y \notin S$ between $x$ and $x + r$. Thus, $p \notin \inte{S}$, so $S$ is not open, hence $\mathbb{Q}$ is not closed.
+
+        \problem Find the closure of the set
+        \[
+                S = \left\{\frac{1}{n^2}: n \in \mathbb{N}\right\},
+        \]
+        in the Euclidean space $\mathbb{R}$.
+
+        \solution We claim that $\cl{S} = S \cup \{0\}$. Since all points in $S$ are trivially closure points of $S$, we first show that 
+        $0$ is a ilmit point of $S$. This follows since for every $r > 0$, we can find $n \in \mathbb{N}$ such that $nr > 1$ using the
+        Archimedean property. Since, $n^2 \geq n$, we have $0 < 1 /n^2 < r$, so $1 /n^2 \in S \cap B_r(0)$. \\
+
+        We now show that there are no limit points of $S$ apart from $0$. Suppose $x \notin S\cup\{0\}$ is a limit point of $S$.
+        This means that every neighbourhood of $x$ contains infinitely many points of $S$. If $x < 0$, then note that $B_{-x}(x) \cap S = \emptyset$.
+        Otherwise, if $x > 0$, set $r = x /2$. If $B_r(x)$ contained infinitely many points of $S$, then there would be infinitely many
+        natural numbers $n$ such that $x - r < 1 /n^2 < x + r$, i.e. inifintely many $n$ such that $n^2 < 2 /x$, which is absurd.
+        Hence, $x$ is not a limit point of $S$.
+
+        \problem Construct an example where an infinite union of compact subsets of the Euclidean space $\mathbb{R}$ is a bounded
+        open set $S$. Is $S$ compact?
+
+        \solution Compact subsets of $\mathbb{R}$ are precisely the closed and bounded sets, by the Heine-Borel theorem. Thus, consider
+        \[
+                \O = \bigcup_{n = 1}^\infty \C_n, \qquad C_n = \left[-1 + \frac{1}{n},\, 1 - \frac{1}{n}\right].
+        \]
+        Note that each $\C_n$ is a closed interval contained within the open ball $(-1, 1)$, hence is compact. We claim that $\O = (-1, 1)$.
+        This is true because for any $x \in \O$, we find $n$ such that  $x \in C_n$, so $-1 + 1 /n \leq x \leq 1 + 1 /n$.
+        Thus, $-1 < x < 1$, i.e.\ $x \in (-1, 1)$.
+        Again, for any $x \in (-1, 1)$, we find $m, n \in \mathbb{N}$ such that $m(x + 1) > 1$, and $n(1 - x) > 1$, so $-1 + 1 /m < x < 1 - 1 /n$.
+        Setting $k = \max(m, n)$, we see that $x \in \C_k$, hence $x \in \O$.
+        Additionally, $\O$ is bounded and open, as it is simply the open ball $B_1(0)$. \\
+
+        It follows from the Heine-Borel theorem that the set $\O$ is not compact, since it is not closed. Note that $1 \notin \O$ is a limit point of
+        $\O$, since for any $r > 0$, we see that $1 - r /2 \in \O \cap B_r(1)$ if $r < 4$ and $0 \in \O \cap B_r(1)$ if $r \geq 4$.
+
+        \problem 
+        \begin{enumerate}
+                \item Show that the map $d\colon \mathbb{R}^n \times \mathbb{R}^n\to \mathbb{R}$ defined by
+                \[
+                        d(x, y) = \frac{\sqrt{\norm{x - y}}}{1 + \sqrt{\norm{x - y}}},
+                \]
+                is a metric, where $\norm{}$ denotes the Euclidean norm on $\mathbb{R}^n$.
+
+                \item Let $d$ be the above metric. Show that not all closed and bounded subsets of $(\mathbb{R}^n, d)$ are compact.
+
+                \item Does the above phenomenon provide a counterexample to the Heine-Borel theorem?
+        \end{enumerate}
+
+        \solution
+        \begin{enumerate}
+                \item The fact that $d$ is symmetric, i.e.\ $d(x, y) = d(y, x)$, follows trivially from the fact that the Euclidean norm $\norm{}$
+                is symmetric. 
+                \[
+                        d(x, y) = \frac{\sqrt{\norm{x - y}}}{1 + \sqrt{\norm{x - y}}} = \frac{\sqrt{\norm{y - x}}}{1 + \sqrt{\norm{y - x}}} = d(y, x).
+                \]
+
+                The non-negativity of the Euclidean norm guarantees that $\norm{x - y} \geq 0$, so $\sqrt{\norm{x - y}} \geq 0$
+                and $1 + \sqrt{\norm{x - y}} > 0$. This makes $d(x, y)$ well defined and non-negative for all $x, y \in \mathbb{R}^n$.
+                Moreover, if $d(x, y) = 0$, the denominator is positive so the numerator $\sqrt{\norm{x - y}}$ must be zero.
+                This forces $\norm{x - y} = 0$, whence $x = y$. Again, if $x = y$, then $\norm{x - y} = 0$ so $d(x, y) = 0$. \\
+                
+                We must now show that $d$ obeys the triangle inequality. 
+                Set\footnote{This is justified, since $\sqrt{\norm{x}} \geq 0$.} $a^2 = \norm{x - y}$, $b^2 = \norm{y - z}$, $c^2 = \norm{x - z}$.
+                Thus, from the properties of the Euclidean norm,
+                \[
+                        c^2 \leq a^2 + b^2.
+                \]
+                Note that $a, b, c$ are non-negative reals. Thus, the following set of inequalities are bidirectionally equivalent.
+                \begin{align*}
+                        d(x, z)                 \;&\leq\; d(x, y) + d(y, z) \\
+                        \frac{c}{1 + c}         \;&\leq\; \frac{a}{1 + a} + \frac{b}{1 + b} \\
+                        c(1 + a)(1 + b)         \;&\leq\; a(1 + b)(1 + c) + b(1 + a)(1 + c) \\
+                        c + ac + bc + abc       \;&\leq\; a + ab + ac + abc + b + ab + bc + abc \\
+                        c                       \;&\leq\; a + b + 2ab + abc
+                \end{align*}
+                The last inequality is true since $(a + b)^2 = a^2 + b^2 + 2ab \geq a^2 + b^2$, so
+                \[
+                        c \leq \sqrt{a^2 + b^2} \leq a + b \leq a + b + 2ab + abc.
+                \]
+                This proves the desired inequality.
+
+                \item We claim that the set $\mathbb{R}^n \subset (\mathbb{R}^n, d)$ is closed, bounded, and not compact.
+                The fact that $\mathbb{R}^n$ is closed follows from the fact that its complement $\emptyset$ is open.
+                The fact that it is bounded follows from the fact that $\mathbb{R}^n \subseteq B_1(0)$. This is true
+                since for any $x \in \mathbb{R}^n$, $\norm{x} \geq 0$, so
+                \[
+                        d(x, 0) = \frac{\sqrt{\norm{x}}}{1 + \sqrt{\norm{x}}} = 1 - \frac{1}{1 + \sqrt{\norm{x}}} < 1.
+                \]
+                Note that if $\norm{x} < \norm{y}$, then $\sqrt{\norm{x}} < \sqrt{\norm{y}}$, so 
+                $1 / (1 + \sqrt{\norm{x}}) > 1 /(1 + \sqrt{\norm{y}})$, hence $d(x, 0) < d(y, 0)$. \\
+                
+                Let us use the notation $n' = (n, 0, 0, \dots, 0) \in \mathbb{R}^n$.
+                To show that $\mathbb{R}^n$ is not compact, consider the open cover 
+                \[
+                        \O = \bigcup_{n = 1}^\infty \O_n, \qquad \O_n = B_{d(n', 0)}(0).
+                \]
+                Note that in the this is indeed an open cover of $\mathbb{R}^n$, since for any $x \in \mathbb{R}^n$, we can find a positive
+                integer $k$ such that $\norm{x} < \norm{k'} = k$ using the Archimedean property. This means that $d(x, 0) < d(k', 0)$, so $x \in \O_k(0)$.
+                On the other hand, if $\O$ had a finite subcover, note that $\O_{n}(0) \subset \O_{n + 1}(0)$, so our subcover is simply $\O_{k}(0)$
+                for some $k \geq 1$. However, we see that $\norm{k' + 1'} > \norm{k'}$, so $d(k' + 1', 0) > d(k', 0)$ and $k' + 1' \notin \O_{k}(0)$
+                which is a contradiction. Hence, $\mathbb{R}^n$ is not compact for any $n \in \mathbb{N}$.
+
+                \item The Heine-Borel theorem applies only to Euclidean spaces $\mathbb{R}^n$, with the Euclidean metric.
+                Since our example in (ii) works in a different metric $d$, there is no violation of the Heine-Borel theorem.
+
+        \end{enumerate}
+
+\end{document}
