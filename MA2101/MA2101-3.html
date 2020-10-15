@@ -743,10 +743,44 @@ We define the dimeter of \(S\) as \(\sup{D}\).</p>
 <p>Every nondecreasing or nonincreasing sequence sequence is called monotone.
 Every bounded monotonic sequence converges in \(\R\).</p>
 
+<h4 id="toc_9">Subsequential limits</h4>
+
 <p>Let \(S\) be the set of all subsequential limits of the sequence \(\{\alpha_n\}\) in a metric space \((M, d)\). Then, \(S\) is closed.</p>
 
 <p>Let \(\{\alpha_n\}\) and \(\{\beta_n\}\) be real sequences such that for all \(M \in \R\), there exists \(N \in \N\) such that for every \(n \geq N\), \(\alpha_n \geq M\) and \(\beta_n \leq M\). We say that \(\{\alpha_n\}\) diverges to \(\infty\) and \(\{\beta_n\}\) diverges to \(-\infty\). We write
 \[ \alpha_n \to \infty, \qquad \beta_n \to -\infty. \]</p>
+
+<p>Again, let \(S\) denote the set of all subsequential limit of \(\{\alpha_n\}\). If any subsequence of diverges to \(\pm \infty\), we let \(\pm\infty \in S\). Thus, \(s^* = \sup{S}\) and \(s_* = \inf{S}\) exist in the extended real number system. These are called the <em>upper</em> and <em>lower limits</em> of the sequence \(\{\alpha_n\}\). These are denoted as
+\[ \limsup_{n \to \infty} \alpha_n = s^*, \qquad
+\liminf_{n \to \infty} \alpha_n = s_*. \]</p>
+
+<p>In general, \(\alpha_n \to \ell\) <em>iff</em> \(s^* = s_* = \ell\).</p>
+
+<p>If \(s^* \neq s_*\), we say that the sequence \(\{\alpha_n\}\) <em>oscillates</em>. The <em>oscillation</em> \(\omega(\{\alpha_n\})\) of the sequence \(\{\alpha_n\}\) is defined as \(s^* - s_*\) if both are finite, else \(\infty\).</p>
+
+<p>With \(S\), \(s^*\) and \(s_*\) defined as before, then \(s^* \in S\). If \(x &gt; s^*\), then there exists an integer \(N\) such that for all \(n \geq N\), we have \(\alpha_n &lt; x\). There is no other element of the extended reals which satisfies both of these properties.</p>
+
+<h2 id="toc_10">Series</h2>
+
+<p>Given a sequence \(\{\alpha_n\}\) in \(\R\), we define the \(k^\text{th}\)-partial sum as \(s_k = \sum_{n = 1}^k \alpha_n\).</p>
+
+<p>If the sequence of the partial sums \(\{s_k\}\) converges, <em>i.e.</em> \(s_k \to s\), we say that the series \(\alpha_1 + \alpha_2 + \dots \) converges to \(s\). Otherwise, we say that it diverges.</p>
+
+<p>The Cauchy criterion for the sequence \(\{s_k\}\) implies that the series \(\sum_{n = 1}^\infty \alpha_n\) converges <em>iff</em> for every \(\epsilon &gt; 0\), there exists and integer \(N\) such that for all \(n &gt; m \geq N\), we have
+\[ \left|\sum_{j = m + 1}^n \alpha_j \right| &lt; \epsilon. \]</p>
+
+<p>In particular, if the series \(\sum_{n = 1}^\infty \alpha_n\) converges, then \(\alpha_n \to 0\).</p>
+
+<p>The Monotone Convergence theorem implies that a series of nonnegative reals converges <em>iff</em> its partial sums forms a bounded sequence.</p>
+
+<blockquote>
+<p>Consider the geometric series \(\sum_{n = 1}^\infty a^n\).
+Note that the partial sums are 
+\[s_k = \sum_{n = 1}^k a^n = \frac{1 - a^{k + 1}}{1 - a}.\]
+When \(a \neq 0\), \(-1 &lt; a &lt; 1\), the series converges to \(\ell = 1 /(1 - a)\). Note that
+\[ |s_k - \ell| = |\ell| |a^{k + 1}|. \]
+For \(a &gt; 1\) and \(a &lt; 1\), note that \(a^n \not\to 0\), hence the series diverges.</p>
+</blockquote>
 
 
 
