@@ -3,3 +3,6 @@
 *.fls
 *.log
 *.synctex.gz
+*.out
+*.swp
+*.ipynb_checkpoints
