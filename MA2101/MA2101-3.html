@@ -766,7 +766,7 @@ Every bounded monotonic sequence converges in \(\R\).</p>
 
 <p>If the sequence of the partial sums \(\{s_k\}\) converges, <em>i.e.</em> \(s_k \to s\), we say that the series \(\alpha_1 + \alpha_2 + \dots \) converges to \(s\). Otherwise, we say that it diverges.</p>
 
-<p>The Cauchy criterion for the sequence \(\{s_k\}\) implies that the series \(\sum_{n = 1}^\infty \alpha_n\) converges <em>iff</em> for every \(\epsilon &gt; 0\), there exists and integer \(N\) such that for all \(n &gt; m \geq N\), we have
+<p>The Cauchy criterion for the sequence \(\{s_k\}\) implies that the series \(\sum_{n = 1}^\infty \alpha_n\) converges <em>iff</em> for every \(\epsilon &gt; 0\), there exists an integer \(N\) such that for all \(n &gt; m \geq N\), we have
 \[ \left|\sum_{j = m + 1}^n \alpha_j \right| &lt; \epsilon. \]</p>
 
 <p>In particular, if the series \(\sum_{n = 1}^\infty \alpha_n\) converges, then \(\alpha_n \to 0\).</p>
@@ -781,6 +781,25 @@ When \(a \neq 0\), \(-1 &lt; a &lt; 1\), the series converges to \(\ell = 1 /(1 
 \[ |s_k - \ell| = |\ell| |a^{k + 1}|. \]
 For \(a &gt; 1\) and \(a &lt; 1\), note that \(a^n \not\to 0\), hence the series diverges.</p>
 </blockquote>
+
+<p>The <em>comparison test</em> states that for two real sequences \(\{\alpha_n\}\) and \(\{\beta_n\}\), suppose that \(|\alpha_n| &lt; \beta_n\) for all \(n \geq N \in \N\). Then, if the series \(\sum \beta_n\) converges, so does \(\sum \alpha_n\).
+Also, if \(0 \leq \alpha_n &lt; \beta_n\) for all \(n \geq N \in \N\) and \(\sum \alpha_n\) diverges, so does \(\sum \beta_n\).</p>
+
+<p>The <em>Cauchy condensation test</em> states that if \(\{\alpha_n\}\) is a nonincreasing sequence of non-negative reals, the series \(\sum \alpha_n\) converges <em>iff</em> the series \(\sum 2^n\alpha_{2^n}\) converges.</p>
+
+<blockquote>
+<p>The series \(\sum 1/n^j\) converges <em>iff</em> \(j &gt; 1\). This can be shown using the Cauchy condensation test, whereby the given series converges <em>iff</em> \(\sum 2^n /(2^n)^j = \sum 2^{(1 - j)n}\) converges. This is a geometric series, which converges <em>iff</em> \(2^{1 - j} &lt; 1\), <em>i.e.</em> \(j &gt; 1\). Note that we can only use the Cauchy condensation test when \(j &gt; 0\), but the series diverges trivially when \(j \leq 0\) since the terms do not go to zero.</p>
+</blockquote>
+
+<p>The <em>root test</em> states that for a real sequence \(\{\alpha_n\}\), the series \(\sum \alpha_n\) converges if \(\limsup_{n \to \infty} |\alpha_n|^{1/n} &lt; 1\) and diverges if \(\limsup_{n \to \infty} |\alpha_n|^{1/n} &gt; 1\). No conclusion can be made if the limit is exactly \(1\).</p>
+
+<p>The D&#39;Alembert <em>ratio test</em> states that for a real sequence \(\{\alpha_n\}\) such that \(\alpha_n \neq 0\) for \(n \geq N\), the series converges if \(\limsup_{ n\to \infty} |\alpha_{n + 1} / \alpha_n| &lt; 1\) and diverges if \(\limsup_{ n\to \infty} |\alpha_{n + 1} / \alpha_n| &gt; 1\). No conclusion can be made if the limit is exactly \(1\).</p>
+
+<p>For a real sequence \(\{\alpha_n\}_{n = 0}^\infty\), the series
+\[ \sum_{n = 0}^\infty \alpha_n x^n\]
+is called the <em>power series</em> of \(\{\alpha_n\}\).</p>
+
+<p>Suppose \(a = \limsup_{n \to \infty} |\alpha_n|^{1/n}\) for such a sequence. Let \(R = 0\) if \(a = \infty\), \(R = \infty\) if \(a = 0\), and \(R = 1/a\) otherwise. The <em>Cauchy Hadamard theorem</em> states that the power series \(\sum \alpha_nx^n\) converges if \(|x| &lt; R\) and diverges if \(|x| &gt; R\). The quantity \(R\) is called the <em>radius of convergence</em> of the power series.</p>
 
 
 
