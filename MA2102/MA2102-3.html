@@ -783,7 +783,15 @@ Note the following properties</p>
 
 <p>The <em>minor</em> \(\tilde{A}_{ij}\) of \(A \in M_n(F)\) is defined as the \((n - 1)\times(n - 1)\) matrix obtained by deleting the \(i^\text{th}\) row and the \(k^\text{th}\) column of \(A\). Then, it can be shown that 
 \[ \det(A) = \sum_{j = 1}^n (-1)^{i + j} a_{ij} \det(\tilde{A}_{ij}). \]
-Note that we have a free choice of the row \(i\). </p>
+Note that we have a free choice of the row \(i\).</p>
+
+<p>We may think of a matrix \(A \in M_n(F)\) as a collection of column vectors.
+\[ A = \left(\v_1\; \v_2 \dots \v_n\right). \]
+The determinant remains unchanged upon adding a scalar multiple of one column to another. It becomes negated when swapping any two columns. As a corollary, if \(E\) is an elementary matrix, then \(\det(EA) = \det(E)\det(A) = \det(AE)\).</p>
+
+<p>A matrix \(A \in M_n(F)\) is invertible <em>iff</em> \(\det(A) \neq 0\).</p>
+
+<p>We can thus define the determinant of a linear map \(T \colon V \to V\) as the determinant of the matrix \([T]_\beta\). This is well-defined, as the determinant of a matrix is conjugation invariant.</p>
 
 
 
