@@ -801,6 +801,29 @@ is called the <em>power series</em> of \(\{\alpha_n\}\).</p>
 
 <p>Suppose \(a = \limsup_{n \to \infty} |\alpha_n|^{1/n}\) for such a sequence. Let \(R = 0\) if \(a = \infty\), \(R = \infty\) if \(a = 0\), and \(R = 1/a\) otherwise. The <em>Cauchy Hadamard theorem</em> states that the power series \(\sum \alpha_nx^n\) converges if \(|x| &lt; R\) and diverges if \(|x| &gt; R\). The quantity \(R\) is called the <em>radius of convergence</em> of the power series.</p>
 
+<h4 id="toc_11">Absolute convergence</h4>
+
+<p>Let \(\{\alpha_n\}\) be a real sequence. We say that the series \(\sum \alpha_n\) <em>converges absolutely</em> if the series \(\sum |\alpha_n|\) converges.</p>
+
+<p>If a real series converges absolutely, it also converges.</p>
+
+<p>A series \(\sum \alpha_n\) <em>converges conditionally</em> if it converges, but the series \(\sum |\alpha_n|\) diverges.</p>
+
+<p><em>Abel&#39;s Lemma</em> states that given two sequences \(\{\alpha_n\}_{n = 0}^\infty\) and \(\{\beta_n\}_{n = 0}^\infty\), define the \(k^\text{th}\) partial sums
+\[ s_k = \sum_{n = 0}^k \alpha_n. \]
+Also define \(s_k = 0\) if \(k \neq \N\). Then, for \(0 \leq m \leq n\), we have
+\[ \sum_{j = m}^n \alpha_j\beta_j = \sum_{j = m}^{n - 1} s_j(\beta_j - \beta_{j + 1}) + s_n\beta_n - s_{m - 1}\beta_m. \]</p>
+
+<p>Suppose that \(\{s_k\}\) is bounded, the sequence \(\{\beta_n\}\) is nonincreasing, and \(\beta_n \to 0\). Then, \(\sum \alpha_j\beta_j\) converges.</p>
+
+<p>Let \(\{\alpha_n\}\) be a nonincreasing sequence where \(\alpha_n \to 0\). Let the radius of convergence of the power series \(\sum\alpha_nx^n\) be \(1\). Then, this power series also converges at \(x = -1\).</p>
+
+<blockquote>
+<p>We see that the alternating harmonic series \(\sum (-1)^n /n\) converges.</p>
+</blockquote>
+
+<p>Let \(\{\alpha_n\}\) be a real sequence such that the sequence \(\{|\alpha_n|\}\) is nonincreasing, \(a_{2m - 1} &gt; 0\) and \(a_{2m} &lt; 0\) for all \(m \in \N\), and \(a_n \to 0\), then the series \(\sum \alpha_n\) converges.</p>
+
 
 
 <script type="text/javascript">
