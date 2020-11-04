@@ -5,7 +5,7 @@
 
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>MA2102-3</title>
+<title>MA2102-4</title>
 
 
 <style type="text/css">
@@ -639,159 +639,35 @@ pre[class*="language-"] {
 \def\adj{\operatorname{adj}}
 \)</p>
 
-<h2 id="toc_1">Change of basis</h2>
+<h2 id="toc_1">Eigenvectors and eigenvalues</h2>
 
-<p>Let \(U\), \(V\), \(W\), \(X\) be finite dimensional vector spaces with ordered bases \(\alpha, \beta, \gamma\) and \(\delta\) respectively.</p>
+<p>Let \(T\colon V \to V\) be a linear map. We note that if \([T]_\beta\) is a diagonal matrix for some ordered basis \(\beta\) of \(V\), the computation of quantities such as the trace and determinants of \(T^k\) becomes simple.
+If such a \(\beta\) exists, then the linear map \(T\) is called <em>diagonalizable</em>.</p>
 
-<p>If \(S\colon V \to W\) and \(T\colon W \to X\), then
-\[ [T\circ S]_\beta^\delta = [T]_\gamma^\delta [S]_\beta^\gamma. \]</p>
+<p>A matrix \(A \in M_n(F)\) is called <em>diagonalizable</em> if \(A\) is similar to a diagonal matrix.</p>
 
-<p>If \(R\colon U \to V\), then
-\[ ([T]_\gamma^\delta [S]_\beta^\gamma) [R]_\alpha^\beta = [T]_\gamma^\delta ([S]_\beta^\gamma [R]_\alpha^\beta). \]</p>
+<p>Suppose \(T\) is diagonalizable, and \([T]_\beta\) is diagonal with respect to the basis \(\beta = \{\v_1, \dots, \v_n\}\). Then,
+\[[T]_\beta = D(\lambda_1, \dots, \lambda_n)\]
+for scalars \(\lambda_i\). This means that \(T(\v_j) = \lambda_j\v_j\). Such a basis \(\beta\) is called an <em>eigenbasis</em>.</p>
 
-<p>Let \(T\colon V \to V\), and let \(\beta, \gamma\) be two ordered bases of \(V\). Then,
-\[ [\Id]_\beta^\gamma [\Id]_\gamma^\beta = [\Id]_\gamma^\gamma = I_n. \]
-Note that 
-\[ [\Id]_\gamma^\beta [T]_\gamma^\gamma = [T]_\gamma^\beta,\qquad [T]_\gamma^\gamma [\Id]_\beta^\gamma = [T]_\beta^\gamma. \]
-Thus,
-\[ [T]_\beta = [\Id]_\gamma^\beta[T]_\gamma [\Id]_\beta^\gamma. \]</p>
+<p>A non-zero vector \(\v\in V\) is called an <em>eigenvector</em> if \(T\v = \lambda\v\) for some scalar \(\lambda\). The scalar \(\lambda\) is called the <em>eigenvalue</em> of the eigenvector \(\v\).</p>
 
-<p>The matrix \([\Id]_\beta^\gamma\) is called the <em>change of basis matrix</em>. It expresses the basis vectors of \(\beta\) in terms of \(\gamma\).</p>
-
-<p>Recall the linear isomorphisms
-\[ \phi_\beta\colon \R^n \to V, \quad (\lambda_1, \dots, \lambda_n) \mapsto \lambda_1\v_1 + \dots + \lambda_n\v_n, \]
-where \(\beta = \{\v_i\}\).
-Now consider the linear map
-\[ T\colon \R^n \to \R^n, \quad T = \phi_\gamma^{-1}\circ \phi_\beta. \]
-We wish to compute \([T]\), with respect to the standard basis of \(\R^n\). Thus, the \(j^\text{th}\) column of \([T]\) is simply \(T(\e_j) = \phi_\gamma^{-1}\circ \phi_\beta(\e_j) = \phi_\gamma^{-1}(\v_j)\).
-If \(\gamma = \{\v_1&#39;, \dots, \v_n&#39;\}\) and the entries of \([T]\) are \(a_{ij}\), then
-\[ \phi_\gamma^{-1}(\v_j) = \phi_\gamma^{-1}(a_{1j}\v_1&#39; + \dots + a_{nj}\v_n&#39;) = a_{ij}\e_1 + \dots + a_{nj}\e_n. \]
-This means that \([T]\) is precisely \([\Id]_\beta^\gamma\).</p>
-
-<h3 id="toc_2">Invertible maps</h3>
-
-<p>A linear map \(T\colon V \to W\) is called <em>invertible</em> if there exists \(S\colon W \to V\) such that \(S\circ V = I_V\) and \(V\circ S = I_W\).
-Note that this implies that both \(S\) and \(T\) must be bijections.
-Thus, \(T\) is just a linear isomorphism, with \(S = T^{-1}\).</p>
-
-<p>Note that if \(V\) is finite dimensional and \(T\colon V \to W\) is invertible, then the dimensions of \(V\) and \(W\) are equal.</p>
-
-<p>A matrix \(A \in M_{m\times n}(\R)\) is called invertible if there exists \(B \in M_{n\times m}(\R)\) such that \(AB = I_m\), and \(BA = I_n\).</p>
-
-<p>Note that if \(A\) is invertible, it must be a square matrix, <em>i.e.</em> \(m = n\).
-To show this, suppose that \(B\) is an inverse of \(A\). It can be shown that \(B\) is unique.
-\[ B = BI_m = BAB&#39; = I_nB&#39; = B&#39;. \]
-Define the linear maps
-\[ L_A\colon \R^n \to \R^m, \qquad L_B\colon \R^m \to \R^n, \]
-via the matrices acting on vectors. With respect to the standard bases \(\beta_k\) of \(\R^k\), \([L_A] = A\) and \([L_B] = B\). Moreover, \(L_A\circ L_B = \Id\) and \(L_B \circ L_A = \Id\). Thus, the Rank Nullity theorem guarantees that \(m = n\).</p>
-
-<p>Suppose \(T\colon V\to W\) and \(S\colon U \to V\) are invertible. Then, </p>
-
-<ul>
-<li>\((T\circ S)^{-1} = S^{-1}\circ T^{-1}\).</li>
-<li>\((T^{-1})^{-1} = T\).</li>
-</ul>
-
-<p>Let \(V\) and \(W\) be finite dimensional vector spaces with ordered bases \(\beta\) and \(\gamma\). If \(T\colon V \to W\) is a linear map, then \(T\) is invertible <em>iff</em> \([T]_\beta^\gamma\) is invertible. Moreover, \([T^{-1}]_\gamma^\beta = ([T]_\beta^\gamma)^{-1}\).</p>
-
-<p>Consider \(T\colon V\to V\) for finite dimensional \(V\) with bases \(\beta\) and \(\gamma\). Then,
-\[ Q [T]_\beta Q^{-1} = [T]_\gamma, \]
-where \(Q = [I_V]_\beta^\gamma\). Note that \([T]_\beta\) is invertible <em>iff</em> \([T]_\gamma\) is invertible.</p>
-
-<h3 id="toc_3">Similarity</h3>
-
-<p>Matrices \(A, B \in M_n(\R)\) are said to be similar if there exists an invertible matrix \(Q \in M_n(\R)\) such that \(Q A Q^{-1} = B\).
-Note that similarity is an equivalence relation.</p>
+<p>Note that all vectors in the null space of a linear map are eigenvectors, with eigenvalue zero.</p>
 
 <blockquote>
-<p>\(Q\) is not unique. If \(QAQ^{-1} = B\), then it follows that \((\lambda Q)A(\lambda Q)^{-1} = B\) for non-zero \(\lambda\).</p>
+<p>The only possible eigenvalues of a projection map are \(0\) and \(1\). This is because \(P^2 = P\), so if \(P\v = \lambda\v\) for \(\v \neq 0\), then \(\lambda^2\v = \lambda\v\).</p>
 </blockquote>
 
-<h4 id="toc_4">Trace</h4>
+<p>The following conditions are equivalent: \(\lambda\) is an eigenvalue of \(T\), \(T - \lambda I_V\) is not invertible, \(\det(T - \lambda I_v) = 0\).</p>
 
-<p>The <em>trace</em> of a <em>square matrix</em> is simply the sum of its diagonal elements. \[ \trace(A) = a_{11} + a_{22} + \dots + a_{nn}. \]</p>
-
-<p>Let \(T\colon V \to V\) be a linear map. Let \(V\) be of dimension \(n\) and let \(\beta\) be an ordered basis of \(V\). The <em>trace</em> of the <em>linear map</em> \(T\) is defined as \(\trace [T]_\beta\).</p>
-
-<p>Note that \(\trace{T}\) is well-defined, since \(\trace [T]_\beta\) will be the same regardless of our choice of \(\beta\). To show this, we prove the cyclic property of trace: for \(A, B, C \in M_n(F)\), we have
-\[ \trace(ABC) = \trace(BCA) = \trace(CAB). \]
-First, we compute
-\[ \trace(AB) = \sum_{ij} a_{ij}b_{ji} = 
-    \sum_{ji}b_{ji}a_{ij} = \trace(BA). \]
-Now, note that
-\[ \trace(ABC) = \trace((A)(BC)) = \trace((BC)(A)) = \trace(BCA). \]
-Similarly,
-\[ \trace(BCA) = \trace((B)(CA)) = \trace((CA)(B)) = \trace(CAB). \]</p>
-
-<p>Now, note that of \(\beta\) and \(\gamma\) are two ordered bases of \(V\), we can find \(Q\) such that \([T]_\beta = Q [T]_\gamma Q^{-1}\). Indeed, \(Q = [I_V]_\gamma^\beta\). Thus,
-\[ \trace[T]_\beta = \trace(Q[T]_\gamma Q^{-1}) = \trace([T]_\gamma Q^{-1}Q) = \trace[T]_\gamma. \]
-In general, similar matrices have the same trace, <em>i.e.</em> the trace is conjugation invariance.</p>
+<p>Let \(T\colon V \to V\) be a linear map. If \(lambda\) is an eigenvalue, its <em>eigenspace</em> \(E_\lambda\) is defined as the set of all vectors having that eigenvalue.
+\[ E_{\lambda_i} = \{\v\in V: T\v = \lambda_i\v\}. \]
+If \(T\) is diagonalizable with distinct eigenvalues \(\lambda_1, \dots, \lambda_k\), then there exists a basis \(\beta = \{\v_1, \dots, \v_n\}\) of eigenvectors, <em>i.e.</em> an eigenbasis. We can rearrange the \(\v_j\) into \(k\) groups such that the \(i^\text{th}\) group of \(r_i\) vectors have eigenvalue \(\lambda_i\). Clearly, \(r_1 + \dots + r_k = n\). Thus, the \(i^\text{th}\) group of eigenvectors, say \(\beta_i\), is a basis of the eigenspace \(E_{\lambda_i}\). Thus, it follows that
+\[ V = E_{\lambda_1} \oplus \dots \oplus E_{\lambda_k}. \]</p>
 
 <blockquote>
-<p>Let \(P\colon V\to V\) be a projection map, <em>i.e.</em> a linear map such that \(P^2 = P\). Note that \(\v = (v - P\v) + P\v\) is a decomposition into \(\kernel(P)\) and \(\image(P)\). If \(\v \in \kernel(P) \cap \image(P)\), then \(P\v = \ve0\) and \(\v = P\w\) for some \(\w\in V\). Thus,
-\[ \v = P\w = P^2\w = P\v = \ve0. \]
-Thus, \(V = \kernel{P}\oplus\image{P}\).</p>
-
-<p>Now, if \(\dim\image{P} = k\) and \(\dim\kernel{P} = n - k\), we can choose bases \(\{\v_1,\dots, \v_k\}\) of \(\image{P}\) and \(\{\u_1, \dots, \u_{n - k}\}\) of \(\kernel{P}\). Their union \(\beta\) must be a basis of \(V\).
-Since \(\v_i = P\w_i\) for some \(\w_i \in V\), we must have
-\[ P\v_i = P^2\w_i = P\w_i = \v_i. \]</p>
-
-<p>With this, we construct the matrix \([P]_\beta\).
-\[ [P]_\beta = \begin{pmatrix} I_k &amp; 0_{k\times(n - k)} \\ 0_{(n - k)\times k} &amp; 0_{(n - k)\times(n - k)}
-\end{pmatrix}. \]
-Thus, \(\trace{P} = \operatorname{rank}{P} = k\).</p>
+<p>Note that for a projection map \(P\), the eigenspaces \(E_0\) and \(E_1\) are precisely the kernel and image of \(P\).</p>
 </blockquote>
-
-<h4 id="toc_5">Rank</h4>
-
-<p>Let \(T\colon V \to W\) be a linear map. The <em>rank</em> of \(T\) is the dimension of the range of \(T\). Thus, \(\rank{T} = \dim\image{T}\).
-If \(\beta = \{\v_1, \dots, \v_n\}\) is an ordered basis of \(V\), then 
-\[ \rank{T} = \dim\span\{T\v_1, \dots, T\v_n\}. \]
-We can thus choose an ordered basis \(\{T\v_1, \dots, T\v_k\}\) of \(\image{T}\) by rearranging indices. This means that for an ordered basis \(\gamma\) of \(W\), the first \(k\) columns of the matrix \([T]_\beta^\gamma\) are linearly independent.</p>
-
-<p>It can be shown that rank is a conjugation invariant.</p>
-
-<h4 id="toc_6">Determinant</h4>
-
-<p>The <em>determinant</em> \(\det(A)\) of a square matrix, often denoted \(|A|\), can be thought of a map
-\[
-\det M_n(F) \to F, \qquad A \mapsto \sum_{i, j\dots, z = 1}^n \epsilon_{ij\dots z} a_{1i}a_{2j}\dots a_{nz}. 
-\]
-Note the following properties</p>
-
-<ul>
-<li>\(\det(I_n) = 1\).</li>
-<li>\(\det(A) = \det(A^t)\).</li>
-<li>\(\det(AB) = \det(A)\det(B)\).</li>
-<li>\(\det(C^{-1}) = \det(C)^{-1}\).</li>
-<li>\(\det(PAP^{-1}) = \det(A)\).</li>
-</ul>
-
-<p>The last immediately shows that determinant is a conjugation invariant.</p>
-
-<p>Suppose that \(R_i\) are rows of a matrix. Then,</p>
-
-<ul>
-<li>\(\det\pmatrix{R_1\\R_2} = -\det\pmatrix{R_2\\R_1}\).</li>
-<li>\(\det\pmatrix{R_1 + \lambda R \\ R_2} = \det\pmatrix{R_1\\R_2} + \lambda\det\pmatrix{R\\R_2}\)</li>
-</ul>
-
-<p>This allows us to formulate a new definition of the determinant. Suppose \(\delta_n\colon M_n(F) \to F\) such that it is a linear function of each row when the others are fixed, \(\delta_n(A) = 0\) whenever any two rows are identical, and \(\delta(I_n) = 1\). Then, \(\delta_n = \det\).</p>
-
-<p>We may define the adjoint matrix such that
-\[ \adj(A) A = \det(A)I_n. \]</p>
-
-<p>The <em>minor</em> \(\tilde{A}_{ij}\) of \(A \in M_n(F)\) is defined as the \((n - 1)\times(n - 1)\) matrix obtained by deleting the \(i^\text{th}\) row and the \(k^\text{th}\) column of \(A\). Then, it can be shown that 
-\[ \det(A) = \sum_{j = 1}^n (-1)^{i + j} a_{ij} \det(\tilde{A}_{ij}). \]
-Note that we have a free choice of the row \(i\).</p>
-
-<p>We may think of a matrix \(A \in M_n(F)\) as a collection of column vectors.
-\[ A = \left(\v_1\; \v_2 \dots \v_n\right). \]
-The determinant remains unchanged upon adding a scalar multiple of one column to another. It becomes negated when swapping any two columns. As a corollary, if \(E\) is an elementary matrix, then \(\det(EA) = \det(E)\det(A) = \det(AE)\).</p>
-
-<p>A matrix \(A \in M_n(F)\) is invertible <em>iff</em> \(\det(A) \neq 0\).</p>
-
-<p>We can thus define the determinant of a linear map \(T \colon V \to V\) as the determinant of the matrix \([T]_\beta\). This is well-defined, as the determinant of a matrix is conjugation invariant.</p>
 
 
 
