@@ -1,0 +1,132 @@
+\documentclass[10pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{bm}
+
+\title{Analysis I - Assignment VII}
+\author{Satvik Saha}
+\date{}
+
+\geometry{a4paper, margin=1in}
+\setlength\parindent{0pt}
+\renewcommand{\labelenumi}{(\alph{enumi})}
+% \renewcommand\qedsymbol{$\blacksquare$}
+\newcounter{prob}
+\def\problem{\stepcounter{prob}\paragraph{Exercise \arabic{prob}}}
+\def\solution{\paragraph{Solution}}
+% \def\cl{\operatorname{cl}}
+\newcommand\cl[1]{\overline{#1}}
+% \def\int{\operatorname{int}}
+\newcommand\inte[1]{{#1}^\circ}
+\newcommand\norm[1]{\lVert #1 \rVert}
+\def\O{\mathcal{O}}
+\def\C{\mathcal{C}}
+
+\begin{document}
+        \par\textbf{IISER Kolkata} \hfill \textbf{Assignment VII}
+        \vspace{3pt}
+        \hrule
+        \vspace{3pt}
+        \begin{center}
+                \LARGE{\textbf{MA 2101 : Analysis I}}
+        \end{center}
+        \vspace{3pt}
+        \hrule
+        \vspace{3pt}
+        Satvik Saha, \texttt{19MS154}, Group C\hfill\today
+        \vspace{20pt}
+
+        \problem Show that if $\{\alpha_n\}$ is a Cauchy sequence in the Euclidean space $\mathbb{R}$, then so is $\{\alpha_n^2\}$.
+        Does the converse also hold?.
+
+        \solution Since $\{\alpha_n\}$ is a Cauchy sequence in $\mathbb{R}$, it converges to a real number $L$.
+        We claim that $\alpha_n^2 \to L^2$, which in turn means that $\{\alpha_n^2\}$ is a Cauchy sequence\footnote{
+                Cauchy sequences and convergent sequences are precisely the same in the Euclidean space $\mathbb{R}$.
+        }. \\
+
+        Let $\epsilon > 0$ be arbitrary.
+        Note that the convergent sequence $\{\alpha_n\}$ must be bounded, i.e.\ $|\alpha_n| < M$ for some positive $M \in \mathbb{R}$.
+        This means that for all $n \in \mathbb{N}$,
+        \[
+                |\alpha_n + L| \leq |\alpha_n| + |L| < M + |L|.
+        \]
+        Furthermore, we can choose $N \in \mathbb{N}$ such that for all $n \geq N$, 
+        \[
+                |\alpha_n - L| < \frac{\epsilon}{M + |L|}.
+        \]
+        Thus, for all $n \geq N$, we have
+        \[
+                |\alpha_n^2 - L^2| = |\alpha_n - L| |\alpha_n + L| < (M + |L|)\frac{\epsilon}{M + |L|} = \epsilon.
+        \]
+        This establishes that $\alpha_n^2 \to L^2$. \\
+
+        The converse is not true. Consider the sequence defined by $\alpha_n = (-1)^n$. Clearly, the constant sequence $\{\alpha_n^2\} = \{1\}$
+        converges to $1$ and hence is Cauchy, but the sequence $\{\alpha_n\}$ does not converge and hence is not Cauchy.
+
+        \problem Let $(M, d)$ be a metric space and let $\{\alpha_n\}$ and $\{\beta_n\}$ be two sequences in $M$ such that
+        \[
+                \lim_{n \to \infty} d(\alpha_n, \beta_n) = 0.
+        \]
+        Prove the following statements.
+        \begin{enumerate}
+                \item The sequence $\{\alpha_n\}$ is convergent if and only if the sequence $\{\beta_n\}$ is convergent.
+                \item The sequence $\{\alpha_n\}$ is a Cauchy sequence if and only if $\{\beta_n\}$ is a Cauchy sequence.
+        \end{enumerate}
+
+        \solution
+        \begin{enumerate}
+                \item Suppose $\alpha_n \to p$, where $p \in M$. This means that for all reals $r > 0$, there exists $N \in \mathbb{N}$
+                such that $\alpha_n \in B_r(p)$ for all $n \geq N$. We claim that $\beta_n \to p$. \\
+
+                Let $r > 0$ be arbitrary, and let $N_1 \in \mathbb{N}$ such that for all $n \geq N_1$, $\alpha_n \in B_{r /2}(p)$.
+                Because $d(\alpha_n, \beta_n) \to 0$, we can choose $N_2 \in \mathbb{N}$ such that for all $n \geq N_2$,
+                $d(\alpha_n, \beta_n) < r /2$. Thus, setting $N = N_1 + N_2$, we observe that for all $n \geq N$, the triangle inequality gives
+                \[
+                        d(\beta_n, p) \leq d(\beta_n, \alpha_n) + d(\alpha_n, p) < \frac{r}{2} + \frac{r}{2} = r.
+                \]
+                Thus, $\beta_n \in B_r(p)$ for all $n \geq N$, which proves that the sequence $\{\beta_n\}$ converges. \\
+
+                The converse follows trivially by swapping the roles of $\{\alpha_n\}$ and $\{\beta_n\}$.
+
+                \item Suppose $\{\alpha_n\}$ is a Cauchy sequence. This means that for all reals $r > 0$, there exists $N \in \mathbb{N}$
+                such that $d(\alpha_m, \alpha_n) < r$ when both $m, n \geq N$. \\
+
+                Let $r > 0$ be arbitrary, and let $N_1$ be such that for all $m, n \geq N_1$, $d(\alpha_m, \alpha_n) < r /3$.
+                Because $d(\alpha_n, \beta_n) \to 0$, we can choose $N_2 \in \mathbb{N}$ such that for all $n \geq N_2$,
+                $d(\alpha_n, \beta_n) < r /3$. Thus, whenever both $m, n \geq N_1 + N_2$, repeated application of the 
+                triangle inequality gives
+                \[
+                        d(\beta_m, \beta_n) \leq d(\beta_m, \alpha_m) + d(\alpha_m, \alpha_n) + d(\alpha_n, \beta_n)
+                                < \frac{r}{3} + \frac{r}{3} + \frac{r}{3} = r.
+                \]
+                This shows that $\{\beta_n\}$ is Cauchy. \\
+
+                Again, the converse follows trivially by swapping the roles of $\{\alpha_n\}$ and $\{\beta_n\}$.
+        \end{enumerate}
+
+        \problem Let $\{\alpha_n\}$ be a sequence of positive real numbers such that 
+        \[
+                |\alpha_{n + 2} - \alpha_{n + 1}| < |\alpha_{n + 1} - \alpha_n|,
+        \]
+        for all $n \in \mathbb{N}$. Can we conclude from the above condition that the sequence $\{\alpha_n\}$ converges?
+
+        \solution No. Consider the sequence defined by $\alpha_n = \sqrt{n}$. We see that
+        \[
+                \sqrt{n + 2} - \sqrt{n + 1} = \frac{1}{\sqrt{n + 2} + \sqrt{n + 1}} < \frac{1}{\sqrt{n} + \sqrt{n + 1}} = \sqrt{n + 1} - \sqrt{n}.
+        \]
+        Thus, the sequence $\{\alpha_n\}$ satisfies the given condition. However, the sequence is clearly unbounded in the reals, and
+        hence cannot converge. \\
+
+        Another counterexample is the sequence defined by
+        \[
+                \alpha_n = 1 + \frac{1}{2} + \dots + \frac{1}{n}.
+        \]
+        Clearly, 
+        \[
+                |\alpha_{n + 2} - \alpha_{n + 1}| = \frac{1}{n + 2} < \frac{1}{n + 1} = |\alpha_{n + 1} - \alpha_n|.
+        \]
+        On the other hand, the harmonic series diverges, so the sequence $\{\alpha_n\}$ does not converge.
+
+\end{document}
