@@ -801,6 +801,16 @@ is called the <em>power series</em> of \(\{\alpha_n\}\).</p>
 
 <p>Suppose \(a = \limsup_{n \to \infty} |\alpha_n|^{1/n}\) for such a sequence. Let \(R = 0\) if \(a = \infty\), \(R = \infty\) if \(a = 0\), and \(R = 1/a\) otherwise. The <em>Cauchy Hadamard theorem</em> states that the power series \(\sum \alpha_nx^n\) converges if \(|x| &lt; R\) and diverges if \(|x| &gt; R\). The quantity \(R\) is called the <em>radius of convergence</em> of the power series.</p>
 
+<blockquote>
+<p>The exponential function is defined as
+\[ \exp(x) = \sum_{n = 0}^\infty \frac{x^n}{n!}. \]
+Note that the ratio test gives that as \(n \to \infty\),
+\[ \left|\frac{x^{n + 1}}{(n + 1)!}\cdot\frac{n!}{x^n}\right| = \left|\frac{x}{n + 1}\right| \to 0. \]
+Thus, the series converges everywhere, <em>i.e.</em> has a radius of convergence \(R = \infty\).</p>
+
+<p>The number \(e = \exp(0)\) is called <em>Euler&#39;s number</em>.</p>
+</blockquote>
+
 <h4 id="toc_11">Absolute convergence</h4>
 
 <p>Let \(\{\alpha_n\}\) be a real sequence. We say that the series \(\sum \alpha_n\) <em>converges absolutely</em> if the series \(\sum |\alpha_n|\) converges.</p>
@@ -834,9 +844,17 @@ Also define \(s_k = 0\) if \(k \neq \N\). Then, for \(0 \leq m \leq n\), we have
 <h2 id="toc_12">Continuity</h2>
 
 <p>Let \((M, d)\) and \((M&#39;, d&#39;)\) be metric spaces. Let \(S \subseteq M\), \(S&#39; \subseteq M&#39;\) and let there be a function \(f\colon S \to S&#39;\). Let \(a\) be a limit point of \(S\). For \(b \in S&#39;\), we write \(f(x) \to b\) as \(x \to a\) or
-\(\lim_{x \to a}f(x) = b\) if the preimage of every open ball centred at \(b\) is some open ball centred at \(a\).</p>
+\(\lim_{x \to a}f(x) = b\) if the preimage of every open ball around \(b\) contains an open ball around \(a\).</p>
+
+<blockquote>
+<p>Note that \(b\) may not be an element of \(S&#39;\). Neither does \(a\) have to be an element of \(S\).</p>
+</blockquote>
 
 <p>Equivalently, we say that \(\lim_{x \to a}f(x) = b\) <em>iff</em> for every sequence \(\{\alpha_n\}\) in \(S\) such that \(\lim_{n \to \infty} \alpha_n = a\) and \(\alpha_n \neq a\) for all but finitely many \(n\), we have \(\lim_{n \to \infty} f(\alpha_n) = b\).</p>
+
+<p>The function \(f\colon S \to S&#39;\) is said to be continuous at \(a \in S\) if for every open set \(\mathcal{O}&#39; \subseteq S&#39;\) containing \(f(a)\), there exists an open set \(\mathcal{O} \subseteq S\) containing \(a\) such that \(\mathcal{O} \subseteq f^{-1}(\mathcal{O}&#39;)\).</p>
+
+<p>If \(f\) is continuous at every point of \(S\), we say that \(f\) is continuous on \(S\).</p>
 
 
 
