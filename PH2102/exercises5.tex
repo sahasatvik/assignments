@@ -1,0 +1,159 @@
+\documentclass[10pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{bm}
+\usepackage{cancel}
+\usepackage{xcolor}
+\usepackage{graphicx}
+
+\title{Mechanics II - Exercises}
+\author{Satvik Saha}
+\date{}
+
+\geometry{a4paper, margin=1in}
+\setlength\parindent{0pt}
+\renewcommand{\labelenumi}{(\alph{enumi})}
+\renewcommand\CancelColor{\color{red}}
+% \renewcommand\qedsymbol{$\blacksquare$}
+\let\vec\boldsymbol
+\newcommand{\uveci}{{\bm{\hat{\textnormal{\bfseries\i}}}}}
+\newcommand{\uvecj}{{\bm{\hat{\textnormal{\bfseries\j}}}}}
+\newcommand{\uveck}{{\bm{\hat{\textnormal{\bfseries k}}}}}
+\newcommand\norm[1]{\left\lVert#1\right\rVert}
+\newcommand\grad[1]{\vec{\nabla}#1}
+\newcommand\divg[1]{\vec{\nabla}\cdot#1}
+\newcommand\curl[1]{\vec{\nabla}\times#1}
+\newcommand\pp[2]{\frac{\partial #1}{\partial #2}}
+\newcommand\dd[2]{\frac{d #1}{d #2}}
+
+\renewcommand\v{\vec{v}}
+\renewcommand\u{\vec{u}}
+\renewcommand\a{\vec{a}}
+
+\newcounter{prob}
+\def\problem{\stepcounter{prob}\paragraph{Exercise \arabic{prob}}}
+\def\solution{\paragraph{Solution}}
+% \setcounter{prob}{11}
+
+\begin{document}
+        \par\textbf{IISER Kolkata} \hfill \textbf{Additional Exercises}
+        \vspace{3pt}
+        \hrule
+        \vspace{3pt}
+        \begin{center}
+                \LARGE{\textbf{PH 2102 : Mechanics II}}
+        \end{center}
+        \vspace{3pt}
+        \hrule
+        \vspace{3pt}
+        Satvik Saha, \texttt{19MS154}, Group E\hfill\today
+        \vspace{20pt}
+
+        \problem An atomic clock is placed in a plane that moves at the rate $400$ m/s with respect to the earth (treated as an inertial frame).
+        The clock measures a time interval of $3600$ s. By how much is the time interval elongated to an observer on the earth?
+
+        \solution As suggested, we use the approximation
+        \[
+                \gamma = (1 - \beta^2)^{-1 /2} \approx 1 + \frac{1}{2} \beta^2,
+        \]
+        where $\beta = v / c$, because we are given that $v \ll c$.
+        Now, we know that the time interval $\Delta t$ in the inertial frame of the earth and the time interval $\Delta t'$ in 
+        the frame moving with velocity $v$ are related by the time dilation formula as
+        \[
+                \Delta t = \gamma \Delta t' \approx \Delta t' + \frac{1}{2}\beta^2 \Delta t'.
+        \]
+        Thus, the difference between these intervals is given by
+        \[
+                \frac{1}{2}\beta^2 \Delta t' = \frac{400^2}{2 \times 9 \times 10^{16}}\times 3600 = 3.2 \times 10^{-9} \text{ s}.
+        \]
+        The elongation is thus $3.2$ nanoseconds.
+
+        \problem The motion of a medium influences the speed of light through it. Consider a light beam passing through water flowing
+        horizontally with velocity $v$. The beam is directed along the flowing water.
+        (a) If the speed in water is $u$ in the laboratory frame, express $u$ in terms of $v$ and $n$ (the refractive index of water).
+        (b) Show that for $v \ll c$, this expression can be reduced to the form
+        \[
+                u \approx \frac{c}{n} + v\left(1 - \frac{1}{n^2}\right).
+        \]
+
+        \solution Let the frame of the laboratory be $S$. The frame of the water $S'$ moves with velocity $v$ with respect to $S$.
+        In this frame $S'$, we know that the speed of light in the water is given by $u' = c / n$, where $n$ is the refractive index of water.
+        Transforming to frame $S$ while noting that all quantities are directed along the same axis, we use the velocity addition formula to see that
+        \[
+                u \;=\; \frac{u' + v}{1 + u'v/c^2} \;=\; \frac{c/n + v}{1 + v/nc}. \tag{a}
+        \]
+        When $v \ll c$, we can approximate $(1 + v/nc)^{-1} = 1 - v/nc + v^2 /n^2c^2 - \dots \approx 1 - v/nc$.
+        Thus, we obtain the first order approximation
+        \[
+                u \;\approx\; \left(\frac{c}{n} + v\right)\left(1 - \frac{v}{nc}\right) \;=\; \frac{c}{n} + v - \frac{v}{n^2} - \cancel{\frac{v^2}{nc}}
+                        \;\approx\; \frac{c}{n} + v\left(1 - \frac{1}{n^2}\right). \tag{b}
+        \]
+
+        \problem Consider the relativistic form of Newton's Second Law. Assume that force is given by
+        \[
+                \vec{F} = \dd{\vec{p}}{t}.
+        \]
+        in an inertial frame, where $\vec{p}$ is the momentum. Show that for $\vec{F}$ parallel to $\v$, which is the velocity of the object upon which
+        the force acts,
+        \[
+                F = \frac{m_0}{(1 - v^2 /c^2)^{3 /2}}\,\dd{v}{t}.
+        \]
+
+        \solution We know that the momentum of a moving body is given by $\vec{p} = m\v = \gamma m_0\v$, where $\gamma = 1 /\sqrt{1 - v^2 /c^2}$.
+        We calculate the quantity
+        \[
+                \dd{\gamma}{t} = \dd{}{t}\frac{1}{\sqrt{1 - v^2 /c^2}} = -\frac{1}{2}\cdot\frac{1}{(1 - v^2 /c^2)^{3 /2}}\cdot 
+                        \left(-\frac{2v}{c^2}\right)\,\dd{v}{t} = \gamma^3 \frac{v}{c^2}\, \dd{v}{t}.
+        \]
+        Thus, we have
+        \[
+                \vec{F} = \dd{\vec{p}}{t} = \dd{(\gamma m_0\v)}{t} = \gamma m_0 \dd{\v}{t} + m_0\v\dd{\gamma}{t} = 
+                        \gamma m_0 \dd{\v}{t} + \gamma^3 m_0 \frac{v}{c^2}\dd{v}{t}\,\v.
+        \]
+        In this equation, consider the components directed along $\v$ and perpendicular to $\v$. We are given that $\vec{F}$ is 
+        directed along $\v$, and so is the very last term. Thus, $d\v/dt$ must also be directed along $\v$, i.e.\ the acceleration has no
+        centripetal component. This means that we can write $d\v /dt = (dv/dt)\hat{\vec{v}}$, $\vec{F} = F\hat{\vec{v}}$
+        and $\v = v\hat{\vec{v}}$. Taking magnitudes,
+        \[
+                F = \gamma m_0 \dd{v}{t}\left(1 + \gamma^2\frac{v^2}{c^2}\right) =
+                        \gamma m_0 \dd{v}{t}\left(1 + \frac{v^2 /c^2}{1 - v^2 /c^2}\right) =
+                        \gamma m_0 \dd{v}{t}\cdot \frac{1}{1 - v^2 /c^2}.
+        \]
+        Thus, we obtain the desired equation,
+        \[
+                F = \frac{m_0}{(1 - v^2 /c^2)^{3 /2}}\,\dd{v}{t}.
+        \]
+
+        \problem A body of rest mass $m_0$ moving with speed $v$ collides with an identical body at rest, sticks to it, and the combined lump
+        moves along the same direction. 
+        (a) What is the momentum (3-momentum) of the resulting lump? 
+        (b) Express the rest mass of the resulting lump in terms of $m_0$ and $\gamma = 1 /\sqrt{1 - v^2 /c^2}$.
+
+        \solution We simply calculate the four momenta $(E /c, \vec{p})$ of the two bodies and add them together, since the conservation 
+        of energy and 3-momenta guarantees that the four momentum of the system must be conserved.
+        Supposing all motion is along the $x$ axis, the moving body initially has energy $E = \gamma m_0c^2$ and momentum $\gamma m_0 v$,
+        where $\gamma = 1 /\sqrt{1 - v^2 / c^2}$. The stationary body initially has energy $m_0c^2$ and zero momentum, as it's at rest.
+        Thus,
+        \[
+                p_f^\mu = \left(\gamma m_0c, \gamma m_0v, 0, 0\right) + \left(m_0c, 0, 0, 0\right) = \left((\gamma + 1)m_0c, \gamma m_0v, 0, 0\right).
+        \]
+        Thus the 3-momentum of the final lump is simply the last three coordinates, so 
+        \[
+                \vec{p} = \gamma m_0 v \,\uveci. \tag{a}
+        \]
+        We know that the rest mass is simply given by the norm of $p^\mu$ multiplied by a factor of $c$. Thus,
+        \[
+                \norm{p_f^\mu}^2 = (\gamma + 1)^2m_0^2c^2 - \gamma^2m_0^2 v^2 = m_0^2\left[\gamma^2c^2 + 2\gamma c^2 + c^2 - \gamma^2v^2\right].
+        \]
+        Now, $c^2 - v^2 = c^2 (1 - v^2 /c^2) = c^2 /\gamma^2$. Thus, our expression simplifies to
+        \[
+                \norm{p_f^\mu}^2 = m_0c^2\left[2 + 2\gamma\right] .
+        \]
+        Taking a square root and dividing by $c$, we obtain the final rest mass
+        \[
+                m_{0f} \;=\; m_0\sqrt{2 + 2\gamma} \;\geq\; 2m_0. \tag{b}
+        \]
+
+\end{document}
