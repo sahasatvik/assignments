@@ -775,7 +775,7 @@ This map is well-defined and surjective, and we can show that this is a linear i
 <h4 id="toc_7">Coordinate vectors</h4>
 
 <p>Given a finite dimensional vector space \(V\) with an ordered basis \(\beta = \{\v_1, \dots, \v_n\}\), we can uniquely write every \(\v \in V\) as a linear combination \( \lambda_1\v_n + \dots + \lambda_n\v_n\). Then,
-\[ [\v]^\beta = (\lambda_1 \; \dots \; \lambda_n)^T \]
+\[ [\v]^\beta = (\lambda_1 \; \dots \; \lambda_n)^\top \]
 is called the coordinate vector of \(\v\) with respect to the ordered basis \(\beta\).</p>
 
 <h4 id="toc_8">Matrix representation</h4>
@@ -794,7 +794,7 @@ T(\v) &amp;= x_1T(\v_1) + \dots + x_nT(\v_n) \\
 \end{align}
 \]
 Therefore,
-\[ [T\v]^\gamma = \left(\sum_{j}a_{1j}x_j\; \dots\; \sum_{j}a_{mj}x_j\right)^T = A[\v]^\beta. \]</p>
+\[ [T\v]^\gamma = \left(\sum_{j}a_{1j}x_j\; \dots\; \sum_{j}a_{mj}x_j\right)^\top = A[\v]^\beta. \]</p>
 
 <p>We call the matrix \(A\) the matrix representation of \(T\) with respect to \(\beta\) and \(\gamma\). We write \(A = [T]_\beta^\gamma\). Thus,
 \[ [T\v]^\gamma \;=\; [T]_\beta^\gamma\,[\v]^\beta. \]
@@ -910,7 +910,7 @@ Thus, there is a way of identifying elements \(\v \in V\) with the elements of t
 </blockquote>
 
 <p>Let \(T\colon V \to W\) be a linear map. If \(\beta\) and \(\gamma\) are ordered bases of \(V\) and \(W\) respectively, then
-\[ \left([T]_\beta^\gamma\right)^T = [T^*]_{\beta^*}^{\gamma^*}. \]</p>
+\[ \left([T]_\beta^\gamma\right)^\top = [T^*]_{\beta^*}^{\gamma^*}. \]</p>
 
 <p>It can be seen from this that the ranks of \(T\) and \(T^*\) are the same.</p>
 
