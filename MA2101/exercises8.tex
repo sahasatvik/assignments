@@ -1,0 +1,190 @@
+\documentclass[10pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{bm}
+
+\title{Analysis I - Assignment VII}
+\author{Satvik Saha}
+\date{}
+
+\geometry{a4paper, margin=1in}
+\setlength\parindent{0pt}
+\renewcommand{\labelenumi}{(\alph{enumi})}
+% \renewcommand\qedsymbol{$\blacksquare$}
+\newcounter{prob}
+\def\problem{\stepcounter{prob}\paragraph{Exercise \arabic{prob}}}
+\def\solution{\paragraph{Solution}}
+% \def\cl{\operatorname{cl}}
+\newcommand\cl[1]{\overline{#1}}
+% \def\int{\operatorname{int}}
+\newcommand\inte[1]{{#1}^\circ}
+\newcommand\norm[1]{\lVert #1 \rVert}
+\def\O{\mathcal{O}}
+\def\C{\mathcal{C}}
+
+\begin{document}
+        \par\textbf{IISER Kolkata} \hfill \textbf{Assignment VII}
+        \vspace{3pt}
+        \hrule
+        \vspace{3pt}
+        \begin{center}
+                \LARGE{\textbf{MA 2101 : Analysis I}}
+        \end{center}
+        \vspace{3pt}
+        \hrule
+        \vspace{3pt}
+        Satvik Saha, \texttt{19MS154}, Group C\hfill\today
+        \vspace{20pt}
+
+        \problem Let $\{\alpha_n\}$ be a sequence of positive integers such that the digit `5' occurs in the decimal expansion of none of the terms
+        of this sequence. Show that the series $\sum_{n = 1}^\infty 1 /\alpha_n$ converges.
+
+        \solution We assume that $\alpha_n$ are distinct. Without loss of generality\footnote{
+                Since we prove convergence, thereby absolute convergence of the increasing sequence, any rearrangement is also convergent
+                by Dirichlet's Theorem.
+        }, let $\{\alpha_n\}$ be an increasing sequence.
+        Let $A_m$ denote the set of all such $\alpha_n$ such that $10^m \leq \alpha_n < 10^{m + 1}$. Every integer in $A_m$ has 
+        precisely $m + 1$ digits. The first cannot be $0$ or $5$, and the remaining $m$ digits cannot be $5$.
+        Thus, $A_m$ can contain no more than $8\times 9^m$ integers. Furthermore, the smallest element of $A_m$ has to be at least $10^m$, so
+        $1 /\alpha_n \leq 1 /10^m$ for all $\alpha_n \in A_m$. Thus,
+        \[
+                \sum_{\alpha_n \in A_m} \frac{1}{\alpha_n} \leq |A_m|\frac{1}{10^m} \leq \frac{8\cdot 9^m}{10^m}.
+        \]
+        Also, note that all $A_m$, with $m = 0, 1, 2, \dots$, exhaust all possible terms of $\{\alpha_n\}$ exclusively. Thus,
+        if $s_k$ denotes the partial sum of all terms $1 /\alpha_n$ where $\alpha_n < 10^k$,
+        \[
+                s_k = \sum_{\alpha_n < 10^k}\frac{1}{\alpha_n} \leq \sum_{m = 0}^{k - 1} 8\cdot\left(\frac{9}{10}\right)^m = 
+                        8\cdot\,\frac{1 - (9 /10)^k}{1 - 9 /10} < 80.
+        \]
+        Thus, the partial sums are bounded above by $80$. Furthermore, the sequence of partial sums is monotonically increasing, since all the terms
+        in the series are positive. Thus, the given series $\sum_{n = 1}^\infty 1 /\alpha_n$ converges by the Monotone Convergence Theorem.
+
+        \problem Let $k \in \mathbb{Z}$. Find the radius of convergence of the of the power series $\sum_{n = 1}^\infty x^n /n^k$.
+
+        \solution To find the radius of convergence of the given power series, we must calculate the limit
+        \[
+                a = \limsup_{n \to \infty} \left|\frac{1}{n^k}\right|^{1 /n}.
+        \]
+        When $k = 0$, this limit is trivially $1$.
+
+        We first show that the sequence $n^{1 /n} \to 1$. Note that for $n\geq 2$, we have $n^{1 /n} > 1$, so we write $n^{1 /n} = 1 + h_n$
+        for positive $h_n$.
+        Thus, using the binomial theorem, 
+        \[
+                n = (1 + h_n)^n = 1 + nh_n + \frac{1}{2}n(n - 1)h_n^2 + \dots + h_n^n > \frac{1}{2}n(n - 1)h_n^2.
+        \]
+        Thus, $0 < h_n^2 < 2 /(n - 1)$, which means that $h_n \to 0$, so $n^{1 /n} = 1 + h_n \to 1$.
+        Since $n^{1 /n} \neq 0$, we also see that $1 /n^{1 /n} \to 1$.
+        Thus, taking $k$ (or $-k$) products, we see that $1 / n^{k /n} \to 1$, so in all cases, $a = 1$.
+        Thus, the radius of convergence of the power series is $1 /a = 1$ irrespective of $k$. \\
+
+        Note that we can also see this via the ratio test, whereby as $n \to \infty$,
+        \[
+                \left|\frac{x^{n + 1}}{(n + 1)^k}\cdot\frac{n^k}{x^n}\right| = |x|\left|\frac{n}{n + 1}\right|^k \to |x|.
+        \]
+        Thus, the series converges when $|x| < 1$.
+
+        \problem Let $\{\alpha_n\}$ be a real sequence. Show that if $\sum_{n = 1}^\infty n\alpha_n$ converges, then so does the series
+        $\sum_{n = 1}^\infty \alpha_n$.
+        
+        \solution We simply apply Abel's Lemma on the sequences $\{n\alpha_n\}$ and $\{1 /n\}$. The first converges as given, hence
+        its $k^\text{th}$ partial sums $s_k = \sum_{n = 1}^k \alpha_n$ are bounded\footnote{We may define $\alpha_0 = 0$ for consistency
+        with the definitions.}. Also, the sequence $1 /n \to 0$, since for any $\epsilon > 0$, there exists $N \in \mathbb{N}$ such that
+        $N\epsilon > 1$. Thus, $1 /n \in B_\epsilon(0)$ for all $n \geq N$. Furthermore, $1 /(n + 1) < 1 /n$, so this sequence is non-increasing.
+        Thus, the series formed by their product,
+        \[
+                \sum_{n = 1}^\infty n\alpha_n \cdot \frac{1}{n} = \sum_{n = 1}^\infty \alpha_n,
+        \]
+        must also converge.
+
+        \problem Let $\{\alpha_n\}$ be a real sequence. Show that
+        \begin{enumerate}
+                \item If the ratio test implies that the series $\sum_{n = 1}^\infty \alpha_n$ converges, then so does the root test.
+                \item If the root test implies that the series $\sum_{n = 1}^\infty \alpha_n$ diverges, then so does the ratio test.
+        \end{enumerate}
+
+        \solution
+        \begin{enumerate}
+                \item Suppose the ratio test gives the convergence of $\sum_{n = 1}^\infty \alpha_n$, i.e.\ 
+                \[
+                        \limsup_{n \to \infty} \left|\frac{\alpha_{n + 1}}{\alpha_n}\right| = \ell < 1.
+                \]
+                Thus, given $\epsilon > 0$, there exists an integer $N \in \mathbb{N}$ such that for all $n \geq N$, we have 
+                \[
+                        \left|\frac{\alpha_{n + 1}}{\alpha_n}\right| < \ell + \epsilon.
+                \]
+                We thus telescope the product
+                \[
+                        |\alpha_n| = \left| \frac{\alpha_{n}}{\alpha_{n - 1}} \right|\dots \left| \frac{\alpha_{N + 1}}{\alpha_{N}} \right| |\alpha_N|
+                                < (\ell + \epsilon)^{n - N} |\alpha_N|.
+                \]
+                Thus, for all $n \geq N$, we have
+                \[
+                        |\alpha_n|^{1 /n} < (\ell + \epsilon)^{1 - N /n}|\alpha_N|^{1 /n}
+                                = (\ell + \epsilon) \left|\frac{\alpha_N}{(\ell + \epsilon)^N}\right|^{1 /n}.
+                \]
+                Taking the limit $n \to \infty$, we have
+                \[
+                        \limsup_{n \to \infty} |\alpha_n|^{1 /n} \leq \ell + \epsilon.
+                \]
+                Simply choosing $\epsilon = (1 - \ell)/2$, we have $\limsup_{n \to \infty} |\alpha_n|^{1 /n} < 1$, as desired. \\
+
+                Note that we have not verified whether the proper limit exists, merely the fact that the upper limit is less than $1$. \\
+
+                We have used the fact that for $a > 0$, the limit $a^{1 /n} \to 1$. To prove this, first suppose $a > 1$, in which case
+                $a^{1 /n} > 1$. We thus write $a^{1 /n} = 1 + b_n$, so for $n \geq 2$,
+                \[
+                        a = (1 + b_n)^n = 1 + nb_n + \dots + b_n^n > nb_n.
+                \]
+                Thus, $0 < b_n < a /n$, so $b_n \to 0$, hence $a^{1 /n} \to 1$. For $a < 1$, simply note that $1 /a > 1$, 
+                and $(1 /a)^{1 /n} \to 1$, so $a^{1 /n} \to 1$. The case $a = 1$ is trivial.
+
+                \item Suppose the root test gives the divergence of $\sum_{n = 1}^\infty \alpha_n$, i.e.\ 
+                \[
+                        \limsup_{n \to \infty}  |\alpha_n|^{1 /n} = \ell^* > 1.
+                \]
+                Thus, given $\epsilon > 0$, there exists a subsequence $\alpha_{k_n} \to \ell$ such that $1 < \ell \leq \ell^*$\footnote{
+                        Note that $\ell^*$ is the supremum of subsequential limits.
+                }, and\footnote{Simply choose $k_1$ as the first index where the sequence is contained within the $\epsilon$ neighbourhood.}
+                \[
+                        \ell - \epsilon \leq |\alpha_{k_n}|^{1 /k_n} \leq \ell + \epsilon.
+                \]
+                This means that $(\ell - \epsilon)^{k_n}\leq|\alpha_{k_n}| \leq (\ell + \epsilon)^{k_n}$.
+                Specifically, since $\ell > 1$, we can always choose $\epsilon$ such that $\ell - \epsilon > 1$.
+                For instance, we may set $\epsilon = (\ell - 1) /4$. \\
+                % Given $n$, we want to find $m > n$ such that
+                % \[
+                %         (\ell - \epsilon)^{k_{m}} > (\ell + \epsilon)^{k_n}.
+                % \]
+                % This is always possible since when $\ell - \epsilon > 0$, the quantity $(\ell - \epsilon)^{k_m}$ is unbounded.
+                % Thus, we obtain yet another subsequence of these $\{k_n\}$, say $\{p_n\}$, where
+                % \[
+                %         |\alpha_{p_{n + 1}}| \geq (\ell - \epsilon)^{p_{n + 1}} > (\ell + \epsilon)^{p_n} \geq |\alpha_{p_n}|.
+                % \]
+                
+                Suppose that $\limsup_{n \to \infty} |\alpha_{n + 1} /\alpha_n| = s \leq 1$. Note that $s \geq 0$.
+                This means that for the same $\epsilon$, there exists $N \in \mathbb{N}$ such that for all $n \geq N$, we have
+                \[
+                        \left|\frac{\alpha_{n + 1}}{\alpha_n}\right| < s + \epsilon.
+                \]
+                Thus, for all $k_n > N$, we can telescope the product
+                \[
+                        |\alpha_{k_n}| = \left| \frac{\alpha_{k_n}}{\alpha_{k_n - 1}} \right|\dots \left| \frac{\alpha_{N + 1}}{\alpha_{N}} \right| 
+                                |\alpha_N| < (s + \epsilon)^{k_n - N}|\alpha_N|.
+                \]
+                Since $(\ell - \epsilon)^{k_n} < |\alpha_{k_n}|$, this is equivalent to demanding
+                \[
+                        \left(\frac{\ell - \epsilon}{s + \epsilon}\right)^{k_n} < \frac{|\alpha_N|}{(s + \epsilon)^{N}}.
+                \]
+                On the other hand, note that $(\ell - \epsilon)/(s + \epsilon) > 1$, since with our choice of $\epsilon = (\ell - 1)/4$,
+                \[
+                        \ell - \epsilon = \ell - 4\epsilon + 3\epsilon = 1 + 3\epsilon \geq s + 3\epsilon > s + \epsilon.
+                \]
+                Thus, the quantity $((\ell - \epsilon)/(s + \epsilon))^{k_n}$ is unbounded above with increasing $k_n > N$.
+                This is a contradiction. Thus, we must have $s > 1$, as desired.
+                
+        \end{enumerate}
+
+\end{document}
