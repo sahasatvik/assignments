@@ -760,7 +760,7 @@ Every bounded monotonic sequence converges in \(\R\).</p>
 
 <p>With \(S\), \(s^*\) and \(s_*\) defined as before, then \(s^* \in S\). If \(x &gt; s^*\), then there exists an integer \(N\) such that for all \(n \geq N\), we have \(\alpha_n &lt; x\). There is no other element of the extended reals which satisfies both of these properties.</p>
 
-<h2 id="toc_10">Series</h2>
+<h3 id="toc_10">Series</h3>
 
 <p>Given a sequence \(\{\alpha_n\}\) in \(\R\), we define the \(k^\text{th}\)-partial sum as \(s_k = \sum_{n = 1}^k \alpha_n\).</p>
 
@@ -841,7 +841,7 @@ Also define \(s_k = 0\) if \(k \neq \N\). Then, for \(0 \leq m \leq n\), we have
 <p>Let \(\sum \alpha_n\) be conditionally convergent. Then for each pair of \(a\) and \(b\) in the extended reals with \(a \leq b\), the given series has a rearrangement \(\sum \alpha_{f(n)}\) with partial sums \(s_k&#39;\) such that 
 \(\liminf_{k \to \infty} s_k&#39; = a\), and \(\limsup_{k \to \infty} s_k&#39; = b\).</p>
 
-<h2 id="toc_12">Continuity</h2>
+<h3 id="toc_12">Continuity</h3>
 
 <p>Let \((M, d)\) and \((M&#39;, d&#39;)\) be metric spaces. Let \(S \subseteq M\), \(S&#39; \subseteq M&#39;\) and let there be a function \(f\colon S \to S&#39;\). Let \(a\) be a limit point of \(S\). For \(b \in S&#39;\), we write \(f(x) \to b\) as \(x \to a\) or
 \(\lim_{x \to a}f(x) = b\) if the preimage of every open ball around \(b\) contains an open ball around \(a\).</p>
@@ -855,6 +855,25 @@ Also define \(s_k = 0\) if \(k \neq \N\). Then, for \(0 \leq m \leq n\), we have
 <p>The function \(f\colon S \to S&#39;\) is said to be continuous at \(a \in S\) if for every open set \(\mathcal{O}&#39; \subseteq S&#39;\) containing \(f(a)\), there exists an open set \(\mathcal{O} \subseteq S\) containing \(a\) such that \(\mathcal{O} \subseteq f^{-1}(\mathcal{O}&#39;)\).</p>
 
 <p>If \(f\) is continuous at every point of \(S\), we say that \(f\) is continuous on \(S\).</p>
+
+<p>Thus, for \(f\colon M \to M&#39;\), \(f\) is continuous on \(M\) <em>iff</em> the inverse images of all open sets are open.</p>
+
+<p>This immediately means that \(f\) is continuous <em>iff</em> the inverse images of all closed sets are closed.</p>
+
+<p>Let \(a, b \in \R\) with \(a &lt; b\). Let \(f\colon (a, b) \to M\) be a function. For \(x \in [a, b)\), we write \(f(x+)  = \alpha\) if \(f(\alpha_n) \to \alpha\) for all sequences \(\{\alpha_n\}\) in \((x, b)\) such that \(\alpha_n \to x\).
+This is called the <em>right hand limit</em>.</p>
+
+<p>For \(f\colon (a, b) \to M\) suppose \(f\) is discontinuous at \(x\). If both \(f(x+)\) and \(f(x-)\) exist, then \(f\) has a discontinuity of the first kind, a simple discontinuity at \(x\). Otherwise, we say that \(f\) has a discontinuity of the second kind at \(x\).</p>
+
+<h4 id="toc_13">Connectedness</h4>
+
+<p>A <em>connected</em> space is one which cannot be expressed as the union of two or more disjoint, non-empty open sets. More precisely, a <em>disconnected</em> space is the union of two disjoint non-empty open sets.</p>
+
+<p>The continuous image of a connected set is connected.</p>
+
+<p>Every non-empty interval in \(\R\) is connected. In addition, every connected subset of \(\R\) is an interval.</p>
+
+<p>Let \(a, b \in \R\) with \(a &lt; b\) and let \(f\colon [a, b] \to \R\) be continuous. Let \(\alpha = \min(f(a), f(b))\) and \(\beta = \min(f(a), f(b))\). Then, for every \(y \in [\alpha, \beta]\), there exists \(x \in [a, b]\) such that \(f(x) = y\).</p>
 
 
 
