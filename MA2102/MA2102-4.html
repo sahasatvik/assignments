@@ -683,7 +683,7 @@ The roots of this polynomial are the eigenvalues of \(T\).</p>
 
 <p>Similar matrices have the same characteristic and minimal polynomials.</p>
 
-<h3 id="toc_3">Inner products</h3>
+<h2 id="toc_3">Inner products</h2>
 
 <p>For vector spaces over \(\R\) or \(\C\), we may introduce an extra structure in order to eventually talk about lengths and angles.</p>
 
@@ -820,6 +820,16 @@ Apply the Pythagorean Theorem to obtain the desired inequality.</p>
 <p>Note that we have equality when the given orthonormal set is also a basis.</p>
 </blockquote>
 
+<h4 id="toc_6">Orthogonal projection</h4>
+
+<p>Let \(W\) be a subspace of an inner product space \(V\). Choose a basis \(\{\w_1, \dots, \w_k\}\) of \(W\), and apply the Gram-Schmidt process to obtain an orthogonal basis \(\gamma = \{\v_1, \dots, \v_k\}\) of \(W\). Extend this to a basis of \(V\) and apply Gram-Schmidt again to obtain an orthogonal basis \(\beta = \{\v_1, \dots, \v_n\}\) of \(V\).</p>
+
+<p>The <em>orthogonal complement</em> \(W^\perp\) of \(W\) is defined as the set \(\{\v \in V: \ip{\v}{\w} = 0 \text{ for all }\w \in W\}\). We note that \(W^\perp\) is also a subspace of \(V\).</p>
+
+<p>Note that \(W\cap W^\perp = \{\ve0\}\). It can be shown that \(\dim W^\perp = \dim{V} - \dim{W}\). Indeed, \(V = W\oplus W^\perp\). Thus, every vector \(\v \in V\) can be written as \(\v = w + w&#39;\), where \(w \in W\) and \(w&#39; \in W^\perp\). The map
+\[ P\colon V \to V, \qquad \v \mapsto \w, \]
+is called the <em>orthogonal projection</em> of \(V\) onto \(W\). Note that \(\image{P} = W\) and \(\kernel{P} = W^\perp\). </p>
+
 
 
 <script type="text/javascript">
@@ -843,7 +853,7 @@ if (typeof MathJaxListener !== 'undefined') {
 })();
 </script>
 
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
 
 </body>
