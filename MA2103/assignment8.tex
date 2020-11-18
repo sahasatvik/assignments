@@ -1,0 +1,312 @@
+\documentclass[10pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{bm}
+\usepackage{cancel}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{hyperref}
+\usepackage{float}
+
+\title{Mathematical Methods II - Assignment VIII}
+\author{Satvik Saha}
+\date{}
+
+\geometry{a4paper, margin=1in}
+\setlength\parindent{0pt}
+\renewcommand{\labelenumi}{(\alph{enumi})}
+\renewcommand\CancelColor{\color{red}}
+% \renewcommand\qedsymbol{$\blacksquare$}
+\newcommand\ve[1]{\boldsymbol{#1}}
+\newcommand\ppx[1]{\frac{\partial #1}{\partial x}}
+\newcommand\ppt[1]{\frac{\partial #1}{\partial t}}
+\newcommand\pp[3][]{\frac{\partial^{#1}{#2}}{\partial {#3}^{#1}}}
+\newcommand\ddx[1]{\frac{d #1}{d x}}
+\newcommand\ddt[1]{\frac{d #1}{d t}}
+\newcommand\dd[3][]{\frac{d^{#1}{#2}}{d {#3}^{#1}}}
+\newcommand\norm[1]{\left\lVert#1\right\rVert}
+\newcommand\grad[1]{\ve{\nabla}#1}
+\newcommand\divg[1]{\ve{\nabla}\cdot#1}
+\newcommand\curl[1]{\ve{\nabla}\times#1}
+\newcommand\lapl[1]{\nabla^2 #1}
+
+\begin{document}
+        \par\textbf{IISER Kolkata} \hfill \textbf{Assignment VIII}
+        \vspace{3pt}
+        \hrule
+        \vspace{3pt}
+        \begin{center}
+                \LARGE{\textbf{MA 2103 : Mathematical Methods II}}
+        \end{center}
+        \vspace{3pt}
+        \hrule
+        \vspace{3pt}
+        Satvik Saha, \texttt{19MS154}\hfill\today
+        \vspace{20pt}
+        \subsection*{Probability and Statistics (M.L. Boas, Chapter 15)}
+
+        \paragraph{Section 2. Problem 15.} Let two dice be thrown. Calculate the probabilities of the following.
+        \begin{enumerate}
+                \item The sum is greater than or equal to 4.
+                \item The sum is even.
+                \item The sum is divisible by 3.
+                \item The sum is equal to 7, if the sum is odd.
+                \item The product of the two numbers is 12.
+        \end{enumerate}
+
+        \textit{Solution.} We denote the sum of the dice as the random variable $X$. The sample space of rolls is simply all ordered pairs
+        of integers $1$ through $6$, i.e.\ $S = \{(a, b)\colon a, b \in \{1, 2, 3, 4, 5, 6\}\}$. Each such roll is equally likely, of which
+        there are $6^2 = 36$, hence each is associated with a probability of $1 /36$. With this, we can group the rolls by their sum
+        and obtain the sample space in terms of the sums. This gives us the distribution of $X$ as follows.
+        \begin{center}
+                \begin{tabular}{r|ccccccccccc}
+                        Sum ($x$)& 2&3&4&5&6&7&8&9&10&11&12 \\
+                        $P(X = x)$& $\frac{1}{36}$& $\frac{2}{36}$ & $\frac{3}{36}$ & $\frac{4}{36}$ & $\frac{5}{36}$ & $\frac{6}{36}$ & $\frac{5}{36}$
+                        & $\frac{4}{36}$ & $\frac{3}{36}$ & $\frac{2}{36}$ & $\frac{1}{36}$
+                \end{tabular}
+        \end{center}
+        Note that these events are mutually exclusive and exhaustive, which is why they qualify as a sample space.
+        Thus, we can calculate the related probabilities.
+        \begin{enumerate}
+                \item For the sum to be greater than of equal to $4$, we can have $X = 4, 5, 6, 7, 8, 9, 10, 11, 12$.
+                To get the probability, we simply add the individual probabilities up.
+                \[
+                        P(X \geq 4) = \frac{3}{36} + \frac{4}{36} + \frac{5}{36} + \frac{6}{36} + \frac{5}{36} + \frac{4}{36} + \frac{3}{36}
+                        + \frac{2}{36} + \frac{1}{36} = \frac{33}{36} = \frac{11}{12}.
+                \]
+                An alternate way to solve this would be to note that the complement event is $X < 4$, and
+                \[
+                        P(X < 4) = \frac{1}{36} + \frac{2}{36} = \frac{3}{36} = \frac{1}{12}.
+                \]
+                This gives $P(X \geq 4) = 1 - P(X < 4) = 11 /12$.
+
+                \item The sum is even when $X = 2, 4, 6, 8, 10, 12$. Thus,
+                \[
+                        P(X \text{ is even}) = \frac{1}{36} + \frac{3}{36} + \frac{5}{36} + \frac{5}{36} + \frac{3}{36} + \frac{1}{36} 
+                                = \frac{18}{36} = \frac{1}{2}.
+                \]
+
+                \item The sum is divisible by 3 when $X = 3, 6, 9, 12$. Thus,
+                \[
+                        P(3\text{ divides }X) = \frac{2}{36} + \frac{5}{36} + \frac{4}{36} + \frac{1}{36} = \frac{12}{36} = \frac{1}{3}.
+                \]
+                \item Firstly, the sum is odd precisely when it is not even, so $P(X\text{ is odd}) = 1 - 1 /2 = 1 /2$.
+                Now, the probability that the sum is equal to 7 can be read off the table as $P(X = 7) = 6 /36 = 1 /6$.
+                The probability that $X = 7$ and is odd is the same as the probability that it is 7, since the sum is guaranteed to be
+                odd once it's a 7.
+                Thus, we calculate the conditional probability
+                \[
+                        P(X = 7 | X\text{ is odd}) = \frac{P(X = 7 \text{ and } X \text{ is odd})}{P(X\text{ is odd})} = \frac{1 /6}{1 /2} = \frac{1}{3}.
+                \]
+
+                \item The product of the two numbers is 12 in precisely the following rolls.
+                \[
+                        (2, 6) \quad (3, 4)\quad (4, 3) \quad (6, 2).
+                \]
+                Thus, the probability that the product of the two numbers is 12 is given by $4 /36  = 1 /9$.
+        \end{enumerate}
+
+        \paragraph{Problem 17.} Two dice are thrown. The number on the first die is even, and the number on the second less than 4.
+        \begin{enumerate}
+                \item What are the possible sums and their probabilities?
+                \item What is the most probable sum?
+                \item What is the probability that the sum is even?
+        \end{enumerate}
+
+        \textit{Solution.} To calculate the conditional probabilities, note that $P(\text{first number is even}) = 1 /2$ and
+        $P(\text{second number} < 4) = 1 /2$. This is because the first number can be 2, 4, or 6 and the second can be 1, 2, or 3.
+        Thus, any roll satisfying these two constraints comes with probability $(1 /3)\times(1 /3) = 1 /9$.
+        \begin{enumerate}
+                \item We list the sums associated with each roll below.
+                \begin{center}
+                \begin{tabular}{c|ccc}
+                          & 2 & 4 & 6 \\\hline
+                        1 & 3 & 5 & 7 \\
+                        2 & 4 & 6 & 8 \\
+                        3 & 5 & 7 & 9
+                \end{tabular}
+                \end{center}
+                Thus, the probabilities associated with each sum are obtained by a simple count.
+                If $X$ is the random variable denoting the sum,
+                \begin{center}
+                \begin{tabular}{c|ccccccc}
+                        Sum ($x$)  & 3 & 4 & 5 & 6 & 7 & 8 & 9 \\
+                        $P(X = x)$ & $\frac{1}{9}$ & $\frac{1}{9}$ & $\frac{2}{9}$ & $\frac{1}{9}$ & $\frac{2}{9}$ & $\frac{1}{9}$ & $\frac{1}{9}$
+                \end{tabular}
+                \end{center}
+
+                \item It is clear that the sums with the highest probabilities are 5 and 7.
+
+                \item Even sums occur when $X = 4, 6, 8$. Adding up the associated probabilities,
+                \[
+                        P(X \text{ is even}) = \frac{1}{9} + \frac{1}{9} + \frac{1}{9} = \frac{3}{9} = \frac{1}{3}.
+                \]
+        \end{enumerate}
+
+        \paragraph{Problem 18.} Are the following correct non-uniform sample spaces for a throw of two dice?
+        If so, find the probabilities of the given sample points. If not show what is wrong.
+        \begin{enumerate}
+                \item First die shows an even number. \\ First die shows an odd number.
+                \item Sum of two numbers on dice is even. \\ First die is even and second odd. \\ First die is odd and second even.
+                \item First die shows a number less than or equal to 3. \\ At least one die shows a number greater than 3.
+        \end{enumerate}
+
+        \textit{Solution.} A list of events comprises a sample space of an experiment if they are mutually exclusive and exhaustive.
+        \begin{enumerate}
+                \item \textbf{Yes.} The events are exclusive, since if the first die shows an even number, it cannot show an odd number,
+                and vice versa. They are also exhaustive, since the first number must either be even or odd.
+
+                Note that the first number is even half of the time, i.e.\ when it is 2, 4, or 6. Thus, the associated probabilities 
+                with the sample space are $1 /2$ and $1 /2$ respectively.
+
+                \item \textbf{Yes.} Each of the numbers is precisely one of `even' (E) or `odd' (O). Thus, we have the combinations
+                EE, EO, OE, and OO, which are all mutually exclusive and exhaust all possibilities. The middle two (EO and OE) are listed
+                as events, and the first and last (EE and OO) are precisely the same as the sum being even. Note that the sum can be even
+                only if both numbers have the same parity. Thus, the three events are mutually exclusive and exhaustive.
+
+                Note that the events $E$ and $O$ individually have probability $1 /2$, thus each of their four combinations has probability
+                $1 /4$. The first event combines two of these cases, hence has twice the probability. Thus, the associated probabilities 
+                with the sample space are $1 /2, 1 /4$ and $1 /4$.
+
+                \item \textbf{No.} Consider the roll (1, 6). This is falls under both cases, since the first die shows a number
+                less than three, while the second shows a number greater than three. Thus, the events are not mutually exclusive. 
+        \end{enumerate}
+
+        \paragraph{Section 3. Problem 13.} 
+        \begin{enumerate}
+                \item A candy vending machine is out of order. The probability that you get a candy bar (with or without return of your money) is
+                $1 /2$, the probability that you get your money back (with or without candy) is $1 /3$, and the probability that you
+                get both the candy and your money back is $1 /12$. What is the probability that you get nothing at all?
+
+                \item Suppose you try again to get a candy bar as in part (a).
+                Set up the 16-point sample space corresponding to the possible results of your two attempts to buy a candy bar, and find
+                the probability that you get two candy bars (and no money back); that you get no candy and lose your money both times;
+                that you just get your money back both times.
+        \end{enumerate}
+
+        \textit{Solution.} Let $A$ denote the event where we get a candy bar, and let $B$ denote the event where we get our money back.
+        We have been given
+        \[
+                P(A) = \frac{1}{2}, \qquad P(B) = \frac{1}{2}, \qquad P(A \cap B) = \frac{1}{12}.
+        \]
+        \begin{enumerate}
+                \item The event where we get \textit{something} back is denoted by $A \cup B$. We use the relation
+                \[
+                        P(A \cup B) = P(A) + P(B) - P(A \cap B) = \frac{1}{2} + \frac{1}{3} - \frac{1}{12} = \frac{9}{12} = \frac{3}{4}.
+                \]
+                Thus, the complement event where we get \textit{nothing} has probability $1 - P(A \cup B) = 1 /4$.
+
+                \item The two attempts are independent, so their probabilities multiply.
+                Note that
+                \begin{align*}
+                        P(A \cap \overline{B}) &= P(A) - P(A \cap B) = \frac{1}{2} - \frac{1}{12} = \frac{5}{12}, \\
+                        P(\overline{A} \cap B) &= P(B) - P(A \cap B) = \frac{1}{3} - \frac{1}{12} = \frac{3}{12}.
+                \end{align*}
+                Thus, we have the following probabilities.
+                \begin{center}
+                \begin{tabular}{cccc}
+                        $\overline{AB}$ & $A\overline{B}$ & $\overline{A}B$ & $AB$ \\
+                        $\frac{3}{12}$  & $\frac{5}{12}$  & $\frac{3}{12}$  & $\frac{1}{12}$
+                \end{tabular}
+                \end{center}
+                With this, we tabulate the 16 point sample space for two attempts. The horizontal axis denotes the first attempt, the vertical
+                one the second (although the order is immaterial). This is calculated simply by cross multiplying the distribution above.
+                \begin{center}
+                \begin{tabular}{c|cccc}
+                                        & $\overline{AB}$  & $A\overline{B}$  & $\overline{A}B$  & $AB$ \\\hline
+                        $\overline{AB}$ & $\frac{9}{144}$  & $\frac{15}{144}$ & $\frac{9}{144}$  & $\frac{3}{144}$ \\
+                        $A\overline{B}$ & $\frac{15}{144}$ & $\frac{25}{144}$ & $\frac{15}{144}$ & $\frac{5}{144}$ \\
+                        $\overline{A}B$ & $\frac{9}{144}$  & $\frac{15}{144}$ & $\frac{9}{144}$  & $\frac{3}{144}$ \\
+                        $AB$            & $\frac{3}{144}$  & $\frac{5}{144}$  & $\frac{3}{144}$  & $\frac{1}{144}$
+                \end{tabular}
+                \end{center}
+                With this, we note the probabilities as follows.
+                \begin{itemize}
+                        \item Two candy bars and no money back, $P(AA\overline{BB}) = 25 /144$.
+                        \item No candy and no money, $P(\overline{AABB}) = 9 /144 = 1 /16$.
+                        \item No candy, money both times, $P(\overline{AA}BB) = 9 /144 = 1 /16$.
+                \end{itemize}
+        \end{enumerate}
+
+        \paragraph{Problem 17.}
+        \begin{enumerate}
+                \item There are 3 red and 5 black balls in one box and 6 red and 4 white balls in another.
+                If you pick a box at random, and then pick a ball from it at random, what is the probability that it is red? Black? White?
+                That it is either red or white?
+
+                \item Suppose the first ball selected is red and is not replaced before a second ball is drawn.
+                What is the probability that the second ball is red also?
+
+                \item If both balls are red, what is the probability that they both came from the same box?
+        \end{enumerate}
+
+        \textit{Solution.}
+        \begin{enumerate}
+                \item There are 8 balls in the first box (call it $A$), and 10 balls in the second (call it $B$).
+                Thus, the probability of drawing red from the boxes are $3 /8$ and $6 /10$ respectively.
+                Assuming that the likelihood of picking either box is equal, we have the probability of picking a red ball as
+                \[
+                        P(R) = P(R \,|\, A)P(A) + P(R \,|\, B)P(B) = 
+                                \frac{3}{8}\cdot \frac{1}{2} + \frac{6}{10}\cdot \frac{1}{2} = \frac{78}{160} = \frac{39}{80}.
+                \]
+                Similarly, the probability of picking a black ball is given by
+                \[
+                        P(K) = P(K \,|\, A)P(A) + P(K \,|\, B)P(B) = 
+                                \frac{5}{8}\cdot \frac{1}{2} + \frac{0}{10}\cdot \frac{1}{2} = \frac{5}{16}.
+                \]
+                The probability of picking a white ball is
+                \[
+                        P(W) = P(W \,|\, A)P(A) + P(W \,|\, B)P(B) = 
+                                \frac{0}{8}\cdot \frac{1}{2} + \frac{4}{10}\cdot \frac{1}{2} = \frac{4}{20} = \frac{1}{5}.
+                \]
+                Picking neither either red or white is equivalent to picking black. Thus, the probability of picking either red or white is
+                \[
+                        P(R \cup W) = 1 - P(K) = \frac{11}{16}.
+                \]
+
+                \item We calculate the probabilities of each combination of red from each box.
+                \begin{align*}
+                        P(R_AR_A) &= \frac{1}{2}\cdot \frac{3}{8}\cdot \frac{1}{2}\cdot \frac{2}{7} = \frac{6}{224}, \\
+                        P(R_AR_B) &= \frac{1}{2}\cdot \frac{3}{8}\cdot \frac{1}{2}\cdot \frac{6}{10} = \frac{18}{320}, \\
+                        P(R_BR_A) &= \frac{1}{2}\cdot \frac{6}{10}\cdot \frac{1}{2}\cdot \frac{3}{8} = \frac{18}{320}, \\
+                        P(R_BR_B) &= \frac{1}{2}\cdot \frac{6}{10}\cdot \frac{1}{2}\cdot \frac{5}{9} = \frac{30}{360}. 
+                \end{align*}
+                Adding these up, we have $P(RR) = 187 / 840$. Conditioning this on the event that the first ball was red, we have
+                \[
+                        P(RR \,|\, R) = \frac{P(R \,|\, RR) \, P(RR)}{P(R)} = \frac{187 /840}{39 /80} = \frac{374}{819}.
+                \]
+
+                \item Both balls come from the same box with probability
+                \[
+                        P(R_AR_A) + P(R_BR_B) = \frac{6}{224} + \frac{30}{360} = \frac{37}{336}.
+                \]
+                Conditioning this on the event that both balls were red, we have
+                \[
+                        P(RR \text{ same box} \,|\, RR) = \frac{P(RR \,|\, RR \text{ same box})\, P(RR \text{ same box})}{P(RR)} = 
+                                \frac{37 /336}{187 /840} = \frac{185}{374}.
+                \]
+        \end{enumerate}
+
+        \paragraph{Problem 21.}
+        Two people are taking turns tossing a pair of coins; the first person to toss two alike wins.
+        What are the probabilities of winning for the first player and for the second player? \\
+
+        \textit{Solution.} Let the probability of the first player winning be $p$. On any turn, the sample space of tossing
+        two coins is $\{H H, H T, T H, T T\}$, with all four events being equally likely. Two coins are alike in two of these cases,
+        hence the probability of winning a turn is $1 /2$. This means that the first player wins the first turn with probability $1 /2$.
+        Otherwise, the second player gets her turn with probability $1 /2$. Now, the situation for the second player is identical to that
+        of the first by symmetry, barring the previous turn, so she now wins with probability $p$. Thus, the probability of the second
+        player winning from the very beginning is equal to the probability of her advancing to her turn, times that of her winning thereon,
+        i.e. $p /2$. Since exactly one of the two players much win, these are mutually exclusive and exhaustive events, so their
+        probabilities must sum to $1$. Thus,
+        \[
+                1 = p + \frac{p}{2}.
+        \]
+        Solving, we obtain $p = 2 /3$, which is the probability of the first player winning. The probability of the second player winning
+        is $1 - p = p /2 = 1 /3$.
+
+\end{document}

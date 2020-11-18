@@ -875,6 +875,21 @@ This is called the <em>right hand limit</em>.</p>
 
 <p>Let \(a, b \in \R\) with \(a &lt; b\) and let \(f\colon [a, b] \to \R\) be continuous. Let \(\alpha = \min(f(a), f(b))\) and \(\beta = \min(f(a), f(b))\). Then, for every \(y \in [\alpha, \beta]\), there exists \(x \in [a, b]\) such that \(f(x) = y\).</p>
 
+<p>The continuous image of a compact set is compact.</p>
+
+<p>A function \(f\colon S \to \R^n\) is called bounded if there exists \(M &gt; 0\) such that \(\norm{f(x)} \leq M\) for all \(x \in S\).</p>
+
+<p>Every continuous function from a compact set to a Euclidean space is bounded.</p>
+
+<p>Let \((M, d)\) be a compact metric space and let \(f\colon M \to \R\) be continuous. Then \(f\) attains both its minimum and its maximum on \(M\).</p>
+
+<p>Let \((M, d)\) be compact and let \(f\colon M \to M&#39;\) be a continuous bijection. Then, \(f^{-1}\colon M&#39; \to M\) defined by \(f^{-1}(f(x)) = x\) for all \(x \in M\) is also continuous.</p>
+
+<p>Let \((M, d)\) and \((M&#39;, d&#39;)\) be metric spaces and \(f\colon M \to M&#39;\) be a function. We say that \(f\) is <em>uniformly continuous</em> if for every \(\epsilon &gt; 0\), there exists a \(\delta &gt; 0\) such that
+\[ d&#39;(f(x), f(y)) &lt; \epsilon \text{ for all } x, y \in M \text{ with } d(x, y) &lt; \delta. \]</p>
+
+<p>If \(f\colon M \to M&#39;\) is not uniformly continuous, then there are sequences \(\{x_n\}\) and \(\{y_n\}\) in \(M\) and some \(\epsilon &gt; 0\) such that \(d(x_n, y_n) \to 0\) but \(d&#39;(f(x_n), f(y_n)) \geq \epsilon\) for all \(n \in \N\).</p>
+
 
 
 <script type="text/javascript">
@@ -898,7 +913,7 @@ if (typeof MathJaxListener !== 'undefined') {
 })();
 </script>
 
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
 
 </body>
