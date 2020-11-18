@@ -830,6 +830,24 @@ Apply the Pythagorean Theorem to obtain the desired inequality.</p>
 \[ P\colon V \to V, \qquad \v \mapsto \w, \]
 is called the <em>orthogonal projection</em> of \(V\) onto \(W\). Note that \(\image{P} = W\) and \(\kernel{P} = W^\perp\). </p>
 
+<p>Given a finite dimensional inner product space \(V\), for each \(\v\in V\), we have the linear map
+\[ \ip{\cdot}{\v}\colon V \to F, \qquad \w \mapsto \ip\w\v. \]
+This leads to the linear map
+\[ \Phi_V\colon V \to V^*, \qquad \v \mapsto \ip{\cdot}{\v}. \]
+Furthermore, note that \(\Phi_V\) is a linear isomorphism.</p>
+
+<p>The finite dimensional <em>Riesz representation theorem</em> states that for a linear map \(T\colon V \to F\) where \(V\) is a finite dimensional inner product space, there exists \(\v_0 \in V\) such that \(T\v = \ip{\v}{\v_0}\).</p>
+
+<p>The <em>adjoint</em> of a linear map \(T\colon V \to W\) is the map \(W \to V\) defined as the composite
+\[ W \overset{\Phi_W}{\longrightarrow} W^* \overset{T^*}{\longrightarrow} V^*\overset{(\Phi_V)^{-1}}{\longrightarrow} V. \]
+This is denoted as \(T^*\).</p>
+
+<p>Let \(\w \in W\) and consider \(T^*\w\). Note that \(T^*\w = \Phi_V^{-1}\ip{T(\cdot)}{\w}_W\). Thus,
+\[ \ip{T(\cdot)}{\w}_W = \ip{\cdot}{T^*\v}_V. \]
+This property is enough to define the adjoint, <em>i.e.</em> the adjoint is the map \(T^*\) satisfying \(\ip{T\v}{\w}_W = \ip{\v}{T^*\w}_V\) for all \(\v \in V\), \(\w \in W\).</p>
+
+<p>Let \(V\) be a finite dimensional inner product space and let \(\beta\) be an orthonormal basis. Then, \([T^*]_\beta = [T]_\beta^*\).</p>
+
 
 
 <script type="text/javascript">
