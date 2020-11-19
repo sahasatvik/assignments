@@ -1,0 +1,71 @@
+\documentclass[10pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+
+\title{Geodynamics - Assignment I}
+\author{Satvik Saha}
+\date{}
+
+\geometry{a4paper, margin=1in}
+% \setlength\parindent{0pt}
+\renewcommand{\labelenumi}{(\alph{enumi})}
+
+\begin{document}
+        \par\textbf{IISER Kolkata} \hfill \textbf{Assignment I}
+        \vspace{3pt}
+        \hrule
+        \vspace{3pt}
+        \begin{center}
+                \LARGE{\textbf{ES 2102 : Hydrology and Geodynamics}}
+        \end{center}
+        \vspace{3pt}
+        \hrule
+        \vspace{3pt}
+        Satvik Saha, \texttt{19MS154}\hfill\today
+        \vspace{20pt}
+
+        \paragraph{Solution 1} The tipping point at which the plate becomes subductable, i.e.\ negatively buoyant, is when the
+        lithospheric mantle buoyancy (which is negative, pulling the crust down) becomes equal to and exceeds the crustal buoyancy. Thus, we want
+        \[
+                (\rho_{am} - \rho_c)h_c g \;\leq\; \frac{1}{2}\alpha\rho_{am}(h_p - h_c)(T_{am} - T_{bc})g.
+        \]
+        Rearranging, we have
+        \[
+                h_p \;\geq\; h_c + \frac{2(\rho_{am} - \rho_c)h_c}{\alpha\rho_{am}(T_{am} - T_{bc})}
+        \]
+        \begin{enumerate}
+                \item Using the given values, with $h_c = 7$ km, we obtain the height of the oceanic plate,
+                \[
+                        h_p \;\geq\; h_c + \frac{2\times(3250 - 3000)}{3\times 10^{-5}\times 3250 \times (1250 - 554)}\,h_c = (1 + 7.37) h_c
+                                \;\approx\; 58.6 \text{ km}.
+                \]
+                The height of the mantle lithosphere is simply $h_{lm} = h_p - h_c \geq 51.6$ km. We use the relation $h_{lm} = 10\sqrt{A}$
+                where $A$ is the mantle lithosphere age in million years. Thus,
+                \[
+                        A \;=\; \left(\frac{h_{lm}}{10}\right)^2 \,\geq\, 5.16^2 \,=\, 26.6\text{ million years}.
+                \]
+                \item From the given relation, we see that $h_{lm} = h_p - h_c \propto h_c$. Thus, the thickness of lithospheric mantle, hence
+                the age $A \propto h_{lm}^2$ must increase with an increase in the crust thickness $h_c$. Specifically,
+                \[
+                        A \propto h_{lm}^2 \propto h_c^2.
+                \]
+                We have already calculated the coefficient of proportionality as $h_{lm} = 7.37\, h_c$, so $A = 0.737^2 h_c^2 = 0.54 h_c^2$.
+                For $h_c$ between $6$ and $8$ km, we see that $A$ ranges between 19.6 and 34.8 million years.
+        \end{enumerate}
+
+        \paragraph{Solution 2} For the subduction of oceanic crust of thickness between $10$ and $40$ km, the plate must have a thickness
+        of at least $h_p = 8.37 h_c$, which is between 83.7 and 334.8 km.
+        Of course, in order for this crust to subduct underneath another plate, it must be even more negatively buoyant than the other plate.
+
+        Such an ocean lithosphere with a plateau embedded in it would not undergo a typical subduction process, since the plateau would
+        offer resistance as soon as it reaches a trench. In such an ocean-ocean plate subduction zone, the plateau would force a subduction flip.
+        This is because the plateau would act as an obstruction, locking the plate from moving further downwards, thus forcing the other plate
+        to subduct.
+
+        Furthermore, note that the required thickness of such a subductable oceanic plate is very high. If such a plate is forced
+        underneath another plate without attaining this thickness, it will undergo flat slab subduction until enough lithospheric mantle
+        develops to make it negatively buoyant, hence subductable.
+        
+\end{document}
