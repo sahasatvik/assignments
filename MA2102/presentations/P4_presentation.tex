@@ -1,0 +1,99 @@
+\documentclass{beamer}
+\usetheme{metropolis}
+\setbeamercovered{transparent}
+
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{bm}
+\def\x{\bm{x}}
+\def\y{\bm{y}}
+\def\v{\bm{v}}
+\def\xcol{\begin{bmatrix} x_1 \\ x_2 \\ \vdots \\ x_m \end{bmatrix} }
+\def\ycol{\begin{bmatrix} y_1 \\ y_2 \\ \vdots \\ y_n \end{bmatrix} }
+\def\yrow{\begin{bmatrix} y_1 & y_2 & \cdots & y_n \end{bmatrix} }
+\def\rank{\operatorname{rank}}
+\def\dim{\operatorname{dim}}
+
+\title{
+        Term presentation \\
+        Problem 4
+}
+\author{Satvik Saha, 19MS154}
+\institute{
+        MA2102: Linear Algebra I \\
+        Indian Institute of Science Education and Research, Kolkata
+}
+\date{\today}
+
+\begin{document}
+        \maketitle
+
+        \begin{frame}{Problem statement}
+                Show that a matrix $A$ is of rank 1 if and only if $A = \x\y^\top$ for some non-zero column vectors $\x$ and $\y$. \\~\\
+                \pause
+                \[
+                        A = \begin{bmatrix}
+                                a_{11} & a_{12} & \cdots & a_{1n} \\
+                                a_{21} & a_{22} & \cdots & a_{2n} \\
+                                \vdots & \vdots & \ddots & \vdots \\
+                                a_{m1} & a_{m2} & \cdots & a_{mn}
+                        \end{bmatrix}, \qquad
+                        \x = \xcol, \qquad
+                        \y = \ycol.
+                \]
+        \end{frame}
+
+        \begin{frame}{Preliminaries}
+                The \alert<1>{column rank} of a matrix $A$ is equal to the dimension of the column space of $A$. \\~\\
+                The \alert<1>{row rank} of a matrix $A$ is equal to the dimension of the row space of $A$. \\~\\
+                \pause
+                The column rank and row rank of any matrix $A \in M_{m\times n}(F)$ are equal. \\~\\
+                The \alert<2>{rank} of $A$ is equal to the column rank of $A$. 
+        \end{frame}
+
+        \begin{frame}{If $A = \x\y^\top$, then $\rank{A} = 1$}
+                \begin{align*}
+                        A = \x\y^\top &= \xcol\yrow \\ \\ \pause
+                                &= \begin{bmatrix}
+                                        x_1y_1 & x_1y_2 & \cdots & x_1y_n \\
+                                        x_2y_1 & x_2y_2 & \cdots & x_2y_n \\
+                                        \vdots & \vdots & \ddots & \vdots \\
+                                        x_my_1 & x_my_2 & \cdots & x_my_n \\
+                                \end{bmatrix} \\ \\ \pause
+                                &= \begin{bmatrix}
+                                        y_1\x & y_2\x & \cdots & y_n\x
+                                \end{bmatrix}.
+                \end{align*}        
+        \end{frame}
+        
+        \begin{frame}{If $A = \x\y^\top$, then $\rank{A} = 1$}
+        The column space of $A$ consists of all finite linear combinations of the columns of $A$. \\~\\
+        \pause
+        For any element $\v$ in the column space of $A$, we can write
+        \[
+                \v = \lambda_1y_1\x + \lambda_2y_2\x + \cdots + \lambda_ny_n\x = \lambda \x.
+        \]
+        \pause
+        The column vector $\x$ spans the column space of $A$. 
+        Furthermore, there is some $y_i\x\neq\mathbf{0}$ in the column space of $A$. 
+        \[
+                \rank{A} \leq 1 \leq \rank{A} \;\Rightarrow\; \rank{A} = 1.
+        \]
+        \end{frame}
+        
+        \begin{frame}{If $\rank{A} = 1$, then $A = \x\y^\top$}
+                The column space of $A$ admits a singleton basis. Set $\x$ equal to this element. \\
+                \[
+                        A = \begin{bmatrix}
+                                \lambda_1\x & \lambda_2\x & \cdots & \lambda_n\x
+                        \end{bmatrix}.
+                \] \\~\\
+                \pause
+                Set
+                \[
+                        \y = \begin{bmatrix}
+                                \lambda_1 \\ \lambda_2 \\ \vdots \\ \lambda_n
+                        \end{bmatrix}.
+                \]\\~\\
+                With this choice of column vectors $\x$ and $\y$, we have A = $\x\y^\top$.
+        \end{frame}
+\end{document}

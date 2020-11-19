@@ -1,0 +1,136 @@
+\documentclass{beamer}
+\usetheme{metropolis}
+\setbeamercovered{transparent}
+
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{bm}
+\def\x{\bm{x}}
+\def\y{\bm{y}}
+\def\v{\bm{v}}
+\def\w{\bm{w}}
+\def\p{\bm{p}}
+\def\q{\bm{q}}
+\def\rank{\operatorname{rank}}
+\def\dim{\operatorname{dim}}
+\newcommand\ip[2]{\langle #1,\, #2 \rangle}
+
+\title{
+        Term presentation \\
+        Problem 2
+}
+\author{Satvik Saha, 19MS154}
+\institute{
+        MA2102: Linear Algebra I \\
+        Indian Institute of Science Education and Research, Kolkata
+}
+\date{\today}
+
+\begin{document}
+        \maketitle
+
+        \begin{frame}{Problem statement}
+                A square, $n \times n$ real matrix $A$ is such that $A A^\top$ is diagonal, with each diagonal entry non-zero.
+                Show that the rows of $A$ are orthogonal.
+                Is it true that the columns are orthogonal? 
+                \pause
+                \[
+                        A = \begin{bmatrix}
+                                a_{11} & a_{12} & \cdots & a_{1n} \\
+                                a_{21} & a_{22} & \cdots & a_{2n} \\
+                                \vdots & \vdots & \ddots & \vdots \\
+                                a_{n1} & a_{n2} & \cdots & a_{nn}
+                        \end{bmatrix}
+                        = \begin{bmatrix}
+                                \v_1 \\
+                                \v_2 \\
+                                \vdots \\
+                                \v_n 
+                        \end{bmatrix}
+                        = \begin{bmatrix}
+                                \w_1 & \w_2 & \cdots & \w_n
+                        \end{bmatrix}.
+                \] \\~\\
+                The rows of $A$ are the row vectors $\v_i \in \mathbb{R}^n$. \\
+                The columns of $A$ are the column vectors $\w_i \in \mathbb{R}^n$.
+        \end{frame}
+
+        \begin{frame}{Preliminaries}
+                The standard inner product for row vectors in $\mathbb{R}^n$ is defined as
+                \[
+                        \ip{\cdot}{\cdot}\colon \mathbb{R}^n\times \mathbb{R}^n \to \mathbb{R}, \qquad \ip{\x}{\y} = \x\y^\top.
+                \]
+                In other words,
+                \[
+                        \ip{\x}{\y} \,=\, \sum_{i = 1}^n x_i y_i.
+                \]\\~\\
+                \pause
+                Note that
+                \[
+                        \ip{\x}{\x} = x_1^2 + x_2^2 + \dots + x_n^2.
+                \]
+                Thus, $\ip{\x}{\x} = 0$ if and only if $\x = \mathbf{0}$.
+        \end{frame}
+
+        \begin{frame}{Preliminaries}
+                Two vectors $\x$ and $\y$ in an inner product space are called orthogonal if $\ip{\x}{\y} = 0$. \\~\\
+                \pause
+                The matrix product can be concisely expressed in terms of the inner product. Let $P \in M_{m \times n}(\mathbb{R})$
+                and $Q \in M_{n \times l}(\mathbb{R})$. Then, the $i, j^\text{th}$ element of the product $PQ$ is given by
+                \[
+                        [PQ]_{ij} \,=\, \sum_{k = 1}^n p_{ik}q_{kj} \,=\, \p_i\q_j \,=\, \ip{\p_i}{\q_j^\top}.
+                \]
+                Note that $\p_i \in \mathbb{R}^n$ is the $i^\text{th}$ row of $P$, and $\q_j \in \mathbb{R}^n$ is the $j^\text{th}$
+                column of $Q$.
+        \end{frame}
+
+        \begin{frame}{Proof}
+                Let $A A^\top = D(\lambda_1, \lambda_2, \dots, \lambda_n)$ for non-zero $\lambda_i \in \mathbb{R}$.
+                Thus, the $i, j^\text{th}$ element of the product $A A^\top$ is given by
+                \[
+                        [A A^\top]_{ij} = \lambda_i\delta_{ij}.
+                \] 
+                \pause
+                If the row vectors $\v_1, \dots, \v_n \in \mathbb{R}^n$ are the rows of $A$, then the column vectors
+                $\v_1^\top, \dots, \v_2^\top \in \mathbb{R}^n$ are the columns of $A^\top$.
+                \[
+                        [A A^\top]_{ij} = \v_i\v_j^\top = \ip{\v_i}{\v_j}.
+                \]
+                \pause
+                Thus, $\ip{\v_i}{\v_j} = 0$ precisely when $i \neq j$. This proves that the rows $\v_1, \dots, \v_n$ of $A$
+                are orthogonal.
+        \end{frame}
+
+        \begin{frame}{Are the columns of $A$ orthogonal?}
+                No. We supply the following counterexample for $n = 2$.
+                \[
+                        A = \begin{bmatrix}
+                                1 & -1 \\ 2 & 2
+                        \end{bmatrix}.
+                \]
+                Note that the rows are orthogonal because 
+                \[
+                        A A^\top \,=\, \begin{bmatrix}
+                                1 & -1 \\ 2 & 2
+                        \end{bmatrix}
+                        \begin{bmatrix}
+                                1 & 2 \\ -1 & 2
+                        \end{bmatrix}
+                        \,=\, \begin{bmatrix}
+                                2 & 0 \\ 0 & 8
+                        \end{bmatrix}
+                \]
+                \pause
+                However, the inner product of the two columns is
+                \[
+                        \begin{bmatrix}
+                                1 \\ 2
+                        \end{bmatrix}^\top
+                        \begin{bmatrix}
+                                -1 \\ 2
+                        \end{bmatrix}
+                        \,=\, 1(-1) + 2(2) = 3 \neq 0.
+                \]
+                Note that the inner product for two column vectors $\x, \y \in \mathbb{R}^n$ is defined as $\x^\top\y$.
+        \end{frame}
+
+\end{document}

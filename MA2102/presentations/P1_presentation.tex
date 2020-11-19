@@ -1,0 +1,194 @@
+\documentclass{beamer}
+\usetheme{metropolis}
+\setbeamercovered{transparent}
+
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{bm}
+\def\v{\bm{v}}
+\def\w{\bm{w}}
+\def\dim{\operatorname{dim}}
+\def\deg{\operatorname{deg}}
+\def\det{\operatorname{det}}
+
+\title{
+        Term presentation \\
+        Problem 1
+}
+\author{Satvik Saha, 19MS154}
+\institute{
+        MA2102: Linear Algebra I \\
+        Indian Institute of Science Education and Research, Kolkata
+}
+\date{\today}
+
+\begin{document}
+        \maketitle
+
+        \begin{frame}{Problem statement}
+                Find the eigenvalues and corresponding eigenvectors of the matrix
+                \[
+                        A = \begin{bmatrix}
+                                1 & 2 & 2 \\ 2 & 1 & 2 \\ 2 & 2 & 1
+                        \end{bmatrix}.
+                \]
+                Find an invertible matrix $P$ such that $P^{-1}AP$ is diagonal.
+        \end{frame}
+
+        \begin{frame}{Preliminaries}
+                An eigenvector of a matrix $A$ is a vector $\v$ such that
+                \[
+                        A\v = \lambda\v,
+                \]
+                for some scalar $\lambda$, which is called the eigenvalue of the eigenvector $\v$. \\~\\
+                \pause
+                The eigenvalues of a matrix $A$ are precisely the roots of the characteristic polynomial
+                \[
+                        \det(A - \lambda I_n) = 0.
+                \]
+        \end{frame}
+        
+        \begin{frame}{Preliminaries}
+                Let $P \in M_n(F)$ be a matrix whose columns are eigenvectors $\v_1, \v_2, \dots, \v_n$ of $A$.
+                Then, $AP = PD$, where $D$ is the diagonal matrix of the corresponding eigenvalues.
+                \begin{align*}
+                        AP &= \begin{bmatrix} A\v_1 & A\v_2 & \cdots & A\v_n \end{bmatrix}\\
+                        &= \begin{bmatrix} \lambda_1\v_1 & \lambda_2\v_2 & \cdots & \lambda_n\v_n \end{bmatrix} \\
+                        &= \begin{bmatrix}
+                                \v_1 & \v_2 & \cdots & \v_n
+                        \end{bmatrix}
+                        \begin{bmatrix}
+                                \lambda_1 & 0 & \cdots & 0 \\
+                                0 & \lambda_2 & \cdots & 0 \\
+                                \vdots & \vdots & \ddots & \vdots \\
+                                0 & 0 & \cdots & \lambda_n
+                        \end{bmatrix}.
+                \end{align*}
+                \pause
+                If the eigenvectors $\v_1, \dots, \v_n$ are linearly independent, the matrix $P$ is invertible.
+                Then, we can write  $P^{-1}AP = D$.
+        \end{frame}
+
+        \begin{frame}{Computing eigenvalues}
+                We first write the characteristic polynomial $p(\lambda) = \det(A - \lambda I_n)$.
+                \begin{align*}
+                        \det \begin{bmatrix}
+                                1 - \lambda & 2 & 2 \\ 2 & 1 - \lambda & 2 \\ 2 & 2 & 1 - \lambda
+                        \end{bmatrix}
+                                \,&=\, (1 - \lambda)^3  + 2\cdot 8 - 3\cdot 4(1 - \lambda) \\
+                                \,&=\, 1 - 3\lambda + 3\lambda^2 - \lambda^3 + 16 - 12 + 12\lambda \\
+                                \,&=\, 5 + 9\lambda + 3\lambda^2 - \lambda^3.
+                \end{align*}
+                \pause
+                By inspection, $p(5) = 0$, so $5$ is a root of $p$. Synthetic division gives
+                \[
+                        p(\lambda) = (5 - \lambda)(1 + 2\lambda + \lambda^2) = (5 - \lambda)(1 + \lambda)^2.
+                \]
+                Thus, the eigenvalues of $A$ are $-1$ and $5$.
+        \end{frame}
+
+        \begin{frame}{Computing eigenvectors}
+                We seek $\v$ such that $A\v = \lambda\v$, i.e.\ $(A - \lambda I_n)\v = \mathbf{0}$. \\~\\
+
+                When $\lambda = 5$,
+                \begin{align*}
+                        \begin{bmatrix}
+                                1 - 5 & 2 & 2 \\ 2 & 1 - 5 & 2 \\ 2 & 2 & 1 - 5
+                        \end{bmatrix}
+                        \begin{bmatrix}
+                                v_{1} \\ v_{2} \\ v_{3}
+                        \end{bmatrix}
+                        &= \begin{bmatrix}
+                                -4v_1 + 2v_2 + 2v_3 \\
+                                2v_1 - 4v_2 + 2v_3 \\
+                                2v_1 + 2v_2 - 4v_3
+                        \end{bmatrix}
+                        &= \begin{bmatrix}
+                                0 \\ 0 \\ 0
+                        \end{bmatrix}.
+                \end{align*}
+                This forces $v_1 = v_2 = v_3$. We choose $v_1 = v_2 = v_3 = 1$.
+        \end{frame}
+        
+        \begin{frame}{Computing eigenvectors}
+                When $\lambda = -1$,
+                \begin{align*}
+                        \begin{bmatrix}
+                                1 + 1 & 2 & 2 \\ 2 & 1 + 1 & 2 \\ 2 & 2 & 1 + 1
+                        \end{bmatrix}
+                        \begin{bmatrix}
+                                v_{1} \\ v_{2} \\ v_{3}
+                        \end{bmatrix}
+                        &= \begin{bmatrix}
+                                2v_1 + 2v_2 + 2v_3 \\
+                                2v_1 + 2v_2 + 2v_3 \\
+                                2v_1 + 2v_2 + 2v_3
+                        \end{bmatrix}
+                        &= \begin{bmatrix}
+                                0 \\ 0 \\ 0
+                        \end{bmatrix}.
+                \end{align*}
+                This only imposes $v_1 + v_2 + v_3 = 0$. The set of solutions $[-v_2 - v_3\quad v_2\quad v_3]^\top$ form a two dimensional
+                subspace of $\mathbb{R}^3$. We choose two linearly independent vectors from this subspace by setting $v_2 = 0, v_3 = 1$ in the first case
+                and $v_2 = 1, v_3 = 0$ in the second.
+        \end{frame}
+
+        \begin{frame}
+                Thus, the eigenvalues and corresponding eigenvectors of $A$ are as follows.
+                \begin{align*}
+                        \lambda = 5,  & \qquad \v_1 = \begin{bmatrix}1 \\ 1 \\ 1\end{bmatrix}, \\\\
+                        \lambda = -1, & \qquad \v_2 = \begin{bmatrix}-1 \\ 0 \\ 1 \end{bmatrix}, \qquad
+                                \v_3 = \begin{bmatrix}-1 \\ 1 \\ 0 \end{bmatrix}.
+                \end{align*}    
+        \end{frame}
+
+        \begin{frame}{Diagonalization}
+                We perform Gauss Jordan elimination on the matrix $P = [\v_1\;\v_2\;\v_3]$, whose columns are the eigenvectors of $A$. \\
+                \begin{align*}
+                        \left[\begin{array}{@{}ccc|ccc}
+                                1 & -1 & -1     & 1 & 0 & 0 \\
+                                1 &  0 &  1     & 0 & 1 & 0 \\
+                                1 &  1 &  0     & 0 & 0 & 1
+                        \end{array}\right] &\longrightarrow
+                        \left[\begin{array}{@{}ccc|ccc}
+                                3 &  0 &  0     & 1 & 1 & 1 \\
+                                1 &  0 &  1     & 0 & 1 & 0 \\
+                                1 &  1 &  0     & 0 & 0 & 1
+                        \end{array}\right] \longrightarrow \\\\
+                        \left[\begin{array}{@{}ccc|ccc}
+                                3 &  0 &  0     & 1 & 1 & 1 \\
+                                0 &  0 &  1     & -\frac{1}{3} & \frac{2}{3} & -\frac{1}{3} \\
+                                0 &  1 &  0     & -\frac{1}{3} & -\frac{1}{3} & \frac{2}{3}
+                        \end{array}\right] &\longrightarrow
+                        \left[\begin{array}{@{}ccc|ccc}
+                                1 &  0 &  0     & \frac{1}{3} & \frac{1}{3} & \frac{1}{3} \\
+                                0 &  1 &  0     & -\frac{1}{3} & -\frac{1}{3} & \frac{2}{3} \\
+                                0 &  0 &  1     & -\frac{1}{3} & \frac{2}{3} & -\frac{1}{3}
+                        \end{array}\right].
+                \end{align*}
+        \end{frame}
+
+        \begin{frame}{Diagonalization}
+                \begin{align*}
+                        P^{-1}AP &= \frac{1}{3} \begin{bmatrix}
+                                1 & 1 & 1 \\ -1 & -1 & 2 \\ -1 & 2 & -1
+                        \end{bmatrix}
+                        \begin{bmatrix}
+                                1 & 2 & 2 \\ 2 & 1 & 2 \\ 2 & 2 & 1
+                        \end{bmatrix}
+                        \begin{bmatrix}
+                                1 & -1 & -1 \\ 1 & 0 & 1 \\ 1 & 1 & 0
+                        \end{bmatrix} \\
+                        &= \frac{1}{3} \begin{bmatrix}
+                                1 & 1 & 1 \\ -1 & -1 & 2 \\ -1 & 2 & -1
+                        \end{bmatrix}
+                        \begin{bmatrix}
+                                5 & 1 & 1 \\ 5 & 0 & -1 \\ 5 & -1 & 0
+                        \end{bmatrix} \\
+                        &= \begin{bmatrix}
+                                5 & 0 & 0 \\ 0 & -1 & 0 \\ 0 & 0 & -1
+                        \end{bmatrix}
+                \end{align*}
+        \end{frame}
+
+
+\end{document}

@@ -1,0 +1,126 @@
+\documentclass{beamer}
+\usetheme{metropolis}
+\setbeamercovered{transparent}
+
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{bm}
+\def\dim{\operatorname{dim}}
+\def\deg{\operatorname{deg}}
+
+\title{
+        Term presentation \\
+        Problem 5
+}
+\author{Satvik Saha, 19MS154}
+\institute{
+        MA2102: Linear Algebra I \\
+        Indian Institute of Science Education and Research, Kolkata
+}
+\date{\today}
+
+\begin{document}
+        \maketitle
+
+        \begin{frame}{Problem statement}
+                Let $a \in \mathbb{R}$. Consider the set
+                \[
+                        S_a^n = \left\{ 1,\, (x - a),\, (x - a)^2,\, \dots,\, (x - a)^n \right\}.
+                \]
+                Show that $S_a^n$ is a basis for $P_n(\mathbb{R})$, the space of polynomials of degree at most $n$.
+        \end{frame}
+
+        \begin{frame}{Preliminaries}
+                Any polynomial in $P_n(\mathbb{R})$ is of the form
+                \[
+                        p(x) = a_0 + a_1x + \dots + a_nx^n.
+                \]
+                In other words, the set $S_0^n = \{1,\, x,\, \dots,\, x^n\}$ is a basis of $P_n(\mathbb{R})$.
+                This gives $\dim{P_n(\mathbb{R})} = n + 1$. \\~\\
+                \pause
+                It is sufficient to show that $S_a^n$ is linearly independent.
+        \end{frame}
+
+        \begin{frame}{Preliminaries}
+                The binomial theorem gives
+                \[
+                        (x - a)^n = x^n + nax^{n - 1} + \binom{n}{2}x^{n - 1} + \dots + a^n.
+                \]
+                Specifically, the coefficient of $x^n$ in $(x - a)^n$ is $1$. \\~\\
+                \pause
+                This means that
+                \[
+                        (x - a)^n - x^n \,\in\, P_{n - 1}(\mathbb{R}) \,\subset\, P_n(\mathbb{R}).
+                \]
+        \end{frame}
+
+        \begin{frame}{Proof by induction: Base case}
+                For $n = 0$, the claim is trivial. We have $S_a^0 = S_0^0 = \{1\}$, which is a linearly independent set. \\~\\
+                \pause
+                For $n = 1$, consider the linear combination of elements from $S_a^1 = \{1,\, (x - a)\}$
+                \[
+                        c_0 + c_1(x - a) \,=\, \mathbf{0},
+                \]
+                for arbitrary $c_0, c_1 \in \mathbb{R}$. \\~\\
+                \pause
+                Successively set $x = a$ and $x = 0$. \\
+                Thus, $c_0 = 0$ and $c_0 - c_1a = 0$, whence $c_0 = c_1 = 0$. \\
+        \end{frame}
+
+        \begin{frame}{Proof by induction: Induction step}
+                Suppose that for $n = k$, the set $S_a^k = \left\{1,\, (x - a),\, \dots, (x - a)^k\right\}$ is linearly independent. \\~\\
+                \pause
+                Consider the linear combination of elements from $S_a^{k + 1}$,
+                \[
+                        c_0 + c_1(x - a) + \dots + c_k(x - a)^k + c_{k + 1}(x - a)^{k + 1} \,=\, \mathbf{0}.
+                \]\\~\\
+                \pause Subtract and add $c_{k + 1}x^{k + 1}$.
+                \begin{align*}
+                        \Big[c_0 &+ c_1(x - a) + \dots  \\
+                        &+ c_k(x - a)^k + c_{k + 1}\left((x - a)^{k + 1} - x^{k + 1}\right)\Big] + c_{k + 1}x^{k + 1} \,=\, \mathbf{0}.
+                \end{align*}
+        \end{frame}
+
+        \begin{frame}{Proof by induction: Induction step}
+                The bracketed portion is a polynomial of degree at most $k$, so we write it in the form
+                \[
+                        p_k(x) \,=\, a_0 + a_1x + \dots + a_kx^k \in P_k(\mathbb{R}).
+                \]\\~\\
+                \pause
+                Replacing this in the previous equation,
+                \[
+                        a_0 + a_1x + \dots + a_kx^k + c_{k + 1}x^{k + 1} \,=\, \mathbf{0}.
+                \]
+                The linear independence of $S_0^{k + 1} = \{1, x, \dots, x^{k + 1}\}$ gives $a_0 = a_1 = \dots = a_k = c_{k + 1} = 0$. \\~\\
+                \pause
+                Substituting this back into the original linear combination,
+                \[
+                        c_0 + c_1(x - a) + \dots + c_k(x - a)^k \,=\, \mathbf{0}.
+                \]
+                The induction hypothesis gives $c_0 = c_1 = \dots = c_k = 0$.
+        \end{frame}
+
+        \begin{frame}{Proof by induction: Conclusion}
+                Thus, by the principle of mathematical induction, the set $S_a^n$ is independent for all integers $n \geq 0$. \\~\\
+
+                Specifically, the set $S_a^n$ is a linearly independent set of size $n + 1$, in the space $P_n(\mathbb{R})$ which has dimension
+                $n + 1$. \\~\\
+
+                Hence, $S_a^n$ is a basis of $P_n(\mathbb{R})$.
+        \end{frame}
+
+        \begin{frame}{Appendix}
+                To show that $\{1, x, x^2, \dots, x^n\}$ is a basis of $P_n(\mathbb{R})$, it suffices to prove its linear independence.
+                Consider the linear combination
+                \[
+                        c_0 + c_1x + c_2x^2 + \dots + c_nx^n \,=\, \mathbf{0}.
+                \]
+                % Since the right hand side is the constant zero polynomial which always evaluates to $0$, the left hand side must also
+                % evaluate to $0$ for all choices of $x \in \mathbb{R}$. \\~\\
+                \pause
+                We choose $n + 1$ distinct reals $x$, which we exhibit as $n + 1$ roots of the polynomial on the left.
+                However, the degree of this polynomial is at most $n$. \\~\\
+
+                We conclude that the polynomial on the left is the zero polynomial, so $c_0 = c_1 = \dots = c_n$.
+        \end{frame}
+
+\end{document}

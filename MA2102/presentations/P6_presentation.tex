@@ -1,0 +1,188 @@
+\documentclass{beamer}
+\usetheme{metropolis}
+\setbeamercovered{transparent}
+
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{bm}
+\usepackage{mathrsfs}
+\def\dim{\operatorname{dim}}
+\def\image{\operatorname{im}}
+\def\kernel{\operatorname{ker}}
+\def\MnR{\operatorname{M_n(\mathbb{R})}}
+\def\Sym{\operatorname{Sym_n(\mathbb{R})}}
+\def\Skew{\operatorname{Skew_n(\mathbb{R})}}
+\def\u{\operatorname{u}}
+\def\v{\operatorname{v}}
+\def\w{\operatorname{w}}
+
+\title{
+        Term presentation \\
+        Problem 6
+}
+\author{Satvik Saha, 19MS154}
+\institute{
+        MA2102: Linear Algebra I \\
+        Indian Institute of Science Education and Research, Kolkata
+}
+\date{\today}
+
+\begin{document}
+        \maketitle
+
+        \begin{frame}{Problem statement}
+                Find a basis of the quotient space $\MnR/\Sym$, where $\Sym$ is the subspace of symmetric matrices.
+        \end{frame}
+
+        \begin{frame}{Preliminaries}
+                The subspace of symmetric matrices is such that for any $A \in \Sym$,
+                \[
+                        A = A^\top \quad \Leftrightarrow \quad a_{ij} = a_{ji}.
+                \] \\~\\
+                \pause
+                It can be shown that the skew-symmetric matrices form a subspace such that for any $B \in \Skew$,
+                \[
+                        B = -B^\top \quad \Leftrightarrow \quad b_{ij} = -b_{ji}.
+                \]
+        \end{frame}
+
+        \begin{frame}{Preliminaries}
+                Any matrix $X \in \MnR$ can be written uniquely as the sum of a symmetric and a skew-symmetric matrix.
+                \[
+                        X = \frac{1}{2}(X + X^\top) + \frac{1}{2}(X - X^\top).
+                \] \\~\\
+                \pause
+                Furthermore, $\Sym \cap \Skew = \{\mathbf{0}\}$, because if $X$ is both symmetric and skew-symmetric,
+                \[
+                        X^\top = X = -X^\top \quad \Rightarrow \quad X = \mathbf{0}.
+                \]
+                \pause
+                Thus, we can write
+                \[
+                        \MnR = \Sym \,\oplus\, \Skew.
+                \]
+        \end{frame}
+
+        \begin{frame}[t]{Basis of $\Skew$}
+                Let $E_{ij} \in \MnR$ be the matrix whose $i, j^\text{th}$ element is $1$, and the remaining elements are $0$.
+                The set of $\beta$ of all such $E_{ij}$ comprises the standard basis of $\MnR$. For any $X \in \MnR$, 
+                \[
+                        X = \sum_{i = 1}^n \sum_{j = 1}^n x_{ij}E_{ij}.
+                \]\\~\\
+                \pause
+                Set
+                \[
+                        B_{ij} = E_{ij} - E_{ji}.
+                \]
+                Thus, $B_{ij}$ is a skew-symmetric matrix with $1$ in the $i, j^\text{th}$ position,
+                and $-1$ in the $j, i^\text{th}$ position.
+                Let
+                \[
+                        \gamma = \left\{B_{ij}\colon 1 \leq i < j \leq n\right\}.
+                \]
+        \end{frame}
+
+        \begin{frame}{Basis of $\Skew$}
+                The linear independence of $\gamma$ follows from the linear independence of $\beta = \{E_{ij}\}$.
+                \[
+                        \sum_{i < j} c_{ij}B_{ij} = \sum_{i < j} c_{ij} E_{ij} - c_{ij}E_{ji} = \mathbf{0}.
+                \]
+                \pause
+                Suppose $B \in \Skew$. Then, $b_{ij} = -b_{ji}$ and $b_{ii} = 0$.
+                \begin{align*}
+                        B = \sum_{i = 1}^n \sum_{j = 1}^n b_{ij}E_{ij} 
+                                &= \sum_{i < j} b_{ij}E_{ij} + \sum_{i = j}b_{ij}E_{ij} + \sum_{i > j} b_{ij}E_{ij} \\
+                                &= \sum_{i < j} b_{ij}E_{ij} + \mathbf{0} + \sum_{i < j} b_{ji}E_{ji} \\
+                                &= \sum_{i < j} b_{ij}E_{ij} - b_{ij}E_{ji} = \sum_{i < j} b_{ij}B_{ij}.
+                \end{align*}
+        \end{frame}
+
+        \begin{frame}{Quotient spaces}
+                Let $V$ be vector space over $F$ and let $W\subseteq V$ be a subspace.
+                The quotient space $V/W$ consists of equivalence classes $[\v]$, where $\v \in V$ and
+                \[
+                        [\v] = \v + W = \{\v + \w\colon \w \in W\}.
+                \]
+                Equivalently, $\u \in [\v]$ if and only if $\u - \v \in W$. \\~\\
+                \pause
+                We define
+                \[
+                        [\u] + [\v] = [\u + \v], \qquad \lambda[\v] = [\lambda\v].
+                \]
+                With this, $V/W$ is a vector space over $F$.
+        \end{frame}
+        
+        \begin{frame}{Quotient spaces}
+                Let $\v \in V$ and $\w_1, \w_2 \in W$. Then
+                \[
+                        [\v + \w_1] = [\v + \w_2].
+                \]
+                Pick $\u \in [\v + \w_1]$. Then $\u = \v + \w_1 + \w_1'$ for some $\w_1' \in W$. Now, $\w_1 + \w_1' \in W$,
+                so $(\w_1 + \w_1') - \w_2 \in W$. This means that
+                \[
+                        \u = \v + \w_1 + \w_1' = \v + \w_2 + (\w_1 + \w_1' - \w_2) \in [\v + \w_2].
+                \]
+                The reverse inclusion follows by symmetry. \\~\\
+                \pause
+                Alternatively, note that since addition in well-defined,
+                \[
+                        [\v + \w_1] = [\v] + [\w_1] = [\v] + [\mathbf{0}] = [\v] + [\w_2] = [\v + \w_2].
+                \]
+        \end{frame}
+
+        \begin{frame}{Basis of $\MnR/\Sym$}
+                We claim that the set 
+                \[
+                        \gamma' = \{[B_{ij}]\colon B_{ij} \in \gamma\} = \left\{[B_{ij}]\colon 1 \leq i < j \leq n\right\}
+                \]
+                is a basis of $\MnR/\Sym$. \\~\\
+                \pause
+                Consider the linear combination
+                \begin{align*}
+                        \sum_{i < j} c_{ij} [B_{ij}] \,&=\, [\mathbf{0}] \\
+                        [B] \,&=\, [\mathbf{0}]
+                \end{align*}
+                This means that the skew-symmetric matrix $B \in [\mathbf{0}]$, i.e.\ $B = \mathbf{0} + A = A$ for some $A \in \Sym$.
+                This forces $B = \mathbf{0}$, whence $c_{ij} = 0$. Thus, $\gamma'$ is linearly independent.
+        \end{frame}
+
+        \begin{frame}{Basis of $\MnR/\Sym$}
+                Pick $[X] \in \MnR/\Sym$. Since $X \in \MnR$, write $X = A + B$ where $A \in \Sym$ and $B \in \Skew$. Note that
+                \[
+                        [X] = [A + B] = [B].
+                \]
+                \pause
+                Now, expand $B$ in the basis $\gamma$.
+                \[
+                        B = \sum_{i < j} b_{ij} B_{ij}.
+                \]
+                Then,
+                \[
+                        [X] \,=\, [B] \,=\, \sum_{i < j} b_{ij} [B_{ij}].
+                \]
+        \end{frame}
+
+        \begin{frame}
+                Thus, $\gamma'$ is linearly independent and spans $\MnR/\Sym$. This proves that $\gamma'$ is a basis of $\MnR/\Sym$. \\~\\
+
+                Moreover, $\gamma$ and $\gamma'$ contain $1 + 2 + \cdots + (n - 1) = n(n - 1)/2$ elements, so
+                \[
+                        \dim{\Skew} = \dim{\MnR/\Sym} = \frac{1}{2}n(n - 1).
+                \]
+        \end{frame}
+
+        \begin{frame}[t]{Appendix}
+                For a linear map $T \colon V \to W$, the map
+                \[
+                        \mathscr{T}\colon V/\kernel{T} \to \image{T}, \qquad [\v] \mapsto T(\v)
+                \]
+                is a linear isomorphism. By setting
+                \[
+                        T\colon \MnR \to \MnR, \qquad X \mapsto \frac{1}{2}(X - X^\top),
+                \]
+                note that $\kernel{T} = \Sym$ and $\image{T} = \Skew$. \\~\\
+
+                If $T(X) = B \in \Skew$, then $X = [B]$. Since a linear isomorphism sends a basis to a basis, and the inverse of a linear isomorphism
+                is a linear isomorphism, the set $\mathscr{T}^{-1}(\gamma) = \gamma'$ is a basis of $\MnR/\Sym$.
+        \end{frame}
+
+\end{document}
