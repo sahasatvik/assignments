@@ -830,6 +830,8 @@ Apply the Pythagorean Theorem to obtain the desired inequality.</p>
 \[ P\colon V \to V, \qquad \v \mapsto \w, \]
 is called the <em>orthogonal projection</em> of \(V\) onto \(W\). Note that \(\image{P} = W\) and \(\kernel{P} = W^\perp\). </p>
 
+<h4 id="toc_7">Adjoint</h4>
+
 <p>Given a finite dimensional inner product space \(V\), for each \(\v\in V\), we have the linear map
 \[ \ip{\cdot}{\v}\colon V \to F, \qquad \w \mapsto \ip\w\v. \]
 This leads to the linear map
@@ -846,7 +848,17 @@ This is denoted as \(T^*\).</p>
 \[ \ip{T(\cdot)}{\w}_W = \ip{\cdot}{T^*\v}_V. \]
 This property is enough to define the adjoint, <em>i.e.</em> the adjoint is the map \(T^*\) satisfying \(\ip{T\v}{\w}_W = \ip{\v}{T^*\w}_V\) for all \(\v \in V\), \(\w \in W\).</p>
 
+<p>Note that \((S + T)^* = S^* + T^*\), \((\lambda T)^* = \lambda^* T^*\), \((ST)^* = T^*S^*\) and \(T^{**} = T\).</p>
+
 <p>Let \(V\) be a finite dimensional inner product space and let \(\beta\) be an orthonormal basis. Then, \([T^*]_\beta = [T]_\beta^*\).</p>
+
+<p>A linear map is called <em>self-adjoint</em> if \(T = T^*\). Equivalently, a linear map \(T\colon V \to V\) is self-adjoint if for any \(\v, \w \in V\), we have \(\ip{T\v}{\w} = \ip{\v}{T\w}\).</p>
+
+<p>\(T\) is self-adjoint <em>iff</em> \([T]_\beta\) is Hermitian for any orthonormal basis \(\beta\), <em>i.e.</em> \([T]_\beta = [T]_\beta^*\).</p>
+
+<p>Let \(T\colon V \to V\) be a self-adjoint operator and \(\lambda \in \C\) is an eigenvalue, with \(T\v = \lambda\v\) for some \(\v \neq \ve{0}\). Then, \(\lambda \in \R\). Moreover, the eigenspaces associated with distinct eigenvalues are orthogonal.</p>
+
+<p>The spectral theorem for real self-adjoint maps says that \(T\colon V \to V\) is self-adjoint <em>iff</em> there exists an orthonormal eigenbasis.</p>
 
 
 
