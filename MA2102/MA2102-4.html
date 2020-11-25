@@ -858,7 +858,23 @@ This property is enough to define the adjoint, <em>i.e.</em> the adjoint is the 
 
 <p>Let \(T\colon V \to V\) be a self-adjoint operator and \(\lambda \in \C\) is an eigenvalue, with \(T\v = \lambda\v\) for some \(\v \neq \ve{0}\). Then, \(\lambda \in \R\). Moreover, the eigenspaces associated with distinct eigenvalues are orthogonal.</p>
 
-<p>The spectral theorem for real self-adjoint maps says that \(T\colon V \to V\) is self-adjoint <em>iff</em> there exists an orthonormal eigenbasis.</p>
+<p>The spectral theorem for real self-adjoint maps says that \(T\colon V \to V\) is self-adjoint if there exists an orthonormal eigenbasis.</p>
+
+<p>The spectral theorem for normal operators says that \(T\colon V \to V\) is normal <em>iff</em> there exists an orthonormal eigenbasis.</p>
+
+<h4 id="toc_8">Isometries</h4>
+
+<p>The distance between vectors \(\v\) and \(\w\) in an inner product space \(V\) is defined to be \(\norm{\v - \w}\).</p>
+
+<p>A linear map \(T\colon V \to V\) is called an <em>isometry</em> if it is distance preserving.
+\[ \norm{T\v - T\w} = \norm{\v - \w}, \quad\text{for all }\v, \w \in V. \]
+Equivalently,
+\[ \norm{T\v} = \norm{\v}, \quad \text{for all }\v \in V. \]
+It can be shown that \(T\) is an isometry <em>iff</em> \(\ip{T\v}{T\w} = \ip{\v}{\w}\). Thus, isometries are also angle preserving.</p>
+
+<p>It can also be shown that an isometry satisfies \(T^* T = I_V\).</p>
+
+<p>The matrix \([T]_\beta\) is unitary.</p>
 
 
 
