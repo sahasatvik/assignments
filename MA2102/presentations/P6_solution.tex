@@ -1,0 +1,205 @@
+\documentclass[10pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{bm}
+\usepackage{mathrsfs}
+\def\dim{\operatorname{dim}}
+\def\image{\operatorname{im}}
+\def\kernel{\operatorname{ker}}
+\def\MnR{\operatorname{M_n(\mathbb{R})}}
+\def\Sym{\operatorname{Sym_n(\mathbb{R})}}
+\def\Skew{\operatorname{Skew_n(\mathbb{R})}}
+\def\u{\bm{u}}
+\def\v{\bm{v}}
+\def\w{\bm{w}}
+
+\newtheorem{lemma}{Lemma}
+\newtheorem*{remark}{Remark}
+
+\title{MA2102 - Solution VI}
+\author{Satvik Saha}
+\date{}
+
+\geometry{a4paper, margin=1in}
+\setlength\parindent{0pt}
+
+\begin{document}
+        \par\textbf{IISER Kolkata} \hfill \textbf{Problem VI}
+        \vspace{3pt}
+        \hrule
+        \vspace{3pt}
+        \begin{center}
+                \LARGE{\textbf{MA2102 : Linear Algebra I}}
+        \end{center}
+        \vspace{3pt}
+        \hrule
+        \vspace{3pt}
+        Satvik Saha, \texttt{19MS154}\hfill\today
+        \vspace{20pt}
+
+        Find a basis of the quotient space $\MnR/\Sym$, where $\Sym$ is the subspace of symmetric matrices.
+
+        \paragraph{Solution}
+        
+        The subspace of symmetric matrices is such that for any $A \in \Sym$,
+        \[
+                A = A^\top \quad \Leftrightarrow \quad a_{ij} = a_{ji}.
+        \]
+        \begin{lemma}
+                The skew-symmetric matrices form a subspace where for any $B \in \Skew$,
+                \[
+                        B = -B^\top \quad \Leftrightarrow \quad b_{ij} = -b_{ji}.
+                \]
+                \begin{proof}
+                        Let $B_1, B_2 \in \Skew$ and $\lambda \in \mathbb{R}$. Then,
+                        \[
+                                (B_1 + B_2)^\top = B_1^\top + B_2^\top = -B_1 - B_2 = - (B_1 + B_2), \qquad
+                                (\lambda B_1)^\top = \lambda B_1^\top = -\lambda B_1.
+                        \]
+                        Thus, $B_1 + B_2 \in \Skew$ and $\lambda B_1 \in \Skew$. Furthermore, the zero matrix $\mathbf{0} \in \Skew$
+                        because it is equal to its negative transpose. Thus, $\Skew$ is a vector subspace of $\MnR$.
+                \end{proof}
+        \end{lemma}
+        Throughout this proof, we will be using $A$ to denote symmetric matrices and $B$ to denote skew-symmetric matrices.
+        \begin{lemma}
+                The vector space $\MnR$ can be decomposed as the direct sum of $\Sym$ and $\Skew$.
+                \[
+                        \MnR = \Sym \,\oplus\, \Skew.
+                \]
+                Equivalently, every matrix $X \in \MnR$ has a unique representation $X = A + B$, where $A \in \Sym$ and $B \in \Skew$.
+                \begin{proof}
+                        It is easily verified that for any $X \in \MnR$,
+                        \[
+                                X = \frac{1}{2}(X + X^\top) \,+\, \frac{1}{2}(X - X^\top).
+                        \]
+                        Now, $(X + X^\top)/2 \in \Sym$ and $(X - X^\top)/2 \in \Skew$.
+                        \[
+                                \frac{1}{2}(X + X^\top)^\top = \frac{1}{2}(X^\top + X) = \frac{1}{2}(X + X^\top), \qquad
+                                \frac{1}{2}(X - X^\top)^\top = \frac{1}{2}(X^\top - X) = -\frac{1}{2}(X - X^\top)
+                        \]
+                        Hence, $\MnR = \Sym + \Skew$. Furthermore, $\Sym \cap \Skew = \{\mathbf{0}\}$, because if $X \in \Sym$ and
+                        $X \in \Skew$, we would require $X = X^\top$ and $X = -X^\top$. Equating, we are forced into $X = \mathbf{0}$.
+                        This proves the claim.
+                \end{proof}
+        \end{lemma}
+        \begin{lemma}
+                Let $\beta = \{E_{ij}\colon 1 \leq i, j \leq n\}$ be the standard basis of $\MnR$, where $E_{ij}$ is the matrix with $1$ in the
+                $i, j^\text{th}$ entry and $0$ everywhere else. Set $B_{ij} = E_{ij} - E_{ji}$. Then, the set
+                \[
+                        \gamma = \left\{B_{ij}\colon 1 \leq i < j \leq n\right\}
+                \]
+                is a basis of $\Skew$.
+                \begin{proof}
+                        Note that $\gamma \subset \Skew$.
+                        Consider the following linear combination, where the indices satisfy $1 \leq i < j \leq n$.
+                        \[
+                                \sum_{i < j} c_{ij}B_{ij} = \sum_{i < j} c_{ij} E_{ij} - c_{ij}E_{ji} = \mathbf{0}.
+                        \]
+                        Note that none of the $E_{ij}$ equals any of the $E_{ji}$ since $i < j$, so the linear independence of $\beta$ (hence
+                        the linear independence of any subset of $\beta$) gives $c_{ij} = 0$ for all $1 \leq i < j \leq n$.
+                        This establishes the linear independence of $\gamma$.\\
+                        Suppose $B \in \Skew$. Then, $b_{ij} = -b_{ji}$ and $b_{ii} = 0$.
+                        This means that we can write
+                        \begin{align*}
+                                B = \sum_{i = 1}^n \sum_{j = 1}^n b_{ij}E_{ij} 
+                                        &= \sum_{i < j} b_{ij}E_{ij} + \sum_{i = j}b_{ij}E_{ij} + \sum_{i > j} b_{ij}E_{ij} \\
+                                        &= \sum_{i < j} b_{ij}E_{ij} + \mathbf{0} + \sum_{i < j} b_{ji}E_{ji} \\
+                                        &= \sum_{i < j} b_{ij}E_{ij} - \sum_{i < j}b_{ij}E_{ji} \\
+                                        &= \sum_{i < j} b_{ij}B_{ij}.
+                        \end{align*}
+                        Thus, $\gamma$ is a linearly independent spanning subset of $\Skew$, hence a basis of $\Skew$.
+                \end{proof}
+        \end{lemma}
+        Let $V$ be vector space over $F$ and let $W\subseteq V$ be a subspace.
+        The quotient space $V/W$ consists of equivalence classes $[\v]$, where $\v \in V$ and
+        \[
+                [\v] = \v + W = \{\v + \w\colon \w \in W\}.
+        \]
+        Equivalently, $\u \in [\v]$ if and only if $\u - \v \in W$.
+        We define
+        \[
+                [\u] + [\v] = [\u + \v], \qquad \lambda[\v] = [\lambda\v].
+        \]
+        With this, $V/W$ is a vector space over $F$.
+        \begin{lemma}
+                Let $\v \in V$ and $\w_1, \w_2 \in W$. Then
+                \[
+                        [\v + \w_1] = [\v + \w_2].
+                \]
+                \begin{proof}
+                        Pick $\u \in [\v + \w_1]$. Then $\u = \v + \w_1 + \w_1'$ for some $\w_1' \in W$. Now, $\w_1 + \w_1' \in W$,
+                        so $(\w_1 + \w_1') - \w_2 \in W$. This means that
+                        \[
+                                \u = \v + \w_1 + \w_1' = \v + \w_2 + (\w_1 + \w_1' - \w_2) \in [\v + \w_2].
+                        \]
+                        Hence, $[\v + \w_1] \subseteq [\v + \w_2]$.
+                        The reverse inclusion follows by symmetry, exchanging the roles of the subscripts $1$ and $2$ in the argument above. \\ \qedhere
+
+                        Alternatively, note that since addition in well-defined,
+                        \[
+                                [\v + \w_1] = [\v] + [\w_1] = [\v] + [\mathbf{0}] = [\v] + [\w_2] = [\v + \w_2].
+                        \]
+                \end{proof}
+        \end{lemma}
+
+        With this, we claim that the set 
+        \[
+                \gamma' = \{[B_{ij}]\colon B_{ij} \in \gamma\} = \left\{[B_{ij}]\colon 1 \leq i < j \leq n\right\}
+        \]
+        is a basis of $\MnR/\Sym$. \\
+
+        Consider the linear combination
+        \[
+                \sum_{i < j} c_{ij} [B_{ij}] \,=\, [\mathbf{0}].
+        \]
+        By the linearity of the equivalence classes as well as the fact that $\gamma$ is a basis of $\Skew$, we can simplify this as
+        \[
+                [B] \,=\, [\mathbf{0}],
+        \]
+        where $B = \sum_{i < j} c_{ij} B_{ij} \in \Skew$.
+        This means that the skew-symmetric matrix $B \in [\mathbf{0}]$, i.e.\ $B = \mathbf{0} + A = A$ for some $A \in \Sym$.
+        Lemma 2 forces $B = \mathbf{0}$, whence $c_{ij} = 0$. Thus, $\gamma'$ is linearly independent. \\
+        
+        Pick $[X] \in \MnR/\Sym$. Since $X \in \MnR$, use Lemma 2 to write $X = A + B$ where $A \in \Sym$ and $B \in \Skew$.
+        Note that by Lemma 4, 
+        \[
+                [X] = [A + B] = [B],
+        \]
+        because $A, \mathbf{0} \in \Sym$.
+        Now, expand $B$ in the basis $\gamma$.
+        \[
+                B = \sum_{i < j} b_{ij} B_{ij}.
+        \]
+        Then, the linearity of the equivalence classes gives
+        \[
+                [X] \,=\, [B] \,=\, \sum_{i < j} b_{ij} [B_{ij}].
+        \]
+        Thus, $\gamma'$ is linearly independent and spans $\MnR/\Sym$. This proves that $\gamma'$ is a basis of $\MnR/\Sym$.
+        This completes the exercise. \\
+
+        Moreover, $\gamma$ and $\gamma'$ contain $1 + 2 + \cdots + (n - 1) = n(n - 1)/2$ elements, so
+        \[
+                \dim{\Skew} = \dim{\MnR/\Sym} = \frac{1}{2}n(n - 1).
+        \]
+
+
+        \begin{remark}
+                We give a sketch of an alternate proof that $\gamma' $ is a basis of $\MnR/\Sym$.
+                Recall that for a linear map $T \colon V \to W$, the map
+                \[
+                        \mathscr{T}\colon V/\kernel{T} \to \image{T}, \qquad [\v] \mapsto T(\v)
+                \]
+                is a linear isomorphism. By setting
+                \[
+                        T\colon \MnR \to \MnR, \qquad X \mapsto \frac{1}{2}(X - X^\top),
+                \]
+                note that $\kernel{T} = \Sym$ (because $A = A^\top$ when $A \in \Sym$) and $\image{T} = \Skew$ (because $(X - X^\top)/2$
+                is always skew-symmetric). \\
+
+                Note that if $B \in \Skew$ then its preimage under $\mathscr{T}$ is the equivalence class $[B]$.
+                Since a linear isomorphism sends a basis to a basis, and the inverse of a linear isomorphism
+                is a linear isomorphism, the set $\mathscr{T}^{-1}(\gamma) = \gamma'$ is a basis of $\MnR/\Sym$.
+        \end{remark}
+\end{document}

@@ -1,0 +1,222 @@
+\documentclass[10pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{bm}
+\def\v{\bm{v}}
+\def\w{\bm{w}}
+\def\dim{\operatorname{dim}}
+\def\deg{\operatorname{deg}}
+\def\det{\operatorname{det}}
+\def\ker{\operatorname{ker}}
+\def\spn{\operatorname{span}}
+
+\newtheorem{lemma}{Lemma}
+
+\title{MA2102 - Solution I}
+\author{Satvik Saha}
+\date{}
+
+\geometry{a4paper, margin=1in}
+\setlength\parindent{0pt}
+
+\begin{document}
+        \par\textbf{IISER Kolkata} \hfill \textbf{Problem I}
+        \vspace{3pt}
+        \hrule
+        \vspace{3pt}
+        \begin{center}
+                \LARGE{\textbf{MA2102 : Linear Algebra I}}
+        \end{center}
+        \vspace{3pt}
+        \hrule
+        \vspace{3pt}
+        Satvik Saha, \texttt{19MS154}\hfill\today
+        \vspace{20pt}
+
+        Find the eigenvalues and corresponding eigenvectors of the matrix
+        \[
+                A = \begin{bmatrix}
+                        1 & 2 & 2 \\ 2 & 1 & 2 \\ 2 & 2 & 1
+                \end{bmatrix}.
+        \]
+        Find an invertible matrix $P$ such that $P^{-1}AP$ is diagonal. \\
+
+        \paragraph{Solution}
+        Recall that an eigenvalue of a matrix $A \in M_n(\mathbb{R})$ is $\lambda \in \mathbb{R}$ such that
+        $A\v = \lambda\v$, for some non-zero $\v \in \mathbb{R}^n$. Furthermore, the eigenvalues of a matrix can be computed
+        as the roots of the characteristic polynomial $p(\lambda) = \det(A - \lambda I_n)$.
+        \begin{lemma}
+                The eigenvalues of $A \in M_n(F)$ are precisely the roots of the characteristic polynomial $p(\lambda) = \det(A - \lambda I_n)$.
+                \begin{proof}
+                        Suppose that $\lambda$ is an eigenvalue of $A$. Then, we find some $\v \neq \mathbf{0}$ such that $A\v = \lambda\v$.
+                        Rearranging, $(A - \lambda I_n)\v = \mathbf{0}$. Thus, $\v \in \ker(A - \lambda I_n)$, so the kernel of $A -\lambda I_n$ must
+                        have dimension greater than 1. From the Rank Nullity theorem, $A - \lambda I_n$ cannot be of full rank, 
+                        hence $\det(A - \lambda I_n) = 0$. \\
+
+                        Conversely, note that if $\det(A - \lambda I_n) = 0$, then $A - \lambda I_n$ is not of full rank.
+                        Thus, the Rank Nullity theorem guarantees that we can find some $\v \neq \mathbf{0}$ in the kernel of $A - \lambda I_n$
+                        such that $(A - \lambda I_n)\v = \mathbf{0}$, i.e.\ $A\v = \lambda\v$. This shows that $\lambda$ is an eigenvalue of $A$, 
+                        completing the proof.
+                \end{proof}
+        \end{lemma}
+        \begin{lemma}
+                Let $P \in M_n(F)$ be a matrix whose columns are eigenvectors $\v_1, \v_2, \dots, \v_n$ of $A$.
+                Then, $AP = PD$, where $D$ is the diagonal matrix of the corresponding eigenvalues.
+                \begin{proof}
+                        Suppose that $A\v_i = \lambda_i\v_i$, for $\lambda_i \in F$. The rules of matrix multiplication directly give
+                        the desired result.
+                        \begin{align*}
+                                AP &= \begin{bmatrix} A\v_1 & A\v_2 & \cdots & A\v_n \end{bmatrix}\\
+                                &= \begin{bmatrix} \lambda_1\v_1 & \lambda_2\v_2 & \cdots & \lambda_n\v_n \end{bmatrix} \\
+                                &= \begin{bmatrix}
+                                        \v_1 & \v_2 & \cdots & \v_n
+                                \end{bmatrix}
+                                \begin{bmatrix}
+                                        \lambda_1 & 0 & \cdots & 0 \\
+                                        0 & \lambda_2 & \cdots & 0 \\
+                                        \vdots & \vdots & \ddots & \vdots \\
+                                        0 & 0 & \cdots & \lambda_n
+                                \end{bmatrix} \\
+                                &= PD.  \qedhere
+                        \end{align*}
+                \end{proof}
+        \end{lemma}
+
+        Suppose that we find $n$ linearly independent eigenvalues of $A$. Then from Lemma 2, $AP = PD$ where the columns of $P$ are the eigenvectors.
+        Furthermore, the linear independence of the eigenvectors mean that $P$ is of full rank, i.e.\ is invertible. Thus, we can write
+        $P^{-1}AP = D$. \\
+        
+        The remainder of this exercise is purely computational. We first evaluate the characteristic polynomial
+        \begin{align*}
+                \det \begin{bmatrix}
+                        1 - \lambda & 2 & 2 \\ 2 & 1 - \lambda & 2 \\ 2 & 2 & 1 - \lambda
+                \end{bmatrix}
+                        \,&=\, (1 - \lambda)^3  + 2\cdot 8 - 3\cdot 4(1 - \lambda) \\
+                        \,&=\, 1 - 3\lambda + 3\lambda^2 - \lambda^3 + 16 - 12 + 12\lambda \\
+                        \,&=\, 5 + 9\lambda + 3\lambda^2 - \lambda^3.
+        \end{align*}
+        The Rational Root theorem says that any rational root of $p$ must be of the form $\pm 1$ or $\pm 5$. Upon inspection,
+        $p(-1) = p(5) = 0$. We synthetically divide $p(\lambda)$ by $\lambda - 5$.
+        \begin{center}
+        \begin{tabular}{c|cccc}
+        $\lambda - 5$   & $-1$ & $3$  &   $9$ & $5$ \\
+                        & $0$  & $-5$ & $-10$ & $-5$  \\\hline
+                        & $-1$ & $-2$ &  $-1$ & $0$
+        \end{tabular}
+        \end{center}
+        Thus,
+        \[
+                p(\lambda) = (\lambda - 5)(-\lambda^2 - 2\lambda - 1) = (5 - \lambda)(1 + \lambda)^2.
+        \]
+        The only roots of $p(\lambda)$ are $5$ and $-1$.
+        From Lemma 1, the eigenvalues of $A$ are $5$ and $-1$.
+        We calculate the associated eigenvectors by demanding $(A - \lambda_i I_n) = \v_i$. \\
+                
+        When $\lambda = 5$,
+        \begin{align*}
+                \begin{bmatrix}
+                        1 - 5 & 2 & 2 \\ 2 & 1 - 5 & 2 \\ 2 & 2 & 1 - 5
+                \end{bmatrix}
+                \begin{bmatrix}
+                        v_{1} \\ v_{2} \\ v_{3}
+                \end{bmatrix}
+                &= \begin{bmatrix}
+                        -4v_1 + 2v_2 + 2v_3 \\
+                        2v_1 - 4v_2 + 2v_3 \\
+                        2v_1 + 2v_2 - 4v_3
+                \end{bmatrix}
+                = \begin{bmatrix}
+                        0 \\ 0 \\ 0
+                \end{bmatrix}.
+        \end{align*}
+        This forces $v_1 = v_2 = v_3$. We choose $v_1 = v_2 = v_3 = 1$. \\
+
+        When $\lambda = -1$,
+        \begin{align*}
+                \begin{bmatrix}
+                        1 + 1 & 2 & 2 \\ 2 & 1 + 1 & 2 \\ 2 & 2 & 1 + 1
+                \end{bmatrix}
+                \begin{bmatrix}
+                        v_{1} \\ v_{2} \\ v_{3}
+                \end{bmatrix}
+                &= \begin{bmatrix}
+                        2v_1 + 2v_2 + 2v_3 \\
+                        2v_1 + 2v_2 + 2v_3 \\
+                        2v_1 + 2v_2 + 2v_3
+                \end{bmatrix}
+                = \begin{bmatrix}
+                        0 \\ 0 \\ 0
+                \end{bmatrix}.
+        \end{align*}
+        This gives $v_1 + v_2 + v_3 = 0$. We choose two vectors such that $v_2 = 0, v_3 = 1$ in the first and $v_2 = 1, v_3 = 0$ in the second. \\
+
+        Thus, we have obtained three eigenvectors of $A$, chosen to be linearly independent.
+        \begin{align*}
+                \lambda = 5,  & \qquad \v_1 = \begin{bmatrix}1 \\ 1 \\ 1\end{bmatrix} \\\\
+                \lambda = -1, & \qquad \v_2 = \begin{bmatrix}-1 \\ 0 \\ 1 \end{bmatrix} \qquad
+                        \v_3 = \begin{bmatrix}-1 \\ 1 \\ 0 \end{bmatrix}.
+        \end{align*}
+        Note that this is not the complete set of eigenvectors associated with each of the eigenvalues.
+        The eigenspace $E_5$ is the set $\spn\{\v_1\} = \{c_1\v_1\colon c_1\in \mathbb{R}\}$ and the eigenspace $E_{-1}$ is the set
+        $\spn\{\v_2, \v_3\} = \{c_2\v_2 + c_3\v_3\colon c_2, c_3 \in \mathbb{R}\}$. \\
+        
+        The linear independence of $\v_1, \v_2, \v_3$ is verified by Gauss Jordan elimination.
+        Let $P$ be the matrix whose columns are the eigenvectors $\v_1, \v_3, \v_3$ in order.
+        \[
+                \left[\begin{array}{@{}ccc|ccc}
+                        1 & -1 & -1     & 1 & 0 & 0 \\
+                        1 &  0 &  1     & 0 & 1 & 0 \\
+                        1 &  1 &  0     & 0 & 0 & 1
+                \end{array}\right]
+        \]
+        Perform the row operation $R_1 \rightarrow R_1 + R_2 + R_3$.
+        \[
+                \left[\begin{array}{@{}ccc|ccc}
+                        3 &  0 &  0     & 1 & 1 & 1 \\
+                        1 &  0 &  1     & 0 & 1 & 0 \\
+                        1 &  1 &  0     & 0 & 0 & 1
+                \end{array}\right]
+        \]
+        Perform $R_2 \rightarrow R_2 - \frac{1}{3}R_1$ and $R_3 \rightarrow R_3 - \frac{1}{3}R_1$.
+        \[
+                \left[\begin{array}{@{}ccc|ccc}
+                        3 &  0 &  0     & 1 & 1 & 1 \\
+                        0 &  0 &  1     & -\frac{1}{3} & \frac{2}{3} & -\frac{1}{3} \\
+                        0 &  1 &  0     & -\frac{1}{3} & -\frac{1}{3} & \frac{2}{3}
+                \end{array}\right]
+        \]
+        Perform $R_1 \rightarrow \frac{1}{3}R_1$, and the swap $R_2 \leftrightarrow R_3$.
+        \[
+                \left[\begin{array}{@{}ccc|ccc}
+                        1 &  0 &  0     & \frac{1}{3} & \frac{1}{3} & \frac{1}{3} \\
+                        0 &  1 &  0     & -\frac{1}{3} & -\frac{1}{3} & \frac{2}{3} \\
+                        0 &  0 &  1     & -\frac{1}{3} & \frac{2}{3} & -\frac{1}{3}
+                \end{array}\right]
+        \]
+        We have the identity matrix $I_3$ on the left, which shows that $P$ is full rank. Thus, $P$ is invertible, and its inverse is the
+        matrix on the right.
+        We have already proved that we must have $P^{-1}AP = D$, where $D$ is the diagonal matrix of eigenvalues $D(5, -1, -1)$.
+        Nevertheless, we verify this computationally, completing the exercise.
+        \begin{align*}
+                P^{-1}AP &= \frac{1}{3} \begin{bmatrix}
+                        1 & 1 & 1 \\ -1 & -1 & 2 \\ -1 & 2 & -1
+                \end{bmatrix}
+                \begin{bmatrix}
+                        1 & 2 & 2 \\ 2 & 1 & 2 \\ 2 & 2 & 1
+                \end{bmatrix}
+                \begin{bmatrix}
+                        1 & -1 & -1 \\ 1 & 0 & 1 \\ 1 & 1 & 0
+                \end{bmatrix} \\
+                &= \frac{1}{3} \begin{bmatrix}
+                        1 & 1 & 1 \\ -1 & -1 & 2 \\ -1 & 2 & -1
+                \end{bmatrix}
+                \begin{bmatrix}
+                        5 & 1 & 1 \\ 5 & 0 & -1 \\ 5 & -1 & 0
+                \end{bmatrix} \\
+                &= \begin{bmatrix}
+                        5 & 0 & 0 \\ 0 & -1 & 0 \\ 0 & 0 & -1
+                \end{bmatrix}
+        \end{align*}
+\end{document}

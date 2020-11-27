@@ -1,0 +1,204 @@
+\documentclass[10pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{bm}
+\def\u{\bm{u}}
+\def\v{\bm{v}}
+\def\w{\bm{w}}
+\def\L{\mathcal{L}}
+\def\dim{\operatorname{dim}}
+\def\spn{\operatorname{span}}
+
+\newtheorem{lemma}{Lemma}
+
+\title{MA2102 - Solution III}
+\author{Satvik Saha}
+\date{}
+
+\geometry{a4paper, margin=1in}
+\setlength\parindent{0pt}
+
+\begin{document}
+        \par\textbf{IISER Kolkata} \hfill \textbf{Problem III}
+        \vspace{3pt}
+        \hrule
+        \vspace{3pt}
+        \begin{center}
+                \LARGE{\textbf{MA2102 : Linear Algebra I}}
+        \end{center}
+        \vspace{3pt}
+        \hrule
+        \vspace{3pt}
+        Satvik Saha, \texttt{19MS154}\hfill\today
+        \vspace{20pt}
+
+        Let $V$ and $W$ be vector spaces over the same field $F$.
+        Show that the set $\L(V, W)$, consisting of linear maps from $V$ to $W$, is a vector space.
+        If $V$ and $W$ are finite dimensional, then find the dimension of $\L(V, W)$.
+
+        \paragraph{Solution}
+        Recall that a vector space $V$ over a field $F$ is a set equipped with a binary operation $+\colon V\times V \to F$ called addition, 
+        and an operation $\cdot\colon F\times V \to V$ called scalar multiplication, such that
+        \begin{enumerate}
+                \item $\u + \v \in V$, for all $\u, \v \in V$.
+                \item $\lambda\u \in V$, for all $\u \in V$, $\lambda \in F$.
+                \item $\u + \v = \v + \u$, for all $\u, \v \in V$.
+                \item $(\u + \v) + \w = \u + (\v + \w)$, for all $\u, \v, \w \in V$.
+                \item There exists $\mathbf{0} \in V$ such that $\mathbf{0} + \v = \v$ for all $\v \in V$.
+                \item For all $\v \in V$, there exists $\u \in V$ such that $\v + \u = \mathbf{0}$. We denote $\u = -\v$.
+                \item $\lambda(\u + \v) = \lambda \u + \lambda \v$, for all $\u, \v \in V$, $\lambda \in F$.
+                \item $(\lambda \mu)\v = \lambda(\mu\v)$ for all $\v \in V$, $\lambda, \mu \in F$.
+                \item $(\lambda + \mu)\v = \lambda\v + \mu\v$, for all $\v \in V$, $\lambda, \mu \in F$.
+                \item There exists $1 \in F$ such that $1\v = \v$ for all $\v \in V$.
+        \end{enumerate}
+        Let $T, T_1, T_2\colon V \to W$ be linear maps and let $\lambda \in F$. We define addition and scalar multiplication 
+        on $\L(V, W)$ as follows.
+        \begin{align*}
+                (T_1 + T_2)(\v) \,&=\, T_1(\v) + T_2(\v) &\text{ for all } \v \in V, \\
+                (\lambda T)(\v) \,&=\, \lambda T(\v) &\text{ for all } \v \in V.
+        \end{align*}
+        With this, we verify the enumerated axioms one by one.
+        \begin{enumerate}
+                \item 
+                Since $T_1$ and $T_2$ are linear maps in $\L(V, W)$, for all $\u, \v \in V$ and $\mu \in F$,
+                \begin{align*}
+                        (T_1 + T_2)(\u + \mu\v) &= T_1(\u + \mu\v) + T_2(\u + \mu\v) \\
+                                &= T_1(\u) + \mu T_1(\v) + T_2(\u) + \mu T_2(\v) \\
+                                &= (T_1 + T_2)(\u) + \mu (T_1 + T_2)(\v).
+                \end{align*}
+                Thus, $T_1 + T_2$ is a linear map in $\L(V, W)$.
+                \item 
+                Again, since $T$ is a linear map in $\L(V, W)$, for all $\u, \v \in V$ and $\lambda, \mu \in F$,
+                \begin{align*}
+                        (\lambda T)(\u + \mu \v) &= \lambda T(\u + \mu \v) \\
+                                &= \lambda T(\u) + \lambda\mu T(\v)) \\
+                                &= (\lambda T)(\u) + \mu (\lambda T)(\v).
+                \end{align*}
+                Thus, $\lambda T$ is a linear map in $\L(V, W)$.
+                \item 
+                For all $\v\in V$, note that the commutativity of addition in $W$ gives
+                \[
+                        (T_1 + T_2)(\v) = T_1(\v) + T_2(\v) = T_2(\v) + T_1(\v) = (T_2 + T_1)(\v).
+                \]
+                Thus, $T_1 + T_2 = T_2 + T_1$.
+                \item 
+                For all $\v \in V$, the associativity of addition in $W$ gives
+                \begin{align*}
+                        ((T_1 + T_2) + T_3)(\v) &= T_1(\v) + (T_2 + T_3)(\v) = T_1(\v) + T_2(\v) + T_3(\v), \\
+                        (T_1 + (T_2 + T_3))(\v) &= (T_1 + T_2)(\v) + T_3(\v) = T_1(\v) + T_2(\v) + T_3(\v).
+                \end{align*}
+                Thus, $(T_1 + T_2) + T_3 = T_1 + (T_2 + T_3)$.
+                \item 
+                Define the linear map $\mathbf{0}_\L\colon V \to W$, $\v \mapsto \mathbf{0}_W$. For any $T \in \L(V, W)$, for all $\v \in V$.
+                \[
+                        (\mathbf{0}_\L + T)(\v) = \mathbf{0}_\L(\v) + T(\v) = \mathbf{0}_W + T(\v) = T(\v).
+                \]
+                Thus, $\mathbf{0}_\L + T = T$.
+                \item 
+                Define $T'\colon V \to W$, $\v \mapsto -T(\v)$. Then for all $\v \in V$,
+                \[
+                        (T + T')(\v) = T(\v) + T'(\v) = T(\v) - T(\v) = \mathbf{0}_W = \mathbf{0}_\L(\v).
+                \]
+                Thus, $T + T' = \mathbf{0}_\L$.
+                \item 
+                For $\lambda, \mu \in F$, for all $\v \in V$,
+                \begin{align*}
+                        (\lambda (T_1 + T_2))(\v) &= \lambda (T_1 + T_2)(\v) \\
+                                &= \lambda(T_1(\v) + T_2(\v)) \\
+                                &= \lambda T_1(\v) + \lambda T_2(\v) \\
+                                &= (\lambda T_1)(\v) + (\lambda T_2)(\v) \\
+                                &= (\lambda T_1 + \lambda T_2)(\v).
+                \end{align*}
+                Thus, $\lambda (T_1 + T_2) = \lambda T_1 + \lambda T_2$.
+                \item 
+                For $\lambda, \mu \in F$, for all $\v \in V$,
+                \begin{align*}
+                        ((\lambda + \mu)T)(\v) &= (\lambda + \mu)T(\v) \\
+                                &= \lambda T(\v) + \mu T(\v) \\
+                                &= (\lambda T)(\v) + (\mu T)(\v) \\
+                                &= (\lambda T + \mu T)(\v).
+                \end{align*}
+                Thus, $(\lambda + \mu)T = \lambda T + \mu T$.
+
+                \item 
+                For $\lambda, \mu \in F$, for all $\v \in V$,
+                \begin{align*}
+                        ((\lambda \mu)T)(\v) &= (\lambda \mu) T(\v) \\
+                                &= \lambda (\mu T(\v)) \\
+                                &= \lambda (\mu T)(\v) \\
+                                &= (\lambda (\mu T))(\v).
+                \end{align*}
+                Thus, $(\lambda \mu) T = \lambda (\mu T)$.
+                
+                \item 
+                Pick the scalar $1 \in F$ which satisfies $1\w = \w$ for all $\w \in W$. Then for all $\v\in V$,
+                \[
+                        (1T)(\v) = 1(T(\v)) = T(\v),
+                \]
+                so $1T = T$.
+        \end{enumerate}
+        This verifies that $\L(V, W)$ is a vector space. \\
+
+        When $V$ and $W$ are finite-dimensional, say with dimensions $n$ and $m$ respectively, we claim that the dimension of $\L(V, W)$ is
+        $mn$.
+        To prove this, let $\beta = \{\v_1, \dots, \v_n\}$ be an ordered basis of $V$ and let $\gamma = \{\w_1, \dots, \w_m\}$ be an ordered basis of $W$.
+        Define the linear maps
+        \[
+                T_{ij}\colon V \to W, \qquad \v_k \mapsto \delta_{ik}\w_j,
+        \]
+        for all $i = 1, \dots, n$ and $j = 1, \dots, m$. We will show that the set of all such $T_{ij}$ (of which there are $mn$) comprises a
+        basis of $\L(V, W)$.
+        Note that $T_{ij}$ has only been defined on the basis vectors $\v_k \in \beta$. To uniquely define $T_{ij}$ on $V$, pick arbitrary
+        $\v \in V$ and expand it in the basis $\beta$ as $\v = \lambda_1\v_1 + \dots + \lambda_n\v_n$. Note that the choice of scalars $\lambda_i \in F$
+        is unique, since $\beta$ is a basis. We now write.
+        \[
+                T_{ij}(\v) = T_{ij}(\lambda_1\v_1 + \dots + \lambda_n\v_n) = \lambda_i\w_j.
+        \]
+        To verify that this map is indeed linear, pick some $\u = \mu_1\v_1 + \dots + \mu_n \v_n \in V$.
+        Note that $\u + \v = (\mu_1 + \lambda_1)\v_1 + \dots (\mu_n + \lambda_n)\v_n$, so 
+        \[
+                T_{ij}(\u + \v) = (\mu_i + \lambda_i)\w_j = \mu_i\w_j + \lambda_i\w_j = T_{ij}(\u) + T_{ij}(\v).
+        \]
+        Also, note that $c\v = c\lambda_1\v_1 + \dots + c\lambda_n\v_n$ for all $c\in F$, so
+        \[
+                T_{ij}(c\v) = (c\lambda_i)\w_j = c(\lambda_i\w_j) = cT_{ij}(\v).
+        \]
+        Thus, all $T_{ij}$ are indeed linear maps in $\L(V, W)$. \\
+
+        We first show that the set of $T_{ij}$ spans $\L(V, W)$.
+        Suppose $T\colon V \to W$ is a linear map in $\L(V, W)$. For each of the basis vectors $\v_i \in \beta$, there exist unique
+        scalars $a_{ij} \in F$ such that
+        \[
+                T(\v_i) \,=\, a_{i1}\w_1 + a_{i2}\w_2 + \dots + a_{im}\w_m.
+        \]
+        This is true because $\gamma$ is a basis of $W$.
+        Pick any $\v \in V$ and write $\v = \lambda_1\v_1 + \dots + \lambda_n\v_n$. Then,
+        \[
+                T(\v) = \sum_{i = 1}^n \lambda_i T(\v_i) = \sum_{i = 1}^n \sum_{j = 1}^m \lambda_i a_{ij}\w_j
+                        = \sum_{i = 1}^n \sum_{j = 1}^m a_{ij} T_{ij}(\v).
+        \]
+        This means that
+        \[
+                T \,=\, \sum_{i = 1}^n \sum_{j = 1}^m a_{ij} T_{ij}.
+        \]
+        Hence, $T$ is in the span of the set of $T_{ij}$ for arbitrary $T \in \L(V, W)$. \\
+
+        We now show that the set of $T_{ij}$ are linearly independent.
+        Consider the linear combination 
+        \[
+                \sum_{i = 1}^n \sum_{j = 1}^m c_{ij} T_{ij} = \mathbf{0}_\L.
+        \]
+        By successively evaluating this map on $\v_k \in \beta$ for $k = 1, \dots, n$, we see that
+        \[
+                \sum_{i = 1}^n \sum_{j = 1}^m c_{ij} T_{ij}(\v_k) = 
+                \sum_{i = 1}^n \sum_{j = 1}^m c_{ij} \delta_{ik}\w_j = \sum_{j = 1}^m c_{kj}\w_j = \mathbf{0}.
+        \]
+        The linear independence of $\gamma = \{\w_1, \dots, \w_m\}$ forces $c_{kj} = 0$.
+        Hence, all the coefficients in the linear combination of $T_{ij}$ are zero, so they are linearly independent. \\
+
+        This proves that the set $\{T_{ij}\colon i, j \in \mathbb{N}, 1 \leq i \leq n, 1\leq j \leq m\}$ is a basis of $\L(V, W)$.
+        This set contains $mn$ elements, hence $\dim \L(V, W) = mn = \dim V \cdot \dim W$.
+
+\end{document}

@@ -1,0 +1,96 @@
+\documentclass[10pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{bm}
+\def\x{\bm{x}}
+\def\y{\bm{y}}
+\def\v{\bm{v}}
+\def\xcol{\begin{bmatrix} x_1 \\ x_2 \\ \vdots \\ x_m \end{bmatrix} }
+\def\ycol{\begin{bmatrix} y_1 \\ y_2 \\ \vdots \\ y_n \end{bmatrix} }
+\def\yrow{\begin{bmatrix} y_1 & y_2 & \cdots & y_n \end{bmatrix} }
+\def\rank{\operatorname{rank}}
+\def\dim{\operatorname{dim}}
+
+\newtheorem{lemma}{Lemma}
+
+\title{MA2102 - Solution IV}
+\author{Satvik Saha}
+\date{}
+
+\geometry{a4paper, margin=1in}
+\setlength\parindent{0pt}
+
+\begin{document}
+        \par\textbf{IISER Kolkata} \hfill \textbf{Problem IV}
+        \vspace{3pt}
+        \hrule
+        \vspace{3pt}
+        \begin{center}
+                \LARGE{\textbf{MA2102 : Linear Algebra I}}
+        \end{center}
+        \vspace{3pt}
+        \hrule
+        \vspace{3pt}
+        Satvik Saha, \texttt{19MS154}\hfill\today
+        \vspace{20pt}
+
+        Show that a matrix $A$ is of rank 1 if and only if $A = \x\y^\top$ for some non-zero column vectors $\x$ and $\y$.
+
+        \paragraph{Solution}
+        We notate the components of $A \in M_{m \times n}(F)$, $\x \in F^m$ and $\y \in F^n$ as follows.
+        \[
+                A = \begin{bmatrix}
+                        a_{11} & a_{12} & \cdots & a_{1n} \\
+                        a_{21} & a_{22} & \cdots & a_{2n} \\
+                        \vdots & \vdots & \ddots & \vdots \\
+                        a_{m1} & a_{m2} & \cdots & a_{mn}
+                \end{bmatrix}, \qquad
+                \x = \xcol, \qquad
+                \y = \ycol.
+        \]
+        Recall that the rank of $A$ is the dimension of the column space of $A$. \\
+
+        Suppose that $A = \x\y^\top$ for some non-zero column vectors $\x \in F^m$ and $\y \in F^n$. We write out the product as
+        \begin{align*}
+                A = \x\y^\top &= \xcol\yrow \\
+                        &= \begin{bmatrix}
+                                x_1y_1 & x_1y_2 & \cdots & x_1y_n \\
+                                x_2y_1 & x_2y_2 & \cdots & x_2y_n \\
+                                \vdots & \vdots & \ddots & \vdots \\
+                                x_my_1 & x_my_2 & \cdots & x_my_n \\
+                        \end{bmatrix} \\
+                        &= \begin{bmatrix}
+                                y_1\x & y_2\x & \cdots & y_n\x
+                        \end{bmatrix}.
+        \end{align*}        
+        The column space of $A$ is the span of the columns of $A$, so for any element $\v$ in the column space of $A$, we can write
+        \[
+                \v = \lambda_1y_1\x + \lambda_2y_2\x + \cdots + \lambda_ny_n\x = \lambda \x,
+        \]
+        for suitable scalars $\lambda_i \in F$. Here, $\lambda = \sum \lambda_iy_i \in F$.
+        Thus, the column space is spanned by the singleton set $\{\x\}$. Moreover, $\x,\y \neq \mathbf{0}$ so there is come non-zero component
+        of $\y$, say $y_j \neq 0$. Hence, the corresponding column $y_j\x$ of $A$ is also non-zero. Thus, the column space contains
+        non-zero elements; specifically, it contains $(y_j\x) / y_j = \x$. Thus, the singleton set $\{\x\}$ is linearly independent and
+        spans the column space of $A$, i.e.\ is a basis of the column space. This means that $\rank{A} = 1$. \\
+
+        Suppose that $\rank{A} = 1$. This means that its column space has dimension $1$, i.e.\ is spanned by a singleton set.
+        Choose a basis $\{\x\}$ of the column space, where $\x \in F^m$ is non-zero. Because every column of $A$ is in the span of this set,
+        we can write the $i^\text{th}$ column of $A$ as the linear combination $\lambda_i\x$, for suitable scalars $\lambda_i \in F$. Hence,
+        \[
+                A = \begin{bmatrix}
+                        \lambda_1\x & \lambda_2\x & \cdots & \lambda_n\x
+                \end{bmatrix}.
+        \]
+        Note that all $\lambda_i \in F$ cannot be zero; if this were the case, then $A$ would be the zero matrix, with $\rank{A} = 0$.
+        Set $\y \in F^n$ as the column vector
+        \[
+                \y = \begin{bmatrix}
+                        \lambda_1 \\ \lambda_2 \\ \vdots \\ \lambda_n
+                \end{bmatrix}.
+        \]
+        Observe that $\y \neq \mathbf{0}$.
+        With this choice of column vectors $\x$ and $\y$, we have A = $\x\y^\top$.
+        This completes the proof.
+\end{document}
