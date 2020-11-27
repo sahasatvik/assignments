@@ -43,7 +43,7 @@
         \begin{frame}{Preliminaries}
                 The binomial theorem gives
                 \[
-                        (x - a)^n = x^n + nax^{n - 1} + \binom{n}{2}x^{n - 1} + \dots + a^n.
+                        (x - a)^n = x^n - nax^{n - 1} + \binom{n}{2}a^2x^{n - 2} + \dots + (-1)^n a^n.
                 \]
                 Specifically, the coefficient of $x^n$ in $(x - a)^n$ is $1$. \\~\\
                 \pause
@@ -100,7 +100,7 @@
         \end{frame}
 
         \begin{frame}{Proof by induction: Conclusion}
-                Thus, by the principle of mathematical induction, the set $S_a^n$ is independent for all integers $n \geq 0$. \\~\\
+                Thus, by the principle of mathematical induction, the set $S_a^n$ is linearly independent for all integers $n \geq 0$. \\~\\
 
                 Specifically, the set $S_a^n$ is a linearly independent set of size $n + 1$, in the space $P_n(\mathbb{R})$ which has dimension
                 $n + 1$. \\~\\
