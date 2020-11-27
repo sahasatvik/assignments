@@ -1,0 +1,243 @@
+\documentclass[10pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{bm}
+
+\title{Analysis I - Assignment VII}
+\author{Satvik Saha}
+\date{}
+
+\geometry{a4paper, margin=1in}
+\setlength\parindent{0pt}
+\renewcommand{\labelenumi}{(\alph{enumi})}
+% \renewcommand\qedsymbol{$\blacksquare$}
+\newcounter{prob}
+\def\problem{\stepcounter{prob}\paragraph{Exercise \arabic{prob}}}
+\def\solution{\paragraph{Solution}}
+\newcommand\norm[1]{\lVert #1 \rVert}
+\def\O{\mathcal{O}}
+\def\C{\mathcal{C}}
+
+\begin{document}
+        \par\textbf{IISER Kolkata} \hfill \textbf{Assignment VII}
+        \vspace{3pt}
+        \hrule
+        \vspace{3pt}
+        \begin{center}
+                \LARGE{\textbf{MA 2101 : Analysis I}}
+        \end{center}
+        \vspace{3pt}
+        \hrule
+        \vspace{3pt}
+        Satvik Saha, \texttt{19MS154}, Group C\hfill\today
+        \vspace{20pt}
+
+        \problem Show that the sum, difference, product and quotient (if the denominator is non-zero everywhere in the domain of definition) of two
+        real valued continuous functions on a metric space $M$ are continuous.
+
+        \problem Let $(X, d)$ be a metric space and let $f, g\colon C \to \mathbb{R}$ be continuous. Show that the set
+        \[
+                A = \{x \in X\colon f(x) < g(x)\}
+        \]
+        is an open set in $X$.
+
+        \solution Note that the difference of continuous function $g - f$ is continuous, and the set $(0, \infty)$ is open in $\mathbb{R}$. Thus,
+        the preimage of the open set $(0, \infty)$ in $g - f$, i.e.\ the set $\{x \in X\colon 0 < (g - f)(x)\}$, must be open in $X$.
+        This is precisely the set $A$, which proves the claim.
+
+        \problem Let $\{\alpha_n\}$ and $\{\beta_n\}$ be two sequences and let $N \in \mathbb{N}$ be such that $\alpha_n \leq \beta_n$
+        for all $n \geq N$. Show that
+        \[
+                \liminf_{n \to \infty} \alpha_n \leq \liminf_{n \to \infty} \beta_n.
+        \]
+
+        \problem For $n \in \mathbb{N}$, define $\alpha_n = n^{1 /n}$. Does the sequence $\{\alpha_n\}$ converge?
+        Determine
+        \[
+                \limsup_{n \to \infty} \alpha_n.
+        \]
+        
+        \solution We show that the sequence $n^{1 /n} \to 1$. Note that for $n\geq 2$, we have $n^{1 /n} > 1$, so we write $n^{1 /n} = 1 + h_n$
+        for positive $h_n$.
+        Thus, using the binomial theorem, 
+        \[
+                n = (1 + h_n)^n = 1 + nh_n + \frac{1}{2}n(n - 1)h_n^2 + \dots + h_n^n > \frac{1}{2}n(n - 1)h_n^2.
+        \]
+        Thus, $0 < h_n^2 < 2 /(n - 1)$, which means that $h_n \to 0$ by the Comparison Test, so $n^{1 /n} = 1 + h_n \to 1$.
+        Since $n^{1 /n} \neq 0$, we also see that $1 /n^{1 /n} \to 1$. \\
+
+        Now, if $\alpha_n \to \ell$, then the set of subsequential limits is the singleton set $\{\ell\}$.
+        To show this, suppose that some subsequence $\alpha_{n_k} \to \ell'$, where $\ell' \neq \ell$.
+        Set $\epsilon = |\ell - \ell'| /3 > 0$. Then, there exists some $N_1 \in \mathbb{N}$ such that
+        $\alpha_{n_k} \in B_\epsilon(\ell')$ for all $n_k \geq N_1$. Also, since $\alpha_n \to \ell$, there exists some $N_2 \in \mathbb{N}$
+        such that $\alpha_n \in B_\epsilon(\ell)$ for all $n \geq N_2$. Now, choose $N > N_1 + N_2$, and choose $K$ such that $n_K > N$.
+        Then, $\alpha_{n_K} \in B_\epsilon(\ell)$ and $\alpha_{n_K} \in B_\epsilon(\ell')$. Now, from the triangle inequality,
+        \[
+                0 < 3\epsilon = |\ell - \ell'| = |(\ell - \alpha_{n_K}) - (\ell' - \alpha_{n_K})| \leq |\ell - \alpha_{n_K}| + |\ell' - \alpha_{n_K}|
+                        < \epsilon + \epsilon = 2\epsilon.
+        \]
+        This is a contradiction. Thus, we must have $\ell = \ell'$. This forces the set of subsequential limits to be the singleton $\{\ell\}$,
+        whose supremum is $\ell$. Thus,
+        \[
+                \limsup_{n \to \infty} n^{1 /n} = 1.
+        \]
+
+        \problem
+        \begin{enumerate}
+                \item If $\{a_n\}$ is a decreasing sequence of strictly positive numbers and if $\sum a_n$ is convergent, show that
+                $\lim_{n \to \infty} na_n = 0$.
+                \item Give an example of a divergent series $\sum a_n$ with $\{a_n\}$ decreasing and such that $\lim_{n \to \infty} na_n = 0$.
+        \end{enumerate}
+
+        \solution
+        \begin{enumerate}
+                \item Since $\sum a_n$ converges and $\{a_n\}$ is decreasing, we use the Cauchy Condensation test to conclude that
+                $\sum 2^n a_{2^n}$ converges. Thus, the sequence of the terms $2^n a_{2^n} \to 0$.
+                Let $\epsilon > 0$, and let $N \in \mathbb{N}$ be such that for all $n \geq N$, $0 < 2^n a_{2^n} < \epsilon /2$.
+                (recall that $a_n$ is strictly positive). Thus, for all $n \geq 2^N > N$, find $k \geq N$ such that $2^{k + 1} > n \geq 2^k$.
+                Then, $a_{2^{k + 1}} < a_{n} \leq a_{2^k}$, so
+                \[
+                        0 < n a_n \leq n a_{2^k} < 2^{k + 1}a_{2^k} < \epsilon.
+                \]
+                Thus, we have $n a_n \to 0$. \\
+
+                We have used the fact that $2^n > n$ for all $n \in \mathbb{N}$. This is shown by induction. The base case $n = 1$
+                is true; if $2^k > k$ for some $k \in \mathbb{N}$, note that $k \geq 1$ so $2^{k + 1} = 2\cdot 2^k > 2k = k + k \geq k + 1$.
+                This completes the proof.
+
+                \item Starting the sequence from $n = 2$, set
+                \[
+                        a_n = \frac{1}{n\log{n}}.
+                \]
+                Note that $\log(n + 1) > \log(n)$, so $\{a_n\}$ is strictly decreasing.
+                Also, $\lim_{n \to \infty} na_n = \lim_{n \to \infty} 1 / \log{n} = 0$, because $\log{n}$ is strictly positive
+                for $n > 1$ and strictly increasing, so $1 /\log{n}$ is a strictly positive decreasing sequence bounded below by 0.
+                Hence, $1 /\log{n}$ converges via the Monotone Convergence theorem. Also, the subsequence $1 /\log{2^n} = 1 /n\log{2}$
+                converges to 0, hence $1 /\log{n} \to 0$. \\
+
+                Applying the Cauchy Condensation test,
+                \[
+                       2^n a_{2^n} = \frac{2^n}{2^n \log{2^n}} = \frac{1}{n\log{2}}. 
+                \]
+                We know that $\sum 1 /n$ does not converge. Thus, neither does $\sum 2^n a_{2^n}$, so $\sum a_n$ diverges.
+        \end{enumerate}
+
+        \problem
+        \begin{enumerate}
+                \item Let
+                \[
+                        s_k = \sum_{n = 0}^k \frac{1}{n!}.               
+                \]
+                Show that $\sum_{k = 0}^\infty k(e - s_k)$ converges.
+                \item Show that $e \notin \mathbb{Q}$.
+        \end{enumerate}
+        \solution
+        \begin{enumerate}
+                \item We note that $e = \sum_{n = 1}^\infty 1 /n!$, so 
+                \begin{align*}
+                        e - s_k = \sum_{n = k + 1}^\infty\frac{1}{n!} 
+                                &= \frac{1}{(k + 1)!} + \frac{1}{(k + 2)!} + \dots \\
+                                &= \frac{1}{k!}\left[\frac{1}{k + 1} + \frac{1}{(k + 1)(k + 2)} + \frac{1}{(k + 1)(k + 2)(k + 3)} + \dots \right] \\
+                                &\leq \frac{1}{k!}\left[\frac{1}{k + 1} + \frac{1}{(k + 1)^2} + \frac{1}{(k + 1)^3} + \dots \right] \\
+                                &= \frac{1}{k!} \cdot\frac{1}{1 - (k + 1)} \\
+                                &= \frac{1}{k\cdot k!}.
+                \end{align*}
+                We used a comparison with a geometric series. Also, each term in $e - s_k$ is positive. Thus, we obtain the inequality 
+                \[
+                        0 < k(e - s_k) \leq \frac{1}{k!}.
+                \]
+                The series $\sum 1 /k!$ converges (to $e$), so the given series $\sum k(e - s_k)$ must also converge by the comparison test.
+
+                \item Suppose to the contrary that $e \in \mathbb{Q}$, so $e = p /q$ for some integers $p, q > 0$.
+                Note that $q \neq 1$, since $e$ is not an integer (it can be shown that $2 < e < 3$).
+                Now, $q! / n!$ is an integer whenever $q \geq n$, because $q! = q\cdot (q-1)! = \dots = q\cdot(q - 1)\cdots (n + 1)\cdot n!$.
+                Thus, the quantity
+                \[
+                        q!s_q = \sum_{n = 0}^{q} \frac{q!}{n!}
+                \]
+                is the sum of positive integers, hence is a positive integer. Also, $q!e = q!\cdot p / q = (q - 1)!\cdot p$ is an integer, hence
+                $q!(e - s_k)$ is an integer. However, we have already shown that 
+                \[
+                        0 < q! (e - s_q) \leq \frac{1}{q} < 1,
+                \]
+                which is a contradiction since there are no integers in $(0, 1)$. Hence, $e \notin \mathbb{Q}$.
+        \end{enumerate}
+
+        \problem For $x \in \mathbb{R}$, let
+        \[
+                E_x = \sum_{n = 0}^\infty \frac{x^n}{n!}.
+        \]
+        \begin{enumerate}
+                \item Show that the series $E_x$ converges for all $x \in \mathbb{R}$.
+                \item Show that if $|x| < 2$, then $(E_x - 2)(2 - |x|) \leq |x|$.
+        \end{enumerate}
+        \solution
+        \begin{enumerate}
+                \item Let $a_n = x^n /n!$. Note that
+                \[
+                        \left| \frac{a_{n + 1}}{a_n} \right| = \left| \frac{x^{n + 1}}{(n + 1)!}\cdot \frac{n!}{x^n} \right| = 
+                        \left|\frac{x}{n + 1}\right| \to 0 < 1.
+                \]
+                Thus, by the ratio test, the series $E_x$ converges everywhere, for all $x \in \mathbb{R}$.
+
+                \item We have to show that if $|x| < 2$,
+                \[
+                        E_x \leq 2 + \frac{|x|}{2 - |x|} = 2 + \frac{|x| /2}{1 - |x|/2}.
+                \]
+                Equivalently,
+                \[
+                        E_x - 1 \leq 1 + \frac{|x|/2}{1 - |x|/2} = \frac{1}{1 - |x| /2}.
+                \]
+                Expanding as a power series and a geometric series respectively, we have to show that
+                \[
+                        x + \frac{x^2}{2} + \frac{x^3}{6} + \dots + \frac{x^n}{n!} + \dots \leq 
+                        1 + \frac{|x|}{2} + \frac{|x|^2}{4} + \frac{|x|^3}{8} + \dots + \frac{|x|^n}{2^n} + \dots
+                \]
+                Note that the series of absolute values is greater than the original by comparison, so we have to show that
+                \[
+                        |x| + \frac{|x|^2}{2} + \frac{|x|^3}{6} + \dots + \frac{|x|^n}{n!} + \dots \leq
+                        1 + \frac{|x|}{2} + \frac{|x|^2}{4} + \frac{|x|^3}{8} + \dots + \frac{|x|^n}{2^n} + \dots
+                \]
+                Whenever $n \geq 8$, we see that $n! > 2^n$, hence $|x|^n / n! < |x|^n / 2^n$. Thus, we need only show that
+                \[
+                        |x| + \frac{|x|^2}{2} + \frac{|x|^3}{6} + \frac{|x|^4}{24} + \frac{|x|^5}{120} + \frac{|x|^6}{720} + \frac{|x|^7}{5040} \leq
+                        1 + \frac{|x|}{2} + \frac{|x|^2}{4} + \frac{|x|^3}{8} + \frac{|x|^4}{16} + \frac{|x|^5}{32} + \frac{|x|^6}{64} + \frac{|x|^7}{128}.
+                \]
+                Set $u = |x| \geq 0$, rearrange, and note that we demand the following when $0 \leq u < 2$.
+                \[
+                        1 - \frac{u}{2} - \frac{u^2}{4} - \frac{u^3}{24} + \frac{u^4}{48} + \frac{11u^5}{480} + \frac{41u^6}{2880} + \frac{307u^7}{40320}
+                                \geq 0.
+                \]
+                Clearing the common denominator $40320$, we write
+                \[
+                        40320 + 840 u^4 + 924 u^5 + 574 u^6 + 307 u^7 \geq 20160 u + 10080 u^2 + 1680 u^3.
+                \]
+                % This can be verified by inspection (graphing). \\
+
+                We have used the fact that $n! > 2^n$ for $n \geq 8$. Thus is true by induction. The base case $n = 8$ is $8! > 2^8 = 256$.
+                Suppose that $k! \geq 2^k$ for some $k \in \mathbb{N}$; then $(k + 1)! = k(k + 1)! \geq k\cdot 2^k > 2^{k + 1}$.
+        \end{enumerate}
+
+        \problem Justify whether the series
+        \[
+                \sum_{n = 1}^\infty \frac{(-1)^n}{\sqrt{n^2 + 1}}
+        \]
+        converges absolutely or diverges.
+
+        \solution The given series converges conditionally. Note that the series $\sum (-1)^n$ has partial sums $-1$ and $0$, hence
+        the partial sums are bounded. Also, the sequence $1 /\sqrt{n^2 + 1}$ is decreasing and converges to zero, since
+        \[
+                0 < \frac{1}{\sqrt{n^2 + 1}} < \frac{1}{\sqrt{n^2}} < \frac{1}{n},
+        \]
+        so $1 /\sqrt{n^2 + 1} \to 0$. Thus, by Abel's Lemma, the series $\sum_{n = 1}^\infty (-1)^n/\sqrt{n^2 + 1}$ converges. \\
+
+        The series of absolute values is such that
+        \[
+                0 < \frac{1}{2n} = \frac{1}{\sqrt{n^2 + 3n^2}} < \frac{1}{\sqrt{n^2 + 1}}.
+        \]
+        Note that the harmonic series $\sum 1 /n$ diverges.
+        Thus, the series $\sum_{n = 1}^\infty 1 /\sqrt{n^2 + 1}$ diverges by the comparison test.
+
+\end{document}
