@@ -51,6 +51,7 @@ a {
     font-family: 'Josefin Sans', monospace;
     font-weight: 300;
     font-size: 3.5rem;
+    text-align: center;
 }
 
 .light-theme #assignments {
