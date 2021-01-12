@@ -1,0 +1,189 @@
+\documentclass[11pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage[%
+    hidealllines=true,%
+    innerbottommargin=15,%
+    nobreak=true,%
+]{mdframed}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{lipsum}
+
+\geometry{a4paper, margin=1in, headheight=14pt}
+
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand\headrulewidth{0.4pt}
+\fancyhead[L]{\scshape MA2201: Probability I}
+\fancyhead[R]{\leftmark}
+\rfoot{\footnotesize\it Updated on \today}
+\cfoot{\thepage}
+
+\def\C{\mathbb{C}}
+\def\R{\mathbb{R}}
+\def\Q{\mathbb{Q}}
+\def\Z{\mathbb{Z}}
+\def\N{\mathbb{N}}
+\newcommand\ddx[1]{\frac{d #1}{d x}}
+\newcommand\ddt[1]{\frac{d #1}{d t}}
+\newcommand\dd[3][]{\frac{d^{#1}{#2}}{d {#3}^{#1}}}
+\newcommand\ppx[1]{\frac{\partial #1}{\partial x}}
+\newcommand\ppt[1]{\frac{\partial #1}{\partial t}}
+\newcommand\pp[3][]{\frac{\partial^{#1}{#2}}{\partial {#3}^{#1}}}
+\newcommand\norm[1]{\left\lVert#1\right\rVert}
+\newcommand\E[1]{E[#1]}
+
+\newmdtheoremenv[%
+    backgroundcolor=blue!10!white,%
+]{theorem}{Theorem}[section]
+\newmdtheoremenv[%
+    backgroundcolor=violet!10!white,%
+]{corollary}{Corollary}[theorem]
+\newmdtheoremenv[%
+    backgroundcolor=teal!10!white,%
+]{lemma}[theorem]{Lemma}
+
+\theoremstyle{definition}
+\newmdtheoremenv[%
+    backgroundcolor=green!10!white,%
+]{definition}{Definition}[section]
+\newmdtheoremenv[%
+    backgroundcolor=red!10!white,%
+]{exercise}{Exercise}[section]
+
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\newtheorem*{example}{Example}
+
+\numberwithin{equation}{section}
+
+\title{
+    \Large\textsc{MA2202} \\
+    % \vspace{10pt}
+    \Huge \textbf{Probability I} \\
+    \vspace{5pt}
+    \Large{Spring 2021}
+}
+\author{
+    \large Satvik Saha%
+    % \thanks{Email: \tt ss19ms154@iiserkol.ac.in}
+    \\\textsc{\small 19MS154}
+}
+\date{\normalsize
+    \textit{Indian Institute of Science Education and Research, Kolkata, \\
+    Mohanpur, West Bengal, 741246, India.} \\
+    % \vspace{10pt}
+    % \today
+}
+
+\begin{document}
+    \maketitle
+
+    \section{Introduction}
+    \begin{definition}[Experiment]
+        An experiment is an act which can be repeated under similar conditions.
+    \end{definition}
+    \begin{example}
+        Tossing a fair coin constitutes an experiment. Here, the possible outcomes
+        of the experiment are `heads' or `tails'.
+    \end{example}
+
+    \begin{definition}[Random experiment]
+        A random experiment is one where there is more than one possible outcome, 
+        and the outcome of the experiment cannot be determined beforehand.
+    \end{definition}
+    \begin{example}
+        A coin toss, or the roll of a die is typically regarded as a random
+        experiment.
+    \end{example}
+    
+    \begin{definition}[Sample space]
+        A sample space $\Omega$ is the set of all outcomes of an experiment.
+    \end{definition}
+    \begin{example}
+        The sample space of rolls of a single die is $\Omega = \{1,2,3,4,5,6\}$.
+        Note that this is a finite, discrete sample space.
+    \end{example}
+    \begin{example}
+        In a game of guessing a particular natural number, the sample space is the
+        set of all natural numbers $\N$. Note that this is an infinite, discrete
+        sample space.
+    \end{example}
+    \begin{example}
+        The temperature in a room man vary continuously. Thus, the sample space of
+        temperatures is a continuous sample space.
+    \end{example}
+    
+    \begin{definition}[Events]
+        A set of events $\mathcal{E}$ is a collection of measurable subsets of
+        a sample space such that $\Omega \in \mathcal{E}$, it is closed under
+        complementing, and it is closed under countable unions.
+    \end{definition}
+    \begin{example}
+        We may have $\mathcal{E} = \{\emptyset, \{2, 4, 6\}, \{1, 3, 5\},
+        \Omega\}$ as our set of events in the case of rolling a die.
+        Obtaining an even number is an event.
+    \end{example}
+    \begin{remark}
+        Formally, the event space $\mathcal{E} \subseteq \mathcal{P}(\Omega)$ forms
+        a $\sigma$-algebra. The pair $(\Omega, \mathcal{E})$ is called a measurable
+        space.
+    \end{remark}
+
+    Note that the set of events is also closed under countable intersections,
+    because for a countable set of events $\{E_n\}_n$, we have \[
+        \bigcap_{n = 1}^\infty E_n = \bigcup_{n = 1}^\infty E_n^c
+    \] by De Morgan's Law, and $E_n^c \in \mathcal{E}$.
+    
+    \begin{definition}[Probability]
+        A probability measure is a function $P\colon \mathcal{E} \to [0, 1]$ such
+        that $P(\emptyset) = 0$, $P(\Omega) = 1$, and for any countable collection of
+        pairwise disjoint events $\{E_n\}_n$, we have \[
+            P(E) = \sum_{n = 1}^\infty E_n, \qquad E = \bigcup_{n = 1}^\infty E_n.
+        \] 
+    \end{definition}
+    \begin{remark}
+        We obtain the relation \[
+            P(A^c) = 1 - P(A)
+        \] directly by noting that $A \cup A^c = \Omega$ and $P(\Omega) = 1$.
+    \end{remark}
+
+    \begin{definition}[Probability space]
+        A probability space $(\Omega, \mathcal{E}, P)$ consists of a sample space
+        $\Omega$ together with a set of events $\mathcal{E}$ and a probability
+        measure $P$.
+    \end{definition}
+    \begin{example}
+        In the context of a coin toss, set $\Omega = \{H, T\}$, $\mathcal{E} =
+        \{\emptyset, \{H\}, \{T\}, \{H, T\}\}$ and define $P\colon \mathcal{E} \to
+        [0, 1]$ such that $P(H) = P(T) = 1 /2$. It can be verified that
+        $\mathcal{E}$ is a $\sigma$-algebra and that $P$ is a probability measure,
+        so the triple $(\Omega, \mathcal{E}, P)$ is indeed a probability space.
+    \end{example}
+
+    \begin{definition}[Equally likely events]
+        Two events $A, B \in \mathcal{E}$ are said to be equally likely if $P(A) =
+        P(B)$.
+    \end{definition}
+
+    The classical definition of probability states that if the sample space
+    $\Omega$ consists of $N$ equally likely events, then the probability of an
+    event $E \in \mathcal{E}$ is given by \[
+        P(E) = \frac{|E|}{n}.
+    \] 
+    Note that this assumes that the notion of equally likely events is known
+    beforehand.\\
+
+    The frequency definition of probability involves performing an experiment
+    $n$ times, denoting $f_n(E)$ as the frequency of the event $E$ over these
+    iterations, and defining \[
+        P(E) = \lim_{n \to \infty} \frac{f_n(E)}{n}. 
+    \] 
+    Note that such a limit may not always be well defined.
+
+\end{document}
+% vim: set tabstop=4 shiftwidth=4 softtabstop=4:
