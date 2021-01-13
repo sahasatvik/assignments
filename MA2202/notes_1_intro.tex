@@ -19,7 +19,7 @@
 \fancyhf{}
 \renewcommand\headrulewidth{0.4pt}
 \fancyhead[L]{\scshape MA2201: Probability I}
-\fancyhead[R]{\leftmark}
+\fancyhead[R]{\scshape Introduction to probability}
 \rfoot{\footnotesize\it Updated on \today}
 \cfoot{\thepage}
 
@@ -37,9 +37,12 @@
 \newcommand\norm[1]{\left\lVert#1\right\rVert}
 \newcommand\E[1]{E[#1]}
 
+\newcounter{module}
+\setcounter{module}{1}
+
 \newmdtheoremenv[%
     backgroundcolor=blue!10!white,%
-]{theorem}{Theorem}[section]
+]{theorem}{Theorem}[module]
 \newmdtheoremenv[%
     backgroundcolor=violet!10!white,%
 ]{corollary}{Corollary}[theorem]
@@ -50,21 +53,30 @@
 \theoremstyle{definition}
 \newmdtheoremenv[%
     backgroundcolor=green!10!white,%
-]{definition}{Definition}[section]
+]{definition}{Definition}[module]
 \newmdtheoremenv[%
     backgroundcolor=red!10!white,%
-]{exercise}{Exercise}[section]
+]{exercise}{Exercise}[module]
 
 \theoremstyle{remark}
 \newtheorem*{remark}{Remark}
 \newtheorem*{example}{Example}
 
-\numberwithin{equation}{section}
+\surroundwithmdframed[%
+    linecolor=black!20!white,%
+    hidealllines=false,%
+    innertopmargin=5,%
+    innerbottommargin=10,%
+    skipabove=0,%
+    skipbelow=0,%
+]{example}
+
+\numberwithin{equation}{module}
 
 \title{
-    \Large\textsc{MA2202} \\
+    \Large\textsc{MA2202: Probability I} \\
     % \vspace{10pt}
-    \Huge \textbf{Probability I} \\
+    \Huge \textbf{Introduction to probability} \\
     \vspace{5pt}
     \Large{Spring 2021}
 }
@@ -83,7 +95,6 @@
 \begin{document}
     \maketitle
 
-    \section{Introduction}
     \begin{definition}[Experiment]
         An experiment is an act which can be repeated under similar conditions.
     \end{definition}
@@ -122,17 +133,17 @@
         A set of events $\mathcal{E}$ is a collection of measurable subsets of
         a sample space such that $\Omega \in \mathcal{E}$, it is closed under
         complementing, and it is closed under countable unions.
+    \begin{remark}
+        Formally, the event space $\mathcal{E} \subseteq \mathcal{P}(\Omega)$ forms
+        a $\sigma$-algebra. The pair $(\Omega, \mathcal{E})$ is called a measurable
+        space.
+    \end{remark}
     \end{definition}
     \begin{example}
         We may have $\mathcal{E} = \{\emptyset, \{2, 4, 6\}, \{1, 3, 5\},
         \Omega\}$ as our set of events in the case of rolling a die.
         Obtaining an even number is an event.
     \end{example}
-    \begin{remark}
-        Formally, the event space $\mathcal{E} \subseteq \mathcal{P}(\Omega)$ forms
-        a $\sigma$-algebra. The pair $(\Omega, \mathcal{E})$ is called a measurable
-        space.
-    \end{remark}
 
     Note that the set of events is also closed under countable intersections,
     because for a countable set of events $\{E_n\}_n$, we have \[
@@ -146,11 +157,10 @@
             P(E) = \sum_{n = 1}^\infty P(E_n), \qquad E = \bigcup_{n = 1}^\infty E_n.
         \] 
     \end{definition}
-    \begin{remark}
-        We obtain the relation \[
-            P(A^c) = 1 - P(A)
-        \] directly by noting that $A \cup A^c = \Omega$ and $P(\Omega) = 1$.
-    \end{remark}
+
+    Note that we obtain the relation \[
+        P(A^c) = 1 - P(A)
+    \] directly by noting that $A \cup A^c = \Omega$ and $P(\Omega) = 1$.
 
     \begin{definition}[Probability space]
         A probability space $(\Omega, \mathcal{E}, P)$ consists of a sample space
