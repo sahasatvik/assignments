@@ -1,0 +1,132 @@
+\documentclass[11pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage[%
+    hidealllines=true,%
+    innerbottommargin=15,%
+]{mdframed}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{lipsum}
+
+\geometry{a4paper, margin=1in, headheight=14pt}
+
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand\headrulewidth{0.4pt}
+\fancyhead[L]{\scshape MA2201: Analysis II}
+\fancyhead[R]{\leftmark}
+\rfoot{\footnotesize\it Updated on \today}
+\cfoot{\thepage}
+
+\def\C{\mathbb{C}}
+\def\R{\mathbb{R}}
+\def\Q{\mathbb{Q}}
+\def\Z{\mathbb{Z}}
+\def\N{\mathbb{N}}
+\newcommand\ddx[1]{\frac{d #1}{d x}}
+\newcommand\ddt[1]{\frac{d #1}{d t}}
+\newcommand\dd[3][]{\frac{d^{#1}{#2}}{d {#3}^{#1}}}
+\newcommand\ppx[1]{\frac{\partial #1}{\partial x}}
+\newcommand\ppt[1]{\frac{\partial #1}{\partial t}}
+\newcommand\pp[3][]{\frac{\partial^{#1}{#2}}{\partial {#3}^{#1}}}
+\newcommand\norm[1]{\left\lVert#1\right\rVert}
+
+\newmdtheoremenv[%
+    backgroundcolor=blue!10!white,%
+]{theorem}{Theorem}[section]
+\newmdtheoremenv[%
+    backgroundcolor=violet!10!white,%
+]{corollary}{Corollary}[theorem]
+\newmdtheoremenv[%
+    backgroundcolor=teal!10!white,%
+]{lemma}[theorem]{Lemma}
+
+\theoremstyle{definition}
+\newmdtheoremenv[%
+    backgroundcolor=green!10!white,%
+]{definition}{Definition}[section]
+\newmdtheoremenv[%
+    backgroundcolor=red!10!white,%
+]{exercise}{Exercise}[section]
+
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\newtheorem*{example}{Example}
+
+\numberwithin{equation}{section}
+
+\title{
+    \Large\textsc{MA2201} \\
+    % \vspace{10pt}
+    \Huge \textbf{Analysis II} \\
+    \vspace{5pt}
+    \Large{Spring 2021}
+}
+\author{
+    \large Satvik Saha%
+    % \thanks{Email: \tt ss19ms154@iiserkol.ac.in}
+    \\\textsc{\small 19MS154}
+}
+\date{\normalsize
+    \textit{Indian Institute of Science Education and Research, Kolkata, \\
+    Mohanpur, West Bengal, 741246, India.} \\
+    % \vspace{10pt}
+    % \today
+}
+
+\begin{document}
+    \maketitle
+
+    \section{Sequences and series of functions}
+    \begin{definition}
+        Let the functions $f_n\colon X \to Y$ be defined for all $n \in \mathbb{N}$
+        and let the sequences $\{f_n(x)\}$ converge for all $x \in X$. We define the
+        function $f\colon X \to Y$ as \[
+            f(x) = \lim_{n \to \infty} f_n(x) 
+        \] for all $x \in X$, and call $f$ the limit of $\{f_n\}$.
+        We also say that $\{f_n\}$ converges to $f$ pointwise on $X$.
+    \end{definition}
+    \begin{example}
+        Consider the functions $f_n\colon [0, 1] \to \R$, $x \mapsto x^n$.
+        It can be shown that $x^n \to 0$ when $x \in [0, 1)$ and $x^n \to 1$ and
+        $x^n \to 1$ when $x = 1$. Thus, $f = \lim_{n \to \infty} f_n$ is well
+        defined. \[
+            f(x) = \begin{cases}
+                0, &\text{ if } 0 \leq x < 1 \\
+                1, &\text{ if } x = 1
+            \end{cases}.
+        \] 
+    \end{example}
+    \begin{remark}
+        Note that while each $f_n$ is continuous in this example, the limit $f$
+        is not.
+    \end{remark}
+    \begin{example}
+        Consider the functions $f_n\colon \R \to \R$, $x \mapsto x/n$.
+        We see that $f_n \to 0$. Note that $0$ here denotes the zero function.
+    \end{example}
+    
+    \begin{definition}
+        Let the functions $f_n\colon X \to Y$ be defined for all $n \in \mathbb{N}$
+        and let the sums $\{\sum f_n(x)\}$ converge for all $x \in X$.
+        We define the function $f\colon X \to Y$ as \[
+            f(x) = \sum_{n = 1}^\infty f_n(x)
+        \] for all $x \in X$, and call $f$ the sum of the series $\sum f_n$.
+    \end{definition}
+    \begin{example}
+        Consider the functions $f_n\colon (0, 1) \to \R$, $x \mapsto x^n$.
+        Note that the sum \[
+            \sum_{n = 1}^{\infty} x^n = x + x^2 + x^3 + \dots 
+                = \frac{x}{1 - x} 
+        \] does indeed converge for all $x \in (0, 1)$. Thus, the sum $f = \sum f_n$
+        is well defined. \[
+            f(x) = \frac{x}{1 - x}.
+        \] 
+    \end{example}
+
+\end{document}
+% vim: set tabstop=4 shiftwidth=4 softtabstop=4:
