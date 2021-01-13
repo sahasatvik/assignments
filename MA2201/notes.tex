@@ -84,15 +84,15 @@
     \section{Sequences and series of functions}
     \begin{definition}
         Let the functions $f_n\colon X \to Y$ be defined for all $n \in \mathbb{N}$
-        and let the sequences $\{f_n(x)\}$ converge for all $x \in X$. We define the
+        and let the sequences $\{f_n(x)\}$ converge for all $x \in X$. Define the
         function $f\colon X \to Y$ as \[
             f(x) = \lim_{n \to \infty} f_n(x) 
-        \] for all $x \in X$, and call $f$ the limit of $\{f_n\}$.
-        We also say that $\{f_n\}$ converges to $f$ pointwise on $X$.
+        \] for all $x \in X$. We call $f$ the limit of $\{f_n\}$, or say that
+        $\{f_n\}$ converges to $f$ pointwise on $X$.
     \end{definition}
     \begin{example}
         Consider the functions $f_n\colon [0, 1] \to \R$, $x \mapsto x^n$.
-        It can be shown that $x^n \to 0$ when $x \in [0, 1)$ and $x^n \to 1$ and
+        It can be shown that $x^n \to 0$ when $x \in [0, 1)$ and 
         $x^n \to 1$ when $x = 1$. Thus, $f = \lim_{n \to \infty} f_n$ is well
         defined. \[
             f(x) = \begin{cases}
@@ -113,9 +113,9 @@
     \begin{definition}
         Let the functions $f_n\colon X \to Y$ be defined for all $n \in \mathbb{N}$
         and let the sums $\{\sum f_n(x)\}$ converge for all $x \in X$.
-        We define the function $f\colon X \to Y$ as \[
+        Define the function $f\colon X \to Y$ as \[
             f(x) = \sum_{n = 1}^\infty f_n(x)
-        \] for all $x \in X$, and call $f$ the sum of the series $\sum f_n$.
+        \] for all $x \in X$. We call $f$ the sum of the series $\sum f_n$.
     \end{definition}
     \begin{example}
         Consider the functions $f_n\colon (0, 1) \to \R$, $x \mapsto x^n$.
