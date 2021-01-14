@@ -123,12 +123,14 @@
     body in thermal equilibrium will be equal. By thermal equilibrium, we mean that
     the temperatures of the body and its surroundings are equal.
 
-    The power emitted by a blackbody is given by the Stefan-Boltzmann Law.
-    \begin{boxedeq}
-        P \,=\, \sigma A T^4.
-    \end{boxedeq}
-    Here, $\sigma \approx \SI{5.67e-8}{\joule\second^{-1}\meter^{-2}\kelvin^{-4}}$
-    is called the Stefan-Boltzmann constant.
+    \begin{theorem}[Stefan-Boltzmann Law]
+        The power emitted by a blackbody is given by \[
+            P \,=\, \sigma A T^4.
+        \]
+        Here, $\sigma \approx 
+        \SI{5.67e-8}{\joule\second^{-1}\meter^{-2}\kelvin^{-4}}$ is called the
+        Stefan-Boltzmann constant.
+    \end{theorem}
 
     We may break down the total energy density $\rho \propto T^4$ in terms of the
     contributions from each frequency, so \[
@@ -138,18 +140,19 @@
     classical mechanics (Rayleigh-Jean's Law), which predicts that $\rho(\nu)$
     is unbounded with increasing frequency -- the famous ultraviolet catastrophe.
 
-    Wien's Law describes the positions of the peaks in $\rho(\nu)$.
-    \begin{boxedeq}
-        \lambda_{peak} \,=\, \frac{w}{T}.
-    \end{boxedeq}
-    Here, $w \approx \SI{2.9e-3}{\milli\kelvin}$.
+    \begin{theorem}[Wien's Law]
+        The positions of the peaks in $\rho(\nu)$ are described by \[
+            \lambda_{peak} \,=\, \frac{w}{T}.
+        \]
+        Here, $w \approx \SI{2.9e-3}{\milli\kelvin}$.  
+    \end{theorem}
     Note that at $T \approx \SI{300}{\kelvin}$, the peak wavelength $\lambda_{peak}$
     is in the infrared range: this is why night vision googles are useful.
     
     Consider a collection of electromagnetic waves in a blackbody cavity, with
     temperature $T$. This can be seen as the superposition of normal modes.
     The classical approach to the blackbody problem is to suppose that the energy
-    density at a particular frequency is proportional to the frequency. \[
+    density at a particular frequency is given by \[
         \rho(\nu) = \overline{E} n(\nu),
     \] where $n(\nu)$ is the number density of wave modes with frequency $\nu$, and
     $E$ is the average energy of the radiation.
@@ -166,41 +169,44 @@
     \[
         n(\nu)\:d\nu = \frac{8\pi}{c^3}\nu^2\:d\nu.
     \] This leads to the Rayleigh-Jean Law,
-    \begin{boxedeq}
+    \begin{boxedeq*}
         \rho(\nu)\:d\nu = \overline{E} n(\nu) \:d\nu 
             = \frac{8\pi k_B T}{c^3}\nu^2\:d\nu.
-    \end{boxedeq}
+    \end{boxedeq*}\\~\\
 
-    Planck's considered the probability distribution for the energy, \[
+    Planck looked at the probability distribution for the energy, \[
         P(E) = \frac{1}{k_B T}e^{-E /k_B T}.
     \] This is the Boltzmann distribution. It can be shown that \[
-        \overline{E} = \frac{\int E P(E) \:dE}{\int P(E) \: dE} = k_B T,
+        \overline{E} = \frac{\int_0^\infty E P(E) \:dE}{\int_0^\infty P(E) \: dE} 
+        = k_B T,
     \] which recovers the Rayleigh-Jean Law.
 
     Planck's idea was to restrict $E$ to discrete values; integral multiples of the
     frequency $\nu$. This leads to \[
         \overline{E} = \frac{\sum E P(E)}{\sum P(E)} 
-            = \frac{h\vu}{e^{nh\nu /k_B T} - 1}.
+            = \frac{h\nu}{e^{h\nu /k_B T} - 1}.
     \] 
-    This gives us the Planck distribution,
-    \begin{boxedeq}
-        \rho(\nu)\:d\nu 
-            = \frac{8\pi h}{c^3} \frac{\nu^3}{e^{nh\nu /k_B T} - 1} \:d\nu
-    \end{boxedeq}
+    This gives us the Planck distribution.
 
+    \begin{theorem}[Planck's Law]
+        The spectral energy density of radiation emitted by a blackbody in thermal
+        equilibrium is described by the distribution \[
+            \rho(\nu)\:d\nu 
+                = \frac{8\pi h}{c^3} \frac{\nu^3}{e^{h\nu /k_B T} - 1} \:d\nu.
+        \] 
+        Here, $h \approx \SI{6.626e-34}{\joule\second}$ is called Planck's constant.
+    \end{theorem}
     When $h\nu \ll 1$, we recover the Rayleigh-Jean limit. When $h\nu \gg 1$, we get
     the Wien limit.
 
     Now we calculate, \[
         \rho = \int_0^\infty \rho(\nu)\:d\nu = \frac{8\pi^5k_B^4}{15c^3h^3}T^4,
     \] which recovers the Stefan-Boltzmann Law with \[
-        \sigma \,=\, \frac{2\pi^4k_B^4}{15c^2h^3}.
+        \sigma \,=\, \frac{2\pi^5k_B^4}{15c^2h^3}.
     \] 
     Also, the maxima of the Planck distribution recovers Wien's Law, with \[
         \nu_{max} \,\approx\, 2.8 \frac{k_B T}{h}.
     \] 
-    We have introduced Planck's constant, which is given by $h \approx
-    \SI{6.626e-34}{\joule\second}$.
 
 
 \end{document}
