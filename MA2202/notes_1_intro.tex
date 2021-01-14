@@ -194,6 +194,20 @@
         P(E) = \lim_{n \to \infty} \frac{f_n(E)}{n}. 
     \] 
     Note that such a limit may not always be well defined.
+    
+    \begin{definition}[Mutually exclusive events]
+        Two events $A, B \in \mathcal{E}$ are called mutually exclusive if $A \cap B
+        = \emptyset$.
+    \end{definition}
+    \begin{definition}[Exhaustive events]
+        A set of events $S \subseteq \mathcal{E}$ is called exhaustive if \[
+            \Omega = \bigcup_{E \in S} E.
+        \] 
+    \end{definition}
+    \begin{example}
+        For any event $A \in \mathcal{E}$, we see that $A$ and $A^c$ are mutually
+        exclusive and exhaustive.
+    \end{example}
 
 \end{document}
 % vim: set tabstop=4 shiftwidth=4 softtabstop=4:
