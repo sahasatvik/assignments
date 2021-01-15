@@ -9,6 +9,7 @@
 ]{mdframed}
 \usepackage{xcolor}
 \usepackage{graphicx}
+\usepackage[hidelinks]{hyperref}
 \usepackage{fancyhdr}
 \usepackage{lipsum}
 \usepackage{bm}
@@ -98,6 +99,8 @@
 
 \begin{document}
     \maketitle
+    \tableofcontents
+
 
     \section{Introduction}
     The quantum world differs from the classical world in many aspects, most of
@@ -208,6 +211,59 @@
         \nu_{max} \,\approx\, 2.8 \frac{k_B T}{h}.
     \] 
 
+    \subsection{Photoelectric effect}
+    This reveals the dual nature of light. Classical optics relies on the wave
+    nature of light, thus explaining phenomena such as interference and diffraction.
+    This culminates in Maxwell's equations, which predict the wave nature of light
+    as the propagation of oscillating electric and magnetic fields.
+
+    The photoelectric effect in the phenomenon in which light shining on a metal
+    surface ejects electrons from it, thus producing a current. Suppose that the
+    incident light has frequency $\nu$, intensity $I$ and this produces a current
+    $i$. We can calculate the maximum kinetic energy of the emitted electrons
+    $E_{max} = eV_0$ by adjusting an opposing potential $V$.
+
+    It turns out that for a constant intensity $I$, the photocurrent saturates at
+    the same value. However, different frequencies $\nu$ produces different stopping
+    potentials $V_0$; the greater the frequency, the greater the magnitude of the
+    stopping potential. This turns out to have a linear relationship, with
+    \begin{boxedeq*}
+        E_{max} \,=\, eV_0 \,=\, h(\nu - \nu_0) \,=\, h\nu - \phi.
+    \end{boxedeq*}
+    The slope $h$ is universal for all metals, while $\phi = h\nu_0$ varies
+    between different metals.
+    This shows that below a certain frequency $\nu_0$, we obtain no photocurrent,
+    regardless of the intensity! This appears strange from a classical perspective,
+    where the energy delivered by an electromagnetic wave is related to its
+    intensity, not its frequency.
+
+    Einstein proposed that light strikes the metal in bundles of energy, all
+    integral multiples of $h\nu$. There is also a minimum binding energy which must
+    be overcome to liberate electrons from the metal surface -- this cannot be paid
+    in a continuous manner, since any partial energy given to an electron will be
+    lost before the arrival of the next energy bundle. Thus, each energy bundle must
+    carry a minimum energy $h\nu_0$ in order to liberate electrons and produce a
+    photocurrent.
+
+    This establishes a particle-like mature of light. Each energy bundle, or
+    particle of light, is called a photon.
+
+    \subsection{Matter waves}
+    Louis de Broglie further hypothesised that matter also has a wave nature, with
+    an associated wavelength of 
+    \begin{boxedeq*}
+        \lambda_{matter} \,=\, \frac{h}{p}.
+    \end{boxedeq*}
+    This has been demonstrated by Davisson and Germer, where a stream of electrons
+    exhibits diffraction.
+    
+    This has some amazing implications. In the classical world, knowledge of a
+    particle's position and momentum is enough to pinpoint its trajectory with
+    arbitrary precision. However, the wavelike nature of matter would imply that we
+    can no longer talk of a definite, localized position when we have knowledge of
+    the particle's momentum! This uncertainty is inherent to quantum mechanics.
+
+    Another consequence is the phenomenon of quantum tunnelling.
 
 \end{document}
 % vim: set tabstop=4 shiftwidth=4 softtabstop=4:
