@@ -1,0 +1,201 @@
+\documentclass[11pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage[%
+    hidealllines=true,%
+    innerbottommargin=15,%
+]{mdframed}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{lipsum}
+\usepackage{bm}
+\usepackage{siunitx}
+
+\geometry{a4paper, margin=1in, headheight=14pt}
+
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand\headrulewidth{0.4pt}
+\fancyhead[L]{\scshape PH2202: Thermal physics}
+\fancyhead[R]{\scshape \leftmark}
+\rfoot{\footnotesize\it Updated on \today}
+\cfoot{\thepage}
+
+\def\C{\mathbb{C}}
+\def\R{\mathbb{R}}
+\def\Q{\mathbb{Q}}
+\def\Z{\mathbb{Z}}
+\def\N{\mathbb{N}}
+\newcommand\ve[1]{\boldsymbol{#1}}
+\newcommand\ddx[1]{\frac{d #1}{d x}}
+\newcommand\ddt[1]{\frac{d #1}{d t}}
+\newcommand\dd[3][]{\frac{d^{#1}{#2}}{d {#3}^{#1}}}
+\newcommand\ppx[1]{\frac{\partial #1}{\partial x}}
+\newcommand\ppt[1]{\frac{\partial #1}{\partial t}}
+\newcommand\pp[3][]{\frac{\partial^{#1}{#2}}{\partial {#3}^{#1}}}
+\newcommand\norm[1]{\left\lVert#1\right\rVert}
+\newcommand\grad[1]{\ve{\nabla}#1}
+\newcommand\divg[1]{\ve{\nabla}\cdot#1}
+\newcommand\curl[1]{\ve{\nabla}\times#1}
+\newcommand\lapl[1]{\nabla^2 #1}
+
+\newmdtheoremenv[%
+    backgroundcolor=blue!10!white,%
+]{theorem}{Proposition}[section]
+% \newmdtheoremenv[%
+%     backgroundcolor=violet!10!white,%
+% ]{corollary}{Corollary}[theorem]
+% \newmdtheoremenv[%
+%     backgroundcolor=teal!10!white,%
+% ]{lemma}[theorem]{Lemma}
+
+\theoremstyle{definition}
+\newmdtheoremenv[%
+    backgroundcolor=green!10!white,%
+]{definition}{Definition}[section]
+% \newmdtheoremenv[%
+%     backgroundcolor=red!10!white,%
+% ]{exercise}{Exercise}[section]
+\newmdenv[%
+    backgroundcolor=cyan!5!white,%
+    innertopmargin=10,%
+]{cyanbox}
+\newenvironment{boxedeq}%
+    {\begin{cyanbox}\begin{equation}}%
+    {\end{equation}\end{cyanbox}}
+\newenvironment{boxedeq*}%
+    {\begin{cyanbox}\begin{equation*}}%
+    {\end{equation*}\end{cyanbox}}
+
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\newtheorem*{example}{Example}
+
+\numberwithin{equation}{section}
+
+\title{
+    \Large\textsc{PH2202} \\
+    % \vspace{10pt}
+    \Huge \textbf{Thermal physics} \\
+    \vspace{5pt}
+    \Large{Spring 2021}
+}
+\author{
+    \large Satvik Saha%
+    % \thanks{Email: \tt ss19ms154@iiserkol.ac.in}
+    \\\textsc{\small 19MS154}
+}
+\date{\normalsize
+    \textit{Indian Institute of Science Education and Research, Kolkata, \\
+    Mohanpur, West Bengal, 741246, India.} \\
+    % \vspace{10pt}
+    % \today
+}
+
+\begin{document}
+    \maketitle
+
+    Thermal physics deals with the topic of \textit{temperature}.
+    Temperature is a statistical property -- thus, it makes no sense to talk of the
+    temperature of one, two, or even a handful of particles.
+
+    \tableofcontents
+
+    \section{Kinetic Theory of Gases}
+    \subsection{The molecular picture of matter}
+    Imagine looking into a container filled with steam, and magnifying by a factor
+    of \num{e10}. A cubic metre might contain around \num{20} molecules, all of
+    which are in constant motion, colliding with the walls and each other.
+    Suppose that one of the walls is a piston. The molecules which collide with the
+    piston and impart a force on it; in order to fix the piston in place, a
+    counter force must be applied.
+    \begin{definition}[Pressure]
+        The force per unit area applied by a gas on the walls of its container is
+        called the pressure of the gas.
+    \end{definition}
+    Now provide the system with heat. We know that the temperature of the gas must
+    increase -- what this means is that the speeds of the molecules increase, on
+    average.
+    \begin{definition}[Temperature]
+        The temperature of a gas is a measure of the average kinetic energy of the
+        constituent particles.
+    \end{definition}
+    Instead, consider an adiabatic container, which stops all flow of heat into and
+    out of the gas. By compressing the gas with the piston, we observe that the
+    temperature of the gas also rises.
+
+    Now, take away heat from the system. The temperature drops and the molecules
+    tend to be close to each other. This is because of the dipolar attractive forces
+    between the molecules (which varies as the inverse cube of the distance of the
+    dipoles, and is hence comparatively short range).
+    On the other hand, they cannot get too close, since once the electron clouds of
+    the molecules start to overlap, a repulsive force is introduced. At a certain
+    point, we reach a condensed form of matter: liquid water.
+
+    Liquid water is very much incompressible, yet the molecules freely move and
+    slide around, without any periodic arrangement. The molecules at the surface are
+    attracted by like molecules inside; this cohesive force keeps the liquid 
+    condensed. This tendency of a liquid to minimize its surface area is related to
+    the phenomenon of surface tension. Some molecules on the surface are energetic
+    enough to escape this cohesive attraction and leave the liquid -- this is called
+    evaporation. Heating a liquid simply increases the average kinetic energy of the
+    molecules, thus increasing the rate of evaporation.
+    When these energetic molecules leave the liquid, the average kinetic energy of
+    the liquid drops, hence it cools down. This is the phenomenon of latent heat.
+
+    When this happens in a closed container, the process of evaporation cannot go on
+    indefinitely, since the air has a limited capacity for holding moisture.
+    Condensation is the process where these airborne molecules return to the liquid.
+    At a certain point, the rates of evaporation and condensation become equal, and
+    we obtain a saturated vapour.
+
+    Return to the liquid, and take away even more heat. Now, the motion of the
+    molecules decrease to a point where they occupy fixed positions. They are still
+    in motion, but their movement is restricted around their mean position.
+    This is the crystal state. The lower the temperature, the smaller the
+    oscillations and vibrations.
+
+    \subsection{Basic assumptions}
+    \begin{enumerate}
+        \itemsep0em 
+        \item Gases are made up of a large number of molecules, and all molecules of
+        one gas are identical.
+        \item Molecules of a gas are always moving. The number of molecules per unit
+        volume remains constant, i.e.\ the density remains constant.
+        \item Molecules behave as elastic spheres during collisions. Kinetic energy
+        and momenta are conserved, and the collision time is negligible compared to
+        the mean path time.
+        \item No force acts on any molecule, except during collisions.
+        Intermolecular forces are only short ranged. Between collisions, the
+        molecules continue moving with uniform velocity in a straight line.
+        \item The entire gas is isotropic; for all molecules, all directions are the
+        same.
+    \end{enumerate}
+    
+    \subsection{Ideal gases}
+    We start by considering very simple collections of molecules. We assume that
+    they are identical, spherical, with negligible size and with no intermolecular
+    interactions. They only undergo elastic collisions.
+
+    % \begin{definition}[Mean free path]
+    %     The mean free path is the average distance covered by a gas molecule before
+    %     colliding, either with another gas particle or the walls of its container.
+    % \end{definition}
+
+    \begin{theorem}[Ideal gas law]
+        The ideal gas law gives a relation between the pressure $p$, the volume $V$,
+        the temperature $T$, and the number of moles $n$ of an ideal gas.
+        \[
+            pV \,=\, nRT.
+        \]
+        Here, the constant of proportionality $R$ is called the ideal gas constant,
+        with value \[
+            R \,\approx\, \SI{8.314}{\joule\per\mole\per\kelvin}.
+        \]
+    \end{theorem}
+
+\end{document}
+% vim: set tabstop=4 shiftwidth=4 softtabstop=4:
