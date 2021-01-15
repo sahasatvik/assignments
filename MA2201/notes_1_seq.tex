@@ -119,6 +119,35 @@
         Consider the functions $f_n\colon \R \to \R$, $x \mapsto x/n$.
         We see that $f_n \to 0$. Note that $0$ here denotes the zero function.
     \end{example}
+    \begin{example}
+        Consider the functions $f_n\colon \R \to \R$, \[
+            f_n(x) = \begin{cases}
+                x^2, &\text{ if }|x| \leq n\\
+                +n, &\text{ if } x > +n \\
+                -n, &\text{ if } x < -n
+            \end{cases}.
+        \] 
+        This converges pointwise to $f\colon \R \to \R$, $x \mapsto x^2$.
+        Note that for any $x \in \R$, we can find sufficiently large $N \in \N$ such
+        that $|x| \leq N$.  This means that the tail of the sequence $\{f_n(x)\}$
+        becomes a constant sequence $\{x^2\}$ from the $N$\textsuperscript{th} term
+        onwards, so $f_n(x) \to x^2$ for all $x \in \R$.
+    \end{example}
+    \begin{example}
+        Consider the functions $f_n\colon \R \to \R$, \[
+            f_n(x) = \lim_{m \to \infty} (\cos{n!\pi x})^{2m}.
+        \] We observe that $f_n(x) = 1$ only when $n!x$ is an integer.
+        Now, if $x$ is rational, $n!x$ will become an integer for sufficiently large
+        $n$, whereas if $x$ is irrational, $n!x$ can never be an integer. Thus,
+        we see that $f_n \to f$, where $f\colon \R \to \R$ is the Dirichlet
+        function defined as \[
+            f(x) = \begin{cases}
+                1, &\text{ if } x \in \Q \\
+                0, &\text{ if } x \notin \Q
+            \end{cases}.
+        \] 
+        Note that $f$ is discontinuous everywhere!
+    \end{example}
     
     \begin{definition}[Series of functions]
         Let the functions $f_n\colon X \to Y$ be defined for all $n \in \mathbb{N}$
@@ -155,6 +184,14 @@
             $x \in X$.
         \end{remark}
     \end{definition}
+    \begin{example}
+        Consider $f_n\colon \R \to \R$, $x \mapsto x + 1 /n$. We see that $f_n \to
+        f$ uniformly on $\R$, where $f\colon \R \to \R$, $x \mapsto x$.
+        Note that given $\epsilon > 0$, we find $N \in \N$ such that $N\epsilon >
+        1$ using the Archimedean property. Thus, for all $x \in \R$, we have \[
+            |f_n(x) - f(x)| = \frac{1}{n} < \epsilon.
+        \] 
+    \end{example}
 
     \begin{lemma}
         The sequence of functions $\{f_n\}$ does not converge uniformly on $X$ to
@@ -275,6 +312,36 @@
         $|f_n(x)| \leq 1$ for all $x \in \R$, and the series $\sum 1$ diverges to
         $\infty$.
     \end{remark}
+
+    \section{Continuity}
+    \begin{theorem}
+        Let the functions $f_n\colon X \to Y$ be continuous, and suppose that 
+        $f_n \to f$ uniformly on $X$ in a metric space. Then, $f$ is continuous on
+        $X$.
+    \end{theorem}
+    \begin{proof}
+        Let $\epsilon > 0$. We wish to show continuity at arbitrary $x_0 \in X$.
+        Since $f_n \to f$ uniformly on $X$, we find $N \in \N$ such that for all $x
+        \in X$ and $n \geq N$, we have \[
+            |f_n(x) - f(x)| < \frac{\epsilon}{3}.
+        \] This holds in particular for $n = N$, and $x = x_0$.
+        
+        The continuity of each $f_n$ on $X$ means that $f_N$ in particular is
+        continuous on $X$, so we can find $\delta > 0$ such that whenever 
+        $|x - x_0| < \delta$, we have \[
+            |f_N(x) - f_N(x_0)| < \frac{\epsilon}{3}.
+        \] Now, for every $x \in X$ such that $|x - x_0| < \delta$, we have
+        \begin{align*}
+            |f(x) - f(x_0)| 
+                \,&\leq\, |f(x) - f_N(x)| + |f_N(x) - f_N(x_0)| + 
+                    |f_N(x_0) - f(x_0)| \\
+                \,&<\, \frac{\epsilon}{3} + \frac{\epsilon}{3} +
+                    \frac{\epsilon}{3} \\
+                \,&=\, \epsilon.
+        \end{align*}
+        This means that $f$ is continuous at $x_0$ for arbitrary $x_0 \in X$, i.e.\
+        $f$ is continuous on $X$.
+    \end{proof}
     
 \end{document}
 % vim: set tabstop=4 shiftwidth=4 softtabstop=4:
