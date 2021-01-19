@@ -1,0 +1,145 @@
+\documentclass[11pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage[%
+    hidealllines=true,%
+    innerbottommargin=15,%
+    nobreak=true,%
+]{mdframed}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{lipsum}
+
+\geometry{a4paper, margin=1in, headheight=14pt}
+
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand\headrulewidth{0.4pt}
+\fancyhead[L]{\scshape MA2201: Probability I}
+\fancyhead[R]{\scshape Introduction to probability}
+\rfoot{\footnotesize\it Updated on \today}
+\cfoot{\thepage}
+
+\def\C{\mathbb{C}}
+\def\R{\mathbb{R}}
+\def\Q{\mathbb{Q}}
+\def\Z{\mathbb{Z}}
+\def\N{\mathbb{N}}
+\newcommand\ddx[1]{\frac{d #1}{d x}}
+\newcommand\ddt[1]{\frac{d #1}{d t}}
+\newcommand\dd[3][]{\frac{d^{#1}{#2}}{d {#3}^{#1}}}
+\newcommand\ppx[1]{\frac{\partial #1}{\partial x}}
+\newcommand\ppt[1]{\frac{\partial #1}{\partial t}}
+\newcommand\pp[3][]{\frac{\partial^{#1}{#2}}{\partial {#3}^{#1}}}
+\newcommand\norm[1]{\left\lVert#1\right\rVert}
+\newcommand\E[1]{E[#1]}
+
+\newcounter{module}
+\setcounter{module}{2}
+
+\newmdtheoremenv[%
+    backgroundcolor=blue!10!white,%
+]{theorem}{Theorem}[module]
+\newmdtheoremenv[%
+    backgroundcolor=violet!10!white,%
+]{corollary}{Corollary}[theorem]
+\newmdtheoremenv[%
+    backgroundcolor=teal!10!white,%
+]{lemma}[theorem]{Lemma}
+
+\theoremstyle{definition}
+\newmdtheoremenv[%
+    backgroundcolor=green!10!white,%
+]{definition}{Definition}[module]
+\newmdtheoremenv[%
+    backgroundcolor=red!10!white,%
+]{exercise}{Exercise}[module]
+
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\newtheorem*{example}{Example}
+
+\surroundwithmdframed[%
+    linecolor=black!20!white,%
+    hidealllines=false,%
+    innertopmargin=5,%
+    innerbottommargin=10,%
+    skipabove=0,%
+    skipbelow=0,%
+]{example}
+
+\numberwithin{equation}{module}
+
+\title{
+    \Large\textsc{MA2202: Probability I} \\
+    % \vspace{10pt}
+    \Huge \textbf{Conditional probability} \\
+    \vspace{5pt}
+    \Large{Spring 2021}
+}
+\author{
+    \large Satvik Saha%
+    % \thanks{Email: \tt ss19ms154@iiserkol.ac.in}
+    \\\textsc{\small 19MS154}
+}
+\date{\normalsize
+    \textit{Indian Institute of Science Education and Research, Kolkata, \\
+    Mohanpur, West Bengal, 741246, India.} \\
+    % \vspace{10pt}
+    % \today
+}
+
+\begin{document}
+    \maketitle
+
+    Suppose a fair die is rolled and the outcome is even. The probability that the
+    outcome was prime is $1 /3$. This is because the only even prime is $2$, and we
+    know that we have rolled one of $2, 4$ or $6$, all of which are equally likely.
+    \begin{definition}[Conditional probability]
+        Suppose a random experiment is performed, and we know that an event $B$
+        occurred. Let $A \in \mathcal{E}$. The probability of occurrence of $A$
+        given $B$ is called the conditional probability $P(A \,|\, B)$.
+
+        \begin{remark}
+            Note that the conditional probability $A$ given $B$ is equivalent to the
+            occurrence of $A \cap B$ computed relative to the probability of the
+            occurrence of $B$. \[
+                P(A\,|\, B) \,P(B) = P(A \cap B).
+            \] 
+        \end{remark}
+    \end{definition}
+    \begin{theorem}[Bayes' Theorem]
+        If $A, B \in \mathcal{E}$ with $P(B) \neq 0$, we have \[
+            P(A \,|\, B) = \frac{P(A)}{P(B)}P(B \,|\, A).
+        \]
+    \end{theorem}
+    \begin{proof}
+        This follows directly from \[
+            P(A \cap B) = P(A \,|\, B) \,P(B) = P(B \,|\, A) \,P(A). \qedhere
+        \] 
+    \end{proof}
+    \begin{example}
+        Suppose a fair die is rolled and the outcome is even. The probability that
+        the outcome is prime is $1 /3$. This is because the only even prime is $2$,
+        the available even numbers are $2, 4, 6$, and the available primes are 
+        $2, 3, 5$. Thus, \[
+            P(\text{prime} \,|\, \text{even}) =
+            \frac{P(\text{even})}{P(\text{prime})} P(\text{even} \,|\, \text{prime})
+            = \frac{3 / 6}{3 / 6} \cdot \frac{1}{3} = \frac{1}{3}.
+        \] 
+    \end{example}
+    
+    \begin{definition}[Independent events]
+        If $A, B \in \mathcal{E}$ such that $P(A), P(B) \neq 0$, and we have \[
+            P(A \,|\, B) = P(A), \qquad P(B \,|\, A) = P(B),
+        \] then we say that
+        $A$ and $B$ are independent. \\
+
+        \noindent Equivalently, $P(A \cap B) = P(A) P(B)$.
+    \end{definition}
+
+\end{document}
+% vim: set tabstop=4 shiftwidth=4 softtabstop=4:

@@ -209,5 +209,61 @@
         exclusive and exhaustive.
     \end{example}
 
+
+    \begin{theorem}[Principle of Inclusion and Exclusion]
+        For events $A_1, A_2, \dots, A_n \in \mathcal{E}$, we have 
+        \begin{align*}
+            P(A_1 \cup \dots \cup A_n) \,=\, &\sum P(A_i) - \sum_{i < j} P (A_i \cap
+            A_j) + \\ &\sum_{i < j < k} P(A_i \cap A_j \cap A_k) - \dots +
+            (-1)^{n-1}P(A_1 \cap \dots A_n).
+        \end{align*}
+    \end{theorem}
+    \begin{proof}
+        This follows by induction. The base case of $n = 2$ states \[
+            P(A_1 \cup A_2) = P(A_1) + P(A_2) - P(A_1 \cap A_2),
+        \] which follows form the fact that the sets $A_1\setminus A_2$, $A_1\cap
+        A_2$ and $A_2\setminus A_1$ are pairwise disjoint.
+
+        For the induction step, assume that the expansion holds for $n = m \geq 2$
+        and note that \[
+            P \left( A_{m + 1} \cap \bigcup_{i = 1}^m A_i \right) = P \left(
+            \bigcup_{i = 1}^m A_i \cap A_{m + 1} \right).
+        \] Putting the $n = m + 1$ case into the $n = 2$ case and expanding the
+        above $n = m$ case, the full expansion will follow. 
+    \end{proof}
+
+    \begin{theorem}[Boole's inequality]
+        For events $A_1, A_2, \dots, A_n \in \mathcal{E}$, we have \[
+            P(A_1 \cup \dots A_n) \leq \sum P(A_i).
+        \] 
+    \end{theorem}
+    \begin{proof}
+       This is clearly true for $n = 2$, since \[
+            P(A_1 \cup A_2) = P(A_1) + P(A_2) - P(A_1 \cap A_2) \leq P(A_1) +
+            P(A_2).
+        \] Define \[
+            B_i = A_i \setminus \bigcup_{j = 1}^{i - 1} A_j.
+        \] Note that $\cup B_i = \cup A_i$, and all $B_i$ are pairwise disjoint.
+        In addition, $B_i \subseteq A_i$, so $P(B_i) \leq P(A_i)$. Thus, \[
+            P(A_1 \cup \dots \cup A_2) \,=\, \sum P(B_i) \,\leq\, \sum P(A_i). \qedhere
+        \] 
+    \end{proof}
+
+    \begin{theorem}[Bonferroni's inequality]
+        For events $A_1, A_2, \dots, A_n \in \mathcal{E}$, we have \[
+            P(A_1 \cap \dots \cap A_n) \geq \sum P(A_i) - (n - 1).
+        \] 
+    \end{theorem}
+    \begin{proof}
+        This holds for $n = 2$, since \[
+            P(A_1 \cap A_2) = P(A_1) + P(A_2) - P(A_1 \cup A_2) \geq P(A_1) +
+            P(A_2) - 1.
+        \]
+        For the induction step, suppose this holds for $n = m \geq 2$. Thus, \[
+            P(A_1 \cap \dots \cap A_m \cap A_{m + 1}) \geq P(A_1 \cap \dots \cap
+            A_m) + P(A_m) - 1 \geq \sum P(A_i) - m. \qedhere
+        \] 
+    \end{proof}
+
 \end{document}
 % vim: set tabstop=4 shiftwidth=4 softtabstop=4:
