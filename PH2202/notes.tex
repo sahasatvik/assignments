@@ -6,9 +6,11 @@
 \usepackage[%
     hidealllines=true,%
     innerbottommargin=15,%
+    nobreak=true,%
 ]{mdframed}
 \usepackage{xcolor}
 \usepackage{graphicx}
+\usepackage[hidelinks]{hyperref}
 \usepackage{fancyhdr}
 \usepackage{lipsum}
 \usepackage{bm}
@@ -167,18 +169,41 @@
         volume remains constant, i.e.\ the density remains constant.
         \item Molecules behave as elastic spheres during collisions. Kinetic energy
         and momenta are conserved, and the collision time is negligible compared to
-        the mean path time.
+        the free path time.
         \item No force acts on any molecule, except during collisions.
         Intermolecular forces are only short ranged. Between collisions, the
         molecules continue moving with uniform velocity in a straight line.
         \item The entire gas is isotropic; for all molecules, all directions are the
         same.
     \end{enumerate}
+
+    \begin{remark}
+        The collisions between molecules can be modelled as the elastic collision of
+        hard spheres. The repulsive forces between molecules, governed by the
+        Lennard-Jones potential, varies as $1 /r^{12}$, which is very short
+        range and very powerful.
+        In comparison, gravity is a long range force since it varies as $1 /r^2$.
+    \end{remark}
     
     \subsection{Ideal gases}
-    We start by considering very simple collections of molecules. We assume that
-    they are identical, spherical, with negligible size and with no intermolecular
-    interactions. They only undergo elastic collisions.
+    For an ideal gas, we make a few more assumptions. The gas molecules have
+    negligible size, so are essentially point masses. Also, there are no forces on
+    the molecules except during collisions, so they have no potential.
+
+    No real gases are ideal. We may look at the limit where the temperature $T$ is
+    very high and the density (or $n$) is very low. Here, the kinetic energy far
+    exceeds any potential energies, and the mean free path becomes very high.
+
+    We look at some absurdities of this model.
+    \begin{enumerate}
+        \itemsep0em 
+        \item How do point masses collide?
+        \item If two gases of different temperatures are mixed, how do they exchange
+        heat?
+        \item Without intermolecular forces, are there any phase changes?
+        \item How do we explain properties such as viscosity and thermal
+        conductivity?
+    \end{enumerate}
 
     % \begin{definition}[Mean free path]
     %     The mean free path is the average distance covered by a gas molecule before
