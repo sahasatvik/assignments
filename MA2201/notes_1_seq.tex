@@ -60,6 +60,7 @@
 \theoremstyle{remark}
 \newtheorem*{remark}{Remark}
 \newtheorem*{example}{Example}
+\newtheorem*{solution}{Solution}
 
 \surroundwithmdframed[%
     linecolor=black!20!white,%
@@ -93,7 +94,8 @@
 
 \begin{document}
     \maketitle
-
+    
+    \section*{Pointwise convergence}
     \begin{definition}[Sequences of functions]
         Let the functions $f_n\colon X \to Y$ be defined for all $n \in \mathbb{N}$
         and let the sequences $\{f_n(x)\}$ converge for all $x \in X$. Define the
@@ -148,6 +150,17 @@
         \] 
         Note that $f$ is discontinuous everywhere!
     \end{example}
+
+    \begin{exercise}
+        Show that if a sequence of functions $\{f_n\}$ converges on $X$, 
+        then the sequence of functions $\{|f_n|\}$ also converges on $X$.
+        \begin{solution}
+            Suppose that $f_n \to f$. Then given $\epsilon > 0$, $x \in X$, we find
+            $N \in \N$ such that for all $n \geq N$, \[
+                | |f_n(x)| - |f(x)| | \leq |f_n(x) - f(x)| < \epsilon.
+            \] This gives $|f_n| \to |f|$ on $X$.
+        \end{solution}
+    \end{exercise}
     
     \begin{definition}[Series of functions]
         Let the functions $f_n\colon X \to Y$ be defined for all $n \in \mathbb{N}$
@@ -166,10 +179,9 @@
             f(x) = \frac{x}{1 - x}.
         \] 
     \end{example}
-
     
-    \section{Uniform convergence}
-    
+    \newpage
+    \section*{Uniform convergence}
     \begin{definition}[Uniform convergence]
         Let the functions $f_n\colon X \to Y$ be defined for all $n \in \N$.
         We say that the sequence $\{f_n\}$ converges uniformly on $X$ to $f$ if
@@ -226,6 +238,11 @@
         for all $m, n \geq N$ and $x \in X$, we have \[
             |f_n(x) - f_m(x)| < \epsilon.
         \] 
+        \begin{remark}
+            We require the functions $f_n$ to be real or complex valued, since
+            Cauchy sequences are precisely the convergent sequences in a complete
+            metric space.
+        \end{remark}
     \end{theorem}
     \begin{proof}
         First suppose that $\{f_n\}$ converges uniformly on $X$, and $f_n \to f$.
@@ -251,7 +268,7 @@
     \end{proof}
 
     \begin{theorem}
-        Let $f_n\colon X \to \R$ and let $f_n \to f$. Set \[
+        Let $f_n\colon X \to Y$ and let $f_n \to f$. Set \[
             M_n = \sup |f_n(x) - f(x)|.
         \]
         Then, $\{f_n\}$ converges uniformly on $X$ to $f$ if and only if $M_n \to
@@ -289,7 +306,7 @@
     \end{example}
 
     \begin{theorem}[Weierstrass M-test]
-        Let $f_n\colon X \to \R$ and suppose that for all $n \in \N$ and $x \in X$,
+        Let $f_n\colon X \to Y$ and suppose that for all $n \in \N$ and $x \in X$,
         \[
             |f_n(x)| \leq M_n.
         \]
@@ -314,7 +331,6 @@
         $\infty$.
     \end{remark}
 
-    \section{Continuity}
     \begin{theorem}
         Let the functions $f_n\colon X \to Y$ be continuous, and suppose that 
         $f_n \to f$ uniformly on $X$ in a metric space. Then, $f$ is continuous on
@@ -361,6 +377,37 @@
         uniformly on $[0, 1]$ because each $f_n$ is continuous, but their limit 
         $\lim_{n \to \infty} f_n$ is discontinuous at $x = 1$.
     \end{example}
+
+    \begin{theorem}
+        Let $K$ be compact, and suppose that 
+        \begin{enumerate}
+            \itemsep0em
+            \item $\{f_n\}$ is a sequence of continuous functions on $K$.
+            \item $\{f_n\}$ converges pointwise to a continuous function $f$ on $K$.
+            \item $f_n \geq f_{n + 1}$ for all $n \in \N$.
+        \end{enumerate}
+        The, $f_n \to f$ uniformly on $K$.
+    \end{theorem}
+    \begin{proof}
+        Set $g_n = f_n - f$, and note that each $g_n$ is also decreasing and
+        continuous, with $g_n \to 0$. 
+        Also note that $g_n \geq 0$.
+        We claim that $g_n \to 0$ uniformly on $K$.
+
+        Let $\epsilon > 0$. Set \[
+            K_n = \{x \in K\colon g_n(x) \geq \epsilon\}.
+        \] Now, note that $K_n \supseteq K_{n + 1}$ since $g_n$ is decreasing, $K_n
+        = g_n^{-1}[\epsilon, \infty)$ is closed since $g_n$ is continuous, and thus
+        $K_n \subseteq K$ is compact.  If $K_n \neq \emptyset$ for all $n \in \N$,
+        recall that \[
+            \mathcal{K} = \bigcap_{n \in \N} K_n \neq \emptyset.
+        \] Selecting $x_0 \in \mathcal{K}$, we have $g_n(x_0) \geq \epsilon$ for all
+        $\N$. This contradicts the fact that $g_n \to 0$ pointwise on $K$. Thus,
+        there must be $N \in \N$ such that $K_{n \geq N} = \emptyset$.  Thus, we
+        have \[
+            0 \leq g_n(x) < \epsilon
+        \] for all $n \geq N$, all $x \in K$, as desired.
+    \end{proof}
     
 \end{document}
 % vim: set tabstop=4 shiftwidth=4 softtabstop=4:
