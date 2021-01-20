@@ -122,8 +122,11 @@ a {
     background-color: #81a2be;
     transition: width 0.1s ease-out;
 }
-.accordion.active .card-title:before {
-    width: 16ch;
+.accordion.active.w-15 .card-title:before {
+    width: 15ch;
+}
+.accordion.active.w-14 .card-title:before {
+    width: 14ch;
 }
 
 .panel {
