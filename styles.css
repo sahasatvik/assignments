@@ -17,13 +17,6 @@ a {
     text-decoration: none;
 }
 
-.separator {
-    width: 10%;
-    height: 1px;
-    background-color: #999999;
-    margin-bottom: 1em;
-}
-
 .card-container {
     width: 60%;
     height: auto;
@@ -45,6 +38,8 @@ a {
     align-items: center;
     justify-content: center;
     flex-direction: column;
+
+    padding-bottom: 3em;
 }
 
 #assignments {
@@ -66,7 +61,7 @@ a {
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    margin: 4em 0em .5em 0em;
+    margin: 4em 0em 4em 0em;
 }
 
 #logo {
@@ -84,23 +79,61 @@ a {
     filter: invert(0%);
 }
 
-#links {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: row;
+.accordion {
+    cursor: pointer;
+}
+.accordion .card {
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+.accordion .card-title {
+    position: relative;
+    font-size: 1.4em;
+    margin-bottom: 0.3em;
+}
+.accordion .card-title:after {
+    content: '+';
+    float: right;
+    text-align: right;
+    font-size: 1.3em;
+    margin-left: 0.5em;
+    opacity: 0.5;
+}
+.accordion.active .card-title:after {
+    content: "-";
+}
+.accordion .card-title:before {
+    position: absolute;
+    content: '';
+    left: 0;
+    width: 0;
+    bottom: -0.2em;
+    height: 2px;
+    transform-origin: left;
+    background-color: #81a2be;
+    transition: width 0.1s ease-out;
+}
+.accordion.active .card-title:before {
+    width: 16ch;
+    transform: scaleX(1);
 }
 
-#links a {
-    display: inline-block;
-    font-size: 1rem;
-    font-weight: 400;
-    color: #81a2be;
-    margin: 0em .5em;
+.panel {
+    margin: 0;
+    overflow: hidden;
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform 0.2s ease-out;
+    max-height: 0;
 }
-
-#links a:hover {
-    color: #b294bb;
+.accordion.active + .panel {
+    max-height: none;
+    transform: scaleY(1);
+}
+.panel .card:last-of-type {
+    margin-bottom: 2em;
 }
 
 .problem-solution-links {
@@ -116,7 +149,7 @@ a {
     }
     #logo-container {
         font-size: 2rem;
-        margin: 1em 0em .5em 0em;
+        margin: 1em 0em 1.5em 0em;
     }
 }
 

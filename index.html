@@ -23,7 +23,14 @@
             <img id="logo" src="https://sahasatvik.github.io/logo_alpha.svg" alt="" onmouseup="toggleTheme()"/>
             <div id="assignments">Notes &amp; Assignments</div>
         </div>
-        <div id="y2s2-card-container" class="card-container">
+        <div id="y2s2-label" class="card-container accordion">
+            <div class="card borderless">
+                <div class="card-title">
+                    Year II, Spring
+                </div>
+            </div>
+        </div>
+        <div id="y2s2-card-container" class="card-container panel">
             <div id="ma2201" class="card borderless">
                 <div class="card-title">
                     MA2201 - Analysis II
@@ -83,8 +90,14 @@
                 </ul>
             </div>
         </div>
-        <div class="separator"></div>
-        <div id="y2s1-card-container" class="card-container">
+        <div id="y2s1-label" class="card-container accordion">
+            <div class="card borderless">
+                <div class="card-title">
+                    Year II, Autumn
+                </div>
+            </div>
+        </div>
+        <div id="y2s1-card-container" class="card-container panel">
             <div id="ma2101" class="card borderless">
                 <div class="card-title">
                     MA2101 - Analysis I
@@ -373,8 +386,14 @@
                 </ul>
             </div> 
         </div>
-        <div class="separator"></div>
-        <div id="y1s2-card-container" class="card-container">
+        <div id="y1s2-label" class="card-container accordion">
+            <div class="card borderless">
+                <div class="card-title">
+                    Year I, Spring
+                </div>
+            </div>
+        </div>
+        <div id="y1s2-card-container" class="card-container panel">
             <div id="ch1201" class="card borderless">
                 <div class="card-title">
                     CH1201 - General Physical Chemistry
@@ -543,8 +562,14 @@
                 </ul>
             </div> 
         </div>
-        <div class="separator"></div>
-        <div id="y1s1-card-container" class="card-container">
+        <div id="y1s1-label" class="card-container accordion">
+            <div class="card borderless">
+                <div class="card-title">
+                    Year I, Autumn
+                </div>
+            </div>
+        </div>
+        <div id="y1s1-card-container" class="card-container panel">
             <div id="ch1101" class="card borderless">
                 <div class="card-title">
                     CH1101 - Elements of Chemistry
@@ -733,6 +758,18 @@
         }
         
         refreshTheme();
+        
+        var acc = document.getElementsByClassName("accordion");
+        var i;
+
+        for (i = 0; i < acc.length; i++) {
+            acc[i].addEventListener("click", function() {
+                this.classList.toggle("active");
+            });
+        }
+        window.addEventListener('load', function() {
+            document.getElementById("y2s2-label").click()
+        });
     </script>
 </body>
 </html>
