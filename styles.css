@@ -26,9 +26,15 @@ a {
     transition: .2s ease background;
     grid-column: span 12;
 }
+.card li {
+    overflow: auto;
 
+}
 .card li:before {
     content: '-';
+}
+.problem-solution-links {
+    float: right;
 }
 
 #global-container {
@@ -80,6 +86,7 @@ a {
 }
 
 .accordion {
+    position: relative;
     cursor: pointer;
 }
 .accordion .card {
@@ -91,33 +98,32 @@ a {
 .accordion .card-title {
     position: relative;
     font-size: 1.4em;
-    margin-bottom: 0.3em;
+    margin-bottom: 0.5em;
 }
 .accordion .card-title:after {
     content: '+';
     float: right;
     text-align: right;
-    font-size: 1.3em;
+    font-size: 1em;
+    color: #81a2be;
     margin-left: 0.5em;
-    opacity: 0.5;
 }
 .accordion.active .card-title:after {
+    color: #b294bb;
     content: "-";
 }
 .accordion .card-title:before {
     position: absolute;
     content: '';
     left: 0;
+    bottom: -0.5em;
     width: 0;
-    bottom: -0.2em;
     height: 2px;
-    transform-origin: left;
     background-color: #81a2be;
     transition: width 0.1s ease-out;
 }
 .accordion.active .card-title:before {
     width: 16ch;
-    transform: scaleX(1);
 }
 
 .panel {
@@ -134,10 +140,6 @@ a {
 }
 .panel .card:last-of-type {
     margin-bottom: 2em;
-}
-
-.problem-solution-links {
-    float: right;
 }
 
 @media only screen and (max-width: 600px) {
