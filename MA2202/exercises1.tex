@@ -1,0 +1,190 @@
+\documentclass[10pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+
+\title{Probability I - Assignment I}
+\author{Satvik Saha}
+\date{}
+
+\geometry{a4paper, margin=1in}
+\setlength\parindent{0pt}
+\renewcommand{\labelenumi}{(\alph{enumi})}
+% \renewcommand\qedsymbol{$\blacksquare$}
+\newcounter{prob}
+\def\problem{\stepcounter{prob}\paragraph{Exercise \arabic{prob}}}
+\def\solution{\paragraph{Solution}}
+
+\begin{document}
+        \par\textbf{IISER Kolkata} \hfill \textbf{Assignment I}
+        \vspace{3pt}
+        \hrule
+        \vspace{3pt}
+        \begin{center}
+                \LARGE{\textbf{MA 2202 : Probability I}}
+        \end{center}
+        \vspace{3pt}
+        \hrule
+        \vspace{3pt}
+        Satvik Saha, \texttt{19MS154}, Group D\hfill\today
+        \vspace{20pt}
+
+
+        \problem Toss a coin a hundred times and write down the outcomes 
+        sequentially.
+        \solution Tails, Tails, Heads, Tails, Heads, Tails, Tails, Tails, Tails,
+        Tails, Heads, Heads, Heads, Heads, Tails, Heads, Tails, Heads, Tails, Heads,
+        Heads, Tails, Tails, Tails, Tails, Tails, Heads, Tails, Heads, Tails, Tails,
+        Tails, Heads, Tails, Heads, Heads, Tails, Heads, Heads, Tails, Tails, Tails,
+        Heads, Heads, Heads, Tails, Tails, Tails, Heads, Heads, Tails, Tails, Heads,
+        Heads, Tails, Tails, Heads, Heads, Heads, Tails, Tails, Heads, Heads, Heads,
+        Tails, Tails, Heads, Heads, Heads, Tails, Heads, Tails, Tails, Heads, Heads,
+        Tails, Tails, Tails, Tails, Heads, Tails, Tails, Tails, Tails, Tails, Tails,
+        Tails, Heads, Tails, Heads, Heads, Tails, Heads, Tails, Heads, Tails, Heads,
+        Heads, Tails, Tails.
+
+        \problem Let $(\Omega, \mathcal{E}, P)$ be a probability space.
+        Let $A, B \in \mathcal{E}$. Show that
+        \begin{enumerate}
+                \item $P(B \cap A^c) = P(B) - P(B \cap A)$.
+                \item $P(A \cup B) = P(A) + P(B) - P(A \cap B)$.
+                \item If $A \subseteq B$, then $P(A) \leq P(B)$.
+        \end{enumerate}
+        \solution Here, we denote $X^c = \Omega\setminus X$.
+        We first note that for any $A \in \mathcal{E}$, the complement $A^c \in
+        \mathcal{E}$. Also, $A \cap A^c = \emptyset$ and $A \cup A^c = \Omega$.
+        Thus, the probability of the countable union can be broken as \[
+                P(\Omega) = P(A \cup A^c) = P(A) + P(A^c).
+        \] Since $P(\Omega) = 1$, we have $P(A^c) = 1 - P(A)$. \\
+        
+        Also, since $\mathcal{E}$ is closed under countable unions as well as
+        complements, we use de Morgan's Laws to conclude that if $A, B \in
+        \mathcal{E}$, then $A^c \cup B^c = (A \cap B)^c \in \mathcal{E}$,
+        so $A \cap B \in \mathcal{E}$.
+        \begin{enumerate}
+                \item Note that \[
+                        (B \cap A^c) \cap (B \cap A) = B \cap B \cap A^c \cap A
+                        = B \cap \emptyset = \emptyset,
+                \] which means that $B \cap A^c$ and $B \cap A$ are disjoint.
+                Also, \[
+                        (B\cap A^c) \cup (B \cap A) = B \cap (A^c \cup A) = 
+                        B \cap \Omega = B.
+                \] 
+                Thus, the probability of the union must be the sum of the individual
+                probabilities, so \[
+                        P(B \cap A^c) + P(B \cap A) = P(B),
+                \] as desired.
+
+                \item Note that \[
+                        (A \cap B) \cap (A \setminus B) = (A \cap B) \cap (A \cap
+                        B^c) = \emptyset,
+                \]
+                \[
+                        (A \cap B) \cap (B \setminus A) = (A \cap B) \cap (B \cap
+                        A^c) = \emptyset,
+                \] 
+                \[
+                        (A \setminus B) \cap (B \setminus A) = (A \cap B^c) \cap (B
+                        \cap A^c) = \emptyset,
+                \]
+                This means that the sets $A\cap B$, $A\setminus B$ and $B\setminus
+                A$ are pairwise disjoint. 
+                Also, note that \[
+                        A = A \cap \Omega = A \cap (B \cup B^c) = (A \cap B) \cup (A
+                        \cap B^c) = (A \cap B) \cup (A \setminus B),
+                \] \[
+                        B = B \cap \Omega = B \cap (A \cup A^c) = (B \cap A) \cup (B
+                        \cap A^c) = (A \cap B) \cup (B \setminus A).
+                \] 
+                Additionally, \[
+                        (A \cap B) \cup (A \setminus B) \cup (B \setminus A) = A
+                        \cup (B \setminus A) = A \cup (B \cap A^c) = (A \cup B) \cap
+                        (A \cup A^c) = A \cup B.
+                \] 
+                Thus, we can write 
+                \begin{align*}
+                P(A) + P(B) \,&=\, \left[P(A\cap B) + P(A\setminus B)\right] + 
+                            \left[P(A \cap B) + P(B \setminus A)\right] \\
+                        \,&=\, P(A \cap B) + P((A \cap B) \cup (A \setminus B) 
+                            \cup (B\setminus A)) \\
+                        \,&=\, P(A \cap B) + P(A \cup B),
+                \end{align*}
+                as desired.
+
+                \item If $A \subseteq B$, we set $C = B \setminus A = B \cap A^c \in
+                \mathcal{E}$.
+                Also note that $B \cap A = A$, so part (a) gives \[
+                        P(C) = P(B) - P(B \cap A) = P(B) - P(A).
+                \] 
+                On the other hand, $C \in \mathcal{E}$ which means that $P(C) \geq
+                0$. This directly gives $P(B) \geq P(A)$, as desired.
+
+        \end{enumerate}
+
+        \problem Let $\Omega$ be a countably infinite sample space of a random
+        experiment, none of whose outcomes are expected to occur in preference to
+        the others. Justify whether the set of events $\mathcal{E}$ can be identical
+        with $2^\Omega$ for such a random experiment.
+        \solution We cannot have $\mathcal{E} = 2^\Omega$. We have been given that
+        none of the outcomes $n \in \Omega$ occur in preference to another.
+        This means that we can write $P(\{n\}) = x$, for some $x \in \mathbb{R}$.
+        Now, note that \[
+                \bigcup_{n \in \Omega} \{n\} = \Omega.
+        \] This is a countable union because $\Omega$ is countably infinite, so we
+        can write \[
+                P(\Omega) = \sum_{n \in \Omega} x.
+        \] The right hand side is an infinite sum with constant terms. If $x = 0$,
+        then the sum evaluates to $0$, otherwise the sum diverges and cannot be
+        assigned any meaningful value. On the other hand, we demand $P(\Omega) = 1$,
+        which is a contradiction.
+
+        \problem To the choice of each $n \in \mathbb{N}$, could you assign a 
+        probability $P(n) > 0$ such that the following conditions hold?
+        \begin{enumerate}
+                \item $P(m) \neq P(n)$ for all $m, n \in \mathbb{N}$, $m \neq n$.
+                \item The probability of choosing an odd positive integer is the
+                same as the probability of choosing an even positive integer.
+        \end{enumerate}
+        \solution We assign the probabilities \[
+                P(2k - 1) = \frac{1}{3^k}, \qquad 
+                P(2k) = \frac{3}{2}\cdot\frac{1}{4^k},
+        \] where $k \in \mathbb{N}$. Note that this covers all $n \in \mathbb{N}$,
+        where each $n$ is either even or odd. Odd $n$ can be uniquely
+        written as $n = 2k - 1$ and even $n$ can be uniquely written as $n = 2k$. \\
+
+        Now, pick $m, n \in \mathbb{N}$, $m \neq n$. If both are odd, say $m = 2k -
+        1$ and $n = 2\ell - 1$, then \[
+                \frac{1}{3^k} = \frac{1}{3^\ell}, \qquad 3^k = 3^\ell
+        \] forces $k = \ell$, hence $m = n$. If both are even, say $m = 2k$ and 
+        $n = 2\ell$, then \[
+                \frac{3}{2}\cdot \frac{1}{4^k} = \frac{3}{2}\cdot \frac{1}{4^\ell},
+                \qquad 4^k = 4^\ell
+        \] also forces $k = \ell$, hence $m = n$.
+        If one of them is even and the other odd, without loss of generality let $m
+        = 2k - 1$ be odd and $n = 2\ell$ be even. Then, \[
+                \frac{1}{3^k} = \frac{3}{2}\cdot \frac{1}{4^\ell}, \qquad
+                3^{k + 1} = 2^{2\ell + 1}
+        \] can only happen if $k + 1 = 2\ell + 1 = 0$ since $2$ and $3$ are prime.
+        This forces $k = -1$, which is absurd. Thus, we obtain contradictions in all
+        cases, which means that $P(m) \neq P(n)$ for any $m \neq n$.
+
+        Also note that each of the events $\{m\}$ and $\{n\}$ are pairwise disjoint,
+        so the probability of their countable union is the sum of their individual
+        probabilities. Thus,
+        \begin{align*}
+                P(n\text{ is odd}) \,&=\, P(\{1, 3, 5, \dots\}) \\ 
+                  \,&=\, P(\{1\}) + P(\{3\}) + P(\{5\}) + \dots \\
+                  \,&=\, \sum_{k = 1}^{\infty} \frac{1}{3^k} \\
+                  \,&=\, \frac{1}{3}\cdot \frac{1}{1 - 1 /3} \,=\, \frac{1}{2}.
+        \end{align*}
+        \begin{align*}
+                P(n\text{ is even}) \,&=\,  P(\{2, 4, 6, \dots\}) \\
+                  \,&=\, P(\{2\}) + P(\{4\}) + P(\{6\}) + \dots \\ 
+                  \,&=\, \frac{3}{2}\sum_{k = 1}^{\infty} \frac{1}{4^k} \\ 
+                  \,&=\, \frac{3}{8}\cdot \frac{1}{1 - 1 /4} \,=\, \frac{1}{2}.
+        \end{align*}
+        This means that $P(\mathbb{N}) = P(\{1, 3, 5, \dots\} \cup \{2, 4, 6, 
+        \dots\}) = 1 /2 + 1 /2 = 1$, as desired.
+
+\end{document}
