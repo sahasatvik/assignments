@@ -308,11 +308,62 @@
 
     Thus, the electrons arrive at the screen as particles, but their distribution on
     the screen shows interference patterns just like those of a wave!
-    
-    % \subsubsection{Spying on the electrons}
-    % Suppose that we repeat this experiment, but this time we place a detector on the
-    % slits. Thus, we can be sure which slit a given electron passes through.
 
+    This suggests that a simple sum of the probabilities $P_1$ and $P_2$ from each
+    of the slits is not enough. Analogous to the double slit experiment with light,
+    we must assign complex probability amplitudes $A_1$ and $A_2$, which we then add
+    up. \[
+        P_1 = |A_1|^2, \qquad P_2 = |A_2|^2, \qquad P_{12} = |A_1 + A_2|^2.
+    \] 
+    
+    \subsubsection{Spying on the electrons}
+    Suppose that we repeat this experiment, but this time we place a detector on the
+    slits. Thus, we can be sure which slit a given electron passes through.
+    One way to do this is to place a light source in between the slits and the
+    screen. When an electron passes through a slit, it will scatter some light which
+    we see as a flash in the neighbourhood of the slit.
+
+    What happens is that the interference pattern disappears! The distribution now
+    has two peaks, just like a classical particle would behave, i.e.\ we now have
+    $P_1 + P_2$.  We do indeed observe a single flash corresponding to each click,
+    so we can pinpoint which slit a given electron on the screen corresponds to.
+
+    To see whether the light source is somehow disturbing the paths of the
+    electrons, we make it dimmer and dimmer.  Note that this merely changes the
+    number of photons hanging around the slits, not their energy (which is $\propto
+    h\nu$), so we do not expect the brightness of the flashes to change.  Now, some
+    clicks do not have a corresponding flash; some electrons are reaching the screen
+    unnoticed by our detector at the slits. The interference pattern at the screen
+    gradually reappears, in the form $P_{12}$!
+
+    Now, the momentum imparted by the light photons obeys $p = h / \lambda$. By
+    choosing a very large $\lambda$, we can have $p \to 0$, which ought to disturb
+    the electrons to a lesser extent. When we do this, we still observe the
+    classical pattern. However, when $\lambda$ exceeds the order of the slit
+    separation, we lose the ability to resolve which slit the electron passed
+    through, i.e.\ the flashes cannot be identified with the correct slit. At this
+    point, we get back the interference pattern. \\
+
+    Thus, there is no way to answer which slit each electron passed through while
+    retaining the interference pattern!
+    This is intrinsic to the quantum system, in the form of the Heisenberg
+    uncertainty principle.
+
+    \section{Postulates of Quantum Mechanics}
+    \begin{enumerate}
+        \itemsep0
+        \item Associated with each classical outcome of a quantum experiment is a
+        probability amplitude, $\psi$, which is not directly observable.
+        \item The probability distribution is given by $P = |\psi|^2$, which is
+        observable.
+        \item For a system with many classical outcomes, we write \[
+            \psi = \sum_{i = 1}^\infty \psi_i.
+        \] Thus, the probability distribution $P$ carries signatures of the
+        probabilities $P_i = |\psi_i|^2$. For example when we have $n = 2$ 
+        outcomes, \[
+            P = |\psi_1 + \psi_2|^2 = P_1 + P_2 + 2\sqrt{P_1P_2}\cos\delta.
+        \] 
+    \end{enumerate}
 
 \end{document}
 % vim: set tabstop=4 shiftwidth=4 softtabstop=4:
