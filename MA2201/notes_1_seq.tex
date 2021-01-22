@@ -3,6 +3,7 @@
 \usepackage[T1]{fontenc}
 \usepackage{geometry}
 \usepackage{amsmath, amssymb, amsthm}
+\usepackage[scr]{rsfso}
 \usepackage[%
     hidealllines=true,%
     innerbottommargin=15,%
@@ -12,6 +13,7 @@
 \usepackage{graphicx}
 \usepackage{fancyhdr}
 \usepackage{lipsum}
+\usepackage{hyperref}
 
 \geometry{a4paper, margin=1in, headheight=14pt}
 
@@ -232,7 +234,7 @@
         \] 
     \end{example}
 
-    \begin{theorem}[Cauchy criterion for uniform convergence]
+    \begin{theorem}[Cauchy criterion for uniform convergence] \label{th:cauchy}
         The sequence of real-valued functions $\{f_n\}$ converges uniformly on $X$
         if and only if for every $\epsilon > 0$, there exists $N \in \N$ such that
         for all $m, n \geq N$ and $x \in X$, we have \[
@@ -267,9 +269,9 @@
         \] as desired.
     \end{proof}
 
-    \begin{theorem}
+    \begin{theorem} \label{th:M_supremum}
         Let $f_n\colon X \to Y$ and let $f_n \to f$. Set \[
-            M_n = \sup |f_n(x) - f(x)|.
+            M_n = \sup_{x \in X} |f_n(x) - f(x)|.
         \]
         Then, $\{f_n\}$ converges uniformly on $X$ to $f$ if and only if $M_n \to
         0$.
@@ -331,7 +333,7 @@
         $\infty$.
     \end{remark}
 
-    \begin{theorem}
+    \begin{theorem} \label{th:continuous}
         Let the functions $f_n\colon X \to Y$ be continuous, and suppose that 
         $f_n \to f$ uniformly on $X$ in a metric space. Then, $f$ is continuous on
         $X$.
@@ -402,12 +404,50 @@
         recall that \[
             \mathcal{K} = \bigcap_{n \in \N} K_n \neq \emptyset.
         \] Selecting $x_0 \in \mathcal{K}$, we have $g_n(x_0) \geq \epsilon$ for all
-        $\N$. This contradicts the fact that $g_n \to 0$ pointwise on $K$. Thus,
-        there must be $N \in \N$ such that $K_{n \geq N} = \emptyset$.  Thus, we
-        have \[
+        $n \in \N$. This contradicts the fact that $g_n \to 0$ pointwise on $K$.
+        Thus, there must exist $N \in \N$ such that $K_{n \geq N} = \emptyset$.
+        Thus, we have \[
             0 \leq g_n(x) < \epsilon
         \] for all $n \geq N$, all $x \in K$, as desired.
     \end{proof}
+
+    \begin{definition}
+        Let $X$ be a metric space and denote $\mathscr{C}(X)$ as the set of all
+        complex-valued, continuous, bounded functions with domain $X$.
+        Define the supremum norm on each $f \in \mathscr{C}(X)$ as \[
+            \norm{f} = \sup_{x \in X} |f(x)|.
+        \] Then, $\mathscr{C}(X)$ is a metric space.
+        \begin{remark}
+            Note that the supremum norm $\norm{\cdot}$ satisfies symmetry,
+            positivity, and the triangle inequality \[
+                \norm{f + g} \leq \norm{f} + \norm{g}
+            \] for all $f, g \in \mathscr{C}(X)$.
+        \end{remark}
+    \end{definition}
+
+    \begin{theorem}
+        The metric space $\mathscr{C}(X)$ is complete.
+    \end{theorem}
+    \begin{proof}
+        Suppose that $\{f_n\}$ is a Cauchy sequence in $\mathscr{C}(X)$. This means
+        that given $\epsilon > 0$, there exists $N \in \N$ such that for all $m, n
+        \geq N$, we have $\norm{f_n - f_m} < \epsilon$. Theorem \ref{th:cauchy}
+        shows that $\{f_n\}$ converges uniformly to some function $f$ on $X$.
+        Theorem \ref{th:continuous} guarantees that $f$ is continuous.
+        Note that $f$ is bounded, since there exists $n \in \N$ such that $\norm{f -
+        f_n} < 1$ and $f_n$ is bounded.
+
+        Thus, $f \in \mathscr{C}(X)$, where $f_n \to f$ uniformly on $X$. It follows
+        from Theorem \ref{th:M_supremum} that $\norm{f - f_n} \to 0$.
+    \end{proof}
+
+    \begin{definition}[Equicontinuity]
+        A sequence of functions $\{f_n\}$ on a set $X$ is called equicontinuous if
+        for every $\epsilon > 0$, there exists $\delta > 0$ such that whenever $|x -
+        y| < \delta$, we have \[
+            |f_n(x) - f_n(y)| < \epsilon.
+        \] 
+    \end{definition}
     
 \end{document}
 % vim: set tabstop=4 shiftwidth=4 softtabstop=4:
