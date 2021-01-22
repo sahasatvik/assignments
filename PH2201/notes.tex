@@ -62,15 +62,17 @@
     backgroundcolor=red!10!white,%
 ]{exercise}{Exercise}[section]
 \newmdenv[%
-    backgroundcolor=cyan!5!white,%
+    hidealllines=false,%
+    linecolor=black!20!white,%,
+    % backgroundcolor=cyan!5!white,%
     innertopmargin=10,%
-]{cyanbox}
+]{equationbox}
 \newenvironment{boxedeq}%
-    {\begin{cyanbox}\begin{equation}}%
-    {\end{equation}\end{cyanbox}}
+    {\begin{equationbox}\begin{equation}}%
+    {\end{equation}\end{equationbox}}
 \newenvironment{boxedeq*}%
-    {\begin{cyanbox}\begin{equation*}}%
-    {\end{equation*}\end{cyanbox}}
+    {\begin{equationbox}\begin{equation*}}%
+    {\end{equation*}\end{equationbox}}
 
 \theoremstyle{remark}
 \newtheorem*{remark}{Remark}
@@ -100,7 +102,6 @@
 \begin{document}
     \maketitle
     \tableofcontents
-
 
     \section{Introduction}
     The quantum world differs from the classical world in many aspects, most of
@@ -349,7 +350,7 @@
     This is intrinsic to the quantum system, in the form of the Heisenberg
     uncertainty principle.
 
-    \section{Postulates of Quantum Mechanics}
+    \section{Postulates of quantum mechanics}
     \begin{enumerate}
         \itemsep0
         \item Associated with each classical outcome of a quantum experiment is a
@@ -365,5 +366,33 @@
         \] 
     \end{enumerate}
 
+    \section{Bohr's atomic model}
+    Recall Rutherford's experiment where he fired $\alpha$ particles at a gold
+    foil, which established the existence of a very small region of positive charge
+    in the centre of every atom (the nucleus), surrounded by negatively charged
+    electrons. This raises the problem of the stability of the electron orbits -- an
+    accelerating charge must radiate energy, that too over a wide range of
+    frequencies. On the other hand, radiation emitted by an atom is always observed
+    at discrete frequencies. For example, the wavelengths emitted by hydrogen are 
+    given by the Rydberg constant.
+    \begin{boxedeq*}
+        \frac{1}{\lambda} = R\left(\frac{1}{m^2} - \frac{1}{n^2}\right).
+    \end{boxedeq*}
+    Bohr's idea was that the angular momenta of the electrons are quantized. We set
+    \[
+        L = pr = mvr = n\hbar.
+    \] In a sense, an electron forms a standing wave in its orbit, with a
+    circumference of $n\lambda$. By balancing the Coulomb and centripetal forces, we
+    can write \[
+        r = \frac{4\pi\epsilon_0 \hbar^2}{me^2}n^2 = a_0n^2.
+    \] Here, $a_0 \approx \SI{5.29e-11}{\meter}$ is called the Bohr radius.
+    As a result, \[
+        E_n = \frac{1}{2}mv^2 - \frac{e^2}{4\pi\epsilon_0 r} 
+            \approx -13.6 \frac{1}{n^2}\,\si{e\volt}.
+    \] The energies emitted by electrons are now restricted to differences of these
+    energy levels, so \[
+        h\nu = E_m - E_n.
+    \] 
+    
 \end{document}
 % vim: set tabstop=4 shiftwidth=4 softtabstop=4:
