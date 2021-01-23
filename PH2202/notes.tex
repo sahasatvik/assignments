@@ -162,7 +162,7 @@
 
     \subsection{Basic assumptions}
     \begin{enumerate}
-        \itemsep0em 
+        \itemsep0 
         \item Gases are made up of a large number of molecules, and all molecules of
         one gas are identical.
         \item Molecules of a gas are always moving. The number of molecules per unit
@@ -196,7 +196,7 @@
 
     We look at some absurdities of this model.
     \begin{enumerate}
-        \itemsep0em 
+        \itemsep0
         \item How do point masses collide?
         \item If two gases of different temperatures are mixed, how do they exchange
         heat?
@@ -204,6 +204,50 @@
         \item How do we explain properties such as viscosity and thermal
         conductivity?
     \end{enumerate}
+
+    \subsection{Pressure}
+    Suppose that a volume $dV$, located at $(r, \theta, \phi)$, contains $n\:dV$
+    particles. If we consider a small flat, horizontal area $\Delta S$, we can
+    calculate the number of molecules moving towards $\Delta S$, as \[
+        dN = \frac{n\cos\theta\,\Delta S}{4\pi r^2}\:dV.
+    \] Over a time $\Delta t$, we only consider the particles within the region 
+    $r = 0 \to c\Delta t$ above the $xy$ plane. Integrating, we have \[
+        \int dN = \int_0^{c\Delta t}\int_{0}^{\pi /2}\int_0^{2\pi}
+        \frac{n\cos\theta\,\Delta S}{4\pi r^2} r^2\sin\theta\:d\phi\:d\theta\:dr.
+    \] Simplifying, we have \[
+        N = \frac{1}{2} n\,\Delta S \cdot c\Delta t \cdot \int_0^{\pi /2}
+        \cos\theta\sin\theta \:d\theta = \frac{1}{4}nc\Delta S \,\Delta t.
+    \] Thus, the number of molecules hitting the wall per unit area per unit time is
+    given by $nc/4$.
+
+    What if we have different molecules with different velocities? We can use this
+    expression to conclude that if $n_i$ molecules have velocity $c_i$, the average
+    velocity is $\overline{c} = \sum n_ic_i / n$, $n = \sum n_i$, so \[
+        N = \frac{1}{4}n\overline{c}.
+    \] Now, each molecule can strike the walls of the container at some angle
+    $\theta$. For an elastic collision, the change in its momentum is
+    $2mc\cos\theta$. Repeating the integration process, we write the momentum
+    imparted as \[
+        \int 2mc\cos\theta \cdot\frac{n\cos\theta \Delta S}{4\pi r^2} dV =
+        mnc^2\Delta S \cdot \int_0^{\pi /2}\cos^2\theta\sin\theta\:d\theta.
+    \] Simplifying, we have \[
+        \frac{1}{3}mnc^2\Delta S \Delta t.
+    \] For a velocity distribution, we deal with the RMS velocity where $c_{rms}^2
+    = \sum n_ic_i^2 / n$. Thus the pressure, which is the momentum imparted per unit
+    area per unit time, is given by \[
+        p = \frac{1}{3}\rho c_{rms}^2.
+    \] Note that $\rho = mn$ is the density of the gas.
+    Now, with knowledge of Boyle's Law and Charles' Law, we are forced to conclude
+    that the temperature $T$ is linearly dependent on $c_{rms}^2$.
+
+    For a volume $V$ of gas, we see that \[
+        pV = \frac{1}{3}mnVc_{rms}^2 = \frac{1}{3}mNc_{rms}^2,
+    \] where $N = nV$ is the total number of molecules. Now, the average kinetic
+    energy of these $N$ molecules is \[
+        E = \sum \frac{1}{2}mn_ic_i^2 = \frac{1}{2}mN c_{rms}^2.
+    \] Combining these relations, we have \[
+        pV = \frac{2}{3} E.
+    \] 
 
     % \begin{definition}[Mean free path]
     %     The mean free path is the average distance covered by a gas molecule before
@@ -221,6 +265,5 @@
             R \,\approx\, \SI{8.314}{\joule\per\mole\per\kelvin}.
         \]
     \end{theorem}
-
 \end{document}
 % vim: set tabstop=4 shiftwidth=4 softtabstop=4:
