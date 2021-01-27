@@ -332,6 +332,15 @@
         $|f_n(x)| \leq 1$ for all $x \in \R$, and the series $\sum 1$ diverges to
         $\infty$.
     \end{remark}
+    \begin{example}
+        Consider the functions \[
+            f_n\colon [-A, +A] \to \R, \qquad f_n(x) = \frac{x^n}{n!}.
+        \] Note that $|f_n(x)| \leq A^n/ n!$, and \[
+            \sum_{k = 0}^{n - 1} \frac{A^k}{k!} \to e^A.
+        \] Thus, the series \[
+            e^x = \sum_{n = 0}^\infty \frac{x^n}{n!}
+        \] converges uniformly on $[-A, +A]$.
+    \end{example}
 
     \begin{theorem} \label{th:continuous}
         Let the functions $f_n\colon X \to Y$ be continuous, and suppose that 

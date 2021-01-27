@@ -43,6 +43,7 @@
 \newcommand\divg[1]{\ve{\nabla}\cdot#1}
 \newcommand\curl[1]{\ve{\nabla}\times#1}
 \newcommand\lapl[1]{\nabla^2 #1}
+\newcommand\E[1]{\langle #1 \rangle}
 
 \newmdtheoremenv[%
     backgroundcolor=blue!10!white,%
@@ -222,8 +223,8 @@
 
     What if we have different molecules with different velocities? We can use this
     expression to conclude that if $n_i$ molecules have velocity $c_i$, the average
-    velocity is $\overline{c} = \sum n_ic_i / n$, $n = \sum n_i$, so \[
-        N = \frac{1}{4}n\overline{c}.
+    velocity is $\E{c} = \sum n_ic_i / n$, $n = \sum n_i$, so \[
+        N = \frac{1}{4}n\E{c}.
     \] Now, each molecule can strike the walls of the container at some angle
     $\theta$. For an elastic collision, the change in its momentum is
     $2mc\cos\theta$. Repeating the integration process, we write the momentum
@@ -232,9 +233,9 @@
         mnc^2\Delta S \cdot \int_0^{\pi /2}\cos^2\theta\sin\theta\:d\theta.
     \] Simplifying, we have \[
         \frac{1}{3}mnc^2\Delta S \Delta t.
-    \] For a velocity distribution, we deal with the RMS velocity where $c_{rms}^2
-    = \sum n_ic_i^2 / n$. Thus the pressure, which is the momentum imparted per unit
-    area per unit time, is given by \[
+    \] For a velocity distribution, we deal with the RMS velocity where $c_{rms}^2 =
+    \E{c_i^2} = \sum n_ic_i^2 / n$. Thus the pressure, which is the momentum
+    imparted per unit area per unit time, is given by \[
         p = \frac{1}{3}\rho c_{rms}^2.
     \] Note that $\rho = mn$ is the density of the gas.
     Now, with knowledge of Boyle's Law and Charles' Law, we are forced to conclude
@@ -249,10 +250,44 @@
         pV = \frac{2}{3} E.
     \] 
 
-    % \begin{definition}[Mean free path]
-    %     The mean free path is the average distance covered by a gas molecule before
-    %     colliding, either with another gas particle or the walls of its container.
-    % \end{definition}
+    \begin{theorem}[Dalton's law of partial pressure]
+        If there are multiple ideal gases in a container, then the total pressure of
+        the mixture is the sum of partial pressures produced by each gas.\[
+            p = p_1 + \dots + p_n = \sum \frac{1}{3} \rho_i \E{c^2}_i.
+        \] 
+        \begin{remark}
+            This is a consequence of the assumption that the different gases do not
+            interact with one another in any way, so the pressures they apply on the
+            walls of the container simply add up. Similarly, the overall density is
+            simply the sum $\rho = \rho_1 + \dots \rho_n$.
+        \end{remark}
+    \end{theorem}
+
+    Consider two gases at the same pressure. Thus, we have \[
+        n_1\epsilon_1 = n_2\epsilon_2,
+    \] where $\epsilon$ is the average kinetic energy of the gas. This is a measure
+    of the temperature $T$ of the gas. Since the gas molecules collide, the
+    temperature $T$ must be common between the two gases, so $\epsilon_1 =
+    \epsilon_2$. This in turn means $n_1 = n_2$.
+    
+    \begin{theorem}[Avogadro's law]
+        Equal volumes of two ideal gases at the same pressure and temperature will
+        contain the same number of particles.
+    \end{theorem}
+
+    \begin{theorem}[Boyle's law]
+        For isothermal expansion or contraction of a gas, \[
+            pV = \text{constant}.
+        \] 
+    \end{theorem}
+
+    Setting $n = 1$, introduce the constant $R$ such that \[
+        pV = \frac{2}{3}E = RT.
+    \] Putting $E = N_A\epsilon$, we write \[
+        \epsilon = \frac{3}{2}k_B T.
+    \] Here, $k_B = R / N_A$ is the Boltzmann constant. $N_A$ is called Avogadro's
+    number, which is the number of particles in a gas with $n = 1$, i.e.\ $1$ mole
+    of gas.
 
     \begin{theorem}[Ideal gas law]
         The ideal gas law gives a relation between the pressure $p$, the volume $V$,
