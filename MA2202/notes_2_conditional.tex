@@ -111,6 +111,14 @@
             \] 
         \end{remark}
     \end{definition}
+
+    \begin{lemma}
+        If $A_1, \dots, A_n$ are exhaustive and pairwise mutually exclusive events
+        such that $P(A_i) > 0$, and $B \in \mathcal{E}$, then \[
+            P(B) = \sum P(A_i) \, P(B \,|\, A_i).
+        \] 
+    \end{lemma}
+
     \begin{theorem}[Bayes' Theorem]
         If $A, B \in \mathcal{E}$ with $P(B) \neq 0$, we have \[
             P(A \,|\, B) = \frac{P(A)}{P(B)}P(B \,|\, A).
@@ -131,6 +139,14 @@
             = \frac{3 / 6}{3 / 6} \cdot \frac{1}{3} = \frac{1}{3}.
         \] 
     \end{example}
+
+    \begin{corollary}
+        If $A_1, \dots, A_n$ are exhaustive and mutually exclusive with $P(A_i) >
+        0$, and $B \in \mathcal{E}$ such that $P(B) > 0$, then \[
+            P(A_j \,|\, B) = \frac{P(A_j) \,P(B\,|\, A_j)}{\sum_{i = 1}^n P(A_i)\,
+            P(B \,|\, A_i)}.
+        \] 
+    \end{corollary}
     
     \begin{definition}[Independent events]
         If $A, B \in \mathcal{E}$ such that $P(A), P(B) \neq 0$, and we have \[
@@ -141,5 +157,16 @@
         \noindent Equivalently, $P(A \cap B) = P(A) P(B)$.
     \end{definition}
 
+    \begin{definition}[Pairwise independent events]
+        A set of events $S \subseteq \mathcal{E}$ is called pairwise independent if
+        the events $A$ and $B$ are independent for all $A, B \in S$.
+    \end{definition}
+
+    \begin{definition}[Mutually independent events]
+        The set of events $A_1, \dots, A_n$ is called mutually independent
+        if \[
+            P\left(\bigcap_{i \in I}A_i\right) = \prod_{i \in I} P(A_i)
+        \] for all subsets $I \subseteq \{1, \dots, n\}$.
+    \end{definition}
 \end{document}
 % vim: set tabstop=4 shiftwidth=4 softtabstop=4:

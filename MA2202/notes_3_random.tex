@@ -1,0 +1,139 @@
+\documentclass[11pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage[%
+    hidealllines=true,%
+    innerbottommargin=15,%
+    nobreak=true,%
+]{mdframed}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{lipsum}
+
+\geometry{a4paper, margin=1in, headheight=14pt}
+
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand\headrulewidth{0.4pt}
+\fancyhead[L]{\scshape MA2201: Probability I}
+\fancyhead[R]{\scshape Introduction to probability}
+\rfoot{\footnotesize\it Updated on \today}
+\cfoot{\thepage}
+
+\def\C{\mathbb{C}}
+\def\R{\mathbb{R}}
+\def\Q{\mathbb{Q}}
+\def\Z{\mathbb{Z}}
+\def\N{\mathbb{N}}
+\newcommand\ddx[1]{\frac{d #1}{d x}}
+\newcommand\ddt[1]{\frac{d #1}{d t}}
+\newcommand\dd[3][]{\frac{d^{#1}{#2}}{d {#3}^{#1}}}
+\newcommand\ppx[1]{\frac{\partial #1}{\partial x}}
+\newcommand\ppt[1]{\frac{\partial #1}{\partial t}}
+\newcommand\pp[3][]{\frac{\partial^{#1}{#2}}{\partial {#3}^{#1}}}
+\newcommand\norm[1]{\left\lVert#1\right\rVert}
+\newcommand\E[1]{E[#1]}
+
+\newcounter{module}
+\setcounter{module}{3}
+
+\newmdtheoremenv[%
+    backgroundcolor=blue!10!white,%
+]{theorem}{Theorem}[module]
+\newmdtheoremenv[%
+    backgroundcolor=violet!10!white,%
+]{corollary}{Corollary}[theorem]
+\newmdtheoremenv[%
+    backgroundcolor=teal!10!white,%
+]{lemma}[theorem]{Lemma}
+
+\theoremstyle{definition}
+\newmdtheoremenv[%
+    backgroundcolor=green!10!white,%
+]{definition}{Definition}[module]
+\newmdtheoremenv[%
+    backgroundcolor=red!10!white,%
+]{exercise}{Exercise}[module]
+
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\newtheorem*{example}{Example}
+
+\surroundwithmdframed[%
+    linecolor=black!20!white,%
+    hidealllines=false,%
+    innertopmargin=5,%
+    innerbottommargin=10,%
+    skipabove=0,%
+    skipbelow=0,%
+]{example}
+
+\numberwithin{equation}{module}
+
+\title{
+    \Large\textsc{MA2202: Probability I} \\
+    % \vspace{10pt}
+    \Huge \textbf{Random variables} \\
+    \vspace{5pt}
+    \Large{Spring 2021}
+}
+\author{
+    \large Satvik Saha%
+    % \thanks{Email: \tt ss19ms154@iiserkol.ac.in}
+    \\\textsc{\small 19MS154}
+}
+\date{\normalsize
+    \textit{Indian Institute of Science Education and Research, Kolkata, \\
+    Mohanpur, West Bengal, 741246, India.} \\
+    % \vspace{10pt}
+    % \today
+}
+
+\begin{document}
+    \maketitle
+
+    \begin{definition}[Random variable]
+        Given a probability space $(\Omega, \mathcal{E}, P)$, a function $X\colon
+        \Omega \to \R$ is called a random variable if $X^{-1}(r, \infty)
+        \in \mathcal{E}$ for all $r \in \R$.
+
+        \begin{remark}
+            For some $S \subseteq \R$, we denote \[
+                P(X \in S) = P(\{\omega \in \Omega\colon X(\omega) \in S\}).
+            \] 
+        \end{remark}
+    \end{definition}
+    
+    \begin{definition}[Discrete random variable]
+        A random variable which can assume only a countably infinite number of
+        values is called a discrete random variable.
+    \end{definition}
+    \begin{example}
+        Let $X\colon \Omega \to \R$ denote the number of heads obtained when a fair
+        coin is tossed thrice. Note that $\Omega = \{0, 1, 2, 3\}$. Thus, 
+        $P(X = 0) = P(X = 4) = 1 /8$ and $P(X = 1) = P(X = 2) = 3 /8$.
+    \end{example}
+
+    \begin{definition}[Probability distribution]
+        The probability distribution of a random variable $X$ is the set of pairs
+        $(X(A), P(A))$ for all $A \in \mathcal{E}$.
+    \end{definition}
+
+    \begin{definition}[Probability mass function]
+        Let $X$ be a discrete random variable. The probability mass function of $X$
+        is the function $p_X\colon \R \to [0, 1]$, \[
+            p_X(\alpha) = P(X = \alpha).
+        \]
+
+        \begin{remark}
+            Since $X$ is a discrete random variable, the set $S = \{x \in \R \colon
+            p_X(\alpha) > 0\}$ is countable, and \[
+                \sum_{x \in S} p_X(x) = 1.
+            \] 
+        \end{remark}
+    \end{definition}
+\end{document}
+% vim: set tabstop=4 shiftwidth=4 softtabstop=4:
