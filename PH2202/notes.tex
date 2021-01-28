@@ -281,13 +281,15 @@
         \] 
     \end{theorem}
 
-    Setting $n = 1$, introduce the constant $R$ such that \[
+    For 1 mole of a gas, introduce the constant $R$ such that \[
         pV = \frac{2}{3}E = RT.
     \] Putting $E = N_A\epsilon$, we write \[
         \epsilon = \frac{3}{2}k_B T.
     \] Here, $k_B = R / N_A$ is the Boltzmann constant. $N_A$ is called Avogadro's
-    number, which is the number of particles in a gas with $n = 1$, i.e.\ $1$ mole
-    of gas.
+    number, which is the number of particles in 1 mole of a gas. We note that \[
+        N_A \approx \num{6.022e23}, \qquad 
+        k_B \approx \SI{1.38e-23}{\joule\per\kelvin}.
+    \] 
 
     \begin{theorem}[Ideal gas law]
         The ideal gas law gives a relation between the pressure $p$, the volume $V$,
@@ -300,5 +302,66 @@
             R \,\approx\, \SI{8.314}{\joule\per\mole\per\kelvin}.
         \]
     \end{theorem}
+
+    Observe that \[
+        \epsilon = \frac{1}{2}m c_{rms}^2 = \frac{3}{2}k_B T.
+    \] This leads to \[
+        p = \frac{1}{3}mn c_{rms}^2 = n k_B T,
+    \] which shows that the pressure $p$ of an ideal gas is a pure function of the
+    intensive properties $n$ and $T$.
+
+    \subsection{Mean free path}
+    We can relax the assumption that gas molecules are point masses, instead
+    modelling them as hard spheres. If we know the molar mass $M$ and the density
+    $\rho$ of the gas, the volume occupied per molecule is $M / N_A\rho$.
+    In this way, we can approximate the `diameter' of each molecule, say $\sigma$.
+    If the molecules are packed tetrahedrally, each molecule occupies a volume
+    $\sigma^3 / \sqrt{2}$. Thus, we write \[
+        \frac{M}{N_A \rho} = \frac{\sigma^3}{\sqrt{2}}, \qquad
+        \sigma = \left(\frac{\sqrt{2} M}{ N_A \rho}\right)^{1 /3}.
+    \] This method is typically employed using the liquid density.
+
+    \begin{definition}
+        The mean distance travelled by a molecule between successive collisions is
+        called the mean free path.
+    \end{definition}
+
+    Consider a gas with identical molecules, each with diameter $\sigma$.
+    Suppose that a particular molecule moves with relative speed $v$ with respect to
+    the other molecules. During each collision, the centres of the molecules are
+    separated by $\sigma$. As this molecule moves, it sweeps out a cylindrical
+    volume of influence, with area of cross section $\pi \sigma^2$ -- any other
+    molecules lying within this volume are prone to collision. With respect to them,
+    we see that within a time $\Delta t$, this volume is given by $\pi \sigma^2
+    v\Delta t$. Multiplying by the number density $n$, we see that $n\pi\sigma^2
+    v\Delta t$ molecules lie within this volume. We set this to be the number of
+    collisions experienced by our molecule over the time $\Delta t$. If our molecule
+    has an actual speed of $u$, it must have travelled a distance $u \Delta t$. This
+    means that the average path length between collisions is given by \[
+        \lambda = \frac{u\Delta t}{n\pi \sigma^2 v \Delta t} = \frac{u /
+        v}{n\pi\sigma^2}.
+    \] Now, our particle of interest is moving significantly faster than all other
+    surrounding molecules, then we may write $u /v \approx 1$, so $\lambda \approx
+    1 /n\pi\sigma^2$. Otherwise, set $u = c$, which is the common speed of all
+    gas molecules. If two such molecules move with the same speed but in different
+    directions, separated by an angle $\theta$, their relative speed is given by \[
+        v = 2c\sin\frac{\theta}{2}.
+    \] To average this over $\theta$, we first need to find the probability
+    distribution for $\theta$. Note that if we direct the velocity of one of the
+    molecules along the axis of a sphere, the other velocity can pierce the sphere
+    surface at any point with uniform probability; this is due to the isotropic
+    nature of the gas. Recall that a differential surface element on a sphere is
+    given as \[
+        dS = R^2\sin\theta \:d\theta \:d\phi.
+    \] Thus, the annular ring at $\theta$ has area $2\pi R^2 \sin\theta \:d\theta$.
+    Dividing by the total surface area $4\pi R^2$, we see that $\theta$ is
+    distributed with the probability density function $f(\theta) = \sin\theta /2$.
+    Thus, the average value of the relative speed $v$ is given by \[
+        \E{v} = \int_0^\pi 2c \sin\frac{\theta}{2}\cdot \frac{1}{2} \sin\theta 
+        \:d\theta = \frac{4}{3}c.
+    \] This gives the mean free path expression \[
+        \lambda = \frac{3}{4n\pi\sigma^2}.
+    \] 
+
 \end{document}
 % vim: set tabstop=4 shiftwidth=4 softtabstop=4:
