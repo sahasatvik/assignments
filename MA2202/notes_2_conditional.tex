@@ -115,7 +115,7 @@
     \begin{lemma}
         If $A_1, \dots, A_n$ are exhaustive and pairwise mutually exclusive events
         such that $P(A_i) > 0$, and $B \in \mathcal{E}$, then \[
-            P(B) = \sum P(A_i) \, P(B \,|\, A_i).
+            P(B) = \sum_{i = 1}^n P(A_i) \, P(B \,|\, A_i).
         \] 
     \end{lemma}
 
@@ -147,6 +147,57 @@
             P(B \,|\, A_i)}.
         \] 
     \end{corollary}
+    \begin{example}
+        Suppose that a test for a certain disease has a sensitivity of $90\%$ and a
+        specificity of $80\%$. This means that it correctly identifies a positive
+        $90\%$ of the time, and incorrectly shows a positive for a healthy
+        individual $20\%$ of the time. Also suppose that $5\%$ of the population
+        suffer from this disease. \\
+
+        We note that the probability that a randomly selected person has this
+        disease is $P(\text{D}) = 0.05$. Now, the probability that an
+        infected person gets a positive test result is $P(+ \,|\, \text{D}) =
+        0.9$. The probability that an uninfected person gets a positive test result
+        is $P(+ \,|\, \text{ND}) = 0.2$. Thus, we use Bayes' Theorem to
+        obtain the probability that a person has the disease, given that they test
+        positive. 
+        \begin{align*}
+            P(\text{D} \,|\, +) &= \frac{P(+ \,|\, \text{D}) \,
+                P(\text{D})}{P(+ \,|\, \text{Infected}) \, P(\text{D}) +
+                P(+ \,|\, \text{ND}) \, P(\text{ND})} \\
+                &= \frac{0.9\times 0.05}{0.9\times 0.05 + 0.2\times 0.95} \\ 
+                &\approx 19\%.
+        \end{align*}
+        This is surprisingly low. This is because of the high rate of false
+        positives --- in a population of 1000 people, there will only be $50$
+        infected people of which $0.9 \times 50 \approx 45$ are identified, but $0.2
+        \times 995 \approx 200$ healthy people who incorrectly test positive. Thus,
+        of the $\approx 245$ positive results, only $45$ are genuine, giving an
+        approximate probability $1 /5 \approx 20\%$ of having the disease, given a
+        positive test. 
+
+        The situation changes when we run the test again. The probability that a
+        person has the disease given \textit{two} positive tests is given by
+        \begin{align*}
+            P(\text{D} \,|\, {+}{+}) &= \frac{P(D)}{P({+}{+})}P({+}{+} \,|\, D) \\
+                &= \frac{0.9^2 \times 0.05}{0.9^2\times 0.05 + 0.2^2\times 0.95} \\
+                &\approx 52\%.
+        \end{align*}
+        Intuitively, when we look at the $245$ people who tested positive the first
+        time, around $0.2\times 200 \approx 40$ people will be false positives the
+        second time around, while around $0.9 \times 45 \approx 41$ people will be
+        true positives. Thus, the probability that a person has the disease given
+        two positive tests is just above $50\%$. \\
+
+        Note that this gives us a quick way of estimating probabilities; after three
+        tests, we expect around $0.2 \times 40 \approx 8$ false positives and $0.9
+        \times 41 \approx 37$ true positives, so $37$ out of $45$ people who test
+        positive three times have the disease. This gives a probability of around
+        $82\%$ that a person who tests positive thrice actually has the disease. 
+
+        Observe that when testing for a disease with low prevalence, the specificity
+        becomes much more significant than the sensitivity.
+    \end{example}
     
     \begin{definition}[Independent events]
         If $A, B \in \mathcal{E}$ such that $P(A), P(B) \neq 0$, and we have \[
@@ -156,6 +207,14 @@
 
         \noindent Equivalently, $P(A \cap B) = P(A) P(B)$.
     \end{definition}
+    \begin{example}
+        Suppose a die is rolled twice. The probability that the first roll is a 4
+        is $1 / 6$, and so is the probability that the second roll is a 2.
+        Now, if we were given that the first roll was a $4$, it wouldn't affect the
+        likelihood of the second roll being a $2$, and vice versa. Thus, the
+        probability of obtaining a 4 and 2 in succession is simply $(1 /6)^2 = 1
+        /36$. The two rolls are independent.
+    \end{example}
 
     \begin{definition}[Pairwise independent events]
         A set of events $S \subseteq \mathcal{E}$ is called pairwise independent if
@@ -167,6 +226,11 @@
         if \[
             P\left(\bigcap_{i \in I}A_i\right) = \prod_{i \in I} P(A_i)
         \] for all subsets $I \subseteq \{1, \dots, n\}$.
+        \begin{remark}
+            A set of mutually independent events is always pairwise independence,
+            since we must have $P(A_i \cap A_j) = P(A_i)\, P(A_j)$ for all $1 \leq
+            i, j \leq n$. The converse is not true.
+        \end{remark}
     \end{definition}
 \end{document}
 % vim: set tabstop=4 shiftwidth=4 softtabstop=4:
