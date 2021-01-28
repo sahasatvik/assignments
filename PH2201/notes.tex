@@ -43,6 +43,7 @@
 \newcommand\divg[1]{\ve{\nabla}\cdot#1}
 \newcommand\curl[1]{\ve{\nabla}\times#1}
 \newcommand\lapl[1]{\nabla^2 #1}
+\newcommand\E[1]{\langle #1 \rangle}
 
 \newmdtheoremenv[%
     backgroundcolor=blue!10!white,%
@@ -158,12 +159,12 @@
     temperature $T$. This can be seen as the superposition of normal modes.
     The classical approach to the blackbody problem is to suppose that the energy
     density at a particular frequency is given by \[
-        \rho(\nu) = \overline{E} n(\nu),
+        \rho(\nu) = \E{E} n(\nu),
     \] where $n(\nu)$ is the number density of wave modes with frequency $\nu$, and
     $E$ is the average energy of the radiation.
 
     The classical law of equipartition of energy gives \[
-        \overline{E} = k_B T,
+        \E{E} = k_B T,
     \] where $k_B$ is the Boltzmann constant.
 
     The wavenumber of for modes within the cavity is given by \[
@@ -174,21 +175,21 @@
     \[
         n(\nu)\:d\nu = \frac{8\pi}{c^3}\nu^2\:d\nu.
     \] This leads to the Rayleigh-Jean Law,
-    \begin{boxedeq*}
-        \rho(\nu)\:d\nu = \overline{E} n(\nu) \:d\nu 
+    \begin{boxedeq}
+        \rho(\nu)\:d\nu = \E{E} n(\nu) \:d\nu 
             = \frac{8\pi k_B T}{c^3}\nu^2\:d\nu.
-    \end{boxedeq*}\\~\\
+    \end{boxedeq}\\~\\
 
     Planck looked at the probability distribution for the energy, \[
         P(E) = \frac{1}{k_B T}e^{-E /k_B T}.
     \] This is the Boltzmann distribution. It can be shown that \[
-        \overline{E} = \frac{\int_0^\infty E P(E) \:dE}{\int_0^\infty P(E) \: dE} 
+        \E{E} = \frac{\int_0^\infty E P(E) \:dE}{\int_0^\infty P(E) \: dE} 
         = k_B T,
     \] which recovers the Rayleigh-Jean Law.
 
     Planck's idea was to restrict $E$ to discrete values; integral multiples of the
     frequency $\nu$. This leads to \[
-        \overline{E} = \frac{\sum E P(E)}{\sum P(E)} 
+        \E{E} = \frac{\sum E P(E)}{\sum P(E)} 
             = \frac{h\nu}{e^{h\nu /k_B T} - 1}.
     \] 
     This gives us the Planck distribution.
@@ -229,9 +230,9 @@
     the same value. However, different frequencies $\nu$ produces different stopping
     potentials $V_0$; the greater the frequency, the greater the magnitude of the
     stopping potential. This turns out to have a linear relationship, with
-    \begin{boxedeq*}
+    \begin{boxedeq}
         E_{max} \,=\, eV_0 \,=\, h(\nu - \nu_0) \,=\, h\nu - \phi.
-    \end{boxedeq*}
+    \end{boxedeq}
     The slope $h$ is universal for all metals, while $\phi = h\nu_0$ varies
     between different metals.
     This shows that below a certain frequency $\nu_0$, we obtain no photocurrent,
@@ -254,9 +255,9 @@
     \subsection{Matter waves}
     Louis de Broglie further hypothesised that matter also has a wave nature, with
     an associated wavelength of 
-    \begin{boxedeq*}
+    \begin{boxedeq}
         \lambda_{matter} \,=\, \frac{h}{p}.
-    \end{boxedeq*}
+    \end{boxedeq}
     This has been demonstrated by Davisson and Germer, where a stream of electrons
     exhibits diffraction.
     
@@ -350,22 +351,6 @@
     This is intrinsic to the quantum system, in the form of the Heisenberg
     uncertainty principle.
 
-    \section{Postulates of quantum mechanics}
-    \begin{enumerate}
-        \itemsep0
-        \item Associated with each classical outcome of a quantum experiment is a
-        probability amplitude, $\psi$, which is not directly observable.
-        \item The probability distribution is given by $P = |\psi|^2$, which is
-        observable.
-        \item For a system with many classical outcomes, we write \[
-            \psi = \sum_{i = 1}^\infty \psi_i.
-        \] Thus, the probability distribution $P$ carries signatures of the
-        probabilities $P_i = |\psi_i|^2$. For example when we have $n = 2$ 
-        outcomes, \[
-            P = |\psi_1 + \psi_2|^2 = P_1 + P_2 + 2\sqrt{P_1P_2}\cos\delta.
-        \] 
-    \end{enumerate}
-
     \section{Bohr's atomic model}
     Recall Rutherford's experiment where he fired $\alpha$ particles at a gold
     foil, which established the existence of a very small region of positive charge
@@ -375,9 +360,9 @@
     frequencies. On the other hand, radiation emitted by an atom is always observed
     at discrete frequencies. For example, the wavelengths emitted by hydrogen are 
     given by the Rydberg constant.
-    \begin{boxedeq*}
+    \begin{boxedeq}
         \frac{1}{\lambda} = R\left(\frac{1}{m^2} - \frac{1}{n^2}\right).
-    \end{boxedeq*}
+    \end{boxedeq}
     Bohr's idea was that the angular momenta of the electrons are quantized. We set
     \[
         L = pr = mvr = n\hbar.
@@ -393,6 +378,49 @@
     energy levels, so \[
         h\nu = E_m - E_n.
     \] 
-    
-\end{document}
+
+    \section{Postulates of quantum mechanics}
+    \begin{enumerate}
+        \itemsep0
+        \item Associated with each classical outcome of a quantum experiment is a
+        probability amplitude, $\Psi$, which is not directly observable.
+        \item The probability distribution is given by $P = |\Psi|^2$, which is
+        observable. For any physically interpretable wavefunction $\Psi$, we demand
+        that $|\Psi|^2$ is normalizable. Thus, \[
+            \int |\Psi|^2 \:dV = 1.
+        \]
+        \item For a system with many classical outcomes, we write \[
+            \Psi = \sum_{i = 1}^\infty \Psi_i.
+        \] Thus, the probability distribution $P$ carries signatures of the
+        probabilities $P_i = |\Psi_i|^2$. For example when we have $n = 2$ 
+        outcomes, \[
+            P = |\Psi_1 + \Psi_2|^2 = P_1 + P_2 + 2\sqrt{P_1P_2}\cos\delta.
+        \] 
+    \end{enumerate}
+
+    \section{The Scr\"odinger Equation}
+    \begin{theorem}
+        The wavefunction $\Psi$ must obey the differential equation \[
+            \left[-\frac{\hbar^2}{2m}\lapl{} + V(\ve{r}, t)\right]\Psi(\ve{r}, t) =
+            i\hbar \ppt{}\Psi(\ve{r}, t).
+        \] 
+    \end{theorem}
+    Consider the simpler case where $V(\ve{r})$ has no time dependence.
+    To solve this equation, we often perform separation of variables, \[
+        \Psi(\ve{r}, t) = \psi(\ve{r})\, T(t).
+    \] As a result, we observe that \[
+        -\frac{1}{\psi}\frac{\hbar^2}{2m}\lapl{\psi} + V = \frac{i\hbar}{T}\ddt{T} =
+        \text{constant}.
+    \] The time part is solved by $T(t) = e^{-i E t/ \hbar}$, where the constant is
+    denoted as $E$.  Note that we have shown $\Psi(\ve{r}, t) = \psi(\ve{r}) e^{-iEt
+    /\hbar}$, so \[
+        |\Psi|^2 = \Psi^*\Psi = \psi^*\psi = |\psi^2|.
+    \] 
+    The spatial part must now satisfy \[
+        -\frac{\hbar^2}{2m} \lapl{\psi} + V\psi = E\psi.
+    \] The Hamiltonian operator is defined as \[
+        \hat{H} = -\frac{\hbar^2}{2m}\lapl{} + V,
+    \] so the spatial part of the equation says $\hat{H}\psi = E\psi$.
+
+    \end{document}
 % vim: set tabstop=4 shiftwidth=4 softtabstop=4:
