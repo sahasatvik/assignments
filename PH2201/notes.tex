@@ -21,7 +21,7 @@
 \pagestyle{fancy}
 \fancyhf{}
 \renewcommand\headrulewidth{0.4pt}
-\fancyhead[L]{\scshape PH2201: Basic Quantum Mechanics}
+\fancyhead[L]{\scshape PH2201}
 \fancyhead[R]{\scshape \leftmark}
 \rfoot{\footnotesize\it Updated on \today}
 \cfoot{\thepage}
@@ -398,7 +398,7 @@
         \] 
     \end{enumerate}
 
-    \section{The Scr\"odinger Equation}
+    \subsection{The Schr\"odinger Equation}
     \begin{theorem}
         The wavefunction $\Psi$ must obey the differential equation \[
             \left[-\frac{\hbar^2}{2m}\lapl{} + V(\ve{r}, t)\right]\Psi(\ve{r}, t) =
@@ -414,13 +414,60 @@
     \] The time part is solved by $T(t) = e^{-i E t/ \hbar}$, where the constant is
     denoted as $E$.  Note that we have shown $\Psi(\ve{r}, t) = \psi(\ve{r}) e^{-iEt
     /\hbar}$, so \[
-        |\Psi|^2 = \Psi^*\Psi = \psi^*\psi = |\psi^2|.
-    \] 
-    The spatial part must now satisfy \[
+        |\Psi|^2 = \Psi^*\Psi = \psi^*\psi = |\psi^2|,
+    \] The spatial part must now satisfy \[
         -\frac{\hbar^2}{2m} \lapl{\psi} + V\psi = E\psi.
-    \] The Hamiltonian operator is defined as \[
+    \] which is called the time independent Schr\"odinger equation.
+    The Hamiltonian operator is defined as \[
         \hat{H} = -\frac{\hbar^2}{2m}\lapl{} + V,
     \] so the spatial part of the equation says $\hat{H}\psi = E\psi$.
+    For convenience, we deal with only one spatial dimension here on.
+
+    \subsection{Observables and operators}
+    \begin{definition}[Expectation value]
+        The expectation value of any linear operator $\hat{A}$ is defined as \[
+            \E{\hat{A}} = \int_{-\infty}^{+\infty} \psi^* \hat{A} \psi \:dx.
+        \]
+    \end{definition}
+    \begin{example}
+        For example, the position, momentum, and energy operators are given by \[
+            \hat{x} = x, \qquad \hat{p}_x = -i\hbar \ppx{}, \qquad \hat{E} = i\hbar
+            \ppt{}.
+        \] 
+        This covers all physically observable quantities, and are thus called
+        observables. Note that these are all linear operators.
+    \end{example}
+
+    What happens if $\psi$ is an eigenstate of $\hat{A}$, with eigenvalue $\lambda$?
+    Note that $\hat{A}\psi = \lambda\psi$, so \[
+        \E{\hat{A}} = \int_{-\infty}^{+\infty} \lambda \psi^*\psi\:dx = \lambda.
+    \]
+
+    \begin{theorem}[Ehrenfest's Theorem]
+        The expectation values obey classical laws. For instance, \[
+            \ddt{}\E{p} = \E{-\ppx{}V}.
+        \] 
+    \end{theorem}
+
+    \begin{definition}[Commutator]
+        The commutator of two linear operators $\hat{A}$ and $\hat{B}$ is defined as
+        \[
+            [\hat{A}, \hat{B}] = \hat{A}\hat{B} - \hat{B}\hat{A}.
+        \] 
+    \end{definition}
+
+    In a statistical distribution, the first, second, third and fourth moments deal
+    with the mean, standard deviation, skew and kurtosis. Skew is a measure of
+    symmetry, and kurtosis is a measure of peakedness.
+
+    \begin{theorem}[Heisenberg's Uncertainty Principle]
+        The standard deviations of the position and momentum are related as \[
+            \sigma_x \sigma_p \geq \frac{\hbar}{2}.
+        \] More generally, for any two Hermitian operators, \[
+            \sigma_A \sigma_B \geq \frac{1}{2}|\E{[\hat{A}, \hat{B}]}|.
+        \] 
+    \end{theorem}
+
 
     \end{document}
 % vim: set tabstop=4 shiftwidth=4 softtabstop=4:
