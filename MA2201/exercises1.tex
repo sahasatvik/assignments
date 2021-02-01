@@ -1,0 +1,499 @@
+\documentclass[10pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+
+\title{Analysis II - Assignment I}
+\author{Satvik Saha}
+\date{}
+
+\geometry{a4paper, margin=1in}
+\setlength\parindent{0pt}
+\renewcommand{\labelenumi}{(\roman{enumi})}
+% \renewcommand\qedsymbol{$\blacksquare$}
+\def\C{\mathbb{C}}
+\def\R{\mathbb{R}}
+\def\Q{\mathbb{Q}}
+\def\Z{\mathbb{Z}}
+\def\N{\mathbb{N}}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}{Corollary}[theorem]
+
+\begin{document}
+    \par\textbf{IISER Kolkata} \hfill \textbf{Assignment I}
+    \vspace{3pt}
+    \hrule
+    \vspace{3pt}
+    \begin{center}
+            \LARGE{\textbf{MA 2201 : Analysis II}}
+    \end{center}
+    \vspace{3pt}
+    \hrule
+    \vspace{3pt}
+    Satvik Saha, \texttt{19MS154}\hfill\today
+    \vspace{20pt}
+
+    We state and prove the following theorems in order to simplify the problems
+    ahead.
+    
+    \begin{lemma}
+        The sequence $\{1 / n\}$ converges on $[0, 1]$, and $1 / n \to 0$.
+    \end{lemma}
+    \begin{proof}
+        Let $\epsilon > 0$ be arbitrary. Using the Archimedean property of the
+        reals, choose $N \in \N$ such that $N \epsilon > 1$. One such choice is
+        given by $N = \lfloor 1 / \epsilon\rfloor + 1$. Thus, for all $n \geq N$, we
+        have \[
+            \left| \frac{1}{n} - 0 \right| = \frac{1}{n} \leq \frac{1}{N} < \epsilon.
+        \] This shows that $1 / n \to 0$.
+    \end{proof}
+    \begin{theorem}
+        Let $f_n\colon X \to Y$ and let $f_n \to f$ pointwise on $X$. 
+        For all $n \in \N$, set \[
+            M_n = \sup_{x \in X} |f_n(x) - f(x)|.
+        \]
+        Then, $\{f_n\}$ converges uniformly on $X$ to $f$ if and only if $M_n \to
+        0$.
+    \end{theorem}
+    \begin{proof}
+        Suppose that $f_n \to f$ uniformly on $X$.
+        Let $\epsilon > 0$ be arbitrary, and let $N \in \N$ be such that
+        for all $n \geq N$ and $x \in X$, \[
+            |f_n(x) - f(x)| < \frac{\epsilon}{2}.
+        \]
+        This means that for all $n \geq N$, \[
+            M_n = \sup |f_n(x) - f(x)| \leq \frac{\epsilon}{2} < \epsilon.
+        \]
+        Also note that all $M_n \geq 0$, since they are the supremums of non-negative
+        quantities.
+        This means that $M_n \to 0$, as desired. \\
+
+        Now suppose that $M_n \to 0$. This means that for arbitrary $\epsilon > 0$,
+        we can find $N \in \N$ such that for all $n \geq N$, we have \[
+            |M_n| = \sup |f_n(x) - f(x)| < \epsilon.
+        \] 
+        Now, from the properties of the supremum, we see that for all $n \geq N$ and
+        $x \in X$, \[
+            |f_n(x) - f(x)| \leq \sup |f_n(x) - f(x)| < \epsilon.
+        \] 
+        This proves that $f_n \to f$ uniformly.
+    \end{proof} 
+    
+    \begin{theorem}
+        Let the functions $f_n\colon X \to Y$ be continuous, and suppose that 
+        $f_n \to f$ uniformly on $X$. Then, $f$ is continuous on
+        $X$.
+    \end{theorem}
+    \begin{proof}
+        Let $\epsilon > 0$. We wish to show that $f$ is continuous at 
+        arbitrary $x_0 \in X$.
+        
+        Since $f_n \to f$ uniformly on $X$, we find $N \in \N$ such that for all $x
+        \in X$ and $n \geq N$, we have \[
+            |f_n(x) - f(x)| < \frac{\epsilon}{3}.
+        \] In particular, this holds for $n = N$, and $x = x_0$.
+        
+        The continuity of each $f_n$ on $X$ means $f_N$ is
+        continuous on $X$ in particular, so we can find $\delta > 0$ such that 
+        whenever $|x - x_0| < \delta$, we have \[
+            |f_N(x) - f_N(x_0)| < \frac{\epsilon}{3}.
+        \]
+
+        Putting these together, for every $x \in X$ such that $|x - x_0| < \delta$,
+        we have
+        \begin{align*}
+            |f(x) - f(x_0)| 
+                \,&\leq\, |f(x) - f_N(x)| + |f_N(x) - f_N(x_0)| + 
+                    |f_N(x_0) - f(x_0)| \\
+                \,&<\, \frac{\epsilon}{3} + \frac{\epsilon}{3} +
+                    \frac{\epsilon}{3} \\
+                \,&=\, \epsilon.
+        \end{align*}
+        This means that $f$ is continuous at $x_0$ for arbitrary $x_0 \in X$, i.e.\
+        $f$ is continuous on $X$.
+    \end{proof}
+    \begin{corollary}
+        Let the functions $f_n\colon X \to Y$ be continuous, and let $f_n \to f$
+        pointwise on $X \subseteq \R$. If $f$ is not continuous on $X$, then the
+        sequence of functions $\{f_n\}$ does not converge uniformly on $X$.
+    \end{corollary}
+    \begin{proof}
+        This is simply the contrapositive of Theorem 2.
+    \end{proof}
+
+    \paragraph{Solution 1.}
+    \begin{enumerate}
+        \item We have been given the functions \[
+            f_n\colon [0, \infty) \to \R, \qquad f_n(x) = \frac{x}{x + n}.
+        \] We show that $f_n \to 0$ pointwise on $[0, \infty)$, where by $0$ we mean
+        the zero function. Let $x \in [0, \infty)$ be arbitrary, and let $\epsilon >
+        0$. We choose $N \in \N$ such that $N\epsilon > x$ using the Archimedean
+        property of the reals. Since $x \geq 0$, whenever $n \geq N$, we have \[
+            \frac{x}{x + n} \leq \frac{x}{n} \leq \frac{x}{N} < \epsilon,
+        \] so $|f_n(x)| < \epsilon$. This means that $f_n(x) \to 0$ for all $x \in
+        [0, \infty)$, hence $f_n \to 0$ pointwise on $[0, \infty)$. This also means
+        that by restricting the domain, $f_n \to 0$ on $[0, a]$ for $a > 0$. \\
+
+        We now show that $\{f_n\}$ does not converge uniformly on $[0, \infty)$.
+        Suppose to the contrary that it did. Let $N \in \N$ be such that for all $n
+        \geq N$ and for all $x \in [0, \infty)$, we have \[
+            |f_n(x) - 0| = \frac{x}{x + n} < \epsilon = \frac{1}{3}.
+        \] This must hold in particular for $x = N \in [0, \infty)$ and $n = N$.
+        Plugging this in, we demand \[
+            \frac{N}{N + N} = \frac{1}{2} < \frac{1}{3},
+        \] which is absurd. \\
+
+        On the other hand, $\{f_n\}$ does converge to $0$ uniformly on $[0, a]$,
+        where $a > 0$. Let $\epsilon > 0$ be arbitrary. Note that for $x \in [0, a]$,
+        we have $x \leq a$. Now, choose $N \in \N$ such that $N\epsilon > a$. Thus,
+        whenever $n \geq N$ and $x \in [0, a]$, we have \[
+            |f_n(x) - 0| = \frac{x}{x + n} \leq \frac{x}{n} \leq \frac{a}{n} \leq
+            \frac{a}{N} < \epsilon.
+        \] This means that $f_n \to 0$ uniformly on $[0, a]$.
+        
+        Note that what we have shown is that on $[0, a], $\[
+            M_n = \sup |f_n(x) - 0| < \frac{a}{n} \to 0.
+        \] 
+
+
+        \item We have been given the functions \[
+            f_n\colon \R \to \R, \qquad f_n(x) = \frac{nx}{x + n^2x^2}.
+        \] Note that we assume $f_n(0) = n / (1 + n^20) = n$.
+        We first show that the sequence of functions $\{f_n\}$ does not converge on
+        $\R$. This is because the sequence $f_n(0) = n \to \infty$ diverges.
+        The same argument shows why $\{f_n\}$ does not converge on $[0, \infty)$.
+        Thus, the question of uniform convergence does not arise on these domains
+        either. \\
+
+        We show that $f_n \to 0$ on $[a, \infty)$, where $a > 0$ by proving the even
+        stronger statement of uniform convergence. Since $x \geq a$, we have \[
+            M_n = \sup|f_n(x) - 0| = \sup \frac{n}{1 + n^2x} \leq \frac{n}{1 +
+            n^2a} \leq \frac{n}{n^2a} \to 0.
+        \] 
+        Thus, $M_n \to 0$, which means that $f_n \to 0$ uniformly on $[a, \infty)$.
+        \\
+
+        Formally, given $\epsilon > 0$, we choose $N \in \N$ such that $Na\epsilon
+        \geq 1$, whence for all $n \geq N$ and $x\in [a, \infty)$, we have \[
+            |f_n(x) - 0| = \frac{nx}{x + n^2x^2} \leq \frac{nx}{n^2x^2} \leq
+            \frac{1}{na} \leq \frac{1}{Na} < \epsilon.
+        \] This gives the uniform convergence of $f_n \to 0$ on $[a, \infty)$.
+
+        \paragraph{Alternate definition at the missing point} We instead define
+        $f_n(0) = 0$, in which case we observe that $f_n(0) \to 0$. When $x > 0$,
+        $f_n(x) = n / (1 + n^2x) < 1 / nx \to 0$. When $x \neq 0$, note that $f_n(-
+        1 / n^2)$ is undefined. Nevertheless, note that when $x \neq -
+        1 /n^2$, \[
+            f_n(x) = \frac{nx}{x + n^2x^2} = \frac{1 / n}{1 / n^2 + x}.
+        \] Since $1 / n^2 \to 0$, we have $1 / n^2 + x \to x \neq 0$ and $1 / n \to
+        0$, hence $f_n(x) \to 0$. This gives $f_n \to 0$ pointwise on $\R$ , which
+        in turn means that $f_n \to 0$ on $[0, \infty)$. \\
+
+        We show that $\{f_n\}$ does not converge uniformly on $[0, \infty)$. 
+        Suppose to the contrary that $f_n \to 0$ uniformly. Pick $N \in \N$ such
+        that for all $n \geq N$ and $x \in [0, \infty)$, we have \[
+            |f_n(x) - 0| = \frac{nx}{x + n^2x^2} < \frac{1}{3}.
+        \] This ought to hold for $x = 1 / N \in [0, \infty)$ and $n = N$ in
+        particular. Thus, \[
+            f_N(1 / N) = \frac{1}{1 /N + 1} < \frac{1}{3},
+        \] which means $1 / N + 1 > 3$, or $1 / N > 2$, or $N < 1 /2$ which is
+        absurd. Thus, $\{f_n\}$ cannot converge uniformly on $[0, \infty)$, nor on
+        $\R$. \\
+
+        The arguments for $f_n \to 0$ uniformly on $[a, \infty)$ where $a > 0$
+        remain identical to what we've shown in the previous definition of $f_n$.
+
+        \item We have been given the functions \[
+            f_n\colon [0, \infty) \to \R, \qquad f_n(x) = \frac{nx}{1 + nx}.
+        \] Note that for all $x \in [0, \infty)$, we have $1 /n \to 0$ so $1 /n + x
+        \to x$, thus when $x > 0$ we can write \[
+            f_n(x) = \frac{nx}{1 + nx} = \frac{x}{1 /n + x} \to 1.
+        \] When $x = 0$, $f_n(x) = 0$ so $f_n(0) \to 0$. Thus, setting \[
+            f\colon [0,\infty) \to \R, \qquad f(x) = \begin{cases}
+                0, &\text{ if } x = 0 \\
+                1, &\text{ if } x > 0
+            \end{cases},
+        \] we have $f_n \to f$ pointwise on $[0, \infty)$. By restricting the domain
+        of $f_n$, we have $f_n \to 1$ pointwise on $[a, \infty)$ where $a > 0$. \\
+
+        We see that $\{f_n\}$ does not converge uniformly on $[0, \infty)$, because
+        each $f_n$ is continuous, being the ratio of continuous functions with a
+        non-zero denominator. However, the limit function $f$ is discontinuous. To
+        see this, note that $f(1 /n) = 1$ for all $n \in \N$, yet
+        $f(0) = 0 \neq 1 = \lim_{n\to \infty} f(1 /n)$. \\
+
+        Another way to see this is to note that $f_n(1 /n) = 1 / 2$ for all $n \in \N$.
+        If $\{f_n\}$ did converge uniformly to $0$ on $[0, \infty)$, pick $N \in \N$
+        such that for all $n \geq \N$ and for all $x \in [0, \infty)$, \[
+            |f_n(x) - f(x)| < \frac{1}{3}.
+        \] This must be true for $x = 1 / N \in [0, \infty)$ and $n = N$ in
+        particular.  This demands $|f_N(1 /N) - f(1 /N)| = 1 / 2 < 1 /3$, which is
+        absurd. \\
+
+        We show that $f_n \to 1$ uniformly on $[a, \infty)$ where $a > 0$.
+        Since $x \geq a$, we have \[
+            M_n = \sup|f_n(x) - 1| = \sup \frac{|nx - (1 + nx)|}{1 + nx} = \sup
+            \frac{1}{1 + nx} \leq \frac{1}{1 + na} < \frac{1}{na} \to 0.
+        \] Thus, $M_n \to 0$ which means that $f_n \to 1$ uniformly on $[a,
+        \infty)$. \\
+    
+        Formally, given $\epsilon > 0$, pick $N \in \N$ such that $Na\epsilon > 1$.
+        Thus, for all $n \geq N$ and $x \in [a, \infty)$, \[
+            |f_n(x) - 1| = \left|\frac{nx}{1 + nx} - 1\right| = \frac{1}{1 + nx}
+            < \frac{1}{nx} \leq \frac{1}{Na} < \epsilon.
+        \] This shows that $f_n \to 1$ uniformly on $[a, \infty)$.
+
+        \item We have been given the functions \[
+            f_n\colon [0, \infty) \to \R, \qquad f_n(x) = \frac{x^n}{1 + x^n}.
+        \] We first note that $x^n \to 0$ when $x \in [0, 1)$ and $x^n \to 1$ 
+        when $x = 1$. The latter follows trivially. The former also follows
+        trivially when $x = 0$. Let $t = x^{-1} - 1 > 0$ when $0 < x < 1$, since
+        $x^{-n} > 1$. Rearranging, $1 /x = 1 + t$, so \[
+            x^{-n} = (1 + t)^n = 1 + nt + \dots + t^n \geq nt.
+        \] This means that $x^n \leq 1 / nt \to 0$, which gives $x^n \to 0$ as
+        desired. \\
+
+        Now, when $0 \leq x < 1$, we have $x^n \to 0$ so $f_n(x) \to 0$.
+        When $x = 1$, we have $f_n(x) = 1 /2$ so $f_n(1) \to 1 /2$.
+        When $x > 1$, we have $f_n(x) = 1 / (x^{-n} + 1) \to 1$ because $x^{-n} = (1
+        / x)^n \to 0$ since $1 / x < 1$.
+        Thus, we set \[
+            f\colon [0, \infty) \to \R, \qquad f(x) = \begin{cases}
+                0, &\text{ if } x < 1 \\
+                \frac{1}{2} &\text{ if } x = 1 \\
+                1 &\text{ if } x > 1
+            \end{cases},
+        \] and write $f_n \to f$ pointwise on $[0, \infty)$. By restricting the 
+        domain, we also say that $f_n \to f$ on $[0, 1]$ and $f_n \to 0$ on $[0, a)$
+        where $0 < a < 1$. \\
+
+        Now, the limit function $f$ is discontinuous at $x = 1$, yet the functions
+        $f_n$ are all continuous since they are ratios of polynomial functions with
+        non-zero denominators. Thus, $\{f_n\}$ does not converge uniformly on $[0,
+        \infty)$, nor on $[0, 1]$. \\
+
+        Another way to see this is to see this is that if $f_n \to f$ uniformly on
+        $[0, 1]$, then we can pick $N \in \N$ such that for all $n \geq N$
+        and $x \in [0, \infty)$, \[
+            |f_n(x) - f(x)| < \frac{1}{4}.
+        \] This must hold in particular for $x = (1 / 2)^{1 / N} < 1$ and $n = N$,
+        hence \[
+            \left|\frac{1 / 2}{1 + 1 / 2} - 0 \right| = \frac{1}{3} < \frac{1}{4},
+        \] which is absurd. Thus, $\{f_n\}$ doesn't converge uniformly on $[0, 1]$,
+        nor on $[0, \infty)$. \\
+
+        When $0 < a < 1$, we show that $f_n \to 0$ on $[0, a)$ uniformly.
+        Note that when $0 < x < a < 1$, we have $x^n < a^n$, and when $x = 0$, we
+        see $f_n(x) = 0$, so \[
+            M_n = \sup|f_n(x) - 0| = \sup \frac{x^n}{1 + x^n} \leq \sup x^n \leq a^n
+            \to 0.
+        \] The last limit follows since $a \in [0, 1)$. Thus, $M_n \to 0$, which
+        means that $f_n \to 0$ uniformly on $(0, a)$ where $0 < a < 1$. \\
+
+        Formally, given $\epsilon > 0$, we choose $N \in \N$ such that $Nt\epsilon
+        > 1$, where $t = a^{-1} - 1$. We have already shown that
+        $a^n \leq 1 / nt$. Now, for all $n \geq N$ and $x \in (0, a)$, we have \[
+            |f_n(x) - 0| = \frac{x^n}{1 + x^n} < x^n < a^n < \frac{1}{nt} \leq \frac{1}{Nt} 
+            < \epsilon,
+        \] and $f_n(0) = 0 < \epsilon$. Thus, $f_n \to f$ uniformly on $[0, a)$.
+
+
+        \item We have been given the functions \[
+            f_n\colon [0, \infty) \to \R, \qquad f_n(x) = \frac{\sin{nx}}{1 + nx}.
+        \] When $x > 0$, we see that $\{\sin{nx}\}$ is a bounded sequence, while $1
+        / (1 + nx) < 1 /nx \to 0$. This gives $f_n(x) \to 0$. Also, $f_n(0) = 0$, so
+        $f_n(0) \to 0$.  Thus, $f_n \to 0$ pointwise on $[0, \infty)$.  By
+        restricting the domain, we see that $f_n \to 0$ on $[a, \infty)$, where $a >
+        0$. \\
+        
+        We show that $\{f_n\}$ does not converge uniformly on $[0, \infty)$.
+        Note that $f_n(1 / n) = \sin(1) /2 > 0.4$, which means \[
+            M_n = \sup|f_n(x) - 0| \geq |f_n(1 /n)| > 0.4
+        \] for all $n \in \N$. Thus, $M_n$ does not converge to $0$, so $\{f_n\}$ 
+        cannot converge uniformly on $[0, \infty)$. \\
+
+        Another way to see this is that if $f_n \to 0$ uniformly on $[0, \infty)$,
+        then we could choose $N \in \N$ such that for all $n \geq N$ and $x \in [0,
+        \infty)$, \[
+            |f_n(x) - 0| < 0.4.
+        \] This should hold for $x = 1 / N \in [0, \infty)$ and $n = N$ in
+        particular.  This demands $|f_N(1 /N)| = \sin(1) / 2 < 0.4$, which is
+        absurd. \\
+
+        We show that $f_n \to 0$ uniformly on $[a, \infty)$, where $a > 0$.
+        Since $x \geq a$ and $|\sin{x}| \leq 1$, we can write \[
+            M_n = \sup|f_n(x) - 0| = \sup \frac{|\sin{nx}|}{1 + nx} \leq \frac{1}{1
+            + na} \to 0.
+        \] This means that $M_n \to 0$, so $f_n \to 0$ uniformly on $[a, \infty)$
+        where $a > 0$. \\
+
+        Formally, given $\epsilon > 0$, we choose $N \in \N$ such that $Na\epsilon >
+        1$. Thus, for all $n \geq N$ and $x \in [a, \infty)$, we have \[
+            |f_n(x) - 0| = \frac{|\sin{nx}|}{1 + nx} \leq \frac{1}{1 + nx} \leq
+            \frac{1}{na} \leq \frac{1}{Na} < \epsilon.
+        \] This means that $f_n \to 0$ uniformly on $[a, \infty)$.
+
+
+        \item We have been given the functions \[
+            f_n\colon \R \to \R, \qquad f_n(x) = e^{-nx}.
+        \] Note that whenever $x < 0$, we have $e^{-x} > 1$ because \[
+            e^y = 1 + y + \frac{y^2}{2} + \dots > 1
+        \] when $-x = y > 0$. Thus, $(e^{-x})^n = e^{-nx} \to \infty$, so $\{f_n\}$
+        does not converge on the entirety of $\R$. When $x = 0$, $e^{-n0} = 1$ so
+        $f_n(0) \to 1$. When $x > 0$, $e^{-x} = 1 /e^{x} < 1$, so $f_n(x) = e^{-nx} 
+        \to 0$. Thus, setting \[
+            f\colon [0,\infty) \to \R, \qquad f(x) = \begin{cases}
+                1, &\text{ if } x = 0 \\
+                0, &\text{ if } x > 0
+            \end{cases},
+        \] we have $f_n \to f$ pointwise on $[0, \infty)$. \\
+
+        Note that $\{f_n\}$ does not converge uniformly to $f$ on $[0, \infty)$
+        since each $f_n$ is continuous, but the limit function $f$ is discontinuous
+        at $0$.
+
+    
+        Alternatively, examine $f_n(1 / n) = e^{-1} > 0$, which means that \[
+            M_n = \sup|f_n(x) - f(x)| \geq |f_n(1 / n) - f(1 / n)| = e^{-1},
+        \] so $M_n$ cannot converge to $0$. \\
+
+        Formally, if $f_n \to f$ uniformly on $[0, \infty)$, then we could choose $N
+        \in \N$ such that for all $n \geq N$ and $x \in [0, \infty)$, \[
+            |f_n(x) - f(x)| < e^{-1}.
+        \] This should hold in particular for $x = 1 / N$ and $n = N$. This demands
+        \[
+            |f_N(1 / N) - f(1 / N)| = e^{-1} < e^{-1},
+        \] which is absurd.
+        
+        \item We have been given the functions \[
+            f_n\colon \R \to \R, \qquad f_n(x) = x^2e^{-nx}.
+        \] We have already seen that $e^{-nx} \to \infty$ when $x < 0$, $e^{-nx} \to
+        0$ when $x > 0$. Thus, $x^2e^{-nx} \to \infty$ when $x < 0$ and $x^2e^{-nx}
+        \to 0$ when $x \geq 0$. This means that $\{f_n\}$ does not converge on $\R$,
+        but $f_n \to 0$ pointwise on $[0, \infty)$. \\
+
+        We show that $f_n \to 0$ uniformly on $[0, \infty)$. Note that $f_n(0) = 0$
+        and when $x > 0$, we have \[
+            e^{nx} = 1 + nx + \frac{1}{2}n^2x^2 + \dots > \frac{1}{2}n^2x^2,
+        \] so $e^{-nx} < 2 / n^2x^2$. Thus, $f_n(x) = x^2e^{-nx} < 2 / n^2$, so \[
+            M_n = \sup|f_n(x) - 0| = \sup x^2e^{-nx} \leq \frac{2}{n^2} \to 0.
+        \] This means that $M_n \to 0$, so $f_n \to 0$ uniformly on $[0, \infty)$.\\
+
+        Formally, given $\epsilon > 0$, choose $N \in \N$ such that $N^2\epsilon >
+        2$. Thus, for all $n \geq N$ and $x \in [0, \infty)$, we have \[
+            |f_n(x) - 0| = x^2e^{-nx} < \frac{2}{n^2} \leq \frac{2}{N^2} < \epsilon.
+        \] This shows that $f_n \to 0$ uniformly on $[0, \infty)$.
+        
+
+        \item We have been given the functions \[
+            f_n\colon \R \to \R, \qquad f_n(x) = n^2x^2e^{-nx}.
+        \] Again, recall that when $x < 0$, we have $x^2e^{-nx} \to \infty$, so
+        $f_n(x) = n^2x^2e^{-nx} \to \infty$. This means that $\{f_n\}$ does not
+        converge on $\R$. When $x = 0$, we have $f_n(0) = 0$ and when $x > 0$, we
+        see that \[
+            e^{nx} = 1 + nx + \frac{1}{2}n^2x^2 + \frac{1}{6}n^3x^3 + \dots >
+            \frac{1}{6}n^3x^3,
+        \] so $f_n(x) = n^2x^2 e^{-nx} < n^2x^2 \cdot 6 / n^3x^3 = 6 / nx \to 0$.
+        Also, $f_n(x) \geq 0$, so $f_n \to 0$ pointwise on $[0, \infty)$. \\
+
+        We show that $\{f_n\}$ does not converge uniformly on $[0, \infty)$ by
+        noting that $f_n(1 / n) = e^{-1} > 0$, so \[
+            M_n = \sup|f_n(x) - 0| \geq |f_n(1 /n) - 0| = e^{-1}.
+        \] This means that $M_n$ cannot converge to $0$, so $\{f_n\}$ cannot
+        converge uniformly on $[0, \infty)$. \\
+
+        Alternatively, if $f_n \to 0$ uniformly on $[0, \infty)$, we could choose $N
+        \in \N$ such that for all $n \geq N$ and $x \in [0, \infty)$, we have \[
+            |f_n(x) - 0| < e^{-1}.
+        \] This should hold in particular for $x = 1 / N$ and $n = N$. This demands
+        \[
+            |f_N(1 / N) - 0| = e^{-1} < e^{-1},
+        \] which is absurd.
+
+
+        \item We have been given the functions \[
+            f_n\colon [0, 2] \to \R, \qquad f_n(x) = \frac{x^n}{1 + x^n}.
+        \] Recall that we've already shown that $f_n \to f$ pointwise where \[
+            f\colon [0, 2] \to \R, \qquad f(x) = \begin{cases}
+                0, &\text{ if } x < 1 \\
+                \frac{1}{2} &\text{ if } x = 1 \\
+                1 &\text{ if } x > 1
+            \end{cases},
+        \] Again, this convergence is not uniform since each $f_n$ is continuous on
+        $[0, 2]$, but the limiting function $f$ is discontinuous at $1$.
+
+
+        \item We have been given the functions \[
+            f_n\colon [0, 1] \to \R, \qquad f_n(x) = \frac{1}{(1 + x)^n}.
+        \] Recall that we've shown that when $0 < x < 1$, we have $x^n \to 0$.
+        Thus, when $0 < x \leq 1$, we have $1 < 1 + x \leq 2$ hence
+        $1 /2 \leq 1 / (1 + x) < 1$, so $1 / (1 + x)^n \to 0$.
+        When $x = 0$, we have $1 / (1 + x)^n = 1$. Thus, setting \[
+            f\colon [0, 1] \to \R, \qquad f(x) = \begin{cases}
+                1, &\text{ if } x = 0 \\
+                0, &\text{ if } x > 0
+            \end{cases},
+        \] we have $f_n \to f$ pointwise on $[0, 1]$. \\
+
+        We see that $\{f_n\}$ does not converge uniformly on $[0, 1]$ because each
+        of the functions $f_n$ is continuous, being the ratio of polynomials with a
+        non-zero denominator, but the limiting function $f$ is discontinuous at $0$.
+        \\
+
+        Alternatively, if $f_n \to f$ uniformly on $[0, 1]$, then we could choose $N
+        \in \N$ such that for all $n \geq N$ and $x \in [0, 1]$, we have \[
+            |f_n(x) - f(x)| < \frac{1}{3}.
+        \] This should hold in particular for $x = 2^{1 / N} - 1 \in [0, 1]$ and $n
+        = N$. Since $x > 0$, this demands \[
+            f_N(2^{1 / N} - 1) = \frac{1}{2} < \frac{1}{3},
+        \] which is absurd.
+    \end{enumerate}
+
+    \paragraph{Solution 2.} We have been given the sequences of functions $\{f_n\}$
+    and $\{g_n\}$ such that $f_n \to f$ and $g_n \to g$ uniformly on some domain
+    $X$. We claim that $f_n + g_n \to f + g$ uniformly on $X$. \\
+    
+    To show this, let $\epsilon > 0$ be arbitrary. From the uniform convergence of
+    $f_n \to f$ and $g_n \to g$, we choose $N_1, N_2 \in \N$ such that for all $x
+    \in X$, \[
+        |f_n(x) - f(x)| < \frac{\epsilon}{2}
+    \] whenever $n \geq N_1$ and \[
+        |g_n(x) - g(x)| < \frac{\epsilon}{2}
+    \] whenever $n \geq N_2$. Thus, whenever $x \in X$ and $n \geq N = N_1 + N_2$,
+    we have
+    \begin{align*}
+        |(f_n(x) + g_n(x)) - (f(x) + g(x))| &= |(f_n(x) - f(x)) + (g_n(x) - g(x))| \\
+            &\leq |f_n(x) - f(x)| + |g_n(x) - g(x)| \\
+            &< \frac{\epsilon}{2} + \frac{\epsilon}{2} \\
+            &= \epsilon.  
+    \end{align*}
+    The second line follows by the triangle inequality.
+    Thus, $f_n + g_n \to f + g$ uniformly, as desired.
+
+    \paragraph{Solution 3.} We have been given the functions \[
+        f_n\colon \R \to \R, \qquad f_n(x) = x + \frac{1}{n}.
+    \] We first show that $f_n \to f$ where $f\colon \R \to \R$, $f(x) = x$ is the
+    identity function. Moreover, this convergence is uniform because \[
+        M_n = \sup|f_n(x) - f(x)| = \sup \left|x + \frac{1}{n} - x\right| =
+        \frac{1}{n} \to 0.
+    \] The last limit follows from the Archimedean property of the reals: given any
+    $\epsilon > 0$, we can choose $N \in \N$ such that $N\epsilon > 1$, so $1 / n <
+    \epsilon$ for all $n \geq N$. Thus, $M_n \to 0$ so $f_n \to f$ uniformly on
+    $\R$. \\
+
+    Now, we examine $\{f^2\}$. Note that \[
+        f_n^2(x) = x^2 + \frac{2x}{n} + \frac{1}{n^2},
+    \] and we have the limits $x^2 \to x^2$, $2x / n \to 0$ and $1 / n^2 \to 0$.
+    The last two follow from $1 / n \to 0$, since $x \in \R$ is fixed.
+    Thus, $f^2_n \to f^2$ pointwise, where $f^2(x) = x^2$. Now, \[
+        f_n^2(x) - f^2(x) = \frac{2x}{n} + \frac{1}{n^2} > \frac{2x}{n}.
+    \] This means that $f_n^2(n) - f^2(n) > 2$, so \[
+        M_n = \sup |f_n^2(x) - f^2(x)| \geq |f_n^2(n) - f^2(n)| > 2.
+    \] Thus, $M_n$ cannot converge to $0$, so $\{f_n^2\}$ cannot converge uniformly
+    on $\R$.
+    
+
+\end{document}
