@@ -135,5 +135,72 @@
             \] 
         \end{remark}
     \end{definition}
+    
+    \begin{definition}[Expectation]
+        The expectation of $g(X)$, for $g\colon \R \to \R$ and a discrete random
+        variable $X$ is defined as \[
+            \E{g(X)} = \sum_{x \in S} g(x)\,p_X(x),
+        \] if the series converges absolutely.
+    \end{definition}
+    \begin{example}
+        The $n$\textsuperscript{th} moment of a discrete random variable $\E{X^n}$
+        is defined as \[
+            \E{X^n} = \sum_{x \in S} x^n\,p_X(x),
+        \] if the series converges absolutely.
+
+        The first moment $\mu = \E{X}$ is called the mean.
+        The second moment $\sigma^2 = \E{(X - \mu)^2}$ is called the variance.
+        Note that \[
+            \sigma^2 = \sum (x - \mu)^2\, p(x) = \sum x^2\,p(x) - 2\mu x\,p(x) +
+            \mu^2 p(x).
+        \] Simplifying, \[
+            \sigma^2 = \E{X^2} - \E{X}^2.
+        \] 
+    \end{example}
+
+    \begin{definition}[Cumulative distribution function]
+        The cumulative distribution function of a random variable $X$ is
+        defined as the function $F_X\colon \R \to [0, 1]$, \[
+            F_X(\alpha) = P(X \leq \alpha).
+        \] 
+    \end{definition}
+
+    \begin{definition}[Continuous random variable]
+        A continuous random variable $X$ is such that its cumulative distribution
+        function $F_X$ is continuous.
+    \end{definition}
+
+    \begin{definition}[Probability density function]
+        Let $X$ be a continuous random variable with a cumulative distribution
+        function $F_X$. If we write \[
+            F_X(\alpha) = \int_{-\infty}^\alpha f_X(x)\:dx
+        \] for all $\alpha \in \R$, then $f_X$ is a probability density function.
+        If $f_X$ is continuous, then the Fundamental Theorem of Calculus guarantees
+        that $f_X(x) = F_X'(x)$.
+        \begin{remark}
+            Note that we can write \[
+                P(\alpha \leq X \leq \beta) = \int_\alpha^\beta f_X(x)\:dx.
+            \] We also demand \[
+                \int_{-\infty}^{+\infty} f_X(x) \:dx.
+            \] 
+        \end{remark}
+    \end{definition}
+    \begin{example}
+        The uniform distribution on an interval $[a, b] \subset \R$ is defined using
+        the probability density function \[
+            f_X(x) = \begin{cases}
+                \frac{1}{b - a}, &\text{ if }a \leq x \leq b \\
+                0, &\text{ otherwise }
+            \end{cases}
+        \]
+    \end{example}
+
+    \begin{definition}[Expectation]
+        The expectation of $g(X)$, for $g\colon \R \to \R$ and a continuous random
+        variable $X$ is defined as \[
+            \E{g(X)} = \int_{-\infty}^{+\infty} g(X)\, f_X(x)\:dx
+        \] if the integral converges absolutely.
+    \end{definition}
+
 \end{document}
 % vim: set tabstop=4 shiftwidth=4 softtabstop=4:
