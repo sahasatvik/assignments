@@ -448,6 +448,30 @@
             \ddt{}\E{p} = \E{-\ppx{}V}.
         \] 
     \end{theorem}
+    \begin{proof}
+        We start by calculating 
+        \begin{align*}
+            \hat{p}\hat{H} - \hat{H}\hat{p} &= \left(-i\hbar
+            \ppx{}\right)\left(\frac{\hbar^2}{2m}\pp[2]{}{x} + V\right)
+            - \left(\frac{\hbar^2}{2m}\pp[2]{}{x} + V\right)\left(-i\hbar
+            \ppx{}\right) \\
+                &= -\frac{i\hbar^3}{2m}\pp[3]{}{x} - i\hbar\ppx{}V +
+                \frac{i\hbar^3}{2m}\pp[3]{}{x} + i\hbar V\ppx{} \\
+                &= -i\hbar \ppx{}V + i\hbar V\ppx{} \\
+                &= -i\hbar \ppx{V}.
+        \end{align*}
+        Now, \[
+            \ddt{\E{p}} = \int \ppt{\psi^*}\hat{p}\psi\:dx + \int \psi^*
+            \ppt{\hat{p}}\psi\:dx + \int \psi^*\hat{p}\ppt{\psi}\:dx.
+        \] The central term is just $\E{\partial \hat{p} / \partial t}$, which is zero.
+        From the Schr\"odinger equation, we can write \[
+            \hat{H}\psi = i\hbar\ppt{\psi}, \qquad (\hat{H}\psi)^* = \psi^*\hat{H} =
+            -i\hbar \ppt{\psi^*}.
+        \] Thus, \[
+            \ddt{\E{p}} = \frac{1}{i\hbar} \int \psi^*(\hat{p}\hat{H} -
+            \hat{H}\hat{p}) \psi \:dx =  \E{-\ppx{V}}. \qedhere
+        \] 
+    \end{proof}
 
     \begin{definition}[Commutator]
         The commutator of two linear operators $\hat{A}$ and $\hat{B}$ is defined as
@@ -455,11 +479,12 @@
             [\hat{A}, \hat{B}] = \hat{A}\hat{B} - \hat{B}\hat{A}.
         \] 
     \end{definition}
-
+    
     In a statistical distribution, the first, second, third and fourth moments deal
     with the mean, standard deviation, skew and kurtosis. Skew is a measure of
-    symmetry, and kurtosis is a measure of peakedness.
+    symmetry, and kurtosis is a measure of peakedness. \newpage
 
+    \subsection{The uncertainty principle}
     \begin{theorem}[Heisenberg's Uncertainty Principle]
         The standard deviations of the position and momentum are related as \[
             \sigma_x \sigma_p \geq \frac{\hbar}{2}.
@@ -467,27 +492,29 @@
             \sigma_A \sigma_B \geq \frac{1}{2}|\E{[\hat{A}, \hat{B}]}|.
         \] 
     \end{theorem}
-    Consider the following expression, which we evaluate using integration by parts.
-    \begin{align*}
-        i\hbar \int \ddx{\psi^*}\psi x\:dx = -i\hbar\int \psi^*\psi\:dx - i\hbar
-        \int \ddx{\psi}\psi^* x\:dx = -i\hbar + \left[i\hbar \int \ddx{\psi^*} \psi
-        x\:dx\right]^*
-    \end{align*}
-    Note that we have chosen $\E{x} = 0$. Thus, \[
-        2i\operatorname{Im}\int i\hbar \ddx{\psi^*}\psi x\:dx = -i\hbar. 
-    \] Since $z^*z \geq b^2$, where $z = a + ib$, we must have \[
-        4\left[\int i\hbar \ddx{\psi^*}\psi x\:dx\right]^2 \geq \hbar^2.
-    \] Cauchy Schwarz gives \[
-        \int x\psi^*\:x\psi \:dx \;\int
-        \left(i\hbar\ppx{\psi^*}\right)\left(-i\hbar\ppx{\psi}\right) \:dx \geq 
-        \left[\int i\hbar \ddx{\psi^*}\psi x\:dx\right]^2 \geq \frac{\hbar^2}{4}.
-    \] In other words, \[
-        \E{x^2}\E{p^2} \geq \frac{\hbar^2}{4}.
-    \] By writing $\sigma_x^2 = \E{x^2} - \E{x}^2$ and $\sigma_p^2 = \E{p^2} -
-    \E{p}^2$, and by choosing $\E{x} = \E{p} = 0$, we arrive at the Heisenberg
-    uncertainty principle, \[
-        \sigma_x\sigma_p \geq \frac{\hbar}{2}.
-    \]
+    \begin{proof}
+        We evaluate the following expression using integration by parts. \[
+            i\hbar \int \ddx{\psi^*}\psi x\:dx = -i\hbar\int \psi^*\psi\:dx - i\hbar
+            \int \ddx{\psi}\psi^* x\:dx = -i\hbar + \left[i\hbar \int \ddx{\psi^*}
+            \psi x\:dx\right]^*
+        \]
+         Thus, \[
+            2i\operatorname{Im}\int i\hbar \ddx{\psi^*}\psi x\:dx = -i\hbar. 
+        \] Since $z^*z \geq b^2$, where $z = a + ib$, we must have \[
+            4\left[\int i\hbar \ddx{\psi^*}\psi x\:dx\right]^2 \geq \hbar^2.
+        \] Cauchy Schwarz gives \[
+            \int x\psi^*\:x\psi \:dx \;\int
+            \left(i\hbar\ppx{\psi^*}\right)\left(-i\hbar\ppx{\psi}\right) \:dx \geq
+            \left[\int i\hbar \ddx{\psi^*}\psi x\:dx\right]^2 \geq
+            \frac{\hbar^2}{4}.
+        \] In other words, \[
+            \E{x^2}\E{p^2} \geq \frac{\hbar^2}{4}.
+        \] By writing $\sigma_x^2 = \E{x^2} - \E{x}^2$ and $\sigma_p^2 = \E{p^2} -
+        \E{p}^2$, and by choosing $\E{x} = \E{p} = 0$, we arrive at the Heisenberg
+        uncertainty principle, \[
+            \sigma_x\sigma_p \geq \frac{\hbar}{2}. \qedhere
+        \]
+    \end{proof}
 
     Another uncertainty relation is the energy-time uncertainty, 
     \begin{boxedeq*}

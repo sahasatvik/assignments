@@ -181,8 +181,16 @@
             f(x) = \frac{x}{1 - x}.
         \] 
     \end{example}
+    \begin{example}
+        Consider the functions \[
+            f_n\colon \R \to \R, \qquad f_n(x) = \frac{x^2}{(1 + x^2)^n}.
+        \] Note that the series $\sum f_n(x)$ is a geometric series. For $x \neq 0$,
+        we have \[
+            \sum_{n = 0}^\infty \frac{x^2}{(1 + x^2)^n} = \frac{x^2}{1 - 1 / (1 +
+            x^2)} = 1 + x^2
+        \] and for $x = 0$, the sum is $0$. Thus, the series converges pointwise.
+    \end{example}
     
-    \newpage
     \section*{Uniform convergence}
     \begin{definition}[Uniform convergence]
         Let the functions $f_n\colon X \to Y$ be defined for all $n \in \N$.
