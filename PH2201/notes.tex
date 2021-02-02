@@ -469,18 +469,18 @@
     \end{theorem}
     Consider the following expression, which we evaluate using integration by parts.
     \begin{align*}
-        i\hbar \int \ddx{\psi^*}\psi\:dx = -i\hbar\int \psi^*\psi\:dx - i\hbar \int
-        \ddx{\psi}\psi^*\:dx = -i\hbar + \left[i\hbar \int \ddx{\psi^*}
-        \psi\:dx\right]^*
+        i\hbar \int \ddx{\psi^*}\psi x\:dx = -i\hbar\int \psi^*\psi\:dx - i\hbar
+        \int \ddx{\psi}\psi^* x\:dx = -i\hbar + \left[i\hbar \int \ddx{\psi^*} \psi
+        x\:dx\right]^*
     \end{align*}
-    Thus, \[
-        2i\operatorname{Im}\int i\hbar \ddx{\psi^*}\psi \:dx = -i\hbar. 
+    Note that we have chosen $\E{x} = 0$. Thus, \[
+        2i\operatorname{Im}\int i\hbar \ddx{\psi^*}\psi x\:dx = -i\hbar. 
     \] Since $z^*z \geq b^2$, where $z = a + ib$, we must have \[
-        4\left[\int i\hbar \ddx{\psi^*}\psi\:dx\right]^2 \geq \hbar^2.
+        4\left[\int i\hbar \ddx{\psi^*}\psi x\:dx\right]^2 \geq \hbar^2.
     \] Cauchy Schwarz gives \[
         \int x\psi^*\:x\psi \:dx \;\int
         \left(i\hbar\ppx{\psi^*}\right)\left(-i\hbar\ppx{\psi}\right) \:dx \geq 
-        \left[\int i\hbar \ddx{\psi^*}\psi\:dx\right]^2 \geq \frac{\hbar^2}{4}.
+        \left[\int i\hbar \ddx{\psi^*}\psi x\:dx\right]^2 \geq \frac{\hbar^2}{4}.
     \] In other words, \[
         \E{x^2}\E{p^2} \geq \frac{\hbar^2}{4}.
     \] By writing $\sigma_x^2 = \E{x^2} - \E{x}^2$ and $\sigma_p^2 = \E{p^2} -
