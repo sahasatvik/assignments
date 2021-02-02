@@ -467,6 +467,32 @@
             \sigma_A \sigma_B \geq \frac{1}{2}|\E{[\hat{A}, \hat{B}]}|.
         \] 
     \end{theorem}
+    Consider the following expression, which we evaluate using integration by parts.
+    \begin{align*}
+        i\hbar \int \ddx{\psi^*}\psi\:dx = -i\hbar\int \psi^*\psi\:dx - i\hbar \int
+        \ddx{\psi}\psi^*\:dx = -i\hbar + \left[i\hbar \int \ddx{\psi^*}
+        \psi\:dx\right]^*
+    \end{align*}
+    Thus, \[
+        2i\operatorname{Im}\int i\hbar \ddx{\psi^*}\psi \:dx = -i\hbar. 
+    \] Since $z^*z \geq b^2$, where $z = a + ib$, we must have \[
+        4\left[\int i\hbar \ddx{\psi^*}\psi\:dx\right]^2 \geq \hbar^2.
+    \] Cauchy Schwarz gives \[
+        \int x\psi^*\:x\psi \:dx \;\int
+        \left(i\hbar\ppx{\psi^*}\right)\left(-i\hbar\ppx{\psi}\right) \:dx \geq 
+        \left[\int i\hbar \ddx{\psi^*}\psi\:dx\right]^2 \geq \frac{\hbar^2}{4}.
+    \] In other words, \[
+        \E{x^2}\E{p^2} \geq \frac{\hbar^2}{4}.
+    \] By writing $\sigma_x^2 = \E{x^2} - \E{x}^2$ and $\sigma_p^2 = \E{p^2} -
+    \E{p}^2$, and by choosing $\E{x} = \E{p} = 0$, we arrive at the Heisenberg
+    uncertainty principle, \[
+        \sigma_x\sigma_p \geq \frac{\hbar}{2}.
+    \]
+
+    Another uncertainty relation is the energy-time uncertainty, 
+    \begin{boxedeq*}
+        \sigma_E \sigma_t \geq \frac{\hbar}{2}.
+    \end{boxedeq*}
 
 
     \end{document}
