@@ -345,12 +345,14 @@
     number of collisions experienced by our molecule over the time $\Delta t$. If
     our molecule has an actual speed of $u$, it must have travelled a distance $u
     \Delta t$. This means that the average path length between collisions is given
-    by \[
+    by
+    \begin{boxedeq*}
         \lambda = \frac{u\Delta t}{n\pi \sigma^2 v \Delta t} = \frac{u /
         v}{n\pi\sigma^2}.
-    \] Now, if our particle of interest is moving significantly faster than all
-    other surrounding molecules, we may write $u /v \approx 1$, so $\lambda \approx
-    1 /n\pi\sigma^2$. Otherwise, set $u = c$, which is the common speed of all gas
+    \end{boxedeq*}
+    Now, if our particle of interest is moving significantly faster than all other
+    surrounding molecules, we may write $u /v \approx 1$, so $\lambda \approx 1
+    /n\pi\sigma^2$. Otherwise, set $u = c$, which is the common speed of all gas
     molecules. If two such molecules move with the same speed but in different
     directions, separated by an angle $\theta$, their relative speed is given by \[
         v = 2c\sin\frac{\theta}{2}.
@@ -373,7 +375,7 @@
     identical speed, in an isotropic fashion. A more nuanced calculation using the
     Maxwell distribution gives the expression
     \begin{boxedeq*}
-        \lambda = \frac{1}{\sqrt{2}4n\pi \sigma^2}.
+        \lambda = \frac{1}{\sqrt{2}n\pi \sigma^2}.
     \end{boxedeq*}
     Note that this doesn't show any explicit dependence on the temperature $T$.
     On the other hand, short range interactions between molecules become more
@@ -383,7 +385,58 @@
     \] where $\sigma_\infty$ is the effective diameter as $T \to \infty$, and $b$ is
     a measure of the molecular attraction. Thus, \[
         \lambda \propto \frac{1}{1 + \frac{b}{T}},
-    \] which shows a marginal dependence on $T$.
+    \] which shows a marginal dependence on $T$. \\
+
+    Suppose that the probability that a molecule suffers no collisions over a
+    distance $x$ is given by $f(x)$. Now, the homogeneity and isotropy of the gas
+    means that over a distance $dx$, the probability of a collision will be some
+    $p\:dx$, irregardless of the direction of $dx$ -- the proportionality is given
+    by a constant $p$ when we consider very small $dx$. Now, the molecule suffers no
+    collisions over a distance $x + dx$ with probability $f(x) (1 - p\:dx)$.
+    However, this is just $f(x + dx)$, which we expand as a Taylor series and take
+    only the first order terms to obtain $f(x) + f'(x)\:dx$. Thus, \[
+        f' = -pf,
+    \] which is solved by the exponential function $e^{-px}$. Since we want $f(0) =
+    1$, i.e.\ no collisions whatsoever over a distance $0$, we set $f(x) = e^{-px}$.
+    Now, we see that the probability of collision between $x$ and $x + dx$ is $f(x)
+    \,p\:dx$, so the mean free path is simply the expected value \[
+        \lambda = \int_{0}^\infty x\,e^{-px}\,p\:dx = \frac{1}{p}.
+    \] Thus, the probability density function $f_\lambda$ of the free path is
+    given as 
+    \begin{boxedeq*}
+        f_\lambda(x) = \frac{1}{\lambda}\, e^{- x / \lambda}.
+    \end{boxedeq*}
+    Note that this is an exponential distribution, with mean $\lambda$ and variance
+    $\lambda^2$. Around $37\%$ of free paths are longer than $\lambda$; only $1\%$
+    of paths are longer than $4.6\lambda$.
+
+    \subsection{Pressure, considering collisions}
+    We recall that the number of molecules moving from a volume $dV$ towards a
+    surface $\Delta S$ was given by \[
+        dN = \frac{n\cos\theta\,\Delta S}{4\pi r^2}\:dV.
+    \] In our prior calculations, we neglected the effects of collisions. We show
+    that these considerations do not in fact change the final result. Note that due
+    to collisions, some of those molecules from $dV$ directed towards $\Delta S$ are
+    deviated from their path and do not reach their destination. Additionally, other
+    molecules from outside $dV$ can collide and reach $\Delta S$.
+
+    Consider those molecules with speeds between $c$ and $c + dc$, say $dn_c$ many
+    of them per unit volume. These molecules have a mean free path of $\lambda_c$,
+    so any one of these will suffer $c \Delta t/ \lambda_c$ collisions over a times
+    $\Delta t$. Thus, within a volume $dV$, the number of collisions in which those
+    $dn_c$ molecules participate is given as \[
+        \frac{c \Delta t}{\lambda_c} \:dn_c\:dV.
+    \] Note that this must be the number of free paths which start over that time.
+    From the isotropic nature of the gas, the fraction of those free paths which
+    start towards $\Delta S$ is given as \[
+        \frac{\cos\theta \Delta S}{4\pi r^2}.
+    \] Of these, the $e^{- r / \lambda_c}$ fraction of free paths are longer than
+    $r$, and hence reach $\Delta S$. Thus, the number of molecules which start from
+    $dV$ and reach $\Delta S$ has the distribution \[
+        dN_c = \frac{\cos\theta \Delta S}{4\pi r^2}\cdot \frac{c\Delta
+        t}{\lambda_c}\cdot e^{-r / \lambda_c}\,\:dn_c\:dV.
+    \] 
+    
 
 
 \end{document}
