@@ -202,5 +202,46 @@
         \] if the integral converges absolutely.
     \end{definition}
 
+
+    \begin{definition}[Mixed random variable]
+        A random variable whose cumulative distribution function $F_X$ is
+        discontinuous at countably many points, with $F_X$ being continuous and
+        strictly increasing in at least one interval is called a mixed random
+        variable.
+    \end{definition}
+
+    \begin{definition}[Conditional probability distributions]
+        Let $X$ and $Y$ be two random variables, and let $A, B \subseteq \R$.
+        If $P(Y \in B) > 0$, then \[
+            P(X \in A \,|\, Y\in B)\, P(Y \in B) = P(X \in A, Y \in B).
+        \] 
+    \end{definition}
+    \begin{definition}[Independent random variables]
+        We say that $X$ and $Y$ are independent if \[
+            P(X \in A, Y \in B) = P(X \in A)\, P(Y \in B)
+        \] for all $A, B \subseteq \R$.
+    \end{definition}
+
+    \begin{example}
+        Consider an experiment where a fair die is rolled until a 6 is obtained, and
+        let $X$ be the random variable denoting the number of throws.  Also, let $Y$
+        be a random variable which is $1$ if the first even outcome is a 6, and 0
+        otherwise. Observe that $P(X = 1) = 1 / 6$ and $P(Y = 1) = 1 / 3$. Also,
+        $P(X = 1, Y = 1) = 1 / 6 \neq P(X = 1)\, P(Y = 1)$, hence $X$ and $Y$ are
+        not independent random variables.
+
+        It can be shown that \[
+            P(X = n \,|\, Y = 1) = \frac{1}{2^n}.
+        \] 
+    \end{example}
+
+    \section*{Bernoulli distribution}
+    Consider an experiment with several identical trials. In each trial, there are
+    two possible outcomes; the probability of a success if given by $p$ and the
+    probability of a failure is $q = 1 - p$. We could let $X_i$ be a random variable
+    denoting the outcome of the $i$\textsuperscript{th} outcome, so we demand that
+    $\{X_i\}$ are independent and identically distributed.
+
+
 \end{document}
 % vim: set tabstop=4 shiftwidth=4 softtabstop=4:
