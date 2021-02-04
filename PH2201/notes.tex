@@ -388,7 +388,7 @@
         observable. For any physically interpretable wavefunction $\Psi$, we demand
         that $|\Psi|^2$ is normalizable. Thus, \[
             \int |\Psi|^2 \:dV = 1.
-        \]
+        \] We also demand $\Psi$ and $d\Psi / dx$ be continuous.
         \item For a system with many classical outcomes, we write \[
             \Psi = \sum_{i = 1}^\infty \Psi_i.
         \] Thus, the probability distribution $P$ carries signatures of the
@@ -421,6 +421,9 @@
     The Hamiltonian operator is defined as \[
         \hat{H} = -\frac{\hbar^2}{2m}\lapl{} + V,
     \] so the spatial part of the equation says $\hat{H}\psi = E\psi$.
+    In other words, the wavefunction $\Psi$ here is an eigenfunction of the
+    Hamiltonian. The full solution can be written as a linear superposition of all
+    such eigenfunctions $\Psi_i$.
     For convenience, we deal with only one spatial dimension here on.
 
     \subsection{Observables and operators}
@@ -482,7 +485,9 @@
     
     In a statistical distribution, the first, second, third and fourth moments deal
     with the mean, standard deviation, skew and kurtosis. Skew is a measure of
-    symmetry, and kurtosis is a measure of peakedness. \newpage
+    symmetry, and kurtosis is a measure of peakedness.
+
+    \newpage
 
     \subsection{The uncertainty principle}
     \begin{theorem}[Heisenberg's Uncertainty Principle]
@@ -521,6 +526,46 @@
         \sigma_E \sigma_t \geq \frac{\hbar}{2}.
     \end{boxedeq*}
 
+    \subsection{Eigenstates and eigenvalues}
+    Recall that the time independent Schr\"odinger equation is given by $\hat{H}\psi
+    = E\psi$, which means that we seek eigenfunctions (or eigenstates) $\psi_n$ of
+    the Hamiltonian, and their associated eigenvalues $E_n$. The eigenvalue $E_n$
+    captures the time evolution of the associated eigenstate, since $\Psi_n = \psi_n
+    e^{-iE_n t/ \hbar}$.
+
+    \begin{definition}[Degenerate eigenstates]
+        If two eigenstates $\psi_1$ and $\psi_2$ have the same energy eigenvalue,
+        they are said to be degenerate with respect to one another.
+    \end{definition}
+
+    \begin{theorem}
+        The energy eigenvalues of the Hamiltonian are real.
+    \end{theorem}
+    \begin{proof}
+        This follows from the fact that the Hamiltonian is Hermitian, i.e.\
+        $\hat{H}^* = \hat{H}$. Thus, if $E$ is an eigenvalue of $\hat{H}$ with
+        the eigenstate $\psi$, then \[
+            \hat{H}\psi = E\psi, \qquad \E{\hat{H}} = \int \psi^*\hat{H}\psi\:dx =
+            E.
+        \] Now, \[
+            E^* = \int (\psi^*\hat{H}\psi)^*\:dx = \int \psi^*\hat{H}^*\psi\:dx = E,
+        \] which forces $E \in \R$.
+    \end{proof}
+
+    \begin{theorem}
+        Non-degenerate eigenstates of the Hamiltonian are orthonormal.
+    \end{theorem}
+    \begin{proof}
+        Suppose that $\psi_1$ and $\psi_2$ are two non-degenerate eigenstates, with
+        distinct eigenvalues $E_1$ and $E_2$. Then, \[
+            \hat{H}\psi_1 = E_1\psi_1, \qquad \hat{H}\psi_2 = E_2\psi_2.
+        \] Observe that \[
+            \int \psi_1^*\hat{H}\psi_2\:dx = \int (\hat{H}^*\psi_1)^*\psi_2\:dx.
+        \] Since the energy eigenvalues are real, we conclude that \[
+            E_2 \int \psi_1^*\psi_2\:dx = E_1 \int \psi_1^*\psi_2\:dx.
+        \] Since $E_1 \neq E_2$, the inner product must be zero.
+    \end{proof}
+    
 
     \end{document}
 % vim: set tabstop=4 shiftwidth=4 softtabstop=4:
