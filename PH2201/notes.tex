@@ -388,7 +388,9 @@
         observable. For any physically interpretable wavefunction $\Psi$, we demand
         that $|\Psi|^2$ is normalizable. Thus, \[
             \int |\Psi|^2 \:dV = 1.
-        \] We also demand $\Psi$ and $d\Psi / dx$ be continuous.
+        \] As a consequence, we require $\Psi \to 0$ as we move away from the
+        origin. We also demand $\Psi$ be continuous, and $\Psi'$ be continuous
+        almost everywhere.
         \item For a system with many classical outcomes, we write \[
             \Psi = \sum_{i = 1}^\infty \Psi_i.
         \] Thus, the probability distribution $P$ carries signatures of the
@@ -564,6 +566,19 @@
         \] Since the energy eigenvalues are real, we conclude that \[
             E_2 \int \psi_1^*\psi_2\:dx = E_1 \int \psi_1^*\psi_2\:dx.
         \] Since $E_1 \neq E_2$, the inner product must be zero.
+    \end{proof}
+
+    \begin{theorem}
+        If $[\hat{A}, \hat{B}] = 0$, then $\hat{A}$ and $\hat{B}$ share
+        non-degenerate eigenstates.
+    \end{theorem}
+    \begin{proof}
+        Let $\psi$ be an eigenstate of $\hat{A}$, so $\hat{A}\psi = \lambda
+        \psi$. Since $\hat{A}$ and $\hat{B}$ commute, \[
+            \lambda \hat{B}\psi = \hat{B}\hat{A}\psi = \hat{A}\hat{B}\psi,
+        \] so $\hat{B}\psi$ is also an eigenstate of $\hat{A}$ with eigenvalue
+        $\lambda$. From the non-degeneracy of $\psi$, we must have $\hat{B}\psi =
+        \mu\psi$ for some non-zero scalar $\mU$.
     \end{proof}
     
 
