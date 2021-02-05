@@ -31,7 +31,8 @@
 \def\Q{\mathbb{Q}}
 \def\Z{\mathbb{Z}}
 \def\N{\mathbb{N}}
-\newcommand\ve[1]{\boldsymbol{#1}}
+% \newcommand\ve[1]{\boldsymbol{#1}}
+\newcommand\ve[1]{\vec{#1}}
 \newcommand\ddx[1]{\frac{d #1}{d x}}
 \newcommand\ddt[1]{\frac{d #1}{d t}}
 \newcommand\dd[3][]{\frac{d^{#1}{#2}}{d {#3}^{#1}}}
@@ -435,8 +436,53 @@
     $dV$ and reach $\Delta S$ has the distribution \[
         dN_c = \frac{\cos\theta \Delta S}{4\pi r^2}\cdot \frac{c\Delta
         t}{\lambda_c}\cdot e^{-r / \lambda_c}\,\:dn_c\:dV.
-    \] 
+    \] Integrating this over all space, and over all possible speeds $c = 0 \to
+    \infty$, we obtain the familiar result \[
+        N = \frac{1}{4}n\E{c} \cdot \Delta S\Delta t,
+    \] only this time, we must define the average speed as \[
+        \E{c} = \frac{1}{n}\int_0^\infty c\:dn_c.
+    \] We redo the calculations for the pressure of the gas by noting that each
+    molecule imparts a momentum change of $2mc\cos\theta$ to the container walls.
+    Integrating, we get back our expression for pressure, \[
+        p = \frac{1}{3}mn\E{c^2},
+    \] where we redefine the root mean square speed $c_{rms}^2 = \E{c^2}$ as \[
+        \E{c^2} = \frac{1}{n}\int_0^\infty c^2\:dn_c.
+    \] Thus, our earlier results remain unchanged, even when accounting for
+    collisions between different gas molecules.
     
+
+    \subsection{Maxwell-Boltzmann distribution}
+    The Maxwell-Boltzmann distribution gives the probability distribution of the
+    velocities of ideal gas molecules. As a result, this depends on the isotropy of
+    the gas, which includes the independence of the spatial components of velocity.
+    This means that there is no correlation between the orthogonal components of the
+    velocity of a gas molecule.
+
+    Consider the velocity space of the molecules of an ideal gas. A gas molecule
+    with velocity $\ve{c}$ can be identified with coordinates $(c_x, c_y, c_z)$ in
+    this velocity space. Note that each of these components are independently
+    distributed, i.e.\ the distribution of $c_x$ is a function only of $c_x$, and so
+    on. Since all directions are equivalent, our choice of coordinate system being
+    arbitrary, we assign the same probability density function $f$ to each of these
+    components. Thus, the number of molecules whose velocities are in the cuboid
+    $c_x \to c_x + dc_x$, $c_y \to c_y + dc_y$, $c_z \to c_z + dc_z$ is described by
+    the joint probability distribution \[
+        dN_c = N\, f(c_x)f(c_y)f(c_z)\:dc_x\:dc_y\:dc_z = N F(c)\:d\gamma.
+    \] The last step follows since the distribution must be independent of our
+    choice of coordinates, hence depend only on the speed $c$. For fixed $c$, we
+    have fixed $c^2 = c_x^2 + c_y^2 + c_z^2$ and fixed $F(c) = f(c_x)f(c_y)f(c_z)$.
+    Now, the equilibrium distributions are such that entropy is maximized, which
+    entails maximising the logarithm of $F(c)$.  In other words, we must maximise
+    $g(\vec{c}) = \ln{F(c)}$ given the constraint $h(\ve{c}) = c^2 - c_x^2 - c_y^2 -
+    c_z^2 = 0$. Using the method of Lagrange multipliers, we set \[
+        \grad{g} = \lambda \grad{h},
+    \] which gives the three equations \[
+        \frac{f'(c_i)}{f(c_i)} + \lambda c_i = 0.
+    \] These give the exponential distributions of the form \[
+        f(c_i) = a e^{-c_i^2 / \alpha^2}.
+    \] Thus, the joint distribution is given by the product \[
+        F(c) = a^3e^{-(c_x^2 + c_y^2 + c_z^2) /\alpha^2} = a^3e^{-c^2 / \alpha^2}.
+    \] 
 
 
 \end{document}
