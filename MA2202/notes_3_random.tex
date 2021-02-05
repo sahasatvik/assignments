@@ -19,7 +19,7 @@
 \fancyhf{}
 \renewcommand\headrulewidth{0.4pt}
 \fancyhead[L]{\scshape MA2201: Probability I}
-\fancyhead[R]{\scshape Introduction to probability}
+\fancyhead[R]{\scshape Random variables}
 \rfoot{\footnotesize\it Updated on \today}
 \cfoot{\thepage}
 
@@ -236,12 +236,63 @@
     \end{example}
 
     \section*{Bernoulli distribution}
-    Consider an experiment with several identical trials. In each trial, there are
-    two possible outcomes; the probability of a success if given by $p$ and the
-    probability of a failure is $q = 1 - p$. We could let $X_i$ be a random variable
-    denoting the outcome of the $i$\textsuperscript{th} outcome, so we demand that
-    $\{X_i\}$ are independent and identically distributed.
+    Consider an experiment with one trial, which has two possible outcomes; the
+    probability of a success is given by $p$ and the probability of a failure is $q
+    = 1 - p$. The discrete random variable such that $X = 1$ on success and $X = 0$
+    on failure is said to follow the Bernoulli distribution.
 
+    \section*{Binomial distribution}
+    Consider an experiment with $n$ Bernoulli trials. We could let $X_i$ be a
+    random variable denoting the outcome of the $i$\textsuperscript{th} trial, so
+    we demand that $\{X_i\}$ are independent and identically distributed.
+    The distribution of the sum $X = X_1 + \dots + X_n$ follows the Binomial
+    distribution $B(n, p)$, where \[
+        P(X = k) = \binom{n}{k}p^kq^{n-k}.
+    \] 
+
+    \section*{Geometric distribution}
+    Consider an experiment where Bernoulli trials are repeated until success. The
+    random variable denoting the number of trials required is said to follow the
+    geometric distribution, where the probability that $n$ trials were required is
+    given by \[
+        P(X = n) = pq^{n - 1}.
+    \] 
+
+    \section*{Pascal distribution}
+    Consider an experiment where Bernoulli trials are repeated until $k$ successes.
+    The random variable denoting the number of trials required follows the Pascal,
+    or negative binomial distribution. The probability that $n \geq k$ trials were
+    required is given by \[
+        P(X = n) = \binom{n - 1}{k - 1}p^k q^{n - k}.
+    \] Note that we choose $k - 1$ successes from $n - 1$ trials, since the last
+    trial is by definition a success.
+
+    \section*{Hypergeometric distribution}
+    Consider an experiment where we choose $n$ balls randomly from a population of
+    $N$ distinct balls, of which $m$ are red. The random variable denoting the
+    number of red balls follows the hypergeometric distribution.  The probability of
+    obtaining $k \leq m$ red balls is given by \[
+        P(X = k) = \frac{\binom{m}{k}\binom{N - m}{n - k}}{\binom{N}{n}}.
+    \] 
+
+    \section*{Poisson distribution}
+    The probability mass function of the Poisson distribution is given by \[
+        P(X = k) = \frac{\lambda^k}{k!}e^{-\lambda},
+    \] where $k \in \N$. This is generally used to model the number of times an
+    event occurs in a given interval. This is a limiting form of the binomial
+    distribution.
+
+    \section*{Exponential distribution}
+    The probability density function of the exponential distribution is given by \[
+        f_X(x) = \lambda e^{-\lambda x}, 
+    \] where $x \geq 0$ and $0$ elsewhere.
+    This is generally used to model the waiting time between successive events.
+
+    \section*{Normal distribution}
+    The probability density function of the normal distribution is given by \[
+        f_X(x) = \frac{1}{\sigma\sqrt{2\pi}}e^{-(x - \mu)^2/2\sigma^2}.
+    \] 
+    
 
 \end{document}
 % vim: set tabstop=4 shiftwidth=4 softtabstop=4:
