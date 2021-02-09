@@ -133,9 +133,79 @@
         If the derivative of $f$ exists at every point in $[a, b]$, we say that $f$
         is differentiable on $[a, b]$.
     \end{definition}
+    \begin{example}
+        Consider the map $x \mapsto x^n$, where $n \in \N$. Using the binomial
+        theorem, we can write \[
+            (x + h)^n = x^n + nx^{n - 1}h + \dots + h^n,
+        \] which means that \[
+            \ddx{}x^n = \lim_{h \to 0} \frac{1}{h}\left[(x + h)^n - x^n\right] =
+            \lim_{h \to 0}\left[ nx^{n - 1} + \binom{n}{2}x^{n - 2}h + \dots + h^{n
+            - 1}\right] = nx^{n - 1}.
+        \] 
+    \end{example}
+    Note that the process of differentiation we described can be generalised to
+    multivariable functions. The idea is to locally approximate a function with an
+    affine function. \\
+
+    \begin{theorem}
+        If $f\colon (a, b) \to \R$ is differentiable on $(a, b)$, then it is also
+        continuous on $(a, b)$.
+    \end{theorem}
     
-    Note that the process we described can be generalised to multivariable
-    functions.
+    \begin{theorem}
+        Let $f\colon I\to \R$ be a continuous function. Then, \begin{enumerate}
+            \itemsep0
+            \item $f$ maps compact sets to compact sets.
+            \item $f$ maps connected sets to connected sets.
+        \end{enumerate}
+    \end{theorem}
+    \begin{corollary}
+        A continuous function $f\colon I \to \R$ maps intervals to intervals.
+    \end{corollary}
+    \begin{corollary}
+        A continuous function $f\colon [a, b] \to \R$ attains its minimum and
+        maximum on $[a, b]$.
+    \end{corollary}
+
+    \begin{definition}
+        Given $f \colon (a, b) \to \R$, a point $c \in (a, b)$ is said to be a point
+        of local maximum if there exists a neighbourhood $I_c$ of $c$ such that \[
+            f(c) > f(x),
+        \] for all $x \in I_c\setminus\{c\}$.
+        There is an analogous definition for a local minimum.
+    \end{definition}
+    \begin{theorem}
+        If $f\colon (a, b) \to \R$ is differentiable and $c \in (a, b)$ is a point
+        of local minimum or maximum, then $f'(c) = 0$.
+        \begin{remark}
+            The converse is not true. Note that the derivative of $x \mapsto x^3$
+            vanishes at $x = 0$, but that is not a local minimum or maximum.
+        \end{remark}
+    \end{theorem}
+    \begin{proof}
+        Let $c$ be a local minimum or maximum of $f$, but suppose that $f'(c) \neq 0$.
+        Define the function \[
+            g\colon (a, b) \to \R, \qquad g(x) = \begin{cases}
+                (f(x) - f(c))/(x - c), &\text{ if } x \neq c \\                
+                f'(c), &\text{ if } x = c
+            \end{cases}
+        \] We note that $g$ is continuous. Also, $f'(c) = g(c) \neq 0$.
+        If $g(c) > 0$, there exists a neighbourhood $I_\delta = (c - \delta, c +
+        \delta)$ such that for all $x \in I_\delta$, $g(x) > 0$, from the continuity
+        of $g$. This means that on $I_c$, \[
+            \frac{f(x) - f(c)}{x - c} > 0,
+        \] which gives $f(x) > f(c)$ on $(c, c + \delta)$ and $f(x) < f(c)$ on $(c -
+        \delta, c)$. This means that $c$ cannot be a local minimum, nor a local
+        maximum. There is an analogous case assuming $g(c) < 0$, which leads to the
+        same contradiction. Thus, we must have $f'(c) = g(c) = 0$.
+    \end{proof}
+
+    \begin{theorem}
+        If $f\colon (a, b)\to \R$ is twice differentiable, and $c \in (a, b)$ is
+        such that $f'(c) = 0$ and $f''(c) < 0$, then $c$ is a point of local
+        maximum. If $f'(c) = 0$ and $f''(c) > 0$, then $c$ is a point of local
+        minimum.
+    \end{theorem}
     
 \end{document}
 % vim: set tabstop=4 shiftwidth=4 softtabstop=4:
