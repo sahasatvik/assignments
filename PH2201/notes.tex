@@ -567,20 +567,47 @@
             E_2 \int \psi_1^*\psi_2\:dx = E_1 \int \psi_1^*\psi_2\:dx.
         \] Since $E_1 \neq E_2$, the inner product must be zero.
     \end{proof}
+    \begin{remark}
+        If $\{\psi_i\}$ are degenerate, note that all linear combination
+        also form degenerate eigenstates. \[
+            \hat{H}\sum c_i\psi_i = E\sum c_i\psi_i.
+        \] Thus, although $\{\psi_i\}$ may not be orthonormal, we can apply the
+        Gram-Schmidt process to obtain an orthonormal basis of that eigenspace.
+    \end{remark}
 
     \begin{theorem}
         If $[\hat{A}, \hat{B}] = 0$, then $\hat{A}$ and $\hat{B}$ share
         non-degenerate eigenstates.
     \end{theorem}
     \begin{proof}
-        Let $\psi$ be an eigenstate of $\hat{A}$, so $\hat{A}\psi = \lambda
-        \psi$. Since $\hat{A}$ and $\hat{B}$ commute, \[
+        Let $\psi$ be a non-degenerate eigenstate of $\hat{A}$, so $\hat{A}\psi =
+        \lambda \psi$. Since $\hat{A}$ and $\hat{B}$ commute, \[
             \lambda \hat{B}\psi = \hat{B}\hat{A}\psi = \hat{A}\hat{B}\psi,
         \] so $\hat{B}\psi$ is also an eigenstate of $\hat{A}$ with eigenvalue
         $\lambda$. From the non-degeneracy of $\psi$, we must have $\hat{B}\psi =
-        \mu\psi$ for some non-zero scalar $\mU$.
+        \mu\psi$ for some non-zero scalar $\mu$.
     \end{proof}
     
+    \begin{theorem}
+        The eigenstates of the time independent Schr\"odinger equation form a
+        complete set of states, i.e.\ they form a basis of the set of all
+        solutions. \[
+            \Psi(x, t) = \sum c_n \psi_n(x) e^{-i E_n t/\hbar}.
+        \] In order to obtain the coefficients $c_n$, we simply take inner products
+        \[
+            \int \Psi_n^*\Psi\:dx = c_n.
+        \] 
+    \end{theorem}
+    \begin{proof}
+        The first statement can be regarded as a postulate. The second follows from
+        the orthonormality of the eigenstates, \[
+            \int \psi_n^*\psi_m\:dx = \delta_{nm}.
+        \] This means that with $\Psi_n = \psi_n e^{-iE_n t / \hbar}$, we have \[
+            \int \psi_n^* \left[\sum c_m\psi_m e^{-i E_m t /\hbar}\right]e^{i E_n t
+            / \hbar}\:dx = 
+            \sum c_me^{-i (E_m - E_n) t / \hbar}\int \psi_n^*\psi_m\:dx = c_n.
+        \] 
+    \end{proof}
 
-    \end{document}
+\end{document}
 % vim: set tabstop=4 shiftwidth=4 softtabstop=4:
