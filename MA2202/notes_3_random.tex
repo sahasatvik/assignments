@@ -239,7 +239,10 @@
     Consider an experiment with one trial, which has two possible outcomes; the
     probability of a success is given by $p$ and the probability of a failure is $q
     = 1 - p$. The discrete random variable such that $X = 1$ on success and $X = 0$
-    on failure is said to follow the Bernoulli distribution.
+    on failure is said to follow the Bernoulli distribution. Note that the
+    expectation value is simply \[
+        \E{X} = p.
+    \] 
 
     \section*{Binomial distribution}
     Consider an experiment with $n$ Bernoulli trials. We could let $X_i$ be a
@@ -248,6 +251,10 @@
     The distribution of the sum $X = X_1 + \dots + X_n$ follows the Binomial
     distribution $B(n, p)$, where \[
         P(X = k) = \binom{n}{k}p^kq^{n-k}.
+    \] The expectation value is given by \[
+        \E{X} = \sum_{k = 0}^n k\binom{n}{k}p^kq^{n - k} = np.
+    \] This is more easily seen from the linearity of expectation, \[
+        \E{X} = \sum_{i = 1}^n \E{X_i} = np.
     \] 
 
     \section*{Geometric distribution}
@@ -267,6 +274,18 @@
     \] Note that we choose $k - 1$ successes from $n - 1$ trials, since the last
     trial is by definition a success.
 
+    \begin{remark}
+        This can be derived by noting that if $X_i \sim
+        \operatorname{Geometric}(p)$, then the random variable $X \sim
+        \operatorname{Pascal}(k, p)$ is simply \[
+            X = X_1 + X_2 + \dots + X_k,
+        \] so for success in $n$ trials, we find $P(X = n)$. This means that we need
+        to sum the probabilities for all possible $X_i = n_i$, where $n = \sum n_i$.
+        There are $\binom{n - 1}{k - 1}$ such solutions, and each of these solutions
+        must occur with probability $p^k q^{n - k}$, denoting $k$ successes and the
+        remaining $n - k$ failures.
+    \end{remark}
+
     \section*{Hypergeometric distribution}
     Consider an experiment where we choose $n$ balls randomly from a population of
     $N$ distinct balls, of which $m$ are red. The random variable denoting the
@@ -280,7 +299,10 @@
         P(X = k) = \frac{\lambda^k}{k!}e^{-\lambda},
     \] where $k \in \N$. This is generally used to model the number of times an
     event occurs in a given interval. This is a limiting form of the binomial
-    distribution.
+    distribution. Note that the expectation value is given by \[
+        \E{X} = \sum_{k = 0}^\infty k\cdot \frac{\lambda^k}{k!}e^{-\lambda} =
+        \lambda.
+    \] In addition, the variance is also given by $\sigma^2 = \lambda$.
 
     \section*{Exponential distribution}
     The probability density function of the exponential distribution is given by \[
