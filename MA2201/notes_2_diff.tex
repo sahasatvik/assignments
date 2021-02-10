@@ -206,6 +206,41 @@
         maximum. If $f'(c) = 0$ and $f''(c) > 0$, then $c$ is a point of local
         minimum.
     \end{theorem}
+
+    \begin{theorem}[Rolle's Theorem]
+        Let $f\colon [a, b] \to \R$ be continuous, and differentiable on $(a, b)$,
+        with $f(a) = f(b)$. Then, there exists $c \in (a, b)$ such that $f'(c) = 0$.
+    \end{theorem}
+    \begin{proof}
+        % Without loss of generality, set $f(a) = f(b) = 0$. This can be done because
+        % a function defined as $f(x) - f(a)$ satisfies all the requirements.
+        Set $f(a) = f(b) = \kappa$.
+        From the continuity of $f$, note that the image of the closed interval $[a,
+        b]$ is another closed interval $[\alpha, \beta]$. This means that $\alpha
+        \leq \kappa \leq \beta$. Note that if $\alpha = \beta = \kappa$, then the
+        function $f$ is identically equal to the constant $\kappa$, hence $f'(x) =
+        0$ everywhere on $[a, b]$. By the continuity of $f$, it must attain its
+        maximum and minimum on $[a, b]$. If $\beta > \kappa$, then the maximum is al
+        least $\beta$ and is hence not attained at the endpoints, which means that
+        the point of maximum lies in $(a, b)$. If $\alpha < \kappa$, then the same
+        argument shows that $f$ attains a minimum in $(a, b)$. Thus, in either case,
+        we have found $c \in (a, b)$ which is either a maximum or minimum of $f$,
+        i.e.\ $f'(c) = 0$.
+    \end{proof}
+
+    \begin{theorem}[Rolle's Theorem]
+        Let $f\colon [a, b] \to \R$ be continuous, and differentiable on $(a, b)$.
+        Then, there exists $c \in (a, b)$ such that \[
+            f(b) - f(a) = f'(c)\, (b - a).
+        \] 
+    \end{theorem}
+    \begin{proof}
+        Apply Rolle's Theorem on the function defined as \[
+            g\colon [a, b] \to \R, \qquad
+            g(x) = f(x) - f(a) - \frac{f(b) - f(a)}{b - a}\cdot(x - a).
+        \] Note that $g$ is continuous on $[a, b]$, differentiable on $(a, b)$, and
+        $g(a) = g(b) = 0$.
+    \end{proof}
     
 \end{document}
 % vim: set tabstop=4 shiftwidth=4 softtabstop=4:
