@@ -467,8 +467,9 @@
     components. Thus, the number of molecules whose velocities are in the cuboid
     $c_x \to c_x + dc_x$, $c_y \to c_y + dc_y$, $c_z \to c_z + dc_z$ is described by
     the joint probability distribution \[
-        dN_c = N\, f(c_x)f(c_y)f(c_z)\:dc_x\:dc_y\:dc_z = N F(c)\:d\gamma.
-    \] The last step follows since the distribution must be independent of our
+        dN_c = N\, f(c_x)f(c_y)f(c_z)\:dc_x\:dc_y\:dc_z = N F(c)\:d\gamma,
+    \] where $d\gamma = c^2\sin\theta\:dc\:d\theta\:d\phi$.
+    The last step follows since the distribution must be independent of our
     choice of coordinates, hence depend only on the speed $c$. For fixed $c$, we
     have fixed $c^2 = c_x^2 + c_y^2 + c_z^2$ and fixed $F(c) = f(c_x)f(c_y)f(c_z)$.
     Now, the equilibrium distributions are such that entropy is maximized, which
@@ -478,12 +479,18 @@
         \grad{g} = \lambda \grad{h},
     \] which gives the three equations \[
         \frac{f'(c_i)}{f(c_i)} + \lambda c_i = 0.
-    \] These give the exponential distributions of the form \[
+    \] These gives us exponential distributions of the form \[
         f(c_i) = a e^{-c_i^2 / \alpha^2}.
     \] Thus, the joint distribution is given by the product \[
         F(c) = a^3e^{-(c_x^2 + c_y^2 + c_z^2) /\alpha^2} = a^3e^{-c^2 / \alpha^2}.
-    \] 
-
+    \] We must now normalise the distributions. We demand \[
+        \int_{-\infty}^{+\infty} f(t)\:dt = \int_{-\infty}^{+\infty} ae^{-t^2 /
+        \alpha^2}\:dt = \sqrt{\pi}a\alpha = 1.
+    \]
+    % and \[
+    %     \int_0^\infty F(t)\,4\pi t^2\:dt = \int_0^\infty a^3 e^{-t^2 / \alpha^2}\:dt =
+    %     \frac{1}{2}\sqrt{\pi}a^3\alpha = 1.
+    % \] 
 
 \end{document}
 % vim: set tabstop=4 shiftwidth=4 softtabstop=4:
