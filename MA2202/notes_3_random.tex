@@ -309,12 +309,46 @@
         f_X(x) = \lambda e^{-\lambda x}, 
     \] where $x \geq 0$ and $0$ elsewhere.
     This is generally used to model the waiting time between successive events.
+    Note that the expectation value is given by \[
+        \E{X} = \int_0^\infty \lambda x e^{-\lambda x}\:dx = \frac{1}{\lambda},
+    \] In addition, the variance is given by $\sigma^2 = 1 /\lambda^2$.
 
     \section*{Normal distribution}
     The probability density function of the normal distribution is given by \[
         f_X(x) = \frac{1}{\sigma\sqrt{2\pi}}e^{-(x - \mu)^2/2\sigma^2}.
     \] 
-    
+
+    \begin{definition}[Memorylessness]
+        The probability distribution of a non-negative discrete random variable $X$
+        is called memoryless if for all $m, n \in \Z_{\geq 0}$, \[
+            P(X > m + n\,|\, X > n) = P(X > m).
+        \] 
+        \begin{remark}
+            This can be written as \[
+                P(X > m + n) = P(X > m) \, P(X > n).
+            \] 
+        \end{remark}
+        \noindent Again, a continuous random variable $Y$ is called memoryless if
+        for all $s, t \geq 0$, \[
+            P(X > s + t\,|\, X > t) = P(X > s).
+        \] 
+    \end{definition}
+    \begin{example}
+        Suppose that $X\sim\operatorname{Geometric}(p)$. Then, \[
+            P(X > n) = \sum_{k = n + 1}^\infty pq^{k - 1} = q^n,
+        \] where $q = 1 - p$. Also, \[
+            P(X > m + n, X > n) = P(X > m + n) = q^{m + n},
+        \] which gives \[
+            P(X > m + n, X > n) = q^m\cdot q^n = P(X > m)\, P(X > n).
+        \] 
+    \end{example}
+    \begin{example}
+        Suppose that $Y\sim\operatorname{Exponential}(\lambda)$. Then, \[
+            P(Y > s) = \int_s^\infty \lambda e^{-\lambda t}\:dt = e^{-\lambda s}.
+        \] Thus, \[
+            P(Y > s + t) = P(Y > s)\, P(Y > t).
+        \] 
+    \end{example}
 
 \end{document}
 % vim: set tabstop=4 shiftwidth=4 softtabstop=4:
