@@ -609,5 +609,40 @@
         \] 
     \end{proof}
 
+
+    \section{Bound state problems}
+    Here, we wish to solve the Schr\"dinger equation in one dimension with a time
+    independent potential $V(x)$.
+
+    \subsection{Piecewise constant potentials}
+    If $V(x)$ is a constant over some interval, then we can write \[
+        -\frac{\hbar^2}{2m}\dd[2]{\psi}{x} + (V - E)\psi = 0.
+    \] Plugging in the Ansatz $\psi(x) = Ae^{kx}$, we obtain \[
+        k = \pm\sqrt{\frac{2m}{\hbar^2}(V - E)}.
+    \] Thus, our solution looks like \[
+        \psi(x) = Ae^{kx} + Be^{-kx}, \qquad 
+        \psi(x) = C\cos{\bar{k}x} + D\sin{\bar{k}x}
+    \] depending on whether $V > E$ or $V < E$.
+    We can stitch together these solutions over all such intervals by demanding the
+    continuity of $\psi$ and $d\psi /dx$.
+
+    \subsection{Infinite square well (particle in a box)}
+    Consider a potential of the form \[
+        V(x) = \begin{cases}
+            0, &\text{ if }0 < x < a \\
+            \infty &\text{ otherwise }
+        \end{cases}
+    \] Note that this forces $\psi(x) = 0$ outside the well where the potential is
+    infinite. Now, setting $k = \sqrt{2mE} / \hbar$, we have the solution inside the
+    well given by \[
+        \psi(x) = A\cos{kx} + B\sin{kx}.
+    \] We further demand $\psi(0) = \psi(a) = 0$, which forces $A = 0$ and $k = n\pi
+    /a$ for integral values of $n$. Thus, we have \[
+        \psi_n(x) = \sqrt{\frac{2}{a}}\sin{\frac{n\pi x}{a}}, \qquad
+        E_n = \frac{n^2\pi^2\hbar^2}{2ma^2}.
+    \] The factor of $\sqrt{2 / a}$ is required to normalize $\psi_n$.
+    
+    
+
 \end{document}
 % vim: set tabstop=4 shiftwidth=4 softtabstop=4:
