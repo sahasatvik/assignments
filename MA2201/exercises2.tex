@@ -1,0 +1,198 @@
+\documentclass[10pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+
+\title{Analysis II - Assignment II}
+\author{Satvik Saha}
+\date{}
+
+\geometry{a4paper, margin=1in}
+\setlength\parindent{0pt}
+\renewcommand{\labelenumi}{(\roman{enumi})}
+% \renewcommand\qedsymbol{$\blacksquare$}
+\def\C{\mathbb{C}}
+\def\R{\mathbb{R}}
+\def\Q{\mathbb{Q}}
+\def\Z{\mathbb{Z}}
+\def\N{\mathbb{N}}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}{Corollary}[theorem]
+
+\begin{document}
+    \par\textbf{IISER Kolkata} \hfill \textbf{Assignment II}
+    \vspace{3pt}
+    \hrule
+    \vspace{3pt}
+    \begin{center}
+            \LARGE{\textbf{MA 2201 : Analysis II}}
+    \end{center}
+    \vspace{3pt}
+    \hrule
+    \vspace{3pt}
+    Satvik Saha, \texttt{19MS154}\hfill\today
+    \vspace{20pt}
+
+    \begin{lemma}
+        The series $\sum_{n = 1}^\infty 1 /n^2$ converges to a real number between
+        $1$ and $2$.
+    \end{lemma}
+    \begin{proof}
+        Note that the partial sums of the given series are monotonically increasing,
+        since all terms are positive. Also,
+        \begin{align*}
+            S_n = \sum_{k = 1}^n \frac{1}{k^2} &= 1 + \sum_{k = 2}^n
+            \frac{1}{k^2} \\
+            &< 1 + \sum_{k = 2}^n \frac{1}{k(k - 1)} \\
+            &= 1 + \sum_{k = 2}^n \left[ \frac{1}{k - 1} - \frac{1}{k} \right] \\
+            &= 1 + 1 - \frac{1}{n} \\
+            & < 2.
+        \end{align*}
+        Thus, the sequence of partial sums of the given series is bounded above,
+        which means that it must converge by the monotone convergence theorem.
+    \end{proof}
+
+    \begin{lemma}
+        If a series $\sum_{n = 1}^\infty \alpha_n$ converges absolutely, then it 
+        also converges ordinarily.
+    \end{lemma}
+    \begin{proof}
+        Let $\epsilon > 0$. From the Cauchy criterion and the absolute convergence
+        of $\sum_{n = 1}^\infty \alpha_n$, we can choose $N \in \N$
+        such that for all $m, n \geq N$, \[
+            \left|\sum_{k = 1}^m |\alpha_k| - \sum_{k = 1}^n |\alpha_k|
+            \right| = \sum_{k = n + 1}^m |\alpha_k| < \epsilon.
+        \] Using the triangle inequality, we have \[
+            \left|\sum_{k = n + 1}^m \alpha_k \right| \leq \sum_{k = n + 1}^m
+            |\alpha_k| < \epsilon,
+        \] which proves that $\sum_{n = 1}^\infty \alpha_n$ converges by the Cauchy
+        criterion.
+    \end{proof}
+
+
+    \paragraph{Solution 1.} We have been given the functions \[
+        f_n \colon \R \setminus \{-1 /n^2\} \to \R, f_n(x) = \frac{1}{1 +
+        n^2x},
+    \] and we wish to examine the convergence of the series of functions $\sum_{n =
+    1}^\infty f_n$. \\
+
+    \textbf{Pointwise and absolute convergence : }
+    Note that when $x = 0$, the pointwise sum is $\sum_{n = 1}^\infty 1$, which
+    clearly diverges. When $x > 0$, note that $f_n(x) > 0$ for all $n \in \N$ so the
+    sequence of partial sums is monotonically increasing. Also, the series is
+    bounded above since \[
+        \sum_{k = 1}^n f_k(x) = \sum_{k = 1}^n \frac{1}{1 + k^2x} < \sum_{k = 1}^n
+        \frac{1}{k^2x} \leq \frac{2}{x},
+    \] so $\sum_{n = 1}^\infty f_n(x)$ converges by the monotone convergence
+    theorem. Note that this convergence is absolute, since all terms are positive
+    in any case. \\
+
+    Similarly, when $x < -1$, $1 + n^2x < 0$ which means that all $f_n(x)$ are
+    negative, so the sequence of partial sums is monotonically decreasing. Now, the
+    series is bounded below since \[
+        \sum_{k = 1}^n f_k(x) = \sum_{k = 1}^n \frac{1}{1 + k^2x} \geq \sum_{k = 1}^n
+        \frac{1}{k^2 + k^2x} \geq \frac{2}{1 + x},
+    \] so $\sum_{n = 1}^\infty f_n(x)$ converges by the monotone convergence
+    theorem. Note that this convergence is absolute, since all terms are negative in
+    any case, hence the absolute sum is simply the negative of the ordinary sum. \\
+
+    Note that the sum $\sum_{n = 1}^\infty f_n(x)$ is not defined when $x \in S =
+    \{-1, -1 /2^2, -1 /3^2, \dots\}$. Suppose that $-1 < x < 0$ and $x \notin S$.
+    Using the Archimedean property, choose $N \in \N$ such that $N^2 |x| > 2$, which
+    means that $1 + n^2x < n^2 x /2 < 0$ for all $n \geq N$. Now for all $n \geq N$,
+    we have the tail of the series \[
+        \sum_{k = N}^n f_k(x) = \sum_{k = N}^n \frac{1}{1 + k^2x} \geq \sum_{k =
+        N}^n \frac{1}{k^2x /2} \geq \frac{4}{x},
+    \] so the tail $\sum_{n = N}^\infty f_n(x)$ converges by the monotone
+    convergence theorem. Thus, the complete series $\sum_{n = 1}^\infty f_n(x)$ must
+    also converge, since the sum of the first $N - 1$ terms is just a finite number.
+    Note that we have shown that the tail of the series from the
+    $N$\textsuperscript{th} term onwards converges absolutely, since all those terms
+    are negative, hence the absolute sum is the negative of the ordinary sum. The
+    first $N - 1$ terms are positive, so the complete absolute series including them
+    is also convergent. \\
+
+    Thus, setting $S_0 = S \cup \{0\} = \{0, -1, -1 /2^2, -1 /3^2, \dots\}$, we have
+    shown that $\sum_{n = 1}^\infty f_n$ is convergent pointwise and absolutely on
+    $\R \setminus S_0$. \\
+
+    \textbf{Uniform convergence : } 
+    We show that $\sum_{n = 1}^\infty$ converges uniformly on any subset of $\R
+    \setminus S_0$ which does not have $0$ as a limit point, i.e.\ the series
+    converges uniformly on $(-\infty, a] \cup [b, \infty) \setminus S_0$, where $a <
+    -1$, $b > 0$. \\
+
+    First, let $x \in [b, \infty)$ with $b > 0$. Then, \[
+        |f_n(x)| = \frac{1}{1 + n^2x} < \frac{1}{n^2x} \leq \frac{1}{n^2b},
+    \] hence $\sum_{n = 1}^\infty f_n$ converges uniformly on $[b, \infty)$ by the
+    Weierstrass M-test. \\
+
+    Again, if $x \in (\infty, a]$ with $a < 0$, for all $n \geq N$ such that $N^2|a|
+    > 2$, we have $1 + n^2x < n^2 x/2 \leq n^2a / 2$, so \[
+        |f_n(x)| = \frac{1}{|1 + n^2x|} \leq \frac{2}{n^2|a|}
+    \] hence the series converges uniformly by the Weierstrass M-test again. \\
+    
+    \textbf{Disproof of uniform convergence : } Suppose that the series
+    converges uniformly on $x \in (0, \infty)$. This means that for $\epsilon = 1
+    /3$, we can choose $N \in \N$ such that for all $n \geq N$, we have \[
+        \left|\sum_{n = 1}^{N + 1} f_{n}(x) - \sum_{n = 1}^{N}f_n(x) \right| = |f_{N
+        + 1}(x)| < \epsilon = \frac{1}{3}
+    \] for all $x \in (0, \infty)$ by the Cauchy criterion. 
+    On the other hand, \[
+        |f_{N + 1}(1 / (N + 1)^2)| = \frac{1}{2} > \frac{1}{3},
+    \] which is a contradiction. \\
+
+    More broadly, suppose that $\sum f_n$ converges uniformly on any set $J_0$ which
+    has $0$ as a limit point. Note that $J_0$ cannot contain $0$. This means that we
+    can choose $x_0 \in J_0$ such that $|x_0| < 1 /(N + 1)^2$. Now, \[
+        |f_{N + 1}(x_0)| = \frac{1}{|1 + (N + 1)^2x_0|} \geq \frac{1}{1 + (N +
+        1)^2|x_0|} >
+        \frac{1}{2} > \frac{1}{3},
+    \] which is again a contradiction. 
+
+
+    \paragraph{Solution 2.} We have been given functions $f_n$ such that for some $M
+    > 0$, \[
+        |f_n(x)| \leq M|x|^n
+    \] for all $n \in \N$. We wish to examine the convergence of the series $\sum_{n
+    = 1}^\infty f_n$. \\
+
+    The series need not converge at all when $|x| \geq 1$. We supply the example
+    $f_n(x) = x^n$, $M = 1$. Note that when $|x| \geq 1$, the series $\sum_{n =
+    1}^\infty x^n$ does not converge because it fails the Cauchy criterion
+    ($n$\textsuperscript{th} term test). We have $|x|^n \to \infty$ when $|x| > 1$
+    and $|x|^n \to 1$ when $|x| = 1$, whereas we demand $f_n(x) \to 0$ for the
+    series to converge. Thus, we need only look at the interval $(-1, +1)$. \\
+
+    Note that this same counterexample shows that $\sum_{n = 1}^\infty f_n$ need not
+    converge uniformly on $(-1, +1)$. If $\sum_{n = 1}^\infty x^n$
+    converged uniformly on $(-1, +1)$, then for $\epsilon = 1 /2$, we could choose
+    $N \in \N$ such that for $n = N$, $m = N + 1$, \[
+        \left|\sum_{n = 1}^{N + 1} f_n(x) - \sum_{n = 1}^N f_n(x)\right| = 
+        |f_{N + 1}(x)| = |x|^{N + 1} < \epsilon = \frac{1}{2}
+    \] by the Cauchy criterion. On the other hand, note that $x_0 = 
+    (1 / 2)^{1 / (N + 1)} \in (-1, +1)$, so we demand \[
+        |f_{N + 1}(x_0)| = \frac{1}{2} < \frac{1}{2},
+    \] which is absurd. \\
+
+    The series does converge absolutely, hence pointwise on $(-1, +1)$. For fixed $x
+    \in (-1, +1)$, the geometric series \[
+        \sum_{n = 1}^\infty M|x|^n = \frac{M|x|}{1 - |x|}
+    \] converges. Since $0 \leq |f_n(x)| \leq M|x|^n$, the series $\sum_{n =
+    1}^\infty |f_n(x)|$ must converge by the comparison test. This means that
+    $\sum_{n = 1}^\infty f_n$ converges absolutely on $(-1, +1)$, which in turn
+    means that it converges ordinarily (pointwise) on the same. \\
+
+    The series converges pointwise, absolutely, and uniformly on the compact
+    interval $[-a, +a]$ where $0 < a < 1$. This is because for $|x| < a < 1$, \[
+        |f_n(x)| \leq M|x|^n \leq Ma^n,
+    \] so setting $M_n = Ma^n$, the series \[   
+        \sum_{n = 1}^\infty  M_n = \sum_{n = 1}^\infty Ma^n = \frac{Ma}{1 - a}
+    \] is convergent, which gives the uniform convergence of both $\sum_{n =
+    1}^\infty f_n$ and $\sum_{n = 1}^\infty |f_n|$ by the Weierstrass M-test. This
+    of course implies the pointwise convergence of the same. \\
+
+\end{document}
