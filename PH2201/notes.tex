@@ -6,6 +6,7 @@
 \usepackage[%
     hidealllines=true,%
     innerbottommargin=15,%
+    nobreak=true,%
 ]{mdframed}
 \usepackage{xcolor}
 \usepackage{graphicx}
@@ -175,10 +176,10 @@
     \[
         n(\nu)\:d\nu = \frac{8\pi}{c^3}\nu^2\:d\nu.
     \] This leads to the Rayleigh-Jean Law,
-    \begin{boxedeq}
+    \begin{boxedeq*}
         \rho(\nu)\:d\nu = \E{E} n(\nu) \:d\nu 
             = \frac{8\pi k_B T}{c^3}\nu^2\:d\nu.
-    \end{boxedeq}\\~\\
+    \end{boxedeq*}\\~\\
 
     Planck looked at the probability distribution for the energy, \[
         P(E) = \frac{1}{k_B T}e^{-E /k_B T}.
@@ -230,9 +231,9 @@
     the same value. However, different frequencies $\nu$ produces different stopping
     potentials $V_0$; the greater the frequency, the greater the magnitude of the
     stopping potential. This turns out to have a linear relationship, with
-    \begin{boxedeq}
+    \begin{boxedeq*}
         E_{max} \,=\, eV_0 \,=\, h(\nu - \nu_0) \,=\, h\nu - \phi.
-    \end{boxedeq}
+    \end{boxedeq*}
     The slope $h$ is universal for all metals, while $\phi = h\nu_0$ varies
     between different metals.
     This shows that below a certain frequency $\nu_0$, we obtain no photocurrent,
@@ -255,9 +256,9 @@
     \subsection{Matter waves}
     Louis de Broglie further hypothesised that matter also has a wave nature, with
     an associated wavelength of 
-    \begin{boxedeq}
+    \begin{boxedeq*}
         \lambda_{matter} \,=\, \frac{h}{p}.
-    \end{boxedeq}
+    \end{boxedeq*}
     This has been demonstrated by Davisson and Germer, where a stream of electrons
     exhibits diffraction.
     
@@ -360,9 +361,9 @@
     frequencies. On the other hand, radiation emitted by an atom is always observed
     at discrete frequencies. For example, the wavelengths emitted by hydrogen are 
     given by the Rydberg constant.
-    \begin{boxedeq}
+    \begin{boxedeq*}
         \frac{1}{\lambda} = R\left(\frac{1}{m^2} - \frac{1}{n^2}\right).
-    \end{boxedeq}
+    \end{boxedeq*}
     Bohr's idea was that the angular momenta of the electrons are quantized. We set
     \[
         L = pr = mvr = n\hbar.
@@ -417,9 +418,11 @@
     denoted as $E$.  Note that we have shown $\Psi(\ve{r}, t) = \psi(\ve{r}) e^{-iEt
     /\hbar}$, so \[
         |\Psi|^2 = \Psi^*\Psi = \psi^*\psi = |\psi^2|,
-    \] The spatial part must now satisfy \[
+    \] The spatial part must now satisfy 
+    \begin{boxedeq*}
         -\frac{\hbar^2}{2m} \lapl{\psi} + V\psi = E\psi.
-    \] which is called the time independent Schr\"odinger equation.
+    \end{boxedeq*}
+    which is called the time independent Schr\"odinger equation.
     The Hamiltonian operator is defined as \[
         \hat{H} = -\frac{\hbar^2}{2m}\lapl{} + V,
     \] so the spatial part of the equation says $\hat{H}\psi = E\psi$.
@@ -523,10 +526,9 @@
         \]
     \end{proof}
 
-    Another uncertainty relation is the energy-time uncertainty, 
-    \begin{boxedeq*}
+    Another uncertainty relation is the energy-time uncertainty, \[
         \sigma_E \sigma_t \geq \frac{\hbar}{2}.
-    \end{boxedeq*}
+    \]
 
     \subsection{Eigenstates and eigenvalues}
     Recall that the time independent Schr\"odinger equation is given by $\hat{H}\psi
@@ -568,8 +570,8 @@
         \] Since $E_1 \neq E_2$, the inner product must be zero.
     \end{proof}
     \begin{remark}
-        If $\{\psi_i\}$ are degenerate, note that all linear combination
-        also form degenerate eigenstates. \[
+        If $\{\psi_i\}$ are degenerate, note that all linear combinations also form
+        degenerate eigenstates. \[
             \hat{H}\sum c_i\psi_i = E\sum c_i\psi_i.
         \] Thus, although $\{\psi_i\}$ may not be orthonormal, we can apply the
         Gram-Schmidt process to obtain an orthonormal basis of that eigenspace.
@@ -606,6 +608,7 @@
             \int \psi_n^* \left[\sum c_m\psi_m e^{-i E_m t /\hbar}\right]e^{i E_n t
             / \hbar}\:dx = 
             \sum c_me^{-i (E_m - E_n) t / \hbar}\int \psi_n^*\psi_m\:dx = c_n.
+            \qedhere
         \] 
     \end{proof}
 
@@ -637,11 +640,81 @@
     well given by \[
         \psi(x) = A\cos{kx} + B\sin{kx}.
     \] We further demand $\psi(0) = \psi(a) = 0$, which forces $A = 0$ and $k = n\pi
-    /a$ for integral values of $n$. Thus, we have \[
+    /a$ for integral values of $n$. Thus, we have 
+    \begin{boxedeq*}
         \psi_n(x) = \sqrt{\frac{2}{a}}\sin{\frac{n\pi x}{a}}, \qquad
         E_n = \frac{n^2\pi^2\hbar^2}{2ma^2}.
-    \] The factor of $\sqrt{2 / a}$ is required to normalize $\psi_n$.
-    
+    \end{boxedeq*}
+    The factor of $\sqrt{2 / a}$ is required to normalize $\psi_n$.
+
+    \subsection{Quantum harmonic oscillator}
+    For any smooth potential $V(x)$ with a local minima at $x_0$, we can expand
+    this as a Taylor series to write \[
+        V(x) = V(x_0) + V'(x_0)(x - x_0) + \frac{1}{2}V''(x_0)(x - x_0)^2 + O(x^3).
+    \] Noting that $V'(x_0) = 0$ and setting $V''(x_0) = m\omega^2$, we have \[
+        V(x) \approx \frac{1}{2}m\omega^2x^2,
+    \] which is the potential of a simple harmonic oscillator. This means that if 
+    we want to solve the Schr\"odinger equation about a local minimum $x_0$ of the
+    potential $V(x)$, we can solve
+    \begin{boxedeq*}
+        -\frac{\hbar^2}{2m}\dd[2]{\psi}{x} + \frac{1}{2}m\omega^2x^2\psi = E\psi.
+    \end{boxedeq*}
+
+    \subsubsection{Algebraic method}
+    Rewrite the equation as follows. \[
+        \frac{1}{2m}(p^2 + (m\omega x)^2) \psi = E\psi.
+    \] This can be `factorized' in the following way. \[
+        p^2 + (m\omega x)^2 = (ip + m\omega x)(-ip + m\omega x) + im[x, p].
+    \] Note that $[x, p] = i\hbar$.
+    We thus define the raising and lowering operators $a_+$ and $a_-$ as follows. \[
+        a_\pm = \frac{1}{\sqrt{2m\omega\hbar}}(\mp ip + m\omega x).
+    \] Their commutator can be calculated as \[
+        [a_+, a_-] = \frac{1}{2m\omega\hbar}((-ip + m\omega x)(ip + m\omega x) -
+        (ip + m\omega x)(-ip + m\omega x)) = -1.
+    \] Note that $a_+$ and $a_-$ are not Hermitian, instead $a_+^* = a_-$.
+    Now, \[
+        a_- a_+ = \frac{1}{\hbar\omega}\hat{H} + \frac{1}{2}, \qquad
+        \hat{H} = \hbar\omega\left(a_-a_+ - \frac{1}{2}\right) =
+        \hbar\omega\left(a_+a_- + \frac{1}{2}\right).
+    \]
+
+    \begin{theorem}
+        If $\psi$ is an eigenstate of the Hamiltonian, with eigenvalue $E$, then
+        $a_+\psi$ is also an eigenstate with eigenvalue $E + \hbar\omega$, and $a_-\psi$
+        is an eigenstate with eigenvalue $E - \hbar\omega$.
+    \end{theorem}
+    \begin{proof}
+        If $\hat{H}\psi = E\psi$, then
+        \begin{align*}
+            \hat{H}(a_+\psi) &= \hbar\omega\left(a_+a_- + \frac{1}{2}\right)a_+\psi \\
+            &= \hbar\omega \left(a_+a_-a_+ + \frac{1}{2}a_+\right)\psi \\
+            &= \hbar\omega a_+ \left(a_-a_+ + \frac{1}{2}\right) \psi \\
+            &= \hbar\omega a_+ \left(a_-a_+ - \frac{1}{2} + 1\right) \psi \\
+            &= a_+ (\hat{H} + \hbar \omega) \psi \\
+            &= (E + \hbar\omega)(a_+\psi).
+        \end{align*}
+        An analogous process shows that $\hat{H}(a_-\psi) = (E -
+        \hbar\omega)(a_-\psi)$.
+    \end{proof}
+
+    For the existence of a ground state, we demand $a_-\psi_0 = 0$. This is because
+    we want $\psi_0$ to be the state with the lowest possible energy, with no other
+    states below it. Thus, the lowering operator must cause $\psi_0$ to vanish. It
+    can be shown that \[
+        \psi_0(x) = A_0e^{-m\omega x^2 / 2\hbar}.
+    \] Plugging this into the Schr\"odinger equation, we see that this state has the
+    energy eigenvalue \[
+        E_0 = \frac{1}{2}\hbar\omega,
+    \] which must be the lowest possible energy for the system. Thus, we get a set
+    of solutions by repeatedly applying the raising operator.
+    \begin{boxedeq*}
+        \psi_n(x) = A_n(a_+)^n e^{-m\omega x^2 / 2\hbar}, \qquad
+        E_n = \left(n + \frac{1}{2}\right) \hbar\omega.
+    \end{boxedeq*}
+    It can be shown that \[
+        A_n = \left(\frac{m\omega}{\pi\hbar}\right)^{1 / 4} 
+        \frac{(-i)^n}{\sqrt{n!(\hbar\omega)^n}}.
+    \] 
     
 
 \end{document}
