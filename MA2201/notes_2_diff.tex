@@ -228,7 +228,7 @@
         i.e.\ $f'(c) = 0$.
     \end{proof}
 
-    \begin{theorem}[Rolle's Theorem]
+    \begin{theorem}[Mean Value Theorem]
         Let $f\colon [a, b] \to \R$ be continuous, and differentiable on $(a, b)$.
         Then, there exists $c \in (a, b)$ such that \[
             f(b) - f(a) = f'(c)\, (b - a).
@@ -241,6 +241,65 @@
         \] Note that $g$ is continuous on $[a, b]$, differentiable on $(a, b)$, and
         $g(a) = g(b) = 0$.
     \end{proof}
+
+    \begin{theorem}
+        Let $f\colon \R \to \R$ be differentiable, and $f'(x) > 0$ for all $x \in
+        \R$. Then, $f$ is strictly increasing on $\R$.
+    \end{theorem}
+    \begin{proof}
+        Let $x_2 > x_1$. By the mean value theorem, we pick $c \in (x_1, x_2)$
+        such that \[
+            f(x_2) - f(x_1) = f'(c) (x_2 - x_1) > 0. \qedhere
+        \] 
+    \end{proof}
+    \begin{remark}
+        The converse is not true. The map $x \mapsto x^3$ is strictly increasing,
+        but its derivative vanishes at $0$.
+    \end{remark}
+
+
+    \begin{theorem}[Chain rule]
+        Let $f$ and $g$ be differentiable on $\R$. Then, $f\circ g$ is also
+        differentiable, with \[
+            (f\circ g)' = (f' \circ g)\cdot g'.
+        \] 
+    \end{theorem}
+    \begin{proof}
+        Fix $a \in \R$.
+        Define the functions \[
+            \varphi\colon \R \to \R, \qquad \varphi(x) = \begin{cases}
+                (g(x) - g(a))/(x - a) &\text{ if }x \neq a\\
+                g'(a), &\text{ if } x = a
+            \end{cases},
+        \] \[
+            \psi\colon \R \to \R, \qquad \psi(y) = \begin{cases}
+                (f(y) - f(b))/(y - b) &\text{ if }y \neq b\\
+                f'(b), &\text{ if } y = b
+            \end{cases}.
+        \] Note that $\varphi$ and $\psi$ are continuous. Also, when $x \neq a$, we
+        have \[
+            g(x) - g(a) = \varphi(x)(x - a).
+        \] Set $b = g(a)$, and write \[
+            f(g(x)) - f(g(a)) = \psi(g(x))(g(x) - g(a)) = \psi(g(x))\,\varphi(x)(x -
+            a).
+        \] Setting $h = f\circ g$, we have \[
+            \frac{h(x) - h(a)}{x - a} = \psi(g(x))\varphi(x).
+        \] Taking limits $x \to a$, we use the continuity of $\varphi$, $\psi$ and
+        $g$ to conclude that the derivative of $h$ is indeed defined at $a$, and \[
+            h'(a) = \psi(g(a))\,\varphi(a) = f'(g(a))\,g'(a). \qedhere
+        \] 
+    \end{proof}
+
+    \begin{theorem}[Inverse function theorem]
+        Let $f$ be continuously differentiable on $\R$, with $f'(x) \neq 0$
+        everywhere. Then, $f$ is invertible, with a continuously differentiable
+        inverse.
+    \end{theorem}
+    \begin{corollary}
+        Let $f$ be continuously differentiable on $\R$, with $f'(x_0) \neq 0$ for
+        some $x_0 \in \R$. Then, there exists some neighbourhood of $x_0$ on which
+        $f$ is invertible, with a continuously differentiable inverse.
+    \end{corollary}
     
 \end{document}
 % vim: set tabstop=4 shiftwidth=4 softtabstop=4:
