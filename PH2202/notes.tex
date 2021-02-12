@@ -486,11 +486,21 @@
     \] We must now normalise the distributions. We demand \[
         \int_{-\infty}^{+\infty} f(t)\:dt = \int_{-\infty}^{+\infty} ae^{-t^2 /
         \alpha^2}\:dt = \sqrt{\pi}a\alpha = 1.
-    \]
-    % and \[
-    %     \int_0^\infty F(t)\,4\pi t^2\:dt = \int_0^\infty a^3 e^{-t^2 / \alpha^2}\:dt =
-    %     \frac{1}{2}\sqrt{\pi}a^3\alpha = 1.
-    % \] 
-
+    \] We deduce that $a$ and $\alpha$ must be functions of $T$ and $m$.
+    Now, we can write \[
+        dn = \frac{n}{\alpha^3\pi^{3 / 2}} e^{-c^2 / \alpha^2} \:d\gamma.
+    \] Integrating over $\theta$ and $\phi$, we have \[
+        dn_c = \frac{4n}{\alpha^3\pi^{1 /2}} c^2 e^{-c^2 / \alpha^2} \:dc
+    \] Now, we can calculate the moments \[
+        \E{c} = \frac{1}{n}\int_0^\infty c\:dn_c = \frac{2\alpha}{\sqrt{\pi}}, \qquad
+        \E{c^2} = \frac{1}{n}\int_0^\infty c^2\:dn_c = \frac{3}{2}\alpha^2.
+    \] The most probable velocity $c_{mp}$ is such that the derivative of the
+    probability density vanishes. We see that $c_{mp} = \alpha$.
+    The ratio of these velocities is given by \[
+        c_{avg} \,:\, c_{rms} \,:\, c_{mp} \,=\, 
+            \frac{2}{\sqrt{\pi}} \,:\, \sqrt{\frac{3}{2}} \,:\, 1.
+    \] Recall that we have already calculated $\E{c^2} = 3 k_B T /m$. Thus, \[
+        \alpha = \sqrt{\frac{2k_B T}{m}}.
+    \] 
 \end{document}
 % vim: set tabstop=4 shiftwidth=4 softtabstop=4:
