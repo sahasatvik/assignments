@@ -15,6 +15,7 @@
 \usepackage{lipsum}
 \usepackage{bm}
 \usepackage{siunitx}
+\usepackage[scr=boondoxupr]{mathalpha}
 
 \geometry{a4paper, margin=1in, headheight=14pt}
 
@@ -501,6 +502,58 @@
             \frac{2}{\sqrt{\pi}} \,:\, \sqrt{\frac{3}{2}} \,:\, 1.
     \] Recall that we have already calculated $\E{c^2} = 3 k_B T /m$. Thus, \[
         \alpha = \sqrt{\frac{2k_B T}{m}}.
+    \]
+    \begin{theorem}[Maxwell-Boltzmann distribution]
+        The velocity distribution of an ideal gas is given by \[
+            dn_c = 4\pi \left( \frac{m}{2\pi k_B T} \right)^{3 /2} c^2\, e^{-mc^2 /
+            2k_B T} \:dc.
+        \] 
+    \end{theorem}
+    The distribution of kinetic energies $\epsilon$ can be obtained by using $E =
+    mc^2 / 2$ and $\epsilon = E / k_B T$, so \[
+        dn_\epsilon = \frac{2n}{\sqrt{\pi}}\sqrt{\epsilon}\,
+        e^{-\epsilon}\:dn_\epsilon.
     \] 
+
+    \subsection{Degrees of freedom}
+    \begin{definition}
+        The number of independent coordinates which completely describe the state of
+        a collection of particles is called the number of degrees of freedom of the
+        collection.
+    \end{definition}
+
+    Consider a point mass travelling in 3D space. Its position can be pinned down by
+    3 coordinates, which means that it has 3 degrees of freedom. In an ideal gas
+    with $N$ particles, there is no correlation between the motion of each particle.
+    Thus, degrees of freedom of each particle add up, giving $3N$ degrees of freedom
+    of the gas. On the other hand, if the motion of the particles is constrained,
+    this reduces the degrees of freedom by the number of these constraints.
+
+    For example, consider a rigid body made of $N \geq 3$ point masses, $m_1, m_2,
+    \dots, m_N$. The first mass has 3 degrees of freedom, the second has 2 and the
+    third has 1. Once these are fixed, the positions of the remaining particles are
+    forced, so the system has exactly 6 degrees of freedom. Another way to see this
+    is that the position of the rigid body is defined by the position of its centre
+    of mass and its orientation in space, which gives 3 + 3 degrees of freedom.
+    
+    Another perspective is to look at the number of free variables in the kinetic
+    energy of the system. A point mass in 3D has 3 degrees of freedom because its
+    kinetic energy is given by \[
+        \mathscr{T} = \frac{1}{2}m(\dot{x}^2 + \dot{y}^2 + \dot{z}^2).
+    \] For a rigid body, its kinetic energy is given by \[
+        \mathscr{T} = \frac{p^2}{2m} + \frac{1}{2}I\omega^2,
+    \] where the translational and rotational kinetic energies each contribute 3
+    degrees of freedom.
+
+    Consider a system with generalized coordinates $q_1, q_2, \dots, q_n$. This
+    system has $n$ degrees of freedom, including translational and rotational
+    degrees. We can also write generalized velocities $\dot{q_1}, \dot{q_2}, \dots,
+    \dot{q_n}$. The generalized momenta can be defined as \[
+        p_i = \pp{E}{\dot{q_i}},
+    \] where $E = \mathscr{T} + \mathscr{V}$ is the total energy of the system. Note
+    that the potential $\mathscr{V}(q_i)$ can only be a function of the coordinates
+    $q_i$, while the kinetic energy $\mathscr{T}$ must be a homogeneous quadratic
+    function of $p_i$.
+
 \end{document}
 % vim: set tabstop=4 shiftwidth=4 softtabstop=4:
