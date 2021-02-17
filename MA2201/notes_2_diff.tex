@@ -290,11 +290,65 @@
         \] 
     \end{proof}
 
-    \begin{theorem}[Inverse function theorem]
-        Let $f$ be continuously differentiable on $\R$, with $f'(x) \neq 0$
-        everywhere. Then, $f$ is invertible, with a continuously differentiable
-        inverse.
+    \begin{definition}[Intermediate Value Property]
+        Let $f\colon (a, b) \to \R$ be such that for all $c, d \in (a, b)$ such that
+        $f(c) < f(d)$ and $\lambda \in (f(c), f(d))$, there exists $x_0 \in (a, b)$ 
+        such that $f(x_0) = \lambda$. Then, we say that $f$ has the intermediate
+        value property.
+    \end{definition}
+
+    \begin{theorem}[Intermediate Value Theorem]
+        All continuous functions $f\colon (a, b) \to \R$ have the intermediate value
+        property.
     \end{theorem}
+
+    \begin{theorem}
+        Let $f\colon (a, b)\to \R$ be differentiable. Then, $f'$ satisfies the
+        intermediate value property.
+    \end{theorem}
+    \begin{proof}
+        Let $c, d \in (a, b)$ and let $\lambda \in \R$ such that $\lambda \in
+        (f'(c), f'(d))$. We wish to find $x_0 \in (a, b)$ such that $f'(x_0) =
+        \lambda$. Define \[
+            g\colon (a, b) \to \R, \qquad g(x) = f(x) - \lambda x.
+        \] Note that $g'(x) = f'(x) - \lambda$, so $g'(c) < 0$ and $g'(d) > 0$.
+        Thus, $g$ is decreasing near $c$ and increasing near $d$, so we can find
+        $t_1, t_2 \in (c, d)$ such that $g(t_1) < g(c)$ and $g(t_2) < g(d)$.
+        This means that $g$ has no local minimum at $c$ nor $d$. From the continuity
+        of $g$, there exists $x_0 \in [c, d]$ such that $g(x_0) = \inf_{[c, d]}
+        g(x)$. We have already shown that $x_0$ is neither $c$, nor $d$, so $x_0 \in
+        (c, d)$. Hence, $g'(x_0) = 0$, which gives $f'(x_0) = \lambda$.
+    \end{proof}
+    
+    \begin{lemma}
+        If $f\colon (a, b) \to (c, d)$ is surjective, continuous and
+        strictly increasing, then $f$ is invertible with a continuous inverse.
+    \end{lemma}
+    \begin{theorem}[Inverse function theorem]
+        Let $f\colon (a, b) \to (c, d)$ be surjective and differentiable, with 
+        $f'(x) \neq 0$ everywhere. Then, $f$ is invertible, with a differentiable 
+        inverse whose derivative is given by \[
+            (f^{-1})'(f(x)) = \frac{1}{f'(x)}.
+        \] 
+    \end{theorem}
+    \begin{proof}
+        Given $f'(x) \neq 0$ on $(a, b)$. Then intermediate value property gives
+        either $f'(x) > 0$ for all $x \in (a, b)$, or $f'(x) < 0$. Without loss of
+        generality, assume the former. This means that $f$ is strictly increasing on
+        $(a, b)$, continuous, and surjective. Our lemma gives the existence of a
+        continuous inverse $f^{-1}$.
+
+        Let $y \in (c, d)$, and let $x = f^{-1}(y)$. From the continuity of
+        $f^{-1}$, we can always write $f^{-1}(y + \kappa) = x + h$. Thus, \[
+            \lim_{\kappa \to 0} \frac{f^{-1}(y + \kappa) - f^{-1}(y)}{\kappa} =
+            \lim_{\kappa \to 0} \frac{x + h - x}{\kappa} = \lim_{\kappa \to 0}
+            \frac{h}{\kappa}.
+        \] Note that $h \to 0$ as $\kappa \to 0$. Thus, this limit can be written as
+        \[
+            (f^{-1})'(y) = \lim_{h \to 0} \frac{h}{f(x + h) - f(x)} =
+            \frac{1}{f'(x)}. \qedhere
+        \]
+    \end{proof}
     \begin{corollary}
         Let $f$ be continuously differentiable on $\R$, with $f'(x_0) \neq 0$ for
         some $x_0 \in \R$. Then, there exists some neighbourhood of $x_0$ on which
