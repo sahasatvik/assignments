@@ -1,0 +1,159 @@
+\documentclass[10pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{graphicx}
+\usepackage{hyperref}
+
+\title{Probability I - Assignment III}
+\author{Satvik Saha}
+\date{}
+
+\geometry{a4paper, margin=1in}
+\setlength\parindent{0pt}
+\renewcommand{\labelenumi}{(\alph{enumi})}
+% \renewcommand\qedsymbol{$\blacksquare$}
+\newcounter{prob}
+\def\problem{\stepcounter{prob}\paragraph{Exercise \arabic{prob}}}
+\def\solution{\paragraph{Solution}}
+
+\begin{document}
+        \par\textbf{IISER Kolkata} \hfill \textbf{Assignment III}
+        \vspace{3pt}
+        \hrule
+        \vspace{3pt}
+        \begin{center}
+                \LARGE{\textbf{MA 2202 : Probability I}}
+        \end{center}
+        \vspace{3pt}
+        \hrule
+        \vspace{3pt}
+        Satvik Saha, \texttt{19MS154}, Group D\hfill\today
+        \vspace{20pt}
+
+        \problem Show that if you keep on tossing a fair coin, eventually you would
+        get a head for sure.
+
+        \solution Let $X$ be the random variable denoting the number of tosses until
+        a head is first obtained. Note that if $X = n$, this means that the first $n
+        - 1$ tosses must have been tails and the $n$\textsuperscript{th} must have
+        been a head. Multiplying, we have \[
+            P(X = n) = \frac{1}{2^{n}}.
+        \] By `eventually get a head for sure', we mean that the probability of
+        having obtained a head at some point of time becomes closer and closer to
+        certain as the total number of tosses increases, i.e.\ as $n \to \infty$,
+        the probability that we never encountered a head becomes closer and closer
+        to $0$, so we want $P(X = n) \to 0$. This is indeed the case because $1 /
+        2^n \to 0$. \\
+
+        \textit{Remark.} This does not mean that if one person starts tossing a coin
+        repeatedly, they cannot get a sequence of all tails, i.e.\ the sequence
+        $TTT\dots$ ought to be a legitimate outcome. It's just that this particular
+        outcome is associated with probability 0. There is no other value we can
+        assign, since the probability of this outcome can only be the limit $P(X =
+        n \to \infty)$, and this particular sequence is the limit of the sequence of
+        outcomes $T^{n - 1}H$.
+
+        \problem Let $\Omega = \{1, 2, 3, 4, 5\}$ and $\mathcal{E} = \{\emptyset,
+        \Omega, \{1\}, \{2, 3, 4, 5\}\}$. Define \[
+            X\colon \Omega \to \mathbb{R}, \qquad X(\omega) = \omega + 1
+        \] for all $\omega \in \Omega$. Is $X$ a random variable?
+
+        \solution No. Recall that for $X$ to be a random variable, we must have
+        $X^{-1}((r, \infty)) \in \mathcal{E}$ for all $r \in \mathbb{R}$. On the
+        other hand, $X^{-1}((3, \infty)) = \{3, 4, 5\} \notin \mathcal{E}$.
+
+        \problem Let $(\Omega, \mathcal{E}, P)$ be a probability space and let $A_1,
+        A_2, \dots, \in \mathcal{E}$ be pairwise mutually exclusive. Let $A =
+        \cup_{n = 1}^\infty A_n$ and let $B \in \mathcal{E}$ with $P(B) \neq 0$.
+        Show that \[
+            P(A\,|\, B) = \sum_{n = 1}^\infty P(A_n\,|\,B).
+        \] 
+        
+        \solution Note that since $\{A_n\}$ are pairwise exclusive, so are $\{A_n
+        \cap B\}$ since \[
+            (A_i \cap B) \cap (A_j \cap B) = (A_i \cap A_j) \cap B = \emptyset.
+        \] Therefore, the probability of the union of these countably many disjoint
+        events is simply the sum of their probabilities, so \[
+            P\left(\bigcup_{n = 1}^\infty A_n \cap B\right) = \sum_{n = 1}^\infty
+            P(A_n \cap B). \tag{\star}\label{eq:star}
+            \] Note that\footnote{
+                To see this formally, note that the countably infinite unions are
+                well defined since the event space is closed under such unions.
+                First, pick $x \in \cup_{n = 1}^\infty A_n \cap B$, which means that
+                $x \in A_n \cap B$ for some $n \in \mathbb{N}$. This means that $x
+                \in A_n$ and $x \in B$, so $x \in \cup_{n = 1}^\infty A_n$ whence $x
+                \in B \cap \cup_{n = 1}^\infty A_n$. \\
+
+                For the reverse direction, pick $x \in B \cap \cup_{n = 1}^\infty
+                A_n$, which means that $x \in B$ and $x \in \cup_{n = 1}^\infty
+                A_n$. Thus, $x \in A_n$ for some $n \in \mathbb{N}$, so $x \in B
+                \cap A_n$ whence $x \in \cup_{n = 1}^\infty A_n \cap B$.
+            } \[
+            \bigcup_{n = 1}^\infty A_n \cap B = B \cap \bigcup_{n = 1}^\infty A_n =
+            B \cap A,
+        \] and \[
+            P(X \,|\, B) = \frac{P(X \cap B)}{P(B)}.
+        \] Thus, dividing (\ref{eq:star}) by $P(B)$, we obtain the desired result. \[
+            P(A\,|\, B) = \frac{P(A \cap B)}{P(B)} = \sum_{n = 1}^\infty \frac{P(A_n
+            \cap B)}{P(B)} = \sum_{n = 1}^\infty P(A_n\,|\,B).
+        \] 
+
+
+        \problem The probability of a family having exactly $k$ children is $p_k$,
+        where $\sum_{k = 1}^\infty p_k = 1$. We assume the gender of each child
+        is either male, female or the third gender with equal probability.
+        \begin{enumerate}
+            \itemsep0em
+            \item What is the probability that the family has only girls?
+            \item Now, if it is known that the family has no girls, what is the
+            probability that the family has only one child?
+        \end{enumerate}
+
+        \solution \begin{enumerate}
+            \item The probability that a family having exactly $k$ children has only
+            girls is simply $1 / 3^k$, since the probability of a child being a girl
+            is $1 / 3$. Now, for a randomly chosen family, we can write \[
+                P(\text{all girls}) = \sum_{n = 1}^\infty P(\text{all girls} \,|\,
+                k\text{ children})\,P(k\text{ children}) = \sum_{k = 1}^\infty
+                \frac{p_k}{3^k}.
+            \] 
+
+            \item The probability that the family has only $1$ child is $p_1$, and
+            the probability that a family with $k$ children has no girls is $(2 /
+            3)^k$, since each child must be either a boy or third gender. Thus, the
+            probability of a family having no girls is set to \[
+                P_{ng} = P(\text{no girls}) = \sum_{n = 1}^\infty
+                \left(\frac{2}{3}\right)^k p_k.
+            \] Thus, Bayes' Theorem gives \[
+                P(1\text{ child} \,|\, \text{no girls}) = \frac{P(1\text{
+                child})}{P(\text{no girls})} P(\text{no girls}\,|\, 1\text{ child})
+                = \frac{p_1}{P_{ng}} \cdot \frac{2}{3}.
+            \] 
+        \end{enumerate}
+        
+        \problem Suppose you are a contestant in a game, where you have the
+        potential to win an expensive car, by making the right decision and win.
+        There are 3 closed doors in front of you and the host explains to you the
+        rules of the game. Two of the three doors have goats behind them and the
+        third one has the valuable car behind it. You have to choose one of the
+        three doors to start the game. Then, from the two other doors, the host will
+        reveal one of that which has a goat behind it. Then you will be asked,
+        whether you want to open the door that you chose, or switch to the other. If
+        you choose wisely, the door that has the car behind it, you will win and get
+        your prize. So, should you switch the door or would you wish to keep your
+        choice of the door unchanged? Justify your answer. 
+
+        \solution Always switch. The probability of picking the car initially is $1
+        /3$. The host always reveals a goat, so the probability that your initially
+        chosen door still has the car behind it is given as \[
+            P(\text{car}\,|\, \text{goat reveal}) =
+            \frac{P(\text{car})}{P(\text{goat reveal})} P(\text{goat reveal} \,|\,
+            \text{car}) = \frac{1 /3}{1}\cdot 1 = \frac{1}{3}.
+        \] Thus, the probability that the remaining door has the car behind it must
+        be $1 - 1 /3 = 2 / 3$, since there are no other possible outcomes. This
+        gives better odds of winning on switching\footnote{This is the well known
+        Monty Hall problem.}. 
+
+\end{document}
