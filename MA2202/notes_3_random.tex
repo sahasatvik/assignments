@@ -61,6 +61,7 @@
 \theoremstyle{remark}
 \newtheorem*{remark}{Remark}
 \newtheorem*{example}{Example}
+\newtheorem*{solution}{Solution}
 
 \surroundwithmdframed[%
     linecolor=black!20!white,%
@@ -313,11 +314,6 @@
         \E{X} = \int_0^\infty \lambda x e^{-\lambda x}\:dx = \frac{1}{\lambda},
     \] In addition, the variance is given by $\sigma^2 = 1 /\lambda^2$.
 
-    \section*{Normal distribution}
-    The probability density function of the normal distribution is given by \[
-        f_X(x) = \frac{1}{\sigma\sqrt{2\pi}}e^{-(x - \mu)^2/2\sigma^2}.
-    \] 
-
     \begin{definition}[Memorylessness]
         The probability distribution of a non-negative discrete random variable $X$
         is called memoryless if for all $m, n \in \Z_{\geq 0}$, \[
@@ -349,6 +345,58 @@
             P(Y > s + t) = P(Y > s)\, P(Y > t).
         \] 
     \end{example}
+    
+    \section*{Normal distribution}
+    The probability density function of the normal distribution is given by \[
+        f_X(x) = \frac{1}{\sigma\sqrt{2\pi}}e^{-(x - \mu)^2/2\sigma^2}.
+    \] 
+
+    \begin{exercise}
+        Consider a continuous random variable with probability density function \[
+            f(x) = c e^{-x^2 /2}.
+        \] Determine the constant $c$.
+        \begin{solution}
+            Define \[
+                I = \int_{-\infty}^{+\infty} e^{-x^2 /2} \:dx.
+            \] By using two dummy variables $x$ and $y$, we can write \[
+                I^2 = \int_{-\infty}^{+\infty} \int_{-\infty}^{+\infty} e^{-(x^2 +
+                y^2) / 2}\:dx\:dy.
+            \] We can shift to polar coordinates by using the transformations \[
+                x = r\cos\theta, \qquad y = r\sin\theta, \qquad dx\:dy =
+                r\:d\theta\:dr.
+            \] Thus, \[
+                I^2 = \int_{0}^\infty \int_{0}^{2\pi} re^{-r^2 / 2}\:d\theta\:dr =
+                \int_0^{2\pi} d\theta \int_0^\infty re^{-r^2 / 2}\:dr.
+            \] Now, the second integral can be computed as \[
+                \int_0^\infty re^{-r^2 / 2}\:dr = \int_0^\infty e^{-r^2 / 2} \:d(r^2
+                / 2) = -e^{-r^2 / 2}\,\Big|_0^\infty = 1.
+            \] Thus, we have \[
+                I = \int_{-\infty}^{+\infty} e^{-x^2 / 2} \:dx = \sqrt{2\pi}.
+            \] This is called a Gaussian integral. We must thus have $c = 1
+            /\sqrt{2\pi}$.
+        \end{solution}
+    \end{exercise}
+
+    \begin{exercise}
+        Find the moments of the standard normal distribution.
+        \begin{solution}
+            Note that $\E{X^{2n - 1}} = 0$, because the integral \[
+                \frac{1}{\sqrt{2\pi}}\int_{-\infty}^{+\infty} x^{2n - 1}e^{-x^2 /
+                2}\:dx = 0.
+            \] The function we are integrating over is an odd function. Now, we
+            consider the second moment. Compute \[
+                \int_{-\infty}^{+\infty} x^2 e^{-x^2 / 2}\:dx = 2 \int_0^\infty x^2
+                e^{-x^2 / 2}\:dx = -2xe^{-x^2 / 2}\Big|_0^\infty + 2\int_0^\infty
+                e^{-x^2 / 2}\:dx = \sqrt{2\pi}.
+            \] Thus, $\E{X^2} = 1$, which means that the variance is also $1$. For
+            higher moments, note that \[
+                \int x^{2n}e^{-x^2 / 2} = -x^{2n - 1}e^{-x^2 / 2} + (2n - 1)
+                \int x^{2n - 2} e^{-x^2 / 2}\:dx,
+            \] which gives the recurrence \[
+                \E{X^{2n}} = (2n - 1)\, \E{X^{2n - 2}} = (2n - 1)!!.
+            \] 
+        \end{solution}
+    \end{exercise}
 
 \end{document}
 % vim: set tabstop=4 shiftwidth=4 softtabstop=4:
