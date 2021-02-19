@@ -35,7 +35,7 @@
 \newcommand\ppt[1]{\frac{\partial #1}{\partial t}}
 \newcommand\pp[3][]{\frac{\partial^{#1}{#2}}{\partial {#3}^{#1}}}
 \newcommand\norm[1]{\left\lVert#1\right\rVert}
-\newcommand\E[1]{E[#1]}
+\newcommand\E[1]{E\left[#1\right]}
 
 \newcounter{module}
 \setcounter{module}{3}
@@ -397,6 +397,50 @@
             \] 
         \end{solution}
     \end{exercise}
+    Suppose that $Z \sim \operatorname{Normal}(\mu, \sigma^2)$, note that $(Z - \mu)
+    / \sigma$ is a standard normal variable. The cumulative distribution function of
+    a standard normal variable is \[
+        \Phi(x) = \frac{1}{\sqrt{2\pi}} \int_{\infty}^x e^{-t^2 / 2}\:dt.
+    \] Thus, \[
+        P(Z \leq z) = P\left(\frac{Z - \mu}{\sigma} \leq \frac{z -
+        \mu}{\sigma}\right) = \Phi\left(\frac{z - \mu}{\sigma}\right).
+    \] Thus, we see that \[
+        \E{(Z - \mu)^n} = \begin{cases}
+            0, &\text{ if } n \text{ is odd }\\
+            \sigma^n(n - 1)!!, &\text{ if } n \text{ is even }
+        \end{cases}.
+    \] 
+
+    \begin{theorem}[Markov's inequality]
+        Let $X$ be a non-negative random variable. Then for all $a > 0$, \[
+            P(X \geq a) \leq \frac{\E{X}}{a}.
+        \] 
+    \end{theorem}
+    \begin{proof}
+        Let $u_a\colon \R_{\geq 0} \to \{0, 1\}$ be a step function where
+        $u_a(x) = 1$ when $x \geq a$ and $0$ otherwise. Note that \[
+            u_a(x) \leq \frac{x}{a}.
+        \] Then, \[
+            P(X \geq a) = \E{u_a(X)} \leq \E{\frac{X}{a}} = \frac{\E{X}}{a}.
+        \] The first step follows since \[
+            P(X \geq a) = \sum_{n = a}^\infty P(X = n) = \sum_{n = 0}^\infty
+            u_a(x)\,P(X = n) = \E{u_a(X)}
+        \] for discrete random variables and \[
+            P(X \geq a) = \int_a^\infty f_X(x)\:dx = \int_{0}^{\infty}
+            u_a(x)f_X(x)\:dx = \E{u_a(X)}
+        \] for continuous random variables.
+        The second step followed since $\E{Y} \geq 0$ for non-negative random
+        variables $Y$.
+    \end{proof}
+    \begin{corollary}[Chebyshev's inequality]
+        If $X$ is a random variable, then for all $a > 0$, \[
+            P(|X - \mu| \geq a) \leq \frac{\sigma^2}{a^2}.
+        \] 
+    \end{corollary}
+    \begin{proof}
+        Use Markov's inequality on the non-negative random variable $(X - \mu)^2$.
+    \end{proof}
+
 
 \end{document}
 % vim: set tabstop=4 shiftwidth=4 softtabstop=4:
