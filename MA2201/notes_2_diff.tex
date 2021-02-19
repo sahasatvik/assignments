@@ -354,6 +354,37 @@
         some $x_0 \in \R$. Then, there exists some neighbourhood of $x_0$ on which
         $f$ is invertible, with a continuously differentiable inverse.
     \end{corollary}
+
+    \begin{theorem}
+        Let $f_n \to f$ pointwise and $\{f_n'\}$ converge uniformly on some interval
+        $[a, b]$. Then, $f_n \to f$ uniformly.
+    \end{theorem}
+    \begin{proof}
+        We show that $\{f_n\}$ is uniformly Cauchy on $E$. Note that for some
+        fixed $t$, we can write\[
+            |f_n(x) - f_m(x)| \leq |(f_n(x) - f_m(x)) - (f_n(t) - f_m(t))| +
+            |f_n(t) - f_m(t)|.
+        \] Using the Mean Value Theorem, the first term can be bounded as \[
+            |(f_n(x) - f_m(x)) - (f_n(t) - f_m(t))| = (f_n' - f_m')(x_0)|x - t|,
+        \] where $x_0$ is between $x$ and $t$.
+        From the pointwise convergence of $f_n \to f$, we have \[
+            |f_n(t) - f_m(t)| < \frac{\epsilon}{2}
+        \] for all $n, m \geq N_t$. The uniform convergence of
+        $\{f_n'\}$ means that we can find $N_0$ such that \[
+            |f_n'(x_0) - f_m'(x_0)| < \frac{\epsilon}{2(b - a)}
+        \] for all $n, m > N_0$. Thus, for all $x \in [a, b]$, and $n, m \geq
+        N_t + N_0$, we have \[
+            |f_n(x) - f_m(x)| < \frac{\epsilon}{2(b - a)}\cdot (b - a) +
+            \frac{\epsilon}{2} = \epsilon.
+        \] This means that $\{f_n\}$ is uniformly Cauchy on $[a, b]$, which
+        gives the uniform convergence of $\{f_n\}$.
+    \end{proof}
+
+    \begin{theorem}
+        Let $\{f_n\}$ be a sequence of differentiable functions on some bounded
+        interval $(a, b)$ such that $f_n \to f$ pointwise and ${f_n'}$ converges
+        uniformly.  Then, $f$ is differentiable and $f_n' \to f'$.
+    \end{theorem}
     
 \end{document}
 % vim: set tabstop=4 shiftwidth=4 softtabstop=4:
