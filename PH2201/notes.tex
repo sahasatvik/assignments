@@ -731,7 +731,51 @@
     \] We can also show that $\psi_i$ are orthogonal. \[
         \int \psi_m^*\psi_n\:dx = \delta_{mn}.
     \] 
-    
+
+    \subsubsection{Analytic method}
+    We obtain a power series solution. Set $\xi = \sqrt{m\omega / \hbar} x$, $K = 2E
+    / \hbar\omega$. The Schr\"odinger equation now reads \[
+        \dd[2]{\psi}{\xi} = (\xi^2 - K)\psi.
+    \] Note that when $\xi \gg K$, our equation has the approximate solution \[
+        \psi(\xi) = Ae^{-\xi^2 / 2}.
+    \] We drop the $e^{+\xi^2 / 2}$ term to ensure $\psi \to 0$ as $\xi \to \infty$.
+    Now, we use the Ansatz \[
+        \psi(\xi) = f(\xi)\, e^{-\xi^2 / 2},
+    \] which when plugged into the differential equation demands \[
+        f'' - 2\xi f' + (K - 1)f = 0.
+    \] Writing $f$ as a power series, \[
+        f(\xi) = \sum_{n = 0}^\infty a_n \xi^n, \quad 
+        f'(\xi) = \sum_{n = 0}^\infty n a_n \xi^{n - 1}, \quad
+        f''(\xi) = \sum_{n = 0}^\infty (n + 1)(n + 2)a_{n + 2}\xi^n.
+    \] Thus, \[
+        \sum_{n = 0}^\infty \left[(n + 1)(n + 2)a_{n + 2} - 2na_n + (K -
+        1)a_n\right]\xi^n = 0,
+    \] whence we obtain the recurrence relation \[
+        a_{n + 2} = \frac{2n + 1 - K}{(n + 1)(n + 2)}a_n.
+    \] Note that this gives two chains of even and odd coefficients, completely
+    determined once we fix $a_0$ and $a_1$. When $n \gg K$, we have the
+    approximation \[
+        a_{n + 2} \approx \frac{2}{n}a_n, \qquad a_n \approx \frac{C}{(n / 2)!}.
+    \] This means that $f(\xi)$ grows roughly as \[
+        \sum \frac{C}{(n / 2)!}\xi^n = \sum \frac{C}{n!}\xi^{2n} = Ce^{\xi^2}.
+    \] This would cause $\psi$ to diverge at infinity. To fix this, we demand that
+    $a_{m + 2} = 0$ for some $m \in \N$ and also kill the other chain, which would
+    force the power series to terminate. Thus, $2m + 1 = K$, so \[
+        a_{n + 2} = \frac{2(n - m)}{(n + 1)(n + 2)}a_n, \qquad E_m = \left(m +
+        \frac{1}{2}\right)\hbar\omega.
+    \] This gives us our solutions $\psi_m$. For $\psi_0$, set $a_1 = 0$, which
+    gives \[
+        \psi_0(\xi) = a_0 e^{-\xi^2 / 2}, \qquad E_0 = \frac{1}{2}\hbar\omega.
+    \] For $\psi_1$, set $a_1 = 0$, which gives \[
+        \psi_1(\xi) = a_1\xi e^{-\xi^2 / 2}, \qquad E_0 = \frac{3}{2}\hbar\omega.
+    \] In this manner, we can obtain all $\psi_m$ by using our recurrence relation.
+    \begin{boxedeq*}
+        \psi_n(\xi) = \left(\frac{m\omega}{\pi\hbar}\right)^{1 /4}
+        \frac{1}{\sqrt{2^n n!}} H_n(\xi)\, e^{-\xi^2 / 2}, \qquad E_n = \left(n +
+        \frac{1}{2}\right) \hbar\omega.
+    \end{boxedeq*}
+    Here, $H_n(\xi)$ are the Hermite polynomials.
+
 
 \end{document}
 % vim: set tabstop=4 shiftwidth=4 softtabstop=4:
