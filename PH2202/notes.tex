@@ -505,7 +505,7 @@
     \]
     \begin{theorem}[Maxwell-Boltzmann distribution]
         The velocity distribution of an ideal gas is given by \[
-            dn_c = 4\pi \left( \frac{m}{2\pi k_B T} \right)^{3 /2} c^2\, e^{-mc^2 /
+            dn_c = 4\pi n\left( \frac{m}{2\pi k_B T} \right)^{3 /2} c^2\, e^{-mc^2 /
             2k_B T} \:dc.
         \] 
     \end{theorem}
@@ -553,7 +553,38 @@
     \] where $E = \mathscr{T} + \mathscr{V}$ is the total energy of the system. Note
     that the potential $\mathscr{V}(q_i)$ can only be a function of the coordinates
     $q_i$, while the kinetic energy $\mathscr{T}$ must be a homogeneous quadratic
-    function of $p_i$.
+    function of $p_i$. Maxwell showed that we can write the following distribution
+    for the velocities, \[
+        F(\dot{q_i})\:d\dot{q_1}\dots\:d\dot{q_n} = c e^{-\mathscr{T} /k_B T}
+        \:d\dot{q_1}\dots\:d\dot{q_n}.
+    \] Here, $F(\dot{q_i})d\gamma$ is the probability of finding the system in the
+    velocity ranges $\dot{q_i} \to \dot{q_i} + d\dot{q_i}$.
+    Boltzmann showed that we can generalize further with  \[
+        F(q_i, p_i)\:dq_1\:dp_1\dots\:dq_n\:dp_n = c e^{-E /k_B T}
+        \:dq_1\:dp_1 \dots \:dq_n\:dp_n.
+    \] Here, we talk about position as well as momenta.
+
+    \begin{theorem}[Equipartition of energy]
+        If a system attains equilibrium at a temperature $T$, then the total kinetic
+        energy $\mathscr{T}$ gets equally distributed between the degrees of
+        freedom, with each degree of freedom getting $k_B T / 2$.
+    \end{theorem}   
+    Recall that in general, the kinetic energy can be written as \[
+        \mathscr{T} = \sum c_{ij}p_i p_j.
+    \] We can perform a suitable coordinate transformation to get rid of cross
+    terms, thus obtaining the co-momenta $\xi_i$. Now, \[
+        \mathscr{T} = \sum \beta_i \xi_i^2, \qquad 
+        E = E' + \beta_j\xi_j^2.
+    \] Thus, the Boltzmann distribution can be written as \[
+        \int ce^{-(E' + \beta_j\xi_j^2) / k_BT} \:d\gamma' = 1,
+    \] integrating over all possible $q_i$ and $\xi_i$. This gives us the
+    normalisation factor $c$. The average kinetic energy associated with $q_j,
+    \xi_j$ is thus the expectation value \[
+        \int \beta_i\xi_j^2 \cdot ce^{-(E' + \beta_j\xi_j^2) / k_BT} \:d\gamma' =
+        \frac{\displaystyle\int \beta_j \xi_j^2 e^{-\beta_j\xi_j^2 / k_B T}
+        \:d\xi_j}{\displaystyle\int e^{-\beta_j\xi_j^2 / k_BT}\:d\xi_j} =
+        \frac{1}{2}k_BT.
+    \] 
 
 \end{document}
 % vim: set tabstop=4 shiftwidth=4 softtabstop=4:
