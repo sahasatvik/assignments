@@ -776,6 +776,73 @@
     \end{boxedeq*}
     Here, $H_n(\xi)$ are the Hermite polynomials.
 
+    \section{Free particles}
+    Consider a free particle, which entails $V(x) = 0$. Now, \[
+        -\frac{\hbar^2}{2m}\dd[2]{\psi}{x} = E \psi, \qquad 
+        \psi'' = -k^2\psi
+    \] where $k^2 = 2mE / \hbar$. This gives the solutions \[
+        \Psi(x, t) = Ae^{ik(x - \hbar kt / 2m)} + Be^{-ik(x + \hbar kt / 2m)}.
+    \] This looks like the superposition of two waves moving left and right with
+    speeds $v = \hbar k / 2m - \sqrt{E / 2m}$, and momenta $p = \hbar k$.
+    This is not normalizable. To do this, we take the superposition of many such
+    waves with different velocities, thus localizing the resultant `wave packet'.
+    This gives \[
+        \Psi(x, t) = \frac{1}{\sqrt{2\pi}} \int \phi(k)\, e^{ix(x - vt)}\:dk,
+    \] for appropriate choice of $\phi(k)$. Initially, at $t = 0$, note that \[
+        \psi(x, 0) = \frac{1}{\sqrt{2\pi}} \int \phi(k)\, e^{ikx}\:dk.
+    \] The inverse Fourier transform directly gives $\phi$ as \[
+        \phi(k) = \frac{1}{\sqrt{2\pi}} \int \psi(x, 0)\, e^{-ikx}\:dx.
+    \] The phase velocity of a wave packet is defined as $v_p =\omega /k$, while the
+    group velocity is $v_g = d\omega / dk$. We see that \[
+        v_g = \frac{\hbar k}{m} = 2v_p.
+    \] This resolves a discrepancy with the classical wave velocity and energy of
+    $\sqrt{2E / m}$.
+
+    \section{Scattering problems and quantum tunnelling}
+    Consider a potential of the form \[
+        V(x) = V_0\, u(x) = \begin{cases}
+            0, &\text{ if }x < 0 \\
+            V_0, &\text{ if } x \geq 0
+        \end{cases}
+    \] Classically, we expect that a particle of energy $E$ moving from left to
+    right will bounce back when $E < V_0$ and pass when $E > V_0$. 
+
+    We have already solved the Schr\"odinger equation for constant potentials. The
+    boundary conditions at $x = 0$ demand \[
+        \psi(x \to 0^-) = \psi(x \to 0^+), \qquad
+        \psi'(x \to 0^-) = \psi'(x \to 0^+).
+    \] When $E > V_0$, the solutions are those of a free particle everywhere, with
+    \[
+        \psi(x) = \begin{cases}
+            Ae^{ik_1x} + Be^{-ik_1x}, & x < 0, \quad k_1 = \sqrt{2mE / \hbar^2}, \\
+            Ce^{ik_2x} + De^{-ik_2x}, & x \geq 0, \quad k_1 = \sqrt{2m(E - V_0) /
+            \hbar^2}.
+        \end{cases}
+    \] We choose $D = 0$ on physical grounds, since we have a free particle coming
+    in from the left. The boundary conditions give $A + B = C$ and $k_1(A - B) =
+    k_2C$. With the choice $A = 1$, \[
+        B = \frac{k_1 - k_2}{k_1 + k_2}, \qquad C = \frac{2k_1}{k_1 + k_2}.
+    \] We call these the reflection and transmission amplitudes, which are the
+    probability amplitudes for the reflection and transmission of the particle at
+    the boundary. Note the analogy with Fresnel coefficients in optics.
+    The reflection and transmission coefficients $R$ and $T$ can be set to $B^2$ and
+    $C^2$. See that \[
+        R + \frac{k_2}{k_1}T = 1.
+    \] When $E < V_0$, we have \[
+        \psi(x) = \begin{cases}
+            Ae^{ik_1x} + Be^{-ik_1x}, & x < 0, \quad k_1 = \sqrt{2mE / \hbar^2}, \\
+            Ce^{k_2x} + De^{-k_2x}, & x \geq 0, \quad k_1 = \sqrt{2m(V_0 - E) /
+            \hbar^2}.
+        \end{cases}
+    \] This time, we set $C = 0$ and $A = 1$. The boundary conditions $1 + B = D$
+    and $ik_1(1 - B) = -k_2D$ give \[
+        B = \frac{k_1 - ik_2}{k_1 + ik_2}, \qquad D = \frac{2k_1}{k_1 + ik_2}.
+    \] With $R = |B|^2$, we now have \[
+        R = 1, \qquad T = \frac{k_1}{k_2}(1 - R) = 0.
+    \] Thus, even though $T = 0$, we still have $\psi(x) \neq 0$ for $x \geq 0$!
+    This phenomenon is called \textit{quantum tunnelling}.
+    There is an analogy here with evanescent waves during total internal reflection.
+
 
 \end{document}
 % vim: set tabstop=4 shiftwidth=4 softtabstop=4:
