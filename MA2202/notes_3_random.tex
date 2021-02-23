@@ -36,6 +36,8 @@
 \newcommand\pp[3][]{\frac{\partial^{#1}{#2}}{\partial {#3}^{#1}}}
 \newcommand\norm[1]{\left\lVert#1\right\rVert}
 \newcommand\E[1]{E\left[#1\right]}
+\newcommand\var[1]{\operatorname{Var}[#1]}
+\newcommand\cov[1]{\operatorname{Cov}[#1]}
 
 \newcounter{module}
 \setcounter{module}{3}
@@ -440,6 +442,34 @@
     \begin{proof}
         Use Markov's inequality on the non-negative random variable $(X - \mu)^2$.
     \end{proof}
+
+    \begin{definition}[Covariance]
+        Let $X$, $Y$ be two random variables. The covariance of $X$ and $Y$ is
+        defined as \[
+            \cov{X, Y} = \E{(X - \E{X})(Y - \E{Y})}.
+        \] 
+        \begin{remark}
+            This can be simplified as \[
+                \cov{X, Y} = \E{XY} - \E{X}\E{Y}.
+            \] 
+        \end{remark}
+    \end{definition}
+
+    \begin{definition}[Correlation coefficient]
+        The correlation coefficient is defined as \[
+            \rho_{X, Y} = \frac{\cov{X, Y}}{\E{X}\, \E{Y}}.
+        \]
+    \end{definition}
+
+    \begin{theorem}[Weak Law of Large Numbers]
+        Suppose that $X_1, \dots, X_n$ are identical and independent random
+        variables, with mean $\mu$ and variance $\sigma^2$. Define \[
+            \overline{X}_n = \frac{1}{n}\sum_{i = 1}^n X_i.
+        \] Then, $\E{\overline{X}_n} = \mu$, and $\var{\overline{X}_n} = \sigma^2 /
+        n$. From Chebyshev, \[
+            \lim_{n \to \infty} P(|\overline{X}_n - \mu| \geq \epsilon) = 0.
+        \] 
+    \end{theorem}
 
 
 \end{document}
