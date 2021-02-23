@@ -357,7 +357,7 @@
 
     \begin{theorem}
         Let $f_n \to f$ pointwise and $\{f_n'\}$ converge uniformly on some interval
-        $[a, b]$. Then, $f_n \to f$ uniformly.
+        $(a, b)$. Then, $f_n \to f$ uniformly.
     \end{theorem}
     \begin{proof}
         We show that $\{f_n\}$ is uniformly Cauchy on $E$. Note that for some
@@ -379,12 +379,57 @@
         \] This means that $\{f_n\}$ is uniformly Cauchy on $[a, b]$, which
         gives the uniform convergence of $\{f_n\}$.
     \end{proof}
+    \begin{remark}
+        We only needed to use the pointwise convergence of $\{f_n\}$ at one point
+        $t$. By using pointwise convergence everywhere, we can allow for unbounded 
+        intervals, or the entirety of $\R$.
+    \end{remark}
 
     \begin{theorem}
         Let $\{f_n\}$ be a sequence of differentiable functions on some bounded
-        interval $(a, b)$ such that $f_n \to f$ pointwise and ${f_n'}$ converges
-        uniformly.  Then, $f$ is differentiable and $f_n' \to f'$.
+        interval $(a, b)$ such that $f_n \to f$ pointwise and $\{f_n'\}$ converges
+        uniformly on every $[\alpha, \beta] \subset (a, b)$.
+        Then, $f$ is differentiable and $f_n' \to f'$.
+        \begin{remark}
+            We allow $a, b$ to be $\pm \infty$.
+        \end{remark}
     \end{theorem}
+    \begin{proof}
+        Let $x_0 \in (a, b)$. We wish to show that the following limit exists. \[
+            \lim_{x \to x_0} \frac{f(x) - f(x_0)}{x - x_0}.
+        \] Define $\varphi\colon (a, b) \setminus \{x_0\} \to \R$, \[
+            \varphi(x) = \frac{f(x) - f(x_0)}{x - x_0}.
+        \] Also define the functions $\varphi_n\colon (a, b) \to \R$, \[
+            \varphi_n(x) = \begin{cases}
+                (f_n(x) - f_n(x_0))/(x - x_0) &\text{ if } x \neq x_0, \\
+                f_n'(x_0) &\text{ if } x = x_0.
+            \end{cases}
+        \] Note that $\varphi_n$ are continuous, from the continuity of each $f_n$.
+        When $x \neq x_0$, we see that $\varphi_n(x) \to \varphi(x)$. 
+        For $x = x_0$, we know that $f_n'$ converges hence $\varphi_n(x_0)$ also 
+        converges. This gives us pointwise convergence.
+
+        We want to show that $\{\varphi_n\}$ converges uniformly. Fix $[\alpha,
+        \beta] \subset (a, b)$ such that $x_0 \in (\alpha, \beta)$. For $x \neq
+        x_0$, we have \[
+            |\varphi_n(x) - \varphi_m(x)| = \left| \frac{(f_n(x) - f_m(x)) -
+            (f_n(x_0) - f_m(x_0))}{x - x_0} \right|.
+        \] Using the Mean Value Theorem on $g = f_n - f_m$ , we choose $c$ between $x$
+        and $x_0$ such that $(x - x_0)g'(c) = g(x) - g(x_0)$. Thus, \[
+            |\varphi_n(x) - \varphi_m(x)| = |f_n'(c) - f_m'(c)| < \epsilon
+        \] for all $m, n \geq N$ for some $N$, given by the uniform convergence of
+        $\{f_n'\}$. This shows that $\{\varphi_n\}$ also converges uniformly on
+        $[\alpha, \beta]$. Note that when $x = x_0$, $|f_n'(x_0) - f_m'(x_0)|$ is
+        similarly bounded.
+
+        Now that $\{\varphi_n\}$ converges uniformly, we know that the limit
+        function is continuous. Since it converges pointwise to $\varphi$ on $x \neq
+        x_0$ and to $\lim_{n \to \infty} f_n'(x_0)$ when $x = x_0$, continuity gives
+        the existence of the desired limit and \[
+            \lim_{n \to \infty} f_n'(x_0) = \lim_{x \to x_0} \frac{f(x) - f(x_0)}{x
+            - x_0} = f'(x_0),
+        \] which gives the differentiability of $f$. Also note that $f_n' \to f'$.
+    \end{proof}
     
 \end{document}
 % vim: set tabstop=4 shiftwidth=4 softtabstop=4:
