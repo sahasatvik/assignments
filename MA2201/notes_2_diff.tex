@@ -430,6 +430,51 @@
             - x_0} = f'(x_0),
         \] which gives the differentiability of $f$. Also note that $f_n' \to f'$.
     \end{proof}
+    \begin{lemma}[Abel's Lemma]
+        Let \[
+            \sum_{x = 0}^\infty a_n(x - a)^n
+        \] be a convergent power series on $(a - R, a + R)$. If the series converges
+        absolutely for some $x = a + c$ within that interval, then it must converge
+        uniformly on any closed interval $[\alpha, \beta] \subset (a - c, a + c)$.
+    \end{lemma}
+    \begin{proof}
+        Note that for all $x \in [\alpha, \beta]$, \[
+            |a_n(x - a)^n| \leq |a_n| |c|^n
+        \] which gives the uniform convergence of $\sum_{n = 1}^\infty a_n(x - a)^n$
+        on $[\alpha, \beta]$ by the Weierstrass M-test.
+    \end{proof}
+    \begin{lemma}
+        If a power series converges absolutely on $(a - R, a + R)$, then it is
+        differentiable, with the derivative being \[
+            \sum_{n = 1}^\infty na_n(x - a)^n.
+        \]
+    \end{lemma}
+    \begin{proof}
+        The absolute convergence of the power series gives its uniform convergence
+        on every compact subset of $(a - R, a + R)$. Note that this gives the
+        continuity of the power series. Now, note that \[
+            \limsup_{n \to \infty} |na_n|^{1 / n} = \lim_{n \to \infty} n^{1
+            /n}\cdot \limsup_{n \to \infty} |a_n|^{1 / n} = \limsup_{n \to \infty}
+            |a_n|^{1 /n},
+        \] so the series of derivatives of terms of the power series converges
+        absolutely on the same domain. This again gives the uniform convergence of
+        this series of derivatives of terms. Abel's Lemma gives uniform
+        convergence on all compact subsets. Thus, by the previous theorem, our power
+        series is differentiable, with the derivative equal to the series of
+        derivatives of terms.
+    \end{proof}
+    \begin{corollary}
+        A power series is infinitely differentiable on its interval of convergence.
+    \end{corollary}
+    \begin{example}
+        Consider $f\colon \R \to \R$, $x \mapsto \sin{x}$. We want to show that
+        $f'(x) = \cos{x}$. Write $f$ as a power series, \[
+            f(x) = \sum_{n = 0}^\infty \frac{(-1)^{2n}x^{2n + 1}}{(2n + 1)!}.
+        \] This converges absolutely on $\R$. Our lemma gives \[
+            f'(x) = \sum_{n = 0}^\infty \frac{(-1)^{2n}x^{2n}}{(2n)!} = \cos{x}.
+        \] 
+
+    \end{example}
     
 \end{document}
 % vim: set tabstop=4 shiftwidth=4 softtabstop=4:
