@@ -1,0 +1,159 @@
+\documentclass[10pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{hyperref}
+
+\title{Analysis II - Assignment III}
+\author{Satvik Saha}
+\date{}
+
+\geometry{a4paper, margin=1in}
+\setlength\parindent{0pt}
+\renewcommand{\labelenumi}{(\roman{enumi})}
+% \renewcommand\qedsymbol{$\blacksquare$}
+\def\C{\mathbb{C}}
+\def\R{\mathbb{R}}
+\def\Q{\mathbb{Q}}
+\def\Z{\mathbb{Z}}
+\def\N{\mathbb{N}}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}{Corollary}[theorem]
+
+\begin{document}
+    \par\textbf{IISER Kolkata} \hfill \textbf{Assignment III}
+    \vspace{3pt}
+    \hrule
+    \vspace{3pt}
+    \begin{center}
+            \LARGE{\textbf{MA 2201 : Analysis II}}
+    \end{center}
+    \vspace{3pt}
+    \hrule
+    \vspace{3pt}
+    Satvik Saha, \texttt{19MS154}\hfill\today
+    \vspace{20pt}
+    
+    \begin{lemma}
+        If $f\colon (a, b) \to \R$ is differentiable, then it is also continuous.
+    \end{lemma}
+    \begin{proof}
+        Let $c \in (a, b)$. On the domain, the limit $\lim_{x \to c} (x - c)$ exists
+        (and is equal to zero). The differentiability of $f$ guarantees that the
+        limit \[
+            f'(c) = \lim_{x \to c} \frac{f(x) - f(c)}{x - c}
+        \] also exists. This means that the limit of the product also exists, and
+        this gives \[
+            \lim_{x \to c}(x - a) \cdot \lim_{x\to c} \frac{f(x) - f(c)}{x - c} =
+            \lim_{x \to c} (x - c) \cdot \frac{f(x) - f(c)}{x - c} = \lim_{x \to c}
+            f(x) - f(c).
+        \] Thus, for all $c \in (a, b)$, \[
+            0 = \lim_{x \to c} f(x) - f(c), \qquad \lim_{x \to c} f(x) = f(c)
+        \] which gives the continuity of $f$.
+    \end{proof}
+
+    \begin{lemma}
+        If $f$ and $g$ are continuous, then so are $f + g$ and $fg$. The quotient $f
+        /g$ is continuous wherever $g(x) \neq 0$. \footnote{See results from the
+        \href{https://sahasatvik.github.io/assignments/MA1101/solutionsheet8.pdf}{first
+        semester}.}
+    \end{lemma}
+
+    \paragraph{Solution 1.} Given $f, g$ differentiable on $\R$. Note that they must
+    also be continuous, which means that the limits \[
+        \lim_{x \to c} f(x) = f(c), \qquad \lim_{x \to c} g(x) = g(c)
+    \] are well defined and exist. Differentiability guarantees that the limits
+    \[
+        f'(c) = \lim_{x \to c} \frac{f(x) - f(c)}{x - c}, \qquad 
+        g'(c) = \lim_{x \to c} \frac{g(x) - g(c)}{x - c}
+    \] also exist.
+    \begin{enumerate}
+        \item Let $h = f + g$. Note that $h$ is continuous. To show that $h$ is
+        differentiable on $\R$ with $h' = f' + g'$, consider 
+        \begin{align*}
+            \lim_{x \to c} \frac{h(x) - h(c)}{x - c} 
+                &= \lim_{x \to c} \frac{(f(x) + g(x)) - (f(c) + g(c))}{x - c} \\
+                &= \lim_{x \to c} \frac{(f(x) - f(c)) + (g(x) - g(c))}{x - c} \\
+                &= \lim_{x \to c} \frac{f(x) - f(c)}{x - c} + 
+                    \lim_{x \to c} \frac{g(x) - g(c)}{x - c} \\
+                &= f'(c) + g'(c).
+        \end{align*}
+        The limit can be separated because the individual limits exist. This
+        shows that $h$ is differentiable on $\R$.
+
+        \item Let $h = fg$. Again, $h$ is continuous. Consider the limit 
+        \begin{align*}
+            \lim_{x \to c} \frac{h(x) - h(c)}{x - c} 
+                &= \lim_{x \to c} \frac{f(x)g(x) - f(c)g(c)}{x - c} \\
+                &= \lim_{x \to c} \frac{f(x)g(x) - f(c)g(x) + 
+                    f(c)g(x) - f(c)g(c)}{x - c} \\
+                &= \lim_{x \to c}g(x)\cdot \lim_{x \to c}\frac{f(x) - f(c)}{x - c} 
+                    + f(c) \lim_{x \to c} \frac{g(x) - g(c)}{x - c} \\
+                &= g(c)f'(c) + f(c)g'(c).
+        \end{align*}
+        This shows that $fg$ is differentiable on $\R$, with $(fg)' = f'g + fg'$.
+
+        \item We show that $1 /g$ is differentiable on the domain where $g(x) \neq
+        0$, which in turn would imply the differentiability of $f / g$ by the
+        product rule above. Let $h = 1 /g$ on the domain where $g(x) \neq 0$. Note
+        that $g$ is continuous, which means that for any $c$ in its domain such that
+        $g(c) \neq 0$, there exists a non-empty neighbourhood $(c - \delta, c +
+        \delta)$ of $c$ where $g(x) \neq 0$. This means that the limit \[
+            \lim_{x \to c} h(x) = \lim_{x \to c} \frac{1}{g(x)} = \frac{1}{g(c)}
+        \] is well defined and exists. Now, 
+        \begin{align*}
+            \lim_{x \to c} \frac{h(x) - h(c)}{x - c} 
+                &= \lim_{x \to c} \frac{1 /g(x) - 1 /g(c)}{x - c} \\
+                &= -\lim_{x \to c} \frac{g(x) - g(c)}{g(x)g(c) (x - c)} \\
+                &= -\lim_{x \to c} \frac{1}{g(x)g(c)} \lim_{x \to c} \frac{g(x) -
+                g(c)}{x - c} \\
+                &= -\frac{1}{g(c)^2}\cdot g'(c).
+        \end{align*}
+        Thus shows that $1 /g$ is differentiable, with $(1 /g)' = -g' / g^2$. Hence,
+        $f /g$ is differentiable, with $(f /g)' = (f'g - fg')/g^2$.
+    \end{enumerate}
+
+    \paragraph{Solution 2.} Given $f$ and $g$ are continuous on $[a, b]$ and
+    differentiable on $(a, b)$. Define the function \[
+        h = (g(b) - g(a))\cdot f - (f(b) - f(a))\cdot g
+    \] on the same domain, and note that $h$ must be continuous on $[a, b]$ and
+    differentiable on $(a, b)$ since it is a linear combination of $f$ and $g$.
+    Also, \[
+        h(a) = f(a)g(b) - g(a)f(b) = h(b).
+    \] Thus, Rolle's Theorem guarantees the existence of $c \in (a, b)$ such that
+    $h'(c) = 0$, whence \[
+        f'(c)(g(b) - g(a)) = g'(c)(f(b) - f(a)).
+    \] 
+
+    \paragraph{Solution 3.} Consider the function \[
+        f\colon [-1, +1] \to \R, \qquad f(x) = x^3.
+    \] This function is continuous, and differentiable on $(-1, +1)$ as it is the
+    product of the differentiable identity functions. It is also strictly
+    increasing; given $x > y$, note that $x - y > 0$ and they both cannot be zero, 
+    so \[
+        f(x) - f(y) = x^3 - y^3 = (x - y)(x^2 + xy + y^2) 
+        = (x - y)\left[\left(x + \frac{1}{2}y\right)^2 + \frac{3}{4}y^2\right] > 0.
+        \] On the other hand\footnote{
+            Apply the product rule twice on the identity functions: $Dx = 1$ and  
+            $Dx^2 = x\:Dx + x\:Dx = 2x$, so $Dx^3 = x^2\:Dx + x\:Dx^2 = 3x^2$, where
+            $Df(x) \equiv f'(x)$.
+        }, \[
+        f'(x) = 3x^2, \qquad f'(0) = 0.
+    \] 
+
+    \paragraph{Solution 4.} Consider the function \[
+        f\colon (0, 2) \to \R, \qquad f(x) = \begin{cases}
+            x, &\text{ if } x < 1, \\
+            x + 1, &\text{ if } x \geq 1.
+        \end{cases}
+    \] Note that this is strictly increasing on $(0, 2)$, yet it is not continuous
+    at $x = 1$. Thus, it cannot be differentiable on $(0, 2)$.
+    
+    
+     
+    
+
+\end{document}

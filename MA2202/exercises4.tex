@@ -1,0 +1,259 @@
+\documentclass[10pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{cancel}
+\usepackage{xcolor}
+
+\title{Probability I - Assignment IV}
+\author{Satvik Saha}
+\date{}
+
+\geometry{a4paper, margin=1in}
+\setlength\parindent{0pt}
+\renewcommand{\labelenumi}{(\alph{enumi})}
+\renewcommand\CancelColor{\color{red}}
+% \renewcommand\qedsymbol{$\blacksquare$}
+\newcounter{prob}
+\def\problem{\stepcounter{prob}\paragraph{Exercise \arabic{prob}}}
+\def\solution{\paragraph{Solution}}
+
+\newcommand\op[1]{\operatorname{#1}}
+\newcommand\E[1]{E[#1]}
+
+\newtheorem*{lemma}{Lemma}
+
+\begin{document}
+        \par\textbf{IISER Kolkata} \hfill \textbf{Assignment IV}
+        \vspace{3pt}
+        \hrule
+        \vspace{3pt}
+        \begin{center}
+                \LARGE{\textbf{MA 2202 : Probability I}}
+        \end{center}
+        \vspace{3pt}
+        \hrule
+        \vspace{3pt}
+        Satvik Saha, \texttt{19MS154}, Group D\hfill\today
+        \vspace{20pt}
+
+        \problem If the probability distribution of a non-negative discrete random
+        variable $X$ is memoryless, show that $X \sim \op{Geometric}(p)$ for some $p
+        \in [0, 1]$.
+
+        \solution Set $P(X = 1) = p \in [0, 1]$ and $q = 1 - p$.
+        Now, the memorylessness of $X$ means that for all $m, n \in \mathbb{N}_0$, \[
+            P(X > m + n \,|\, X > n) = P(X > m), \qquad
+            P(X > m + n) = P(X > m)\, P(X > n).
+        \] We claim that \[
+            P(X > n) = q^{n}
+        \] for all $n \in \mathbb{N}$. First, note that \[
+            1 = P(X > 0 \,|\, X > 0) = P(X > 0), \qquad P(X = 0) = 1 - P(X > 0) = 0,
+        \] so \[
+            P(X > 1) = 1 - (P(X = 0) + P(X = 1)) = 1 - p = q^1,
+        \] which establishes our base case. Now, if $P(X > k) = q^{k}$ for some
+        $k > 1$, then \[
+            P(X > k + 1) = P(X > k) \, P(X > 1) = q^{k} \cdot q = q^{k + 1},
+        \] which establishes $P(X > n) = q^n$ by induction.
+        Now, \[
+            P(X = n) = P(X > n - 1) - P(X > n) = q^{n - 1} - q^n = (1 - q)q^{n - 1} 
+            = pq^{n - 1},
+        \] which means that $X \sim \op{Geometric}(p)$ as desired.
+        
+
+        \problem If the probability distribution of a non-negative continuous random
+        variable $X$ is memoryless, show that $X \sim \op{Exponential}(\lambda)$ for
+        some $\lambda > 0$.
+
+        \solution Choose $\lambda \geq 0$ such that $P(X > 1) = e^{-\lambda} < 1$.
+        The memorylessness of $X$ means that for all $s, t > 0$, \[
+            P(X > s + t \,|\, X > t) = P(X > s), \qquad 
+            P(X > s + t) = P(X > s) \, P(X > t).
+        \]
+        We claim that the cumulative distribution function of $X$ must be of the
+        form \[
+            P(X > s) = e^{-\lambda s}.
+        \] First, note that $P(X \geq 0) = P(X > 0) = 1$ from the non-negativity of
+        $X$. Also, $P(X > 1) = e^{-\lambda}$. To show this holds for all natural
+        numbers, suppose that $P(X > k) = e^{-\lambda k}$ for some $k \in
+        \mathbb{N}$. Then,
+        \[
+            P(X > k + 1) = P(X > k)\, P(X > 1) = e^{-\lambda k}\cdot e^{-\lambda} =
+            e^{-\lambda (k + 1)}
+        \] which establishes $P(X > n) = e^{-\lambda n}$ for all $n \in
+        \mathbb{N}_0$. Now, for any real number $x$ and $m \in \mathbb{N}$, note 
+        that \[
+            P(X > mx) = P(X > x)\cdot P(X > (m - 1)x) = \dots = \left[P(X >
+            x)\right]^m.
+        \] This means that for any rational $p / q$ where $p, q \in \mathbb{N}$, we
+        have \[
+            P(X > p) = \left[ P(X > p / q) \right]^q, \qquad
+            P(X > p / q) = \left[ P(X > p) \right]^{1 / q} = \left[e^{-\lambda
+            p}\right]^{1 / q} = e^{-\lambda p / q},
+        \] so $P(X > r) = e^{-\lambda r}$ for all positive rationals $r \in
+        \mathbb{Q}_+$. Now, the rationals are dense in the reals and the cumulative
+        distribution function of a continuous random variable is continuous (hence
+        so is $P(X > x) = 1 - P(X \leq x)$).
+        This means that we can find a sequence of rationals $r_n \to x$, so \[
+            P(X > x) = \lim_{n \to \infty} P(X > r_n) = \lim_{n \to \infty}
+            e^{-\lambda r_n} = e^{-\lambda x}.
+        \] Thus, $P(X > x) = e^{-\lambda x}$  for all non-negative real numbers $x
+        \in \mathbb{R}_+$. Furthermore, note that \[
+            P(X \leq x) = 1 - e^{-\lambda x} = 
+                \int_0^x \lambda e^{-\lambda t}\:dt =
+                \int_{-\infty}^{+\infty} \lambda e^{-\lambda t}\, u(t)\:dt,
+        \] where $u(t)$ is the step function which assumes the value $0$ for all $x
+        < 0$ and $1$ for all $x \geq 0$. Thus, we have found a probability density
+        function \[
+            f_X(x) = \lambda e^{-x}\, u(x),
+        \] which is precisely that of an exponential distribution. Hence, $X \sim
+        \op{Exponential}(\lambda)$. Finally, we eliminate $\lambda = 0$ since that
+        gives an identically zero probability density function.
+
+        \problem Let $X$ be a random variable. Find $\E{X}$ in each of the following
+        cases. \begin{enumerate}
+            \itemsep0em
+            \item $X \sim \op{Geometric}(p)$.
+            \item $X \sim \op{Poisson}(\lambda)$.
+            \item $X \sim \op{Exponential}(\lambda)$.
+            \item $X \sim \op{Pascal}(n, p)$.
+        \end{enumerate}
+
+        \solution We state and prove the following lemma. 
+        \begin{lemma}
+            If $X$ is a non-negative discrete random variable with finite
+            expectation, then \[
+                \E{X} = \sum_{n = 0}^\infty P(X > n).
+            \]
+        \end{lemma}
+        \begin{proof}
+            Note that \[
+                P(X > n - 1) = P(X = n) + P(X > n).
+            \] Thus, \[
+                \E{X} = \sum_{n = 1}^\infty n\,P(X = n) = \sum_{n = 1}^\infty
+                n\left[P(X > n - 1) - P(X > n)\right] = \sum_{n = 1}^\infty n\, P(X
+                > n - 1) - \sum_{n = 1}^\infty n\, P(X > n).
+            \] Reshuffling indices, \[
+                \E{X} = \sum_{n = 0}^\infty (n + 1)\,P(X > n) - \sum_{n = 1}^\infty
+                n\, P(X > n) = P(X > 0) + \sum_{n = 1}^\infty (n + 1 - n)\, P(X >
+                n),
+            \] which gives \[
+                \E{X} = \sum_{n = 0}^\infty P(X > n). \qedhere
+            \] 
+        \end{proof}
+
+        \begin{enumerate}
+            \item We have the probability mass function \[
+                P(X = n) = pq^{n - 1},
+            \] where $q = 1 - p$ and $n = 1, 2, \dots$. Now, \[
+                P(X > n) = \sum_{k = n + 1}^\infty pq^{k - 1} = pq^n \cdot
+                \frac{1}{1 - p} = q^n.
+            \] Thus, 
+            \[
+                \E{X} = \sum_{n = 0}^\infty P(X > n)
+                = \sum_{n = 0}^\infty q^n = \frac{1}{1 - q} = \frac{1}{p}.
+            \] Note that $p > 0$. 
+
+            \item We have the probability mass function \[
+                P(X = n) = \frac{\lambda^n}{n!}e^{-\lambda}.
+            \] Now, \[
+                \E{X} = \sum_{n = 1}^\infty n\cdot \frac{\lambda^n}{n!}e^{-\lambda}
+                = \lambda e^{-\lambda}\sum_{n = 1}^\infty 
+                    \frac{\lambda^{n - 1}}{(n - 1)!}
+                = \lambda e^{-\lambda}e^{\lambda} = \lambda.
+            \] 
+
+            \item We have the probability density function \[
+                f_X(x) = \lambda e^{-\lambda x}.
+            \] Thus, \[
+                \E{X} = \int_0^\infty x\,f_X(x)\:dx =
+                \int_{0}^\infty \lambda xe^{-\lambda x}\:dx =
+                -\cancel{xe^{-\lambda x}\Big|_0^\infty}
+                + \int_0^\infty e^{-\lambda x}\:dx =
+                \frac{1}{\lambda}e^{-\lambda x}\Big|_0^\infty = \frac{1}{\lambda}.
+            \] 
+
+            \item We have the probability mass function \[
+                P(X = k) = \binom{k - 1}{n - 1}p^n q^{k - n}
+            \] where $q = 1- p$ and $k \geq n$. Now, note that $X \sim
+            \op{Pascal}(n, p)$ represents the number of Bernoulli trials required
+            for getting $n$ successes. If $X_i \sim \op{Geometric}(p)$, then each
+            $X_i$ denotes the number of Bernoulli trials until $1$ success. Thus, we
+            can write \[
+                X = X_1 + X_2 + \dots + X_n,
+            \] since the total number of trials must add up. The set of $X_i$
+            contains identical and independent random variables. Using linearity of
+            expectation (shown in the next problem), \[
+                \E{X} = \sum_{k = 1}^n \E{X_k} = \frac{n}{p}.
+            \] 
+        \end{enumerate}
+
+        \problem
+        \begin{enumerate}
+            \itemsep0em
+            \item Let $X_1, X_2, \dots, X_n$ be random variables which are all
+            defined on the same sample space $\Omega$, each of which has finite
+            expectation. Show that \[
+                \E{a_1X_1 + \dots + a_nX_n} = a_1\E{X_1} + \dots + a_n\E{X_n}
+            \] for all $a_1, a_2, \dots, a_n \in \mathbb{R}$.
+
+            \item Deduce the expectation value of a Binomial random variable from
+            the expectation of a Bernoulli random variable.
+        \end{enumerate}
+
+        \solution \begin{enumerate}
+            \item First, let $X_i$ be discrete random variables. Now, for discrete
+            variables $X$ and $Y$ and $a \in \mathbb{R}$, \[
+                \E{aX} = \sum_{x} (ax)\,P(aX = ax) = a\sum_{x} x\,P(X = x) = a\E{X},
+            \] and 
+            \begin{align*}
+                \E{X + Y} &= \sum_{x, y} (x + y) \,P(X = x, Y = y) \\
+                    &= \sum_{xy}x\,P(X = x, Y = y) + \sum_{xy} y\,P(X = x, Y = y) \\ 
+                    &= \sum_x x\,P(X = x) + \sum_y y\,P(Y = y) \\
+                    &= \E{X} + \E{Y}.
+            \end{align*}
+            We have used the fact that \[
+                \sum_{xy} x \,P(X = x, Y = y) = \sum_x x\sum_y P(X = x, Y = y) =
+                \sum_x x P(X = x).
+            \] 
+            Using these two rules finitely many times, we have \[
+                \E{a_1X_1 + a_2X_2 + \dots + a_nX_n} = a_1\E{X_1} + \E{a_2X_2 +
+                \dots + a_nX_n} = \dots = a_1\E{X_1} + \dots + a_n\E{X_n}.
+            \] 
+
+
+            Now, let $X_i$ be continuous random variables. Again, \[
+                \E{aX} = \int_\mathbb{R} ax\, f_X(x)\:dx = a\E{X}.
+            \] Also,
+            \begin{align*}
+                \E{X + Y} &= \iint_{\mathbb{R}^2} (x + y)\,f_{X, Y}(x, y)\:dx\:dy \\ 
+                    &= \iint_{\mathbb{R}^2} x\,f_{X, Y}(x, y)\:dx\:dy +
+                    \iint_{\mathbb{R}^2} y\,f_{X, Y}(x, y)\:dy\:dx \\
+                    &= \int_{\mathbb{R}} x\, f_X(x)\:dx + \int_{\mathbb{R}}
+                    y\,f_Y(y)\:dy \\
+                    &= \E{X} + \E{Y}.
+            \end{align*}
+            Here, we have used \[
+                \int_{\mathbb{R}} f_{X, Y}(x, y)\:dy = f_X(x).
+            \] 
+            Like before, we use these two rules finitely many times to get \[
+                \E{a_1X_1 + a_2X_2 + \dots + a_nX_n} = \dots = 
+                a_1\E{X_1} + \dots + a_n\E{X_n}.
+            \] 
+
+
+            \item Note that if $X \sim \op{Binomial}(n, p)$, we can write it as the sum
+            of $X_i \sim \op{Bernoulli}(p)$ as \[
+                X = X_1 + \dots + X_n.
+            \] The expectation of a Bernoulli random variable is \[
+                \E{X_i} = 0\cdot (1 - p) + 1\cdot p = p.
+            \] Thus, linearity of expectation gives the expectation of the Binomial
+            random variable as \[
+                \E{X} = \sum_{k = 1}^n \E{X_k} = np.
+            \] 
+        \end{enumerate}
+        
+\end{document}
