@@ -16,6 +16,7 @@
 \usepackage{bm}
 \usepackage{braket}
 \usepackage{siunitx}
+\usepackage[scr=boondoxupr]{mathalpha}
 
 \geometry{a4paper, margin=1in, headheight=14pt}
 
@@ -799,6 +800,7 @@
     $\sqrt{2E / m}$.
 
     \section{Scattering problems and quantum tunnelling}
+    \subsection{Step function potential}
     Consider a potential of the form \[
         V(x) = V_0\, u(x) = \begin{cases}
             0, &\text{ if }x < 0 \\
@@ -815,7 +817,7 @@
     \[
         \psi(x) = \begin{cases}
             Ae^{ik_1x} + Be^{-ik_1x}, & x < 0, \quad k_1 = \sqrt{2mE / \hbar^2}, \\
-            Ce^{ik_2x} + De^{-ik_2x}, & x \geq 0, \quad k_1 = \sqrt{2m(E - V_0) /
+            Ce^{ik_2x} + De^{-ik_2x}, & x \geq 0, \quad k_2 = \sqrt{2m(E - V_0) /
             \hbar^2}.
         \end{cases}
     \] We choose $D = 0$ on physical grounds, since we have a free particle coming
@@ -831,7 +833,7 @@
     \] When $E < V_0$, we have \[
         \psi(x) = \begin{cases}
             Ae^{ik_1x} + Be^{-ik_1x}, & x < 0, \quad k_1 = \sqrt{2mE / \hbar^2}, \\
-            Ce^{k_2x} + De^{-k_2x}, & x \geq 0, \quad k_1 = \sqrt{2m(V_0 - E) /
+            Ce^{k_2x} + De^{-k_2x}, & x \geq 0, \quad k_2 = \sqrt{2m(V_0 - E) /
             \hbar^2}.
         \end{cases}
     \] This time, we set $C = 0$ and $A = 1$. The boundary conditions $1 + B = D$
@@ -843,6 +845,53 @@
     This phenomenon is called \textit{quantum tunnelling}.
     There is an analogy here with evanescent waves during total internal reflection.
 
+    \subsection{Finite potential barrier}
+    Consider a potential of the form \[
+        V(x) = \begin{cases}
+            0, &\text{ if }x < 0 \\
+            V_0, &\text{ if } 0 \leq x \leq a \\
+            0, &\text{ if } a < x
+        \end{cases}
+    \] We solve this as \[
+        \psi(x) = \begin{cases}
+            e^{ik_1x} + re^{-ik_1x}, & x < 0, \quad\qquad\! k_1 = \sqrt{2mE /
+            \hbar^2}, \\
+            Ae^{ik_2x} + Be^{-ik_2x}, & 0 \leq x \leq a, \quad k_2 = \sqrt{2m(E -
+            V_0) / \hbar^2}, \\
+            te^{ik_1x}, & a < x.
+        \end{cases}
+    \] Applying our boundary conditions, \[
+        1 + r = A + B, \qquad k_1(1 - r) = k_2(A - B),
+    \] \[
+        te^{ik_1a} = Ae^{ik_2a} + Be^{-ik_2a}, \qquad 
+        k_1te^{ik_1a} = k_2(Ae^{ik_2a} - Be^{-ik_2a}). \quad
+    \] Set $\mu = k_2 /k_1 = \sqrt{1 - V_0 /E}$, and $\mathscr{A} = (1 +
+    \mu^2)\sin{k_2a} + 2\mu i\cos{k_2 a}$. We can show that \[
+        r = (1 - \mu^2)\sin{k_2a} / \mathscr{A}, \qquad 
+        t = 2\mu ie^{-ik_1a} / \mathscr{A}, \qquad\quad
+    \] \[
+        A = i(1 + \mu)e^{-ik_2a} / \mathscr{A}, \qquad 
+        B = -i(1 - \mu)e^{ik_2a} / \mathscr{A}.
+    \] When $E > 0$ and $E \geq V_0$, the transmission coefficient $T = |t|^2$ is
+    given by \[
+        T = \frac{4\mu^2}{(1 + \mu^2)^2\sin^2{k_2a} + 4\mu^2\cos^2{k_2a}} = 
+        \frac{1}{1 + \frac{1}{4}\left(\frac{1 - \mu^2}{\mu}\right)^2 \sin^2{k_2a}}.
+    \] Note that $T \leq 1$, and $R = 1 - T$. Whenever $k_2a = n\pi$, the system is
+    in resonance and we get perfect transmission. Also, \[
+        E_n = V_0 + \frac{n^2\pi^2\hbar^2}{2ma^2}.
+    \] Note the similarities with the `particle in a box' system, and a Fabry-Perot
+    interferometer cavity. Thus, we have standing waves formed in the region $[0,
+    a]$ at such resonance energies.
+
+    On the other hand, in the limit $E \to V_0^+$ and for very small $a$, we have \[
+        T \approx 1 - \frac{mV_0a^2}{2\hbar^2}.
+    \] 
+
+    When $E < V_0$, the quantity $k_2$ is imaginary, say $k_2 = iK$. With $\mu' =
+    k_1 / K$, \[
+        T = \frac{4\mu'^2}{(1 - \mu'^2)\sinh^2{Ka} + 4\mu'^2\cosh^2{Ka}}.
+    \] As $E \to 0^+$, we have $T \to 0$ and $R \to 1$. This is another case of
+    quantum tunnelling.
 
 \end{document}
 % vim: set tabstop=4 shiftwidth=4 softtabstop=4:
