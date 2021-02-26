@@ -473,7 +473,26 @@
         \] This converges absolutely on $\R$. Our lemma gives \[
             f'(x) = \sum_{n = 0}^\infty \frac{(-1)^{2n}x^{2n}}{(2n)!} = \cos{x}.
         \] 
-
+    \end{example}
+    \begin{example}
+        Consider the function \[
+            f\colon \R \to \R, \qquad 
+            f(x) = \begin{cases}
+                e^{- 1 / x}, &\text{ if }x > 0, \\
+                0, &\text{ if } x \leq 0.
+            \end{cases}
+        \] This function is differentiable everywhere. This is easily seen when $x
+        \neq 0$. For $x = 0$, the left hand limit is simply \[
+            \lim_{x \to 0^-} \frac{f(x) - f(0)}{x} = 0,
+        \] and from the positive side, \[
+            \lim_{x \to 0^+} \frac{f(x) - f(0)}{x} = \lim_{x \to 0^+}
+            \frac{e^{-1 /x}}{x} = 0.
+        \] Hence, $f'(0) = 0$. Indeed, \[
+            \lim_{x \to 0^+} \frac{e^{-1 /x}}{p(x)} = 0
+        \] for any polynomial $p(x)$, which means that $f$ is infinitely
+        differentiable, with $f^{(n)}(0) = 0$. This means that if $f$ has a power
+        series centred at $x = 0$, all its coefficients must be identically zero.
+        Thus, $f$ has no power series around $x = 0$.
     \end{example}
     
 \end{document}
