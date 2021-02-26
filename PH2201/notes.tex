@@ -893,5 +893,35 @@
     \] As $E \to 0^+$, we have $T \to 0$ and $R \to 1$. This is another case of
     quantum tunnelling.
 
+    \section{The Schr\"odinger equation in 3D}
+    \subsection{Particle in a 3D box}
+    Consider a potential of the form \[
+        V(\ve{r}) = \begin{cases}
+            0, &\text{ if } 0 < x < a,\; 0 < y < b,\; 0 < z < c \\
+            \infty, &\text{ otherwise }
+        \end{cases}
+    \] We perform separation of variables \[
+        \psi(\ve{r}) = \psi_x(x)\,\psi_y(y)\,\psi_z(z),
+    \] and plug this into the time independent Schr\"odinger equation inside the box
+    \[
+        -\frac{\hbar^2}{2m}\lapl{\psi} = E\psi.
+    \] This gives \[
+        \sum \frac{1}{\psi_i}\pp[2]{\psi_i}{x_i} = -\frac{2mE}{\hbar^2}.
+    \] We can thus write \[
+        \frac{1}{\psi_x}\pp[2]{\psi_x}{x} = -\frac{2mE_x}{\hbar^2}, \qquad
+        \frac{1}{\psi_y}\pp[2]{\psi_y}{y} = -\frac{2mE_y}{\hbar^2}, \qquad
+        \frac{1}{\psi_z}\pp[2]{\psi_z}{z} = -\frac{2mE_z}{\hbar^2}.
+    \] We know how to solve these equations; these just give the one dimensional
+    `particle in a box' solutions. Thus, 
+    \begin{boxedeq*}
+        \psi(\ve{r}) = A \sin\frac{n_x\pi x}{a}\sin\frac{n_y\pi
+        x}{b}\sin\frac{n_z\pi x}{c}, \qquad 
+        E = \frac{\hbar^2\pi^2}{2m}\left(\frac{n_x^2}{a^2} + \frac{n_y^2}{b^2} +
+        \frac{n_z^2}{c^2}\right).
+    \end{boxedeq*}
+    Note that the ground state corresponds to $n_x = n_y = n_z = 1$.
+    
+    
+
 \end{document}
 % vim: set tabstop=4 shiftwidth=4 softtabstop=4:
