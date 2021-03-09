@@ -471,6 +471,32 @@
         \] 
     \end{theorem}
 
+    \begin{definition}[Moment generating function]
+        Let $X$ be a random variable such that $\E{e^{|tX|}}$ is finite for all $t$ 
+        in a neighbourhood of the origin. Then, the moment generating function for
+        $X$ is defined in this neighbourhood as \[
+            M_X(t) = \E{e^{tX}} = 1 + t\E{X} + \frac{1}{2}t^2\E{X^2} + \dots
+        \] 
+        \begin{remark}
+            By writing the moment generating function as a Maclaurin series, we see
+            that \[
+                \dd[n]{}{t}M_X(t)\Big|_{t = 0} = \E{X^n}.
+            \] Also note that \[
+                M_{X + Y} = M_X + M_Y.
+            \] 
+        \end{remark}
+    \end{definition}
+
+    \begin{theorem}
+        A moment generating function determines its corresponding random variable
+        completely. They are related via the Laplace transform and its inverse. \[
+            M_X(t) = \mathcal{L}\{f_X\}(-t).
+        \] 
+    \end{theorem}
+
+    % \begin{theorem}[Central Limit Theorem]
+    % \end{theorem}
+
 
 \end{document}
 % vim: set tabstop=4 shiftwidth=4 softtabstop=4:
