@@ -47,6 +47,12 @@
 \newcommand\lapl[1]{\nabla^2 #1}
 \newcommand\E[1]{\langle #1 \rangle}
 
+\def\vr{\ve{r}}
+\def\vp{\ve{p}}
+\def\vL{\ve{L}}
+\def\vJ{\ve{J}}
+\def\vS{\ve{S}}
+
 \newmdtheoremenv[%
     backgroundcolor=blue!10!white,%
 ]{theorem}{Proposition}[section]
@@ -892,7 +898,7 @@
         T = \frac{4\mu'^2}{(1 - \mu'^2)\sinh^2{Ka} + 4\mu'^2\cosh^2{Ka}}.
     \] As $E \to 0^+$, we have $T \to 0$ and $R \to 1$. This is another case of
     quantum tunnelling.
-
+    
     \section{The Schr\"odinger equation in 3D}
     \subsection{Particle in a 3D box}
     Consider a potential of the form \[
@@ -921,6 +927,35 @@
     \end{boxedeq*}
     Note that the ground state corresponds to $n_x = n_y = n_z = 1$.
     
+    \subsection{Angular momentum}
+    We write \[
+        \vL = \vr \times \vp = L_x\hat{i} + L_y\hat{j} + L_z\hat{k}, \qquad
+        L_i = x_jp_k - x_kp_j.
+    \] It can be shown that $\vL$ is Hermitian. Furthermore, the commutators are of
+    the form \[
+        [L_x, L_y] = i\hbar L_z, \qquad 
+        [L_y, L_z] = i\hbar L_x, \qquad 
+        [L_z, L_x] = i\hbar L_y.
+    \] This immediately gives us uncertainty relations between the different
+    components of the angular momentum. In other words, simultaneous eigenstates of
+    any pair of $L_x, L_y, L_z$ do not exist. However, note that \[
+        [L^2, L_i] = 0, \qquad
+        L^2 = L_x^2 + L_y^2 + L_z^2.
+    \] Thus, we can get simultaneous eigenfunctions of $L^2$ and any one component,
+    say $L_z$.
+
+    The total angular momentum $\vJ$ of an atomic system is given as the sum of 
+    the orbital and spin angular momenta. \[
+        \vJ = \vL + \vS.
+    \] We get back the commutation relations exactly the same as for $\vL$.
+    Now, we define the ladder operators \[
+        J_+ = J_x + iJ_y, \qquad J_- = J_x - iJ_y, \qquad 
+        [J_x, J_y] = 2\hbar J_z.
+    \] Again, $J_+^* = J_-$, which means that the ladder operators are not Hermitian.
+    Now, let $\psi$ be a simultaneous eigenstate of $J^2$ and $J_z$, with $J^2\psi =
+    \alpha\psi$ and $J_z\psi = \beta\psi$. Setting $\varphi = J_+\psi$, we have \[
+        J^2\varphi = \alpha\varphi.
+    \] 
     
 
 \end{document}
