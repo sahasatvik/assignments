@@ -446,7 +446,7 @@
     \begin{lemma}
         If a power series converges absolutely on $(a - R, a + R)$, then it is
         differentiable, with the derivative being \[
-            \sum_{n = 1}^\infty na_n(x - a)^n.
+            \sum_{n = 1}^\infty na_n(x - a)^{n - 1}.
         \]
     \end{lemma}
     \begin{proof}
@@ -494,6 +494,72 @@
         series centred at $x = 0$, all its coefficients must be identically zero.
         Thus, $f$ has no power series around $x = 0$.
     \end{example}
-    
+
+    \begin{definition}
+        We notate the $n$\textsuperscript{th} derivative of a function $f$ as \[
+            f^{(n)} = \dd[n]{f}{x} = \underbrace{\ddx{}\left(\ddx{}\left(\dots
+            \ddx{f}\dots\right)\right)}_{n\text{ times }}.
+        \] 
+    \end{definition}
+    \begin{example}
+        Consider \[
+            f\colon \R \to \R, \qquad x \mapsto x^m.
+        \] Differentiating $n$ times, we write \[
+            f^{(n)}(x) = \dd[n]{}{x}x^m = \begin{cases}
+                m(m - 1)\dots(m - n + 1) x^{m - n} &\text{ if } n \leq m, \\
+                0 &\text{ if } n > m.
+            \end{cases}
+        \] 
+    \end{example}
+    \begin{example}
+        Consider \[
+            f\colon \R \to \R, \qquad x \mapsto \sin{x}.
+        \] Differentiating $n$ times, we write \[
+            f^{(n)}(x) = \dd[n]{}{x}\sin{x} = \sin\left(x + \frac{n\pi}{2}\right).
+        \] 
+    \end{example}
+    \begin{theorem}
+        Let $f$ be differentiable $n$ times at $x$, and let it be of the form \[
+            f = g\cdot h
+        \] where $g$ and $h$ are also differentiable $n$ times at $x$. Then, \[
+            f^{(n)}(x) = \sum_{k = 0}^n \binom{n}{k}g^{(k)}(x)h^{(n - k)}(x).
+        \] 
+    \end{theorem}
+    \begin{proof}
+        For $n = 1$, this is simply the product rule. Suppose that this is true for
+        some $n \geq 1$. Then, \[
+            f^{(n + 1)}(x) = \ddx{}f^{(n)}(x) = \sum_{k = 0}^n
+            \binom{n}{k}\ddx{}\left[g^{(k)}(x)h^{(n - k)}(x)\right].
+        \] Now, \[
+            \ddx{}\left[g^{(k)}(x)h^{(n - k)}(x)\right] = g^{(k + 1)}(x)h^{(n -
+            k)}(x) + g^{(k)}(x)h^{(n - k + 1)}(x).
+        \] Plugging this back in and shifting indices, \[
+            f^{(n + 1)}(x) = \sum_{k = 1}^{n + 1} \binom{n}{k -
+            1}g^{(k)}(x)h^{(n - k + 1)}(x) + \sum_{k = 0}^{n} \binom{n}{k}
+            g^{(k)}(x)h^{(n - k + 1)}(x).
+        \] Separating the first and last terms and using \[
+            \binom{n}{k - 1} + \binom{n}{k} = \binom{n + 1}{k}
+        \] completes the proof by induction.
+    \end{proof}
+
+    \begin{lemma}
+        Suppose that $p(x)$ is a polynomial of degree $n$, and we have been given the
+        values \[
+            b_i = \frac{p^{(n)}(a)}{n!}
+        \] for all $i = 0, \dots, n$. Then, the polynomial is uniquely determined,
+        as \[
+            p(x) = b_0 + b_1(x - a) + \dots + b_n(x - a)^n.
+        \] 
+    \end{lemma}
+
+    \begin{definition}[Taylor polynomial]
+        Let $f\colon [a, b] \to \R$ be a continuous function such that $f', f'',
+        \dots, f^{(n - 1)}$ are also continuous. Then, for $x_0 \in (a, b)$, 
+        the polynomial \[
+            p(x) = \sum_{k = 0}^n \frac{f^{(k)}(x_0)(x - x_0)^k}{k!}
+        \] is called the Taylor polynomial of $f$ of degree $n$ about the point
+        $x_0$.
+    \end{definition}
+
 \end{document}
 % vim: set tabstop=4 shiftwidth=4 softtabstop=4:
