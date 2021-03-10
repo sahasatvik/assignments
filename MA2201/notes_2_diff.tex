@@ -554,12 +554,77 @@
 
     \begin{definition}[Taylor polynomial]
         Let $f\colon [a, b] \to \R$ be a continuous function such that $f', f'',
-        \dots, f^{(n - 1)}$ are also continuous. Then, for $x_0 \in (a, b)$, 
+        \dots, f^{(n)}$ are also continuous. Then, for $x_0 \in (a, b)$, 
         the polynomial \[
             p(x) = \sum_{k = 0}^n \frac{f^{(k)}(x_0)(x - x_0)^k}{k!}
         \] is called the Taylor polynomial of $f$ of degree $n$ about the point
         $x_0$.
+        \begin{remark}
+            Note that \[
+                p(x_0) = f(x_0), \quad
+                p'(x_0) = f'(x_0), \quad
+                p''(x_0) = f''(x_0), \;\; \dots \;\;
+                p^{(n)}(x_0) = f^{(n)}(x_0).
+            \] 
+        \end{remark}
     \end{definition}
+
+    \begin{definition}
+        A polynomial $p$ is said to approximate a function $f$ up to the order $n$
+        near a point $x_0$ if for every $\epsilon > 0$, there exists a $\delta$
+        neighbourhood of $x_0$ where for all $k = 0, \dots, n$, \[
+            |f^{(k)}(x) - p^{(k)}(x)| < \epsilon
+        \]
+    \end{definition}
+
+    \begin{lemma}
+        The Taylor polynomial of degree $n$ of a function $f$ approximates it up to 
+        order $n$.
+    \end{lemma}
+    \begin{proof}
+        Note that \[
+            |f^{(k)}(x) - p^{(k)}(x)| \leq |f^{(k)}(x) - f^{(k)}(x_0)| + 
+                |f^{(k)}(x_0) - p^{(k)}(x_0)| + |p^{(k)}(x_0) - p^{(k)}(x)|.
+        \] For the Taylor polynomial, the central term is zero. The continuity of
+        $f^{(k)}$ and $p^{(k)}$ allow us to control the remaining terms, giving the
+        desired result.
+    \end{proof}
+
+    \begin{definition}[Remainder]
+        Let $p$ approximate $f$ up to order $n$. Then, the remainder term is defined
+        on the interval of approximation as \[
+            R_{n + 1}(x) = f(x) - p(x).
+        \] 
+    \end{definition}
+
+    \begin{definition}[Big $O$ and small $o$ notation]
+        Let $f$ and $g$ be two functions on a neighbourhood of $x_0$. We say that $f
+        \sim O(g)$ near $x_0$ if there exists $M > 0$ such that \[
+            \frac{|f(x)|}{|g(x)|} \leq M
+        \] for all points $x$ near $x_0$.
+
+        We say that $f \sim o(g)$ near $x_0$ if \[
+            \lim_{x \to x_0} \frac{|f(x)|}{|g(x)|} = 0.
+        \] 
+    \end{definition}
+
+    \begin{theorem}[Taylor's theorem]
+        Let $f\colon [a, b] \to \R$ be such that $f, f', \dots, f^{(n + 1)}$ are
+        continuous. Then, \[
+            f(x) = p(x) + R_{n + 1}(x)
+        \] where $p$ is the Taylor polynomial of degree $n$ of 
+        $f$ around some point $x_0 \in (a, b)$, and $R_{n + 1}$ is defined as \[
+            R_{n + 1}(x) = \frac{f^{(n + 1)}(c)(x - x_0)^{n + 1}}{(n + 1)!}
+        \] for some $c$ between $x$ and $x_0$.
+
+        \begin{remark}
+            The former form of $R_{n + 1}$ is called Lagrange's form. The following
+            is Cauchy's form; for $0 < \theta < 1$, \[
+                R_{n + 1}(x) = \frac{f^{(n + 1)}(x_0 + \theta(x - x_0))(x -
+                x_0)^{n + 1}(1 - \theta)^n}{n!}
+            \] 
+        \end{remark}
+    \end{theorem}
 
 \end{document}
 % vim: set tabstop=4 shiftwidth=4 softtabstop=4:
