@@ -167,7 +167,7 @@
 
     \subsection{Basic assumptions}
     \begin{enumerate}
-        \itemsep0 
+        \itemsep0em 
         \item Gases are made up of a large number of molecules, and all molecules of
         one gas are identical.
         \item Molecules of a gas are always moving. The number of molecules per unit
@@ -201,7 +201,7 @@
 
     We look at some absurdities of this model.
     \begin{enumerate}
-        \itemsep0
+        \itemsep0em
         \item How do point masses collide?
         \item If two gases of different temperatures are mixed, how do they exchange
         heat?
@@ -584,6 +584,47 @@
         \frac{\displaystyle\int \beta_j \xi_j^2 e^{-\beta_j\xi_j^2 / k_B T}
         \:d\xi_j}{\displaystyle\int e^{-\beta_j\xi_j^2 / k_BT}\:d\xi_j} =
         \frac{1}{2}k_BT.
+    \] 
+
+    \subsection{Transport phenomena}
+    We make a distinction between \textit{random motion} and \textit{mass motion}.
+    When a gas is at equilibrium, quantities such as temperature, density, pressure,
+    etc.\ are uniform over the entire volume. However, a gas may not be in
+    equilibrium, in which case there will be a tendency to restore equilibrium by
+    `movement' of the quantities which are not uniform. If the temperature in a gas
+    is not uniform, we have transport of heat; if the density is not uniform, we
+    have a bulk transport of mass. These are diffusion phenomena; while the gas
+    particles are always in random motion, there is an overall `flow' which is
+    directed from a region of higher concentration (of heat, mass, etc) to lower
+    concentration.
+
+    \subsubsection{Viscosity}
+    Consider the presence of mass motion (with a certain flow velocity) in addition
+    to thermal motion. Also assume that the flow velocity increases uniformly in a
+    direction perpendicular to the motion. Let the flow velocity be $u_0$ in the
+    positive $y$ direction. Then, at a volume $dV$ located at $(r, \theta, \phi)$,
+    we have a flow velocity \[
+        u_0 + r\cos\theta\,\pp{u}{z}.
+    \] The term $\partial u / \partial z$ is the velocity gradient.
+    We repeat the procedure of choosing a small area $\Delta S$ on the $xy$ plane to
+    get the number of molecules colliding as \[
+        dN = \frac{\cos\theta \Delta S}{4\pi r^2}\cdot \frac{\E{c}\Delta
+        t}{\lambda}\cdot e^{-r / \lambda}\,n\:dV.
+    \] We have already averaged over the speeds $c$. Now, if all these molecules
+    retain their flow velocity from $dV$ after collision, there is a transfer of
+    momentum from that $z$ layer to the $xy$ plane, given by \[
+    \] There is a symmetric layer on the other side of the plane which transfers a
+    momentum \[
+        m\left(u_0 - r\cos\theta\,\pp{u}{z}\right)\:dN
+    \] in the opposite direction. Thus, the net momentum transfer is \[
+        2mr\cos\theta\,\pp{u}{z}\:dN.
+    \] Integrating over the upper half volume, we get a momentum transfer of \[
+        \Delta p = \frac{1}{3}mn\E{c}\lambda \pp{u}{z}\Delta S\:\Delta t.
+    \] Recall that when a shear force is applied on a layer, we have \[
+        F = \eta \pp{u}{z}\Delta S,
+    \] where $\eta$ is the coefficient of viscosity. Comparing this with $\Delta p /
+    \Delta t$, we get \[
+        \eta = \frac{1}{3}mn\E{c}\lambda = \frac{m\E{c}}{3\sqrt{2}\pi\sigma^2}.
     \] 
 
 \end{document}
