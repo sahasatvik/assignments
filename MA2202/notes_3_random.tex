@@ -486,6 +486,19 @@
             \] 
         \end{remark}
     \end{definition}
+    \begin{example}
+        Consider a Bernoulli random variable $X$. Its moment generating function is
+        given by \[
+            M_X(t) = pe^t + q.
+        \] If $Y$ is a binomial random variable, then its moment generating function
+        is simply \[
+            M_Y(t) = (pe^t + q)^n.
+        \] If $Z$ is a Poisson random variable, then \[
+            M_Z(t) = e^{\lambda(e^t - 1)}.
+        \] If $W$ is a unit normal random variable, then \[
+            M_W(t) = e^{t^2 / 2}.
+        \] 
+    \end{example}
 
     \begin{theorem}
         A moment generating function determines its corresponding random variable
@@ -493,9 +506,54 @@
             M_X(t) = \mathcal{L}\{f_X\}(-t).
         \] 
     \end{theorem}
+    \begin{example}
+        Suppose that $X_i \sim \operatorname{Poission}(\lambda_i)$, and let $X = X_1
+        + \dots + X_n$. Then, the moment generating function of $X$ must be the
+        product of the moment generating functions of $X_i$, so \[
+            M_X(t) = \prod e^{\lambda_i(e^t - 1)} = e^{\lambda(e^t - 1)}
+        \] where $\lambda = \lambda_1 + \dots + \lambda_n$. This is the moment
+        generating function of a Poisson random variable as well, so $X \sim
+        \operatorname{Poisson}(\lambda)$.
+    \end{example}
+    \begin{example}
+        Let $X_i \sim \operatorname{Normal}(\mu_i, \sigma_i^2)$, and let $X = X_1 +
+        \dots + X_n$. Note that \[
+            M_{X_i}(t) = e^{t\mu_i + t^2\sigma_i^2 / 2}.
+        \] Hence, the moment generating function of the sum is simply \[
+            M_X(t) = e^{t\mu + t^2\sigma^2 / 2},
+        \] where $\mu = \mu_1 + \dots + \mu_n$ and $\sigma^2 = \sigma_1^2 + \dots +
+        \sigma_n^2$. Thus, $X \sim \operatorname{Normal}(\mu, \sigma^2)$.
+    \end{example}
 
-    % \begin{theorem}[Central Limit Theorem]
-    % \end{theorem}
+
+    \begin{theorem}[Central Limit Theorem]
+        Let $X_1, \dots, X_n$ be identical and independent random variables with
+        mean $\mu$ and variance $\sigma^2$. Then, the distribution of $(\overline{X}
+        - \mu)/ (\sigma / \sqrt{n})$ tends to the standard normal distribution as $n
+        \to \infty$. \[
+            \lim_{n \to \infty} P\left(\frac{\overline{X} - \mu}{\sigma / \sqrt{n}}
+            \leq a  \right) = \Phi(a).
+        \] 
+    \end{theorem}
+    \begin{proof}
+        Note that \[
+            \frac{\overline{X} - \mu}{\sigma / \sqrt{n}} = \frac{1}{\sqrt{n}}\sum_{k
+            = 1}^n Y_i,
+        \] where $Y_i = (X_i - \mu) / \sigma$. Let $M(t)$ be the moment generating
+        function of $Y_i$, so the corresponding moment generating function for $Y_i
+        / \sqrt{n}$ is given as $M(t / \sqrt{n})$. Since $Y_i$ are identical and
+        independent, this means that the moment generating function of the sum must
+        be $(M(t / \sqrt{n}))^n$. Setting $L(t) = \log M(t)$, we have $L(0) = 0$.
+        Also, $\E{Y_i} = 0$ and $\var{Y_i} = 1$, so $L'(0) = 0$ and $L''(0) = 1$.
+        We wish to show that the moment generating function $((M(t / \sqrt{n})))^n$
+        tends to $e^{t^2 / 2}$ as $n \to \infty$, i.e.\ \[
+            \lim_{n \to \infty} nL(t / \sqrt{n}) = t^2 / 2.
+        \] Setting $x = 1 / \sqrt{n}$ and applying L'H\^opital's rule twice, \[
+            \lim_{n \to \infty} nL(t / \sqrt{n}) = \lim_{x \to 0}
+            \frac{L(tx)}{x^2} = \lim_{x \to 0} \frac{t L'(tx)}{2x} = \lim_{x \to 0}
+            \frac{t^2 L''(tx)}{2} = t^2 /2. \qedhere
+        \] 
+    \end{proof}
 
 
 \end{document}
