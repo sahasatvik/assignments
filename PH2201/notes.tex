@@ -955,8 +955,38 @@
     Now, let $\psi$ be a simultaneous eigenstate of $J^2$ and $J_z$, with $J^2\psi =
     \alpha\psi$ and $J_z\psi = \beta\psi$. Setting $\varphi = J_+\psi$, we have \[
         J^2\varphi = \alpha\varphi.
-    \] 
-    
+    \] Thus, $J_+$ does not change the eigenvalues of eigenstates of $J^2$. However,
+    note that the commutator $[J_z, J_+]$ is non-zero, with \[
+        [J_z, J_+] = i\hbar J_y + \hbar J_x = \hbar J_+.
+    \] Similarly, \[
+        [J_z, J_-] = \hbar J_-.
+    \] Thus, we calculate \[
+        J_z\varphi = J_z J_+\psi = (\beta + \hbar)\varphi.
+    \] This shows that the raising operator gives another eigenstate with eigenvalue
+    incremented by $\hbar$. Similarly, \[
+        J_zJ_-\psi = (\beta - \hbar)(J_-\psi),
+    \] so the lowering operator lowers the eigenvalue by $\hbar$.
+    On the other hand, this cannot proceed indefinitely, since the eigenvalues must
+    be bounded as $\beta^2 \leq \alpha$, since $J_z^2 \leq J^2$. This means that we
+    have two states, \[
+        J_+\psi_{max} = 0, \qquad J_-\psi_{min} = 0.
+    \] Write \[
+        J^2 = J_-J_+ + J_z^2 + \hbar J_z = J_+J_- + J_z^2 - \hbar J_z.
+    \] Now, \[
+        J^2\psi_{max} = (\beta_{max}^2 + \hbar\beta_{max})\psi_{max} =
+        \alpha\psi_{max}, \qquad
+        J^2\psi_{min} = (\beta_{min}^2 - \hbar\beta_{min})\psi_{min} =
+        \alpha\psi_{min}.
+    \] This gives $\beta_{max} = -\beta_{min}$ and $\beta_{max} = \beta_{min} +
+    n\hbar$. Thus, \[
+        \beta_{max} = \frac{1}{2}n\hbar.
+    \] Writing $j = n /2$, we have \[
+        \alpha = \hbar^2 j(j + 1), \qquad \beta = m_j\hbar, \qquad m_j = -j, -j + 1,
+        \dots, j - 1, j.
+    \] These are the eigenvalues of $\psi$ with respect to $J^2$ and $J_z$.
+    Note that fermions (matter particles) correspond to odd $n$, and bosons (force
+    particles) correspond to even $n$.
+
 
 \end{document}
 % vim: set tabstop=4 shiftwidth=4 softtabstop=4:
