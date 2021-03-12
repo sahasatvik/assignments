@@ -613,6 +613,7 @@
     \] We have already averaged over the speeds $c$. Now, if all these molecules
     retain their flow velocity from $dV$ after collision, there is a transfer of
     momentum from that $z$ layer to the $xy$ plane, given by \[
+        m\left(u_0 + r\cos\theta\,\pp{u}{z}\right)\:dN.
     \] There is a symmetric layer on the other side of the plane which transfers a
     momentum \[
         m\left(u_0 - r\cos\theta\,\pp{u}{z}\right)\:dN
@@ -625,7 +626,57 @@
     \] where $\eta$ is the coefficient of viscosity. Comparing this with $\Delta p /
     \Delta t$, we get \[
         \eta = \frac{1}{3}mn\E{c}\lambda = \frac{m\E{c}}{3\sqrt{2}\pi\sigma^2}.
+    \] Combining the temperature dependencies of $\E{c}$ and $\sigma^2$, we have \[
+        \eta \propto \frac{\sqrt{T}}{1 + b/ T}, \qquad \eta =
+        \eta_0\sqrt{\frac{T}{T_0}} \cdot\frac{1 + b / T_0}{1 + b / T}.
+    \] As a first order approximation, $\eta \propto \sqrt{T}$ for large $T$.
+
+    \subsubsection{Conductivity}
+    We proceed exactly as before, except now we have a temperature gradient
+    $\partial T / \partial z$ rather than a velocity gradient. Let the heat capacity
+    of a molecule be given by $mc_v$ -- this replaces the momentum. The heat carried
+    per molecule is thus given as \[
+        mc_v\left(T_0 + r\cos\theta\,\pp{T}{z}\right)\:dN.
+    \] Hence, applying symmetry again, the total heat transmitted through $\Delta S$
+    is given as \[
+        2mc_v\cos\theta\,\pp{T}{z}\:dN.
+    \] Integrating again, \[
+        \Delta Q = \frac{1}{3}mnc_v\E{c}\lambda \pp{T}{z}\Delta S\:\Delta t.
+    \] Thermal conductivity is defined as $\kappa$ where \[
+        \Delta Q = \kappa \pp{T}{z}\Delta S.
+    \] Comparing, \[
+        \kappa = \frac{1}{3}mn\E{c}\lambda c_v = \eta c_v.
+    \] In practice however, we observe $\kappa / \eta c_v > 1$, often as high as
+    $2.5$ for mono-atomic gases, $1.9$ for diatomic and $1.75$ for triatomic gases.
+    This discrepancy arises because of the assumption that all molecules move with
+    speed $\E{c}$, while in reality they follow a distribution. Faster molecules
+    will collide more often, and carry a larger kinetic energy, which biases the
+    energy to a higher value. Another factor is that $\lambda_c$ has a dependence on
+    $c$, as shown by Tait. \[
+        \lambda_c = \frac{c^2}{\alpha^2\sqrt{\pi}n\sigma^2\psi(c / \alpha)},
+    \] where $\psi$ is a function of $c$.
+
+    One approach is to define $\epsilon = \kappa/\eta c_v$, and show that
+    $\epsilon = 5 / 2$ for mono-atomic gases using a statistical mechanics argument
+    taking into account intermolecular forces (Chapman and Enskog). We can also
+    split $\epsilon = \epsilon_t + \epsilon_r$, where $\epsilon_t$ is the
+    contribution purely from translational degrees of freedom. This gives \[
+        \kappa = \eta(\epsilon_tc_t + \epsilon_rc_r), \qquad 
+        \epsilon = \frac{\epsilon_tc_t + \epsilon_rc_r}{c_t + c_r}.
+    \] For mono-atomic gases, $c_r = 0$ and $\epsilon = 5 /2$. For polyatomic
+    molecules, we have $c_r$ contributing due to rotational and vibrational degrees
+    of freedom. There are $3$ translational degrees of freedom per molecule; let the
+    remaining be $\beta$ ($2$ for diatomic, $3$ for triatomic). Now, \[
+        c_t = \frac{1}{J_m}\dd{}{T}\left(\frac{3}{2}k_BT\right) = \frac{3k_B}{2J_m}.
+    \] Similarly, \[
+        c_r = \frac{\beta k_B}{2J_m}.
+    \] Setting $\epsilon_t = 5 / 2$, $\epsilon_r = 1$, we get \[
+        \epsilon = \frac{15 + 2\beta}{6 + 2\beta}.
+    \] We wish to write this in terms of $\gamma = c_p / c_v$. Now, $c_p = c_v + k_B
+    / J_m$. This gives \[
+        \frac{\kappa}{\eta c_v} = \epsilon = \frac{9\gamma - 5}{4}.
     \] 
+
 
 \end{document}
 % vim: set tabstop=4 shiftwidth=4 softtabstop=4:
