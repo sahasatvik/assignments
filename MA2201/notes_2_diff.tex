@@ -625,6 +625,43 @@
             \] 
         \end{remark}
     \end{theorem}
+    \begin{proof}
+        Recall that \[
+            p(x) = f(x_0) + f'(x_0)(x - x_0) + \frac{1}{2}f''(x_0)(x - x_0)^2 +
+            \dots + \frac{1}{n!}f^{(n)}(x_0)(x - x_0)^n.
+        \] Write $R_{n + 1}(x) = (x - x_0)^m H(x)$, for $m \leq n + 1$ and some function
+        $H$. Note that $H(x) = (f(x) - p(x))/(x - x_0)^m$ on $x \neq x_0$. Now, fix
+        $x \in (a, b)$ and define $\varphi\colon [a, b] \to \R$, \[
+            \varphi(t) = f(t) + f'(t)(x - t) + \frac{1}{2}f''(t)(x - t)^2 + \dots +
+            \frac{1}{n!}f^{(n)}(t)(x - t)^n + (x - t)^mH(x).
+        \] Note that $\varphi$ is continuous on $[a, b]$. Also, $\varphi$ is
+        differentiable on $(a, b)$. Now, $\varphi(x) = f(x)$, and \[
+            \varphi(x_0) = f(x_0) + f'(x_0)(x - x_0) + \dots +
+            \frac{1}{n!}f^{(n)}(x_0)(x - x_0)^n + (x - x_0)^mH(x) = f(x).
+        \] On the compact interval with endpoints $x$ and $x_0$, we now have a
+        continuous and differentiable function $\varphi$ with $\varphi(x) =
+        \varphi(x_0)$, so the Rolle's Theorem gives the existence of $c$ between
+        $x$ and $x_0$ such that $\varphi'(c) = 0$. This means that the following is
+        zero. \[
+            f'(c) - f'(c) + f''(c)(x - c) - f''(c)(x - x_0) + 
+            \dots + \frac{1}{n!}f^{(n + 1)}(c)(x - c)^n - m(x - c)^{m - 1}H(x).
+        \] Cancelling terms, \[
+            m(x - c)^{m - 1}H(x) = \frac{1}{n!}f^{(n + 1)}(c)(x - c)^n.
+        \] Putting $m = n + 1$, we have \[
+            (n + 1)H(x) = \frac{1}{n!}f^{(n + 1)}(c), \qquad
+            R_{n + 1}(x) = \frac{1}{(n + 1)!}f^{(n + 1)}(c)(x - x_0)^{n + 1}.
+        \] This is Lagrange's form of the remainder.
+        Putting $m = 1$, we have \[
+            H(x) = \frac{1}{n!}f^{(n + 1)}(c)(x - c)^n.
+        \] Setting $c = x_0 + \theta(x - x_0)$, we have $(x - c) = (x - x_0)(1 -
+        \theta)$, so \[
+            H(x) = \frac{1}{n!}f^{(n + 1)}(x_0 + \theta(x - x_0))(x - x_0)^n(1 -
+            \theta)^n.
+        \] Thus, \[
+            R_{n + 1}(x) = \frac{1}{n!}f^{(n + 1)}(x_0 + \theta(x - x_0))(x -
+            x_0)^{n + 1}(1 - \theta)^n.
+        \] This is Cauchy's form of the remainder.
+    \end{proof}
 
 \end{document}
 % vim: set tabstop=4 shiftwidth=4 softtabstop=4:
