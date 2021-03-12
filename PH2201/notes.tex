@@ -52,6 +52,9 @@
 \def\vL{\ve{L}}
 \def\vJ{\ve{J}}
 \def\vS{\ve{S}}
+\def\ver{\ve{\hat{e}_r}}
+\def\veth{\ve{\hat{e}_\theta}}
+\def\veph{\ve{\hat{e}_\phi}}
 
 \newmdtheoremenv[%
     backgroundcolor=blue!10!white,%
@@ -987,6 +990,45 @@
     Note that fermions (matter particles) correspond to odd $n$, and bosons (force
     particles) correspond to even $n$.
 
+    \subsection{Orbital angular momentum}
+    Recall that using spherical polar coordinates, we can write \[
+        \grad{} = \ver\pp{}{r} +
+        \veth\frac{1}{r}\pp{}{\theta} +
+        \veph\frac{1}{r\sin\theta}\pp{}{\phi}.
+    \] With this, we write \[
+        L_x = i\hbar\left(\sin\phi\pp{}{\theta} +
+        \cot\theta\cos\phi\pp{}{\phi}\right), \quad
+        L_y = i\hbar\left(-\cos\phi\pp{}{\theta} +
+        \cot\theta\sin\phi\pp{}{\phi}\right), \quad
+        L_z = -i\hbar\pp{}{\phi}.
+    \] Also, \[
+        L^2 =
+        -\hbar^2\left(\frac{1}{\sin\theta}\pp{}{\theta}\left(\sin\theta\pp{}{\theta}\right)
+        + \frac{1}{\sin^2\theta}\pp[2]{}{\phi}\right), \qquad
+        L_{\pm} = \hbar e^{\pm i\phi}\left(\pm\pp{}{\theta} +
+        i\cot\theta\pp{}{\phi}\right).
+    \] We want to have \[
+        L^2 \psi_{lm} = \hbar^2 l(l + 1)\psi_{lm}, \qquad L_z\psi_{lm} =
+        m\hbar\psi_{lm}.
+    \] To solve these eigenvalue equations, we separate variables as $\psi(\theta,
+    \phi) = \Theta(\theta) \Phi(\phi)$. The second equation thus gives \[
+        \Phi(\phi) = e^{im\phi}, \qquad \psi_{lm} = \Theta e^{im\phi}.
+    \] Note that $\psi_{lm}$ must be periodic in $\phi$ with period $2\pi$, which
+    forces $m$ to be an integer. Plugging this into the first equation gives \[
+        \left[\frac{1}{\sin\theta}\pp{}{\theta}\left(\sin\theta\pp{}{\theta}\right)
+        - \frac{m^2}{\sin^2\theta} + l(l + 1)\right]\Theta(\theta) = 0.
+    \] This is called a Legendre differential equation, whose solutions are the
+    Legendre polynomials. The solutions $\psi_{lm} = Y_{lm}$ are called spherical
+    harmonics. Each of the Legendre functions $P_{lm}(\xi)$ has $l - m$ roots
+    within $|\xi| < 1$. The Legendre polynomials $P_l$ satisfy the recurrence \[
+        (l + 1)P_{l + 1}(\xi) = (2l + 1)\xi P_{l}(\xi) - lP_{l - 1}(\xi).
+    \] The Legendre functions satisfy \[
+        P_{lm}(-\xi) = (-1)^{l + m} P_{lm}(\xi),
+    \] \[
+        \int_{-1}^{+1}P_{lm}(\xi)P_{l'm}(\xi)\:d\xi = \frac{2}{2l + 1}\cdot \frac{(l
+        - m)!}{(l + m)!}\,\delta_{ll'}.
+    \] It can also be shown that all $Y_{lm}$ are orthogonal and complete. Note that
+    $Y_{lm}$ is even for even $l$ and odd for odd $l$.
 
 \end{document}
 % vim: set tabstop=4 shiftwidth=4 softtabstop=4:
