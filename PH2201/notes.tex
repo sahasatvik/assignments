@@ -1029,6 +1029,44 @@
         - m)!}{(l + m)!}\,\delta_{ll'}.
     \] It can also be shown that all $Y_{lm}$ are orthogonal and complete. Note that
     $Y_{lm}$ is even for even $l$ and odd for odd $l$.
+    
+    \subsection{The central potential problem}
+    Consider a potential $V(r)$ which only depends on radial distance.
+    Then, \[
+        \hat{H} = \frac{\hat{p}^2}{2m} + V(r).
+    \] We can calculate the norm of the orbital angular momentum, \[
+        L^2 = r^2p^2 - (\vr \cdot \vp)^2 - i\hbar\,\vr\cdot\vp.
+    \] This can be rearranged to get \[
+        \vr\cdot\vp = -i\hbar r\pp{}{r}, \qquad 
+        \hat{p}^2 = \frac{L^2}{r^2} + \hat{p}_r^2, \qquad
+        \hat{p}_r^2 = -i\hbar \left(\frac{1}{r} + \pp{}{r}\right).
+    \] Note that \[
+        [r, \hat{p}_r] = i\hbar.
+    \] This means that the Schr\"odinger equation looks like \[
+        \left[-\frac{\hbar^2}{2m}\left(\pp[2]{}{r} + \frac{2}{r}\pp{}{r}\right) +
+        \frac{L^2}{2mr^2} + V(r)\right]\psi(r, \theta, \phi) = E(r, \theta, \phi).
+    \] Since $V(r)$ has rotational symmetry, we have $[\hat{H}, L^2] = 0$. Thus, we
+    separate \[
+        \psi(r, \theta, \phi) = R(r)\,Y_{lm}(\theta, \phi).
+    \] Using $L^2Y_{lm} = \hbar^2l(l+1)Y_{lm}$ makes $Y_{lm}$ drop out of the
+    equation. Taking $u(r) = rR(r)$, we have \[
+        \left[-\frac{\hbar^2}{2m}\pp[2]{}{r} + \frac{\hbar^2}{2mr^2}l(l + 1) +
+        V(r)\right]u(r) = Eu(r).
+    \] We may define an effective potential as \[
+        V_\text{eff}(r) = V(r) + \frac{\hbar^2}{2mr^2}l(l+1).
+    \] Normalizability gives \[
+        \int |u(r)|^2 \:dr < \infty, \qquad
+        \lim_{r \to \infty} |u(r)| \leq \frac{a}{r^{1 /2 + \epsilon}}.
+    \] In other words, $u(r)$ must fall off faster than $1 / \sqrt{r}$
+    asymptotically. Similarly, $R(r) = u(r) / r$, so $u(r) \to 0$ faster as $r
+    \to 0$. For $l \neq 0$, the centripetal part of the effective potential makes it
+    repulsive overall. Otherwise, for $l = 0$, we must have $u(0) = 0$ so \[
+        V_\text{eff}(r) = \begin{cases}
+            V(r), &\text{ if }l r > 0, \\
+            \infty, &\text{ if } r = 0.
+        \end{cases}
+    \] 
+    
 
 \end{document}
 % vim: set tabstop=4 shiftwidth=4 softtabstop=4:
