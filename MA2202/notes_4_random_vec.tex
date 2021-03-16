@@ -1,0 +1,154 @@
+\documentclass[11pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage[%
+    hidealllines=true,%
+    innerbottommargin=15,%
+    nobreak=true,%
+]{mdframed}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{lipsum}
+\usepackage{bm}
+
+\geometry{a4paper, margin=1in, headheight=14pt}
+
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand\headrulewidth{0.4pt}
+\fancyhead[L]{\scshape MA2201: Probability I}
+\fancyhead[R]{\scshape Random variables}
+\rfoot{\footnotesize\it Updated on \today}
+\cfoot{\thepage}
+
+\def\C{\mathbb{C}}
+\def\R{\mathbb{R}}
+\def\Q{\mathbb{Q}}
+\def\Z{\mathbb{Z}}
+\def\N{\mathbb{N}}
+\newcommand\ddx[1]{\frac{d #1}{d x}}
+\newcommand\ddt[1]{\frac{d #1}{d t}}
+\newcommand\dd[3][]{\frac{d^{#1}{#2}}{d {#3}^{#1}}}
+\newcommand\ppx[1]{\frac{\partial #1}{\partial x}}
+\newcommand\ppt[1]{\frac{\partial #1}{\partial t}}
+\newcommand\pp[3][]{\frac{\partial^{#1}{#2}}{\partial {#3}^{#1}}}
+\newcommand\norm[1]{\left\lVert#1\right\rVert}
+\newcommand\E[1]{E\left[#1\right]}
+\newcommand\var[1]{\operatorname{Var}[#1]}
+\newcommand\cov[1]{\operatorname{Cov}[#1]}
+\renewcommand\vec[1]{\boldsymbol{#1}}
+
+\def\vX{\vec{X}}
+\def\vt{\vec{t}}
+
+\newcounter{module}
+\setcounter{module}{4}
+
+\newmdtheoremenv[%
+    backgroundcolor=blue!10!white,%
+]{theorem}{Theorem}[module]
+\newmdtheoremenv[%
+    backgroundcolor=violet!10!white,%
+]{corollary}{Corollary}[theorem]
+\newmdtheoremenv[%
+    backgroundcolor=teal!10!white,%
+]{lemma}[theorem]{Lemma}
+
+\theoremstyle{definition}
+\newmdtheoremenv[%
+    backgroundcolor=green!10!white,%
+]{definition}{Definition}[module]
+\newmdtheoremenv[%
+    backgroundcolor=red!10!white,%
+]{exercise}{Exercise}[module]
+
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\newtheorem*{example}{Example}
+\newtheorem*{solution}{Solution}
+
+\surroundwithmdframed[%
+    linecolor=black!20!white,%
+    hidealllines=false,%
+    innertopmargin=5,%
+    innerbottommargin=10,%
+    skipabove=0,%
+    skipbelow=0,%
+]{example}
+
+\numberwithin{equation}{module}
+
+\title{
+    \Large\textsc{MA2202: Probability I} \\
+    % \vspace{10pt}
+    \Huge \textbf{Random vectors} \\
+    \vspace{5pt}
+    \Large{Spring 2021}
+}
+\author{
+    \large Satvik Saha%
+    % \thanks{Email: \tt ss19ms154@iiserkol.ac.in}
+    \\\textsc{\small 19MS154}
+}
+\date{\normalsize
+    \textit{Indian Institute of Science Education and Research, Kolkata, \\
+    Mohanpur, West Bengal, 741246, India.} \\
+    % \vspace{10pt}
+    % \today
+}
+
+\begin{document}
+    \maketitle
+
+    \begin{definition}[Random vector]
+        A random vector $\vX\colon \Omega \to \R^n$ is a tuple of random 
+        variables $X_i\colon \Omega \to \R$.
+    \end{definition}
+    \begin{definition}[Joint cumulative distribution function]
+        The joint cumulative distribution function of a random vector $\vX$ is
+        the map $F_{\vX}\colon \R^n \to [0, 1]$, given as \[
+            F_{\vX}(\vec{s}) = P(X_1 \leq s_1, \dots, X_n \leq s_n).
+        \] 
+    \end{definition}
+
+    \begin{definition}[Joint probability mass function]
+        If $X_i$ are discrete random variables, their joint probability mass 
+        function is the map $p_{\vX} \colon \R^n \to [0, 1]$, \[
+            p_{\vX}(\vec{s}) = P(X_1 = s_1, \dots, X_n = s_n).
+        \] 
+    \end{definition}
+
+    \begin{definition}[Joint probability density function]
+        Suppose that \[
+            F_{\vX}(\vec{s}) = \int_{-\infty}^{s_n} \dots \int_{-\infty}^{s_1}
+            f_{\vX}(t_1, \dots, t_n)\:dt_1\dots\:dt_n,
+        \] then $f_{\vX}\colon \R^n \to [0, 1]$ is the probability density
+        function corresponding to the joint cumulative distribution function
+        $F_{\vX}$.
+
+        \begin{remark}
+            If $f_{\vX}$ is continuous, then \[
+                f_{\vX} = \frac{\partial F_{\vX}(t_1, \dots, t_n)}{\partial
+                t_1\dots\partial t_n}.
+            \] 
+        \end{remark}
+    \end{definition}
+
+    \begin{definition}[Joint moment generating function]
+        Let $\vX$ be a random vector. Then, its joint moment generating function
+        is defined as \[
+            M_{\vX}(\vt) = \E{e^{\vt^\top \vX}} = \E{e^{t_1X_1 +
+            \dots + t_nX_n}}.
+        \] 
+        \begin{remark}
+            If $X_1, \dots, X_n$ are independent, then \[
+                M_{\vX}(\vt) = \prod M_{X_i}(t_i).
+            \] 
+        \end{remark} 
+    \end{definition}
+    
+\end{document}
+% vim: set tabstop=4 shiftwidth=4 softtabstop=4:
