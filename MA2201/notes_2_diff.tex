@@ -568,6 +568,19 @@
             \] 
         \end{remark}
     \end{definition}
+    \begin{example}
+        Consider $f\colon (-1, \infty) \to \R$, $x \mapsto \log{(1 + x)}$.
+        In order to expand this as a Taylor series about $x_0 = 0$, we calculate \[
+            f'(x) = \frac{1}{1 + x}, \qquad f''(x) = -\frac{1}{(1 + x)^2},
+            \quad\dots\quad,
+            f^{(n)}(x) = \frac{(-1)^{n - 1}(n - 1)!}{(1 + x)^{n}}.
+        \] This gives \[
+            \frac{f^{(n)}(0)}{n!} = \frac{(-1)^{n - 1}}{n}.
+        \] Thus, the Taylor polynomial of degree $n$ is given by \[
+            p(x) = x - \frac{1}{2}x^2 + \frac{1}{3}x^3 - \dots + (-1)^{n -
+            1}\frac{1}{n}x^n.
+        \]  
+    \end{example}
 
     \begin{definition}
         A polynomial $p$ is said to approximate a function $f$ up to the order $n$
@@ -661,6 +674,38 @@
             R_{n + 1}(x) = \frac{1}{n!}f^{(n + 1)}(x_0 + \theta(x - x_0))(x -
             x_0)^{n + 1}(1 - \theta)^n.
         \] This is Cauchy's form of the remainder.
+    \end{proof}
+
+    \begin{definition}[Convexity]
+        The graph of a function $f$ on $\R$ is said to be convex downwards at a
+        point $x_0$ if there exists an non-empty open neighbourhood of $x_0$ such
+        that the tangent to the graph at $x_0$ lies below the graph on that
+        neighbourhood (excluding the point $x_0$). Similarly, it is said to be
+        convex upwards if the tangent lies above the graph on that deleted
+        neighbourhood.
+
+        \begin{remark}
+            If the tangent line lies on opposite sides of the graph on the left and
+            right sides of $x_0$, then it is called a point of inflection.
+        \end{remark}
+    \end{definition}
+
+    \begin{theorem}
+        Let $f\colon (a, b) \to \R$ be such that $f''$ is continuous and $f''(x_0) >
+        0$ for some $x_0 \in (a, b)$. Then, the graph of $f$ is convex downwards at
+        $x_0$.
+    \end{theorem}
+    \begin{proof}
+        Using Taylor's formula, write \[
+            f(x) = f(x_0) + f'(x_0)(x - x_0) + \frac{1}{2}f''(c)(x - x_0)^2,
+        \] for some $c$ between $x$ and $x_0$. Note that $f(x_0) + f'(x_0)(x - x_0)$
+        is the equation of the tangent line to $f$ at $x_0$. Since $f''(x_0) > 0$
+        and $f''$ is continuous, we find a non-empty open neighbourhood of $x_0$ on
+        which $f''(x) > 0$. On this neighbourhood (excluding the point $x_0$), \[
+            \frac{1}{2}f''(c)(x - x_0)^2 > 0.
+        \] This immediately gives \[
+            f(x) > f(x_0) + f'(x_0)(x - x_0)
+        \] on the deleted neighbourhood of $x_0$.
     \end{proof}
 
 \end{document}
