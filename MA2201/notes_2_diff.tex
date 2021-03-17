@@ -200,13 +200,6 @@
         same contradiction. Thus, we must have $f'(c) = g(c) = 0$.
     \end{proof}
 
-    \begin{theorem}
-        If $f\colon (a, b)\to \R$ is twice differentiable, and $c \in (a, b)$ is
-        such that $f'(c) = 0$ and $f''(c) < 0$, then $c$ is a point of local
-        maximum. If $f'(c) = 0$ and $f''(c) > 0$, then $c$ is a point of local
-        minimum.
-    \end{theorem}
-
     \begin{theorem}[Rolle's Theorem]
         Let $f\colon [a, b] \to \R$ be continuous, and differentiable on $(a, b)$,
         with $f(a) = f(b)$. Then, there exists $c \in (a, b)$ such that $f'(c) = 0$.
@@ -707,6 +700,57 @@
             f(x) > f(x_0) + f'(x_0)(x - x_0)
         \] on the deleted neighbourhood of $x_0$.
     \end{proof}
+    
+    \begin{corollary}
+        If $f\colon (a, b)\to \R$ is twice differentiable with continuous $f''$, and
+        $x_0 \in (a, b)$ is such that $f'(x_0) = 0$ and $f''(x_0) > 0$, then $x_0$
+        is a point of local minimum.
+    \end{corollary}
+    \begin{proof}
+        Note that $f$ is convex downwards on some neighbourhood $(c, d)$ of $x_0$,
+        which means that \[
+            f(x) > f(x_0) + f'(x_0)(x - x_0) = f(x_0).
+        \] on $(c, d)\setminus\{x_0\}$.
+    \end{proof}
+
+    \begin{theorem}
+        If $f\colon (a, b)\to \R$ is thrice differentiable with continuous $f'''$,
+        and $x_0 \in (a, b)$ is such that $f''(x_0) = 0$ and $f'''(x_0) \neq 0$,
+        then $x_0$ is a point of inflection.
+    \end{theorem}
+    \begin{proof}
+        Use Taylor's formula to write \[
+            f(x) = f(x_0) + f'(x_0)(x - x_0) + \frac{1}{6}f'''(c)(x - x_0)^3,
+        \] for some $c$ between $x$ and $x_0$. First suppose that $f'''(x_0) > 0$,
+        which means that there is a non-empty neighbourhood of $x_0$ on which
+        $f'''(x) > 0$. Also, $(x - x_0)^3$ changes sign as we pass through $x_0$
+        from left to right. Thus, \[
+            f(x) < f(x_0) + f'(x_0)(x - x_0)
+        \] on some $(x_0 - \delta, x_0)$ and \[
+            f(x) > f(x_0) + f'(x_0)(x - x_0)
+        \] on some $(x_0, x_0 + \delta)$. In other words, $f$ changes sign on either
+        side of the tangent at $x_0$. The case where $f'''(x_0) < 0$ is similar.
+    \end{proof}
+
+    \begin{theorem}
+        Let $f\colon (a, b)\to \R$ be $n$ times differentiable with continuous
+        $f^{(n)}$, and $x_0 \in (a, b)$ is such that $f''(x_0) = f'''(x_0) = \dots =
+        f^{(n - 1)}(x_0) = 0$ and $f^{(n)}(x_0) \neq 0$.
+        \begin{enumerate}
+            \itemsep0em
+            \item If $n$ is even and $f^{(n)}(x_0) > 0$, then $f$ is convex
+            downwards at $x_0$.
+            Furthermore, if $f'(x_0) = 0$, then $x_0$ is a point of local minimum.
+            \item If $n$ is odd, then $x_0$ is a point of inflection.
+        \end{enumerate}
+    \end{theorem}   
+    \begin{proof}
+        Use Taylor's formula to write \[
+            f(x) = f(x_0) + f'(x_0)(x - x_0) + \frac{1}{n!}f^{(n)}(c)(x - x_0)^n
+        \] for some $c$ between $x$ and $x_0$, and proceed exactly as in the
+        previous two theorems.
+    \end{proof}
+
 
 \end{document}
 % vim: set tabstop=4 shiftwidth=4 softtabstop=4:
