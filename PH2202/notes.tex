@@ -643,11 +643,11 @@
     \] Integrating again, \[
         \Delta Q = \frac{1}{3}mnc_v\E{c}\lambda \pp{T}{z}\Delta S\:\Delta t.
     \] Thermal conductivity is defined as $\kappa$ where \[
-        \Delta Q = \kappa \pp{T}{z}\Delta S.
+        \frac{\Delta Q}{\Delta t} = \kappa \pp{T}{z}\Delta S.
     \] Comparing, \[
         \kappa = \frac{1}{3}mn\E{c}\lambda c_v = \eta c_v.
     \] In practice however, we observe $\kappa / \eta c_v > 1$, often as high as
-    $2.5$ for mono-atomic gases, $1.9$ for diatomic and $1.75$ for triatomic gases.
+    $2.5$ for monoatomic gases, $1.9$ for diatomic and $1.75$ for triatomic gases.
     This discrepancy arises because of the assumption that all molecules move with
     speed $\E{c}$, while in reality they follow a distribution. Faster molecules
     will collide more often, and carry a larger kinetic energy, which biases the
@@ -657,13 +657,13 @@
     \] where $\psi$ is a function of $c$.
 
     One approach is to define $\epsilon = \kappa/\eta c_v$, and show that
-    $\epsilon = 5 / 2$ for mono-atomic gases using a statistical mechanics argument
+    $\epsilon = 5 / 2$ for monoatomic gases using a statistical mechanics argument
     taking into account intermolecular forces (Chapman and Enskog). We can also
     split $\epsilon = \epsilon_t + \epsilon_r$, where $\epsilon_t$ is the
     contribution purely from translational degrees of freedom. This gives \[
         \kappa = \eta(\epsilon_tc_t + \epsilon_rc_r), \qquad 
         \epsilon = \frac{\epsilon_tc_t + \epsilon_rc_r}{c_t + c_r}.
-    \] For mono-atomic gases, $c_r = 0$ and $\epsilon = 5 /2$. For polyatomic
+    \] For monoatomic gases, $c_r = 0$ and $\epsilon = 5 /2$. For polyatomic
     molecules, we have $c_r$ contributing due to rotational and vibrational degrees
     of freedom. There are $3$ translational degrees of freedom per molecule; let the
     remaining be $\beta$ ($2$ for diatomic, $3$ for triatomic). Now, \[
@@ -675,6 +675,20 @@
     \] We wish to write this in terms of $\gamma = c_p / c_v$. Now, $c_p = c_v + k_B
     / J_m$. This gives \[
         \frac{\kappa}{\eta c_v} = \epsilon = \frac{9\gamma - 5}{4}.
+    \] 
+
+    \subsubsection{Diffusivity}
+    Again, consider a density gradient $\partial n / \partial z$. Now, \[
+        dN = \frac{\cos\theta \Delta S}{4\pi r^2}\cdot \frac{\E{c}\Delta
+        t}{\lambda}\cdot e^{-r / \lambda}\,\left(n_0 +
+        r\cos\theta\,\pp{n}{z}\right)\:dV,
+    \] above the $xy$ plane. Repeating the procedure with the mirror half and
+    integrating, we get the flow of particles through our area $\Delta S$ as \[
+        \Delta N = \frac{1}{3}\E{c}\lambda \pp{n}{z}\Delta S \Delta t.
+    \] From the definition of diffusivity, \[
+        \frac{\Delta N}{\Delta t} = D \pp{n}{z}\Delta S.
+    \] Comparing, \[
+        D = \frac{1}{3}\E{c}\lambda.
     \] 
 
 
