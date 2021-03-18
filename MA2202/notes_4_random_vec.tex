@@ -140,7 +140,7 @@
     \begin{definition}[Joint moment generating function]
         Let $\vX$ be a random vector. Then, its joint moment generating function
         is defined as \[
-            M_{\vX}(\vt) = \E{e^{\vt^\top \vX}} = \E{e^{t_1X_1 +
+            M_{\vX}(\vt) = \E{e^{\vt^\top \!\vX}} = \E{e^{t_1X_1 +
             \dots + t_nX_n}}.
         \] 
         \begin{remark}
@@ -148,6 +148,33 @@
                 M_{\vX}(\vt) = \prod M_{X_i}(t_i).
             \] 
         \end{remark} 
+    \end{definition}
+
+    \begin{theorem}
+        If $X$ and $Y$ are independent continuous random variables, then the
+        probability density function of their sum is the convolution $f_{X + Y} =
+        f_X * f_Y$, \[
+            f_{X + Y}(x) = \int_{\R} f_X(x - t)\,f_Y(t)\:dt.
+        \] 
+    \end{theorem}
+    \begin{example}
+        When $X$ and $Y$ are identical and uniform on $[0, 1]$, then \[
+            f_{X + Y}(x) = \int_0^1 f(x - t) \:dt = \begin{cases}
+                x, &\text{ if }a\in [0, 1], \\
+                2 - x, &\text{ if }a\in [1, 2], \\
+                0, &\text{ otherwise }.
+            \end{cases}
+        \] Also, \[
+            M_{X + Y}(t) = (M(t))^2 = \frac{1}{t^2}(e^t - 1)^2.
+        \] 
+    \end{example}
+
+    \begin{definition}[Conditional distribution]
+        Let $X$ and $Y$ be two discrete random variables. We write \[
+            P(X = s\,|\, Y = t) = \frac{P(X = s, Y = t)}{P(Y = t)}
+        \] for $P(Y = t) > 0$. We also have \[
+            P(X \leq s \,|\, Y = t) = \sum_{r \leq s}P(X = r\,|\, Y = t).
+        \] 
     \end{definition}
     
 \end{document}
