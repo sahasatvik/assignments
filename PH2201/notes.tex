@@ -49,6 +49,8 @@
 
 \def\vr{\ve{r}}
 \def\vp{\ve{p}}
+\def\vv{\ve{v}}
+\def\vk{\ve{k}}
 \def\vL{\ve{L}}
 \def\vJ{\ve{J}}
 \def\vS{\ve{S}}
@@ -501,8 +503,6 @@
     In a statistical distribution, the first, second, third and fourth moments deal
     with the mean, standard deviation, skew and kurtosis. Skew is a measure of
     symmetry, and kurtosis is a measure of peakedness.
-
-    \newpage
 
     \subsection{The uncertainty principle}
     \begin{theorem}[Heisenberg's Uncertainty Principle]
@@ -1062,10 +1062,80 @@
     \to 0$. For $l \neq 0$, the centripetal part of the effective potential makes it
     repulsive overall. Otherwise, for $l = 0$, we must have $u(0) = 0$ so \[
         V_\text{eff}(r) = \begin{cases}
-            V(r), &\text{ if }l r > 0, \\
+            V(r), &\text{ if } r > 0, \\
             \infty, &\text{ if } r = 0.
         \end{cases}
     \] 
+
+    \section{The hydrogen atom}
+    This is a simple two body problem with a negatively charged electron orbiting a
+    positively charged nucleus.
+    Here, our potential of interest is the Coulomb potential, \[
+        V(r) = -\frac{e^2}{4\pi \epsilon_0 r}.
+    \] Here, we define \[
+        \vr_{cm} = \frac{m_1\vr_1 + m_2\vr_2}{m_1 + m_2}, \qquad
+        \mu = \frac{m_1m_2}{m_1 + m_2}.
+    \] We also have the relative variables \[
+        \vr = \vr_1 - \vr_2, \qquad \vp = \mu(\vv_1 - \vv_2).
+    \] We use $\mu$ and $\nu$ for the particle indices, and $i$ and $j$ for the
+    Cartesian indices. Now, \[
+        [r_{\nu i}, p_{\mu j}] = i\hbar \delta_{ij}\delta_{\mu\nu}, \qquad
+        [\vr_{cm, i}, \vp_{cm, j}] = i\hbar \delta_{ij} = [r_i, p_j].
+    \] Also, \[
+        \vp_{cm} = -i\hbar\grad{}_{cm}, \qquad 
+        \vp_{r} = -i\hbar\grad{}_{r}, \qquad
+        \frac{p_1^2}{m_1} + \frac{p_2^2}{m_2} = \frac{p_{cm}^2}{m_1 + m_2} +
+        \frac{p^2}{2\mu}.
+    \] This gives us the Schr\"odinger equation \[
+        \left[\frac{p_{cm}^2}{M} + \frac{p^2}{2\mu} + V(r)\right]\psi(\vr_{cm}, \vr)
+        = E_{tot}\psi(\vr_{cm}, \vr).
+    \] Note that the system as a whole acts as a free particle. Thus, \[
+        E_{cm} = \frac{\hbar^2k_{cm}^2}{2M}, \qquad \psi_{cm}(\vr_{cm}) =
+        e^{-\vk_{cm}\cdot\vr_{cm}}
+    \] We are left with \[
+        \left[\frac{p^2}{2\mu} + V(r)\right]\psi(\vr)
+        = E_{rel}\psi(\vr),
+    \] where $E_{rel} = E_{tot} - E_{cm}$.
+    Using our results from the central potential problem, \[
+        \left[-\frac{\hbar^2}{2\mu}\dd[2]{}{r} + \frac{\hbar^2}{2\mu r^2}l(l + 1)
+        - \frac{e^2}{4\pi\epsilon_0 r}\right]u(r) = E_{rel} u(r).
+    \] When $l = 0$, we have \[
+        V_{\text{eff}}(r) \to -\frac{e^2}{4\pi \epsilon_0 r} < 0.
+    \] Thus, we have bound states for $l = 0$, $E < 0$. Setting $\epsilon = -E$, we
+    have \[
+        \dd[2]{}{r}u(r) + \frac{2\mu e^2}{4\pi\epsilon_0 \hbar^2 r}u(r) - \frac{l(l
+        + 1)}{r^2}u(r) = \frac{2\mu\epsilon}{\hbar^2}u(r).
+    \] As $r \to \infty$, we set $u \sim u_{app}$, and \[
+        \dd[2]{}{r}u_{app} = \frac{2\mu \epsilon}{\hbar^2}u_{app}, \qquad
+        u_{app}(r) = e^{-\sqrt{2\mu\epsilon / \hbar^2}r}.
+    \] We now attempt a trial solution $u(r) = v(r)u_{app}(r)$, and expand this as a
+    power series \[
+        u(r) = v(r)\,e^{-\sqrt{2\mu\epsilon / \hbar^2}r}, \qquad 
+        v(r) = \sum_{p = 1}^\infty A_p r^p.
+    \] Note that $A_0 = 0$ since $u(0) = 0$. This will give \[
+        \left[p(p + 1) - l(l + 1)\right]A_{p + 1} =
+        \left[\frac{2p\sqrt{2\mu\epsilon}}{\hbar} - \frac{2\mu
+        e^2}{4\pi\epsilon_0\hbar^2}\right]A_p.
+    \] Note that for $p = l$, $A_p = 0$. This kills all preceding coefficients, so
+    the only non-zero coefficients are for $p > l$. Also, $u(r) \to 0$ as $r \to
+    \infty$, so the power series of $v(r)$ must terminate. Setting $A_{n + 1} = 0$,
+    we demand \[
+        \frac{2n\sqrt{2n\epsilon}}{\hbar} = \frac{2\mu e^2}{4\pi\epsilon_0 \hbar^2}.
+    \] Rearranging, \[
+        E = -\epsilon = -\frac{\mu e^4}{2(4\pi\epsilon_0)^2\hbar^2 n^2} \approx
+        -\frac{13.6}{n^2}\si{\eV}.
+    \] Also, \[
+        R(r) = -\frac{v(r)}{r}e^{-\sqrt{2\mu\epsilon / \hbar^2}r} = R_{nl}(r),
+    \] so we recover $\psi_{nlm} = R_{nl}Y_{lm}$. An important parameter is the Bohr
+    radius, given by \[
+        a_0 = \frac{4\pi\epsilon_0 \hbar^2}{\mu e^2} \approx \SI{5.3e-11}{\m}.
+    \] Summarizing, the good quantum numbers are \[
+        n = 1, 2, 3, \dots, \qquad l = 0, 1, \dots, n - 1, \qquad m = -l, -l + 1,
+        \dots, l - 1, l.
+    \] Note that the energy $E_n$ depends on the principal quantum number $n$ alone!
+    Each $n$ has $n$ possible $l$, and each $l$ has $2l + 1$ possible $m$.
+    Thus, the total degeneracy of $E$ is $\sum_{l = 0}^{n - 1} 2l + 1 = n^2$. This
+    is doubled to account for the spin internal degree of freedom.
     
 
 \end{document}
