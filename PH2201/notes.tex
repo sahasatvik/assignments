@@ -1003,8 +1003,8 @@
         L_z = -i\hbar\pp{}{\phi}.
     \] Also, \[
         L^2 =
-        -\hbar^2\left(\frac{1}{\sin\theta}\pp{}{\theta}\left(\sin\theta\pp{}{\theta}\right)
-        + \frac{1}{\sin^2\theta}\pp[2]{}{\phi}\right), \qquad
+        -\hbar^2\left(\frac{1}{\sin\theta}\pp{}{\theta}\left(\sin\theta\pp{}{\theta}
+        \right) + \frac{1}{\sin^2\theta}\pp[2]{}{\phi}\right), \qquad
         L_{\pm} = \hbar e^{\pm i\phi}\left(\pm\pp{}{\theta} +
         i\cot\theta\pp{}{\phi}\right).
     \] We want to have \[
@@ -1136,7 +1136,75 @@
     Each $n$ has $n$ possible $l$, and each $l$ has $2l + 1$ possible $m$.
     Thus, the total degeneracy of $E$ is $\sum_{l = 0}^{n - 1} 2l + 1 = n^2$. This
     is doubled to account for the spin internal degree of freedom.
-    
 
+    \section{Spin angular momentum}
+    \subsection{The Zeeman effect}
+    Consider a hydrogen atom in an external magnetic field $B$ aligned along the $z$
+    axis. If $H_0$ is the Hamiltonian of the Hydrogen atom, then the effective
+    Hamiltonian is given by \[
+        H = H_0 - \frac{e}{2m}\ve{B}\cdot\vL_{\text{eff}}.
+    \] This modifies the Schr\"odinger equation slightly, giving \[
+        E_{nlm} = -\frac{13.6}{n^2}\si{\eV} - \hbar\omega_Lm_{\text{eff}}.
+    \] The term $\omega_L = eB / 2m$ is called the Larmor frequency. What this means
+    is that the presence of the magnetic field ought to lift the $2n + 1$ degeneracy
+    of the energy levels.
+
+    On the other hand, the actual observed splitting in a hydrogen atom is
+    different, with an even number of levels. This indicates the presence of another
+    source of angular momentum, called \textit{spin}. 
+
+    \subsection{Stern-Gerlach experiment}
+    A beam of particles splits into two patches when subjected to an inhomogeneous
+    magnetic field. We do not observe $2l + 1$ beams however, but an even number
+    (two times what we expect). Again, this points to the existence of the spin
+    angular momentum, with \[
+        \ve{\mu}_S = -\frac{g_S\mu_B}{\hbar}\ve{S}.
+    \] 
+
+    \subsection{Formalism}
+    We have \[
+        [S_i, S_j] = i\hbar \delta_{ij}\epsilon_{ijk}S_k.
+    \] Also, \[
+        S^2\ket{s, m} = s(s + 1)\ket{s, m}, \qquad S_z\ket{s, m} = m\ket{s, m}.
+    \] We also have the creation and annihilation operators, \[
+        S_\pm = S_x \pm iS_y, \qquad
+        S_\pm\ket{s, m_s} = \hbar\sqrt{s(s + 1) - m_s(m_s + 1)}\ket{s, m_s \pm 1}.
+    \] Suppose $S = 1 /2$. Now, there are two corresponding $m_s$, so we have two
+    eigenstates. \[
+        S_z\ket{\uparrow} = \frac{1}{2}\hbar \ket{\uparrow}, \qquad
+        S_z\ket{\downarrow} = \frac{1}{2}\hbar \ket{\uparrow}.
+    \] These can be represented using two orthogonal vectors, \[
+        \ket{\uparrow} = \ket{s = 1 /2, m_s = +1 / 2} = \begin{pmatrix}
+            1\\0
+        \end{pmatrix},\qquad
+        \ket{\downarrow} = \ket{s = 1 /2, m_s = -1 / 2} = \begin{pmatrix}
+            0\\1
+        \end{pmatrix}.
+    \] The duals are given by the transposes. Now, the operators $S_i$ can also be
+    given matrix representations, whose components can be computed using the
+    projections \[
+        \braket{\uparrow|S_z|\downarrow} = \frac{1}{2}\hbar, \qquad
+        \braket{\downarrow|S_z|\uparrow} = -\frac{1}{2\hbar}, \qquad
+        \braket{\uparrow|S_z|\uparrow} = \braket{\downarrow|S_z|\downarrow} = 0.
+    \] Thus, \[
+        S_z = \frac{1}{2}\hbar \begin{pmatrix}
+            1 & 0 \\ 0 & -1
+        \end{pmatrix}.
+    \] Similarly, we can show that \[
+        S_+ = \hbar \begin{pmatrix}
+            0 & 1 \\ 0 & 0
+        \end{pmatrix}, \qquad
+        S_- = \hbar \begin{pmatrix}
+            0 & 0 \\ 1 & 0
+        \end{pmatrix}.
+    \] We can now obtain $S_x$ and $S_y$, \[
+        S_x = \frac{1}{2}\hbar \begin{pmatrix}
+            0 & 1 \\ 1 & 0
+        \end{pmatrix}, \qquad
+        S_y = \frac{1}{2}\hbar \begin{pmatrix}
+            0 & -i \\ i & 0
+        \end{pmatrix}.
+    \] 
+    
 \end{document}
 % vim: set tabstop=4 shiftwidth=4 softtabstop=4:
