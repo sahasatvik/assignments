@@ -688,9 +688,44 @@
     \] From the definition of diffusivity, \[
         \frac{\Delta N}{\Delta t} = D \pp{n}{z}\Delta S.
     \] Comparing, \[
-        D = \frac{1}{3}\E{c}\lambda.
+        D = \frac{1}{3}\E{c}\lambda = \frac{\eta}{\rho}.
     \] 
 
+    \subsubsection{Interdiffusivity}
+    Instead of having just one gas with a density gradient, consider two gases with
+    densities $n_a$ and $n_b$, diffusing in the same container in opposite directions.
+    Note that the mean free paths of the gases are different, $\lambda_a$ and
+    $\lambda_b$. Using the fact that $n_a + n_b = n$ remains constant, \[
+        \pp{n_a}{z} = -\pp{n_b}{z} = \pp{n'}{z}.
+    \] Consider an area $\Delta S$ perpendicular to the $z$ axis. The number of
+    molecules of each type of gas passing through this area is given as \[
+        \Delta N_a = \frac{1}{3}\E{c}_a\lambda_a \pp{n_a}{z}\Delta S \Delta t, \qquad
+        \Delta N_b = \frac{1}{3}\E{c}_b\lambda_b \pp{n_a}{z}\Delta S \Delta t.
+    \] The total is \[
+        \Delta N = \underbrace{\frac{1}{3}\left(\E{c}_a\lambda_a -
+        \E{c}_b\lambda_b\right)}_{D'}\pp{n'}{z}\Delta S \Delta t.
+    \] Now if $D' \neq 0$, then there is an overall flow of gas molecules in a
+    particular direction. However, we want the total density and pressure to remain
+    the same everywhere. In order to stop this from happening, there must be a mass
+    motion of molecules in the opposite direction, say with velocity $v$. The number
+    of such molecules moving through $\Delta S$ is $nv\Delta S \Delta t$. Combining
+    this with $\Delta N$ and setting the net movement to zero, \[
+        v = -\frac{D'}{n}\pp{n'}{z}.
+    \] The flow of the first type of molecules is thus $n_av\Delta S\Delta t + 
+    \Delta N_a$. We define the interdiffusivity of one type of gas into the other as \[
+        D_{ab} = \frac{1}{3} \frac{n_b\E{c}_a\lambda_a + n_a\E{c}_b\lambda_b}{n_a +
+        n_b}.
+    \] This proceeds at a rate \[
+        \frac{\Delta N_{ab}}{\Delta t} = D_{ab}\pp{n'}{z}\Delta S.
+    \] This is called Meyer's Law. Note that $n_a$ and $n_b$ vary spatially, hence
+    so does $D_{ab}$. Also, when $n_a \gg n_b$, we recover the diffusivity of a
+    single gas, \[
+        D_{ab} \to \frac{1}{3}\E{c}_b\lambda_b.
+    \]
+
+    In the special case where $D' = 0$, we observe $v = 0$ and $D_{ab} =
+    \E{c}\lambda$ assuming identical $\E{c}$ and $\lambda$. Now, $D_{ab}$ becomes
+    spatially independent.
 
 \end{document}
 % vim: set tabstop=4 shiftwidth=4 softtabstop=4:
