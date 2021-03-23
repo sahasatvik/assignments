@@ -229,6 +229,21 @@
         \] The proof for discrete random variables is analogous, switching the sums
         for integrals.
     \end{proof}
+
+    \begin{theorem}
+        For random variables $X$ and $Y$, \[
+            \var{X} = \var{\E{X\,|\,Y}} + \E{\var{X\,|\,Y}}.
+        \] 
+    \end{theorem}
+    \begin{proof}
+        Using the previous theorem, \[
+            \var{\E{X\,|\,Y}} = \E{\E{X\,|\,Y}^2} - \E{\E{X\,|\,Y}}^2 =
+            \E{\E{X\,|\,Y}^2} - \E{X}^2,
+        \] and \[
+            \E{\var{X\,|\,Y}} = \E{\E{X^2\,|\,Y} - \E{X\,|\,Y}^2} =
+            \E{X^2} - \E{\E{X\,|\,Y}^2}.
+        \] Adding the above gives the desired result.
+    \end{proof}
     
 \end{document}
 % vim: set tabstop=4 shiftwidth=4 softtabstop=4:
