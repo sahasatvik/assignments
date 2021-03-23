@@ -1204,6 +1204,39 @@
         S_y = \frac{1}{2}\hbar \begin{pmatrix}
             0 & -i \\ i & 0
         \end{pmatrix}.
+    \] The matrices of $S_x$, $S_y$, $S_z$ without the pre-factors are called Pauli
+    matrices. Some properties of the Pauli matrices are \[
+        \sigma_x^2 = \sigma_y^2 = \sigma_z^2 = 1, \qquad 
+        \sigma_x\sigma_y\sigma_z = i, \qquad
+        [\sigma_x, \sigma_y] = 2i\sigma_z.
+    \] This can also be written as \[
+        \sigma_i\sigma_z = \delta_{ij} + i\epsilon_{ijk}\sigma_k.
+    \] We also define a vector of Pauli matrices \[
+        \ve{\sigma} = \sigma_x\hat{x} + \sigma_y\hat{y} + \sigma_z\hat{z}.
+    \] The Pauli matrices together with the identity matrix form a basis.
+
+    The eigenvectors of $S_x$ and $S_y$ are \[
+        \frac{1}{\sqrt{2}}(\ket{\uparrow} \pm \ket{\downarrow}), \qquad
+        \frac{1}{\sqrt{2}}(\ket{\uparrow} \pm i\ket{\downarrow}).
+    \] 
+
+    \subsection{Spin precession}
+    The Hamiltonian of a particle under a magnetic field is \[
+        H = -\ve{\mu}\cdot \ve{B}.
+    \] If $\ve{B}$ is directed along the $z$ axis, \[
+        H = \frac{2\mu_B}{\hbar}BS_z = \mu_BB\sigma_z.
+    \] Writing $\ket{\psi} = \psi_+\ket{\uparrow} + \psi_-\ket{\downarrow}$, our
+    Schr\"odinger equation gives \[
+        \pm\mu_BB\psi_{\pm} = i\hbar\ppt{}\psi_{\pm}.
+    \] Now we look at different initial conditions. If $\psi(t = 0) =
+    \ket{\uparrow}$, i.e.\ along the $z$-axis, we can show that the solution also
+    remains with spin along the same direction -- no precession.
+
+    Suppose instead that $\psi(t = 0) = (\ket{\uparrow} + \ket{\downarrow}) /
+    \sqrt{2}$. Now, \[
+        \psi(t) = \frac{1}{\sqrt{2}}\begin{pmatrix}
+            e^{-i\omega t / 2} \\ e^{i\omega t / 2}
+        \end{pmatrix}.
     \] 
     
 \end{document}
