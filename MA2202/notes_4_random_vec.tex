@@ -174,8 +174,61 @@
             P(X = s\,|\, Y = t) = \frac{P(X = s, Y = t)}{P(Y = t)}
         \] for $P(Y = t) > 0$. We also have \[
             P(X \leq s \,|\, Y = t) = \sum_{r \leq s}P(X = r\,|\, Y = t).
+        \]
+        If $X$ and $Y$ are continuous random variables, then the conditional
+        distribution of $X$ given $Y = t$ is described as \[
+            F_{X\,|\, Y = t}(r) = \int_{-\infty}^s \frac{f_{X, Y}(r, t)}{f_Y(t)}\:dr.
         \] 
     \end{definition}
+    \begin{example}
+        Consider two continuous random variables $X$ and $Y$ which have a joint
+        probability mass function \[
+            f_{X, Y}(s, t) = \begin{cases}
+                \alpha t, &\text{ if }0 < t < s < 1, \\
+                0, &\text{ otherwise.}
+            \end{cases}
+        \] First normalize, by demanding \[
+            \iint_{\R^2} f_{X, Y}(s, t)\:dt\:ds = \int_0^1\int_0^s \alpha t\:dt\:ds = 1,
+        \] whence $\alpha = 6$.
+        Thus, \[
+            \E{Y\,|\,X = s} = \int_\R t \cdot \frac{f_{X, Y}(s, t)}{f_X(s)}\:dt.
+        \] Now, \[
+            f_X(s) = \int_\R f_{X, Y}(s, t)\:dt = \int_0^s 6t\alpha\:dt = 3s^2
+        \] for $0 < s < 1$, and simply $3$ for $s \geq 1$. Thus, \[
+            \E{Y\,|\, X = s} = \int_0^s t\cdot \frac{6t}{3s^2}\:dt = \frac{2}{3}s,
+        \] in the region $0 < s < 1$. For $s \geq 1$, the expectation becomes $2 /
+        3$. 
+        Also, \[
+            \var{Y\,|\, X = s} = \E{Y^2 \,|\, X = s} - \E{Y \,|\,X = s}^2.
+        \] The first term is \[
+            \E{Y^2\,|\, X = s} = \int_0^s t^2\cdot \frac{6t}{3s^2}\:dt =
+            \frac{1}{2}s^2.
+        \] Thus, \[
+            \var{Y\,|\, X = s} = \frac{1}{2}s^2 - \frac{4}{9}s^2 = \frac{1}{18}s^2.
+        \]
+        
+        \noindent
+        Note that \[
+            f_Y(t) = \int_\R f_{X, Y}(s, t)\:ds = \int_t^1 6t\alpha\:ds = 6t(1 - t)
+        \] in the region $0 < t < 1$. Thus, \[
+            F_Y(t) = \int_0^t 6t'(1 - t')\:dt' = t^2(3 - 2t)
+        \] for $0 < t < 1$. $F_Y(t) = 1$ for $t \geq 1$.
+    \end{example}
+
+    \begin{theorem}
+        For discrete or continuous random variables $X$ and $Y$, \[
+            \E{\E{X\,|\,Y}} = \E{X}.
+        \] 
+    \end{theorem}
+    \begin{proof}
+        \[
+            \E{\E{X\,|\,Y}} = \sum_n \E{X\,|\,Y = n}\,P(Y = n) = \sum_{nm}
+            m P(X = m, Y = n).
+        \] Reordering the summations, we get \[
+            \sum_{m}m\sum_{n}P(X = m, Y = n) = \sum_{m}mP(X = m) = \E{X}.
+        \] The proof for discrete random variables is analogous, switching the sums
+        for integrals.
+    \end{proof}
     
 \end{document}
 % vim: set tabstop=4 shiftwidth=4 softtabstop=4:
