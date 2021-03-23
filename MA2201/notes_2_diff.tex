@@ -801,9 +801,20 @@
         \] Since $\varphi(x) \in [0, 1]$, the series converges uniformly on $\R$.
         This in turn gives the continuity of $\R$.
 
-        To show that $f$ is not differentiable at every point $x \in \R$, show the
-        existence of a sequence $h_n \to 0$ but $\lim_{n \to \infty}
-        (f(x + h_n) - f(x)) / h_n$ does not exist.
+        To show that $f$ is not differentiable at every point $x \in \R$, construct a 
+        sequence such that $h_n \to 0$ but $\lim_{n \to \infty} (f(x + h_n) - f(x)) / 
+        h_n$ does not exist. We fix $x$ and $m$, and set \[
+            h_n = \pm\frac{1}{2}4^{-m},
+        \] where the sign is chosen such that there is no integer between $4^mx$ and
+        $4^m(x + h_n)$. Now, set \[
+            \gamma_n = \frac{\varphi(4^n(x + h_n)) - \varphi(4^nx)}{h_n}.
+        \] Note that when $n > m$, $4^nh_n$ is an even integer, so $\gamma_n = 0$.
+        When $0 \leq n \leq m$, we have $|\gamma_n| \leq 4^n$ since $|\varphi(s) -
+        \varphi(t)| \leq |s - t|$. For $n = m$, $\gamma_m = 4^m$, so we now evaluate
+        \[
+            \left|\frac{f(x + h_n) - f(x)}{h_n}\right| = \left|\sum_{n = 0}^m
+            \left(\frac{3}{4}\right)^n \gamma_n\right| \geq \frac{1}{2}(3^m + 1).
+        \] However, $h_n \to 0$, which means that the desired limit does not exist.
     \end{proof}
     \begin{example}
         Weierstrass gave the example \[
@@ -812,7 +823,7 @@
         3\pi / 2$.
     \end{example}
     \begin{example}
-        Hardy have the example \[
+        Hardy gave the example \[
             f(x) = \sum_{n = 1}^\infty \frac{\sin(n^2\pi x)}{n^2}.
         \] 
     \end{example}
