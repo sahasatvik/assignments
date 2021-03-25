@@ -288,6 +288,21 @@
             p(t_m)^{r_m}.
         \] 
     \end{theorem}
+    \begin{theorem}
+        Let $X_1, \dots, X_n$ be discrete independent identically distributed random
+        variables, and let $F$ denote their common cumulative distribution function.
+        Then, \[
+            P(X_{(n)} \leq s) = P(X_1 \leq s, \dots, X_n \leq s) = F(s)^n.
+        \] Now, \[
+            P(X_{(n)} = s) = P(X_{(n)} \leq s) - P(X_{(n)} \leq s - 1) = F(s)^n -
+            F(s - 1)^n.
+        \] Similarly, \[
+            P(X_{(1)} \leq s) = 1 - P(X_1 \geq s, \dots, X_n \geq s) = 1 - (1 -
+            F(s))^n.
+        \] Thus, \[
+            P(X_{(1)} = s) = (1 - F(s - 1))^n - (1 - F(s))^n.
+        \]  
+    \end{theorem}
     
 \end{document}
 % vim: set tabstop=4 shiftwidth=4 softtabstop=4:
