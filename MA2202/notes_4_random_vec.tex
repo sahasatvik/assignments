@@ -244,6 +244,50 @@
             \E{X^2} - \E{\E{X\,|\,Y}^2}.
         \] Adding the above gives the desired result.
     \end{proof}
+
+    \begin{definition}[Order statistics]
+        Let $X_1, \dots, X_n$ be discrete independent identically distributed random
+        variables, with a common probability mass function. We define \[
+            X_{(1)} = \min(X_1, \dots, X_n), \qquad \dots \qquad X_{(n)} =
+            \max(X_1, \dots, X_n).
+        \] Note that we must have \[
+            X_{(1)} \leq X_{(2)} \leq \dots \leq X_{(n - 1)} \leq X_{(n)}.
+        \]
+    \end{definition}
+    \begin{lemma}
+        If $X_1, \dots, X_n$ be discrete independent identically distributed random
+        variables, with a common probability mass function, for any permutation
+        $\sigma$ of $\{1, \dots, n\}$, \[
+            P(X_1 = s_1, \dots, X_n = s_n) = P(X_1 = s_{\sigma(1)}, \dots, X_n =
+            s_{\sigma(n)}).
+        \] 
+    \end{lemma}
+    \begin{proof}
+        The expressions are both equal to $p(s_1) \dots p(s_n)$, where $p$ is the
+        common probability mass function.
+    \end{proof}
+
+    \begin{theorem}
+        Let $X_1, \dots, X_n$ be discrete independent identically distributed random
+        variables, and let $g$ denote the joint probability mass function of the
+        order statistics. \[
+            g(s_1, \dots, s_n) = \begin{cases}
+                P(X_{(1)} = s_1, \dots, X_{(n)} = s_n), &\text{ if }s_1 \leq \dots
+                \leq s_n, \\
+                0, &\text{ otherwise}.
+            \end{cases}
+        \] Furthermore, let $G_{\tilde{s}}$ denote the group of all permutations of
+        $\{s_1, \dots, s_n\}$. Recall that $|G_{\tilde{s}}| = n! / (r_1!\dots r_m!)$
+        where $r_i$ of the $s_j$'s are equal to some $t_i$. Thus for increasing
+        $s_1, \dots, s_n$, \[
+            g(s_1, \dots, s_n) = \sum_{\sigma \in G_{\tilde{s}}} P(X_1 =
+            \sigma(s_1), \dots, X_n = \sigma(s_n)) = |G_{\tilde{s}}|P(X_1 = s_1,
+            \dots, X_n = s_n).
+        \] This can also be written as \[
+            g(s_1, \dots, s_n) = \binom{n}{r_1 \dots r_m}p(t_1)^{r_1} \dots
+            p(t_m)^{r_m}.
+        \] 
+    \end{theorem}
     
 \end{document}
 % vim: set tabstop=4 shiftwidth=4 softtabstop=4:
