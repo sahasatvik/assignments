@@ -144,7 +144,7 @@
         \] for all $\epsilon > 0$, which forces $\ell = \ell'$.
     \end{proof}
 
-    \begin{theorem}
+    \begin{theorem}\label{th:bounded}
         If $f$ is Riemann integrable on $[a, b]$, then $f$ is bounded on that interval.
         Furthermore, if $M > 0$ is such that $|f(x)| \leq M$ for all $x \in [a, b]$,
         then \[
@@ -347,10 +347,100 @@
         \] 
     \end{proof}
 
+    \begin{lemma}
+        Let $f$ be bounded on $[a, b]$, and let $P'$ be any partition of that
+        interval. Then for every $\epsilon > 0$, there exists a $\delta > 0$ such that
+        for all partitions $P$ with $\norm{P} < \delta$, \[
+            U(f, P) - U(f, P \cup P') < \epsilon.
+        \] 
+    \end{lemma}
+    \begin{proof}
+        Using the boundedness of $f$, choose $M \in \R$ such that $|f(x)| < M$ for
+        all $x \in [a, b]$. Suppose that $P' = \{x_1, \dots, x_n\}$. Set $\delta =
+        \epsilon / 4nM$. Now, let $P$ be any partition of $[a, b]$ with $\norm{P} <
+        \delta$. Write $P = \{y_i\}$, and $P\cup P' = \{z_i\}$ where all these sets
+        are ordered. Now, note that if one of the subintervals $[z_j, z_{j + 1}]$
+        does not contain a point $x_i$, then the term $M_j(y_{j + 1} - y_{j})$
+        cancels from $U(f, P) - U(f, P\cup P')$. Whenever there is an $x_i$ in
+        $[z_j, z_{j + 1}]$, we have a term of the form \[
+            M_j(y_{j + 1} - y_j) - M'(x_i - y_j) - M''(y_{j + 1} - x_i),
+        \] where $M', M''$ are the supremums over the two pieces, each less than
+        $M$. This means that this term is bounded by $4M\delta$. Since this can
+        happen at most $n$ times, \[
+            U(f, P) - U(f, P \cup P') < 4nM\delta = \epsilon. \qedhere
+        \] 
+    \end{proof}
+
     \begin{theorem}
         Riemann and Darboux integrability are equivalent and assign the same value
         to the integrals. 
     \end{theorem}
+    \begin{proof}
+        First assume that $f$ is Riemann integrable on $[a, b]$. By
+        Theorem~\ref{th:bounded}, $f$ is bounded so the Darboux upper and lower sums
+        are well defined. Given $\epsilon > 0$, we seek a partition $P$ such that \[
+            U(f, P) - L(f, P) < \epsilon.
+        \] Now, Riemann integrability guarantees the existence of a $\delta > 0$
+        such that for all tagged partitions $\dot{P}$ with $\Vert\dot{P}\Vert <
+        \delta$, \[
+            |S(f, P) - \ell| < \frac{\epsilon}{3}
+        \] where $\ell$ is the value of the Riemann integral. Choose $P$ with $n$
+        subintervals. Now, let $\dot{P}_\xi$ be tagged with $\xi_j$ and
+        $\dot{P}_\zeta$ be tagged with $\zeta_j$. From the definitions of the
+        infimum and supremum, we choose our tags such that \[
+            f(\xi_j)  - m_j < \epsilon / 6(b - a), \qquad 
+            M_j - f(\zeta_j) < \epsilon / 6(b - a).
+        \] This gives \[
+            M_j - m_j < f(\xi_j) - f(\zeta_j) + \frac{\epsilon}{3(b - a)}.
+        \] Thus, \begin{align*}
+            U(f, P) - L(f, P) &< \sum_{j = 0}^{n - 1} \left(f(\xi_j) - f(\zeta_j) +
+            \frac{\epsilon}{3(b - a)}\right)(x_{j + 1} - x_{j}) \\
+            &< S(f, \dot{P}_\xi) - S(f, \dot{P}_\zeta) + \frac{\epsilon}{3(b -
+            a)}\cdot(b - a) \\
+            &< |S(f, \dot{P}_\xi) - \ell| + |\ell - S(f, \dot{P}_\zeta)| +
+            \frac{\epsilon}{3} \\
+            &< \epsilon.
+        \end{align*}
+        This proves that $f$ is Darboux integrable on $[a, b]$, i.e.\ $U_f = L_f$.
+        We now wish to show that $U_f = L_f = \ell$. Let $\epsilon > 0$. Using the
+        properties of the infimum and supremum, we find partitions $P_1, P_2$ and
+        $\dot{P}_3$ such that \[
+            L_f - L(f, P_1) < \frac{\epsilon}{6}, \qquad
+            U(f, P_2) - U_f < \frac{\epsilon}{6}, \qquad
+            |S(f, \dot{P}_3) - \ell| < \frac{\epsilon}{3}.
+        \] Setting $P = P_1 \cup P_2 \cup P_3$, \[
+            L_f - L(f, P) < \frac{\epsilon}{6}, \qquad
+            U(f, P) - U_f < \frac{\epsilon}{6}, \qquad
+            |S(f, \dot{P}) - \ell| < \frac{\epsilon}{3}.
+        \] Now, \[
+            L(f, P) \leq S(f, \dot{P}) \leq U(f, P) < L(f, P) + \frac{\epsilon}{3}.
+        \] This means that $S(f, \dot{P}) - L(f, P) < \epsilon / 3$. Now, \[
+            |\ell - L_f| \leq |\ell - S(f, \dot{P})| + |S(f, \dot{P}) - L(f, P)| +
+            |L(f, P) - L_f| < \epsilon.
+        \] This forces $U_f = L_f = \ell$.
+        \begin{center}
+            \rule{5em}{0.5pt}
+        \end{center}
+
+        \noindent
+        Now assume that $f$ is Darboux integrable on $[a, b]$. This means that $U_f
+        = L_f$. For $\epsilon > 0$, choose a partition $P'$ such that \[
+            U(f, P') - U_f < \frac{\epsilon}{2}.
+        \] Set $\delta_1 = \epsilon / 8nM$, and use our previous lemma to conclude
+        that for any partition $P$ of $[a, b]$ with $\norm{P} < \delta_1$, \[
+            U(f, P) < U(f, P \cup P') + \frac{\epsilon}{2} \leq U(f, P') +
+            \frac{\epsilon}{2} < U_f + \epsilon.
+        \] Similarly, we can choose $\delta_2 > 0$ such that for all partitions $P$
+        with $\norm{P} < \delta_2$, \[
+            L(f, P) > L_f - \epsilon.
+        \] Setting $\delta = \min\{\delta_1, \delta_2\}$, we have \[
+            L_f - \epsilon < L(f, P) < S(f, \dot{P}) < U(f, P) < U_f + \epsilon.
+        \] Thus, for all tagged partitions $\dot{P}$ with $\Vert\dot{P}\Vert <
+        \delta$, we have \[
+            |S(f, \dot{P}) - U_f| < \epsilon. \qedhere
+        \] 
+
+        \end{proof}
 
     \begin{theorem}
         Any real continuous function on $[a, b]$ is Riemann integrable.
@@ -363,8 +453,25 @@
         \] Now, construct a partition of $[a, b]$ which divides the interval into
         equal subintervals of length $(b - a) / n$, where $n$ is chosen such that
         $\Vert P\Vert < \delta$. This immediately gives \[
-            U(f, P) - L(f, P) = \sum_{j = 0}^n (M_j - m_j)\cdot \frac{1}{n}(b - a)
-            \leq n\cdot \frac{\epsilon}{b - a}\cdot \frac{b - a}{n} = \epsilon. \qedhere
+            U(f, P) - L(f, P) = \sum_{j = 0}^{n - 1} (M_j - m_j)\cdot \frac{1}{n}(b
+            - a) \leq n\cdot \frac{\epsilon}{b - a}\cdot \frac{b - a}{n} = \epsilon.
+            \qedhere
+        \] 
+    \end{proof}
+
+    \begin{theorem}
+        Any bounded, monotone function on $[a, b]$ is Riemann integrable.
+    \end{theorem}
+    \begin{proof}
+        Without loss of generality, suppose that $f$ is monotonically increasing.
+        Now, $f$ on each interval attains its minimum and maximum at the endpoints,
+        so \[
+            U(f, P) - L(f, P) = \sum_{j = 0}^{n - 1} (f(x_{j + 1}) - f(x_j))(x_{j +
+            1} - x_j).
+        \] Let $\epsilon > 0$. Choose $P$ such that each subinterval has length $(b
+        - a) / n$. Since $f$ is bounded on $[a, b]$, we can choose $n$ to be
+        sufficiently large such that \[
+            U(f, P) - L(f, P) = (f(b) - f(a))\frac{b - a}{n} < \epsilon. \qedhere
         \] 
     \end{proof}
 
