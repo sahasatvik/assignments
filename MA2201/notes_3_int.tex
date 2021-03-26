@@ -270,6 +270,7 @@
         Note that $P_1\cup P_2$ is a common refinement of $P_1$ and $P_2$,
         hence \[
             L(f, P_1) \leq L(f, P_1 \cup P_2) \leq U(f, P_1\cup P_2) \leq U(f, P_2).
+            \qedhere
         \] 
     \end{proof}
     \begin{corollary}
@@ -320,13 +321,52 @@
     \end{definition}
     
     \begin{theorem}
-        Riemann and Darboux integrability are equivalent and assign the same value
-        to the integrals. Equivalently, a function $f$ is Riemann integrable on $[a,
-        b]$ if and only if for every $\epsilon > 0$, there exists a partition $P$
-        such that \[
+        A function $f$ is Darboux integrable on $[a, b]$ if and only if for every
+        $\epsilon > 0$, there exists a partition $P$ such that \[
             U(f, P) - L(f, P) < \epsilon.
         \] 
     \end{theorem}
+    \begin{proof}
+        First, assume that given $\epsilon > 0$, there exists a partition $P$ such
+        that \[
+            U(f, P) - L(f, P) < \epsilon.
+        \] By the previous corollary, \[
+            U_f - L_f \leq U(f, P) - L(f, P) < \epsilon
+        \] for all $\epilon > 0$, so $U_f = L_f$ giving Darboux integrability. \\
+
+        \noindent
+        Now, suppose that $f$ is Darboux integrable on $[a, b]$. This means that
+        $U_f = L_f$. Using the definitions of supremum and infimum, for $\epsilon >
+        0$, there exists a partition $P_1$ such that $U(f, P_1) - U_f < \epsilon /
+        2$ and a partition $P_2$ such that $L_f - L(f, P_2) < \epsilon / 2$. Adding,
+        \[
+            U(f, P_1) - L(f, P_2) < \epsilon.
+        \] Now, setting $P = P_1 \cup P_2$ as a common refinement of $P_1$ and
+        $P_2$, we have \[
+            U(f, P) - L(f, P) < U(f, P_1) - L(f, P_2) < \epsilon. \qedhere
+        \] 
+    \end{proof}
+
+    \begin{theorem}
+        Riemann and Darboux integrability are equivalent and assign the same value
+        to the integrals. 
+    \end{theorem}
+
+    \begin{theorem}
+        Any real continuous function on $[a, b]$ is Riemann integrable.
+    \end{theorem}
+    \begin{proof}
+        Note that any continuous function on a compact interval is uniformly continuous.
+        Thus, for $\epsilon > 0$, there exists $\delta > 0$ such that for all $x, y
+        \in [a, b]$, we have \[
+            |f(x) - f(y)| < \frac{\epsilon}{b - a}.
+        \] Now, construct a partition of $[a, b]$ which divides the interval into
+        equal subintervals of length $(b - a) / n$, where $n$ is chosen such that
+        $\Vert P\Vert < \delta$. This immediately gives \[
+            U(f, P) - L(f, P) = \sum_{j = 0}^n (M_j - m_j)\cdot \frac{1}{n}(b - a)
+            \leq n\cdot \frac{\epsilon}{b - a}\cdot \frac{b - a}{n} = \epsilon. \qedhere
+        \] 
+    \end{proof}
 
 \end{document}
 % vim: set tabstop=4 shiftwidth=4 softtabstop=4:
