@@ -1169,10 +1169,10 @@
     \] We also have the creation and annihilation operators, \[
         S_\pm = S_x \pm iS_y, \qquad
         S_\pm\ket{s, m_s} = \hbar\sqrt{s(s + 1) - m_s(m_s + 1)}\ket{s, m_s \pm 1}.
-    \] Suppose $S = 1 /2$. Now, there are two corresponding $m_s$, so we have two
+    \] Suppose $s = 1 /2$. Now, there are two corresponding $m_s$, so we have two
     eigenstates. \[
         S_z\ket{\uparrow} = \frac{1}{2}\hbar \ket{\uparrow}, \qquad
-        S_z\ket{\downarrow} = \frac{1}{2}\hbar \ket{\uparrow}.
+        S_z\ket{\downarrow} = -\frac{1}{2}\hbar \ket{\downarrow}.
     \] These can be represented using two orthogonal vectors, \[
         \ket{\uparrow} = \ket{s = 1 /2, m_s = +1 / 2} = \begin{pmatrix}
             1\\0
@@ -1183,9 +1183,9 @@
     \] The duals are given by the transposes. Now, the operators $S_i$ can also be
     given matrix representations, whose components can be computed using the
     projections \[
-        \braket{\uparrow|S_z|\downarrow} = \frac{1}{2}\hbar, \qquad
-        \braket{\downarrow|S_z|\uparrow} = -\frac{1}{2\hbar}, \qquad
-        \braket{\uparrow|S_z|\uparrow} = \braket{\downarrow|S_z|\downarrow} = 0.
+        \braket{\uparrow|S_z|\uparrow} = \frac{1}{2}\hbar, \qquad
+        \braket{\downarrow|S_z|\downarrow} = -\frac{1}{2}\hbar, \qquad
+        \braket{\uparrow|S_z|\downarrow} = \braket{\downarrow|S_z|\uparrow} = 0.
     \] Thus, \[
         S_z = \frac{1}{2}\hbar \begin{pmatrix}
             1 & 0 \\ 0 & -1
@@ -1238,6 +1238,34 @@
             e^{-i\omega t / 2} \\ e^{i\omega t / 2}
         \end{pmatrix}.
     \] 
+
+    \subsection{Addition of total angular momentum}
+    Recall that \[
+        [J_{\mu i}, J_{\nu j}] = i\hbar \delta_{\mu\nu}\epsilon_{ijk}J_k.
+    \] Write $\ket{j_1m_1;j_2m_2} = \ket{j_1m_1}\ket{j_2m_2}$. While \[
+        J_z\ket{j_1m_1;j_2m_2} = \hbar(m_1 + m_2)\ket{j_1m_1;j_2m_2},
+    \] we see that $[J^2, J_{iz}] \neq 0$. Thus, we seek $\ket{j, m_j, j_1, j_2}$.
+
+    Consider two spin-half operators, \[
+        \vS = \vS_1 + \vS_2.
+    \] We have four states $\ket{\uparrow\uparrow}$, etc,\ such that \[
+        S_z\ket{\uparrow\uparrow} = \hbar \ket{\uparrow\uparrow}, \qquad
+        S_z\ket{\downarrow\downarrow} = -\hbar\ket{\downarrow\downarrow}.
+    \] Since $[S_1, S_2] = 0$, we can simplify \[
+        S^2 = \frac{2}{3}\hbar^2 + 2S_{1z}S_{2z} + S_{1+}S_{2-} + S_{1-}S_{2+}.
+    \] Now, \[
+        S^2\ket{\uparrow\uparrow} = 2\hbar^2\ket{\uparrow\uparrow}, \qquad
+        S^2\ket{\downarrow\downarrow} = 2\hbar^2\ket{\downarrow\downarrow}.
+    \] Setting $S_- = S_{1-} + S_{2+}$, \[
+        \frac{1}{\sqrt{2}}S_-\ket{\uparrow\uparrow} =
+        \frac{1}{\sqrt{2}}\hbar(\ket{\uparrow\downarrow} + \ket{\downarrow\uparrow}).
+    \] This gives us the eigenstates \[
+        \ket{\uparrow\uparrow}, \qquad \frac{1}{\sqrt{2}}(\ket{\uparrow\downarrow} +
+        \ket{\downarrow\uparrow}), \qquad \ket{\downarrow\downarrow},
+    \] along with a singlet state \[
+        \frac{1}{\sqrt{2}}(\ket{\uparrow\downarrow} - \ket{\downarrow\uparrow}).
+    \] 
+    
     
 \end{document}
 % vim: set tabstop=4 shiftwidth=4 softtabstop=4:
