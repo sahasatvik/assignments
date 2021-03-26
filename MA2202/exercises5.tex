@@ -1,0 +1,143 @@
+\documentclass[10pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{cancel}
+\usepackage{xcolor}
+
+\title{Probability I - Assignment V}
+\author{Satvik Saha}
+\date{}
+
+\geometry{a4paper, margin=1in}
+\setlength\parindent{0pt}
+\renewcommand{\labelenumi}{(\alph{enumi})}
+\renewcommand\CancelColor{\color{red}}
+% \renewcommand\qedsymbol{$\blacksquare$}
+\newcounter{prob}
+\def\problem{\stepcounter{prob}\paragraph{Exercise \arabic{prob}}}
+\def\solution{\paragraph{Solution}}
+
+\newcommand\op[1]{\operatorname{#1}}
+\newcommand\E[1]{E[#1]}
+
+\newtheorem*{lemma}{Lemma}
+
+\begin{document}
+        \par\textbf{IISER Kolkata} \hfill \textbf{Assignment V}
+        \vspace{3pt}
+        \hrule
+        \vspace{3pt}
+        \begin{center}
+                \LARGE{\textbf{MA 2202 : Probability I}}
+        \end{center}
+        \vspace{3pt}
+        \hrule
+        \vspace{3pt}
+        Satvik Saha, \texttt{19MS154}, Group D\hfill\today
+        \vspace{20pt}
+
+        \problem Observe that for a unit normal distribution, $P(X > 2) \approx
+        0.02275$. In this in accordance with the $3\sigma$ rule of thumb?
+
+        \solution The $3\sigma$ rule of thumb claims that \[
+            P(\mu - 2\sigma \leq X \leq \mu + 2\sigma) \approx 0.9545.
+        \] In the complementary region, \[
+            P(|X - \mu| > 2\sigma) \approx 1 - 0.9545 \approx 0.0455.
+        \] 
+
+        In our particular case, we have $\mu = 0$ and $\sigma^2 = 1$, $P(X > 2)
+        \approx 0.02275$. Symmetry of the normal distribution about the origin means
+        that $P(X < -2) \approx 0.02275$ as well, so \[
+            P(|X - 0| \geq 2) = P(X < -2) + P(X > 2) \approx 2\times 0.02275
+            \approx 0.0455.
+        \] This is in perfect accordance with our rule of thumb.
+
+        \problem Find the moment generating function for the exponential random
+        variable with parameter $\lambda$.
+
+        \solution We have a random variable $X$ such that \[
+            f_X(x) = \lambda e^{-\lambda x}u(x),
+        \] where $u(x)$ is the Heaviside step function and $\lambda > 0$. Now, \[
+            M_X(t) = \E{e^{tX}} = \int_0^\infty \lambda e^{tx}e^{-\lambda x}\:dx.
+        \] This converges only when $t < \lambda$, so \[
+            M_X(t) = \frac{\lambda}{t - \lambda}e^{-(\lambda - t)x}\Big|_0^\infty =
+            \frac{\lambda}{\lambda - t}.
+        \] 
+
+        \textsc{Note:} In the domain $t \in (0, \lambda)$, we can write \[
+            M_X(t) = \frac{1}{1 - t / \lambda} = 1 + \frac{t}{\lambda} +
+            \frac{t^2}{\lambda^2} + \dots + \frac{t^n}{\lambda^n} + \dots.
+        \] This directly gives \[
+            \E{X^n} = \frac{n!}{\lambda^n}.
+        \] Putting $\lambda = 1$, we have shown that \[
+            \E{X^n} = \int_0^\infty x^n e^{-x}\:dx = \Gamma(n + 1) = n!.
+        \] 
+
+        \problem Let $X \sim \operatorname{Normal}(0, 1)$ and let $\Phi$ denote the
+        cumulative distribution function of $X$.
+        \begin{enumerate}
+            \itemsep0em
+            \item Show that for all $a > 0$, \[
+                \Phi(a) \geq \frac{a^2}{1 + a^2}.
+            \] 
+            \item For $r \in \mathbb{R}$, compute $\E{e^{rX}}$.
+        \end{enumerate}
+
+        \solution \begin{enumerate}
+            \itemsep0em
+            \item Note that \[
+                \Phi(a) = P(X \leq a) = \frac{1}{\sqrt{2\pi}}\int_{-\infty}^a
+                e^{-t^2 / 2}\:dt.
+            \] Since $1 - \Phi(a) = P(X \geq a)$, we instead prove the equivalent
+            statement that \[
+                P(X \geq a) = \frac{1}{\sqrt{2\pi}}\int_a^\infty e^{-t^2 / 2}\:dt
+                \leq 1 - \frac{a^2}{1 + a^2} = \frac{1}{1 + a^2}.
+            \] When $a \leq 1$, this is trivial. Note that our integral is symmetric
+            about $x = 0$, so the integral over $(0, \infty)$ is just half of the
+            integral over $\mathbb{R}$, which must be $1$. Thus, \[
+                \frac{1}{\sqrt{2\pi}}\int_a^\infty e^{-t^2 /2}\:dt \leq
+                \frac{1}{\sqrt{2\pi}}\int_0^\infty e^{-t^2 /2}\:dt = \frac{1}{2}
+                \leq \frac{1}{1 + a^2}.
+            \] The last inequality holds when $a \leq 1$, since $2 \geq 1 + a^2$.
+
+            Now consider $a > 1$. When we integrate, we have $a \leq t$ for the
+            dummy variable $t$. Thus, \[
+                \frac{1}{\sqrt{2\pi}}\int_a^\infty ae^{-t^2 / 2}\:dt \leq
+                \frac{1}{\sqrt{2\pi}}\int_a^\infty te^{-t^2 / 2}\:dt =
+                \frac{1}{\sqrt{2\pi}} e^{-t^2 / 2}\Big|_a^\infty = 
+                \frac{1}{\sqrt{2\pi}}e^{-a^2 / 2}.
+            \] This gives \[
+                \frac{1}{\sqrt{2\pi}}\int_a^\infty e^{-t^2 / 2}\:dt \leq
+                \frac{e^{-a^2 /2}}{\sqrt{2\pi} a}.
+            \] When $a > 1$, we have $\sqrt{2\pi}a > 2$. Also, \[
+                e^{a^2 / 2} > 1 + \frac{1}{2}a^2,
+            \] so  \[
+                \sqrt{2\pi}a e^{a^2 / 2} > 2e^{a^2 / 2} > 2 + a^2 > 1 + a^2.
+            \] Putting this together, \[
+                \frac{1}{\sqrt{2\pi}}\int_a^\infty e^{-t^2 / 2}\:dt \leq
+                \frac{1}{\sqrt{2\pi}ae^{a^2 / 2}} < \frac{1}{1 + a^2}.
+            \] This proves the desired inequality for all $a > 0$.
+
+            \item We want to compute \[
+                \E{e^{rX}} = \frac{1}{\sqrt{2\pi}} \int_{\mathbb{R}}e^{rt} e^{-t^2
+                / 2}\:dt.
+            \] Completing the square, \[
+                \frac{1}{2}t^2 - rt = \frac{1}{2}(t - r)^2 - \frac{1}{2}r^2,
+            \] so \[
+                \frac{1}{\sqrt{2\pi}}\int_{\mathbb{R}}e^{-(-rt + t^2 / 2)}\:dt =
+                \frac{1}{\sqrt{2\pi}}\int_{\mathbb{R}} e^{r^2 / 2}e^{-(t - r)^2 /
+                2}\:dt.
+            \] We take the factor of $e^{r^2 / 2}$ outside and shift the variable of
+            integration as $t \mapsto t + r$. The result is simply \[
+                \E{e^{rX}} = e^{r^2 /2}\cdot
+                \frac{1}{\sqrt{2\pi}}\int_{\mathbb{R}}e^{-t^2 / 2}\:dt = e^{r^2 /
+                2}.
+            \] 
+        \end{enumerate}
+
+        
+\end{document}
