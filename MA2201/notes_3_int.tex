@@ -475,5 +475,47 @@
         \] 
     \end{proof}
 
+    \begin{theorem}
+        Let $f$ be Riemann integrable on $[a, b]$, and let $g$ be such that $g(x) =
+        f(x)$ for all $x \in [a, b]\setminus\{c\}$, and $f(c) \neq g(c)$ for some $c
+        \in [a, b]$. Then, $g$ is also Riemann integrable on $[a, b]$.
+    \end{theorem}
+    \begin{proof}
+        Let the integral of $f$ on $[a, b]$ be $\ell$. For $\epsilon > 0$, let
+        $\delta > 0$ be such that for all tagged partitions $\dot{P}$ with
+        $\Vert\dot{P}\Vert < \delta$, we have \[
+            |S(f, \dot{P}) - \ell| < \frac{\epsilon}{2}.
+        \] Now, note that \[
+            |S(f, \dot{P}) - S(g, \dot{P})| \leq 2\delta |f(c) - g(c)|.
+        \] This is because $c$ can be a tag of at most $2$ subintervals. Relabelling
+        $\delta$ such that $2\delta|f(c) - g(c)| < \epsilon / 2$, we see that for
+        all tagged partitions $\dot{P}$ with $\Vert\dot{P}\Vert < \delta$, \[
+            |S(g, \dot{P}) - \ell| \leq |S(g, \dot{P}) - S(f, \dot{P})| + |S(f,
+            \dot{P}) - \ell| < \epsilon. \qedhere
+        \] 
+    \end{proof}
+
+    \begin{theorem}
+        Let $f$ be a bounded function with a single point of discontinuity in $[a,
+        b]$.  Then, $f$ is Riemann integrable on $[a, b]$.
+    \end{theorem}
+    \begin{proof}
+        Let $c \in [a, b]$ be the point of discontinuity. From the boundedness of
+        $f$, choose $M$ such that $|f(x)| < M$ for all $x \in [a, b]$. Now, for
+        $\epsilon > 0$, choose a partition of $[a, b]$ such that the subinterval
+        containing $c$ has length at most $\epsilon / 2M$. The continuity and
+        boundedness of $f$ on the remaining subintervals means that it is Riemann
+        integrable on them, so we can repartition them with $P'$ such that $U(f, P')
+        - L(f, P') < \epsilon / 2$. Thus, the difference in the upper and lower sums
+        for the total partition $P$ is bounded as \[
+            U(f, P) - L(f, P) < \frac{\epsilon}{2} + (M_i - m_i)\frac{\epsilon}{2M}
+            \leq \epsilon. \qedhere
+        \] 
+    \end{proof}
+    \begin{corollary}
+        Let $f$ be a bounded function with finitely many points of discontinuity in
+        $[a, b]$. Then, $f$ is Riemann integrable on $[a, b]$.
+    \end{corollary}
+
 \end{document}
 % vim: set tabstop=4 shiftwidth=4 softtabstop=4:
