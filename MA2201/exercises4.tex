@@ -1,0 +1,347 @@
+\documentclass[10pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{hyperref}
+
+\title{Analysis II - Assignment IV}
+\author{Satvik Saha}
+\date{}
+
+\geometry{a4paper, margin=1in}
+\setlength\parindent{0pt}
+\renewcommand{\labelenumi}{(\roman{enumi})}
+% \renewcommand\qedsymbol{$\blacksquare$}
+\def\C{\mathbb{C}}
+\def\R{\mathbb{R}}
+\def\Q{\mathbb{Q}}
+\def\Z{\mathbb{Z}}
+\def\N{\mathbb{N}}
+\newcommand\ddx[1]{\frac{d^{#1}}{dx^{#1}}}
+
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}{Corollary}[theorem]
+
+\begin{document}
+    \par\textbf{IISER Kolkata} \hfill \textbf{Assignment IV}
+    \vspace{3pt}
+    \hrule
+    \vspace{3pt}
+    \begin{center}
+            \LARGE{\textbf{MA 2201 : Analysis II}}
+    \end{center}
+    \vspace{3pt}
+    \hrule
+    \vspace{3pt}
+    Satvik Saha, \texttt{19MS154}\hfill\today
+    \vspace{20pt}
+    
+    \paragraph{Solution 1.}
+    We find the intervals on which the given function $f\colon \R \to \R$ is
+    strictly increasing or decreasing.
+    \begin{enumerate}
+        \item \[
+            f(x) = (x + a)^2.
+        \] Note that $f(x)$ is a polynomial, hence infinitely differentiable
+        everywhere. Calculate \[
+            f'(x) = 2(x + a), \qquad f''(x) = 2, \qquad f'''(x) = f^{(4)}(x) = \dots
+            = 0.
+        \] Now, $f$ is strictly increasing precisely when $f'(x) > 0$, i.e.\ on the
+        interval $(-a, \infty)$. Also, $f$ is strictly decreasing when $f'(x) < 0$,
+        i.e.\ on the interval $(-\infty, -a)$. Since $-a$ is a point of minima,
+        $f'(-a) = 0$ and $f''(-a) > 0$, with no other $x$ such that $f(x) = f(-a) =
+        0$, we may also include the endpoint. \\
+
+        The function $f$ is strictly increasing on $[-a, \infty)$ and strictly
+        decreasing on $(-\infty, -a]$.
+
+        \item \[
+            f(x) = ax^2 + bx + c, \qquad a, b, c \neq 0.
+        \] Again, \[
+            f'(x) = 2ax + b = 2a(x - \alpha), \qquad f''(x) = 2a,
+        \] where $\alpha = -b / 2a$.
+        If $a > 0$, then $f$ is strictly increasing on $[\alpha, \infty)$ and
+        strictly decreasing on $(-\infty, \alpha]$. 
+        If $a < 0$, then $f$ is strictly decreasing on $[\alpha, \infty)$ and
+        strictly increasing on $(-\infty, \alpha]$. 
+
+        \item \[
+            f(x) = (ax + b)^3 = a^3(x - \alpha)^3, \qquad a, b \neq 0
+        \] where $\alpha = - b / a$. If $a > 0$, $f$ is strictly increasing
+        everywhere, and if $a < 0$, then $f$ is strictly decreasing everywhere. \\
+
+        This is easily seen, because $s < t \implies s^3 < t^3$ for all $s, t \in
+        \R$. Thus, $(s - \alpha)^3 < (t - \alpha)^3$ so when $a > 0$, $f(s) < f(t)$
+        and when $a < 0$, $f(s) > f(t)$.
+    \end{enumerate}
+
+    \paragraph{Solution 2.}
+    We find the Taylor expansion of order $k$ of the following functions. 
+    \begin{enumerate}
+        \item \[
+            f(x) = \frac{1}{1 + x^2}.
+        \] To expand about $x = 0$, we compute \[
+            f(x) = \frac{1}{(1 + ix)(1 - ix)} 
+                = \frac{1}{2}\left[\frac{1}{1 + ix} + \frac{1}{1 - ix}\right].
+        \] Since \[
+            \ddx{n}\frac{1}{1 + ax} = \frac{(-1)^na^n n!}{(1 + ax)^{n + 1}},
+        \] we write \[
+            f^{(n)}(x) = \frac{(-1)^nn!}{2}\left[\frac{i^n}{(1 + ix)^{n + 1}} +
+            \frac{(-i)^n}{(1 - ix)^{n + 1}}\right].
+        \] At $x = 0$, \[
+            f^{(n)}(0) = \frac{1}{2}i^n(-1)^nn!\left[1 + (-1)^n\right].
+        \] When $n$ is odd, $f^{(n)}(0) = 0$. When $n$ is even, we have $f^{(n)}(0)
+        = i^nn!$. Thus, \begin{align*}
+            f(x) &= \sum_{n = 0}^k \frac{f^{(n)}(0)x^n}{n!} + O(x^{k + 1}) \\
+            &= 1 - x^2 + x^4 - \dots + (-1)^{m / 2}x^m + O(x^{k + 1}),
+        \end{align*}
+        where $m$ is the highest even integer less than or equal to $k$. \\
+
+        \noindent \textbf{Alternatively:} Write $1 / (1 + x^2)$ as a geometric power
+        series, \[
+            f(x) = 1 - x^2 + x^4 - \dots = \sum_{n = 0}^\infty a_nx^n,
+        \] where $a_{4n} = 1$, $a_{4n + 1} = 0$, $a_{4n + 2} = -1$ and $a_{4n + 3}
+        = 0$. This converges absolutely and uniformly on any compact subinterval of
+        $(-1, +1)$, simply because it is a geometric series with common ratio
+        $-x^2$, whose absolute value $|x^2| < 1$ on the interval.  As a corollary of
+        Abel's Lemma \footnote{In
+        \href{https://sahasatvik.me/assignments/MA2201/notes_2_diff.pdf}{notes on
+        differentiation}, Corollary 2.15.1.}, this power series is infinitely
+        differentiable on its interval of convergence. Recall that \[
+            f'(x) = \sum_{n = 1}^\infty na_nx^{n - 1}.
+        \] Repeating this finitely many times, \[
+            f^{(m)}(x) = \sum_{n = m}^\infty n(n - 1)\dots(n - m + 1)a_nx^{n - m}.
+        \] Thus, we have $f^{(n)}(0) = n!a_n$, which vanishes for odd $n$ and is
+        alternately $\pm n!$ for even $n$. This gives us back our result \[
+            f(x) = 1 - x^2 + x^4 - \dots + (-1)^{m / 2}x^m + O(x^{k + 1}),
+        \] where $m$ is the highest even integer less than or equal to $k$.
+
+        \item \[
+            f(x) = \frac{1}{x}.
+        \] To expand about $x = 1$, we compute \[
+            f'(x) = -\frac{1}{x^2}, \qquad f''(x) = \frac{2}{x^3}, \qquad f^{(n)}(x)
+            = \frac{(-1)^nn!}{x^{n + 1}}.
+        \] Thus, \begin{align*}
+            f(x) &= \sum_{n = 0}^k \frac{f^{(n)}(1)(x - 1)^n}{n!} + O(x^{k + 1})
+            \\
+            &= 1 - (x - 1) + (x - 1)^n - \dots + (-1)^k(x - 1)^k + O(x^{k + 1}).
+        \end{align*}
+
+        \item \[
+            f(x) = e^x.
+        \] To expand about $x = 0$, note that \[
+            f^{(n)}(x) = f(x) = e^x,
+        \] so \begin{align*}
+            f(x) &= \sum_{n = 0}^k \frac{f^{(n)}(0)x^n}{n!} + O(x^{k + 1}) \\
+            &= 1 + x + \frac{1}{2}x^2 + \dots + \frac{1}{k!}x^k + O(x^{k + 1}).
+        \end{align*}
+
+        \item \[
+            f(x) = \sin{x}.
+        \] To expand about $x = 0$, note that \[
+            f'(x) = \cos{x}, \qquad f''(x) = -\sin{x}, \qquad f'''(x) = -\cos{x},
+            \qquad \dots
+        \] In general, \[
+            f^{(4n \pm 1)}(x) = \pm \cos{x}, \qquad f^{(4n + 1 \pm 1)}(x) =
+            \mp\sin{x}.
+        \] Thus, $f^{(2n)}(0) = 0$ and $f^{2n + 1}(0) = (-1)^n$. Setting $m = 2\ell
+        + 1$ equal to the greatest odd integer less than or equal to $k$, we have
+        \begin{align*}
+            f(x) &= \sum_{n = 0}^\ell \frac{f^{(2n + 1)}(0)x^{2n + 1}}{(2n + 1)!} + 
+            O(x^{k + 1}) \\
+            &= \sum_{n = 0}^\ell \frac{(-1)^n x^{2n + 1}}{(2n + 1)!} + O(x^{k + 1})
+            \\
+            &= x - \frac{1}{3!}x^3 + \frac{1}{5!}x^5 - \dots +
+            \frac{(-1)^\ell}{m!}x^m + O(x^{k + 1}).
+        \end{aligned}
+
+        \item \[
+            f(x) = x^k|x|.
+        \] First note that $x|x|$ is differentiable at the origin. The limit \[
+            \lim_{h \to 0} \frac{h|h| - 0}{h} = \lim_{h \to 0} |h| = 0
+        \] is well defined and exists, equal to zero. Hence, the product with $x^{k
+        - 1}$ is also differentiable. 
+        Also note that for $x > 0$ \[
+            \lim_{h \to 0}\frac{(x + h)|x + h| - x|x|}{h} = \lim_{h \to
+            0} \frac{(x + h)^2 - x^2}{h} = \lim_{h \to 0}2x + h = 2x,
+        \] and for $x < 0$, \[
+            \lim_{h \to 0}\frac{(x + h)|x + h| - x|x|}{h} = \lim_{h \to
+            0} \frac{-(x + h)^2 + x^2}{h} = \lim_{h \to 0}-2x - h = -2x
+        \] hence the derivative of $x|x|$ is $2|x|$ everywhere.
+        Using the product rule, compute \[
+            f'(x) = \ddx{}(x^{k - 1}\cdot x|x|) = (k - 1)x^{k - 2}\cdot x|x| + 2x^{k - 1}|x|
+            = (k + 1)x^{k - 1}|x|.
+        \] This is of the same form as the original function, so we know that $f'$
+        is further differentiable. Each time the differential operator acts on $f$,
+        a factor is pulled in front and the power of $x$ reduces by $1$. After $k$
+        such operations, \[
+            f^{(k)}(x) = (k + 1)\cdot k \cdots 2 \cdot|x|.
+        \] In all cases, $f^{(n)}(0) = 0$. Thus, the $k$ order Taylor polynomial
+        about $x = 0$ is \[
+            \sum_{n = 0}^k \frac{f^{(n)}(0)x^n}{n!} = 0.
+        \] However, note that Taylor's theorem does not apply since the $k + 1$
+        order derivative does not exist at $0$.
+
+        If we'd stopped at a $k - 1$ order series, then we do have a remainder term
+        of the form $f^{(k)}(c) = (k + 1)!|c|$, for some $c$ between $0$ and $x$.
+
+        \item \[
+            f(x) = \begin{cases}
+                x^{k + 1}\sin\left(\frac{1}{x}\right), &\text{ if }x \neq 0, \\
+                0, &\text{ if } x = 0.
+            \end{cases}
+        \] The $k$ order Taylor expansion about $0$ does not exist, since such
+        functions are not generally differentiable $k$ times at $x = 0$. 
+        As a counterexample, set $k = 2$. Now, \[
+            f'(0) = \lim_{x \to 0} \frac{x^3\sin(1 / x) - 0}{x - 0} = \lim_{x \to 0}
+            x^2\sin\left(\frac{1}{x}\right) = 0.
+        \] Now, for $x \neq 0$, use the product rule to compute \[
+            f'(x) = 3x^2\sin\left(\frac{1}{x}\right) -
+            x\cos\left(\frac{1}{x}\right).
+        \] Thus, the limit \[
+            f''(0) := \lim_{x \to 0} \frac{f'(x) - f'(0)}{x - 0} = \lim_{x \to 0}
+            3x\sin\left(\frac{1}{x}\right) - \cos\left(\frac{1}{x}\right)
+        \] does not exist. \\~\\
+
+        In general, define \[
+            F_n(x) = \begin{cases}
+                x^{n}\sin\left(\frac{1}{x}\right), &\text{ if }x \neq 0, \\
+                0, &\text{ if } x = 0.
+            \end{cases} 
+            \qquad
+            G_n(x) = \begin{cases}
+                x^{n}\cos\left(\frac{1}{x}\right), &\text{ if }x \neq 0, \\
+                0, &\text{ if } x = 0.
+            \end{cases} 
+        \] For $x \neq 0$, see that \[
+            F_n'(x) = nF_{n - 1}(x) - G_{n - 2}(x), \qquad
+            G_n'(x) = nG_{n - 1}(x) + F_{n - 2}(x).
+        \] The fact that the minimum leading power of $x$ drops by $2$ each time
+        means that we get at most $\lceil k / 2 \rceil$ derivatives. \\
+
+        We will instead show that the $m = \lceil k / 2\rceil$ Taylor polynomial about
+        $x = 0$ is identically zero, i.e.\ \[
+            f^{(n)}(0) = 0
+        \] for $n = 0, 1, \dots, m$. More generally, \[
+            F_{k + 1}^{(n)}(0) = G_{k + 1}^{(n)}(0) = 0
+        \] for $n = 0, 1, \dots, m$.
+
+        We show this by induction on $k$. First, for $k = 1$, $m = 1$, $F_2(0) = 0$ and 
+        \[
+            F_2'(0) = \lim_{x \to 0} \frac{x^2\sin\left(1 / x\right) - 0}{x - 0} =
+            \lim_{x \to 0} x\sin\left(\frac{1}{x}\right) = \lim_{x \to \infty}
+            \frac{\sin{x}}{x} = 0.
+        \] Similarly, $G_2(0) = 0$ and \[
+            G_2'(0) = \lim_{x \to 0} x\cos\left(\frac{1}{x}\right) = 0.
+        \] Now, suppose that our statement is true for all $1 \leq n \leq k$, i.e.\ 
+        the $0$ to $m = \lceil n / 2\rceil$ order derivatives of $F_{n + 1}$ and
+        $G_{n + 1}$ all vanish at $x = 0$. Now, $F_{k + 2}(0) = 0$ and \[
+            F_{k + 2}'(0) = \lim_{x \to 0} \frac{x^{k + 2}\sin\left(1 / x\right) - 0}{x - 0} =
+            \lim_{x \to 0} x^{k + 1}\sin\left(\frac{1}{x}\right) = \lim_{x \to \infty}
+            \frac{\sin{x}}{x^{k + 1}} = 0,
+        \] and similarly, $G_{k + 2}(0) = 0$ and \[
+            G_{k + 2}'(0) = \lim_{x \to 0} x^{k + 1}\cos\left(\frac{1}{x}\right) = 0.
+        \] We use our recurrence relation (for $x \neq 0$) together with the above
+        two facts (at $x = 0$) to conclude that \[
+            F_{k + 2}'(x) = nF_{k + 1}(x) - G_{k}(x), \qquad
+            G_{k + 2}'(x) = nG_{k + 1}(x) + F_{k}(x)
+        \] everywhere. Now, $F_{k + 2}'$ and $G_{k + 2}'$ are linear combinations of
+        $F_{k + 1}$, $F_{k}$, $G_{k + 1}$ and $G_{k}$. Hence, we are guaranteed
+        $\lceil (k - 1) / 2\rceil$ further derivatives at $0$ by our induction hypothesis.
+        Since all derivatives (up to $\lceil (k - 1) / 2\rceil$) of these four 
+        functions at $x = 0$ are zero, all these derivatives of the linear combinations 
+        $F_{k + 2}'$ and $G_{k + 2}'$ at $x = 0$ must also be zero.
+        This gives us $\lceil(k + 1) /2\rceil$ derivatives of $F_{k + 2}$ and $G_{k
+        + 2}$, all equal to zero at $x = 0$, which proves our statement by induction.
+
+        Hence, the $\lceil k / 2\rceil$ order Taylor polynomial of $f$ around $x =
+        0$ is \[
+            \sum_{n = 0}^{\lceil k / 2\rceil} \frac{f^{(n)}(0)x^n}{n!} = 0.
+        \] We cannot write a remainder term in the form of Lagrange or Cauchy, since
+        the subsequent derivative does not exist.
+        
+        \item \[
+            f(x) = \begin{cases}
+                e^{1 / x^2}, &\text{ if }x \neq 0, \\
+                0, &\text{ if } x = 0.
+            \end{cases}
+        \] Again, the $k$ order Taylor expansion about $0$ does not exist, since $f$
+        is not differentiable at $x = 0$. Note that $f$ is unbounded on
+        any $\delta$ neighbourhood of $0$, since there will always be a
+        point $1 / N < \delta$, hence for all $n \leq N$, $1 / n \in (-\delta,
+        +\delta)$ and $f(1 / n) = e^{n^2} \to \infty$. Thus, the limit \[
+            \lim_{x \to 0} \frac{f(x) - f(0)}{x - 0} = \lim_{x \to 0}
+            \frac{1}{x}e^{1 / x^2}
+        \] does not exist. \\~\\
+
+        Consider instead the function \[
+            f(x) = \begin{cases}
+                e^{-1 / x^2}, &\text{ if }x \neq 0, \\
+                0, &\text{ if } x = 0.
+            \end{cases}
+        \] Now, we compute \[
+            e^{1 / x^2} > 1 + \frac{1}{x^2}, \qquad 
+            0 < e^{-1  /x^2} < \frac{1}{1 + 1 / x^2} = \frac{x^2}{1 + x^2}.
+        \] Dividing by $x$ and taking limits as $x \to 0$, the squeeze theorem gives \[
+            f'(0) = \lim_{x \to 0}\frac{1}{x}\cdot e^{-1 / x^2} = 0.
+        \] Elsewhere, the chain rule gives \[
+            f'(x) = e^{-1 / x^2}\cdot \frac{2}{x^3}, \qquad x^3 f'(x) = 2f(x).
+        \] For the second derivative, \[
+            e^{1 / x^2} > 1 + \frac{1}{x^2} + \frac{1}{2x^4} + \frac{1}{6x^6}, \qquad 
+            0 < e^{-1 / x^2} < \frac{1}{1 + 1 / 6x^6} = \frac{6x^6}{1 + 6x^6}.
+        \] Using the squeeze theorem again, \[
+            f''(0) = \lim_{x \to 0} \frac{1}{x}\cdot \frac{2}{x^3}e^{-1 / x^2} = 0.
+        \] Now, we differentiate \[
+            \ddx{}x^3f'(x) = 2f'(x), \qquad 3x^2 f'(x) + x^3f''(x) = 2f'(x),
+        \] which when rearranged gives \[
+            x^3 f''(x) = (2 - 3x^2)f'(x), \qquad x^6f''(x) = 2(2 - 3x^2)f(x).
+        \] Thus, \[
+            f'''(0) = \lim_{x \to 0} \frac{1}{x}f''(x) = \lim_{x \to 0} \frac{2 - 3x^2}{x^3}\cdot \frac{2}{x^3}
+            \cdot f(x).
+        \] Using \[
+            e^{1 / x^2} > 1 + \frac{1}{n!x^{2n}}, \qquad 0 < e^{-1 / x^2} <
+            \frac{n!x^{2n}}{1 + n!x^{2n}},
+        \] for $n = 4$, \[
+            f'''(0) = \lim_{x \to 0} \frac{2(2 - 3x^2)}{x^6}e^{-1 / x^2} \leq
+            \lim_{x \to 0} \frac{2(2 - x^2)}{x^6}\cdot \frac{4!x^8}{1 + 4!x^8} = 0,
+        \] hence the squeeze theorem again gives $f'''(0) = 0$. \\
+
+        In general, when we differentiate our functional equation, we get the form \[
+            x^{3n}f^{(n)}(x) = p_{n}(x)f(x),
+        \] where $p_n(x)$ is a polynomial of degree at most $2n$. To show this by
+        induction, note that $p_0(x) = 1$, $p_1(x) = 2$, $p_2(x) = 2(2 - 3x^2)$.
+        If this holds for all $n \leq m$, then \[
+            x^{3m}f^{(m)}(x) = p_m(x)f(x), 
+        \] which when differentiated gives \[
+            3mx^{3m - 1}f^{(m)}(x) + x^{3m}f^{(m + 1)}(x) = p_m'(x)f(x) +
+            p_m(x)f'(x).
+        \] Substituting the formulae for $f^{(m)}(x)$ and $f'(x)$, \[
+            \frac{3m}{x}p_m(x)f(x) + x^{3m}f^{(m + 1)}(x) = p_m'(x)f(x) +
+            \frac{2}{x^3}p_m(x)f(x),
+        \] which when multiplied by $x^3$ and rearranged gives \[
+            x^{3(m + 1)}f^{(m + 1)}(x) = \left[(2 - 3mx^2)p_m(x) +
+            x^3p_m'(x)\right]f(x).
+        \] The polynomial in brackets has degree at most $2m + 2$. This proves the
+        desired statement by induction, and also gives us a recurrence relation for
+        $p_m(x)$. \\
+
+        Now we show that $f^{(n)}(0) = 0$. Suppose that this is true for all $n \leq
+        m$, hence \[
+            f^{(m + 1)}(0) = \lim_{x \to 0} \frac{1}{x}f^{(m)}(x) = \lim_{x \to 0}
+            \frac{p_m(x)}{x^{3m + 1}}e^{-1 / x^2}.
+        \] Using our inequality, \[
+            f^{(m + 1)}(0) \leq \lim_{x \to 0}
+            \frac{p_m(x)}{x^{3m + 1}}\frac{(3m)!x^{6m}}{1 + (3m)!x^{6m}} = \lim_{x
+            \to 0}\frac{(3m)!x^{3m - 1}p_m(x)}{1 + (3m)!x^{6m}} = 0.
+        \] Hence, $f^{(m + 1)}(0) = 0$, which proves that $f^{(n)}(0) = 0$ for all
+        $n \in \N$. \\
+
+        This means that the Taylor polynomial of any degree about $x = 0$ is just
+        the zero polynomial. The remainder term is of course the function itself,
+        $f(x)$.
+    \end{enumerate}
+
+\end{document}
