@@ -165,6 +165,7 @@
     This is the crystal state. The lower the temperature, the smaller the
     oscillations and vibrations.
 
+
     \subsection{Basic assumptions}
     \begin{enumerate}
         \itemsep0em 
@@ -189,7 +190,8 @@
         range and very powerful.
         In comparison, gravity is a long range force since it varies as $1 /r^2$.
     \end{remark}
-    
+
+
     \subsection{Ideal gases}
     For an ideal gas, we make a few more assumptions. The gas molecules have
     negligible size, so are essentially point masses. Also, there are no forces on
@@ -209,6 +211,7 @@
         \item How do we explain properties such as viscosity and thermal
         conductivity?
     \end{enumerate}
+
 
     \subsection{Pressure}
     Suppose that a volume $dV$, located at $(r, \theta, \phi)$, contains $n\:dV$
@@ -412,6 +415,7 @@
     $\lambda^2$. Around $37\%$ of free paths are longer than $\lambda$; only $1\%$
     of paths are longer than $4.6\lambda$.
 
+
     \subsection{Pressure, considering collisions}
     We recall that the number of molecules moving from a volume $dV$ towards a
     surface $\Delta S$ was given by \[
@@ -515,6 +519,7 @@
         e^{-\epsilon}\:dn_\epsilon.
     \] 
 
+
     \subsection{Degrees of freedom}
     \begin{definition}
         The number of independent coordinates which completely describe the state of
@@ -586,6 +591,7 @@
         \frac{1}{2}k_BT.
     \] 
 
+
     \subsection{Transport phenomena}
     We make a distinction between \textit{random motion} and \textit{mass motion}.
     When a gas is at equilibrium, quantities such as temperature, density, pressure,
@@ -597,6 +603,7 @@
     particles are always in random motion, there is an overall `flow' which is
     directed from a region of higher concentration (of heat, mass, etc) to lower
     concentration.
+
 
     \subsubsection{Viscosity}
     Consider the presence of mass motion (with a certain flow velocity) in addition
@@ -630,6 +637,7 @@
         \eta \propto \frac{\sqrt{T}}{1 + b/ T}, \qquad \eta =
         \eta_0\sqrt{\frac{T}{T_0}} \cdot\frac{1 + b / T_0}{1 + b / T}.
     \] As a first order approximation, $\eta \propto \sqrt{T}$ for large $T$.
+
 
     \subsubsection{Conductivity}
     We proceed exactly as before, except now we have a temperature gradient
@@ -677,6 +685,7 @@
         \frac{\kappa}{\eta c_v} = \epsilon = \frac{9\gamma - 5}{4}.
     \] 
 
+
     \subsubsection{Diffusivity}
     Again, consider a density gradient $\partial n / \partial z$. Now, \[
         dN = \frac{\cos\theta \Delta S}{4\pi r^2}\cdot \frac{\E{c}\Delta
@@ -690,6 +699,7 @@
     \] Comparing, \[
         D = \frac{1}{3}\E{c}\lambda = \frac{\eta}{\rho}.
     \] 
+
 
     \subsubsection{Interdiffusivity}
     Instead of having just one gas with a density gradient, consider two gases with
@@ -726,6 +736,24 @@
     In the special case where $D' = 0$, we observe $v = 0$ and $D_{ab} =
     \E{c}\lambda$ assuming identical $\E{c}$ and $\lambda$. Now, $D_{ab}$ becomes
     spatially independent.
+    
+    
+    \subsection{Density variation with height}
+    Consider a column of gas under the influence of gravity, and assume that the
+    gravitational acceleration is uniform throughout, directed downwards. A thin
+    parcel of air of thickness $dz$ at a height $z$ experiences forces from below
+    and above. Balancing these, \[
+        p + dp + \rho g\:dz = p,
+    \] where $p + dp$ is the pressure above the parcel and $p$ is the pressure
+    below. Note that $\rho g\:dz$ is the weight per unit area of our parcel.
+    Rearranging, \[
+        dp = -\rho g\:dz, \qquad
+        \frac{dn}{n} = -\frac{mg}{k_B T}\:dz.
+    \] This gives the formula \[
+        n = n_0 e^{-mg \Delta z/ k_BT.
+    \] We have ignored variation of $T$ and $g$ with height. If known, these
+    corrections can be incorporated into the formula.
+
 
     \subsection{Brownian motion}
     Consider a homogeneous, isotropic system with really small molecules. These
@@ -747,6 +775,14 @@
     average motion -- the velocities during the mean path are increased. Thus,
     Brownian particles can be treated as ideal gas particles in thermal equilibrium
     with the surrounding fluid medium.
+
+    We return to the barometric law, this time for Brownian particles. This time, we
+    must consider the effect of buoyancy, since our particles are suspended in a
+    liquid. Now, the particles (assumed to be spherical) have apparent weight \[
+        \frac{4}{3}\pi r^3(\rho - \rho_{l})g.
+    \] Thus, we obtain \[
+        n = n_0 e^{-4\pi r^3(\rho - \rho_l)gN_A\Delta z / 3R T}.
+    \] This can be rearranged to get an expression for Avogadro's number $N_A$.
 
 \end{document}
 % vim: set tabstop=4 shiftwidth=4 softtabstop=4:
