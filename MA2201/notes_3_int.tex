@@ -171,7 +171,7 @@
         
         \noindent
         Next, for any tagged partition $\dot{P}$ of $[a, b]$, we have \[
-            |S(f, \dot{P})| \leq \sum_{j = 0}^{n - 1}|f(\xi_j)(x_{j + 1} - x_j) \leq
+            |S(f, \dot{P})| \leq \sum_{j = 0}^{n - 1}|f(\xi_j)|(x_{j + 1} - x_j) \leq
             M(b - a).
         \] Let the Riemann integral of $f$ be $\ell$.
         Thus, for all $\epsilon > 0$, we find $\delta > 0$ such that for all
@@ -494,6 +494,11 @@
             \dot{P}) - \ell| < \epsilon. \qedhere
         \] 
     \end{proof}
+    \begin{corollary}
+        Let $f$ be Riemann integrable on $[a, b]$, and let $g$ be such that $g(x) =
+        f(x)$ on all but finitely many points in $[a, b]$. Then, $g$ is also Riemann
+        integrable on $[a, b]$.
+    \end{corollary}
 
     \begin{theorem}
         Let $f$ be a bounded function with a single point of discontinuity in $[a,
@@ -516,6 +521,91 @@
         Let $f$ be a bounded function with finitely many points of discontinuity in
         $[a, b]$. Then, $f$ is Riemann integrable on $[a, b]$.
     \end{corollary}
+    \begin{corollary}
+        Let $f$ be a bounded function whose points of discontinuities in $[a, b]$
+        have finitely many limit points. Then, $f$ is Riemann integrable.
+    \end{corollary}
+
+    \begin{theorem}
+        The collection of all Riemann integrable functions on $[a, b]$ forms a
+        vector space.
+    \end{theorem}
+
+    \begin{theorem}
+        Let $f$ and $g$ be Riemann integrable on $[a, b]$, such that \[
+            f(x) \leq g(x)
+        \] for all $x \in [a, b]$. Then, \[
+            \int_a^b f \leq \int_a^b g.
+        \] 
+    \end{theorem}
+
+    \begin{theorem}
+        Let $f$ be Riemann integrable on $[a, b]$, and let $c \in [a, b]$. Then, \[
+            \int_a^b f = \int_a^c f + \int_c^b f.
+        \] 
+    \end{theorem}
+
+    \begin{definition}
+        Let $f$ be Riemann integrable on $[a, b]$. We define \[
+            \int_a^b f = -\int_b^a f.
+        \] 
+    \end{definition}
+
+    \begin{theorem}
+        Let $f$ be Riemann integrable on $[a, b]$, and let \[
+            m \leq f(x) \leq M
+        \] for all $x \in [a, b]$. Also let $\varphi\colon [m, M] \to \R$ be
+        continuous, and define $h = \varphi \circ f$ on $[a, b]$. Then, $h$ is
+        Riemann integrable on $[a, b]$.
+    \end{theorem}
+    \begin{proof}
+        Let $\epsilon > 0$. Note that $\varphi$ must be uniformly continuous on $[a,
+        b]$, which means that there exists $\delta > 0$ such that for all $x, y \in
+        [m, M]$ with $|x - y| < \delta$, we have \[
+            |\varphi(x) - \varphi(y)| < \epsilon.
+        \] From the Riemann integrability of $f$ on $[a, b]$, we find a partition
+        $P = \{x_0, \dots, x_n\}$ of $[a, b]$ such that $\norm{P} < \delta$ and \[
+            U(f, P) - L(f, P) < \delta^2.
+        \] We define $M_j$ and $m_j$ in the usual way, with respect to $f$ and $P$.
+        Also define $M_j^*$ and $m_j^*$ with respect to $h = \varphi\circ f$ and $P$.
+        Consider the sets \[
+            A = \{j \in \{0, \dots, n - 1\}\colon M_j - m_j < \delta\},
+        \] \[
+            B = \{j \in \{0, \dots, n - 1\}\colon M_j - m_j \geq \delta\}.
+        \] For each $j \in A$, we use the uniform continuity of $\varphi$ to get \[
+            M_j^* - m_j^* < \epsilon.
+        \] When $k \in B$, let $M' = \sup_{[a, b]} h = \sup_{[m, M]} \varphi$, so \[
+            M_k^* - m_k^* < 2M'.
+        \] Now, \[
+            \delta\sum_{k \in B} (x_{k + 1} - x_k) \leq \sum_{k \in B} (M_k -
+            m_k)(x_{k + 1} - x_k) \leq \delta^2,
+        \] where the first inequality is because $k \in B$, and the second is
+        because of the Riemann integrability of $f$. This gives \[
+            \sum_{k \in B} x_{k + 1} - x_k < \delta.
+        \] Thus, \[
+            U(h, P) - U(h, P) = \sum_{j \in A} (M_j^* - m_j^*)\Delta x + \sum_{k \in
+            B} (M_k^* - m_k^*)\Delta x \leq \epsilon(b - a) + 2M'\delta.
+        \] Choose $\delta < \epsilon$, whence \[
+            U(h, P) - L(h, P) \leq \epsilon(a - b + 2M'). \qedhere
+        \] 
+
+    \end{proof}
+    
+    \begin{corollary}
+        Let $f$ be Riemann integrable on $[a, b]$. Then, $f^2$ is also Riemann
+        integrable on $[a, b]$.
+    \end{corollary}
+
+    \begin{corollary}
+        Let $f$ and $g$ be Riemann integrable on $[a, b]$. Then, $fg$ is also
+        Riemann integrable on $[a, b]$.
+    \end{corollary}
+    \begin{proof}
+        Use \[
+            fg = \frac{1}{4}\left[(f + g)^2 - (f - g)^2\right]. \qedhere
+        \] 
+    \end{proof}
+
 
 \end{document}
 % vim: set tabstop=4 shiftwidth=4 softtabstop=4:
