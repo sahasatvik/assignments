@@ -1,0 +1,242 @@
+\documentclass[10pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{cancel}
+\usepackage{xcolor}
+
+\title{Probability I - Assignment VI}
+\author{Satvik Saha}
+\date{}
+
+\geometry{a4paper, margin=1in}
+\setlength\parindent{0pt}
+\renewcommand{\labelenumi}{(\alph{enumi})}
+\renewcommand\CancelColor{\color{red}}
+% \renewcommand\qedsymbol{$\blacksquare$}
+\newcounter{prob}
+\def\problem{\stepcounter{prob}\paragraph{Exercise \arabic{prob}}}
+\def\solution{\paragraph{Solution}}
+
+\newcommand\op[1]{\operatorname{#1}}
+\newcommand\E[1]{\op{E}[#1]}
+\newcommand\V[1]{\op{Var}[#1]}
+
+\newtheorem*{lemma}{Lemma}
+
+\begin{document}
+        \par\textbf{IISER Kolkata} \hfill \textbf{Assignment VI}
+        \vspace{3pt}
+        \hrule
+        \vspace{3pt}
+        \begin{center}
+                \LARGE{\textbf{MA 2202 : Probability I}}
+        \end{center}
+        \vspace{3pt}
+        \hrule
+        \vspace{3pt}
+        Satvik Saha, \texttt{19MS154}, Group D\hfill\today
+        \vspace{20pt}
+
+        \problem Let $X$ and $Y$ be two independent identically distributed random
+        variables taking values in $\{0, 1, \dots, n\}$. Determine the probability
+        distribution of $Z = X + Y$.
+
+        \solution Let $X$ and $Y$ share the probability mass functions $p_X = p_Y =
+        p$. We seek $p_Z$, where \[
+            p_Z(z) = P(Z = z) = P(X + Y = z) = \sum_{s = 0}^{z} P(X = s, Y = z - s)
+            = \sum_{s = 0}^z p(s)p(z - s).
+        \] Here, we have summed over all possible ways of splitting $z$ among the
+        two variables $X$ and $Y$, and have used the independence of the variables
+        to split the joint distribution as a product $p_{X,Y}(x, y) = p_X(x)p_Y(y)$.
+        \\
+
+        Now, note that if $z < 0$ or $z > 2n$, we immediately get $p_Z(z) = 0$. This
+        is because there are no terms in our sum, i.e.\ no ways of adding integers
+        in the given range to get such a $z$. Similarly, if $n < z \leq 2n$, our sum
+        only goes as far as $s = n$ since subsequent terms are cut off by $p(s)$
+        being zero. Also, we demand $z - s \leq n$, so $s \geq z - n$. In other
+        words, the sum is over $s = z - n, \dots, n$. If $0 \leq z \leq n$, all the
+        terms in our sum survive. \\
+
+        Putting all this together, suppose that the common probability mass function is
+        uniform, with $p(x) = 1 / (n + 1) = q$ when $0 \leq x \leq n$ and $p(x) = 0$
+        otherwise. Then we have \[
+            p_Z(z) = \begin{cases}
+                0, &\text{ if } z < 0, \\
+                (z + 1)q^2, &\text{ if }0 \leq z \leq n, \\
+                (2n - z + 1)q^2, &\text{ if } n \leq z \leq 2n, \\
+                0, &\text{ if } z > 2n.
+            \end{cases}
+        \] 
+
+        If we plot such a function, we see that $p_Z(0) = q^2$, which increases with
+        $z$ by one each time until we get a peak $p_Z(n) = (n + 1)q^2$, then it
+        falls off symmetrically until $p_Z(2n) = q^2$. The total `area' covered is
+        can be calculated by joining the triangular halves into a square with side
+        $n + 1$, hence we have the sum \[
+            \sum_{z = 0}^{2n} p_Z(z) = (n + 1)^2q^2 = 1.
+        \] 
+
+        \problem Let $X$ and $Y$ be two independent identically distributed
+        continuous $\operatorname{Uniform}(0, 1)$ random variables taking values in
+        $\{0, 1, \dots, n\}$. Determine the probability distribution of $Z = X + Y$.
+
+        \solution Let $X$ and $Y$ share the common probability density function $f_X
+        = f_Y = f$. We seek $f_Z$, where \[
+            f_Z(z) = P(X + Y = z) = \int_{\mathbb{R}} f_{X, Y}(X = t, Y = z - t)\:dt
+            = \int_{\mathbb{R}} f(t)f(z - t)\:dt.
+        \] Again, we have used the independence of $X$ and $Y$ to split the joint
+        distribution $f_{X, Y}(x, y) = f_X(x) f_Y(y)$. Now, note that \[
+            f(t) = \begin{cases}
+                1, &\text{ if }t \in (0, 1), \\
+                0, &\text{ otherwise}.
+            \end{cases}
+        \] This means that our integral will vanish whenever $t \leq 0$ or $t \geq
+        1$, so we can place our bounds as $0$ and $1$. Within this range, $f(t) = 1$,
+        so we simplify \[
+            f_Z(z) = \int_0^1 f(z - t)\:dt.
+        \] If $z \leq 0$, note that $z - t < 0$ where $t \in (0, 1)$ so $f(z -
+        t)$ vanishes, giving us zero. Again, if $z \geq 2$, we have $z - t > 2 - t >
+        1$ when $t \in (0, 1)$, so again $f(z - t)$ vanishes giving us zero. When $1
+        \leq z < 2$, we can only integrate where $0 < z - t < 1$, i.e.\ $z - 1 < t <
+        1$. When $0 < z < 1$, we integrate only where $0 < z - t < 1$, i.e.\ $0 < t
+        < z$. Putting this together, and using \[
+            \int_0^z \:dt = z, \qquad \int_{z - 1}^1\:dt = 2 - z,
+        \] we have \[
+            f_Z(z) = \begin{cases}
+                0, &\text{ if }z \leq 0, \\
+                z, &\text{ if } 0 < z < 1, \\
+                2 - z, &\text{ if } 1 \leq z < 2, \\
+                0, &\text{ if } z \geq 2.
+            \end{cases}
+        \] Again, the graph of such a function is a triangle with vertices at the
+        origin $(0, 0)$, $(1, 1)$ and $(2, 0)$. The area of such a triangle is \[
+            \int_{\mathbb{R}}f_Z(z)\:dz = \frac{1}{2}\cdot 2 \cdot 1 = 1.
+        \] 
+
+        \problem Let a random variable $X \sim \operatorname{Poisson}(\lambda)$.
+        \begin{enumerate}
+            \itemsep0em
+            \item Find the conditional expectation of $X$ given that $X$ is an even
+            number.
+            \item Find the variance of the conditional expectation of $X$ given that
+            $X$ is even.
+        \end{enumerate}
+
+        \solution Note that $X$ has the probability mass function \[
+            p(x) = \frac{\lambda^n}{n!}e^{-\lambda}.
+        \] 
+        \begin{enumerate}
+            \itemsep0em
+            \item Conditioning on $X$ being even, \[
+                \E{X|X\text{ is even}} = \sum_{n = 0}^\infty n \cdot \frac{P(X = n,
+                n\text{ is even})}{P(X\text{ is even})}.
+            \] Now, \[
+                P(X\text{ is even}) = \sum_{n = 0}^\infty
+                \frac{\lambda^{2n}}{(2n)!}e^{-\lambda}.
+            \] Use the facts that \[
+                e^{\lambda} = \sum_{n = 0}^\infty \frac{\lambda^n}{n!}, \qquad
+                e^{-\lambda} = \sum_{n = 0}^\infty (-1)^n\frac{\lambda^n}{n!},
+            \] add to make the odd indexed terms disappear and the even terms
+            double, and conclude \[
+                P(X\text{ is even}) = \frac{1}{2}(e^{\lambda} +
+                e^{-\lambda})e^{-\lambda} = \frac{1}{2}(1 + e^{-2\lambda}) =
+               e^{-\lambda} \cosh{\lambda}.
+            \] Thus, we have \[
+                \E{X|X\text{ is even}} = \frac{2}{1 + e^{-2\lambda}}\sum_{n =
+                0}^\infty (2n)\cdot \frac{\lambda^{2n}}{(2n)!}e^{-\lambda}.
+            \] The sum can be written as \[
+                \lambda e^{-\lambda}\sum_{n = 1}^\infty \frac{\lambda^{2n - 1}}{(2n
+                - 1)!}.
+            \] Using the same process as before, we conclude that the sum inside is
+            \[
+                \frac{1}{2}(e^{\lambda} - e^{-\lambda}) = \sinh{\lambda},
+            \] so \[
+                \E{X|X\text{ is even}} = \frac{2}{1 + e^{-2\lambda}}\lambda
+                e^{-\lambda}\cdot \frac{1}{2}(e^{\lambda} - e^{-\lambda}) = \left(\frac{1
+                - e^{-2\lambda}}{1 + e^{-2\lambda}}\right)\cdot \lambda.
+            \] If desired, this can be further simplified as \[
+                \E{X|X\text{ is even}} = \lambda \tanh{\lambda}.
+            \] 
+
+            \item Note that $\E{X|X\text{ is even}}$ is simply a real number, so
+            $\V{\E{X|X\text{ is even}}}$ is trivially zero. \\~\\
+
+            For completeness, calculate \[
+                P(X\text{ is odd}) = 1 - P(X\text{ is even}) = \frac{1}{2}(1 -
+                e^{-2\lambda}) = e^{-\lambda}\sinh{\lambda},
+            \] and \[
+                \E{X|X\text{ is odd}} = \sum_{n = 0}^\infty n\cdot \frac{P(X = n,
+                n\text{ is odd})}{P(X\text{ is odd})} = \frac{2}{1 -
+                e^{-2\lambda}}\sum_{n = 0}^\infty (2n + 1)\cdot
+                \frac{\lambda^{2n + 1}}{(2n + 1)!}e^{-\lambda},
+            \] which we simplify as before to get \[
+                \frac{2}{1 - e^{-2\lambda}}\lambda e^{-\lambda}\sum_{n = 0}^\infty
+                \frac{\lambda^{2n}}{(2n)!} = \frac{2}{1 - e^{-2\lambda}}\cdot\lambda
+                e^{-\lambda}\cdot \frac{1}{2}(1 + e^{-2\lambda}) = \left(\frac{1 +
+                e^{-2\lambda}}{1 - e^{-2\lambda}}\right)\lambda.
+            \] Again, we may write \[
+                \E{X|X\text{ is odd}} = \lambda\coth{\lambda}.
+            \] Define the random variable \[
+                Y = \begin{cases}
+                    1, &\text{ if }X\text{ is even}, \\
+                    0, &\text{ if }X\text{ is odd}.
+                \end{cases}, \qquad
+                p_Y(y) = \begin{cases}
+                    e^{-\lambda}\cosh{\lambda}, &\text{ if }y = 1, \\
+                    e^{-\lambda}\sinh{\lambda}, &\text{ if }y = 0.
+                \end{cases}
+            \] Thus, \[
+                \E{X|Y} = \begin{cases}
+                    \lambda\tanh{\lambda}, &\text{ if }Y = 1,\\
+                    \lambda\coth{\lambda}, &\text{ if }Y = 0.
+                \end{cases}
+            \] Thus, \begin{align*}
+                \E{\E{X|Y}} &= \lambda\coth{\lambda}\cdot P(Y = 0) +
+                \lambda\tanh{\lambda}\cdot P(Y = 1) \\
+                &= \lambda e^{-\lambda}\left(\coth{\lambda}\sinh{\lambda} +
+                \tanh{\lambda}\cosh{\lambda}\right) \\
+                &= \lambda e^{-\lambda}\left(\cosh{\lambda} + 
+                \sinh{\lambda}\right) = \lambda,
+            \end{align*}
+            which we note is simply $\lambda = \E{X} = \E{\E{X|Y}}$, as demanded by
+            the law of total expectation. Also, \begin{align*}
+                \E{\E{X|Y}^2} &= \lambda^2\coth^2{\lambda}\cdot P(Y = 0) +
+                \lambda^2\tanh^2{\lambda}\cdot P(Y = 1) \\
+                &= \lambda^2
+                e^{-\lambda}\left(\coth^2{\lambda}\sinh{\lambda} +
+                \tanh^2{\lambda}\cosh{\lambda}\right) \\
+                &= \lambda^2
+                e^{-\lambda}\left(\frac{\cosh^2\lambda}{\sinh\lambda} + 
+                \frac{\sinh^2\lambda}{\cosh\lambda}\right) \\
+                &= \lambda^2
+                e^{-\lambda}\cdot\frac{\cosh^3\lambda +
+                \sinh^3\lambda}{\cosh\lambda\sinh\lambda}.
+            \end{align*}
+            Now, \[
+                \cosh^3\lambda = \frac{1}{8}(e^{3\lambda} + 3e^{\lambda} +
+                3e^{-\lambda} + e^{-3\lambda}), \qquad
+                \sinh^3\lambda = \frac{1}{8}(e^{3\lambda} - 3e^{\lambda} +
+                3e^{-\lambda} - e^{-3\lambda}),
+            \] so \[
+                \cosh^3\lambda + \sinh^3\lambda = \frac{1}{4}(e^{3\lambda} +
+                3e^{-\lambda}).
+            \] Also, \[
+                \cosh{\lambda}\sinh{\lambda} = \frac{1}{4}(e^{2\lambda} -
+                e^{-2\lambda}).
+            \] Thus, \[
+                \E{\E{X|Y}^2} = \lambda^2 \frac{e^{2\lambda} +
+                3e^{-2\lambda}}{e^{2\lambda} - e^{-2\lambda}} =
+                \lambda^2\left(1 + \frac{4e^{-2\lambda}}{e^{2\lambda} -
+                e^{-2\lambda}}\right).
+            \] Putting these together, \[
+                \V{\E{X|Y}} = \E{\E{X|Y}^2} - \E{X}^2 = \frac{4\lambda^2
+                e^{-2\lambda}}{e^{2\lambda} - e^{-2\lambda}}.
+            \]
+        \end{enumerate}
+        
+\end{document}
