@@ -304,5 +304,46 @@
         \]  
     \end{theorem}
     
+    \begin{theorem}
+        Let $X_1, \dots, X_n$ be continuous independent identically distributed random
+        variables, let $f$ denote their common probability density function, and let
+        $g$ denote their joint probability density function.
+        As before, for any permutation of $\{s_1, \dots, s_n\}$, \[
+            g(s_{\sigma(1)}, \dots, s_{\sigma(n)}) = f(s_1) \dots f(s_n).
+        \] For small $\epsilon > 0$, we can write \[
+            P\left(s_{\sigma(1)} - \frac{\epsilon}{2} \leq X_1 \leq s_{\sigma(1)} +
+            \frac{\epsilon}{2}, \dots,  s_{\sigma(n)} - \frac{\epsilon}{2} \leq X_n
+            \leq s_{\sigma(n)} + \frac{\epsilon}{2}\right) \approx
+            \epsilon^nf(s_1)\dots f(s_n).
+        \] Therefore, for $s_1 < s_2 < \dots < s_n$, we have \[
+            P\left(s_{\sigma(1)} - \frac{\epsilon}{2} \leq X_{(1)} \leq
+            s_{\sigma(1)} + \frac{\epsilon}{2}, \dots,  s_{\sigma(n)} -
+            \frac{\epsilon}{2} \leq X_{(n)} \leq s_{\sigma(n)} +
+            \frac{\epsilon}{2}\right) \approx n!\epsilon^nf(s_1)\dots f(s_n).
+        \] Therefore, dividing by $\epsilon^n$ and letting $\epsilon \to 0$, we have
+        \[
+            g(s_1, \dots, s_n) = n! f(s_1)\dotsf(s_n).
+        \] Thus, assuming the continuity of $f$, we have \[
+            g(s_1, \dots, s_n) = \begin{cases}
+                n!\lim_{\substack{(r_1, \dots, r_n) \to (s_1, \dots, s_n) \\ r_1 <
+                \dots < r_n}} f(r_1) \dots f(r_n), &\text{ if }s_1 \leq \dots \leq
+                s_n, \\
+                0 &\text{ otherwise}.
+            \end{cases}
+        \] 
+    \end{theorem}
+    
+    \begin{theorem}
+        Let $X_1, \dots, X_n$ be continuous independent identically distributed random
+        variables, and let $F$ denote their common cumulative distribution function.
+        Then, like before, \[
+            P(X_{(1)} \leq s) = 1 - (1 - F(s))^n, \qquad
+            P(X_{(n)} \leq s) = F(s)^n.
+        \] Thus, the probability density functions are given by \begin{align*}
+            f_{X_{(1)}}(s) &= \dd{}{s}P(X_{(1)} \leq t) = n (1 - F(s)^{n - 1}) f(s), \\
+            f_{X_{(n)}}(s) &= \dd{}{s}P(X_{(n)} \leq t) = n F(s)^{n - 1} f(s).
+        \end{align*}
+    \end{theorem}
+    
 \end{document}
 % vim: set tabstop=4 shiftwidth=4 softtabstop=4:
