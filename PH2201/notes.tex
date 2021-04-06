@@ -1044,7 +1044,7 @@
         [r, \hat{p}_r] = i\hbar.
     \] This means that the Schr\"odinger equation looks like \[
         \left[-\frac{\hbar^2}{2m}\left(\pp[2]{}{r} + \frac{2}{r}\pp{}{r}\right) +
-        \frac{L^2}{2mr^2} + V(r)\right]\psi(r, \theta, \phi) = E(r, \theta, \phi).
+        \frac{L^2}{2mr^2} + V(r)\right]\psi(r, \theta, \phi) = E\psi(r, \theta, \phi).
     \] Since $V(r)$ has rotational symmetry, we have $[\hat{H}, L^2] = 0$. Thus, we
     separate \[
         \psi(r, \theta, \phi) = R(r)\,Y_{lm}(\theta, \phi).
@@ -1248,7 +1248,8 @@
 
     Consider two spin-half operators, \[
         \vS = \vS_1 + \vS_2.
-    \] We have four states $\ket{\uparrow\uparrow}$, etc,\ such that \[
+    \] We have four states $\ket{\uparrow\uparrow}$, $\ket{\downarrow\downarrow}$,
+    $\ket{\uparrow\downarrow}$, $\ket{\downarrow\uparrow}$, such that \[
         S_z\ket{\uparrow\uparrow} = \hbar \ket{\uparrow\uparrow}, \qquad
         S_z\ket{\downarrow\downarrow} = -\hbar\ket{\downarrow\downarrow}.
     \] Since $[S_1, S_2] = 0$, we can simplify \[
@@ -1265,6 +1266,29 @@
     \] along with a singlet state \[
         \frac{1}{\sqrt{2}}(\ket{\uparrow\downarrow} - \ket{\downarrow\uparrow}).
     \] 
+
+    \subsection{Heisenberg spin exchange problem}
+    Consider a spin exchange Hamiltonian, \[
+        H = \lambda\vS_1\cdot\vS_2,
+    \] for the exchange coupling $\lambda > 0$. The particles carrying this spin are
+    localized in space, and $V(r) = 0$. Note that \[
+        H \propto \vS_i, \qquad [H, S_{iz}] \neq 0.
+    \] However, for $\vS = \vS_1 + \vS_2$, we must have $[H, S^2] = 0$, because \[
+        S^2 = S_1^2 + S_2^2 + 2\vS_1\cdot\vS_2, \qquad \vS_1\cdot\vS_2 =
+        \frac{1}{2}(S^2 - S_1^2 - S_2^2).
+    \] We also have $[H, S_1^2] = [H, S_2^2] = 0$. We get \[
+        H\ket{s, m_s; s_1, s_2} = \frac{1}{2}\lambda\hbar^2\left[s(s + 1) -
+        \frac{3}{2}\right]\ket{s, m_S; s_1, s_2}.
+    \] The ground state $s = 0$ has $E = -3\lambda \hbar^2 / 4$ with a singlet $m_s
+    = 0$, and the excited state $s = 1$ has $E = \lambda\hbar^2 / 4$ with a triplet
+    $m_s = -1, 0, 1$.
+
+
+    \section{Symmetries and symmetry breaking}
+    Recall that when a Hamiltonian possessed certain symmetries, it ended up
+    commuting with certain operators which carried out those symmetry related
+    transformations. This in turn implies simultaneous eigenstates of the
+    Hamiltonian and those operators.
     
     
 \end{document}
