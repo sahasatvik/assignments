@@ -21,7 +21,7 @@
 \fancyhf{}
 \renewcommand\headrulewidth{0.4pt}
 \fancyhead[L]{\scshape MA2201: Analysis II}
-\fancyhead[R]{\scshape Differentiation}
+\fancyhead[R]{\scshape Integration}
 \rfoot{\footnotesize\it Updated on \today}
 \cfoot{\thepage}
 
@@ -604,6 +604,39 @@
         Use \[
             fg = \frac{1}{4}\left[(f + g)^2 - (f - g)^2\right]. \qedhere
         \] 
+    \end{proof}
+
+    \begin{theorem}[Lebesgue-Vitali theorem]
+        A bounded function on a compact interval $[a, b]$ is Riemann integrable if
+        and only if it is continuous almost everywhere, i.e.\ the set of its points
+        of discontinuity has measure zero.
+
+        \begin{remark}
+            A set $\mathscr{D} \subset \R$ has Lebesgue measure zero if for every
+            $\epsilon > 0$, there exists countable collection of open intervals
+            $\{\mathscr{I}_n\}$ such that \[
+                \mathscr{D} \subseteq \bigcup_{n = 1}^\infty \mathscr{I}_n, \qquad
+                \sum_{n = 1}^\infty \mu(\mathscr{I}_n) < \epsilon,
+            \] where $\mu(\mathscr{I}_n) = b_n - a_n$ is the length of each open
+            interval $\mathscr{I}_n = (a_n, b_n)$.
+        \end{remark}
+    \end{theorem}
+    \begin{example}
+        The Dirichlet function, defined as \[
+            f\colon [0, 1] \to \R, \qquad f(x) = \begin{cases}
+                1, &\text{ if }x \in \Q, \\
+                0, &\text{ if }x \notin \Q,
+            \end{cases}
+        \] is not Riemann integrable since its set of discontinuities is the entire
+        interval $[0, 1]$.
+    \end{example}
+    
+    \begin{lemma}
+        Any countable set has Lebesgue measure zero.
+    \end{lemma}
+    \begin{proof}
+        Enclose each element of the set with an open interval of length $\epsilon /
+        2^n$, for $n = 1, 2, \dots$.
     \end{proof}
 
 
