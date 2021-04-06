@@ -20,7 +20,7 @@
 \fancyhf{}
 \renewcommand\headrulewidth{0.4pt}
 \fancyhead[L]{\scshape MA2201: Probability I}
-\fancyhead[R]{\scshape Random variables}
+\fancyhead[R]{\scshape Random vectors}
 \rfoot{\footnotesize\it Updated on \today}
 \cfoot{\thepage}
 
@@ -340,7 +340,7 @@
             P(X_{(1)} \leq s) = 1 - (1 - F(s))^n, \qquad
             P(X_{(n)} \leq s) = F(s)^n.
         \] Thus, the probability density functions are given by \begin{align*}
-            f_{X_{(1)}}(s) &= \dd{}{s}P(X_{(1)} \leq t) = n (1 - F(s)^{n - 1}) f(s), \\
+            f_{X_{(1)}}(s) &= \dd{}{s}P(X_{(1)} \leq t) = n (1 - F(s))^{n - 1} f(s), \\
             f_{X_{(n)}}(s) &= \dd{}{s}P(X_{(n)} \leq t) = n F(s)^{n - 1} f(s).
         \end{align*}
     \end{theorem}

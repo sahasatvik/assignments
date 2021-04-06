@@ -1,0 +1,153 @@
+\documentclass[11pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage[%
+    hidealllines=true,%
+    innerbottommargin=15,%
+    nobreak=true,%
+]{mdframed}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{lipsum}
+\usepackage{bm}
+
+\geometry{a4paper, margin=1in, headheight=14pt}
+
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand\headrulewidth{0.4pt}
+\fancyhead[L]{\scshape MA2201: Probability I}
+\fancyhead[R]{\scshape Markov chains}
+\rfoot{\footnotesize\it Updated on \today}
+\cfoot{\thepage}
+
+\def\C{\mathbb{C}}
+\def\R{\mathbb{R}}
+\def\Q{\mathbb{Q}}
+\def\Z{\mathbb{Z}}
+\def\N{\mathbb{N}}
+\newcommand\ddx[1]{\frac{d #1}{d x}}
+\newcommand\ddt[1]{\frac{d #1}{d t}}
+\newcommand\dd[3][]{\frac{d^{#1}{#2}}{d {#3}^{#1}}}
+\newcommand\ppx[1]{\frac{\partial #1}{\partial x}}
+\newcommand\ppt[1]{\frac{\partial #1}{\partial t}}
+\newcommand\pp[3][]{\frac{\partial^{#1}{#2}}{\partial {#3}^{#1}}}
+\newcommand\norm[1]{\left\lVert#1\right\rVert}
+\newcommand\E[1]{E\left[#1\right]}
+\newcommand\var[1]{\operatorname{Var}[#1]}
+\newcommand\cov[1]{\operatorname{Cov}[#1]}
+\renewcommand\vec[1]{\boldsymbol{#1}}
+
+\def\vX{\vec{X}}
+\def\vt{\vec{t}}
+\def\mP{\mathbb{P}}
+
+\newcounter{module}
+\setcounter{module}{5}
+
+\newmdtheoremenv[%
+    backgroundcolor=blue!10!white,%
+]{theorem}{Theorem}[module]
+\newmdtheoremenv[%
+    backgroundcolor=violet!10!white,%
+]{corollary}{Corollary}[theorem]
+\newmdtheoremenv[%
+    backgroundcolor=teal!10!white,%
+]{lemma}[theorem]{Lemma}
+
+\theoremstyle{definition}
+\newmdtheoremenv[%
+    backgroundcolor=green!10!white,%
+]{definition}{Definition}[module]
+\newmdtheoremenv[%
+    backgroundcolor=red!10!white,%
+]{exercise}{Exercise}[module]
+
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\newtheorem*{example}{Example}
+\newtheorem*{solution}{Solution}
+
+\surroundwithmdframed[%
+    linecolor=black!20!white,%
+    hidealllines=false,%
+    innertopmargin=5,%
+    innerbottommargin=10,%
+    skipabove=0,%
+    skipbelow=0,%
+]{example}
+
+\numberwithin{equation}{module}
+
+\title{
+    \Large\textsc{MA2202: Probability I} \\
+    % \vspace{10pt}
+    \Huge \textbf{Markov chains} \\
+    \vspace{5pt}
+    \Large{Spring 2021}
+}
+\author{
+    \large Satvik Saha%
+    % \thanks{Email: \tt ss19ms154@iiserkol.ac.in}
+    \\\textsc{\small 19MS154}
+}
+\date{\normalsize
+    \textit{Indian Institute of Science Education and Research, Kolkata, \\
+    Mohanpur, West Bengal, 741246, India.} \\
+    % \vspace{10pt}
+    % \today
+}
+
+\begin{document}
+    \maketitle
+
+    \begin{definition}[Markov chain]
+        Let $\{X_n\}_{n = 0}^\infty$ be a sequence of random variables taking values
+        in $\{0, 1, \dots, N\}$ such that \[
+            P(X_{n + 1} = s_{n + 1} | X_{n} = s_n, \dots, X_0 = s_0) = P(X_{n + 1} =
+            s_{n + 1} | X_n = s_n).
+        \] Then, the sequence $\{X_n\}$ is a Markov chain.
+    \end{definition}
+
+    \begin{definition}[Transition probabilities]
+        We define \[
+            p_{ij} = P(X_{n + 1} = j \,|\, X_n = i).
+        \] If $p_{ij}$ does not depend on $n$, then it is called a stationary
+        transition probability from the $i$\textsuperscript{th} state to the
+        $j$\textsuperscript{th} state.
+        \begin{remark}
+            Note that \[
+                \sum_{j = 0}^N P(X_{n + 1} = j \,|\, X_n = i) = \sum_{j = 0}^N
+                p_{ij} = 1.
+            \] 
+        \end{remark}
+    \end{definition}
+
+    \begin{definition}[Stochastic matrix]
+        The stochastic matrix or transition probability matrix $\mP$ is
+        defined such that $\mP_{ij} = p_{ij}$, where $0 \leq i, j \leq N$.
+        \begin{remark}
+            Note that setting $\vec{1} = (1 \dots 1)^\top$, we have $\mP\vec{1} =
+            \vec{1}$.
+        \end{remark}
+    \end{definition}
+
+    \begin{lemma}
+        For a Markov chain with stationary transition probabilities,
+        \[
+            P(X_n = s_n, \dots, X_0 = s_0) = p_{s_{n - 1}s_n}p_{s_{n - 2}s_{n -
+            1}}\dots p_{s_0s_1}P(X_0 = s_0).
+        \] 
+    \end{lemma}
+
+    \begin{definition}[$m$-stage probability matrix]
+        We define $\mP^{(m)}$ such that \[
+            \mP^{(m)}_{ij} = P(X_m = j \,|\, X_0 = i).
+        \] 
+    \end{definition}
+
+\end{document}
+% vim: set tabstop=4 shiftwidth=4 softtabstop=4:
