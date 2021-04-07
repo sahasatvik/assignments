@@ -33,7 +33,7 @@
 \def\Z{\mathbb{Z}}
 \def\N{\mathbb{N}}
 % \newcommand\ve[1]{\boldsymbol{#1}}
-\newcommand\ve[1]{\vec{#1}}
+\newcommand\ve[1]{\boldsymbol{#1}}
 \newcommand\ddx[1]{\frac{d #1}{d x}}
 \newcommand\ddt[1]{\frac{d #1}{d t}}
 \newcommand\dd[3][]{\frac{d^{#1}{#2}}{d {#3}^{#1}}}
@@ -395,7 +395,7 @@
     Suppose that the probability that a molecule suffers no collisions over a
     distance $x$ is given by $f(x)$. Now, the homogeneity and isotropy of the gas
     means that over a distance $dx$, the probability of a collision will be some
-    $p\:dx$, irregardless of the direction of $dx$ -- the proportionality is given
+    $p\,dx$, irregardless of the direction of $dx$ -- the proportionality is given
     by a constant $p$ when we consider very small $dx$. Now, the molecule suffers no
     collisions over a distance $x + dx$ with probability $f(x) (1 - p\:dx)$.
     However, this is just $f(x + dx)$, which we expand as a Taylor series and take
@@ -776,13 +776,45 @@
     Brownian particles can be treated as ideal gas particles in thermal equilibrium
     with the surrounding fluid medium.
 
+    \subsubsection{Perrin's experiment}
     We return to the barometric law, this time for Brownian particles. This time, we
     must consider the effect of buoyancy, since our particles are suspended in a
     liquid. Now, the particles (assumed to be spherical) have apparent weight \[
         \frac{4}{3}\pi r^3(\rho - \rho_{l})g.
     \] Thus, we obtain \[
         n = n_0 e^{-4\pi r^3(\rho - \rho_l)gN_A\Delta z / 3R T}.
-    \] This can be rearranged to get an expression for Avogadro's number $N_A$.
+    \] This can be rearranged to get an expression for Avogadro's number $N_A$. Such
+    an experiment was carried out by Perrin. The radius of a Brownian particle can
+    be obtained by Stokes' Law. \[
+        6\pi r \eta v_{t} = \frac{4}{3}\pi r^3(\rho - \rho_l)g.
+    \] 
+
+    \subsubsection{Langevin method}
+    The total force on a Brownian particle can be divided into two parts -- the
+    force due to bombardment by other particles $\ve{p}$ and the viscous force
+    $\ve{F}_v$, \[
+        \ve{F}_v = -6\pi r \eta \ve{v}.
+    \] Hence, we write \[
+        m\ddot{\ve{x}} = \ve{p} - 2b\dot{\ve{x}}, \qquad 2b = 6\pi r\eta.
+    \] We wish to calculate the distance travelled by such a particle over some
+    small time interval. If the particle is displaced by some $\Delta \ve{x}$, we
+    wish to find the root-mean-square of the component $\Delta x$. Using only the
+    $x$ components of our differential equation and multiplying by $x$, \[
+        \frac{m}{2}\dd[2]{x^2}{t} - m\dot{x}^2 =  mx\ddot{x} = xp_x - 2bx\dot{x} =
+        xp_x - b\ddt{x^2}.
+    \] We are interested in $\E{x^2}$, so we take averages on both sides.
+    Equipartition of energy will give $\E{m\dot{x}^2} = k_B T$. Because of the
+    random nature of $p_x$, we use symmetry to argue that $\E{xp_x} = 0$. This
+    leaves \[
+        \frac{m}{2}\dd[2]{\E{x^2}}{t} + b\ddt{\E{x^2}} - k_BT = 0.
+    \] This has the solution \[
+        \ddt{\E{x^2}} = \frac{k_B T}{b}(1 - e^{-2bt / m}), \qquad \E{x^2} =
+        \frac{k_B T}{b}\left[t + \frac{m}{2b}(e^{-2bt / m} - 1)\right].
+    \] Note that $m / 2b$ is very small for typical Brownian particles, so we can
+    approximate \[
+        \E{x^2} = \frac{k_BT}{b}t = \frac{RT}{3\pi r\eta N_A} t.
+    \] 
+
 
 \end{document}
 % vim: set tabstop=4 shiftwidth=4 softtabstop=4:
