@@ -639,6 +639,81 @@
         2^n$, for $n = 1, 2, \dots$.
     \end{proof}
 
+    \begin{theorem}
+        Let $f$ be Riemann integrable on $[a, b]$ and let $g\colon [a, b] \to \R$ be
+        defined as \[
+            g(x) = \int_a^x f(t)\:dt.
+        \] Then, 
+        \begin{enumerate}
+            \itemsep0em
+            \item $g$ is continuous on $[a, b]$.
+            \item If $f$ is continuous at some $x_0 \in (a, b)$, then $g$ is
+            differentiable at $x_0$ and $g'(x_0) = f(x_0)$.
+        \end{enumerate}
+    \end{theorem}
+    \begin{proof}
+        To show that $g$ is continuous, first note that $f$ is Riemann integrable so
+        it must be bounded, i.e.\ we find $M > 0$ such that $|f(x)| < M$ on $[a,
+        b]$. Now, for $x, y \in [a, b]$, $x > y$, note that \[
+            |g(x) - g(y)| = |\int_y^x f(t)\:dt| \leq M(x - y).
+        \] Therefore, for $\epsilon > 0$, set $\delta = \epsilon / M$ whereby for
+        all $x, y \in [a, b]$ with $|x - y| < \delta$, we have \[
+            |g(x) - g(y)| \leq M|x - y| < \epsilon.
+        \] This gives the continuity of $g$.
+
+        \noindent Now, suppose that $f$ is continuous at some $x_0 \in (a, b)$.
+        Thus, given $\epsilon > 0$, we can choose $\delta > 0$ such that $|x - x_0| <
+        \delta$ implies that $|f(x) - f(x_0)| < \epsilon$. Choose $0 < h < \delta$,
+        whence \[
+            g(x_0 + h) - g(x_0) = \int_{x_0}^{x_0 + h}f(t)\:dt.
+        \] Rearranging, we can write \[
+            \frac{g(x_0 + h) - g(x_0)}{h} - f(x_0) = \frac{1}{h}\int_{x_0}^{x_0 + h}
+            f(t) - f(x_0)\:dt.
+        \] Taking absolute values, we see that \[
+            \left|\frac{g(x_0 + h) - g(x_0)}{h} - f(x_0)\right| \leq 
+            \frac{1}{h}\int_{x_0}^{x_0 + h} |f(t) - f(x_0)| \:dt \leq \frac{\epsilon
+            h}{h} = \epsilon.
+        \] The case for $-\delta < h < 0$ is analogous. This gives \[
+            g'(x_0) = \lim_{h \to 0} \frac{g(x_0 + h) - g(x_0)}{h} = f(x_0). \qedhere
+        \] 
+    \end{proof}
+
+    \begin{theorem}[Fundamental Theorem of Calculus]
+        Let $f$ be Riemann integrable on $[a, b]$. Suppose that $g$ is continuous on
+        $[a, b]$, differentiable on $(a, b)$, and satisfies $g'(x) = f(x)$ for all
+        $x \in (a, b)$. Then, \[
+            g(b) - g(a) = \int_a^b f(x)\:dx.
+        \] 
+    \end{theorem}
+    \begin{proof}
+        Since $f$ is Riemann integrable on $[a, b]$, given $\epsilon > 0$, there
+        exists a $\delta > 0$ such that for all tagged partitions $\dot{P}$ with
+        $\Vert\dot{P}\Vert < \delta$, \[
+            |S(f, \dot{P}) - \ell| < \epsilon,
+        \] where $\ell$ is the integral of $f$ on $[a, b]$. Choose one such
+        partition $\dot{P}$. Now, pick a subinterval $[x_j, x_{j + 1}]$. Note that
+        $g$ is continuous on this closed interval, and differentiable on the open
+        interval. Using the Mean Value Theorem, we choose $\xi_j \in (x_j, x_{j +
+        1})$ such that \[
+            g(x_{j + 1}) - g(x_j) = g'(\xi_j)(x_{j + 1} - x_j) = f(\xi_j)(x_{j + 1}
+            - x_j).
+        \] Choosing such $\xi_j$ for all $j = 0, \dots, n - 1$, we have \[
+            \sum_{j = 0}^{n - 1}g(x_{j + 1}) - g(x_j) = \sum_{j = 0}^{n - 1}
+            f(\xi_j)(x_{j + 1} - x_j) = S(f, \dot{P}_\xi),
+        \] where $\dot{P}_\xi$ denotes the use of the tags $\xi_j$. Note that
+        $\Vert\dot{P}\Vert = \Vert\dot{P}_\xi\Vert < \delta$. Also, the first sum
+        telescopes to $g(b) - g(a)$. Thus, \[
+            |g(b) - g(a) - \ell| < \epsilon
+        \] for all $\epsilon > 0$, which gives the desired equality.
+    \end{proof}
+
+    \begin{theorem}[Integration by parts]
+        Let $f$ and $g$ be continuous on $[a, b]$ and differentiable on $(a, b)$.
+        Also let $f'$ and $g'$ be Riemann integrable on $[a, b]$. Then, \[
+            \int_a^b f(x)g'(x)\:dx = f(b)g(b) - f(a)g(a) - \int_a^b f'(x)g(x)\:dx.
+        \] 
+    \end{theorem}
+
 
 \end{document}
 % vim: set tabstop=4 shiftwidth=4 softtabstop=4:
