@@ -143,11 +143,39 @@
         \] 
     \end{lemma}
 
-    \begin{definition}[$m$-stage probability matrix]
-        We define $\mP^{(m)}$ such that \[
-            \mP^{(m)}_{ij} = P(X_m = j \,|\, X_0 = i).
+    \begin{definition}[$n$-stage transition probability matrix]
+        We define $\mP^{(n)}$ such that \[
+            \mP^{(n)}_{ij} = P(X_n = j \,|\, X_0 = i).
+        \] Note that for stationary transition probabilities, this is equivalent to
+        \[
+            \mP^{(n)}_{ij} = P(X_{m + n} = j \,|\, X_m = i).
         \] 
     \end{definition}
+    \begin{lemma}
+        The $n$-stage transition matrices are simply the powers of the stochastic
+        matrix, \[
+            \mP^{(n)} = \mP^n.
+        \] 
+    \end{lemma}
+    \begin{proof}
+        Note that \[
+            P(X_n = s_n | X_0 = s_0)  = \sum_{s_{n - 1}, \dots, s_{1}} p_{s_{n -
+            1}s_n} \dots p_{s_0 s_1}. \qedhere
+        \] 
+    \end{proof}
+    \begin{lemma}
+        The probability mass function of $X_n$ is given by \[
+            P(X_n = j) = \sum_{i = 0}^N P(X_n = j \,|\, X_0 = i)\,P(X_0 = i) = 
+            \sum_{i = 0}^N \mP_{ij}^{(n)} \,P(X_0 = i).
+        \] 
+    \end{lemma}
+
+    \begin{theorem}[Chapman-Kolmogorov equation]
+        \[
+            \mP^{(n)}_{ij} = \left[\mP^{(n - r)}\mP^{(r)}\right]_{ij} = \sum_{k = 0}^N
+            \mP^{(n - r)}_{ik}\mP^{(r)}_{kj}.
+        \] 
+    \end{theorem}
 
 \end{document}
 % vim: set tabstop=4 shiftwidth=4 softtabstop=4:
