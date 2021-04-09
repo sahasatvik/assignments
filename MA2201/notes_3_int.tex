@@ -713,6 +713,28 @@
             \int_a^b f(x)g'(x)\:dx = f(b)g(b) - f(a)g(a) - \int_a^b f'(x)g(x)\:dx.
         \] 
     \end{theorem}
+    \begin{proof}
+        The proof involves defining $h = f\cdot g$, and using the Fundamental
+        Theorem of Calculus on \[
+            h' = f'g + fg'. \qedhere
+        \] 
+    \end{proof}
+
+    \begin{theorem}[Substitution of variables]
+        Let $f$ be Riemann integrable on $[a, b]$ and let $\varphi\colon [c, d] \to
+        [a, b]$ be a surjective, strictly increasing map such that $\varphi$ is
+        differentiable on $(c, d)$. Then, \[
+            \int_a^b f(x)\:dx = \int_c^d (f\circ\varphi)(x)\,\varphi'(x)\:dx.
+        \] 
+    \end{theorem}
+
+    \begin{theorem}[Uniform convergence theorem]
+        Let $\{f_n\}$ be a sequence of Riemann integrable
+        functions on $[a, b]$ such that $f_n \to f$ uniformly on $[a, b]$. Then, $f$
+        is also Riemann integrable on $[a, b]$, and \[
+            \int_a^b f(x)\:dx = \lim_{n \to \infty} \int_a^b f_n(x)\:dx.
+        \] 
+    \end{theorem}
 
 
 \end{document}
