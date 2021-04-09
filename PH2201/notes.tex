@@ -1303,6 +1303,20 @@
     A density matrix $\rho$ is an operator such that $\E{\hat{A}} =
     \operatorname{trace}(\rho\hat{A})$ for some operator $\hat{A}$. We can write \[
         \rho = \sum_{i}c_i \ket{i}\bra{i}.
+    \] Plugging in the identity matrix, we demand \[
+        \operatorname{trace}{\rho} = \sum_{i}c_i = 1.
+    \] A pure state is such that $c_i = \delta_{ij}$ for some $j$, i.e.\ only one
+    $c_i$ is $1$. Otherwise, we have a mixed state, which we cannot describe using
+    wavefunctions. The Liouville-von Neumann equation states that \[
+        \ddt{}\rho = \frac{1}{i\hbar}[H, \rho].
+    \] Now, we can formulate a measure of quantum entanglement - von Neumann entropy
+    (VNE). Consider a system consisting of two subsystems, with bases
+    $\{\ket{i^A}\}$ and $\{\ket{i^B}\}$. The reduced density matrix of $A$ is
+    defined as \[
+        \rho^A = \operatorname{trace}^B \rho^{AB} = \sum_i \braket{i^B | \rho^{AB} |
+        i^B}.
+    \] The VNE of $\rho^{AB}$ is now defined as \[
+        S = -\operatorname{trace}(\rho^{AB} \log{\rho^{AB}}).
     \] 
     
     
