@@ -736,6 +736,62 @@
         \] 
     \end{theorem}
 
+    \begin{definition}[Improper integrals]
+        Let $f$ be Riemann integrable on all $[a, c]$ such that $c < b$, where we
+        allow $b = \infty$. Define \[
+            \int_0^b f(x)\:dx = \lim_{c \to b} \int_a^c f(x)\:dx,
+        \] provided that the limit exists and is finite.
+        We say that the integral is convergent. Similarly, if \[
+            \lim_{c \to b}\int_a^c |f(x)|\:dx
+        \] exists and is finite, we say that the integral is absolutely convergent.
+    \end{definition}
+
+    \begin{theorem}
+        Let $f$ be Riemann integrable on $[a, t]$ for every $t \geq a$. Assume that
+        there is a positive constant $M$ such that \[
+            \int_a^t |f(x)|\:dx < M
+        \] for every $t \geq a$. Then, both of the following improper integrals exist \[
+            \int_a^\infty f(x)\:dx, \qquad \int_a^\infty |f(x)|\:dx.
+        \]
+    \end{theorem}
+    \begin{proof}
+        Define \[
+            F\colon[a, \infty) \to \R, \qquad F(t) = \int_a^t |f(x)|\:dx.
+        \] Note that $F$ is an increasing function, and $|F(t)| < M$ for all $t \geq
+        a$. Hence, $\lim_{t \to \infty} F(t)$ exists, which gives the absolute
+        convergence of the improper integral. This in turn gives the convergence of
+        the improper integral.
+    \end{proof}
+
+    \begin{theorem}
+        Let $f$ be continuous, monotonically decreasing on $[0, \infty)$, and
+        non-negative. Then, the improper integral \[
+            \int_0^\infty f(x)\:dx
+        \] converges if and only if the series \[
+            \sum_{n = 0}^\infty f(n)
+        \] converges.
+    \end{theorem}
+
+    % \begin{theorem}
+    %     Let $f$ and $g$ be positive functions and Riemann integrable on $[a, n]$ for
+    %     all $n \in \N$, and let \[
+    %         \lim_{x \to \infty} \frac{f(x)}{g(x)} = A > 0.
+    %     \] Then, the improper integral \[
+    %         \int_a^\infty f(x)\:dx
+    %     \] converges if the improper integral \[
+    %         \int_a^\infty g(x)\:dx
+    %     \] converges.
+    % \end{theorem}
+    
+    \begin{theorem}
+        Let $G$ be bounded, and $f$ be such that $f(x) \to 0$ as $x \to \infty$, and
+        \[
+            \int_0^\infty |f'(x)|\:dx < \infty.
+        \] Then, the improper integral \[
+            \int_0^\infty f'(x)G(x)\:dx
+        \] converges.
+    \end{theorem}
+
 
 \end{document}
 % vim: set tabstop=4 shiftwidth=4 softtabstop=4:
