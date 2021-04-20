@@ -1,0 +1,154 @@
+\documentclass[10pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{hyperref}
+\usepackage[scr]{rsfso}
+
+\title{Analysis II - Assignment V}
+\author{Satvik Saha}
+\date{}
+
+\geometry{a4paper, margin=1in}
+\setlength\parindent{0pt}
+\renewcommand{\labelenumi}{(\roman{enumi})}
+% \renewcommand\qedsymbol{$\blacksquare$}
+\def\C{\mathbb{C}}
+\def\R{\mathbb{R}}
+\def\Q{\mathbb{Q}}
+\def\Z{\mathbb{Z}}
+\def\N{\mathbb{N}}
+\newcommand\ddx[1]{\frac{d^{#1}}{dx^{#1}}}
+
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}{Corollary}[theorem]
+
+\begin{document}
+    \par\textbf{IISER Kolkata} \hfill \textbf{Assignment V}
+    \vspace{3pt}
+    \hrule
+    \vspace{3pt}
+    \begin{center}
+            \LARGE{\textbf{MA 2201 : Analysis II}}
+    \end{center}
+    \vspace{3pt}
+    \hrule
+    \vspace{3pt}
+    Satvik Saha, \texttt{19MS154}\hfill\today
+    \vspace{20pt}
+    
+    \paragraph{Solution 1.}
+    Let $f$ be monotonic on $[a, b]$. First, note that $f$ must be bounded on $[a,
+    b]$. If $f$ is monotonically increasing, then we must have \[
+        f(a) \leq f(x) \leq f(b)
+    \] for all $a \leq x \leq b$. Similarly, if $f$ is monotonically decreasing,
+    then \[
+        f(b) \leq f(x) \leq f(a)
+    \] for all $a \leq x \leq b$. \\
+
+    Without loss of generality, let $f$ be monotonically increasing on $[a, b]$, and
+    let $M > 0$ such that $|f(x)| < M$ for all $x \in [a, b]$. Given $\epsilon > 0$,
+    we wish to construct a partition $P$ of $[a, b]$ such that \[
+        U(f, P) - L(f, P) < \epsilon,
+    \] where $U(f, P)$ and $L(f, P)$ are the upper and lower Darboux sums over the
+    partition $P$. Now, note that over any subinterval $[x_j, x_{j + 1}]$ of $[a,
+    b]$, we have \[
+        m_j = \inf_{x \in [x_j, x_{j + 1}]} f(x) = f(x_j), \qquad
+        M_j = \sup_{x \in [x_j, x_{j + 1}]} f(x) = f(x_{j + 1}).
+    \] This is simply a consequence of the monotonicity of $f$ -- the maximum and
+    minimum (which are the same as the supremum and infimum doe to boundedness) are
+    attained at the endpoints. With this, set $\delta = (b - a) / n$ and let $n$ be
+    sufficiently large so that $(f(b) - f(a))\delta < \epsilon$, i.e.\ \[
+        n\epsilon > (f(b) - f(a))(b - a).
+    \] This can be done using the Archimedean property of the reals. Now, let the
+    partition $P$ be such that $[a, b]$ is divided into $n$ equal subintervals,
+    i.e.\ $P = \{x_0, x_1, \dots, x_n\}$ where \[
+        x_j = a + \frac{j}{n}(b - a).
+    \] Now, $x_{j} - x_{j + 1} = \delta$, so \[
+        U(f, P) - L(f, P) = \sum_{j = 0}^{n - 1} (M_j - m_j)\delta = \delta \sum_{j
+        = 0}^{n - 1} f(x_{j + 1}) - f(x_j) = \delta \cdot (f(b) - f(a)) < \epsilon.
+    \] We have used the fact that the sum telescopes. Hence, $f$ is Riemann
+    integrable on $[a, b]$. The proof for monotonically decreasing $f$ is analogous,
+    since $-f$ will be monotonically increasing and the negative of a Riemann
+    integrable function is clearly Riemann integrable.
+
+    \begin{lemma}
+        Any countable set (finite or countably infinite) has Lebesgue measure zero.
+    \end{lemma}
+    \begin{proof}
+        Let $S$ be countable, and let $\mathscr{J} \subseteq \N$ be the
+        indices of $S$. Create the open intervals \[
+            \mathscr{O}_j = \left(x_j - \frac{\epsilon}{2^{j + 1}}, x_j +
+            \frac{\epsilon}{2^{j + 1}}\right),
+        \] for all $x_j \in S$, $j \in \mathscr{J}$. Thus, $\mu(\mathscr{O}_j) =
+        \epsilon / 2^{j}$, where $\mu$ is the length of the interval. Also, the
+        union of all such $\mathscr{O}_j$, say $\mathscr{O}$, forms a cover of $S$.
+        The length of this cover is bounded as \[
+            \mu\left(\mathscr{O}\right) \leq \sum_{j \in \mathscr{J}}
+            \mu(\mathscr{O}_j) \leq \sum_{j = 1}^\infty \frac{\epsilon}{2^j} =
+            \epsilon.
+        \] Since $\epsilon$ was arbitrary, we conclude that $S$ has
+        Lebesgue measure zero.
+    \end{proof}
+
+    \paragraph{Solution 2.}
+    Given two continuous functions $f$ and $g$ on $[a, b]$, a point $c \in [a, b]$,
+    and the function \[
+        h\colon [a, b] \to \R, \qquad h(x) = \begin{cases}
+            f(x), &\text{ if }x \in [a, c], \\
+            g(x), &\text{ if }x \in (c, b).
+        \end{cases}
+    \] Without loss of generality, define $h(b) = 0$ to cover the endpoint.
+    Note that $f$ and $g$ are continuous, so $h$ is continuous on $[a, c)$ and $(c,
+    b)$. This leaves potential discontinuities at the points $c$ and $b$. 
+    Now, the set of discontinuities of $h$, say $\mathscr{D} \subseteq \{c, b\}$, is
+    a finite set and hence has Lebesgue measure zero. Hence, by the Lebesgue-Vitali
+    Theorem, $h$ is Riemann integrable. \\
+
+    \textbf{Alternative} Define the step function \[
+        u\colon[a, b] \to \R, \qquad u(x) = \begin{cases}
+            0, &\text{ if }x \in [a, c], \\
+            f(c) - g(c), &\text{ if }x \in (c, b],
+        \end{cases}
+    \] and define $h(b) = g(b)$ to cover the endpoint. Now, consider the function $h
+    + u$. On the interval $[a, c)$, $h + u = f$ so it is continuous. On the interval
+    $(c, b]$, $h + u = g - g(c) + f(c)$, which is again continuous. Now, \[
+        \lim_{x \to c^-}(h + u)(x) = \lim_{x \to c^-} f(x) = f(c), 
+    \] and \[
+        \lim_{x \to c^+}(h + u)(x) = \lim_{x \to c^+} g(x) - g(c) + f(c) = f(c),
+    \] and $(h + u)(c) = f(c)$, so $h + u$ is continuous on the entirety of $[a,
+    b]$, hence Riemann integrable. Thus, it suffices to show that the step function
+    $u$ is Riemann integrable, which would imply that the difference $h = (h + u) -
+    u$ is Riemann integrable. \\
+
+    Let $f(c) - g(c) = \alpha$. Given $\epsilon > 0$, construct a partition $P =
+    \{a, c - \delta, c + \delta, b\}$ where $\delta > 0$ is small enough to maintain the
+    ordering of the points (we discard the trivial case where $c$ is one of the
+    endpoints $a$ or $b$, which would mean that $h$ is one of $f$ or $g$).
+    Furthermore, let $\delta$ be such that $2|\alpha|\delta < \epsilon$.
+    Now, $U(f, P) - L(f, P)$ has contributions only from the central subinterval
+    $[c - \delta, c + \delta]$, so \[
+        U(f, P) - L(f, P) = 2|\alpha|\delta < \epsilon.
+    \] \\
+
+    Note that if $f$ and $g$ are two Riemann integrable functions on $[a, b]$, then
+    it is possible to find two partitions $P_1$ and $P_2$ such that \[
+        U(f, P_1) - L(f, P_1) < \frac{\epsilon}{2}, \qquad U(g, P_2) - L(g, P_2) <
+        \frac{\epsilon}{2}.
+    \] For the common refinement $P = P_1 \cup P_2$, we must have \[
+        U(f, P) - L(f, P) < \frac{\epsilon}{2}, \qquad U(g, P) - L(g, P) <
+        \frac{\epsilon}{2}.
+    \] Adding, \[
+        U(f + g, P) - L(f + g, P) < \frac{\epsilon}{2}.
+    \] Also, note that \[
+        U(-f, P) = -L(f, P), \qquad L(-f, P) = -U(f, P)
+    \] because on any interval $[s, t]$, \[
+        \sup -f(x) = - \inf f(x), \qquad \inf -f(x) = -\sup f(x).
+    \] Hence, \[
+        U(-f, P) - L(-f, P) = U(f, P) - L(f, P) < \frac{\epsilon}{2}.
+    \] This gives the Riemann integrability of $f + g$ as well as $-f$.
+
+\end{document}
