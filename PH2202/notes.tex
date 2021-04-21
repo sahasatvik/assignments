@@ -815,6 +815,17 @@
         \E{x^2} = \frac{k_BT}{b}t = \frac{RT}{3\pi r\eta N_A} t.
     \] 
 
+    \subsubsection{Diffusion equation}
+    It can be shown that Brownian particles obey the diffusion equation, \[
+        \ppt{n} = D\pp[2]{n}{x},
+    \] We can show that given initial conditions $n(x, t = 0) = n_0\delta(x)$, i.e.\
+    the particles are initially clustered at the origin, this has the solution \[
+        n(x, t) = \frac{n_0}{\sqrt{4\pi Dt}} e^{-x^2 / 4Dt}.
+    \] This means that $n(x, t)$ follows a Gaussian distribution, with variance
+    $\sigma^2 = 2Dt$. Hence, we recover \[
+        \E{x^2} = 2Dt.
+    \]
+
 
 \end{document}
 % vim: set tabstop=4 shiftwidth=4 softtabstop=4:
