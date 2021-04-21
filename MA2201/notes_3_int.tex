@@ -735,6 +735,62 @@
             \int_a^b f(x)\:dx = \lim_{n \to \infty} \int_a^b f_n(x)\:dx.
         \] 
     \end{theorem}
+    
+    \begin{theorem}[Weierstrass approximation theorem]
+        Let $f\colon [a, b] \to \R$ be continuous. Then, there exists a sequence of
+        polynomials $\{p_n\}$ such that $p_n \to f$ uniformly on $[a, b]$.
+    \end{theorem}
+    \begin{proof}
+        Without loss of generality, we may only consider continuous functions on
+        $[0, 1]$ such that $f(0) = f(1) = 0$. Also define $f(x) = 0$ outside $[0,
+        1]$. Thus, $f$ is uniformly continuous on $\R$. Define the polynomials \[
+            q_n(x) = c_n(1 - x^2)^n,
+        \] where we choose $c_n$ such that \[
+            \int_{-1}^{+1} q_n(x)\:dx = 1.
+        \] Since $Q_n$ is even, compute \[
+            \int_{-1}^{+1}(1 - x^2)^n\:dx = 2\int_0^1 (1 - x^2)^n\:dx
+        \] This can be split into \[
+            2\left[\int_0^{1 / \sqrt{n}} (1 - x^2)^n\:dx + \int_{1 / \sqrt{n}}^1 (1
+            - x^2)^n\:dx \right] \geq 2\int_0^{1 / \sqrt{n}} (1 - x^2)^n\:dx.
+        \] Using Bernoulli's inequality, \[
+            \int_{-1}^{+1}(1 - x^2)^n\:dx \geq 2\int_0^{1 / \sqrt{n}} (1 - nx^2)\:dx
+            = \frac{4}{3\sqrt{n}} \geq \frac{1}{\sqrt{n}}.
+        \] Hence, $c_n < \sqrt{n}$. This means that $q_n \to 0$ uniformly on any
+        $[\delta, 1] \subset [0, 1]$. \[
+            q_n(x) < \sqrt{n}(1 - \delta^2)^n \to 0.
+        \] Now define \[
+            p_n(x) = \int_{-1}^{+1} f(x + t)q_n(t)\:dt.
+        \] Again, split this integral apart on the intervals $[-1, -x]$, $[-x, 1 -
+        x]$, and $[1 - x, 1]$. The integrals on the outermost intervals vanish
+        simply because $f(x) = 0$ on them. Hence, \[
+            p_n(x) = \int_{-x}^{1 - x} f(x + t)q_n(t)\:dx.
+        \] Changing variables, \[
+            p_n(x) = \int_0^1 f(t)q_n(t - x)\:dt.
+        \] Now, note that $p_n$ is a polynomial in $x$. This is because $q_n(t - x)$
+        is a polynomial in $x$, and our integral is over $t$. We claim that $p_n \to
+        f$ uniformly on $[0, 1]$. To show this, let $\epsilon > 1$, and use the
+        uniform continuity of $f$ to find $\delta > 0$ such that for all $|x - y| <
+        \delta$, we have \[
+            |f(x) - f(y)| < \frac{\epsilon}{2}.
+        \] Now, compute \[
+            |p_n(x) - f(x)| = |\int_{-1}^{+1} f(x + t)q_n(t)\:dt -
+            \int_{-1}^{+1}f(x)q_n(t)\:dt| \leq \int_{-1}^{+1}|f(x + t) -
+            f(x)|q_n(t)\:dt.
+        \] Again, split this integral on the intervals $[-1, -\delta]$, $[-\delta,
+        +\delta]$, and $[+\delta, 1]$. For the central integral, apply the
+        uniform continuity argument to get the bound \[
+            I_2 \leq \frac{\epsilon}{2}\int_{-\delta}^{+\delta}q_n(t)\:dt <
+            \frac{\epsilon}{2}.
+        \] Set $M = \sup|f(x)|$. Then, the outermost integrals are bounded as \[
+            I_1 \leq 2M\int_{-1}^{-\delta} q_n(t)\:dt, \qquad I_3 \leq
+            2M\int_{+\delta}^{+1} q_n(t)\:dt.
+        \] Use the fact that $q_n(x) < \sqrt{n}(1 - \delta^2)^n$ and take
+        sufficiently large $n$ to conclude \[
+            |p_n(x) - f(x)| < 4M \sqrt{n}(1 - \delta^2)^n + \frac{\epsilon}{2} <
+            \epsilon. \qedhere
+        \] 
+    \end{proof}
+
 
     \begin{definition}[Improper integrals]
         Let $f$ be Riemann integrable on all $[a, c]$ such that $c < b$, where we
@@ -772,16 +828,16 @@
         \] converges.
     \end{theorem}
 
-    % \begin{theorem}
-    %     Let $f$ and $g$ be positive functions and Riemann integrable on $[a, n]$ for
-    %     all $n \in \N$, and let \[
-    %         \lim_{x \to \infty} \frac{f(x)}{g(x)} = A > 0.
-    %     \] Then, the improper integral \[
-    %         \int_a^\infty f(x)\:dx
-    %     \] converges if the improper integral \[
-    %         \int_a^\infty g(x)\:dx
-    %     \] converges.
-    % \end{theorem}
+    \begin{theorem}
+        Let $f$ and $g$ be positive functions and Riemann integrable on $[a, n]$ for
+        all $n \in \N$, and let \[
+            \lim_{x \to \infty} \frac{f(x)}{g(x)} = A > 0.
+        \] Then, the improper integral \[
+            \int_a^\infty f(x)\:dx
+        \] converges if the improper integral \[
+            \int_a^\infty g(x)\:dx
+        \] converges.
+    \end{theorem}
     
     \begin{theorem}
         Let $G$ be bounded, and $f$ be such that $f(x) \to 0$ as $x \to \infty$, and
