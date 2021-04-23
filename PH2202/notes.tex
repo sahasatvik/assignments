@@ -826,6 +826,33 @@
         \E{x^2} = 2Dt.
     \]
 
+    \subsection{Real gases}
+    We use the Van der Waals equation \[
+        \left( p + \frac{an^2}{V^2} \right)(V - nb) = nRT.
+    \] In the context of real gases, we must consider \emph{phase transitions}.
+    Above a certain temperature, a gas cannot be liquefied regardless of the
+    pressure applied.  This is called the critical temperature of the gas, and the
+    corresponding pressure required to liquefy the gas is called the critical
+    pressure. This is essentially the peak of the condensation region in the $p-V$
+    diagram of the real gas. To identify this point, we demand \[
+        \pp{p}{V} = 0, \qquad \pp[2]{p}{V} = 0.
+    \] Isolate \[
+        p = \frac{nRT}{V - nb} - \frac{an^2}{V^2}
+    \] and solve for the critical point, whence \[
+        T_c = \frac{8a}{27bR}, \qquad p_c = \frac{a}{27b^2}, \qquad V_c = 3nb.
+    \] During a phase transition, there is a discontinuous jump in the density of
+    the substance. This difference is called an order parameter, and is used to
+    identify the phase of the substance at the transition temperature and pressure.
+    This density difference vanishes at the critical point, where we consider a
+    single supercritical phase. \\
+
+    Now consider the potential energy of a real gas. An ideal gas was assumed to
+    have no intermolecular forces, hence no dependence of $U$ upon either $V$ or
+    $P$. However, an isothermally expanding real gas sees its potential energy
+    increase. Thus, \[
+        \left( \pp{U}{V} \right)_T > 0, \qquad \left( \pp{U}{p} \right)_T < 0.
+    \] 
+
 
 \end{document}
 % vim: set tabstop=4 shiftwidth=4 softtabstop=4:
