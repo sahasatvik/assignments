@@ -1,0 +1,139 @@
+\documentclass[10pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{cancel}
+\usepackage{xcolor}
+
+\title{Probability I - Assignment VIII}
+\author{Satvik Saha}
+\date{}
+
+\geometry{a4paper, margin=1in}
+\setlength\parindent{0pt}
+\renewcommand{\labelenumi}{(\roman{enumi})}
+\renewcommand\CancelColor{\color{red}}
+% \renewcommand\qedsymbol{$\blacksquare$}
+\newcounter{prob}
+\def\problem{\stepcounter{prob}\paragraph{Exercise \arabic{prob}}}
+\def\solution{\paragraph{Solution}}
+
+\newcommand\op[1]{\operatorname{#1}}
+\newcommand\E[1]{\op{E}\left[#1\right]}
+\newcommand\V[1]{\op{Var}[#1]}
+\newcommand\CV[1]{\op{Cov}[#1]}
+
+\newtheorem*{lemma}{Lemma}
+
+\begin{document}
+        \par\textbf{IISER Kolkata} \hfill \textbf{Assignment VIII}
+        \vspace{3pt}
+        \hrule
+        \vspace{3pt}
+        \begin{center}
+                \LARGE{\textbf{MA 2202 : Probability I}}
+        \end{center}
+        \vspace{3pt}
+        \hrule
+        \vspace{3pt}
+        Satvik Saha, \texttt{19MS154}, Group D\hfill\today
+        \vspace{20pt}
+
+        \problem Let $X$, $Y$ and $Z$ be independent identically distributed
+        positive random variables. Determine \[
+            \E{\frac{2X + 3Y}{X + Y + Z}}.
+        \] 
+
+        \solution Using the fact that $X$, $Y$, $Z$ are identically distributed, we
+        use a symmetry argument and permute them cyclically, which gives \[
+            \E{\frac{2X + 3Y}{X + Y + Z}} = \E{\frac{2Y + 3Z}{X + Y + Z}} =
+            \E{\frac{2Z + 3X}{X + Y + Z}}.
+        \] Adding these up and using linearity of expectation, we have \[
+            3\E{\frac{2X + 3Y}{X + Y + Z}} = \E{\frac{2(X + Y + Z) + 3(Y + Z + X)}{X
+            + Y + Z}} = \E{5} = 5.
+        \] Hence, \[
+            \E{\frac{2X + 3Y}{X + Y + Z}} = \frac{5}{3}.
+        \] 
+
+        \problem A gambler plays a game in which on each play he wins Rs.\ 1 with
+        probability $p$ and loses Rs.\ 1 with probability $q = 1 - p$. Once he loses
+        all his money, he cannot gamble any more. The gambler starts with Rs.\ $R$,
+        where $R \in \mathbb{N}$.
+
+        \begin{enumerate}
+            \item To evade the possibility of losing all his money, he chooses an
+            integer $M > R$ and decides to quit gambling as soon as he has Rs.\ $M$.
+            Find the probability that he loses all his money if 
+            \begin{enumerate}
+                \item $p \neq q$.
+                \item $p = 1 = 1 /2$.
+            \end{enumerate}
+
+            \item Show that if $p \leq q$ and if instead of setting a target $M$ to
+            quit gambling, the gambler keeps on gambling irrespective of his gains
+            or losses, then eventually he will lose all his money.
+        \end{enumerate}
+
+        \solution 
+        Let $\{X_n\}_{n = 1}^\infty$ be a Markov chain where $X_n$ denotes the money
+        the gambler has after gambling $n$ times (we fix $X_0 = R$ for notational
+        purposes). Recall that the Markov property is indeed satisfied -- the money
+        the gambler has at stage $n + 1$ depends only on how much he had at stage
+        $n$, and whether he wins or loses.
+        \begin{enumerate}
+            \item The gambler must either win or lose money at each round. Say he
+            currently has money $X_n = k$. If $1 < k < M - 1$, he could have reached
+            this point by winning Rs.\ 1 from $X_{n - 1} = k - 1$, or by losing Rs.\
+            1 from $X_{n - 1} = k + 1$. 
+
+            Let $P_k$ be the probability that the gambler loses all his money
+            given that he currently has Rs.\ $k$. If $0 < k < M$, note that \[
+                P_{k} = pP_{k + 1} + qP_{k - 1}.
+            \] This is because the gambler wins on the next turn with probability
+            $p$, getting Rs.\ $k + 1$. Now, the Markov property means that his odds
+            of ruin henceforth only depend on the current state, which we have
+            defined as $P_{k + 1}$. The same applies for the $qP_{k - 1}$ term.
+            Also, since the game terminates whenever $k = 0$ or $k = M$ \[
+                P_0 = 1,\qquad P_M = 0.
+            \] Note that $R \neq 0, M$. Now, write \[
+                P_k = (p + q)P_k = pP_{k + 1} + qP_{k - 1}, \qquad p(P_{k + 1} -
+                P_k) = q(P_k - P_{k - 1}).
+            \] Therefore, using $P_0 = 1$, \[
+                P_{k + 1} - P_k = \frac{q}{p}\left(P_k - P_{k - 1}\right) =
+                \dots = \frac{q^k}{p^k}(P_1 - 1).
+            \] Now by telescoping the series, \[
+                P_{k + 1} - 1 = (P_{k + 1} - P_k) + (P_{k} - P_{k - 1}) + \dots +
+                (P_1 - 1) = \sum_{n = 0}^k \frac{q^n}{p^n}(P_1 - 1). 
+            \] This is a geometric series, which for $p \neq q$ is \[
+                P_{k + 1} - 1 = \frac{1 - (q / p)^{k + 1}}{1 - (q /p)}(P_1 - 1)
+            \] and for $p = q$ is \[
+                P_{k + 1} - 1 = (k + 1)(P_1 - 1).
+            \] To evaluate $1 - P_1$, set $k + 1 = M$. Demanding $P_M = 0$ gives \[
+                1 - P_1 = \begin{cases}
+                    \frac{1 - (q / p)}{1 - (q / p)^M}, &\text{ if }p \neq q, \\
+                    \frac{1}{M}, &\text{ if } p = q = 1 /2.
+                \end{cases}
+            \] Thus, setting $k + 1 = R$, we have the desired probability of ruin \[
+                P_R = \begin{cases}
+                    1 - \frac{1 - (q / p)^R}{1 - (q / p)^M}, &\text{ if }p \neq q, \\
+                    1 - \frac{R}{M}, &\text{ if } p = q = 1 /2.
+                \end{cases}
+            \] 
+
+            \item Note that when $p \leq q$, setting $1 < \alpha = q / p$, we have \[
+                \frac{1 - \alpha^R}{1 - \alpha^M} = \frac{\alpha^{-M} - \alpha^{R
+                -M}}{\alpha^{-M} - 1}.
+            \] Since $\alpha > 1$, we have $\alpha^{-M} \to 0$ as $M \to \infty$.
+            Also, $\alpha^{R - M} \to 0$ since we always have $R < M$. Thus, \[
+                1 - \frac{1 - \alpha^R}{1 - \alpha^M} \to 1
+            \] as $M \to \infty$. Similarly, we have $R / M \to 0$, so \[
+                1 - \frac{R}{M} \to 1.
+            \] In any case, $P_R \to 1$ as $M \to \infty$. This means that if the
+            gambler keeps playing irrespective of gains or losses, he will be
+            eventually lose all his money (ruin is a probability one event).
+        \end{enumerate}
+
+\end{document}
