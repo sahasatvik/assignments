@@ -1,0 +1,673 @@
+\documentclass[11pt]{report}
+
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{bm}
+\usepackage[scr]{rsfso}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+
+\geometry{a4paper, margin=1in, headheight=14pt}
+
+\pagestyle{fancy}
+\renewcommand\headrulewidth{0.4pt}
+\fancyhead[L]{\it Principles of Mathematical Analysis}
+\rfoot{\footnotesize\it Updated on \today}
+\cfoot{\thepage}
+\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+
+\renewcommand{\labelenumi}{(\alph{enumi})}
+\renewcommand{\labelenumii}{(\roman{enumii})}
+
+\def\C{\mathbb{C}}
+\def\R{\mathbb{R}}
+\def\Q{\mathbb{Q}}
+\def\Z{\mathbb{Z}}
+\def\N{\mathbb{N}}
+
+\renewcommand\vec\boldsymbol
+\def\vx{\vec{x}}
+\def\vy{\vec{y}}
+\def\vz{\vec{z}}
+\def\va{\vec{a}}
+\def\vb{\vec{b}}
+\def\vc{\vec{c}}
+\def\vr{\vec{r}}
+
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\newtheorem*{example}{Example}
+\newtheorem*{solution}{Solution}
+
+\title{
+    \Large\textsc{Summer Programme 2021} \\
+    \vspace{10pt}
+    \huge Solutions to exercises from Walter Rudin's \\
+    \textit{Principles of Mathematical Analysis} 
+}
+\author{
+    \large Satvik Saha%
+    % \thanks{Email: \tt ss19ms154@iiserkol.ac.in}
+    \\\textsc{\small 19MS154}
+}
+\date{\normalsize
+    \textit{Indian Institute of Science Education and Research, Kolkata, \\
+    Mohanpur, West Bengal, 741246, India.} \\
+    % \vspace{10pt}
+    % \today
+}
+
+\begin{document}
+    \maketitle
+
+    \chapter{The Real and Complex Number Systems}
+
+    \paragraph{Exercise 1.} If $r$ is rational ($r \neq 0$) and $x$ is irrational,
+    prove that $r + x$ and $rx$ are irrational.
+    \begin{solution}
+        Use the fact that the field of rationals is closed under additiona and
+        multiplication, as well as the existence of the additive inverse $-r$ and
+        the multiplicative inverse $1 / r$. If $r + x$ and $rx$ were rational, then
+        both \[
+            (-r) + r + x = x, \qquad (1 / r) rx = x
+        \] must also be rational. These are contradictions.
+    \end{solution}
+
+    \paragraph{Exercise 2.} Prove that there is no rational number whose square is
+    $12$.
+    \begin{solution}
+        Suppose that $x \in \Q$, $x^2 = 12$, and $x = p / q$ where $q \neq 0$ and
+        $p$ and $q$ are coprime integers. This would imply that \[
+            p^2 = 12q^2 = 3(2q)^2,
+        \] so $3$ divides $p^2$, hence $3$ divides $p$. Write $p = 3m$ for some
+        integer $m$, giving \[
+            3(2q)^2 = p^2 = (3m)^2 = 9m^2, \qquad (2q)^2 = 3m^2.
+        \] This means that $3$ divides $(2q)^2$, hence $3$ divides $2q$, hence $3$
+        divides $q$. This contradicts the fact that $p$ and $q$ are coprime, which
+        means that there is no rational number whose square is $12$.
+    \end{solution}
+
+    \paragraph{Exercise 3.} Prove that the axioms of multiplication in a field imply
+    the following statements.
+    \begin{enumerate}
+        \itemsep0em
+        \item If $x \neq 0$ and $xy = xz$, then $y = z$.
+        \item If $x \neq 0$ and $xy = x$, then $y = 1$.
+        \item If $x \neq 0$ and $xy = 1$, then $y = 1 / x$.
+        \item If $x \neq 0$ then $1 / (1 / x) = x$.
+    \end{enumerate}
+    \begin{solution}
+        The axioms of multiplication guarantee the existence of an element $1 / x$
+        such that $x (1 / x) = 1$. Left multiply on both sides of $xy = xz$, use
+        associativity and $1w = w$ for all $w$ in the field to get \[
+            (1 / x)xy = (1 / x)xz, \qquad y = z.
+        \] This proves (a). Setting $z = 1$ proves (b), and setting $z = 1 / x$
+        proves (c). Using $x(1 / x) = 1$, replace $x$ with $1 / x$ in (c)
+        to give \[
+            (1 / x)(1 / (1 / x)) = 1,
+        \] then left multiply with $x$ yielding \[
+            x(1 / x)(1 / (1 / x)) = x, \qquad 1 / (1 / x) = x.
+        \] 
+    \end{solution}
+    
+    \paragraph{Exercise 4.} Let $E$ be a non-empty subset of an ordered set; suppose
+    that $\alpha$ is a lower bound of $E$ and $\beta$ is an upper bound of $E$.
+    Prove that $\alpha \leq \beta$.
+    \begin{solution}
+        By definition, $\alpha \leq x$ for all $x \in E$ and $x \leq \beta$ for all
+        $\x \in E$. Since $E$ is non-empty, simply select some $x \in E$, whence
+        $\alpha \leq x \leq \beta$. Thus, we either have $\alpha = x = \beta$,
+        $\alpha = x < \beta$, $\alpha < x = \beta$, or $\alpha < x < \beta$.
+        In the last case, transitivity gives $\alpha < \beta$. Hence, $\alpha \leq
+        \beta$.
+    \end{solution}
+
+    \paragraph{Exercise 5.} Let $A$ be a non-empty subset of the real numbers which
+    is bounded below. Let $-A$ be the set of all numbers $-x$, where $x \in A$.
+    Prove that \[
+        \inf A = - \sup(-A).
+    \] 
+    \begin{solution}
+        Fix $\alpha = -\sup(-A)$. We claim that $\alpha = \inf A$, i.e.\ $\beta \leq
+        \alpha \leq x$ for all lower bounds $\beta$ of $A$ and for all $x \in A$.
+
+        First, note that $-\alpha = \sup(-A)$, which means that $-\alpha \geq x$ for
+        all $x \in -A$, whence $\alpha \leq -x$ for all $-x \in A$. However, for
+        each $x \in A$, we have $-x \in -A$ so $\alpha \leq x$ for all $x \in A$.
+
+        Now, let $\beta$ be a lower bound of $A$. This means that $\beta \leq x$ for
+        all $x \in A$, so $-\beta \geq -x$ for all $x \in A$. Again, $-x \in -A$ for
+        all $x \in A$, so $-\beta \geq x$ for all $x \in -A$. This means that
+        $\beta$ is an upper bound of $-A$, which means $-\beta \geq \sup(-A) =
+        -\alpha$. Thus, $\beta \leq \alpha$.
+
+        This proves that $\inf A = -\sup(-A)$.
+    \end{solution}
+
+    \paragraph{Exercise 6.} Fix $b > 1$.
+    \begin{enumerate}
+        \item If $m, n, p, q$ are integers, $n > 0$, $q > 0$, and $r = m / n = p /
+        q$, prove that \[
+            (b^m)^{1 / n} = (b^p)^{1 / q}.
+        \] Hence it makes sense to define $b^r = (b^m)^{1 / n}$.
+        \item Prove that $b^{r + s} = b^rb^s$ if $r$ and $s$ are rational.
+        \item If $x$ is real, define $B(x)$ to be the set of all numbers $b^t$,
+        where $t$ is rational and $t \leq x$. Prove that \[
+            b^r = \sup B(r).
+        \] Hence is makes sense to define $b^x = \sup B(x)$ for every real $x$.
+        \item Prove that $b^{x + y} = b^xb^y$ for all real $x$ and $y$.
+    \end{enumerate}
+    \begin{solution} \\~\\
+        \begin{enumerate}
+            \item Write $r$ with the common denominator $s = nq$, so $r = mq / s =
+            pn / s$. Now, note that \[
+                \left((b^m)^{1 / n}\right)^s = (b^m)^{q} = b^{mq}, \qquad
+                \left((b^p)^{1 / q}\right)^s = (b^p)^{n} = b^{np},
+            \] but $mq = np = rs$. Setting $b^{rs} = x$, use Theorem~1.21 to conclude
+            that there is a unique $y$ such that $y^s = x = b^{rs}$. However, we
+            have just verified two such $y$, hence \[
+                (b^m)^{1 / n} = (b^p)^{1 / q}.
+            \]
+            \item Set $r = m / n$, $s = p / q$ with $n > 0$, $q > 0$. Then, \[
+                b^{r + s} = b^{(mq + np) / nq} = (b^{mq + np})^{1 / nq} =
+                (b^{mq}b^{np})^{1 / nq}.
+            \] The corollary of Theorem~1.21 lets us distribute the integer root
+            over the product, giving \[
+                b^{r + s} = b^{mq / nq} b^{np / nq} = b^{m / n}b^{p / q} = b^rb^s.
+            \] 
+            \item First, we show that $b^n - 1 \geq n(b - 1)$ for all positive integers
+            $n$. This is trivially true for $n = 1$. For $n > 1$, write $b = 1 + a$
+            where $a > 0$. Hence the Binomial Theorem gives \[
+                b^n = (1 + a)^n = 1 + na + \frac{1}{2}n(n - 1)a^2 + \dots + a^n > 1
+                + na,
+            \] hence \[
+                b^n - 1 > na = n(b - 1).
+            \] Note that this inequality becomes strict for $n > 1$.
+            Replacing $b$ with $b^{1 / n} > 1$, we have $b - 1 > n(b^{1 / n} - 1)$ 
+            for all positive integers $n$.
+
+            Now, given some $t > 1$, we can choose a positive integer 
+            $n > (b - 1) / (t - 1)$, which implies $n(t - 1) > b - 1 > n(b^{1 / n} -
+            1)$, hence $t > b^{1 / n}$.
+
+            Now, note that for all $x \in B(r)$, $x = b^t$ for some rational $t$.
+            First, note that for all rational $t \leq r$, we have $b^t \leq b^r$.
+            This is because if we write $t$ and $r$ with a common positive integer 
+            denominator, $t = m / q$, $r = n / q$, then $m \leq n$ so $(b^{1 / q})^m
+            \leq (b^{1 / q})^n$. Thus, $b^r$ is an upper bound for $B(r)$.
+
+            Next, we show that $b^r$ is the least upper bound to $B(r)$. Suppose
+            that $\alpha = \sup B(r)$, and $b^t \leq \alpha < b^r$ for all $t \leq
+            r$. Using the previously proven inequality, find a large enough integer
+            $n$ such that $b^{1 / n} < b^r / \alpha$. Thus, $\alpha < b^{r - 1 /
+            n}$, and $r - 1 / n < r$ so $b^{r - 1 / n} \in B(r)$, which contradicts
+            the fact that $\alpha$ is the supremum of $B(r)$. Hence, $b^r$ is the
+            least upper bound of $B(r)$, so \[
+                b^r = \sup B(r).
+            \] 
+            \item We have been given \[
+                b^x = \sup B(x), \qquad b^y = \sup B^y, \qquad b^{x + y} = \sup B(x + y)
+            \] by definition for real $x$ and $y$. Choose some rational $t \leq x +
+            y$, so $b^t \in B(x + y)$. By choosing a rational $r$ such that $t - y <
+            r < x$ and setting $s = t - r$, we have $t = r + s$ and $r < x$, $s <
+            y$. Thus, $b^r \in B(x)$ and $b^s \in B(y)$, so every element $b^t \in
+            B(x + y)$ can be written as $b^{r + s} = b^rb^s$, which is the product
+            of an element each from $B(x)$ and $B(y)$. Conversely, given elements
+            $b^r \in B(x)$ and $b^s \in B(y)$, we have $r \leq x$ and $s \leq y$ so
+            $t = r + s \leq x + y$, hence $b^{r + s} = b^t \in B(x + y)$. Thus,
+            we have \[
+                B(x + y) = \{wz: w\in B(x), z \in B(y)\}.
+            \]
+
+            Thus, for any element $wz \in B(x + y)$, $w \in B(x)$, $z \in B(y)$, we
+            have $w \leq \sup B(x) = b^x$ and $z \leq \sup B(y) = b^y$, so $wz \leq
+            b^x b^y$. This means that $b^xb^y$ is an upper bound of $B(x + y)$.
+
+            Now suppose that $\alpha = \sup B(x + y)$ such that 
+            $wz \leq \alpha < b^xb^y$ for all $wz \in B(x + y)$, where $w \in B(x)$
+            and $z \in B(y)$. Then, $\alpha / b^x < b^y$, so choose $\beta$ such
+            that $\alpha / b^x < \beta < b^y$. In other words, $\alpha / \beta <
+            b^x$ and $\beta < b^y$, so we can choose rational $r < x$, $s < y$ such
+            that $\alpha / \beta \leq b^r \in B(x)$ and $\beta \leq b^s \in B(y)$.
+            Note that $r \neq x$ and $s \neq y$.
+            Thus, the product $(\alpha / \beta)\beta = \alpha \leq b^rb^s \in B(x +
+            y)$. However, recall that we chose $\alpha$ such that $b^rb^s \leq \alpha$
+            for all $b^r \in B(x)$, $b^s \in B(y)$, so we must have $\alpha =
+            b^rb^s$ for our choice of $r$ and $s$. Now, we can choose rational $r'$ and 
+            $s'$ such that $r < r' < x$ and $s < s' < y$, hence $b^r < b^{r'} \in
+            B(x)$ and $b^s < b^{s'} \in B(y)$. This gives $\alpha = b^rb^s <
+            b^{r'}b^{s'} \in B(x + y)$, which contradicts the fact that $\alpha$ is
+            an upper bound. Thus, $b^xb^y$ must be the least upper bound of $B(x +
+            y)$, so \[
+                b^{x + y} = b^xb^y.
+            \] 
+        \end{enumerate}
+    \end{solution}
+    
+    \paragraph{Exercise 7.} Fix $b > 1$, $y > 0$, and show the following.
+    \begin{enumerate}
+        \itemsep0em
+        \item For any positive integer $n$, $b^n - 1 \geq n(b - 1)$.
+        \item Hence, $b - 1 \geq n(b^{1 / n} - 1)$.
+        \item If $t > 1$ and $n > (b - 1)/(t - 1)$, then $b^{1 / n} < t$.
+        \item If $w$ is such that $b^w < y$, then $b^{w + 1 / n} < y$ for
+        sufficiently large $n$.
+        \item If $b^w > y$, then $b^{w - 1 / n} > y$ for sufficiently large $n$.
+        \item Let $A$ be the set of all $w$ such that $b^w < y$, and show that $x =
+        \sup A$ satisfies $b^x = y$.
+        \item Prove that this $x$ is unique.
+    \end{enumerate}
+    \begin{solution}\\~\\
+        \begin{enumerate}
+            \item See Exercise 1 (c).
+            \item See Exercise 1 (c).
+            \item See Exercise 1 (c).
+            \item Set $t = yb^{-w} > 1$, and using the previous inequality, choose
+            sufficiently large $n$ such that $b^{1 / n} < t = yb^{-w}$. Thus, \[
+                b^{w + 1 / n} < y.        
+            \]
+            \item Set $t = (1 / y)b^{w} > 1$, and using the inequality in (c),
+            choose sufficiently large $n$ such that $b^{1 / n} < t = (1 / y)b^w$.
+            Thus, \[
+                y < b^{w - 1 / n}.
+            \] 
+            \item Exactly one of the following must be true; $b^x < y$, $b^x = y$,
+            $b^x > y$. If $b^x < y$, then $x \in A$ by definition. Using (d), we can
+            find sufficiently large $n$ such that \[
+                b^{x + 1 / n} < y,
+            \] hence $x < x + 1 / n \in A$, contradicting the fact that $x$ is an
+            upper bound of $A$. If $b^x > y$, then using (e), we can find
+            sufficiently large $n$ such that \[
+                y < b^{x - 1 / n},
+            \] which means that $x - 1 / n$ is also an upper bound of $A$,
+            contradicting the fact that $x$ is the lowest upper bound of $A$.
+            This leaves us with $b^x = y$.
+            \item Suppose that $x \neq x'$, and without loss of generality $x < x'$.
+            Set $x' - x = h > 0$, and note that $b^{x'} = b^{x + h} = b^x b^h$.
+            Now, $b > 1$ and $h > 0$, so $b^h > 1$. Thus, $b^{x'} > b^x$, which
+            means that $b^{x'} \neq b^x$ for $x' \neq x$. Thus, if $b^x = y$, then
+            $x$ is unique.
+        \end{enumerate}
+    \end{solution}
+
+    \paragraph{Exercise 8.} Prove that no order can be defined in the complex field
+    that turns it into an ordered field.
+    \begin{solution}
+        In an ordered field, if $x > 0$, then we must have $-x < 0$, and vice versa
+        by Proposition~1.18. The same proposition gives that if $x \neq 0$, then
+        $x^2 > 0$. This forces $i^2 = -1 > 0$. Applying the same proposition again,
+        this forces $(-1)^2 = 1 > 0$, which is a contradiction because we cannot
+        have both $-1 > 0$ and $1 > 0$.
+    \end{solution}
+    
+    \paragraph{Exercise 9.} Suppose $z = a + bi$, $w = c + di$. Define $z < w$ if $a
+    < c$, and also if $a = c$ but $b = d$. Prove that this turns the set of all
+    complex numbers into an ordered set. Does this ordered set have the
+    least-upper-bound property?
+    \begin{solution}
+        First, we show that for arbitrary $z = a + bi$ and $w = c + di$, exactly one
+        of the following is true: $z < w$, $z = w$, $z > w$. To do this, note that
+        the real numbers are ordered, so either $a < c$, $a = c$, or $a > c$.
+        In the case $a < c$, we have $z < w$ and since $a \neq c$, $z \neq w$. Also,
+        this excludes $w < z$. In the case $a > c$, the roles of $z$ and $w$ are
+        interchanged, so $z > w$. In the case $a = c$, we note that either $b < d$,
+        $b = d$, or $b > d$; when $b < d$, $z < w$ and when $b > d$, $z > w$.
+        Finally, when $a = c$ and $b = d$, we have $z = w$.
+
+        Next, we show that transitivity holds, i.e.\ if $z < w$ and $w < x$, then $z
+        < x$. Write $z = a + bi$, $w = c + di$ and $x = e + fi$. Note that the
+        conditions $z < w$ and $w < x$ imply $a \leq c$ and $c \leq e$. This has to
+        be further split into four cases.
+        \begin{quote}
+        \begin{description}
+            \itemsep0em
+            \item[Case 1] If $a < c$ and $c < e$, then $a < e$ so $z < x$.
+            \item[Case 2] If $a = c$ and $c < e$, then $a < e$ again so $z < x$.
+            \item[Case 3] If $a < c$ and $c = e$, then $a < e$ again so $z < x$.
+            \item[Case 4] If $a = c$ and $c = e$, then we must have had $b < d$
+            and $d < f$, so $a = e$ and $b < f$ gives $z < x$.
+        \end{description}
+        \end{quote}
+
+        No, this ordered set does not have the least upper bound property. Consider
+        the set of complex numbers $S = \{a + bi: 0 < a < 1, b = 0\}$. If $w = c +
+        di$ is to be an upper bound of $S$, i.e.\ $z \leq w$ for all $z \in S$, then 
+        either $z = w$ for some $z \in S$ or $z < w$ for all $z \in S$.
+        The former implies that $w = a + 0i$ for some $0 < a < 1$, in which case we
+        have $w = a + 0i < (a + 1) / 2 + 0i \in S$, a contradiction. The latter
+        implies that $a \leq c$ for all $0 < a < 1$, which forces $1 \leq c$.
+        If $w = c + di$ is the least upper bound of $S$ with $1 < c$, then note that
+        $(1 + c) / 2 + di < c + di = w$ is smaller upper bound of $S$. Otherwise, if
+        $w = 1 + di$ is the least upper bound of $S$, then $1 + (d - 1)i < 1 + di =
+        w$ is a smaller upper bound. This means that the set $S$ have no least upper
+        bound.
+    \end{solution}
+    
+    \paragraph{Exercise 10.} Suppose $z = a + bi$, $w = u + vi$, and \[
+        a = \left(\frac{|w| + u}{2}\right)^{1 / 2}, \qquad
+        b = \left(\frac{|w| - u}{2}\right)^{1 / 2}.
+    \] Prove that $z^2 = w$ if $v \geq 0$ and $(\overline{z})^2 = w$ if $v \leq 0$.
+    Conclude that every complex number (with one exception) has two complex square
+    roots.
+    \begin{solution}
+        Write \[
+            z^2 = (a + bi)^2 = a^2 - b^2 + 2abi, \qquad
+            \overline{z}^2 = (a - bi)^2 = a^2 - b^2 - 2abi.
+        \] Now, \[
+            a^2 - b^2 = \frac{1}{2}(|w| + u) - \frac{1}{2}(|w| - v) = u,
+        \] and 
+        \begin{align*}
+            2ab &= 2\left(\frac{|w| + u}{2}\right)^{1 / 2}\left(\frac{|w| -
+                    u}{2}\right)^{1 / 2} \\
+                &= 2\left(\frac{(|w| + u)(|w| - u)}{4}\right)^{1 / 2} \\
+                &= 2\left(\frac{|w|^2 - u^2}{4}\right)^{1 / 2} \\
+                &= 2\left(\left(\frac{v}{2}\right)^2\right)^{1 / 2}.
+        \end{align*}
+        Recall that $(x^2)^{1 / 2} = x$ if $x \geq 0$ and $(x^2)^{1 / 2} = -x$ if $x
+        \leq 0$. Thus, when $v \geq 0$, we have $2ab = v$ and when $v \leq 0$, we
+        have $2ab = -v$. This means that $w = u + 2abi = z^2$ when $v \geq 0$ and $w =
+        u - 2abi = (\overline{z})^2$ when $v \leq 0$.
+
+        Note that when $w = 0$, it has only one square root, namely $0$. Otherwise,
+        every non-zero complex number $w = u + iv$ has two square roots, either $z,
+        -z$ or $\overline{z}, -\overline{z}$ depending on the sign of $v$.
+    \end{solution}
+
+    \paragraph{Exercise 11.} If $z$ is a complex number, prove that there exists an
+    $r \geq 0$, a complex number $w$ with $|w| = 1$ such that $z = rw$. Are $w$ and
+    $r$ always uniquely determined by $z$?
+    \begin{solution}
+        Write $z = a + bi$, and if $z \neq 0$ define \[
+            r = \sqrt{a^2 + b^2}, \qquad
+            w = z / r = \frac{a}{\sqrt{a^2 + b^2}} + \frac{bi}{\sqrt{a^2 + b^2}}.
+        \] If $z = 0$, simply take $r = 0$ and $w = 1$. Thus, $z = rw$.
+
+        When $z \neq 0$, this choice is unique, since $z = rw$ forces $|z| = |rw| =
+        |r| |w| = r$, hence $r = |z| = \sqrt{a^2 + b^2}$ and $w = z / r$. Otherwise
+        for $z = 0$, we can choose any $w$ (say $w = \pm 1$) as long as $r = 0$.
+    \end{solution}
+
+    \paragraph{Exercise 12.} If $z_1, \dots, z_n$ are complex, prove that \[
+        |z_1 + z_2 + \dots + z_n| \leq |z_1| + |z_2| + \dots + |z_n|.
+    \]
+    \begin{solution}
+        We prove this by induction. The case $n = 1$ is trivially true. For $n = 2$,
+        see Theorem~1.33. If this holds for some $n \geq 1$, then use the $n = 2$
+        case on $z_1 + \dots + z_n$ and $z_{n + 1}$, then the induction hypothesis
+        to get \[
+            |z_1 + \dots + z_n + z_{n + 1}| \leq |z_1 + \dots + z_n| + |z_{n + 1}|
+            \leq |z_1| + \dots + |z_n| + |z_{n + 1}|.
+        \] This proves the desired statement by induction.
+    \end{solution}
+
+    \paragraph{Exercise 13.} If $x$ and $y$ are complex, prove that \[
+         | |x| - |y| | \leq |x - y|.
+    \]
+    \begin{solution}
+        Use the triangle inequality to write \[
+            |x| = |x - y + y| \leq |x - y| + |y|, \qquad
+            |y| = |y - x + x| \leq |x - y| + |x|.
+        \] Thus, if $|x| > |y|$, then $| |x| - |y| | = |x| - |y| \leq |x - y|$ by
+        the first inequality. If $|x| < |y|$, then $| |x| - |y| | = |y| - |x| \leq
+        |x - y|$ by the second inequality. If $|x| = |y|$, then $| |x| - |y| | = 0$,
+        so the inequality holds trivially.
+    \end{solution}
+    
+    \paragraph{Exercise 14.} If $z$ is a complex number such that $|z| = 1$, that
+    is, such that $z\overline{z} = 1$, compute \[
+        |1 + z|^2 + |1 - z|^2.
+    \]
+    \begin{solution}
+        Write $z = a + bi$, so $a^2 + b^2 = 1$. Now, $|1 + z|^2 = (a + 1)^2 + b^2$,
+        and $|1 - z|^2 = (a - 1)^2 + b^2$. Adding, \[
+            |1 + z|^2 + |1 - z|^2 = 2(a^2 + b^2 + 1) + 2a - 2a = 4.
+        \] 
+    \end{solution}
+    
+    \paragraph{Exercise 15.} Under what conditions does equality hold in the Schwarz
+    inequality?
+    \begin{solution}
+        In Theorem~1.35, recall that \[
+            A = \sum |a_i|^2, \qquad B = \sum |b_i|^2, \quad C = \sum a_i
+            \overline{b_i},   
+        \] and the desired inequality was $AB \geq C^2$
+        If $B = 0$, then all $b_i = 0$ so equality holds. Otherwise, we concluded
+        that with $B > 0$, \[
+            \sum |Ba_i - Cb_i|^2 = B(AB - |C|^2) \geq 0.
+        \] Here, equality means $AB = |C|^2$, so every $|Ba_i - Cb_i| = 0$, hence
+        $a_i = (C / B)b_i$ for all $i$.
+    \end{solution}
+    
+    \paragraph{Exercise 16.} Suppose $k \geq 3$, $\vx, \vy \in \R^k$,
+    $|\vx - \vy| = d > 0$ and $r > 0$. Prove the following.
+    \begin{enumerate}
+        \itemsep0em
+        \item If $2r > d$, then there are infinitely many $\vz \in \R^k$ such
+        that \[
+            |\vz - \vx| = |\vz - \vy| = r.
+        \] 
+        \item If $2r = d$, there is exactly one such $\vz$.
+        \item If $2r < d$, there is no such $\vz$.
+    \end{enumerate}
+    \begin{solution}
+        Note that by translating all the variables $\vx' = \vx - \vy$,
+        $\vy' = \vec{0}$, our system of equations looks identical, with $|\vx' -
+        \vy'| = d$ and the solutions are related by $\vz' = \vz -
+        \vy$. Thus, we may instead consider the system $|\vx| = d$, \[
+            |\vz - \vx| = |\vz| = r.
+        \]
+        Consider an arbitrary solution $\vz$ and write $\vec{v} = \vz - 
+        \frac{1}{2}\vx$. Now, \[
+            |\vz|^2 = (\frac{1}{2}\vx + \vec{v})\cdot
+            (\frac{1}{2}\vx + \vec{v}) = \frac{1}{4}|\vx|^2 +
+            |\vec{v}|^2 + \vx\cdot\vec{v}.
+        \] Also, \[
+            |\vz - \vx|^2 = 
+            (-\frac{1}{2}\vx+\vec{v})\cdot(-\frac{1}{2}\vx+\vec{v}) =
+            \frac{1}{4}|\vx|^2 + |\vec{v}|^2 - \vx\cdot\vec{v}. 
+        \] Adding the above equations gives \[
+            |\vz|^2 + |\vz - \vx|^2 = \frac{1}{2}|\vx|^2 +
+            2|\vec{v}|^2, \qquad
+            |\vec{v}|^2 = r^2 - \frac{d^2}{4}.
+        \] Subtracting the two equations gives $\vec{v}\cdot\vx = 0$.
+
+        These conditions on $\vec{v}$ are necessary and sufficient to generate
+        solutions $\vz = \frac{1}{2}\vx + \vec{v}$.
+
+        \begin{enumerate}
+            \item Pick a unit vector $\hat{\vec{v}}$ perpendicular to $\vx$,
+            i.e.\ $\hat{\vec{v}}\cdot\vx = 0$. Note that the components satisfy
+            \[
+                v_1x_1 + \dots + v_kx_k = 0.
+            \] Since $d > 0$, we have $\vx\neq 0$, so without loss of generality
+            let $x_1 \neq 0$. Then we have \[
+                v_1 = -\frac{1}{x_1}(v_2x_2 + \dots + v_kx_k).
+            \] Therefore, we may choose the components $v_2, \dots, v_k$
+            arbitrarily.  For example, fix $v_2 = 1$, vary $v_3 = 0, 1, 2, \dots$
+            and vary the remaining components arbitrarily, then normalize. All of
+            the generated unit vectors are distinct, because the ratio of components
+            $v_2$ and $v_3$ is different in each case. Thus, we have generated
+            infinitely many unit vectors $\hat{\vec{v}}$ this way.
+
+            Now define the real number $v \geq 0$, $v^2 = r^2 - d^2 / 4$. Then,
+            all the vectors $\vz = \frac{1}{2}\vx + \vec{v}$ are
+            solutions, where $\vec{v} = v\hat{\vec{v}}$.
+
+            \item We have $|\vx| = d = 2r$, which means \[
+                |\vec{v}|^2 = r^2 - \frac{1}{4}(2r)^2 = 0,
+            \] forcing $|\vec{v}| = 0$, $\vec{v} = \vec{0}$. Thus, there is only one
+            solution, namely $\vz = \frac{1}{2}\vx$.
+
+            \item When $2r < d$ \[
+                |\vec{v}|^2 = r^2 - \frac{d^2}{4} < 0,
+            \] which is impossible. Thus, there are no solutions $\vz$ of this
+            system.
+        \end{enumerate}
+        Note that when $k = 2$, we can only generate 2 unit vectors $\hat{\vec{v}}$
+        such that $\hat{\vec{v}}\cdot\vx = 0$. Note that \[
+            v_1x_1 + v_2x_2 = 0, \qquad v_1 = -\frac{v_2x_2}{x_1}, \qquad v_1^2 = 1
+            - v_2^2.
+        \] Thus, there are only two solutions, when $2r > d$. When $k = 1$, it is
+        impossible to get a non-zero real $v$ satisfying $vx = 0$, yet we require
+        $v^2 = r^2 - d^2 / 4 > 0$ when $2r > d$, so there are no solutions.
+
+        The remaining parts (b) and (c) remain identical for $k = 1, 2$.
+    \end{solution}
+    
+    \paragraph{Exercise 17.} Prove that \[
+        |\vx + \vy|^2 + |\vx - \vy|^2 = 2|\vx|^2 + 2|\vy|^2
+    \] if $\vx, \vy \in \R^k$. Interpret this geometrically, as a statement about
+    parallelograms.
+    \begin{solution}
+        Calculate \[
+            |\vx + \vy|^2 = (\vx + \vy)\cdot(\vx + \vy) = |\vx|^2 + |\vy|^2 +
+            2\vx\cdot\vy,
+        \] \[
+            |\vx - \vy|^2 = (\vx - \vy)\cdot(\vx - \vy) = |\vx|^2 + |\vy|^2 -
+            2\vx\cdot\vy.
+        \] Adding the two gives the desired equation.
+
+        If we interpret $\vx$ and $\vy$ to be two adjacent legs of a parallelogram,
+        then $\vx + \vy$ and $\vx - \vy$ represent its diagonals. Thus, the sum of
+        squares of the diagonals of a parallelogram is equal to twice the sum of
+        squares of two adjacent sides.
+    \end{solution}
+
+    \paragraph{Exercise 18.} If $k \geq 2$ and $\vx \in \R^k$, prove that there
+    exists $\vy \in \R^k$ such that $\vy \neq \vec{0}$ but $\vx\cdot\vy = 0$.
+    Is this also true if $k = 1$?
+    \begin{solution}
+        If $\vx = \vec{0}$, then any non-zero vector in $\vy \in \R^k$ satisfies
+        $\vx\cdot\vy = 0$. Otherwise, $\vx = (x_1, x_2, \dots, x_k) \neq\vec{0}$ so
+        without loss of generality let the component $x_1 \neq 0$. Set \[
+            \vec{y} = (-x_2, x_1, 0, \dots, 0) \in \R^k,
+        \] so \[
+            \vx\cdot\vy = x_1(-x_2) + x_2(x_1) + 0 + \dots + 0 = 0.
+        \] This is clearly not possible in $\R$ unless $x = 0$, because the product
+        of any two non-zero real numbers is also non-zero.
+    \end{solution}
+
+    \paragraph{Exercise 19.} Suppose $\va, \vb \in \R^k$. Find $\vc \in
+    \R^k$ such that \[
+        |\vx - \va| = 2|\vx - \vb|
+    \] if and only if $|\vx - \vc| = r$.
+    \begin{solution}
+        Write $\vx' = \vx - \va$, $\vb' = \vb - \va$, $\vc' = \vc - \va$, so we want
+        to find $\vc'$ such that \[
+            |\vx'| = 2|\vx' - \vb'|
+        \] if and only if $|\vx' - \vc'| = r$.
+
+        Write $\vx' = \frac{4}{3}\vb' + \vr$. Then \[
+            |\vx'|^2 = \frac{16}{9}|\vb'|^2 + |\vr|^2 + \frac{8}{3}\vb'\cdot\vr,
+        \] and \[
+            |\vx' - \vb'|^2 = |\frac{1}{3}\vb' + \vr|^2 = \frac{1}{9}|\vb'|^2 +
+            |\vr|^2 + \frac{2}{3}\vb'\cdot\vr.
+        \] Using $|\vx'|^2 = 4|\vx' - \vb'|^2$, we have \[
+            \frac{12}{9}|\vb'|^2 = 3|\vr|^2, \qquad |\vr| = \frac{2}{3}|\vb'|.
+        \] Thus, $|\vx' - \frac{4}{3}\vb'| = \frac{2}{3}|\vb'|$, which is both
+        necessary and sufficient. This means that  $\vc' = \frac{4}{3}\vb'$ and $r =
+        \frac{2}{3}|\vb'|$. Translating everything back by $\va$, we have \[
+            \vc = \frac{4}{3}\vb - \frac{1}{3}\va, \qquad r = \frac{2}{3}|\vb - \va|.
+        \] 
+    \end{solution}
+
+    \paragraph{Exercise 20.} With reference to the Appendix, suppose that property
+    (III) were omitted from the definition of a cut. Keep the same definitions of
+    order and addition. Show that the resulting ordered set has the
+    least-upper-bound property, that addition satisfies axioms (A1) to (A4) (with
+    a slightly different zero-element!) but that (A5) fails.
+    \begin{solution}
+        We define a cut as any set $\alpha \subset \Q$ with the following properties.
+        \begin{itemize}
+            \itemsep0em
+            \item[(I)] $\alpha$ is not empty, $\alpha \neq \Q$.
+            \item[(II)] If $p \in \alpha$, $q \in \Q$, and $q < p$, then $q \in \alpha$.
+        \end{itemize}
+        Property (III) used to state that if $p \in \alpha$, then $p < r$ for some
+        $r \in \alpha$, which meant that $\alpha$ had no maximal element.
+        Property (II) implies that if $p \in \alpha$ and $q \notin \alpha$, then $p
+        < q$ (take the contrapositive, and note that $p \neq q$). It also implies
+        that if $r \notin \alpha$ and $r < s$, then $s \notin \alpha$ ($s \in
+        \alpha$ would have forced $r \in \alpha$).
+
+        Call the set of all these cuts $\R'$.
+        Like before, the order $\alpha < \beta$ is defined to mean $\alpha \subset
+        \beta$, for $\alpha, \beta \in \R'$. Again, $\R'$ has the least upper bound
+        property.
+
+        To see this, let $A$ be any non-empty subset of $\R'$ bounded above by
+        $\beta \in \R'$, and let $\gamma$ be the union of all $\alpha \in A$. Thus,
+        $p \in \gamma$ if and only if $p \in \alpha$ for some $\alpha \in A$. To
+        verify that $\gamma$ is indeed a cut, note that $A$ is non-empty so there is
+        at least one element $\alpha_0 \in A$ which is non-empty, so $\alpha_0
+        \subset \gamma$ with $\gamma$ non-empty. Also, $\gamma \subset \beta$ since
+        $\beta$ being an upper bound means that $\alpha < \beta$ for all $\alpha \in
+        A$, which in turn means $\alpha \subset \beta$ for all $\alpha \in A$, hence
+        $\gamma = \cup_{\alpha \in A} \alpha \subset \beta$. This verifies property
+        (I). To verify property (II), pick $p \in \gamma$, and suppose that $p \in
+        \alpha_1$ for some $\alpha \in A$. If $q \in \Q$ with $q < p$, this gives $q
+        \in \alpha_1$, hence $q \in \gamma$. Thus, $\gamma$ is indeed a cut, i.e.\
+        $\gamma \in \R'$.
+
+        Now, we claim that $\gamma = \sup A$. Clearly, for any $\alpha \in A$, we
+        have $\alpha \subset \gamma$ by definition to $\alpha \leq \gamma$ for all
+        $\alpha \in A$, meaning $\gamma$ is an upper bound of $A$. Now suppose that
+        $\delta \in \R'$, and $\delta < \gamma$. This means that $\delta$ is a
+        proper subset of $\gamma$, so there is some $p \in \gamma$ such that $\p
+        \notin \delta$. However, we must have $p \in \alpha_1$ for some $\alpha_1
+        \in A$, so $\alpha$ cannot be a proper subset of $\delta$, meaning that
+        $\delta$ is not an upper bound of $A$. Thus, $\gamma$ is the least upper
+        bound of $A$.
+
+        Like before, for $\alpha, \beta \in \R'$, define addition $\alpha + \beta$
+        as the set of sums $r + s$ with $r \in \alpha$, $s \in \beta$. We must now
+        verify the axioms of addition. 
+        \begin{itemize}
+            \item[(A1)] We demand closure, which is easily seen because $\alpha +
+            \beta$ is a non-empty proper subset of $\Q$, and if $p \in \alpha +
+            \beta$, then we must be able to write $p = r + s$ for some $r \in
+            \alpha$, $s \in \beta$. Now if $q \in \Q$ and $q < p$, then $q - s < p -
+            s = r$, so $q - s \in \alpha$, hence $q = (q - s) + s \in \alpha +
+            \beta$. 
+
+            \item[(A2)] We demand commutativity, which follows trivially. $\alpha +
+            \beta = \beta + \alpha$, both being the set of $r + s = s + r$ with $r
+            \in \alpha$, $s \in \beta$. 
+
+            \item[(A3)] We demand associativity, which follows again from the
+            associativity of the rational numbers. Note that if $\alpha, \beta,
+            \gamma \in \R'$, with $r \in \allpha$, $s \in \beta$, $t \in \gamma$,
+            then $r + (s + t) = (r + s) + t$. 
+
+            \item[(A4)] Here, select $0' = \{r \in \Q: r \leq 0\}$. To show that for
+            any $\alpha \in \R'$, $0' + \alpha = \alpha$, note that $0' + \alpha$ is
+            the set of all rational numbers $r + s$ with $r \leq 0$ and $s \in
+            \alpha$, so $r + s \leq s \in \alpha$ hence $0' + \alpha \subseteq
+            \alpha$. Now, if $s \in \alpha$, then $0 + s \in 0' + \alpha$ since $0
+            \in 0'$ and $s \in \alpha$, so $\alpha \subseteq 0' + \alpha$. This
+            proves $0' + \alpha = \alpha$. 
+
+            \item[(A5)] We demand the existence of an additive inverse $-\alpha$ for
+            every $\alpha$, such that $\alpha + (-\alpha) = 0'$. This fails with the
+            choice $\alpha = 0^* = \{r \in \Q: r < 0\}$. Note that if $0^* + (-0^*)
+            = 0'$, we require $r + s \leq 0$ for all $r \in 0^*$, $s \in -0^*$.
+            There must also be some $r_0 \in 0^*$, $s_0 \in -0^*$ such that $r_0 +
+            s_0 = 0$. Since $r_0 \in 0^*$, $r_0 < 0$, so $s_0 = -r_0 > 0$.  Now,
+            note that $-s_0 / 2 < 0$ so $-s_0 / 2 \in 0^*$, but the sum $(-s_0 / 2)
+            + s_0 = s_0 / 2 > 0$, which is a contradiction.
+        \end{itemize}
+
+        In addition, note that $0^*$ does not serve as a zero element, since $0^* +
+        0' = 0'$, not $0^*$. Furthermore, there is no choice of a zero element, say
+        $\alpha_0$, which makes (A1-4) hold as well as (A5), since our choice of the
+        zero element $0'$ is forced (we have already shown that $0' + \alpha_0 =
+        \alpha_0$, not $0'$ if $\alpha_0 \neq 0'$; the field axioms imply that the
+        zero element once found is unique).
+    \end{solution}
+    
+    
+    
+\end{document}
+% vim: set tabstop=4 shiftwidth=4 softtabstop=4:
