@@ -432,7 +432,7 @@
         In Theorem~1.35, recall that \[
             A = \sum |a_i|^2, \qquad B = \sum |b_i|^2, \quad C = \sum a_i
             \overline{b_i},   
-        \] and the desired inequality was $AB \geq C^2$
+        \] and the desired inequality was $AB \geq C^2$.
         If $B = 0$, then all $b_i = 0$ so equality holds. Otherwise, we concluded
         that with $B > 0$, \[
             \sum |Ba_i - Cb_i|^2 = B(AB - |C|^2) \geq 0.
@@ -481,7 +481,7 @@
             i.e.\ $\hat{\vec{v}}\cdot\vx = 0$. Note that the components satisfy
             \[
                 v_1x_1 + \dots + v_kx_k = 0.
-            \] Since $d > 0$, we have $\vx\neq 0$, so without loss of generality
+            \] Since $d > 0$, we have $\vx\neq \vec{0}$, so without loss of generality
             let $x_1 \neq 0$. Then we have \[
                 v_1 = -\frac{1}{x_1}(v_2x_2 + \dots + v_kx_k).
             \] Therefore, we may choose the components $v_2, \dots, v_k$
@@ -506,11 +506,11 @@
             system.
         \end{enumerate}
         Note that when $k = 2$, we can only generate 2 unit vectors $\hat{\vec{v}}$
-        such that $\hat{\vec{v}}\cdot\vx = 0$. Note that \[
+        such that $\hat{\vec{v}}\cdot\vx = 0$. This is because we want \[
             v_1x_1 + v_2x_2 = 0, \qquad v_1 = -\frac{v_2x_2}{x_1}, \qquad v_1^2 = 1
             - v_2^2.
-        \] Thus, there are only two solutions, when $2r > d$. When $k = 1$, it is
-        impossible to get a non-zero real $v$ satisfying $vx = 0$, yet we require
+        \] Thus, there are only two solutions, when $2r > d$. When $k = 1$, the
+        condition $vx = 0$ with $x \neq 0$ forces $v = 0$, yet we require
         $v^2 = r^2 - d^2 / 4 > 0$ when $2r > d$, so there are no solutions.
 
         The remaining parts (b) and (c) remain identical for $k = 1, 2$.
@@ -638,7 +638,7 @@
 
             \item[(A3)] We demand associativity, which follows again from the
             associativity of the rational numbers. Note that if $\alpha, \beta,
-            \gamma \in \R'$, with $r \in \allpha$, $s \in \beta$, $t \in \gamma$,
+            \gamma \in \R'$, with $r \in \alpha$, $s \in \beta$, $t \in \gamma$,
             then $r + (s + t) = (r + s) + t$. 
 
             \item[(A4)] Here, select $0' = \{r \in \Q: r \leq 0\}$. To show that for
