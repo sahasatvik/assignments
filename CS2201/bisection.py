@@ -29,7 +29,8 @@ def bisection(f, lo, hi, delta=0.001, maxiter=100):
 def f(x):
     return 10**x + x - 4
 
-# Display the approximate root
-root, i = bisection(f, 0, 1, delta=1e-6)
-if root is not None:
-    print(f"Root at {root}, f(x) = {f(root)}, {i} iterations")
+if __name__ == '__main__':
+    # Display the approximate root
+    root, i = bisection(f, 0, 1, delta=1e-6)
+    if root is not None:
+        print(f"Root at {root}, f(x) = {f(root)}, {i} iterations")

@@ -24,6 +24,7 @@ def tabulation(f, lo, hi, n):
 def f(x):
     return 10**x + x - 4
 
-# Display all intervals containing roots to the console
-for interval in tabulation(f, 0, 1, 10):
-    print(f"Root present in the interval [{interval[0]}, {interval[1]}]")
+if __name__ == '__main__':
+    # Display all intervals containing roots to the console
+    for interval in tabulation(f, 0, 1, 10):
+        print(f"Root present in the interval [{interval[0]}, {interval[1]}]")

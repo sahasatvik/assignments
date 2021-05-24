@@ -26,6 +26,7 @@ def f(x):
 def df(x):
     return 10**x * np.log(10) + 1
 
-# Display the approximate root
-root, i = newton_raphson(f, df, 0.5, epsilon=1e-6)
-print(f"Root at {root}, f(x) = {f(root)}, {i} iterations")
+if __name__ == '__main__':
+    # Display the approximate root
+    root, i = newton_raphson(f, df, 0.5, epsilon=1e-6)
+    print(f"Root at {root}, f(x) = {f(root)}, {i} iterations")

@@ -27,7 +27,8 @@ def regula_falsi(f, lo, hi, epsilon=0.001, maxiter=100):
 def f(x):
     return 10**x + x - 4
 
-# Display the approximate root
-root, i = regula_falsi(f, 0, 1, epsilon=1e-6)
-if root is not None:
-    print(f"Root at {root}, f(x) = {f(root)}, {i} iterations")
+if __name__ == '__main__':
+    # Display the approximate root
+    root, i = regula_falsi(f, 0, 1, epsilon=1e-6)
+    if root is not None:
+        print(f"Root at {root}, f(x) = {f(root)}, {i} iterations")
