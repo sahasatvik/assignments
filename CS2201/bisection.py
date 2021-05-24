@@ -13,15 +13,15 @@ def bisection(f, lo, hi, delta=0.001, maxiter=100):
     '''
 
     # Check that a root does indeed lie within the interval
-    if f(lo) * f(hi) >= 0:
-        return None
+    if f(lo) * f(hi) > 0:
+        return None, None
     for i in range(maxiter):
         x = (lo + hi) / 2
         # Exit if the interval is smaller than delta
         if (hi - lo) <= delta:
             return x, i
         # Halve the size of the interval, based on where the root lies
-        if f(lo) * f(x) < 0:
+        if f(lo) * f(x) <= 0:
             hi = x
         else:
             lo = x
@@ -31,5 +31,5 @@ def f(x):
 
 # Display the approximate root
 root, i = bisection(f, 0, 1, delta=1e-6)
-if root:
+if root is not None:
     print(f"Root at {root}, f(x) = {f(root)}, {i} iterations")

@@ -12,7 +12,7 @@ def regula_falsi(f, lo, hi, epsilon=0.001, maxiter=100):
     '''
     
     if f(lo) * f(hi) > 0:
-        return None
+        return None, None
     for i in range(maxiter):
         x = hi - f(hi) * (hi - lo) / (f(hi) - f(lo))
         # Exit if the residue is within tolerance
@@ -29,5 +29,5 @@ def f(x):
 
 # Display the approximate root
 root, i = regula_falsi(f, 0, 1, epsilon=1e-6)
-if root:
+if root is not None:
     print(f"Root at {root}, f(x) = {f(root)}, {i} iterations")
