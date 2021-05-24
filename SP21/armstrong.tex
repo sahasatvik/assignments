@@ -1,0 +1,215 @@
+\documentclass[11pt]{report}
+
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage[scr]{rsfso}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+
+\geometry{a4paper, margin=1in, headheight=14pt}
+
+\pagestyle{fancy}
+\renewcommand\headrulewidth{0.4pt}
+\fancyhead[L]{\it Groups and Symmetry}
+\rfoot{\footnotesize\it Updated on \today}
+\cfoot{\thepage}
+\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+
+\renewcommand{\labelenumi}{(\alph{enumi})}
+\renewcommand{\labelenumii}{(\roman{enumii})}
+
+\def\C{\mathbb{C}}
+\def\R{\mathbb{R}}
+\def\Q{\mathbb{Q}}
+\def\Z{\mathbb{Z}}
+\def\N{\mathbb{N}}
+
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\newtheorem*{example}{Example}
+\newtheorem*{solution}{Solution}
+
+\title{
+    \Large\textsc{Summer Programme 2021} \\
+    \vspace{10pt}
+    \huge Solutions to exercises from M.A.~Armstrong's \\
+    \textit{Groups and Symmetry} 
+}
+\author{
+    \large Satvik Saha%
+    % \thanks{Email: \tt ss19ms154@iiserkol.ac.in}
+    \\\textsc{\small 19MS154}
+}
+\date{\normalsize
+    \textit{Indian Institute of Science Education and Research, Kolkata, \\
+    Mohanpur, West Bengal, 741246, India.} \\
+    % \vspace{10pt}
+    % \today
+}
+
+\begin{document}
+    \maketitle
+
+    \chapter{Symmetries of the Tetrahedron}
+
+    \paragraph{Exercise 1.1} Glue two copies of a regular tetrahedron together so
+    that they have a triangular face in common, and work out all the rotational
+    symmetries of this new solid.
+    \begin{solution}
+        The resultant bi-pyramid has five vertices; label the ones furthest apart as
+        1 and 2, and then label the remaining ones on the equator as 3, 4, 5. The
+        rotational symmetries are those which permute these five vertices such that
+        1 and 2 never leave the long axis, and the cyclicity of the vertices 1, 2,
+        3, 4 is preserved. Thus, we have 3 rotations about the long axis (by $0$,
+        $2\pi / 3$, and $4\pi / 3$) which cycle the vertices 3, 4, 5, then three
+        rotations, each about an axis through one of the vertices 3, 4, 5 and the
+        midpoint of the opposite edge (by $0$, $\pi$) which swap the positions of 1
+        and 2 and reverse the cyclicity of 3, 4, 5. This gives a total of $2\times 3
+        = 6$ symmetries.
+    \end{solution}
+
+    \paragraph{Exercise 1.2} Find all rotational symmetries of a cube.
+    \begin{solution}
+        First consider the four rotations (by $0$, $\pi / 2$, $\pi$, $3\pi / 2$)
+        about an axis which passes through the centres of opposite faces; there are
+        three such axes giving $3\times 3 = 9$ such rotational symmetries (excluding
+        the identity symmetry, which we will add on at the end).
+        Next, consider the two rotations (by $0$, $\pi$) about an axis passing
+        through the centres of opposite edges; there are six such axes, giving
+        $1\times 6 = 6$ such rotational symmetries.
+        Next, consider the three rotations (by $0$, $2\pi / 3$, $4\pi / 3$) about an
+        axis passing through opposite vertices; there are four such axes, giving
+        $2\times 4 = 8$ such rotational symmetries. Adding these up, we have $9 + 6
+        + 8 = 23$ rotational symmetries. The identity symmetry brings the total to
+        $24$ rotational symmetries of the cube.
+    \end{solution}
+
+    \paragraph{Exercise 1.3} Adopt the notation of Figure~1.4. Show that the axis of
+    the composite rotation $srs$ passes through the vertex $4$, and that the axis of
+    $rsrr$ is determined by the midpoints of edges $12$ and $34$.
+    \begin{solution}
+        Let the original state of the tetrahedron be represented by the tuple $(1,
+        2, 3, 4)$, indicating the labels on the four vertices. Applying $s$ permutes
+        this to $(4, 3, 2, 1)$, and applying $r$ permutes (the original) to $(1, 4,
+        2, 3)$. Thus, the action $srs$ is the permutation $(1, 2, 3, 4) \to (4, 3,
+        2, 1) \to (4, 1, 3, 2) \to (2, 3, 1, 4)$. Note that the vertex labelled $4$
+        is a fixed point, hence the axis of this composite rotation must have passed
+        through this vertex.
+
+        Similarly, the action $rsrr$ maps $(1, 2, 3, 4) \to (1, 4, 2, 3) \to (1, 3,
+        4, 2) \to (2, 4, 3, 1) \to (2, 1, 4, 3)$. There are no fixed points, hence
+        this is not a rotation through a vertex. Instead, the first pair and last
+        pair of vertices have swapped, which indicates a rotation about an axis
+        through the centres of the edges $12$ and $34$.
+    \end{solution}
+
+    \paragraph{Exercise 1.4} Having completed the previous exercise, express each of
+    the twelve rotational symmetries of the tetrahedron in terms of $r$ and $s$.
+    \begin{solution}
+        The twelve rotational symmetries of the tetrahedron are $e$ (the identity),
+        $r$, $r^2$, $s$, $rs$, $r^2s$, $srs$, $rsrs$, $r^2srs$, $sr^2s$, $rsr^2s$,
+        $r^2sr^2s$. See Exercise~1.7 for their actions on the $(1, 2, 3, 4)$ state.
+    \end{solution}
+
+    \paragraph{Exercise 1.5} Again with the notation of Figure~1.4, check that
+    $r^{-1} = rr$, $s^{-1} = s$, $(rs)^{-1} = srr$ and $(sr)^{-1} = rrs$.
+    \begin{solution}
+        Note that $r^3$ maps $(1, 2, 3, 4) \to (1, 4, 2, 3) \to (1, 3, 4, 2) \to (1,
+        2, 3, 4)$, so $r^3 = e$. Thus, $(rr)r = e = r(rr)$, so $r^{-1} = rr$.
+
+        Next, note that $ss$ maps $(1, 2, 3, 4) \to (4, 3, 2, 1) \to (1, 2, 3, 4)$,
+        so $ss = e$. Thus, $(s)s = e = e(s)$, so $s^{-1} = s$.
+
+        Next, note that $(rs)(srr) = r(ss)(rr) = r(e)(rr) = rrr = e$, and $(srr)(rs)
+        = s(rrr)s = s(e)s = ss = e$, so $(rs)^{-1} = srr$.
+
+        Finally, note that $(sr)(rrs) = (srr)(rs) = e$ and $(rrs)(sr) = (rr)(ss)r =
+        rrr = e$, so $(sr)^{-1} = rrs$.
+    \end{solution}
+
+    \paragraph{Exercise 1.6} Show that a regular tetrahedron has a total of
+    twenty-four symmetries if reflections and products of reflections are allowed.
+    Identify a symmetry which is not a rotation and not a reflection. Check that
+    this symmetry is a product of three reflections.
+    \begin{solution}
+        Note that a reflection about the plane passing through an edge and the
+        centroid swaps the remaining two vertices. Thus, by representing the vertex
+        configuration of the tetrahedron as a tuple $(1, 2, 3, 4)$, this can be
+        mapped to any of the $4! = 24$ permutations by employing suitable
+        reflections (for example, see bubble sort).
+
+        Consider the action which takes the tetrahedron $(1, 2, 3, 4)$ to the state
+        $(4, 1, 2, 3)$.  This is not a rotation about a vertex, nor a reflection
+        about a plane through an edge because there are no fixed points.
+        This is not a rotation about an axis through the centres of opposite sides
+        either, since those must swap the labels on two pairs of adjacent vertices.
+        However, this can be reached via the reflections $(1, 2, 3, 4) \to (4, 2, 3,
+        1) \to (4, 1, 3, 2) \to (4, 1, 2, 3)$; these were reflections about planes
+        passing through the edges $23$, $13$, $12$.
+    \end{solution}
+
+    \paragraph{Exercise 1.7} Let $q$ denote reflection of a regular tetrahedron in
+    the plane determined by its centroid and one of its edges. Show that the
+    rotational symmetries, together with those of the form $uq$, where $u$ is a
+    rotation, give all twenty-four symmetries of the tetrahedron.
+    \begin{solution}
+        We let $q$ mean the reflection in the plane through the centroid and the
+        side $12$; note that this maps $(1, 2, 3, 4) \to (1, 2, 4, 3)$.
+        Below, we list all $24$ permutations of the tuple $(1, 2, 3, 4)$, which
+        represent all $24$ symmetries of the tetrahedron.
+        \begin{center}
+        \begin{tabular}{r|c||r|c}
+            Symmetry    & State         & Symmetry      & State         \\\hline
+            $e$         & 1, 2, 3, 4    & $q$           & 1, 2, 4, 3 \\
+            $r$         & 1, 4, 2, 3    & $rq$          & 1, 3, 2, 4 \\
+            $r^2$       & 1, 3, 4, 2    & $r^2q$        & 1, 4, 3, 2 \\
+            $s$         & 4, 3, 2, 1    & $sq$          & 3, 4, 2, 1 \\
+            $rs$        & 4, 1, 3, 2    & $rsq$         & 3, 1, 4, 2 \\
+            $r^2s$      & 4, 2, 1, 3    & $r^2sq$       & 3, 2, 1, 4 \\
+            $srs$       & 2, 3, 1, 4    & $srsq$        & 2, 4, 1, 3 \\
+            $rsrs$      & 2, 4, 3, 1    & $rsrsq$       & 2, 3, 4, 1 \\
+            $r^2srs$    & 2, 1, 4, 3    & $r^2srsq$     & 2, 1, 3, 4 \\
+            $sr^2s$     & 3, 1, 2, 4    & $sr^2sq$      & 4, 1, 2, 3 \\
+            $rsr^2s$    & 3, 4, 1, 2    & $rsr^2sq$     & 4, 3, 1, 2 \\
+            $r^2sr^2s$  & 3, 2, 4, 1    & $r^2sr^2sq$   & 4, 2, 3, 1
+        \end{tabular}
+        \end{center}
+    \end{solution}
+
+    \paragraph{Exercise 1.8} Find all plane symmetries (rotations and reflections)
+    of a regular pentagon and of a regular hexagon.
+    \begin{solution}
+        Any symmetry of a regular $n$-gon is one which preserves adjacent vertices,
+        i.e.\ two labelled vertices must remain adjacent before and after the
+        symmetry action. Thus, we have $n$ rotations (by $2k\pi / n$), along with
+        $n$ rotations followed by a reflection (these are mirror images of the
+        previous $n$ symmetries). Thus, a regular $n$-gon has $2n$ plane symmetries;
+        ten for a pentagon and twelve for a hexagon.
+    \end{solution}
+
+    \paragraph{Exercise 1.9} Show that the hexagonal plate of Figure~1.2 has
+    twenty-four symmetries in all. Identify those symmetries which commute with all
+    the others.
+    \begin{solution}
+        By representing the vertices of the hexagon as the tuple $(1, 2, 3, 4, 5,
+        6)$, we see symmetries of the plate are precisely those actions which
+        permute these elements, preserving the adjacency but allowing a reversal in
+        order. There are six tuples of the form $(1 + n, 2 + n, \dots, 6 + n)$ and
+        six more of the form $(6 + n, 5 + n, \dots, 1 + n)$.
+        Because we are dealing with a hexagonal plate, there is another symmetry
+        which is a reflection passing through a plane parallel to the hexagonal
+        face. This does not change the labels on the vertices on the hexagonal face
+        in any way, but exchanges the top and bottom faces. Thus, this symmetry
+        commutes with all other symmetries, and the combination of any one of the
+        twelve previously shown symmetries with this reflection symmetry produces a
+        new symmetry, bringing our total to twenty-four.
+    \end{solution}
+
+    \paragraph{Exercise 1.10} Make models of the octahedron, dodecahedron, and
+    icosahedron. Try to spot as many symmetries of these solids as you can.
+    
+    
+\end{document}
+% vim: set tabstop=4 shiftwidth=4 softtabstop=4:
