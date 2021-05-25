@@ -25,6 +25,7 @@ def bisection(f, lo, hi, delta=0.001, maxiter=100):
             hi = x
         else:
             lo = x
+    return x, maxiter
     
 def f(x):
     return 10**x + x - 4
