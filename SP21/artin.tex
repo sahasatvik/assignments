@@ -28,6 +28,7 @@
 \def\N{\mathbb{N}}
 
 \DeclareMathOperator\sign{sign}
+\DeclareMathOperator\lcm{lcm}
 
 \renewcommand\vec\boldsymbol
 \def\vx{\vec{x}}
@@ -727,6 +728,835 @@
             \mathbb{I}_n.
         \] Thus, $Y^{-1} = \mathbb{I}_n + BX^{-1}A$.
     \end{solution}
+    
+
+
+    \chapter{Groups}
+
+    \section{The Definition of a Group}
+    
+    \paragraph{Exercise 1.} \mbox{}
+    \begin{enumerate}
+        \itemsep0em    
+        \item Verify (1.17) and (1.18) by explicit computation.
+        \item Make a multiplication table for $S_3$.
+    \end{enumerate}
+    \begin{solution} \mbox{}
+        \begin{enumerate}
+            \item We see that \[
+                1 = \begin{bmatrix}
+                    1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1
+                \end{bmatrix}, \qquad
+                x = \begin{bmatrix}
+                    0 & 1 & 0 \\ 0 & 0 & 1 \\ 1 & 0 & 0
+                \end{bmatrix}, \qquad
+                y = \begin{bmatrix}
+                    0 & 1 & 0 \\ 1 & 0 & 0 \\ 0 & 0 & 1
+                \end{bmatrix}.
+            \] Calculate \begin{align*}
+                x^2 &= \begin{bmatrix}
+                    0 & 1 & 0 \\ 0 & 0 & 1 \\ 1 & 0 & 0
+                \end{bmatrix} \begin{bmatrix}
+                    0 & 1 & 0 \\ 0 & 0 & 1 \\ 1 & 0 & 0
+                \end{bmatrix} = \begin{bmatrix}
+                    0 & 0 & 1 \\ 
+                    1 & 0 & 0 \\
+                    0 & 1 & 0
+                \end{bmatrix}, \\
+                xy &= \begin{bmatrix}
+                    0 & 1 & 0 \\ 0 & 0 & 1 \\ 1 & 0 & 0
+                \end{bmatrix} \begin{bmatrix}
+                    0 & 1 & 0 \\ 1 & 0 & 0 \\ 0 & 0 & 1
+                \end{bmatrix} = \begin{bmatrix}
+                    1 & 0 & 0 \\
+                    0 & 0 & 1 \\
+                    0 & 1 & 0
+                \end{bmatrix}, \\
+                x^2y &= \begin{bmatrix}
+                    0 & 0 & 1 \\ 
+                    1 & 0 & 0 \\
+                    0 & 1 & 0
+                \end{bmatrix} \begin{bmatrix}
+                    0 & 1 & 0 \\ 1 & 0 & 0 \\ 0 & 0 & 1
+                \end{bmatrix} = \begin{bmatrix}
+                    0 & 0 & 1 \\
+                    0 & 1 & 0 \\
+                    1 & 0 & 0
+                \end{bmatrix}.
+            \end{align*}
+            These six matrices cover all possible permutations of the three rows.
+
+            \item \mbox{}
+            \[
+                \begin{array}{c|cccccc}
+                    \times  & 1     & x     & x^2   & y     & xy    & x^2y  \\\hline 
+                    1       & 1     & x     & x^2   & y     & xy    & x^2y  \\
+                    x       & x     & x^2   & 1     & xy    & x^2y  & y     \\
+                    x^2     & x^2   & 1     & x     & x^2y  & y     & xy    \\
+                    y       & y     & x^2y  & xy    & 1     & x^2   & x     \\
+                    xy      & xy    & y     & x^2y  & x     & 1     & x^2   \\
+                    x^2y    & x^2y  & xy    & y     & x^2   & x     & 1     
+                \end{array}
+            \]
+        \end{enumerate}
+    \end{solution}
+
+    \paragraph{Exercise 2.} \mbox{}
+    \begin{enumerate}
+        \itemsep0em
+        \item Prove that $GL_n(\R)$ is a group.
+        \item Prove that $S_n$ is a group.
+    \end{enumerate}
+    \begin{solution} \mbox{}
+        \begin{enumerate}
+            \item We show that $GL_n(\R)$ is a group under matrix multiplication.
+            Note that if $\det{A} \neq 0$ and $\det{B} \neq 0$, then $\det{AB} =
+            \det{A}\det{B} \neq 0$, so $GL_n(\R)$ is closed under multiplication.
+            This composition is also associative, by virtue of the associativity of
+            matrix multiplication. The identity matrix $\mathbb{I}_n$ serves as the
+            group identity, since $\mathbb{I}_nA = \mathbb{I}_n = A\mathbb{I}_n$ for
+            all $A \in GL_n(\R)$. Finally, all non-singular matrices are invertible,
+            with the inverse also being non-singular, which means that every element
+            $A \in GL_n(\R)$ has an inverse $A^{-1} \in GL_n(\R)$. Thus, $GL_n(\R)$
+            forms a group.
+
+            \item We show that $S_n$ is a group under function composition. Note
+            that each element $S_n$ is a bijection $f\colon \{1, \dots, n\} \to \{1,
+            \dots, n\}$. Since the composition of two bijections is also a
+            bijection, we see that $S_n$ is closed under composition. Also note that
+            function composition is associative, with $(f\circ g) \circ h = g \circ
+            (g \circ h)$. The identity map $\mathbb{I} \in S_n$ which maps each
+            integer to itself serves as the identity element, since $\mathbb{I} \circ f
+            = \mathbb{I} = f \circ \mathbb{I}$ for all $f \in S_n$. Finally, all
+            bijections have an inverse which is also a bijection, hence every
+            element $f \in S_n$ has n inverse $f^{-1} \in S_n$. Thus, $S_n$ forms a
+            group.
+        \end{enumerate}
+    \end{solution}
+
+    \paragraph{Exercise 3.} Let $S$ be a set with an associative law of composition
+    and with an identity element. Prove that the subset of $S$ consisting of
+    invertible elements is a group.
+    \begin{solution}
+        Let $S' \subset S$ be the set of all invertible elements of $S$. Note that
+        by construction, composition in $S'$ is associative. The identity element
+        $e \in S$ must also belong to $S'$, since $ee = e$, hence $e$ is invertible
+        with $e^{-1} = e$. This serves as an identity for all elements in $S'$ as
+        well. Also, all elements in $S'$ are invertible, and their inverses must
+        also be in $S'$, because if $a^{-1} = b$, then $ba^{-1} = e = a^{-1}b$, so
+        $b^{-1} = a$ making $b = a^{-1}$ invertible. Finally, $S'$ is closed under
+        composition, because the product of invertible elements is invertible, with
+        $(ab)^{-1} = b^{-1}a^{-1}$. This means that $S'$ is a group.
+    \end{solution}
+    
+    \paragraph{Exercise 4.} Solve for $y$, given that $xyz^{-1}w = 1$ in a group.
+    \begin{solution}
+        Write \begin{align*}
+            xyz^{-1}w &= 1, \\
+            xyz^{-1}ww^{-1}& = w^{-1}, \\
+            xyz^{-1} &= w^{-1}, \\
+            xyz^{-1}z &= w^{-1}z, \\
+            xy &= w^{-1}z, \\
+            x^{-1}xy &= x^{-1}w^{-1}z, \\
+            y &= x^{-1}w^{-1}z.
+        \end{align*}
+    \end{solution}
+    
+    \paragraph{Exercise 5.} Assume that the equation $xyz = 1$ holds in a group $G$.
+    Does it follow that $yzx = 1$? That $yxz = 1$?
+    \begin{solution}
+        We have $xyz = 1$, so \[
+            1 = x^{-1}x = x^{-1}1x = x^{-1}(xyz)x = (x^{-1}x)yzx = yzx.
+        \] It is not necessarily true that $yxz = 1$. Consider the group $S_3$ as
+        seen in Exercise~1. We have $(xy)(x)(y) = 1$, but $(x)(xy)(y) = x^2y^2 = x^2
+        \neq 1$.
+    \end{solution}
+
+    \paragraph{Exercise 6.} Write out all ways in which one can form a product of
+    four elements $a$, $b$, $c$, $d$ in the given order.
+    \begin{solution}
+        \[
+            (ab)(cd) \quad (a(bc))d \quad ((ab)c)d \quad a(b(cd)) \quad a((bc)d)
+        \] 
+    \end{solution}
+    
+    \paragraph{Exercise 7.} Let $S$ be any set. Prove that the law of composition
+    defined by $ab = a$ is associative.
+    \begin{solution}
+        It is sufficient to show that $(ab)c = a(bc)$ for all $a, b, c \in S$. We
+        have \[
+            (ab)c = ac = a, \qquad a(bc) = a.
+        \] 
+    \end{solution}
+    
+    \paragraph{Exercise 8.} Give an example of $2\times 2$ matrices such that
+    $A^{-1}B \neq BA^{-1}$.
+    \begin{solution}
+        Consider \[
+            A = \begin{bmatrix}
+                1 & -1 \\ 0 & 1
+            \end{bmatrix}, \qquad
+            A^{-1} = \begin{bmatrix}
+                1 & 1 \\ 0 & 1
+            \end{bmatrix}, \qquad
+            B = \begin{bmatrix}
+                1 & 0 \\ 1 & 1 
+            \end{bmatrix}.
+        \] Now, \[
+            A^{-1}B = \begin{bmatrix}
+                2 & 1 \\ 1 & 1
+            \end{bmatrix}, \qquad
+            BA^{-1} = \begin{bmatrix}
+                1 & 1 \\ 1 & 2
+            \end{bmatrix}.
+        \] 
+    \end{solution}
+
+    \paragraph{Exercise 9.} Show that if $ab = a$ in a group, then $b = 1$, and if
+    $ab = 1$, then $b = a^{-1}$.
+    \begin{solution}
+        If $ab = a$, then \[
+           b = 1b = (a^{-1}a)b = a^{-1}(ab) = a^{-1}a = 1. 
+        \] If $ab = 1$, then it suffices to show that $ba = 1$ to conclude $b =
+        a^{-1}$. \[
+           ba = 1(ba) = (a^{-1}a)(ba) = a^{-1}(ab)a = a^{-1}a = 1.
+        \] 
+    \end{solution}
+
+    \paragraph{Exercise 10.} Let $a$, $b$ be elements of a group $G$. Show that the
+    equation $ax = b$ has a unique solution in G.
+    \begin{solution}
+        The existence of a solution is guaranteed by the inverse of $a$, namely
+        $a^{-1} \in G$ such that $aa^{-1} = 1 = a^{-1}a$. Thus, $(a^{-1})ax =
+        a^{-1}b$, hence $x = a^{-1}b$.
+
+        Now suppose that $ax = ay = b$. Again, left multiplying by $a^{-1}$ gives $x
+        = y$, guaranteeing that the solution is unique.
+    \end{solution}
+    
+    \paragraph{Exercise 11.} Let $G$ be a group, with multiplicative notation. We
+    define an \textit{opposite group} $G^\circ$ with law of composition $a \circ b$
+    as follows: The underlying set is the same as $G$, but the law of composition is
+    the opposite; that is, we define $a \circ b = ba$. Prove that this defines a group.
+    \begin{solution}
+        The composition in $G^\circ$ is closed, since $a\circ b = ba \in G$ and
+        $G^\circ$ shares all elements with $G$. Note that composition is associative
+        in $G$, so for all $a, b, c \in G$, \[
+            c(ba) = (cb)a, \qquad (a\circ b) \circ c = a \circ (b\circ c).
+        \] This shows that composition is associative in $G^\circ$. Next, the
+        identity in $G$ serves as the identity in $G^\circ$, since for any $a \in
+        G^\circ$, \[
+            1\circ a = a1 = a = 1a = a\circ 1.
+        \] Each $a \in G$ has an inverse $a^{-1} \in G$, and this guarantees that
+        each $a \in G^\circ$ has the same inverse $a^{-1} \in G^\circ$, since \[
+            a\circ a^{-1} = a^{-1}a = 1 = aa^{-1} = a^{-1}\circ a. 
+        \] Thus, $G^\circ$ is a group.
+    \end{solution}
+
+
+    \section{Subgroups}
+    \paragraph{Exercise 1.} Determine the elements of the cyclic group generated by
+    the matrix $\begin{bmatrix}
+        1 & 1 \\ -1 & 0
+    \end{bmatrix}$ explicitly.
+    \begin{solution}
+        Set \[
+            1 = \begin{bmatrix}
+                1 & 0 \\ 0 & 1
+            \end{bmatrix}, \qquad
+            x = \begin{bmatrix}
+                1 & 1 \\ -1 & 0
+            \end{bmatrix}, \qquad
+            x^2 = \begin{bmatrix}
+                0 & 1 \\ -1 & -1
+            \end{bmatrix}, \qquad
+            x^3 = \begin{bmatrix}
+                -1 & 0 \\ 0 & -1
+            \end{bmatrix}, \qquad
+        \] \[
+            x^4 = \begin{bmatrix}
+                -1 & -1 \\ 1 & 0
+            \end{bmatrix}, \qquad
+            x^5 = \begin{bmatrix}
+                0 & -1 \\ 1 & 1
+            \end{bmatrix}, \qquad
+            x^6 = \begin{bmatrix}
+                1 & 0 \\ 0 & 1
+            \end{bmatrix}. 
+        \] Therefore, the elements of the cyclic group generated by $x$ are the
+        matrices $\{1, x, x^2, x^3, x^4, x^5\}$. This group has order 6.
+    \end{solution}
+
+    \paragraph{Exercise 2.} Let $a$, $b$ be elements of a group $G$. Assume that $a$
+    has order 5 and that $a^3b = ba^3$. Prove that $ab = ba$.
+    \begin{solution}
+        We have $a^5 = 1$, therefore \[
+            ab = 1ab = a^5ab = a^6b = a^3(a^3b) = a^3(ba^3),
+        \] \[
+            ba = ba1 = baa^5 = ba^6 = (ba^3)a^3 = (a^3b)a^3.
+        \] These are equal by associativity.
+    \end{solution}
+    
+    \paragraph{Exercise 3.} Which of the following are subgroups?
+    \begin{enumerate}
+        \itemsep0em
+        \item $GL_n(\R) \subset GL_n(\C)$.
+        \item $\{1, -1\} \subset \R^\times$.
+        \item The set of positive integers in $\Z^+$.
+        \item The set of positive reals in $\R^\times$.
+        \item The set of all matrices $\begin{bmatrix}
+            a & 0 \\ 0 & 0
+        \end{bmatrix}$, with $a \neq 0$, in $GL_2(\R)$.
+    \end{enumerate}
+    \begin{solution}
+        It can be shown that (a), (b), (d) meet the axioms required for a subgroup.
+        In (c), the additive identity $0$ is missing. In (e), the identity matrix
+        $\mathbb{I}_2$ is missing (and none of the described matrices belong to
+        $GL_2(\R)$ in any case).
+    \end{solution}
+
+    \paragraph{Exercise 4.} Prove that a non-empty subset $H$ of a group $G$ is a
+    subgroup if for all $x, y \in H$ the element $xy^{-1}$ is also in $H$.
+    \begin{solution}
+        Since $H$ is non-empty, we can pick $x \in H$. Then, $x \in H$ and $x \in
+        H$, so $x x^{-1} = 1 \in H$. Next, for any $x \in H$, we have $1 \in H$ and 
+        $x \in H$, so $1x^{-1} = x^{-1} \in H$. Finally, for any $x, y \in H$, we
+        have $x \in H$ and $y^{-1} \in H$, so $x(y^{-1})^{-1} = xy \in H$. This
+        means that $H \subseteq G$ is a subgroup.
+    \end{solution}
+    
+    \paragraph{Exercise 5.} An $n$th root of unity is a complex number $z$ such that
+    $z^n = 1$. Prove that the $n$th roots of unity form a cyclic subgroup of
+    $\C^\times$ of order $n$.
+    \begin{solution}
+        Let the set of all $n$th roots of unity be $G$.
+        First we have $1^n = 1$ so $1 \in G$. Next, if $x, y \in G$, then $x^n = y^n
+        = 1$, so $(xy)^n = 1$, thus $xy \in G$. Finally, note that $x^{-1} = x^{n -
+        1}$, because $x x^{n - 1} = x^{n - 1}x = x^n = 1$. To see that this is a
+        cyclic subgroup, set $x = e^{1\pi i / n}$, then $G = \{1, x, \dots, x^{n -
+        1}\}$. There are no other elements of $G$, since the polynomial $x^n - 1$
+        has at most $n$ distinct complex roots.
+    \end{solution}
+
+    \paragraph{Exercise 6.} \mbox{}
+    \begin{enumerate}
+        \itemsep0em
+        \item Find generators and relations analogous to (2.13) for the Klein four
+        group.
+        \item Find all subgroups of the Klein four group.
+    \end{enumerate}
+    \begin{solution} \mbox{}
+        \begin{enumerate}
+            \item Write \[
+                e = \begin{bmatrix}
+                    1 & 0 \\ 0 & 1
+                \end{bmatrix}, \qquad
+                x = \begin{bmatrix}
+                    1 & 0 \\ 0 & -1
+                \end{bmatrix}, \qquad
+                y = \begin{bmatrix}
+                    -1 & 0 \\ 0 & 1
+                \end{bmatrix}, \qquad
+                z = \begin{bmatrix}
+                    -1 & 0 \\ 0 & -1
+                \end{bmatrix}.
+            \] It can be verified that $x^2 = y^2 = z^2 = e$. Also, $xy = z = yx$,
+            $xz = y = zx$, $yz = x = zy$. Thus, this group is abelian. Also, any
+            two of $x, y, z$ suffice to generate the third, and hence the entire
+            Klein four group. Any one is not sufficient, since every element has
+            order $2$.
+
+            \item The Klein four group has two trivial subgroups, namely $\{e\}$ and
+            the whole group. Also, each of $\{e, x\}$, $\{e, y\}$, $\{e, z\}$ form a
+            subgroup, since all of them contain the identity $e$, each element is
+            their own inverse, and multiplication is closed. This gives a total of
+            $5$ subgroups.
+        \end{enumerate}
+    \end{solution}
+
+    \paragraph{Exercise 7.} Let $a$ and $b$ be integers.
+    \begin{enumerate}
+        \itemsep0em
+        \item Prove that the subset $a\Z + b\Z$ is a subgroup of $\Z^+$.
+        \item Prove that $a$ and $b + 7a$ generate the subgroup $a\Z + b\Z$.
+    \end{enumerate}
+    \begin{solution} \mbox{}
+        \begin{enumerate}
+            \item We have \[
+                G = a\Z + b\Z = \{ar + bs: r, s \in \Z\}.
+            \] First note that $0 = a0 + b0 \in G$. Next, for any two elements $x, y
+            \in G$, we can write $x = ar_1 + bs_1$ and $y = ar_2 + bs_2$ for
+            integers $r_1, r_2, s_1, s_2$, so the sum $x + y = a(r_1 + r_2) + b(s_1
+            + s_2) \in G$. Finally, for $x = ar + bs \in G$, we have $-x = a(-r) +
+            b(-s) \in G$, with $x + (-x) = 0$. This proves that $G$ is a subgroup of
+            $\Z^+$.
+
+            \item Let $H$ be the group generated by $a$ and $b + 7a$. Note that $a$,
+            $a + a = 2a$, $2a + a = 3a$, \dots, $6a + a = 7a$, \dots, $(n - 1)a + a
+            = na$ are all in $H$. Similarly, if $na \in H$, then $-na \in H$ for all
+            positive integers $n$. Thus, $0 = a + (-a) \in H$, and $b = (b + 7a) +
+            (-7a) \in H$. We repeat this process with $b$ to see that $nb \in H$ for
+            all integers $n$. Thus, $ar + bs \in H$ for all integers $r$ and $s$,
+            which means that $H \subseteq a\Z + b\Z$. On the other hand, for all $ar
+            + bs \in a\Z + b\Z$, we have $ar + bs = a(1 - 7s) + (b + 7a)s \in H$, so
+            $a\Z + b\Z \subseteq H$. This establishes that $H = a\Z + b\Z$.
+        \end{enumerate}
+    \end{solution}
+
+    \paragraph{Exercise 8.} Make a multiplication table for the quaternion group H.
+    \begin{solution}
+        Use $i^2 = j^2 = k^2 = ijk = -1$, $ij = k$, $ji = i^3j = -k$.
+        \[
+            \begin{array}{c|cccccccc}
+                \times  & 1  & i  & j  & k  & -1 & -i & -j & -k \\\hline
+                1       & 1  & i  & j  & k  & -1 & -i & -j & -k \\
+                i       & i  & -1 & k  & -j & -i & 1  & -k & j  \\
+                j       & j  & -k & -1 & i  & -j & k  & 1  & -i \\
+                k       & k  & j  & -i & -1 & -k & -j & i  & 1  \\
+                1       & -1 & -i & -j & -k &  1 &  i &  j &  k \\
+                i       & -i & 1  & -k &  j &  i & -1 &  k & -j \\
+                j       & -j & k  & 1  & -i &  j & -k & -1 &  i \\
+                k       & -k & -j & i  & 1  &  k &  j & -i & -1 \\
+            \end{array} 
+        \] 
+    \end{solution}
+
+    \paragraph{Exercise 9.} Let $H$ be the subgroup generated by two elements $a$,
+    $b$ of a group $G$. Prove that if $ab = ba$, then $H$ is an abelian group.
+    \begin{solution}
+        Since $H$ is generated by $a$ and $b$, every element in $H$ can be written
+        in the form \[
+            a^{m_1}b^{n_1}a^{m_2}b^{n_2} \dots a^{m_k}b^{n_k},
+        \] where $k \in \N$ and $m_i, n_i \in \Z$. First, we claim that every such
+        element can be simplified to the form $a^mb^m$. To see this, note that since
+        $a$ and $b$ commute, we have $ab(b^{-1}a^{-1}) = 1 = ba(a^{-1}b^{-1}) =
+        ab(a^{-1}b^{-1})$, so cancelling $ab$ gives $b^{-1}a^{-1} = a^{-1}b^{-1}$.
+        Now, $ab = ba$ means $a = bab^{-1}$. Thus, for any positive power $a^m =
+        ba^mb^{-1}$, and $a^{-m} = ba^{-m}b^{-1}$. Thus, $a^mb^n = ba^mb^{-1}b^n =
+        ba^mb^{n - 1}$. Repeating this another $n - 1$ times gives $a^mb^n =
+        b^na^{m}$ for positive $n$. For negative $n$, simply note that $a^m =
+        b^{n}(b^{-n}a^m) = b^n(a^mb^{-n})$, hence $a^mb^n = b^na^m$.
+        This means that the powers $a^m$ and $b^n$ commute. Thus, we can commute all
+        powers $b^{n_i}$ in our general expression to the right, yielding \[
+            a^{m_1 + \dots + m_k}b^{n_1 + \dots n_k} = a^mb^n. 
+        \] Now pick arbitrary $x, y \in H$, and write $x = a^mb^n$, $y = a^rb^s$.
+        Then, \[
+            xy = a^mb^na^rb^s = a^m(b^n a^r)b^s = a^ma^r b^nb^s = a^{m + r}b^{n +
+            s}, 
+        \] \[
+            yx = a^rb^sa^mb^n = a^r(b^s a^m)b^n = a^ra^m b^sb^n = a^{m + r}b^{n +
+            s}. 
+        \] This gives $xy = yx$ for all $x, y \in H$, which means that $H$ is abelian.
+    \end{solution}
+
+    \paragraph{Exercise 10.} \mbox{}
+    \begin{enumerate}
+        \itemsep0em 
+        \item Assume that an element $x$ of a group has order $rs$. Find the order
+        of $x^r$.
+        \item Assuming that $x$ has arbitrary order $n$, what is the order of $x^r$?
+    \end{enumerate}
+    \begin{solution}
+    \begin{enumerate}
+        We first show that if $x$ has order $n$ and $x^m = 1$, then $n$ divides $m$.
+        Note that $n \leq m$, since $n$ is chosen to be the least natural number
+        satisfying $x^{n} = 1$. Thus, use Euclid's Division Lemma to write $m = nq +
+        r$ for integers $q > 0$, $0 \leq r < n$. We now have \[
+            1 = x^{m} = x^{nq + r} = (x^{n})^qx^r = x^r.
+        \] Since $r < n$, the only possibility is $r = 0$, hence $m = nq$, proving
+        that $n$ divides $m$.
+
+        \item Note that $(x^{r})^s = x^{rs} = 1$, so the order of $x^r$ divides $s$.
+        Also, if the order of $x^r$ were less then $s$, say $t < s$, then we would
+        have $(x^r)^t = 1$, so $x^{rt} = 1$, with $rt < rs$. This would contradict
+        the fact that $rs$ is the order of $x$. Thus, the order of $x^r$ must be
+        $s$.
+
+        \item We claim that the order of $x^r$ is $m = n / \gcd(n, r)$. Write
+        $\gcd(n, r) = d$, so $rm = nr / d = nk$ for some integer $k$ since $d$
+        divides $r$.
+        Thus, \[
+            (x^r)^m = x^{rm} = x^{nk} = (x^n)^k = 1.
+        \] Suppose instead that the order of $x^r$ is some $m' < m$. Then $m'$ divides
+        $m$, so $m = m'q$ for some integer $q > 1$. We have $1 = (x^r)^{m'} = x^{rm'}$, 
+        therefore $n$ must divide $rm'$, say $rm' = nk'$ for some integer $k'$. Now,
+        $nk = rm = rm'q = nk'q$, so $k = k'q$. Recall that $n = md$, $r = kd$. Now
+        we have found $n = m'(qd)$, $r = k'(qd)$, thus $qd$ divides both $n$ and
+        $r$. However, $qd > d$, which contradicts the fact that any common factor of
+        $n$ and $r$ must divide $d$. Hence, the order of $x^r$ must be $m = n / d$.
+    \end{enumerate}
+    \end{solution}
+    
+    \paragraph{Exercise 11.} Prove that in any group the orders of $ab$ and $ba$ are
+    equal.
+    \begin{solution}
+        Note that $ab = (b^{-1}b)ab = b^{-1}(ba)b$. It is easily seen by induction that
+        $(ab)^n = b^{-1}(ba)^nb$ for all positive integers $n$. Therefore, if the
+        order of $ab$ is some integer $n$, $1 = (ab)^n = b^{-1}(ba)^nb$,
+        hence $(ba)^n = bb^{-1} = 1$. Thus, the order of $ba$ divides $n$. A similar
+        argument using $(ba)^n = a^{-1}(ab)^na$ shows that if the order of $ba$ is
+        $n'$, then the order of $ab$ divides $n'$. This forces $n = n'$ when either
+        $ab$ or $ba$ has finite order.
+
+        Note that we shown that if the order of $ab$ is finite, then the order of
+        $ba$ must be finite, and vice versa. This immediately implies that if the
+        order of any one of $ab$ or $ba$ is infinite, then the order of the other
+        must also be infinite. Hence, the order of $ab$ and $ba$ are always the same
+        in any group.
+    \end{solution}
+    
+    \paragraph{Exercise 12.} Describe all groups $G$ which contain no proper
+    subgroup.
+    \begin{solution}
+        Suppose that $G$ has no proper subgroups, i.e.\ the only subgroups of $G$
+        are $\{1\}$ and $G$. The trivial group of one element $\{1\}$ satisfies
+        this. Otherwise, let $G$ be a non-trivial group, with $x \in G$ such that $x
+        \neq 1$. Then, the group generated by $x$, i.e.\ the group of elements
+        $\{\dots x^{-2}, x^{-1}, 1, x, x^2, \dots\}$ is a subgroup of $G$. Since $G$
+        has no proper subgroups, this forces this to be equal to $G$ itself.
+        Thus, $G$ is a cyclic group.
+
+        Suppose that $G$ has finite order, and furthermore suppose that this order
+        is a composite number $ab$, where $a \geq b > 1$. Then, it can be shown that
+        the group generated by $x^a$ is a proper subgroup of $G$, with $x$ not in
+        this subgroup. Therefore, the order of $G$ must be prime.
+
+        Suppose that $G$ has infinite order. Now note that the group generated by
+        $x^2$ is a proper subgroup of $G$, with $x$ not in this subgroup. This is a
+        contradiction, thus the order of $G$ cannot be infinite.
+    \end{solution}
+
+    \paragraph{Exercise 13.} Prove that every subgroup of a cyclic group is cyclic.
+    \begin{solution}
+        Let $G$ be a cyclic group generated by the single element $x$. If $x = 1$,
+        then $G = \{1\}$, which has no proper subgroups. Otherwise, note that we can
+        enumerate \[
+            G = \{\dots x^{-2}, x^{-1}, 1, x, x^2, \dots\}.
+        \] Let $H$ be a proper subgroup of $G$, and let $y \in H$ be a non-trivial
+        element. This means that $y \in G$, so we can write $y = x^k$ for some
+        positive integer $k$ (note that if $k$ were negative, then $y^{-1} = x^{-k}
+        \in H$ too, so use $-k$ instead). Suppose that we have chosen $w = x^m \in
+        H$ such that $m$ is the smallest possible, positive choice. This means that
+        $m \leq k$, so using Euclid's Division Lemma, write $k = mq + r$ for $0 \leq
+        r < m$. Thus, $x^{k} = (x^m)^q x^r = w^qx^r$, or $x^r = w^{-q}x^k$. Now, $w
+        \in H$ means that all powers of $w$ are also in $H$, hence $w^{-q} \in H$.
+        This means that $w^{-q}x^k = x^r \in H$. However, recall that $m$ was the
+        smallest positive integer such that $x^m \in H$, which forces $r = 0$. Thus,
+        for any $y \in H$, we see that $y = w^q$. This means that $H$ is generated
+        by the element $w = x^m$, which makes it a cyclic subgroup.
+    \end{solution}
+
+    \paragraph{Exercise 14.} Let $G$ be a cyclic group of order $n$, and let $r$ be
+    an integer dividing $n$. Prove that $G$ contains exactly one subgroup of order
+    $r$.
+    \begin{solution}
+        Let $G$ be generated by the element $x$, so $G = \{1, x, \dots, x^{n -
+        1}\}$, and let $H$ be a subgroup of order $r$, where $n = mr$ for some
+        positive integer $m$.  We claim that the subgroup generated by $x^m$ is the
+        only subgroup of order $r$. Note from the previous exercise that $H$ must be
+        cyclic, and thus is generated by some element $x^k \in G$. Thus, if we pick
+        $y \in H$, we must have $y = x^{kq}$ for some non-negative integer $q$.
+        Since $H$ has order $r$, we require $y^r = 1$, i.e.\ $x^{kqr} = 1$.
+        Now, $x$ has order $n$, hence $n$ must divide $kqr$, say $np = kqr$ for some
+        positive integer $p$. Substitute $n = mr$, so $mp = kq$. Thus, $y = x^{kq} =
+        x^{mp}$, so every element of $H$ is a power of $x^m$. In other words, $H
+        \subseteq \{1, x^m, \dots, x^{m(r - 1)}\}$. Also note that $H$ contains
+        exactly $r$ elements, and the right hand side also contains $r$ elements
+        since all $x^{mp}$ are distinct. Thus, we must have an equality, which means
+        that the only subgroup of $G$ with order $r$ is the one generated by $x^m$.
+    \end{solution}
+
+    \paragraph{Exercise 15.} \mbox{}
+    \begin{enumerate}
+        \itemsep0em
+        \item In the definition of subgroup, the identity element in $H$ is required
+        to be the identity of $G$. One might require only that $H$ have an identity
+        element, not that it is the same as the identity in $G$. Show that if $H$
+        has an identity at all, then it is the identity in $G$, so this definition
+        would be equivalent to the one given.
+        \item Show the analogous thing for inverses.
+    \end{enumerate}
+    \begin{solution} \mbox{}
+    \begin{enumerate}
+        \item Let $1$ be the identity element in $G$, and suppose that $1'$ is the
+        identity element in $H$. Now, both $1' \in G$ and $1 \in G$, and we demand \[
+            1x = x\text{ for all } x\in G, \qquad 1'x = x \text{ for all } x\in H.
+        \] Combining these, we want \[
+            1 = 1'1 = 1',
+        \] so the identity in $H$ must be the same as the identity in $G$.
+        
+        \item Let $x \in H$, let $y$ be its inverse in $G$, and let $w$ be its
+        inverse in $H$. We want \[
+            xy = 1 = yx, \qquad xw = 1 = wx.
+        \] Thus, \[
+            y = y1 = y(xw) = (yx)w = 1w = w,
+        \] so the inverse of $x$ in $G$ must be the same in $H$.
+    \end{enumerate}
+    \end{solution}
+
+    \paragraph{Exercise 16.} \mbox{}
+    \begin{enumerate}
+        \itemsep0em
+        \item Let $G$ be a cyclic group of order $6$. How many of its elements
+        generate $G$?
+        \item Answer the same question for cyclic groups of order $5$, $8$, and
+        $10$.
+        \item How many elements of a cyclic group of order $n$ are generators for
+        that group?
+    \end{enumerate}
+    \begin{solution} \mbox{}
+    \begin{enumerate}
+        \item Let $G = \{1, x, \dots, x^5\}$. Then, the elements $x$ and $x^5$ (2
+        elements) generate $G$. Note that $x^2$ and $x^4$ only generate $\{1, x^2,
+        x^4\}$, and $x^3$ only generates $\{1, x^3\}$.
+
+        \item Using the same notation as before, a cyclic group of order $5$ is
+        generated by $x$, $x^2$, $x^3$, $x^4$ (4 elements). A cyclic group of order
+        $8$ is generated by $x$, $x^3$, $x^5$, $x^7$ (4 elements). A cyclic group of
+        order $10$ is generated by $x$, $x^3$, $x^7$, $x^9$ (4 elements).
+
+        \item A cyclic group of order $n$ is generated by $\phi(n)$ elements, where
+        the Euler totient function $\phi$ counts the number of positive integers
+        less than $n$ which are co-prime with $n$. This is because a cyclic group
+        $G = \{1, \dots, x^{n - 1}\}$ of order $n$ is generated by $x^r$ precisely
+        when $\gcd(n, r) = 1$. Recall from Exercise~14 that if the order of a cyclic
+        group $G$ is $n = ab$, then $x^a$ generates a subgroup of order $b$. Thus,
+        when $b > 1$, the generated subgroup is a proper subgroup. This means that
+        whenever $r$ divides $n$, $x^r$ cannot generate the entire group $G$.
+        Similarly, if $r$ and $n$ share a common factor $m > 1$, then $m$ divides
+        $n$ so $x^m$ cannot generate $G$, and neither can $x^r = x^{mk}$ for some
+        integer $k$. This only leaves those $x^r$ such that $r$ and $n$ have no
+        common factors. If so, then we can choose integers $p$ and $q$ such that
+        $\gcd(n, r) = 1 = np + rq$, so $x^1 = x^{np + rq} = (x^r)^q$. Thus, any
+        element $x^m \in G$ can be expressed as $(x^r)^{mq}$, so $x^r$ does indeed
+        generate $G$.
+    \end{enumerate}
+    \end{solution}
+
+    \paragraph{Exercise 17.} Prove that a group in which every element except the
+    identity has order 2 is abelian.
+    \begin{solution}
+        Let $G$ be such a group, and let $x, y \in G$. Note that since every element
+        has order $2$, we have $x^2 = y^2 = (xy)^2 = (yx)^2 = 1$. Also, \[
+            (xy)(yx) = xy^2x = x^2 = 1, \qquad (xy)(xy) = (xy)^2 = 1.
+        \] Equating and cancelling $xy$ from the left gives $yx = xy$, showing that
+        $G$ is abelian.
+    \end{solution} 
+    
+    \paragraph{Exercise 18.} \mbox{}
+    \begin{enumerate}
+        \itemsep0em
+        \item Prove that the elementary matrices of the first and third types
+        suffice to generate $GL_n(\R)$.
+        \item The \textit{special linear group} $SL_n(\R)$ is the set of $n \times
+        n$ matrices whose determinant is $1$. Show that $SL_n(\R)$ is a subgroup of
+        $GL_n(\R)$.
+        \item Use row reduction to prove that the elementary matrices of the first
+        type generate $SL_n(\R)$. Do the $2 \times 2$ case first.
+    \end{enumerate}
+    \begin{solution} \mbox{}
+    \begin{enumerate}
+        \item First, we show that elementary matrices of the second type, i.e.\
+        permutation matrices, can be generated by elementary matrices of the other
+        two types, i.e.\ row adding and scaling. In order to transpose rows $i$ and
+        $j$, consider the following row operations: $R_i \to R_i + R_j$, $R_j \to
+        R_i - R_j$, $R_i \to R_i - R_j$. This can be achieved using only row
+        addition and scaling, hence any transposition matrix can be obtained by
+        applying this to the identity matrix. Furthermore, any permutation matrix
+        can be expressed as the product of transposition matrices. This proves that
+        elementary matrices of the first and third types generate those of the
+        second type. Now, if $A$ is invertible, then the process of Gauss-Jordan
+        elimination can be applied to reduce it to an identity matrix, hence
+        $E_1\cdots E_kA = \mathbb{I}$. This means that $A = E_k^{-1} \cdots
+        E_1^{-1}$, hence any matrix in $GL_n(\R)$ can be expressed as a product of
+        elementary matrices. In addition, any product of elementary matrices is
+        invertible, which means that the elementary matrices generate $GL_n(\R)$.
+
+        \item First note that the identity matrix $\mathbb{I}_n \in SL_n(\R)$, since
+        it has determinant $1$. Using $\det{AB} = \det{A}\det{B}$, conclude that if
+        $A, B \in SL_n(\R)$, then $AB \in SL_n(\R)$. Finally, use $\det{A^{-1}} = 1 /
+        \det{A}$ to conclude that if $A \in SL_n(\R)$, then $A^{-1} \in SL_n(\R)$.
+        This proves that $SL_n(\R)$ is a subgroup of $GL_n(\R)$.
+
+        \item Consider an arbitrary matrix \[
+           \begin{bmatrix}
+               a & b \\ c & d
+           \end{bmatrix} \in SL_2(\R),
+        \] where $ad - bc = 1$. Perform $R_1 \to R_1 - (b / d)R_2$ to get \[
+            \begin{bmatrix}
+                a - bc / d & 0 \\ c & d
+            \end{bmatrix}.
+        \] Note that $a - bc / d = 1 / d$. Next, perform $R_2 \to R_2 - cdR_1$. \[
+            \begin{bmatrix}
+                1 / d & 0 \\ 0 & d
+            \end{bmatrix}.
+        \] Note that if $d = 0$, we could have performed analogous operations using
+        $b$ instead (both $b = d = 0$ is not possible, since we require $ad - bc =
+        1$). Now, perform $R_2 \to R_2 + dR_1$. \[
+            \begin{bmatrix}
+                1 / d & 0 \\ 1 & d
+            \end{bmatrix}.
+        \] Next, perform $R_1 \to R_1 - R_2 / d$. \[
+            \begin{bmatrix}
+                0 & -1 \\ 1 & d
+            \end{bmatrix}.
+        \] Next, perform $R_2 \to R_2 + dR_1$. \[
+            \begin{bmatrix}
+                0 & -1 \\ 1 & 0
+            \end{bmatrix}.
+        \] Finally, perform $R_1 \to R_1 + R_2$, $R_2 \to R_2 - R_1$, $R_1 \to R_1 +
+        R_2$. \[
+            \begin{bmatrix}
+                1 & 0 \\ 0 & 1
+            \end{bmatrix}.
+        \] Thus, we have shown that any matrix in $SL_2(\R)$ can be generated using
+        only elementary matrices of the first type.
+
+        Analogously, consider some $A = [a_{ij}] \in SL_n(\R)$. We have already seen
+        that $R_i \to R_i + R_j$, $R_j \to R_j - R_i$, $R_i \to R_i + R_j$
+        transposes rows with a change of sign. Thus, transpose rows such that let
+        $a_{11} \neq 0$ (if all $a_{1j} = 0$, then $\det{A} = 0$). Performing $R_i
+        \to R_i - (a_{i1} / a_{11})R_1$ for all $i = 2, \dots, n$ makes sure that
+        all elements except the first one are zero. \[
+            \begin{bmatrix}
+                a_{11} & a_{12} & \cdots & a_{1n} \\
+                0      & a_{22} - a_{12}a_{21} / a_{11} & \cdots & a_{2n} -
+                a_{1n}a_{21} / a_{11} \\
+                \vdots & \vdots & \ddots & \vdots \\
+                0 & a_{n2} - a_{12}a_{n1} / a_{11} & \cdots & a_{nn} - a_{1n}a_{n1} / a_{11}
+            \end{bmatrix}.
+        \] Now, note that the determinant of $A$ is $a_{11} \det{M_{11}} \neq 0$, which
+        means that the first column of $M_{11}$ contains a non-zero element. We thus
+        repeat the above process, transposing rows if necessary $n$ times, finally
+        giving us an upper triangular matrix. Relabel the entries as $b_{ij}$. \[
+            \begin{bmatrix}
+                b_{11} & b_{12} & \cdots & b_{1n} \\
+                0 & b_{22} & \cdots & b_{2n} \\
+                \vdots & \vdots & \ddots & \vdots \\
+                0 & 0 & \cdots & b_{nn}
+            \end{bmatrix}.
+        \] Note that $b_{11} b_{22} \dots b_{nn} = 1$. Thus, for each $j = n, n-1,
+        \dots, 2$, perform $R_i \to R_i - (b_{ij} / b_{jj})R_j$ for all $i = 1,
+        \dots, j - 1$. This yields a diagonal matrix, \[
+            \begin{bmatrix}
+                b_{11} & 0 & \cdots & 0\\
+                0 & b_{22} & \cdots & 0\\
+                \vdots & \vdots & \ddots & \vdots \\
+                0 & 0 & \cdots & b_{nn}
+            \end{bmatrix}.
+        \] Now, look at the upper left $2\times 2$ block. Performing $R_2 \to R_2 +
+        R_1 / b_{11}$, $R_1 \to R_1 - b_{11}R_2$, $R_2 \to R_2 + R_1 / b_{11}$
+        yields \[
+            \begin{bmatrix}
+                0 & -b_{11}b_{22} & \cdots & 0\\
+                1 & 0 & \cdots & 0\\
+                \vdots & \vdots & \ddots & \vdots \\
+                0 & 0 & \cdots & b_{nn}
+            \end{bmatrix}.
+        \] Performing our transposition with sign change yields \[
+            \begin{bmatrix}
+                1 & 0 & \cdots & 0\\
+                0 & b_{11}b_{22} & \cdots & 0\\
+                \vdots & \vdots & \ddots & \vdots \\
+                0 & 0 & \cdots & b_{nn}
+            \end{bmatrix}.
+        \] Repeating this down the line, we see that $b_{11}b_{22} \dots b_{nn}$
+        bunches up at the lower right, but this is just $1$, so we get the identity
+        matrix. Thus, $SL_{n}(\R)$ is generated by elementary matrices of the first
+        type.
+    \end{enumerate}
+
+    \paragraph{Exercise 19.} Determine the number of elements of order $2$ in the
+    symmetric group $S_4$.
+    \begin{solution}
+        Use the notation $(a\; b\; c\; d)$ to denote a cycle $a\rightsquigarrow b$,
+        $b \rightsquigarrow c$, $c \rightsquigarrow d$, $d \rightsquigarrow a$.
+        Note that any transposition of two elements has order $2$, hence all
+        two-cycles \[
+            (1\;2)\quad (1\;3)\quad (1\;4)\quad (2\;3)\quad (2\;4)\quad (3\;4)
+        \] have order $2$. If any two of them commute, then their product will also
+        be of order $2$ (Exercise~11), therefore the products of disjoint two-cycles
+        \[
+            (1\;2)(3\;4)\quad (1\;3)(2\;4)\quad (1\;4)(2\;3)
+        \] also have order $2$. This gives a total of $9$ elements.
+    \end{solution}
+
+    \paragraph{Exercise 20.} \mbox{}
+    \begin{enumerate}
+        \itemsep0em
+        \item Let $a$, $b$ be elements of an abelian group of orders $m$, $n$
+        respectively. What can you say about the order of their product $ab$?
+        \item Show by example that the product of elements of finite order in a
+        non-abelian group need not have finite order.
+    \end{enumerate}
+    \begin{solution} \mbox{}
+    \begin{enumerate}
+        \item Set $d = \gcd(m, n)$. The order of $ab$ will always divide $k = mn / d$.
+        Note that in an abelian group, \[
+            (ab)^k = a^kb^k = a^{mn / d}b^{mn / d} = (a^m)^{n / d} (b^n)^{m / d} =
+            1.
+        \] Note that the order of $ab$ is not always $k$. Consider $a = b = i \in
+        \C^\times$, and note that the orders of $a$ and $b$ are $4$. However, the
+        order of their product $i^2 = -1$ is $2$.
+
+        \item Select the following elements from $GL_2(\R)$. \[
+            A = \begin{bmatrix}
+                -1 & 1 \\ 0 & 1
+            \end{bmatrix}, \qquad
+            B = \begin{bmatrix}
+                -1 & -1 \\ 0 & 1
+            \end{bmatrix}.
+        \] Note that $A^2 = B^2 = \mathbb{I}_2$. However, \[
+            AB = \begin{bmatrix}
+                1 & 2 \\ 0 & 1
+            \end{bmatrix}, \qquad
+            (AB)^2 = \begin{bmatrix}
+                1 & 4 \\ 0 & 1
+            \end{bmatrix}, \qquad
+            (AB)^3 = \begin{bmatrix}
+                1 & 6 \\ 0 & 1
+            \end{bmatrix}, \qquad
+            \dots
+        \] In general for $n > 0$, we have \[
+            (AB)^n = \begin{bmatrix}
+                1 & 2n \\ 0 & 1
+            \end{bmatrix}.
+        \] Thus, $AB$ has infinite order.
+    \end{enumerate}
+    \end{solution}
+
+    \paragraph{Exercise 21.} Prove that the set of elements of finite order in an
+    abelian group is a subgroup.
+    \begin{solution}
+        Let $G$ be abelian, and let $H$ be the set of all elements with finite
+        order. Note that $1 \in H$. Also, if $a$ and $b$ have finite order, so does
+        $ab$ by the previous exercise. Finally, if $a$ has finite order $n$, then
+        $a^n = 1$ forces $1 = a^{-n} = (a^{-1})^n$, hence $a^{-1}$ has finite order
+        $n$. Thus, $H$ is a subgroup of $G$.
+    \end{solution}
+
+    \paragraph{Exercise 22.} Prove that the greatest common divisor of $a$ and $b$,
+    as defined in the text, can be obtained by factoring $a$ and $b$ into primes and
+    collecting the common factors.
+    \begin{solution}
+        Suppose that \[
+            a = p_1^{\alpha_1}p_2^{\alpha_2} \cdots p_n^{\alpha_n} \cdots, \qquad
+            b = p_1^{\beta_1}p_2^{\beta_2} \cdots p_n^{\beta_n} \cdots,
+        \] where $p_i$ are the prime numbers, and $\alpha_i, \beta_i$ are
+        non-negative integers.  We have $\alpha_{i \geq M} = \beta_{i \geq N} = 0$
+        eventually, for $a$ and $b$ to be finite. Setting $\gamma_i =
+        \min\{\alpha_i\, \beta_i\}$, we claim that the greatest common factor of $a$
+        and $b$ is \[
+            d = p_1^{\gamma_1}p_2^{\gamma_2} \cdots p_n^{\gamma_n} \cdots.
+        \] First note that $d$ divides both $a$ and $b$, therefore $d$ must divide
+        $d' = \gcd(a, b)$. Write \[
+            d' / d = p_1^{\gamma_1'}p_2^{\gamma_2'}\cdots p_n^{\gamma_n'}\cdots.
+        \] Suppose that $\gamma_k' > 0$ for some $k$. This means that the power of
+        $p_k$ in $d'$ is $\gamma_k + \gamma_k' > \min\{\alpha_k, \beta_k\}$. This
+        means that $d'$ cannot divide one or more of $a$ and $b$, so $\gamma_i' = 0$
+        for all $i$. Thus, $d = d'$.
+    \end{solution}
+    
     
 
 

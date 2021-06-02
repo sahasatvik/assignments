@@ -3,6 +3,7 @@
 \usepackage[T1]{fontenc}
 \usepackage{geometry}
 \usepackage{amsmath, amssymb, amsthm}
+\usepackage{bm}
 \usepackage[scr]{rsfso}
 \usepackage{xcolor}
 \usepackage{fancyhdr}
@@ -17,14 +18,22 @@
 \cfoot{\thepage}
 \renewcommand{\chaptermark}[1]{\markboth{#1}{}}
 
-\renewcommand{\labelenumi}{(\alph{enumi})}
-\renewcommand{\labelenumii}{(\roman{enumii})}
+% \renewcommand{\labelenumi}{(\alph{enumi})}
+\renewcommand{\labelenumi}{(\roman{enumi})}
 
 \def\C{\mathbb{C}}
 \def\R{\mathbb{R}}
 \def\Q{\mathbb{Q}}
 \def\Z{\mathbb{Z}}
 \def\N{\mathbb{N}}
+
+\renewcommand\vec\boldsymbol
+\def\vx{\vec{x}}
+\def\vy{\vec{y}}
+\def\vz{\vec{z}}
+\def\ve{\vec{e}}
+
+\newcommand\norm[1]{\left\lVert#1\right\rVert}
 
 \theoremstyle{remark}
 \newtheorem*{remark}{Remark}
@@ -211,5 +220,359 @@
     icosahedron. Try to spot as many symmetries of these solids as you can.
     
     
+
+    \chapter{Axioms}
+
+    \paragraph{Exercise 2.1} Compare the symmetry of a snow crystal with that of the
+    hexagonal plate in Figure~1.2.
+
+    \paragraph{Exercise 2.2} Show that the set of positive real numbers form a group
+    under multiplication.
+    \begin{solution}
+        First note that multiplication of real numbers is associative, which means
+        that $(xy)z = x(yz)$ for all $x, y, z \in \R^+$. Next, $1x = x = x1$ for all
+        $x \in \R^+$, so $1 \in \R^+$ serves as our identity element. Finally, every
+        positive real number $x$ has a multiplicative inverse $1 / x \in \R^+$,
+        which satisfies $x(1 / x) = 1 = (1 / x) x$.
+    \end{solution}
+
+    \paragraph{Exercise 2.3} Which of the following collections of $2\times 2$
+    matrices with real entries form groups under matrix multiplication?
+    \begin{enumerate}
+        \itemsep0em
+        \item Those of the form $\begin{bmatrix}
+            a & b \\ b & c
+        \end{bmatrix}$ for which $ac \neq b^2$.
+        \item Those of the form $\begin{bmatrix}
+            a & b \\ c & a
+        \end{bmatrix}$ for which $a^2 \neq bc$.
+        \item Those of the form $\begin{bmatrix}
+            a & b \\ 0 & c
+        \end{bmatrix}$ for which $ac \neq 0$.
+        \item Those which have non-zero determinant and whose entries are integers.
+    \end{enumerate}
+    \begin{solution} \mbox{}
+        \begin{enumerate}
+            \item Matrices of this form are not closed under multiplication.
+            Consider \[
+                \begin{bmatrix}
+                    1 & 1 \\ 1 & 0
+                \end{bmatrix}\begin{bmatrix}
+                    1 & 1 \\ 1 & 2
+                \end{bmatrix} = \begin{bmatrix}
+                    2 & 3 \\ 1 & 1
+                \end{bmatrix}.
+            \] 
+            \item Matrices of this form are not closed under multiplication.
+            Consider \[
+                \begin{bmatrix}
+                    1 & 1 \\ 2 & 1
+                \end{bmatrix}\begin{bmatrix}
+                    1 & 1 \\ 3 & 1
+                \end{bmatrix} = \begin{bmatrix}
+                    4 & 2 \\ 5 & 3
+                \end{bmatrix}.
+            \] 
+            \item First, note that multiplication of such matrices is closed, \[
+                \begin{bmatrix}
+                    a_1 & b_1 \\ 0 & c_1
+                \end{bmatrix}\begin{bmatrix}
+                    a_2 & b_2 \\ 0 & c_2
+                \end{bmatrix} = \begin{bmatrix}
+                    a_1a_2  & a_1b_2 + b_1c_2 \\ 0 & c_1c_2
+                \end{bmatrix}.
+            \] Next, the identity matrix $\mathbb{I}_2$ satisfies the role of the
+            multiplicative identity, with $\mathbb{I}_2M = \mathbb{I}_2 =
+            M\mathbb{I}_2$ for all such matrices $M$. Finally, we have \[
+                \begin{bmatrix}
+                    1 / a & -b / ac \\ 0 & 1 / c
+                \end{bmatrix} \begin{bmatrix}
+                    a & b \\ 0 & c
+                \end{bmatrix} = \begin{bmatrix}
+                    1 & 0 \\ 0 & 1    
+                \end{bmatrix} = \begin{bmatrix}
+                    a & b \\ 0 & c
+                \end{bmatrix} \begin{bmatrix}
+                    1 / a & -b / ac \\ 0 & 1 / c
+                \end{bmatrix},
+            \] so all such matrices have a multiplicative inverse. This means that
+            this collection of matrices forms a group under matrix multiplication.
+
+            \item Note that all the collection of all matrices must have
+            $\mathbb{I}_2$ as the identity element. However, not all matrices have a
+            multiplicative inverse in this collection. For example, \[
+                \begin{bmatrix}
+                    2 & 0 \\ 0 & 2
+                \end{bmatrix} \begin{bmatrix}
+                    1 / 2 & 0 \\ 0 & 1 / 2
+                \end{bmatrix} = \begin{bmatrix}
+                    1 & 0 \\ 0 & 1
+                \end{bmatrix}.
+            \]
+        \end{enumerate}
+    \end{solution}
+
+    \paragraph{Exercise 2.4} Let $f$ be a similarity of the plane. Show that $f$ is a
+    bijection and that the inverse function $f^{-1}$ is also a similarity. Verify
+    that the collection of all similarities of the plane forms a group under
+    composition of functions.
+    \begin{solution}
+        Any similarity $f\colon \R^2 \to \R^2$ of the plane can be written in the
+        form \[
+            f(\vx) = \lambda A\vx + \vx_0,
+        \] where $A \in O_2(\R)$ is an orthogonal matrix, $\vx_0 \in \R^2$ is a
+        translation vector and $\lambda \in \R\setminus\{0\}$ is a scaling factor.
+        The fact that all such $\lambda A$ are invertible guarantees that $f$ is a
+        bijection. This immediately gives \[
+            f^{-1}(\vx) = \frac{1}{\lambda}A^{-1}\vx - \frac{1}{\lambda}A^{-1}\vx_0,
+        \] which is also a similarity of the plane. \\
+
+        A similarity of the plane must send lines to lines, in such a way that
+        all lengths scale in the same proportion. This means that \[
+            f(\vx + \mu(\vy - \vx)) = f(\vx) + \mu (f(\vy) - f(\vx))
+        \] for all scalars $\mu$. Set $f(\vec{0}) = \vx_0$, and set $g = f - \vx_0$.
+        Then we have $g(\vec{0}) = \vec{0}$ and \[
+            g(\vx + \mu(\vy - \vx)) = g(\vx) + \mu(g(\vy) - g(\vx)).
+        \] Setting $\vx = \vec{0}$, next $\mu = 1 / 2$ gives \[
+            g(\mu\vy) = \mu g(\vy), \qquad g(\vx + \vy) = g(\vx + \vy).
+        \] Thus, $g$ is a linear transformation, and is thus of the form \[
+            g(\vx) = B\vx
+        \] for some $2\times 2$ matrix $B$. Note that if $B$ were not of full rank,
+        then its null space must contain some non-zero vector $\vec{v}$ such that
+        $B\vec{v} = \vec{0}$. This cannot be allowed for a similarity of the plane,
+        since such a transformation would map the entire line along $\vec{v}$ onto
+        the single point at the origin. Thus, $B$ must be invertible making $g$ a
+        linear bijection, and this is sufficient to show that $f(\vx) = B\vx +
+        \vx_0$ is a bijection.
+
+        To show that $B = \lambda A$ for some $A \in O_2(\R)$, note that we require
+        $f$ and $g$ to scale all line segments equally. Thus, $\norm{g(\vx)} =
+        \norm{g(\vy)}$ whenever $\norm{\vx} = \norm{\vy}$. Set $\lambda =
+        \norm{g(\hat{\vec{v}})}$ for all unit vectors $\hat{\vec{v}}$, and noting
+        that $\lambda \neq 0$, set $A = B / \lambda$. Thus, $\norm{g(\vec{v})} =
+        \norm{g(v\hat{\vec{v}})} = v \norm{g(\hat{\vec{v}})} =
+        \norm{\vec{v}}\lambda$ for all vectors $\vec{v}$. Hence, $\norm{A\vec{v}} =
+        \norm{\vec{v}}$ for all vectors $\vec{v}$, so the transformation represented
+        by $A$ is an isometry. This can be shown to force $A \in O_2(\R)$.
+    \end{solution}
+
+    \paragraph{Exercise 2.5} A function from the plane to itself which preserves the
+    distance between any two points is called an \textit{isometry}. Prove that an
+    isometry must be a bijection and check that the collection of all isometries of
+    the plane forms a group under composition of functions.
+    \begin{solution}
+        Again, an isometry $f\colon \R^2 \to \R^2$ of the plane must be of the form
+        \[
+            f(\vx) = A\vx + \vx_0,
+        \] where $A \in O_2(\R)$ is an orthogonal matrix and $\vx_0 \in \R^2$ is a
+        translation vector. The invertibility of $A$ guarantees that $f$ is a
+        bijection.
+    \end{solution}
+    
+    \paragraph{Exercise 2.6} Show that the collection of all rotations of the plane
+    about a fixed point $P$ forms a group under composition of functions. Is the
+    same true of the set of all reflections in lines which pass through $P$? What
+    happens if we take all the rotations and all the reflections?
+
+    \paragraph{Exercise 2.7} Let $x$ and $y$ be elements of a group $G$. Prove that
+    $G$ contains $w$, $z$ which satisfy $wx = y$ and $xz = y$, and show that these
+    elements are unique.
+    \begin{solution}
+        Note that $x$ has an inverse $x^{-1} \in G$. Set $w = yx^{-1}$ and $z =
+        x^{-1}y$, whence \[
+            wx = (yx^{-1})x = y(x^{-1}x) = ye = y, \qquad
+            xz = x(x^{-1}y) = (xx^{-1})y = ey = y.
+        \] Next, suppose that $w_1x = w_2x = y$. Right multiplying by $x^{-1}$ gives
+        $w_1 = w_2 = yx^{-1}$. Similarly, if $xz_1 = xz_2 = y$, left multiplying my
+        $x^{-1}$ gives $z_1 = z_2 = x^{-1}y$.
+    \end{solution}
+
+    \paragraph{Exercise 2.8} If $x$ and $y$ are elements of a group, prove that
+    $(xy)^{-1} = y^{-1}x^{-1}$.
+    \begin{solution}
+        Using the associativity of multiplication, \[
+            (xy)(y^{-1}x^{-1}) = x(yy^{-1})x = xex^{-1} = x x^{-1} = e,
+        \]\[
+            (y^{-1}x^{-1})(xy) = y^{-1}(x^{-1}x)y = y^{-1}ey = y^{-1}y = e.
+        \] 
+    \end{solution}
+
+
+    \chapter{Numbers}
+
+    \paragraph{Exercise 3.1} Show that each of the following collections of numbers
+    forms a group under addition.
+    \begin{enumerate}
+        \itemsep0em
+        \item The even integers.
+        \item All real numbers of the form $a + b\sqrt{2}$ where $a, b \in \Z$.
+        \item All real numbers of the form $a + b\sqrt{2}$ where $a, b \in \Q$.
+        \item All complex numbers of the form $a + bi$ where $a, b \in \Z$.
+    \end{enumerate}
+
+    \paragraph{Exercise 3.2} Write $\Q(\sqrt{2})$ for the set described in
+    Exercise~3.1~(iii). Given a non-zero element $a + b\sqrt{2}$, express $1 / (a +
+    b\sqrt{2})$ in the form $c + d\sqrt{2}$ where $c, d \in \Q$. Prove that
+    multiplication makes $\Q(\sqrt{2}) - \{0\}$ into a group.
+    \begin{solution}
+        For all non-zero elements $a + b\sqrt{2}$, write \[
+            \frac{1}{a + b\sqrt{2}} = \frac{a - b\sqrt{2}}{(a + b\sqrt{2})(a -
+            b\sqrt{2})} \,=\, \frac{a}{a^2 - 2b^2} + \frac{-b}{a^2 - 2b^2}\sqrt{2}.
+        \] Note that $a^2 \neq 2b^2$ for any $a, b \in \Q$ other than $a = b = 0$,
+        because of the irrationality of $\sqrt{2}$.
+
+        Note that multiplication of real numbers is associative, and that $1 = 1 +
+        0\sqrt{2}$ serves as an identity element since $1(a + b\sqrt{2}) = a +
+        b\sqrt{2} = (a + b\sqrt{2})1$. Furthermore, every non-zero element $a + b\sqrt{2}$
+        has a multiplicative inverse as indicated above. This proves that
+        $\Q(\sqrt{2}) - \{0\}$ is a group under multiplication.
+    \end{solution}
+    
+    \paragraph{Exercise 3.3} Let $n$ be a positive integer and let $G$ consist of
+    all those complex numbers $z$ which satisfy $z^n = 1$. Show that $G$ forms a
+    group under multiplication of complex numbers.
+    \begin{solution}
+        Note that multiplication of complex numbers is associative, and that $1$
+        serves as an identity element. Multiplication is closed since if $x^n = y^n
+        = 1$, $(xy)^n = 1$. Given a complex number $z \in G$, we have its
+        multiplicative inverse $z^{n - 1}$ since $zz^{n - 1} = 1 = z^{n - 1}z$.
+        Thus, $G$ is a group under multiplication of complex numbers.
+    \end{solution}
+
+    \paragraph{Exercise 3.4} Vary $n$ in the previous exercise and check that the
+    union of all these groups \[
+        \bigcup_{n = 1}^\infty \{z \in \C : z^n = 1\}
+    \] is also a group under multiplication of complex numbers.
+    \begin{solution}
+        Let $G$ be the set described above. Note that multiplication of complex
+        numbers is associative, and that $1$ serves as the identity element.
+        Furthermore, if $z \in G$, then $z^n = 1$ for some $n \in \N$, which means
+        that $z^{n - 1}$ is its multiplicative inverse. Thus, $G$ is a group under
+        multiplication of complex numbers.
+    \end{solution}
+
+    \paragraph{Exercise 3.5} Let $n$ be a positive integer. Prove that \[
+        (x ._{n} y) ._{n} z = x ._{n} (y ._{n} z)
+    \] for all $x, y, z \in \Z$.
+    \begin{solution}
+        Using Euclid's Division Lemma, find integers $0\leq a, b, c \leq n - 1$ such
+        that \[
+            x = pn + a, \qquad y = qn + b, \qquad z = rn + c
+        \] for integers $p, q, r$. This gives \[
+            xy = (pn + a)(qn + b) = pqn + pbn + qan + ab = (pq + pb + qa)n + ab,
+        \] so $x ._{n} y = xy \pmod{n} = ab$. Similarly, $y._{n}z = xy \pmod{n} =
+        bc$. Thus, \[
+            (x ._{n} y) ._{n} z = ab ._{n} z = ab (rn + c) \pmod{n} = (abr)n + abc
+            \pmod{n} = abc,
+        \] and \[
+            x ._{n} (y ._{n} z) = x ._{n} bc = (pn + a)bc \pmod{n} = (pbc)n + abc
+            \pmod{n} = abc.
+        \] 
+    \end{solution}
+    
+    \paragraph{Exercise 3.6} Verify that each of the sets \begin{align*}
+        &\{1, 3, 7, 9, 11, 13, 17, 19\} \\
+        &\{1, 3, 7, 9\} \\
+        &\{1, 9, 13, 17\}
+    \end{align*} forms a group under multiplication modulo $20$.
+    \begin{solution}
+        Verifying that a set forms a group comes down to furnishing a complete
+        multiplication table, and ensuring that every row and column contains
+        every element exactly once.
+        \begin{enumerate}
+            \item \mbox{}
+            \begin{center}
+                \begin{tabular}{r|rrrrrrrr}
+                    ._{20}  &  1 &  3 &  7 &  9 & 11 & 13 & 17 & 19 \\\hline
+                    1       &  1 &  3 &  7 &  9 & 11 & 13 & 17 & 19 \\
+                    3       &  3 &  9 &  1 &  7 & 13 & 19 & 11 & 17 \\
+                    7       &  7 &  1 &  9 &  3 & 17 & 11 & 19 & 13 \\
+                    9       &  9 &  7 &  3 &  1 & 19 & 17 & 13 & 11 \\
+                    11      & 11 & 13 & 17 & 19 &  1 &  3 &  7 &  9 \\
+                    13      & 13 & 19 & 11 & 17 &  3 &  9 &  1 &  7 \\
+                    17      & 17 & 11 & 19 & 13 &  7 &  1 &  9 &  3 \\
+                    19      & 19 & 17 & 13 & 11 &  9 &  7 &  3 &  1
+                \end{tabular}
+            \end{center}
+            \item Note that $3^{-1} = 7$, $7^{-1} = 3$, $9^{-1} = 9$.
+            \item Note that $9^{-1} = 9$, $13^{-1} = 17$, $17^{-1} = 13$.
+        \end{enumerate}
+    \end{solution}
+    
+    \paragraph{Exercise 3.7} Which of the following sets form groups under
+    multiplication modulo $14$? \begin{align*}
+        &\{1, 3, 5\} && \{1, 3, 5, 7\} \\
+        &\{1, 7, 13\} && \{1, 9, 11, 13\}
+    \end{align*}
+    \begin{solution}
+        Note that associativity of multiplication modulo $14$ holds in all cases,
+        and $1$ serves as the identity element. The set $\{1, 3, 5\}$ forms a group
+        since $3^{-1} = 5$, $5^{-1} = 3$. Similarly, the set $\{1, 9, 11, 13\}$
+        forms a group since $9^{-1} = 11$, $11^{-1} = 9$, $13^{-1} = 13$.
+        Neither set containing $7$ forms a group, since $7$ has no inverse modulo
+        $14$; if $7x \pmod{14} = 1$, then $7x = 14n + 1$ for some integer $n$, which
+        is impossible since $7x$ is a positive multiple of $7$ but $14n + 1$ is not.
+    \end{solution}
+    
+    \paragraph{Exercise 3.8} Show that if a subset of $\{1, 2, \dots, 21\}$ contains
+    an even number, or contains the number $11$, then it cannot form a group under
+    multiplication modulo $22$.
+    \begin{solution}
+        Suppose that $n = 2m \in G \subseteq \{1, 2, \dots, 21\}$ is even. For $G$ to
+        be a group, it must contain the multiplicative inverse of $n$, i.e.\ some
+        element $x \in G$ such that $nx \pmod{22} = 1$. This means that $nx = 22k +
+        1$ for some integer $k$, which is impossible since $nx = 2mx$ is even but
+        $22k + 1 = 2(11k) + 1$ is odd.
+
+        Similarly, suppose that $11 \in G$. Again, $G$ must contain a multiplicative inverse of
+        $11$, i.e.\ some $x \in G$ such that $11x \pmod{22} = 1$. This means that
+        $11x = 22k + 1$ for some integer $k$, which is impossible since $11x$ is a
+        multiple of $11$ but $22k + 1 = 11(2k) + 1$ is not.
+    \end{solution}
+
+    \paragraph{Exercise 3.9} Let $p$ be a prime number and let $x$ be an integer
+    which satisfies $1 \leq x \leq p - 1$. Show that none of $x$, $2x$, \dots, $(p -
+    1)x$ is a multiple of $p$. Deduce the existence of an integer $z$ such that $1
+    \leq z \leq (p - 1)$ and $xz \pmod{p} = 1$.
+    \begin{solution}
+        Let $1 \leq x \leq p - 1$ and let $1 \leq k \leq p - 1$ such that $kx$ is a
+        multiple of $p$, i.e.\ $kx = mp$ for some positive integer $m$. Since $p
+        \,|\, mp$, we must have $p \,|\, kx$. However, neither $x$ nor $k$ can
+        contain $p$ as a prime factor, since they are strictly less than $p$. This
+        means that the prime factorisation of $kx$ contains no factors of $p$; no
+        factors of $p$ can be introduced by the multiplication of factors from $k$
+        and $x$ since $p$ is prime. This is a contradiction, which means that none
+        of $x$, $2x$, \dots, $(p - 1)x$ is a multiple of $p$.
+
+        Consider the elements $1$, $x$, $2x$, \dots, $(p - 1)x$. We have $p$ of
+        them, but there are $p - 1$ possible remainders modulo $p$, which means that
+        two of these elements share the same remainder modulo $p$ by the pigeon-hole
+        principle. If we have $mx = nx \pmod{p}$ for $m > n$ and $1 \leq m, n \leq p
+        - 1$, then $(m - n)x = 0 \pmod{p}$. This is not possible since $1 \leq m - n
+        \leq p - 1$ so $(m - n)$ cannot be a multiple of $p$. The only remaining
+        possibility is that $zx = 1 \pmod{p}$ for some $1 \leq z \leq p - 1$.
+    \end{solution}
+    
+    \paragraph{Exercise 3.10} Use the results of Exercises~3.5 and 3.9 to verify
+    that multiplication modulo $n$ makes $\{1, 2, \dots, n - 1\}$ into a group if
+    $n$ is prime. What goes wrong when $n$ is not a prime number?
+    \begin{solution}
+        The result of Exercise~3.5 guarantees associativity of multiplication modulo
+        $n$, and it is clear that $1$ serves as an identity element. The result of
+        Exercise~3.9 guarantees that every element $x \in \{1, 2, \dots, n - 1\}$
+        has a corresponding multiplicative inverse $x^{-1}$, with $x x^{-1} = 1
+        \pmod{n}$ when $n$ is prime. Thus, this set forms a group.
+
+        When $n$ is not a prime number, certain elements fail to have multiplicative
+        inverses as seen in Exercises~3.7 and 3.8. Specifically, the factors of $n$
+        not equal to $1$ or $n$ do not have multiplicative inverses. This is clear
+        since if $n = mk$ for $m, k \neq 1$, and $mx = 1 \pmod{n}$ for some $1 \leq
+        x \leq n - 1$, then $mx = n\ell + 1 = mk\ell + 1$ for some integer $\ell$,
+        which is impossible since $mx$ is a multiple of $m$ but $mk\ell + 1 =
+        m(k\ell) + 1$ is not.
+    \end{solution}
+    
+    
+
 \end{document}
 % vim: set tabstop=4 shiftwidth=4 softtabstop=4:
