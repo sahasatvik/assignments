@@ -1,0 +1,133 @@
+\documentclass[11pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{bm}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{hyperref}
+
+\geometry{a4paper, margin=1in, headheight=14pt}
+
+\def\C{\mathbb{C}}
+\def\R{\mathbb{R}}
+\def\Q{\mathbb{Q}}
+\def\Z{\mathbb{Z}}
+\def\N{\mathbb{N}}
+
+\renewcommand\vec\boldsymbol
+\def\vx{\vec{x}}
+\def\vy{\vec{y}}
+\def\vz{\vec{z}}
+\def\ve{\vec{e}}
+
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\newtheorem*{example}{Example}
+\newtheorem*{solution}{Solution}
+
+\title{
+    \Large\textsc{Summer Programme 2021} \\
+    \vspace{10pt}
+    \huge Equivalence of metric spaces \\
+}
+\author{
+    \large Satvik Saha%
+    % \thanks{Email: \tt ss19ms154@iiserkol.ac.in}
+    \\\textsc{\small 19MS154}
+}
+\date{\normalsize
+    \textit{Indian Institute of Science Education and Research, Kolkata, \\
+    Mohanpur, West Bengal, 741246, India.} \\
+    % \vspace{10pt}
+    % \today
+}
+
+
+\begin{document}
+    \maketitle
+    
+    We claim that the following metrics on $\R^n$ are equivalent, in that they
+    induce the same topology on $\R^n$.
+    \begin{enumerate}
+        \item $d_1(\vx, \vy) = |\vx - \vy|$, the Euclidean metric.
+        \item $d_2(\vx, \vy) = \max_i\{|x_i - y_i|\}$, the Chebyshev metric.
+        \item $d_3(\vx, \vy) = |\vx - \vy| / (1 + |\vx - \vy|)$.
+    \end{enumerate}
+    Label the metric spaces $M_i = (\R^n, d_i)$, and their respective collections of
+    open sets $\tau_i$. Denote $B^i_r(\vx)$ to be the open ball in $M_i$, centred at
+    $\vx$ with radius $r$, i.e.\ the collection of points $\vy \in M_i$ such that
+    $d_i(\vx, \vy) < r$.
+
+    \begin{itemize}
+    \item[($\tau_1 \subseteq \tau_2$)] 
+    Consider an open ball $B^1_r(\vx) \subseteq M_1$. Any point $\vy$ in this ball
+    satisfies $d_1(\vy, \vx) = |\vy - \vx| < r$.
+    Let $d_1(\vy, \vx) = r - \epsilon$ for some $\epsilon > 0$, and set $\epsilon' =
+    \epsilon / \sqrt{n}$. For all $\vz$ in the open ball $B^2_{\epsilon'}(\vy)$,
+    i.e.\ such that $d_2(\vz, \vy) < \epsilon'$, we have \[
+        d_1(\vz, \vy)^2 = \sum_i (z_i - y_i)^2 \leq n\max\{|z_i - y_i|\}^2 =
+        nd_2(\vz, \vy)^2 < \epsilon^2.
+    \] The triangle inequality gives \[
+        d_1(\vz, \vx) \leq d_1(\vz, \vy) + d_1(\vy, \vx) < \epsilon + r - \epsilon = r,
+    \] hence $\vz \in B^1_r(\vx)$.
+
+    Thus, the open ball $B_y := B^2_{\epsilon'}(\vy) \subseteq M_2$ is contained
+    within the open ball $B := B^1_r(\vx) \subseteq M_1$.  Take the union of $B_y$
+    for all $\vy \in B$, and note that this is precisely equal to $B$. This is
+    because any element of $B$ is the center of some $B_y$, and every element in the
+    union is contained within some $B_y$, which in turn is contained within $B$.
+    Hence, any open ball in $M_1$ is open in $M_2$. Since every open set in a metric
+    space can be written as the union of open balls, we see that every open set in
+    $M_1$ is an open set in $M_2$.
+
+    \item[($\tau_2 \subseteq \tau_1$)]
+    Consider an open ball $B^2_r(\vx) \subseteq M_2$. Any point $\vy$ in this ball
+    satisfies $d_2(\vy, \vx) = \max_i\{|y_i - x_i|\} < r$. Let $d_2(\vy, \vx) = r -
+    \epsilon$ for some $\epsilon > 0$. For all $\vz$ in the open ball
+    $B^1_{\epsilon}(\vy)$, we have \[
+        d_1(\vz, \vy)^2 = \sum_i (z_i - y_i)^2 < \epsilon ^2,
+    \] hence $|z_i - y_i| < \epsilon$ for all $i$.  Specifically, \[
+        d_2(\vz, \vy) = \max_i\{|z_i - y_i|\} < \epsilon.
+    \] The triangle inequality further gives \[
+        d_2(\vz, \vx) \leq d_2(\vz, \vy) + d_2(\vy, \vx) < \epsilon + r - \epsilon =
+        r.
+    \]
+
+    Thus, the open ball $B_y := B^1_\epsilon(\vy) \subseteq M_1$ is contained within
+    the open ball $B := B^2_r(\vx)$. Like before, the union of all such $B_y$ for
+    $\vy \in B$ yields precisely $B$, so any open ball in $M_2$ is an open set in
+    $M_1$. It follows that any open set in $M_2$ is an open set in $M_1$.
+    
+    \item[$(\tau_1 = \tau_3)$] Note that for any open ball $B^1_r(\vx) \subseteq
+    M_1$, any point $\vy$ in this ball satisfies $d_1(\vy, \vx) < r$, which is
+    equivalent to $d_3(\vy, \vx) = d_1(\vy, \vx) / (1 + d_1(\vy, \vx)) < r / (1 + r)
+    := r'$. Thus, $B^1_r(\vx) = B^3_{r'}(\vx)$.
+
+    Similarly, for any open ball $B^3_r(\vx) \subseteq M_3$, if $r \geq 1$ then
+    $B^3_r(\vx) = \R^n$ (every point $\vy \in \R^n$ satisfies $d_3(\vy,
+    \vx) < 1$ because $s / (1 + s) < 1$ for all non-negative reals $s$). Otherwise,
+    we can find $r' \geq 0$ such that $r' / (1 + r') = r$, specifically choose $r' =
+    r / (1 - r)$. Again, this gives $B^3_r(\vx) = B^1_{r'}(\vx)$.
+
+    Thus, every open ball in $M_1$ is an open ball in $M_3$, and vice versa. It
+    follows that a set is open in $M_1$ if and only if it is open in $M_3$.
+
+    Note that we have not used any specific property of $d_1$ here, merely its
+    relation with $d_3$. This means that more generally, the open sets in the metric
+    space $(\R^n, d)$ are identical to those in the metric space $(\R^n, d')$, where
+    $d'(x, y) = d(x, y) / (1 + d(x, y))$.  \\~\\
+
+    We have used that fact that for all real numbers, \[
+        0 \leq x < y \;\Longleftrightarrow\; 0 \leq \frac{x}{1 + x} \leq \frac{y}{1
+        + y}.
+    \] This is equivalent to stating that the function $f\colon [0, \infty) \to [0,
+    1)$ defined by $x \mapsto x / (1 + x)$ is strictly increasing,
+    which is evident by \[
+        f(x) = \frac{x}{1 + x} = \frac{x + 1 - 1}{1 + x} = 1 - \frac{1}{1 + x}.
+    \] The map $x \mapsto 1 / (1 + x)$ is strictly decreasing, hence $x \mapsto 1 -
+    1 / (1 + x)$ is strictly increasing.
+    \end{itemize}
+    
+    Together, we have $\tau_1 = \tau_2 = \tau_3$, which means that all three metrics
+    induce the same topology on $\R^n$.
+\end{document}
