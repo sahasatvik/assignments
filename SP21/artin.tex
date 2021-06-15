@@ -29,6 +29,8 @@
 
 \DeclareMathOperator\sign{sign}
 \DeclareMathOperator\lcm{lcm}
+\DeclareMathOperator\aut{Aut}
+\DeclareMathOperator\im{im}
 
 \renewcommand\vec\boldsymbol
 \def\vx{\vec{x}}
@@ -639,7 +641,10 @@
             c_{ij} = \sum_{k = 1}^n a_{ik}b_{kj}.
         \] Now, $a_{ik} = 0$ for all $i < k$ and $b_{ki} = 0$ for all $k < j$. Thus,
         when $i < j$, we have $c_{ij} = 0$, hence $AB$ is also lower triangular.
-        Again for upper triangular matrices $X$, $Y$, use $(XY)^t = Y^tX^t$.
+        Furthermore, if all the diagonal entries $a_{ii} = b_{ii} = 1$, then the
+        only term in the sum is $c_{ii} = a_{ii}b_{ii} = 1$, so the diagonal entries
+        of $C$ are all $1$.  Again for upper triangular matrices $X$, $Y$, use
+        $(XY)^t = Y^tX^t$.
 
         \begin{enumerate}
             \itemsep0em
@@ -1556,9 +1561,964 @@
         means that $d'$ cannot divide one or more of $a$ and $b$, so $\gamma_i' = 0$
         for all $i$. Thus, $d = d'$.
     \end{solution}
-    
+
     
 
+    \section{Isomorphisms}
+
+    \paragraph{Exercise 1.} Prove that the additive group $\R^+$ of real numbers is
+    isomorphic to the multiplicative group $P$ of positive reals.
+    \begin{solution}
+        We construct the isomorphism $\varphi\colon \R^+ \to P$, $x \mapsto e^x$.
+        This is a homomorphism, because $\phi(0) = e^0 = 1$, and \[
+            \varphi(x + y) = e^{x + y} = e^xe^y = \varphi(x)\,\varphi(y).
+        \] This map is injective because for any $\varphi(x) = \varphi(y)$, we have
+        $e^x = e^y$ or $e^{x - y} = 0$, hence $x - y = 0$ or $x = y$. This map is
+        also surjective because $\varphi^{-1}(x) = \log(x)$ is well defined for all
+        positive reals. Hence, $\varphi$ is a bijection between $\R^+$ and $P$
+        respecting their laws of composition, which proves that they are isomorphic.
+    \end{solution}
+    
+    \paragraph{Exercise 2.} Prove that the elements $ab$ and $ba$ are conjugate
+    elements in a group.
+    \begin{solution}
+        Note that \[
+            ab = (ab)aa^{-1} = a(ba)a^{-1}, \qquad
+            ba = (ba)bb^{-1} = b(ab)b^{-1}.
+        \] 
+    \end{solution}
+    
+    \paragraph{Exercise 3.} Let $a$, $b$ be elements of a group $G$, and let $a' =
+    bab^{-1}$. Prove that $a = a'$ is and only if $a$ and $b$ commute.
+    \begin{solution}
+        First, suppose that $a = a'$. This means that $a = b a ab^{-1}$, or $ab =
+        ba$, hence $a$ and $b$ commute.
+
+        Next, suppose that $a$ and $b$ commute. Then, $a' = ba a b^{-1} = abb^{-1} =
+        a$.
+    \end{solution}
+
+    \paragraph{Exercise 4.} \mbox{}
+    \begin{enumerate}
+        \itemsep0em
+        \item Let $b' = aba^{-1}$. Prove that $b'^n = a b^na^{-1}$.
+        \item Prove that if $aba^{-1} = b^2$, then $a^3ba^{-3} = b^8$.
+    \end{enumerate}
+    \begin{solution} \mbox{}
+    \begin{enumerate}
+        \item The claim for $n \geq 1$ follows from induction. Note that the case $n
+        = 1$ is true, and if it holds for some $k$ with $b'^k = ab^ka^{-1}$, then \[
+            b'^{k + 1} = b'^k' = (ab^ka^{-1})(aba^{-1}) = ab^k(a^{-1}a)ba^{-1} =
+            ab^{k + 1}a^{-1},
+        \] thus proving the claim for all $n \geq 1$.
+        Now, for any $n \leq -1$, note that $b^{-n} = ab^{-n}a^{-1}$ by the first
+        part, hence taking inverses gives $b^n = ab^{n}a^{-1}$. This establishes the
+        formula for all $n \in \Z$.
+
+        \item We have been given the rule $ab = b^2a$. Thus, \[
+            a^3ba^{-3} = a^2(ab)a^{-3} = a^2(b^2a)a^{-3} = a^2b^2a^{-2}.
+        \] Proceeding in this fashion, this is the same as \[
+            a(ab)ba^{-2} = a(b^2a)ba^{-2} = ab^2(ab)a^{-2} = ab^2(b^2a)a^{-2} =
+            ab^4a^{-1}.
+        \] Finally, this is the same as \[
+            (ab)b^3a^{-1} = (b^2a)b^3a^{-1} = b^2(ab)b^2a^{-1} = b^2(b^2a)b^2a^{-1} =
+        \] \[
+            b^4(ab)ba^{-1} = b^4(b^2a)ba^{-1} = b^6(ab)a^{-1} = b^6(b^2a)a^{-1} =
+            b^8.
+        \] 
+
+
+        Alternatively, note that $b^2 = aba^{-1}$, so \[
+            b^8 = (b^2)^4 = ab^4a^{-1}, \qquad
+            b^4 = (b^2)^2 = ab^2a^{-1}, \qquad
+            b^2 = (b^2)^1 = aba^{-1}.
+        \] Substituting each of these into the equation above gives \[
+            b^8 = ab^4a^{-1} = a(ab^2a^{-1})a^{-1} = a(a(aba^{-1})a^{-1})a^{-1} =
+            a^3ba^{-3}.
+        \] 
+    \end{enumerate}
+    \end{solution}
+    
+    \paragraph{Exercise 5.} Let $\varphi\colon G \to G'$ be an isomorphism of groups.
+    Prove that the inverse function $\varphi^{-1}$ is also an isomorphism.
+    \begin{solution}
+        First note that $\varphi$ is a bijection, which means that $\varphi^{-1}$ is
+        also a bijection. Let $a', b' \in G'$ be arbitrary. We set $a =
+        \varphi^{-1}(a')$, $b = \varphi^{-1}(b')$. Since \[
+            \varphi(ab) = \varphi(a)\varphi(b),
+        \] we have \[
+            \varphi(ab) = a'b', \qquad \varphi^{-1}(a') \varphi^{-1}(b') = ab =
+            \varphi^{-1}(a'b').
+        \] This proves that $\varphi^{-1}\colon G' \to G$ is an isomorphism.
+    \end{solution}
+
+    \paragraph{Exercise 6.} Let $\varphi\colon G \to G'$ be an isomorphism of groups,
+    let $x, y \in G$ and let $x' = \varphi(x)$ and $y' = \varphi(y)$.
+    \begin{enumerate}
+        \itemsep0em
+        \item Prove that the orders of $x$ and $x'$ are equal.
+        \item Prove that if $xyx = yxy$, then $x'y'x' = y'x'y'$.
+        \item Prove that $\varphi(x^{-1}) = x'^{-1}$.
+    \end{enumerate}
+    \begin{solution}
+        Recall that if $e$ and $e'$ are the identity elements in $G$ and $G'$
+        respectively, then $\varphi(e) = e'$. This is because $ee = e$, so
+        $\varphi(e)\varphi(e) = \varphi(e)$, hence cancellation gives $\varphi(e) =
+        e'$.
+        \begin{enumerate}
+            \item Suppose that the orders of $x$ and $x'$ are $m$ and $n$
+            respectively, hence $x^m = e$ and $x'^n = e'$. Note that $\varphi(x^2) =
+            \varphi(x)\varphi(x) = x'^2$, and by repeating this process, it can be
+            shown that $\varphi(x^k) = x'^{k}$ for any $k \geq 1$. This means that
+            if $x^m = e$, we have $x'^m = \varphi(x^m) = \varphi(e) = e'$, hence $m
+            \geq n$. Also, $\varphi^{-1}$ is also an isomorphism, so $x^n =
+            \varphi^{-1}(x'^{n}) = \varphi^{-1}(e') = e$, hence $n \geq m$.
+            Together, this implies that $m = n$.
+
+            Note that if $m$ were infinite, this would force $n$ to be infinite as
+            well, and vice versa.
+
+            \item Write \[
+                \varphi(xyx) = \varphi(xy)\varphi(x) =
+                \varphi(x)\varphi(y)\varphi(x) = x'y'x'.
+            \] Similarly, $\varphi(yxy) = y'x'y'$. Equating the two gives the
+            desired result.
+
+            \item Use the fact that $x x^{-1} = e$, so $\varphi(x)\varphi(x^{-1}) =
+            \varphi(x x^{-1}) = \varphi(e) = e'$. This means $x' \varphi(x^{-1}) =
+            e'$, which forces $\varphi(x^{-1}) = x'^{-1}$.
+        \end{enumerate}
+    \end{solution}
+    
+
+    
+    \paragraph{Exercise 9.} Find an isomorphism from a group $G$ to its opposite
+    group $G^\circ$.
+    \begin{solution}
+        Define $\varphi\colon G \to G^\circ$, $x \mapsto x^{-1}$. This is clearly a
+        bijection because every element $x$ has exactly one inverse. Observe that 
+        for any $x, y \in G$, \[
+            \varphi(xy) = (xy)^{-1}= y^{-1}x^{-1} = \varphi(y)\varphi(x) =
+            \varphi(x)\circ \varphi(y),
+        \] as desired. Recall the nature of composition $\circ$ in $G^\circ$.
+    \end{solution}
+    
+    \paragraph{Exercise 10.} Prove that the map $A \rightsquigarrow (A^t)^{-1}$ is
+    an automorphism of $GL_n(\R)$.
+    \begin{solution}
+        First note that this map is a bijection, because every matrix in $GL_n(\R)$
+        has exactly one inverse, and every matrix in $GL_n(\R)$ has exactly one
+        transpose in $GL_n(\R)$. Also observe that for $A, B \in GL_n(\R)$, \[
+            ((AB)^t)^{-1} = (B^tA^t)^{-1} = (A^t)^{-1}(B^t)^{-1},
+        \] which proves that the given map is an automorphism.
+    \end{solution}
+
+    \paragraph{Exercise 11.} Prove that the set $\aut(G)$ of automorphisms of a
+    group $G$ forms a group, the law of composition being the composition of
+    functions.
+    \begin{solution}
+        Note that the identity map is trivially an automorphism. The composition of
+        functions is inherently associative, and the composition of two
+        automorphisms is another automorphism - suppose that $\varphi$ and $\psi$
+        are automorphisms. Then, $\psi \circ \varphi$ is a bijection, with \[
+            (\psi\circ\varphi)(xy) = \psi(\varphi(xy)) = \psi(\varphi(x)\,\varphi(y))
+            = \psi(\varphi(x))\,\psi(\varphi(y)) =
+            (\psi\circ\varphi)(x)\,(\psi\circ\varphi)(y).
+        \] Finally, the inverse of an automorphism is also an automorphism. This
+        shows that $\aut(G)$ forms a group.
+    \end{solution}
+
+    \paragraph{Exercise 12.} Let $G$ be a group and let $\varphi\colon G \to G$ be
+    the map $\vaprhi(x) = x^{-1}$.
+    \begin{enumerate}
+        \itemsep0em 
+        \item Prove that $\varphi$ is bijective.
+        \item Prove that $\varphi$ is an automorphism if and only if $G$ is abelian.
+    \end{enumerate}
+    \begin{solution}
+    \begin{enumerate}
+        \item The map $\varphi$ is a bijection because every element $x$ in $G$ has
+        a unique inverse.
+
+        \item If $G$ is abelian, note that \[
+            \varphi(xy) = (xy)^{-1} = y^{-1}x^{-1} = x^{-1}y^{-1} =
+            \varphi(x)\varphi(y).
+        \]
+
+        If $\vaprhi$ is to be an automorphism, we have \[
+            \varphi(x^{-1}y^{-1}) = (x^{-1}y^{-1})^{-1} = yx.
+        \] for all $x, y \in G$. We also demand \[
+            \varphi(x^{-1}y^{-1}) = \varphi(x^{-1})\varphi(y^{-1}) = xy,
+        \] hence equating the two gives $xy = yx$, proving that $G$ is abelian.
+    \end{enumerate}
+    \end{solution}
+
+    
+    \paragraph{Exercise 13.}\mbox{}
+    \begin{enumerate}
+        \itemsep0em
+        \item Let $G$ be a group of order $4$. Prove that every element has order
+        $1$, $2$, or $4$.
+        \item Classify groups of order $4$ by considering the following cases.
+        \begin{enumerate}
+            \itemsep0em
+            \item $G$ contains an element of order $4$.
+            \item Every element of $G$ has order $<4$.
+        \end{enumerate}
+    \end{enumerate}
+    \begin{solution} \mbox{}
+    \begin{enumerate}
+        \item Note that every $x \in G$ obeys $x^4 = 1$, so the order of every
+        element of $G$ must be either $1, 2, 3$ or $4$. Suppose that $x^3 = 1$.
+        Writing $x^3 = 1 = x^4$ gives $x = 1$. Thus, no element of $G$ can have
+        order $3$.
+
+        In any group of $n$ elements, observe that every element obeys $x^n = 1$. To
+        see this, consider the set $\{1, x, \dots, x^n\}$. All of these elements
+        cannot be distinct since that would yield $n + 1$ elements in a group of $n$
+        elements. Thus, we have $x^p = x^q$ for some $0 \leq p < q \leq n$, giving
+        $x^{q - p} = 1$, so the order of $x$ is less than or equal to $n$.
+        Suppose that $x$ has order $m \leq q - p$; write $n = am + b$ for $0 \leq b
+        < m$. Now, $x^n = (x^m)^ax^b = x^b$, so the minimality of $m$ forces $b =
+        0$. This yields $x^n = 1$.
+
+        \item Let the elements of $G$ be $\{1, a, b, c\}$, where $a, b, c$ are distinct.
+        Suppose that $a$ has order $4$. Now, $b$ and $c$ must have order $2$ or $4$.
+        Now, $a^2 \neq 1$ and $a^2 \neq a$, so without loss of generality set $a^2 =
+        b$. Thus, $b^2 = a^4 = 1$, so $b$ has order $2$. We now have $a^{-1} \neq a$
+        since that would imply $a^2 = 1$, and also $a^{-1} \neq b$ because that
+        would also give $a^{-2} = b^2 = 1$ hence $a^2 = 1$. Thus, $a^{-1} = c =
+        a^3$, so $c$ also has order $4$. This means that $G$ is the cyclic group
+        $\{1, a, a^2, a^3\}$.
+
+        Now, suppose that no element has order $4$. None of $a, b, c$ can have order
+        $1$, hence each of them has order $2$, with $a^2 = b^2 = c^2 = 1$. Examine
+        $ab$, and note that $ab = b$ would imply $a = 1$, $ab = a$ would imply $b =
+        1$. This forces $ab = c$. The same argument also forces $ba = c$, and
+        similarly $ac = ca = b$, $bc = cb = a$. Thus, $G$ is the Klein four group
+        $\{1, a, b, ab\}$.
+    \end{enumerate}
+    \end{solution}
+
+    \paragraph{Exercise 14.} Determine the group of automorphisms of the following
+    groups.
+    \begin{enumerate}
+        \itemsep0em
+        \item $\Z^+$.
+        \item A cyclic group of order $10$.
+        \item $S_3$.
+    \end{enumerate}
+
+
+    \paragraph{Exercise 15.} Show that the functions $f = 1 / x$, $g = (x - 1) / x$
+    generate a group of functions, the law of composition being composition of
+    functions, which is isomorphic to the symmetric group $S_3$.
+    \begin{solution}
+        Observe that $f^2(x) = x$, $g^2(x) = ((x - 1) / x - 1) / ((x - 1) / x) = - 1
+        / (x - 1)$, $g^3(x) = -1 / ((x - 1) / x - 1) = x$. This gives $fg(x) =
+        (f\circ g)(x) = x / (x - 1)$, and $fg^2(x) = (f\circ g^2)(x) = 1 - x$.
+
+        Next, $gf(x) = (1 / x - 1) / (1 / x) = 1 - x = fg^2(x)$, and $g^2f(x) = ((1
+        - x) - 1) / (1 - x) = x / (1 - x) = fg(x)$. This means that compositions
+        like $fgfg = f(gf)g = f(fg^2)g = f^2g^3 = 1$. Thus, the elements $f$ and $g$
+        generate the elements $1, g, g^2, f, fg, fg^2$ which is closed under
+        composition.
+
+        Our group consists of the functions $\{1, g, g^2, f, fg, fg^2\}$. The map
+        from this set to $S_3$, defined as $f \rightsquigarrow (1\,2)$ and $g
+        \rightsquigarrow (1\, 2\, 3)$ is thus an isomorphism, because it is
+        bijective, and the multiplication table of our given elements is identical
+        to that of $S_3$.
+    \end{solution}
+    
+    \paragraph{Exercise 16.} Give an example of two isomorphic groups such that
+    there is more than one isomorphism between them.   
+    \begin{solution}
+        Recall that we constructed an isomorphism between the additive group $\R^+$
+        of real numbers and the multiplicative group $P$ of positive reals, by
+        considering the map $x \mapsto e^{x}$. Another isomorphism is defined by the
+        map $x \mapsto e^{-x}$.
+
+
+        Note that this map is motivated by the fact that the reflection
+        $\varphi\colon \Z^{+} \to \Z^{+}$, $x \mapsto -x$ is an automorphism.
+    \end{solution}
+
+
+    \section{Homomorphisms}
+    
+    \paragraph{Exercise 1.} Let $G$ be a group, with law of composition written $x
+    \,\#\, y$. Let $H$ be a group with law of composition $u \circ v$. What is the
+    condition for a map $\varphi\colon G \to H$ to be a homomorphism?
+    \begin{solution}
+        We demand that for all $x, y \in G$, \[
+            \varphi(x \,\#\, y) = \varphi(x) \circ \varphi(y).
+        \] 
+    \end{solution}
+
+    \paragraph{Exercise 2.} Let $\varphi\colon G \to G'$ be a group homomorphism.
+    Prove that for any elements $a_1, \dots, a_k$ of $G$, \[
+        \varphi(a_1\cdots a_k) = \varphi(a_1)\cdots \varphi(a_k).
+    \] 
+    \begin{solution}
+        This follows from induction, the base case $k = 2$ following from the
+        definition of a homomorphism. If this formula holds for some $n \geq 2$,
+        then \[
+            \varphi(a_1\cdots a_n a_{n + 1}) = \varphi(a_1\cdots a_n)\,\varphi(a_n) =
+            \varphi(a_1)\cdots \varphi(a_n)\,\varphi(a_{n + 1}).
+        \] 
+    \end{solution}
+
+    \paragraph{Exercise 3.} Prove that the kernel and image of a homomorphism are
+    subgroups.
+    \begin{solution}
+        Let $\varphi\colon G \to H$ be a homomorphism. The kernel of $\varphi$ is the set
+        of all elements $x \in G$ such that $\varphi(x) = 1_H$. The image of
+        $\varphi$ is the set of all elements $u \in H$ such that $u = \varphi(x)$
+        for some $x \in G$. Denote the kernel as $K \subseteq G$, and the image as
+        $I \subseteq H$. It suffices to show that $K < G$ and $I < H$ are subgroups.
+
+        Note that $1_G \in K$ because a homomorphism must send the identity of $G$
+        to the identity of $H$. Note that $\varphi(1_G) = \varphi(1_G 1_G) =
+        \varphi(1_G)\varphi(1_G)$, and cancellation gives $\varphi(1_G) = 1_H$.
+        Next, if $x, y \in K$, then $\varphi(xy) = \varphi(x)\varphi(y) = 1_H 1_H =
+        1_H$, hence $xy \in K$. Finally, if $x \in K$, then $1_H = \varphi(1_G) =
+        \varphi(x x^{-1}) = \varphi(x)\varphi(x^{-1}) = \varphi(x^{-1})$, so
+        $x^{-1}$ in $K$. Thus, the kernel of $\varphi$ is a subgroup of $G$.
+
+        Note that $1_H \in I$, because $\varphi(1_G) = 1_H$. If $u, v \in I$, then
+        $u = \varphi(x)$ and $v = \varphi(y)$ for some $x, y \in G$, so $uv =
+        \varphi(x)\varphi(y) = \varphi(xy)$. This means that $uv \in I$. Finally, if
+        $u \in I$ with $u = \varphi(x)$, then $1_H = \varphi(1_G) = \varphi(x
+        x^{-1}) = \varphi(x)\varphi(x^{-1}) = u \varphi(x^{-1})$, so $u^{-1} =
+        \varphi(x^{-1})$ which means $u^{-1} \in I$. Thus the image of $\varphi$ is
+        a subgroup of $H$.
+    \end{solution}
+    
+    \paragraph{Exercise 4.} Describe all homomorphisms $\varphi\colon \Z^+ \to
+    \Z^+$, and determine which are injective, which are surjective, and which are
+    isomorphisms.
+    \begin{solution}
+        Note that for any such homomorphism, $\varphi(0) = 0$. Since $\Z^+$ is
+        generated by $1$, the homomorphism $\varphi$ is fully determined by
+        $\varphi(1)$. For any $n > 0$, write $n = 1 + \dots + 1$, hence $\varphi(n)
+        = \varphi(1) + \dots + \varphi(1) = n\varphi(1)$. Thus, $\varphi(0) =
+        \varphi(n + (-n)) = \varphi(n) + \varphi(-n)$, so $\varphi(-n) = -\varphi(n)
+        = -n\varphi(1)$.
+
+        If $\varphi(1) = 0$, then $\varphi(n = 0)$ for all $n$; this homomorphism is
+        not injective, nor surjective. If $\varphi(1) = 1$ or $\varphi(1) = -1$,
+        then $\varphi(n) = n$ or $\varphi(n) = -n$ respectively; these homomorphisms
+        are isomorphisms, since they are both injective and surjective.
+
+        If $\varphi(1) > 1$, this homomorphism is injective, because if $\varphi(m)
+        = \varphi(n)$, then $\varphi(m - n) = 0$ or $(m - n)\varphi(1) = 0$, which
+        is possible only if $m - n = 0$. This is not surjective however, since there
+        is no $n$ such that $\varphi(n) = 1$. If $\varphi(n) = 1$, then note that
+        $n\varphi(1) = 1$, which would require $\varphi(1) = 1 / n \notin \Z$. The
+        same applies whenever $\varphi(1) < -1$.
+    \end{solution}
+
+    \paragraph{Exercise 5.} Let $G$ be an abelian group. Prove that the $n$th power
+    map $\varphi\colon G \to G$ defined by $\varphi(x) = x^n$ is a homomorphism from
+    $G$ to itself.
+    \begin{solution}
+        Note that for any $x, y \in G$, we have \[
+            \varphi(xy) = (xy)^n = x^ny^n = \varphi(x)\, \varphi(y),
+        \] which shows that $\varphi$ preserves the group structure, and is hence a
+        homomorphism. Note that we have used the commutativity of elements in $G$ to
+        conclude that $(xy)^n = x^ny^n$.
+    \end{solution}
+
+    \paragraph{Exercise 6.} Let $f\colon \R^+ \to \C^\times$ be the map $e^{ix}$.
+    Prove that $f$ is a homomorphism, and determine its kernel and image.
+    \begin{solution}
+        For any $x, y \in \R$, note that \[
+            f(x + y) = e^{i(x + y)} = e^{ix}e^{iy} = f(x)\,f(y),
+        \] which establishes $f$ as a homomorphism.
+
+        Note that the identity in $\C^\times$ is $1$; the solutions of $e^{ix}$ for
+        real $x$ are precisely $2\pi k$, for $k \in \Z$. This set forms the kernel
+        of $f$. Also, $f$ maps the interval $[0, 2\pi)$ precisely to the unit circle
+        in $\C$, which thus forms the image of $f$.  There are no other points in
+        the image of $f$, since $|f(x)| = |e^{ix}| = 1$ for all real $x$.
+    \end{solution}
+    
+    \paragraph{Exercise 7.} Prove that the absolute value map $|~ ~|\colon
+    \C^\times \to \R^\times$ sending $\alpha \rightsquigarrow |\alpha|$ is a
+    homomorphism, and determine its kernel and image.
+    \begin{solution}
+        For any $\alpha, \beta \in \C$, note that \[
+            |\alpha\beta| = |\alpha| |\beta|,
+        \] which establishes the absolute value map as a homomorphism.
+
+        The pre-image of $1$, the identity in $\R^\times$, is the unit circle in
+        $\C$ described by $\{e^{ix}\colon x \in \R\}$. This is the kernel of the
+        absolute value map. The image of this map is the entirety of $\R$, since
+        $x = |x|$ for all $x \in \R$.
+    \end{solution}
+
+    \paragraph{Exercise 8.} \mbox{}
+    \begin{enumerate}
+        \itemsep0em 
+        \item Find all subgroups of $S_3$, and determine which are normal.
+        \item Find all subgroups of the quaternion group, and determine which are
+        normal.
+    \end{enumerate}
+    \begin{solution} \mbox{}
+    \begin{enumerate}
+        \item Let $x$ denote the transposition $(1\, 2)$ and $y$ denote the cycle
+        $(1\, 2\, 3)$. The elements of $S_3$ are $1, x, y, xy, y^2, xy^2$, with $x^2
+        = 1$ and $y^3 = 1$. Now, $x$ generates the subgroup $\{1, x\}$ and $y$ or
+        $y^2$ generate the subgroup $\{1, y, y^2\}$. Note that $x$ and $y$ together
+        generate the whole of $S_3$. If a subgroup contains any of $xy, xy^2$ along
+        with $x$, then $x(xy) = y$ and $x(xy^2) = y^2$ mean that $y$ is also in the
+        subgroup, hence the subgroup is $S_3$ itself. Similarly, if a subgroup
+        contains any of $xy, xy^2$ along with $y$, then $(xy)yy = x$ and $(xy^2)y =
+        x$ mean that $y$ is also in the subgroup, again forcing the subgroup to be
+        $S_3$. Also note that $xy$ generates the subgroup $\{1, xy\}$ and $xy^2$
+        generates the subgroup $\{1, xy^2\}$. If a subgroup contains both $xy$ and
+        $xy^2$, then it also contains $(xy)^{-1} = y^2x$ hence $(y^2x)(xy^2) = y$
+        and $(xy^2)y = x$, which forces it to be equal to $S_3$.
+        Thus, we have found all subgroups of $S_3$, namely $\{1\}$, $\{1,
+        x\}$, $\{1, xy\}$, $\{1, xy^2\}$, $\{1, y, y^2\}$, and $S_3$.
+
+        Consider the subgroup $\{1, x\}$. Note that $yxy^{-1} = yxy^2 = (xy^2)y^2 =
+        xy \notin \{1, x\}$. Similarly for the other subgroups of order $2$,
+        $y(xy)y^{-1} = yxy y^2 = yx = xy^2$, and $y(xy^2)y^{-1} = yxy = xy^2y = x$.
+        Thus, none of these are normal subgroups. Looking at $\{1, y, y^2\}$,
+        consider the homomorphism $\varphi\colon S_3 \to S_3$ defined by $\varphi(x)
+        = x$, $\varphi(y) = 1$. This gives $\varphi(y^2) = 1$, $\varphi(xy) = x$,
+        $\varphi(xy^2) = x$, hence $\{1, y, y^2\}$ is the kernel of the homomorphism
+        $\varphi$, making it a normal subgroup. This is the only normal subgroup
+        besides $\{1\}$ and $S_3$.
+
+        \item The quaternion group contains the elements $1, i, j, k, -1, -i, -j,
+        -k$. The only non-trivial subgroups are $\{1, -1\}$, $\{1, i, -1, -i\}$,
+        $\{1, j, -1, -j\}$ and $\{1, k, -1, -k\}$. This is because any two other
+        elements like $i$ and $j$ can generate the third, $ij = k$. The subgroup
+        $\{1, -1\}$ is normal since $x(-1)x^{-1} = -x x^{-1} = -1$ for all other
+        choices of $x$. It suffices to show that $\{1, i, -1, -i\}$ is normal to
+        prove that all the subgroups are normal. We can check that $jij^{-1} =
+        ji(-j) = -jij = -jk = -i$, $kik^{-1} = ki(-k) = -kik = -k(-j) = -i$, which
+        is sufficient to show that $\{1, i, -1, -i\}$ is normal.
+    \end{enumerate}
+    \end{solution} 
+    
+    \paragraph{Exercise 9.} \mbox{}
+    \begin{enumerate}
+        \itemsep0em 
+        \item Prove that the composition $\varphi\circ \psi$ of two homomorphisms
+        $\varphi, \psi$ is a homomorphism.
+        \item Describe the kernel of $\varphi\circ\psi$.
+    \end{enumerate}
+    \begin{solution} \mbox{}
+    \begin{enumerate}
+        \item Note that for all elements $x, y$, we have \[
+            (\varphi\circ\psi)(xy) = \varphi(\psi(x)\psi(y)) =
+            \varphi(\psi(x))\varphi(\psi(y)) = (\varphi\circ \psi)(x)\,
+            (\varphi\circ \psi)(y).
+        \] 
+        \item The kernel of $\varphi\circ \psi$ is by definition
+        $\psi^{-1}(\varphi^{-1}(1))$, where $1$ is the identity in the image of
+        $\varphi \circ \psi$. This contains the kernel of $\psi$, since $\psi(x) = 1
+        \implies \varphi(\psi(x)) = 1$.
+    \end{enumerate}
+    \end{solution}
+    
+    \paragraph{Exercise 10.} Let $\varphi\colon G \to G'$ be a group homomorphism.
+    Prove that $\varphi(x) = \varphi(y)$ if and only if $xy^{-1} \in \ker{\varphi}$.
+    \begin{solution}
+        Recall that $\varphi(y^{-1}) = \varphi(y)^{-1}$. Suppose that $\varphi(x) =
+        \varphi(y)$. Then, $\varphi(xy^{-1}) = \varphi(x)\varphi(y^{-1}) =
+        \varphi(y)\varphi(y)^{-1} = 1$, so $xy^{-1} \in \ker{\varphi}$.
+
+        Next, suppose that $xy^{-1} \in \ker{\varphi}$, i.e.\ $\varphi(xy^{-1}) =
+        1$. This gives $\varphi(x)\varphi(y)^{-1} = 1$, hence $\varphi(x) =
+        \varphi(y)$.
+    \end{solution}
+
+    \paragraph{Exercise 11.} Let $G$, $H$ be cyclic groups, generated by the
+    elements $x$, $y$. Determine the condition on the orders $m$, $n$ of $x$ and $y$
+    so that the map sending $x^i \rightsquigarrow y^i$ is a group homomorphism.
+    \begin{solution}
+        Note that $x^m = 1$, hence $x^{i} = x^{i + km}$ for all integers $k$. We
+        want $y^i = \varphi(x^i) = \varphi(x^{i + m}) = y^{i + m}$, hence
+        $1 = y^{m}$. This means that the order of $y$ must divide $m$, hence $n \,|\,
+        m$ is a necessary condition for our map to be well-defined.
+
+        We claim that $\varphi$ is now a homomorphism. Given any $x^p, x^q \in G$,
+        we see that $\varphi(x^px^q) = \varphi(x^{p + q}) = y^{p + q} = y^p y^q =
+        \varphi(x^p)\varphi(x^q)$. These operations are well-defined since there is
+        a unique element $y^j \in H$ such that $y^j = y^{p + q}$, namely when $j = p
+        + q \pmod{n}$.
+    \end{solution}
+    
+    \paragraph{Exercise 12.} Prove that the $n\times n$ block matrices $M$ which
+    have the block form \[
+        \begin{bmatrix}
+            A & B \\ 0 & D
+        \end{bmatrix}
+    \] with $A \in GL_r(\R)$ and $D \in GL_{n - r}(\R)$ form a subgroup $P$ of
+    $GL_n(\R)$, and the map $P \to GL_r(\R)$ sending $M \rightsquigarrow A$ is a
+    homomorphism. What is it's kernel?
+    \begin{solution}
+        Note that multiplication of such block matrices is closed, with \[
+            \begin{bmatrix}
+                A_1 & B_1 \\ 0 & D_1
+            \end{bmatrix} \begin{bmatrix}
+                A_2 & B_2 \\ 0 & D_2
+            \end{bmatrix} = \begin{bmatrix}
+                A_1A_2 & A_1B_2 + B_1D_2 \\ 0 & D_1D_2
+            \end{bmatrix}.
+        \] The identity matrix $\mathbb{I}_n \in P$, since it is of the required
+        block form ($A = \mathbb{I}_r$, $D = \mathbb{I}_{n - r}$, $B = 0$). Because
+        $A$ and $D$ are invertible, note that \[
+            \begin{bmatrix}
+                A & B \\ 0 & D
+            \end{bmatrix}^{-1} = \begin{bmatrix}
+                A^{-1} & -A^{-1}BD^{-1} \\ 0 & D^{-1}
+            \end{bmatrix},
+        \] which can be checked by \[
+            \begin{bmatrix}
+                A & B \\ 0 & D
+            \end{bmatrix} \begin{bmatrix}
+                A^{-1} & -A^{-1}BD^{-1} \\ 0 & D^{-1}
+            \end{bmatrix} = \begin{bmatrix}
+                A A^{-1} & A(-A^{-1}BD^{-1}) + B(D^{-1}) \\ 0 & D D^{-1}
+            \end{bmatrix} = \begin{bmatrix}
+                1 & 0 \\ 0 & 1
+            \end{bmatrix}.
+        \] Thus, $P$ forms a subgroup of $GL_n(\R)$. Labelling the matrices $M_A$,
+        where $A$ is the top left block, we see that the map sends \[
+            M_X \rightsquigarrow X, \qquad M_Y \rightsquigarrow Y, \qquad 
+            M_XM_Y \rightsquigarrow XY
+        \] since the top left block obeys the usual multiplication in $GL_r(\R)$.
+        This shows that this map is a homomorphism. Its kernel is the pre-image of
+        $\mathbb{I}_r$, which is the set of matrices $M_A \in P$ such that $A =
+        \mathbb{I}_r$.
+    \end{solution}
+
+    \paragraph{Exercise 13.} \mbox{}
+    \begin{enumerate}
+        \itemsep0em
+        \item Let $H$ be a subgroup of $G$, and let $g \in G$. The \textit{conjugate
+        subgroup} $gHg^{-1}$ is defined to be the set of all conjugates $ghg^{-1}$,
+        where $h \in H$. Prove that $gHg^{-1}$ is a subgroup of $G$.
+        \item Prove that a subgroup $H$ of $G$ is normal if and only if $gHg^{-1} =
+        H$ for all $g \in G$.
+    \end{enumerate}
+    \begin{solution} \mbox{}
+    \begin{enumerate}
+        \item Note that the identity $1 \in G$ is present in $H$, hence $g 1 g^{-1}
+        = 1 \in gHg^{-1}$. Next, multiplication of elements in closed in the
+        conjugate subgroup, because for any $h_1, h_2 \in H$, we have \[
+            (gh_1g^{-1})(gh_2g^{-1}) = gh_1(g^{-1}g)h_2g^{-1} = g(h_1h_2)g^{-1},
+        \] and $h_1 h_2 \in H$. Finally, for any $h \in H$, we have $(ghg^{-1})^{-1}
+        = gh^{-1}g^{-1}$, with $h^{-1} \in H$. Thus, $gHg^{-1}$ is indeed a subgroup
+        of $G$.
+
+        \item Suppose that $H$ is a normal subgroup. For any $ghg^{-1} \in G$ with
+        $h \in H$, we must have $ghg^{-1} \in H$ by definition. Also for any $h \in
+        H$, we must have $ghg^{-1} \in H$, hence $gHg^{-1} = H$.
+
+        Suppose that $gHg^{-1} = H$ for every $g \in G$. This means that given $h
+        \in H$, we have $ghg^{-1} \in H$, hence $H$ must be a normal subgroup.
+    \end{enumerate}
+    \end{solution}
+    
+    \paragraph{Exercise 14.} Let $N$ be a normal subgroup of $G$, and let $g \in G$,
+    $n \in N$. Prove that $g^{-1}ng \in N$.
+    \begin{solution}
+        Note that we must have $gng^{-1} \in N$ for every choice of $g \in G$. Thus,
+        choose $g^{-1} \in G$, whence $(g^{-1})n(g^{-1})^{-1} = g^{-1}ng \in N$.
+    \end{solution}
+
+    \paragraph{Exercise 15.} Let $\varphi$ and $\psi$ be two homomorphisms from a
+    group $G$ to another group $G'$, and let $H \subset G$ be the subset $\{x \in
+    G\colon \phi(x) = \psi(x)\}$. Prove or disprove: $H$ is a subgroup of $G$.
+    \begin{solution}
+        Note that a homomorphism must map the identity to the identity, so
+        $\barphi(1) = 1' = \psi(1)$ gives $1 \in H$. If $x, y \in H$, then
+        $\varphi(x) = \psi(x)$ and $\varphi(y) = \psi(y)$, so $\varphi(xy) =
+        \varphi(x)\varphi(y) = \psi(x)\psi(y) = \psi(xy)$ giving $xy \in H$.
+        Finally, if $x \in H$ with $\varphi(x) = \psi(x)$, we have $\varphi(x^{-1}) =
+        \varphi(x)^{-1} = \psi(x)^{-1} = \psi(x^{-1})$, so $x^{-1} \in H$. Thus, $H$
+        forms a subgroup of $G$.
+    \end{solution}
+    
+    \paragraph{Exercise 16.} Let $\varphi\colon G \to G'$ be a group homomorphism,
+    and let $x \in G$ be an element of order $r$. What can you say about the order
+    of $\varphi(x)$?
+    \begin{solution}
+        Note that the order of $\varphi(x)$ is at most $r$, since \[
+            \varphi(x)^r = \varphi(x^r) = \varphi(1) = 1.
+        \] Furthermore, if the order of $\varphi(x)$ is $r'$, we must have $r' \,|\,
+        r$. Write $r = ar' + b$ for $0 \leq b < r'$, whence \[
+            1 = \varphi(x^r) = \varphi(x^{ar' + b}) = \varphi(x^a)^{r'}\varphi(x)^b
+            = \varphi(x)^b.
+        \] The minimality of $r'$ forces $b = 0$, hence $r = ar'$.
+    \end{solution}
+
+    \paragraph{Exercise 17.} Prove that the center of a group is a normal subgroup.
+    \begin{solution}
+        Recall that the center $H$ of a group $G$ is the set of elements $x \in G$
+        such that $xg = gx$ for all $g \in G$. This forms a subgroup of $G$ since $1
+        \in H$, $(xy)g = x(yg) = x(gy) = (xg)y = g(xy)$ hence $xy \in H$ if $x, y
+        \in H$, and $xg = gx$ implies $gx^{-1} = x^{-1}g$ hence $x^{-1}\in H$ if $x
+        \in H$. Furthermore, $H$ is a normal subgroup since $H$ is abelian. Note
+        that given any $x \in H$ and $g \in G$, we have $gxg^{-1} = xgg^{-1} = x \in
+        H$.
+    \end{solution}
+    
+    \paragraph{Exercise 18.} Prove that the center of $GL_n(\R)$ is the subgroup $Z
+    = \{cI\colon c \in \R, c \neq 0\}$.
+    \begin{solution}
+        Note that for each element $cI \in Z$, we indeed observe that \[
+            (cI)A = cA = Ac = (AI)c = A(cI)
+        \] for every choice of $A \in GL_n(\R)$.
+        Suppose that $B$ commutes with every matrix in $GL_n(\R)$, i.e.\ $BA = AB$
+        for all $A \in GL_n(\R)$. Let $E_{ij}$ be the matrix with $1$ in the $i$,
+        $j$th entry and zeroes everywhere else, and note that the product $BE_{ij}$
+        is a matrix with its $j$th column equal to the $i$th column of $B$ and with
+        zeroes everywhere else. Similarly, $E_{ij}B$ is the matrix whose $i$th row
+        is the $j$th row of $B$, and with zeroes everywhere else. Now, $I + E_{ij}
+        \in GL_n(\R)$, so by demanding $B(I + E_{ij}) = (I + E_{ij})B$, we want
+        $BE_{ij} = E_{ij}B$, which forces $b_{jj} = b_{ii}$, with the remaining
+        entries $b_{ki} = 0$ and $b_{jk} = 0$ for the remaining choices of $k$.
+        Repeating this for every pair $1 \leq i < j \leq n$, we conclude that all
+        the diagonal entries $b_{ii}$ are equal, and all off-diagonal entries of $B$
+        are zero. Thus, $B$ must be of the form $b_{11}I = cI$.
+    \end{solution}
+
+    \paragraph{Exercise 19.} Prove that if a group contains exactly one element of
+    order $2$, then that element is in the center of the group.
+    \begin{solution}
+        Let $x$ be the only element of order $2$ in the group $G$, i.e.\ $x^2 = 1$
+        hence $x = x^{-1}$.
+        Suppose that for some $g \in G$, we have $xg \neq gx$, i.e.\ $xgx^{-1}g^{-1}
+        = y \neq 1$. Then we have $xy = x^{-1}y = gx^{-1}g^{-1}$, hence $(xy)^2 =
+        gx^{-2}g^{-1} = gg^{-1} = 1$. Since $x$ is the only element of order $2$,
+        either $xy = 1$ or $xy = x$. The former implies that $y = x^{-1} = x$, hence
+        $xgx^{-1}g^{-1} = x \implies gx^{-1}g^{-1} = 1 \implies x = 1$, a
+        contradiction. The latter implies that $y = 1$, another contradiction. Thus,
+        we must have $xg = gx$ for all $g \in G$, which means that $x$ is in the
+        center of $G$.
+    \end{solution}
+    
+    \paragraph{Exercise 20.} Consider the set $U$ of real $3\times 3$ matrices of
+    the form \[
+        \begin{bmatrix}
+            1 & * & * \\ 0 & 1 & * \\ 0 & 0 & 1
+        \end{bmatrix}.
+    \]
+    \begin{enumerate}
+        \itemsep0em
+        \item Prove that $U$ is a subgroup of $SL_3(\R)$.
+        \item Prove or disprove: $U$ is normal.
+        \item Determine the center of $U$.
+    \end{enumerate}
+    \begin{solution} \mbox{}
+    \begin{enumerate}
+        \itemsep0em
+        \item See Chapter 1, Miscellaneous Problems, Exercise 6.
+        \item Consider \[
+            \begin{bmatrix}
+                1 & 0 & 0 \\ 1 & 1 & 0 \\ 0 & 0 & 1
+            \end{bmatrix} \begin{bmatrix}
+                1 & 0 & 0 \\ -1 & 1 & 0 \\ 0 & 0 & 1
+            \end{bmatrix} = \begin{bmatrix}
+                1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1
+            \end{bmatrix},
+        \] \[
+             \begin{bmatrix}
+                1 & 0 & 0 \\ 1 & 1 & 0 \\ 0 & 0 & 1
+            \end{bmatrix} \begin{bmatrix}
+                1 & 1 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1
+            \end{bmatrix}\begin{bmatrix}
+                1 & 0 & 0 \\ -1 & 1 & 0 \\ 0 & 0 & 1
+            \end{bmatrix} = \begin{bmatrix}
+                1 & 1 & 0 \\ 1 & 2 & 0 \\ 0 & 0 & 1
+            \end{bmatrix} \begin{bmatrix}
+                1 & 0 & 0 \\ -1 & 1 & 0 \\ 0 & 0 & 1
+            \end{bmatrix} = \begin{bmatrix}
+                0 & 1 & 0 \\ -1 & 2 & 0 \\ 0 & 0 & 1
+            \end{bmatrix}.
+        \] Thus, this particular conjugate does not belong to $U$, which means that
+        $U$ is not a normal subgroup of $SL_3(\R)$.
+
+        \item Note that a general product of matrices in $U$ looks like \[
+            \begin{bmatrix}
+                1 & a & b \\ 0 & 1 & c \\ 0 & 0 & 1
+            \end{bmatrix} \begin{bmatrix}
+                1 & a' & b' \\ 0 & 1 & c' \\ 0 & 0 & 1
+            \end{bmatrix} = \begin{bmatrix}
+                1 & a' + a & b' + ac' + b \\ 0 & 1 & c' + c \\ 0 & 0 & 1
+            \end{bmatrix}.
+        \] Thus, for this product to commute for fixed $a, b, c$, we require $ac' =
+        a'c$ for all choices of $a'$ and $c'$. This immediately gives $a = c = 0$,
+        and this is sufficient. The center of $U$ is the set of all matrices of the
+        form \[
+            \begin{bmatrix}
+                1 & 0 & b \\ 0 & 1 & 0 \\ 0 & 0 & 1
+            \end{bmatrix}.
+        \] 
+    \end{enumerate}
+    \end{solution}
+    
+    \paragraph{Exercise 21.} Prove by giving an explicit example that $GL_2(\R)$ is
+    not a normal subgroup of $GL_2(\C)$.
+    \begin{solution}
+        Consider \[
+            \begin{bmatrix}
+                1 & i \\ 0 & 1
+            \end{bmatrix} \begin{bmatrix}
+                1 & 0 \\ 1 & 1
+            \end{bmatrix} \begin{bmatrix}
+                1 & -i \\ 0 & 1
+            \end{bmatrix} = \begin{bmatrix}
+                1 + i & i \\ 1 & 1
+            \end{bmatrix} \begin{bmatrix}
+                1 & -i \\ 0 & 1
+            \end{bmatrix} = \begin{bmatrix}
+                1 + i & -1 \\ 1 & 1 - i
+            \end{bmatrix}.
+        \] 
+    \end{solution}
+
+    \paragraph{Exercise 22.} Let $\varphi\colon G \to G'$ be a surjective homomorphism.
+    \begin{enumerate}
+        \itemsep0em
+        \item Assume that $G$ is cyclic. Prove that $G'$ is cyclic.
+        \item Assume that $G$ is abelian. Prove that $G'$ is abelian.
+    \end{enumerate}
+    \begin{solution} \mbox{}
+    \begin{enumerate}
+        \item Let $G$ be generated by the element $x$. For every element $u \in G'$,
+        we must have $u = \varphi(x^r)$ for some $r \in \Z$ because of the
+        surjectivity of $\varphi$. Thus, every $u \in G'$ is of the form $u =
+        \varphi(x)^r$, which means that $G'$ is a cyclic group generated by
+        $\varphi(x)$.
+
+        \item For any $u, v \in G'$, we must have $u = \varphi(x)$ and $v =
+        \varphi(y)$ for some $x, y \in G$. Then, $uv = \varphi(x)\varphi(y) =
+        \varphi(xy) = \varphi(yx) = \varphi(y)\varphi(x) = vu$, which shows that
+        $G'$ is abelian.
+    \end{enumerate}    
+    \end{solution}
+    
+    \paragraph{Exercise 23.} Let $\varphi\colon G \to G'$ be a surjective
+    homomorphism, and let $N$ be a normal subgroup of $G$. Prove that $\varphi(N)$
+    is a normal subgroup of $G'$.
+    \begin{solution}
+        Let $u \in \varphi(N)$ be fixed, and let $v \in G'$ be arbitrary. We find
+        $x \in N$, $y \in G$ such that $u = \varphi(x)$, $v = \varphi(y)$. Since $x
+        \in N$ is part of a normal subgroup, we have $yxy^{-1} \in N$, hence
+        $\varphi(yxy^{-1}) \in \varphi(N)$. However, $\varphi(yxy^{-1}) = vuv^{-1}
+        \in \varphi(N)$, which shows that $\varphi(N)$ is a normal subgroup of $G'$.
+    \end{solution}
+    
+
+    \section{Equivalence Relations and Partitions}
+
+    \paragraph{Exercise 1.} Prove that the non-empty fibres of a map form a
+    partition of the domain.
+    \begin{solution}
+        Consider a map $f\colon X \to Y$, and without loss of generality let $f$ be
+        surjective (if not, substitute $\im{Y}$ for $Y$). We wish to show that for
+        any two $u, v \in Y$ such that $u \neq v$, the pre-images $f^{-1}(u)$ and
+        $f^{-1}(v)$ are disjoint. Suppose these two sets had a common element $x$;
+        this would imply $f(x) = u$ and $f(x) = v$ simultaneously, which is absurd.
+        Furthermore, every $x \in X$ belongs to the fibre $f^{-1}(f(x))$ by
+        construction, which means that the non-empty fibres of the map $f$ partition
+        the domain $X$.
+    \end{solution}
+
+    \paragraph{Exercise 2.} Let $S$ be a set of groups. Prove that the relation
+    $G\sim H$ if $G$ is isomorphic to $H$ is an equivalence relation in $S$.
+    \begin{solution}
+        Note that $\sim$ is reflexive, since every group is isomorphic to itself via
+        the identity map. The relation $\sim$ is also symmetric because if $G\sim
+        H$, there is an isomorphism $\varphi \colon G \to H$ whose inverse
+        $\phi^{-1}\colon H \to G$ is also an isomorphism hence $H \sim G$. Finally,
+        if $G_1 \sim G_2$ and $G_2 \sim G_3$, there exist isomorphisms
+        $\varphi\colon G_1 \to G_2$ and $\psi\colon G_2 \to G_3$, whence the map
+        $\psi\circ \varhi\colon G_1 \to G_3$ is an isomorphism giving $G_1 \sim
+        G_3$, making $\sim$ transitive. Thus, $\sim$ is an equivalence relation in
+        $S$.
+    \end{solution}
+    
+    \paragraph{Exercise 3.} Determine the number of equivalence relations on a set
+    of $5$ elements.
+    \begin{solution}
+        It can be shown that any partition $\{A_i\}$ of a set defines an equivalence
+        relation, namely $x \sim y$ if $x$ and $y$ belong to the same set $A_i$.
+        Additionally, every equivalence relation defines a partition of its set,
+        which means that there is a one-to-one correspondence between partitions and
+        equivalence relations.  There are $52$ partitions of a set of 5 elements,
+        which means that there are $52$ possible equivalence relations.
+    \end{solution}
+
+    \paragraph{Exercise 4.} Is the intersection $R \cap R'$ of two equivalence
+    relations $R, R' \subset S \times S$ an equivalence relation? Is the union?
+    \begin{solution}
+        Yes, the intersection $T = R\cap R'$ is an equivalence relation. Note that
+        $xTx$ because $xRx$ and $xR'x$, $xTy$ means that $xRy$ and $xR'y$ which
+        means $yRx$ and $yR'x$, giving $yTx$. Finally, if $xTy$ and $yTz$, that
+        means that $xRy$ and $xR'y$, $yRz$ and $yR'z$, which together give $xRz$ and
+        $xR'z$ giving $xTz$. This proves that $T$ is an equivalence relation.
+
+        No, the union $R\cup R'$ is not necessarily an equivalence relation.
+        Consider the relations on $S = \{1, 2, 3\}$, where \[
+            R = \{(1, 1), (2, 2), (3, 3), (1, 2), (2, 1)\}, \qquad
+            R' = \{(1, 1), (2, 2), (3, 3), (2, 3), (3, 2)\}. 
+        \] It is clear that both $R$ and $R'$ are equivalence relation. Their union \[
+            R \cup R' = \{(1, 1), (2, 2), (3, 3), (1, 2), (2, 1), (2, 3), (3, 2)\}
+        \] is not however, since it contains $(1, 2)$ and $(2, 3)$, but not $(1, 3)$.
+    \end{solution}
+    
+    \paragraph{Exercise 5.} Let $H$ be a subgroup of a group $G$. Prove that the
+    relation defined by the rule $a \sim b$ if $b^{-1}a \in H$ is an equivalence
+    relation on $G$.
+    \begin{solution}
+        For any $a \in G$, we have $a^{-1}a = 1 \in H$ so $a \sim a$. For any $a, b
+        \in G$, if $a \sim b$ i.e.\ $b^{-1}a \in H$, its inverse $a^{-1}b \in H$
+        i.e.\ $b \sim a$.  Finally, if for $a, b, c \in G$ we have $a \sim b$ and $b
+        \sim c$, i.e.\ $b^{-1}a \in H$ and $c^{-1}b \in H$, we have the product
+        $(c^{-1}b)(b^{-1}a) = c^{-1}a \in H$ so $c \sim a$.
+    \end{solution}
+    
+    \paragraph{Exercise 6.} \mbox{}
+    \begin{enumerate}
+        \itemsep0em
+        \item Prove that the relation $x$ conjugate to $y$ in a group $G$ is an
+        equivalence relation on $G$.
+        \item Describe the elements $a$ whose conjugacy class (equivalence class)
+        consists of the element $a$ alone.
+    \end{enumerate}
+    \begin{solution} \mbox{}
+    \begin{enumerate}
+        \item Note that every element is self conjugate via $x = 1 x 1$. If $x$ is
+        conjugate with $y$, we have $x = gyg^{-1}$ for some $g \in G$, hence $y =
+        g^{-1}xg = (g^{-1})x(g^{-1})^{-1}$ so $y$ is conjugate with $y$. Finally, if
+        $x$ is conjugate with $y$ and $y$ is conjugate with $z$, we have $x =
+        gyg^{-1}$ and $y = hzh^{-1}$ for some $g, h \in G$, which gives $x =
+        g(hzh^{-1})g^{-1} = (gh)x(gh)^{-1}$, hence $x$ is conjugate with $z$.
+
+        \item Suppose that the conjugacy class of $a$ contains only $a$. This means
+        that the only element $b$ such that $a = gbg^{-1}$ for some $g \in G$, i.e.\
+        $b = g^{-1}ag$, is $a$ itself. Thus, the quantity $g^{-1}ag = a$ for all $g
+        \in G$, i.e.\ $ag = ga$ for all $g \in G$, i.e.\ $a$ is in the center of
+        $G$.
+    \end{enumerate}
+    \end{solution}
+    
+    \paragraph{Exercise 7.} Let $R$ be the relation on the set $\R$ of real numbers.
+    We may view $R$ as a subset of the $(x, y)$ plane. Explain the geometric meaning
+    of the reflexive and symmetric properties.
+    \begin{solution}
+        Reflexivity forces every pair $(x, x) \in R$, hence the diagonal line $x =
+        y$ must be present in $R$. Symmetry forces $(y, x) \in R$ whenever $(x, y)
+        \in R$, which means that $R$ has a reflection symmetry about the $x = y$
+        line.
+    \end{solution}
+    
+    \paragraph{Exercise 8.} With each of the following subsets $R$ of the $(x, y)$
+    plane, determine which of the axioms (5.2) are satisfied and whether or not $R$
+    is an equivalence relation on the set $\R$ of real numbers.
+    \begin{enumerate}
+        \itemsep0em
+        \item $R = \{(s, s)\colon s \in \R\}$.
+        \item $R = $ empty set.
+        \item $R = $ locus $\{y = 0\}$.
+        \item $R = $ locus $\{xy + 1 = 0\}$.
+        \item $R = $ locus $\{x^2y - xy^2 - x + y = 0\}$.
+        \item $R = $ locus $\{x^2 - xy + 2x - 2y = 0\}$.
+    \end{enumerate}
+    \begin{solution} \mbox{}
+    \begin{enumerate}
+        \item All three axioms are satisfied, $R$ being the `discrete' relation
+        where every element is related only to itself.
+        \item Symmetry and transitivity are vacuously satisfied, reflexivity is not.
+        \item Only transitivity is (trivially) satisfied. Note that $(1, 1) \notin R$, $(1, 0)
+        \in R$ but $(0, 1) \notin R$. Also, every element is only related to $0$,
+        which means that the only configuration of $xRy$ and $yRz$ is $xR0$ and
+        $0R0$.
+        \item Only symmetry is satisfied. Note that $1\cdot 1 + 1 = 2 \neq 0$, and
+        both $(1, -1) \in R$ and $(-1, 1) \in R$, yet $(1, 1) \notin R$.
+        \item All three axioms are satisfied. Clearly, $(x, x) \in \R$ for all $x
+        \in R$, whenever $(x, y) \in R$ we have $x^2y - xy^2 = x - y$, hence $y^2x -
+        x^2y = y - x$ so $(y, x) \in R$. Rewrite our condition as $xy(x - y) - (x -
+        y) = 0$ or $(xy - 1)(x - y) = 0$. Thus, $xRy$ if $x = y$ or $xy = 1$.
+        Suppose that $xRy$ and $yRz$. We may have $x = y = z$, or $x = y$ and $yz =
+        1$ hence $xz = 1$, $xy = 1$ and $y = z$ hence $xz = 1$, or $xy = 1$ and $yz
+        = 1$, whence $x = z$. In all cases, $xRz$.
+        \item Only symmetry is satisfied. Clearly $(x, x) \in R$ for all $x \in \R$.
+        Note that our condition can be written as $x(x - y) + 2(x - y) = 0$, or $(x
+        + 2)(x - y) = 0$. This gives $xRy$ whenever $x = -2$ or $x = y$. Thus, $(-2,
+        0) \in R$ but $(0, -2) \notin R$. Now, if $xRy$ and $yRz$, we may have $x =
+        -2$ and $y = -2$, or $x = -2$ and $y = z$, or $x = y$ and $y = -2$ hence $x
+        = -2$, or $x = y$ and $y = z$ hence $x = z$. In all cases, $xRz$.
+    \end{enumerate}
+    \end{solution}
+
+    \paragraph{Exercise 9.} Describe the smallest equivalence relation on the set of
+    real numbers which contains the line $x - y = 1$ in the $(x, y)$ plane, and
+    sketch it.
+    \begin{solution}
+        Reflexivity demands that we include the line $x = y$, symmetry demands that
+        we include the line $y - x = 1$. Now, for all $x \in \R$, we have $(x - 1,
+        x) \in R$ and $(x, x + 1) \in R$, so transitivity demands $(x - 1, x + 2)
+        \in R$ which is equivalent to saying that $(x, x + 2) \in R$ for all $x \in
+        \R$. By repeating this process arbitrarily many times and employing
+        symmetry, we see that $(x, x + n) \in R$ for all $x \in \R$ and $n \in \Z$.
+        This gives \[
+            R = \text{locus }\{x - y = n\colon n \in \Z\}.
+        \] This consists of all lines with slope $1$ which cut the axes at integral
+        points.
+    \end{solution}
+
+    \paragraph{Exercise 10.} Draw the fibres of the map from the $(x, z)$ plane to
+    the $y$ axis defined by the map $y = zx$.
+    \begin{solution}
+        Denote the map $f\colon \R^2 \to \R$, $(x, z) \mapsto xz$. Fixing $y \in R$,
+        we see that $f^{-1}(y)$ is the collection of points $(x, z)$ such that
+        $xz = y$, i.e.\ a rectangular hyperbola.
+    \end{solution}
+    
+    \paragraph{Exercise 11.} Work out rules, obtained from the rules on the
+    integers, for addition and multiplication on the set (5.8).
+    \begin{solution}
+        The required rules are those of addition and multiplication in the field
+        $\Z_2$. Note that given any two elements $x, y \in \bar{0}$, we have $x + y
+        = \bar{0}$ because the sum of even numbers is even. Similarly, the sum of an
+        even number and an odd number is odd, and the sum of two odd numbers is
+        even. This ensures that it makes sense to define $\bar{0} + \bar{0} =
+        \bar{1} + \bar{1} = \bar{0}$, and $\bar{0} + \bar{1} = \bar{1} + \bar{0} =
+        \bar{1}$. Similarly, the product of an even number with any other number is
+        even, and the product of two odd numbers is odd. Thus, we can define
+        $\bar{0}\cdot \bar{0} = \bar{0} \cdot \bar{1} = \bar{1} \cdot \bar{0} =
+        \bar{0}$, and $\bar{1} \cdot \bar{1} = \bar{1}$.
+    \end{solution}
+    
+    \paragraph{Exercise 12.} Prove that the cosets (5.14) are the fibres of the map
+    $\varphi$.
+    \begin{solution}
+        Recall that we defined the group homomorphism $\varphi\colon G \to G'$ with
+        kernel $N$, and described the cosets \[
+            aN := \{g \in G \colon g = an \text{ for some }n \in N\}.
+        \] Suppose that $b \in \im{\varphi}$. This means that $b = \varphi(a)$ for
+        at least one $a \in G$. We claim that the fibre $\varphi^{-1}(b) = aN$.
+        To see this, note that if $x \in \varphi^{-1}(b)$, then $\varphi(x) = b =
+        \varphi(a)$, hence $\varphi(a^{-1}x) = 1$ so $a^{-1}x \in N$. Thus, $x =
+        a(a^{-1}x) \in aN$. Next, pick $x \in aN$, i.e.\ $x = an$ where $\varphi(n)
+        = 1$. Thus, $\varphi(x) = \varphi(an) = \varphi(a)\varphi(n) = b$, hence $x
+        \in \varphi^{-1}(b)$. Together, we have shown that the coset $aN$ is
+        precisely the fibre of $\varphi(a)$.
+    \end{solution}
+    
+    
+    
 
 \end{document}
 % vim: set tabstop=4 shiftwidth=4 softtabstop=4:
