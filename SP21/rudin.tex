@@ -1039,6 +1039,363 @@
         ((-\sqrt{3}, -\sqrt{2}) \cup (\sqrt{2}, \sqrt{3}))$.
     \end{solution}
     
+    \paragraph{Exercise 17.} Let $E$ be the set of all $x \in [0, 1]$ whose decimal
+    expansion contains only the digits $4$ and $7$. Is $E$ countable? Is $E$ dense
+    in $[0, 1]$? Is $E$ compact? Is $E$ perfect?
+    \begin{solution}
+        The set $E$ is uncountable, which can be shown by applying Cantor's
+        diagonalization argument with the symbols $4$ and $7$ in lieu of $0$ and
+        $1$. The set $E$ is not dense in $[0, 1]$, since the neighbourhood $(-0.1,
+        +0.1) \cap [0, 1] = [0, 0.1)$ contains no elements of $E$.
+
+        In order to show that the bounded set $E$ is compact, it is sufficient to
+        show that it is closed and then apply the Heine-Borel Theorem.
+        Suppose that the number $a = 0.a_1a_2 \dots a_n \dots \in [0, 1]\setminus E$,
+        where all $a_{k < n}$ being either $4$ or $7$ and $a_n$ being neither $4$
+        nor $7$. This means that for any $b = 0.b_1b_2 \dots\in E$, we have $a \neq b$, 
+        and the first digit which differs from $a$, say $b_m \neq a_m$ must be such
+        that $m \leq n$ (clearly the $n$th digit of $a$ differs from that of $b$).
+        Thus, \[
+            a - b = \sum_{k = m}^{\infty} a_k10^{-k}, \qquad
+            |a - b| \geq |a_m - b_m| 10^{-m} - \sum_{k = m + 1}^\infty |a_k -
+            b_k|10^{-k}.
+        \] Now, clearly $|a_m - b_m| \geq 1$. Also, each $|a_k - b_k| \leq 7$; this
+        is because $b_k$ is limited to either $4$ or $7$, and each of these digits
+        is at most $7$ away from $0 \leq a_k < 10$. Thus, the infinite sum is
+        bounded above by \[
+            \sum_{k = m + 1}^\infty 7 \cdot 10^{-k} = \frac{7}{9}10^{-m}, \qquad |a
+            - b| \geq \frac{2}{9}10^{-m} \geq \frac{2}{9}10^{-n}.
+        \] Note that $|a - b|$ is bounded below by the same quantity regardless of
+        our choice of $b \in E$, hence the corresponding neighbourhood of $a$
+        contains no points from $E$. Thus, $a$ cannot be a limit point of $E$. In
+        other words, $E$ contains all its limit points, and is hence closed. This
+        further shows that $E \subset [0, 1]$ is compact.
+
+        In order to show that $E$ is perfect, it is sufficient to show that every
+        point in $E$ is a limit point. Again, given $b = 0.b_1 b_2 \dots \in E$,
+        toggling the digit $b_n$ between $4$ and $7$ creating the number $b'\in E$ 
+        gives a difference of $3\cdot 10^{-n}$. Since $10^{-n} \to 0$,
+        given any $\epsilon > 0$ we can find sufficiently large $n$ such that
+        $3\cdot 10^{-n} < \epsilon$, hence $|b - b'| < \epsilon$. Thus, every point
+        $b \in E$ is a limit point of $E$.
+    \end{solution}
+    
+    \paragraph{Exercise 18.} Is there a non-empty perfect set in $\R^1$ which
+    contains no rational number?
+
+
+    \paragraph{Exercise 19.} \mbox{}
+    \begin{enumerate}
+        \itemsep0em
+        \item If $A$ and $B$ are disjoint closed sets in some metric space $X$,
+        prove that they are separated.
+        \item Prove the same for disjoint open sets.
+        \item Fix $p \in X$, $\delta > 0$, define $A$ to be the set of all $q \in X$
+        for which $d(p, q) < \delta$, define $B$ similarly with $>$ in place of $<$.
+        Prove that $A$ and $B$ are separated.
+        \item Prove that every connected metric space with at least two points is
+        uncountable.
+    \end{enumerate}
+    \begin{solution} \mbox{}
+    \begin{enumerate}
+        \item Note that since $A$ and $B$ are closed, we have $A = \overline{A}$ and
+        $B = \overline{B}$. This immediately gives $A \cap \overline{B} = B \cap
+        \overline{A} = \emptyset$.
+        \item Suppose that $A \cap \overline{B} \neq \emptyset$, i.e.\ there is a
+        limit point $x$ of $B$ which is contained in $A$. Thus, there is an open
+        ball $B_r(x) \subseteq A$, and since $x$ is a limit point of $B$ there are
+        an infinite number of point $b_i \in B \cap B_r(x) \subseteq A$, which
+        contradicts the assumption that $A \cap B = \emptyset$. A symmetric argument
+        shows that $B \cap \overline{A} = \epmtyset$.
+        \item Note that $A$ and $B$ are open sets; $A$ is an open ball, and $B$ is
+        the complement of the closed ball described by $d(p, q) \leq \delta$. In
+        addition, $A$ and $B$ are disjoint, since we cannot have both $\delta < d(p,
+        q) < \delta$. Thus, $A$ and $B$ are separated by the previous exercise.
+        \item Choose distinct $p, q \in X$, set $\delta = d(p, q) > 0$. Now, let $0
+        \leq \delta' \leq \delta$, and examine all points $x$ such that $d(p, x) =
+        \delta$. If no such $x$ existed, then the open sets described by $d(p, x) <
+        \delta'$ and $d(p, x) > \delta'$ would cover $X$, thus separating it. In
+        this manner, we choose $x_{\delta'}$ for every $\delta' \in [0, 1]$. Note
+        that all such $x_{\delta'}$ are distinct by construction, thus we have a
+        bijection between $\{x_{\delta'}\}$ and the uncountable interval $[0, 1]$,
+        hence $\{x_{\delta'}\} \subseteq X$ is uncountable.
+    \end{enumerate}
+    \end{solution}
+
+    \paragraph{Exercise 20.} Are closures and interiors of connected sets always
+    connected?
+    \begin{solution}
+        The closures of connected sets are always connected. Suppose that $A$ is
+        connected but $\overline{A}$ is not, i.e.\ we can choose non-empty disjoint
+        open sets $X, Y$ such that $\overline{A} = X \cup Y$. Consider $X_0 = X \cap
+        A$ and $Y_0 = Y \cap A$. Suppose that $A \subseteq X$; this would imply that
+        all the points in the non-empty set $Y$ are limit points of $A$. However,
+        since $A \subseteq X$, these are also limit points of $X$, which contradicts
+        the fact that $X$ is open. Similarly, we cannot have $A \subseteq Y$.
+        Therefore, $X_0$ and $Y_0$ are both non-empty. Furthermore, $A = X_0 \cup
+        Y_0$, because $X_0 \cup Y_0 = (X \cap A) \cup (Y \cap A) = (X \cup Y) \cap A
+        = \overline{A} \cap A = A$. Thus, $X_0$ and $Y_0$ separate $A$, which is a
+        contradiction.
+
+        Consider the sets $A$ and $B$ in $\R^2$ described by $d(x, (0, 0)) \leq
+        1$ and $d(x, (2, 0)) \leq 1$. These are closed discs with the common point
+        $(1, 0)$. This means that the union $A \cup B$ is connected. However, their
+        interiors are open discs which are disjoint, and hence their union is
+        disconnected.
+    \end{solution}
+
+    \paragraph{Exercise 21.} Let $A$ and $B$ be separated subsets of some $\R^k$,
+    suppose $\va \in A$, $\vb \in B$, and define \[
+        p(t) = (1 - t)\va + t\vb
+    \] for $t \in \R^1$. Put $A_0 = p^{-1}(A)$, $B_0 = p^{-1}(B)$.
+    \begin{enumerate}
+        \itemsep0em
+        \item Prove that $A_0$ and $B_0$ are separated subsets of $\R^1$.
+        \item Prove that there exists $t_0 \in (0, 1)$ such that $p(t_0) \notin A
+        \cup B$.
+        \item Prove that every convex subset of $\R^k$ is connected.
+    \end{enumerate}
+    \begin{solution} \mbox{}
+    \begin{enumerate}
+        \item Suppose that $A_0 \cap
+        \overline{B_0} \neq \emptyset$, i.e.\ let $x \in A_0$ be a limit point of
+        $B_0$. Thus, for any $r > 0$, we can find $y \in B_0$ such that $d(x, y) <
+        r$. Note that $p(x) = (1 - x)\va + x\vb \in A$, and $p(y) = (1 - y)\va +
+        y\vb \in B$ by construction, and \[
+            d(p(x), p(y)) = |(y - x)\va + (x - y)\vb| = |x - y| |\va - \vb|.
+        \] Since $|\va - \vb|$ is fixed and positive ($A \cap B = \emptyset$), for
+        any $\epsilon > 0$, we can choose sufficiently small $r$ such that $|x - y|
+        < r$ gives $d(p(x), p(y)) < \epsilon$. Thus, we have shown that $p(x)$ is a
+        limit point of $B$, with every $\epsilon$ neighbourhood of $p(x) \in A$
+        containing the points $p(y) \in B$. This contradicts the fact that $A$ and
+        $B$ are separated, so $A \cap \overline{B} = \emptyset$. A symmetric
+        argument shows that we must have $\B_0 \cap \overline{A_0} = \emptyset$,
+        which proves that $A_0$ and $B_0$ are separated.
+
+        \item Suppose that $p(t) \in A \cup B$ for all $t \in [0, 1]$. Set $X = [0,
+        1] \cap A_0$, $Y = [0, 1] \cap B_0$. Note that $A_0 \cup B_0 = p^{-1}(A)
+        \cup p^{-1}(B) = [0, 1]$, since for every $t \in [0, 1]$, either $t \in A$
+        or $t \in B$. Thus, $X \cup Y = [0, 1]$, with $X \cap Y = \emptyset$. This
+        constitutes a disconnection of the connected set $[0, 1]$, which is a
+        contradiction. Thus, there must exist some point $t_0 \in [0, 1]$ such that
+        $p(t_0) \notin A \cup B$. Furthermore, $p(0) = \va \in A$ and $p(1) = \vb
+        \in B$, so we must have $t_0 \in (0, 1)$.
+
+        \item A convex set $E$ is such that if $\va, \vb \in E$, then the line
+        segment joining $\va$ and $\vb$ is contained in $E$, i.e.\ $p([0, 1])
+        \subseteq E$. Thus, if a convex set $E$ were separated as $E = A \cup B$,
+        then we could use the previous exercise to find $t_0$ such that $p(t_0)
+        \notin E$, which is a contradiction.
+    \end{enumerate} 
+    \end{solution}
+
+    \paragraph{Exercise 22.} A metric space is called separable if it contains a
+    countable dense set. Show that $\R^k$ is separable.
+    \begin{solution}
+        We claim that $\Q^k$ is a countable dense set in $\R^k$. This follows from
+        the fact that $\Q$ is countable and dense in $\R$. Given any point $\vx \in
+        \R^k$ and $\epsilon > 0$, we can always find points $y_i \in \Q$ such that
+        $|x_i - y_i| < \epsilon / \sqrt{k}$ for each component $x_i \in \R$ of
+        $\vx$. Thus, we have found $\vy \in \Q^k$ where \[
+            d(\vx, \vy)^2 = \sum_{i = 1}^k |x_i - y_i|^2 < k\cdot
+            \frac{\epsilon^2}{k} = \epsilon^2.
+        \] 
+    \end{solution}
+
+    \paragraph{Exercise 23.} A collection $\{V_\alpha\}$ of open sets of $X$ is
+    called a \textit{base} for $X$ if the following is true: For every $x \in X$ and
+    every open set $G \subset X$ such that $x \in G$, we have $x \in V_\alpha
+    \subset G$ for some $\alpha$. In other words, every open set in $X$ is the union
+    of a sub-collection of $\{V_\alpha\}$.
+
+    Prove that every separable metric space has a countable base.
+    \begin{solution}
+        Let $\{x_i\}_{i \in \N}$ be a countable dense subset of the separable metric
+        space $X$. Define $V_{ij} = B_{q_j}(x_i)$ for every positive rational $q_j$.
+        Note that $\{V_{ij}\}$ is countable, since the indexing set $\N \times \N$
+        is countable. We claim that $\{V_{ij}\}$ is a base for $X$. Indeed, for
+        every $x \in X$ and every open set $G \subset X$ with $x \in G$, we can find
+        a point $x_i \in G$ such that $d(x, x_i) < r/2$ for any $r$; choose this $r$
+        such that the open ball $B_r(x) \subset G$ (this can be done since $G$ is
+        open). Now choose a positive rational $q_j$ such that $d(x, x_i) < q_j < r/2$.
+        This immediately gives $x \in V_{ij} = B_{q_j}(x_i) \subset B_r(x) \subset
+        G$.
+    \end{solution}
+
+    \paragraph{Exercise 24.} Let $X$ be a metric space in which every infinite set
+    has a limit point. Prove that $X$ is separable.
+    \begin{solution}
+        Fix $\delta > 0$ and $x_i \in X$. Construct the sequence of points $x_1,
+        x_2, \dots$ such that every new point $x_{j + i} \in X$ is chosen to satisfy
+        $d(x_{j + 1}, x_i) \geq \delta$ for all previous $i = 1, \dots, j$. We claim
+        that this process terminates, i.e.\ $X$ can be covered by finitely many many
+        neighbourhoods of radius $\delta$. If this process did not terminate, then
+        the infinite set $\{x_i\}$ would not have any limit point; any point $x \in
+        X$ cannot have more than one point of $\{x_i\}$ in the neighbourhood
+        $B_{\delta / 2}(x)$ since every point $x_i$ is separated from the others by
+        at least $\delta$. Thus, we have found a finite set $X_\delta$ of open balls
+        $B_\delta(x_i)$ which cover $X$. Consider the collection of the centres
+        $x_{in}$ of all such covers $X_{1 / n}$. This is a countable set which is
+        dense in $X$. This is because given any $x \in X$ and $\epsilon > 0$, we can
+        find $k$ such that $0 < 1 /k < \epsilon$, and furthermore $X$ is covered by
+        $X_{1 / k}$ so there is an open ball $B_{1 / k}(x_{in})$ containing the
+        point $x$.
+    \end{solution}
+
+    \paragraph{Exercise 25.} Prove that every compact metric space $K$ has a
+    countable base, and that $K$ is therefore separable.
+    \begin{solution}
+        Given $n \in N$, consider the set of open balls $B_{1 / n}(x)$ for all $x
+        \in K$. This is an open cover of $K$, and hence must contain a finite
+        sub-cover $X_{1 / n}$ of $K$. Repeating this for all $n \in N$, we see that
+        the collection of the centres $x_{in}$ of all such $X_{1 / n}$ is a
+        countable dense subset of $X$, by the previous exercise. This proves that
+        $X$ is separable. The union of all $X_{1 / n}$, i.e.\ the collection of all
+        open balls $B_{1 / n}(x_{in})$, is a countable base of $X$.
+    \end{solution}
+
+    \paragraph{Exercise 26.} Let $X$ be a metric space in which every infinite set
+    set has a limit point. Show that $X$ is compact.
+    \begin{solution}
+        By Exercise~24, $X$ is separable, and by Exercise~23, $X$ has a countable
+        base $\{V_i\}$. Suppose that $\{X_\alpha\}$ is an open cover of $X$. Since
+        for every $x \in X$ we can choose $V_i$ such that $x \in V_i \subset
+        X_\alpha$, we can manufacture a countable sub-cover $\{X_{\alpha_i}\} \equiv
+        \{X_j\}$. Now suppose that no \textit{finite} collection of such $X_j$
+        covers $X$. This means that for every finite union $X_1 \cup \dots \cup
+        X_n$, the complement $Y_n$ is non-empty. However, the intersection of all
+        such $Y_n$ is empty, since the infinite union $X_1 \cup \dots$ covers $X$.
+        Thus, choose $y_n \in Y_n$ for each $n$, note that the infinite set $E =
+        \{y_n\}$ must have a limit point $y \in X$. Since $\{X_i\}$ covers $X$, we
+        have $y \in X_n$ for some $n$, and since $X_n$ is
+        open, we can find an open ball $B_r(y) \subset X_n$. Thus, $B_r(y) \cap Y_n
+        = \emptyset$, and since $Y_{k} \supset Y_{k + 1}$ we have $B_r(y) \cap
+        Y_{k\geq n} = \emptyset$. Thus, we have found a neighbourhood of $y$ not
+        containing any points in $Y_{k \geq n}$, specifically not containing any
+        $y_n$. This contradicts the fact that $y$ is a limit point of $E$.
+    \end{solution}
+    
+    \paragraph{Exercise 27.} Define a point $p$ in a metric space $X$ to be a
+    \textit{condensation point} of a set $E \subset X$ if every neighbourhood of $p$
+    contains uncountably many points of $E$.
+
+    Suppose $E \subset \R^k$, $E$ is uncountable, and let $P$ be the set of all
+    condensation points of $E$. Prove that $P$ is perfect and that at most countably
+    many points of $E$ are not in $P$. In other words, show that $P^c \cap E$ is at
+    most countable.
+    \begin{solution}
+        Let $\{V_n\}$ be a countable base of $\R^k$, and let $W$ be the union of
+        those $V_n$ such that $E \cap V_n$ is at most countable. Then, $E \cap W =
+        \bigcup_n (E \cap V_n)$ is at most countable since it is countable union of
+        at most countable sets. We claim that $P = W^c$.
+
+        First, let $x \in W^c$. Since $\{V_n\}$ is a countable base, given any open
+        ball $B_r(x)$, we can find $x \in V_k \subset B_r(x)$. Now, $x \notin W$
+        hence $x \notin V_n$ where $E \cap V_n$ is countable. Hence, $x \in V_k$
+        where $E \cap V_k$ is uncountable. Thus, the neighbourhood $B_r(x)$ contains
+        uncountably many points of $E$, so $x$ is a condensation point of $E$, i.e.\
+        $x \in P$. This gives $W^c \subseteq P$.
+
+        Next, let $x \in W$. This means that $x \in V_n$ where $E\cap V_n$ is
+        countable. Thus, any neighbourhood of $x$ contained within $V_n$ (recall
+        that the countable base in a separable metric space can consist of open
+        balls) can contain at most countably many points of $E$, so $x$ is not a
+        condensation point of $E$. Thus, $x \notin P$, i.e.\ $W \subseteq P^c$.
+        Together, we have $W^c = P$.
+
+        To show that $P$ is perfect, we must show that it is closed and that every
+        point of $P$ is a limit point. Note that the complement $P^c = W$ is open,
+        being a union of open sets $V_n$, immediately showing that $P$ is closed.
+        Now, let $x \in P$, and let $B_r(x)$ be a neighbourhood of $x$, with $B_r(x)
+        \cap E$ being uncountable. Suppose that there is no point $y \in B_r(x) \cap
+        P$, $y \neq x$. This means that all the points $y \in B_r(x)\setminus\{x\}$
+        are contained in $P^c = W$, hence all such $y$ belong to some $V_n$ where
+        $E \cap V_n$ is countable. Thus, $B_r(x) \setminus\{x\} \subset W$. Since $E
+        \cap W$ contains at most countably many points, we have $E \cap (B_r(x)
+        \setminus\{x\})$ containing at most countably many points, hence the
+        addition of the single point $x$ gives $E \cap B_r(x)$ containing at most
+        countably many points. This contradicts the fact that $x$ is a condensation
+        point of $E$. Thus, every point in $P$ must be a limit point of $P$, proving
+        that $P$ is perfect.
+    \end{solution}
+
+    \paragraph{Exercise 28.} Prove that every closed set in a metric space is the
+    union of a (possibly empty) perfect set and a set which is at most countable.
+    As a corollary, every countable closed set in $\R^k$ has isolated points.
+    \begin{solution}
+        Given any closed set $E$, note that its set of condensation points $P$ is
+        perfect, and the set $P^c \cap E$ is at most countable, with their union $P
+        \cup (P^c \cap E) = E$. This is because $P \subseteq \overline{E} = E$, since
+        every condensation point is also a limit point.
+
+        If $E$ were countable, then $P$ must be empty (there are no uncountably many
+        points of $E$ to choose from). Thus, the set $P^c \cap E = E$ is countable
+        and hence not perfect. This means that at least one of its points is not a
+        limit point, and is hence an isolated point.
+    \end{solution}
+    
+    \paragraph{Exercise 29.} Prove that every open set in $\R^1$ is the union of an
+    at most countable collection of disjoint segments.
+    \begin{solution}
+        Note that $\R$ is separable and hence has a countable base $\{V_i\}$ of open
+        intervals $(a_i, b_i)$. Thus, given any open set $O \subseteq \R$, for each
+        $x \in O$ choose $V_i$ such that $x \in V_j \subset O$. The countable union
+        of all such $V_j$ gives precisely $O$. This is because any $x \in O$ belongs
+        to some $V_j$, and any $x$ in the union of $V_j$ belongs to some $V_j$ which
+        is contained in $O$.
+
+        Now we refine our collection of $V_j$ based on the following rules. If $V_j
+        \subset V_k$, we eliminate $V_j$. If $V_j$ and $V_k$ overlap such that $a_j
+        < a_k < b_j < b_k$, then replace $V_j$ and $V_k$ with $V_j \cup V_k$. This
+        new collection of open intervals is thus by construction disjoint as
+        required.
+    \end{solution}
+
+    \paragraph{Exercise 30.} Imitate the proof of Theorem~2.43 to obtain the
+    following result.
+    \begin{quote}
+        If $\R^{k} = \bigcup_1^\infty F_n$, where each $F_n$ is a closed subset of
+        $\R^k$, then at least one $F_n$ has a non-empty interior.
+
+        \textit{Equivalent statement:} If $G_n$ is a dense open subset of $\R^k$,
+        for $n = 1, 2, 3, \dots$, then $\bigcap_1^\infty G_n$ is not empty (in fact,
+        it is dense in $\R^k$).
+    \end{quote}
+    \begin{solution}
+        First we show that the statements are equivalent. If the first statement is
+        true, and we have been given dense open subsets $G_n \subseteq \R^k$, set
+        $F_n = G_n^c$ for all $n$. All $F_n$ must have empty interiors since every
+        $G_n$ is dense in $\R^k$. Thus, their union cannot be the entirety of $R^k$,
+        hence the union of all $G_n$ must be non-empty.
+
+        If the second statement is true, and we have been given closed subsets $F_n
+        \subseteq \R^n$ whose union is $\R^k$, set $G_n = F_n^c$. Note that the
+        intersection of all such $G_n$ is empty, which means that at least one such
+        $G_k$ is not dense in $\R^k$. The corresponding $F_k$ thus has a non-empty
+        interior.
+
+        We prove the second statement. Let $G_n$ be dense open sets of $\R^k$. Pick
+        any open non-empty set $O \subseteq \R^k$, and note that since $G_1$ is
+        dense, the set $O \cap G_1$ is non-empty and open (note that $\overline{G_1}
+        = \R^k$, so $G_1^c$ is a collection of limit points of $G_1$, which is thus
+        closed). Thus, pick $x_1 \in O \cap G_1$ and construct the open ball
+        $B_{r_1}(x_1)$ contained within it. This is another non-empty open set,
+        hence $O_1 = B_{r_1}(x_1) \cap G_2$ is non-empty and open. Pick a point
+        $x_2$ in this set, and construct the open ball $B_{r_2}(x_2) \subset O_1
+        \subseteq B_{r_1}(x_1)$. Continuing in this manner, we have generated nested
+        sequence of open balls such that $B_{r_k}(x_k) \supseteq B_{r_{k + 1}}(x_{k
+        + 1})$.  Now, the closure of each of these balls is compact by the
+        Heine-Borel Theorem, hence the intersection of all these compact balls must
+        be non-empty by Theorem~2.36. Any point $x$ in this intersection is a common
+        element of all the compact balls, but every one of these compact balls is
+        contained within its parent open set $O_n = B_{r_n}(x_n) \cap G_{n + 1}$.
+        Hence, $x \in O \cap G_n$ for all $G_n$, thus the set $G = \bigcap_1^\infty
+        G_n$ intersects with every open set $O$ in at least one point, i.e.\ every
+        non-empty neighbourhood $O$ contains some point of $G$, which means that $G$
+        is dense in $\R^k$.
+    \end{solution}
+    
+    
     
 \end{document}
 % vim: set tabstop=4 shiftwidth=4 softtabstop=4:
