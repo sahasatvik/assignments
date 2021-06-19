@@ -60,6 +60,8 @@
 
 \begin{document}
     \maketitle
+    \tableofcontents
+
 
     \chapter{Symmetries of the Tetrahedron}
 
@@ -923,6 +925,205 @@
         d'\rangle$, hence $d = kd'$, or $d'$ divides $d$.
     \end{solution}
     
+    
 
+    \setcounter{chapter}{6}
+    \chapter{Isomorphisms}
+    
+    \paragraph{Exercise 7.1} Check that the numbers $1, 2, 4, 5, 7, 8$ form a group
+    under multiplication modulo $9$ and show that this group is isomorphic to
+    $\Z_6$.
+    \begin{solution}
+        We exhibit the multiplication tables of both groups.
+        \begin{center}
+        \begin{tabular}{c|cccccc}
+            \times_9 & 1 & 2 & 4 & 5 & 7 & 8 \\\hline
+            1 & 1 & 2 & 4 & 5 & 7 & 8 \\
+            2 & 2 & 4 & 8 & 1 & 5 & 7 \\
+            4 & 4 & 8 & 7 & 2 & 1 & 5 \\
+            5 & 5 & 1 & 2 & 7 & 8 & 4 \\
+            7 & 7 & 5 & 1 & 8 & 4 & 2 \\
+            8 & 8 & 7 & 5 & 4 & 2 & 1
+        \end{tabular} \qquad
+        \begin{tabular}{c|cccccc}
+            +_6 & 0 & 1 & 2 & 5 & 4 & 3 \\\hline
+            0   & 0 & 1 & 2 & 5 & 4 & 3 \\
+            1   & 1 & 2 & 3 & 0 & 5 & 4 \\
+            2   & 2 & 3 & 4 & 1 & 0 & 5 \\
+            5   & 5 & 0 & 1 & 4 & 3 & 2 \\
+            4   & 4 & 5 & 0 & 3 & 2 & 1 \\
+            3   & 3 & 4 & 5 & 2 & 1 & 0
+        \end{tabular}
+        \end{center}
+        Consider the map $f\colon \Z_9^\times \to \Z_6^+$ which sends \[
+            1 \to 0, \qquad 2 \to 1, \qquad 4 \to 2, \qquad 5 \to 5, \qquad 7 \to 4,
+            \qquad 8 \to 3.
+        \] It can be checked that this preserves the multiplication table of $\Z_6$,
+        and hence is an isomorphism.
+    \end{solution}
+
+    \paragraph{Exercise 7.2} Verify that the integers $1, 3, 7, 9, 11, 13, 17, 19$
+    form a group under multiplication modulo $20$. Explain why this group is not
+    isomorphic to $\Z_8$.
+    \begin{solution}
+        The fact that these elements form a group has been checked in Exercise~3.6.
+
+        The multiplication table shows that there are 3 elements $\{9, 11, 19\}$ in
+        the multiplication group of order 2. However, there is only 1 element $\{4\}$
+        of order 2 in $\Z_8$. Thus, there can be no isomorphism between these two
+        groups.
+    \end{solution}
+
+    \paragraph{Exercise 7.3} Show that the subgroup $\{e, (12)(34), (13)(24),
+    (14)(23)\}$ of $A_4$ is isomorphic to the group of plane symmetries of a
+    chessboard.
+    \begin{solution}
+        This is clear upon labelling the four edges of the chessboard
+        (anti-clockwise) with the labels $1, 2, 3, 4$ respectively. The
+        permutation$(12)(34)$ is the reflection $q_2$ about a diagonal, $(13)(24)$
+        is rotation $r$ by $\pi$, and $(14)(23)$ is the reflection $q_1$ about the
+        other diagonal. With this identification, we can check that $(12)(34) \cdot
+        (13)(24) = (14)(23)$ corresponds to $q_2r = q_1$, and so on for each of the
+        $16$ multiplications.
+    \end{solution}
+
+    \paragraph{Exercise 7.4} Produce a specific isomorphism between $S_3$ and $D_3$.
+    How many different isomorphisms are there from $S_3$ to $D_3$?
+    \begin{solution}
+        Consider the map which sends \[
+            e \to e, \qquad (12) \to s, \qquad (123) \to r.
+        \] It can be checked that this is an isomorphism by completing the
+        multiplication tables (note that we have mapped the generators of $S_3$ to
+        those of $D_3$), or by noting that every permutation of three vertices
+        defines exactly one plane symmetry of an equilateral triangle, and exhausts
+        them.
+        
+        There is are two order $3$ elements in each group, each of which can be
+        mapped to the other, fixing the other relation.
+        There are three order $2$ elements in both groups, each of which can be
+        mapped to another, again fixing the remaining relations.
+        Thus, there are $2 \times 3 = 6$ isomorphisms between $S_3$ and $D_3$.
+    \end{solution}
+    
+    \paragraph{Exercise 7.5} Let $G$ be a group. Show that the correspondence $x
+    \mapsto x^{-1}$ is an isomorphism from $G$ to $G$ if and only if $G$ is abelian.
+
+    \paragraph{Exercise 7.6} Prove that $\Q^{pos}$ is not isomorphic to $\Z$.
+    \begin{solution}
+        Suppose that the map $f\colon \Z \to \Q^{pos}$ is an isomorphism. Choose $n
+        \in \Z$ such that $f(n) = 2$. Then, $f(n) = f(n / 2 + n / 2) = f(n / 2)f(n /
+        2) = f(n / 2)^2$, which forces $f(n / 2) = \sqrt{2} \notin \Q^{pos}$.
+    \end{solution}
+
+    \paragraph{Exercise 7.7} If $G$ is a group, and if $g$ is an element of $G$,
+    show that the function $\varphi\colon G \to G$ defined by $\varphi(x) =
+    gxg^{-1}$ is an isomorphism. Work out this isomorphism when $G$ is $A_4$ and $g$
+    is the permutation $(123)$.
+    \begin{solution}
+        Note that this map is one-to-one, since if $\varphi(x) = \varphi(y)$, then
+        $gxg^{-1} = gyg^{-1}$ directly gives $x = y$. This map is also surjective,
+        since for any $x \in G$, observe that $\varphi(g^{-1}xg) = g(g^{-1}xg)g^{-1}
+        = x$. This, $\varphi$ is an isomorphism.
+
+        Note that in $A_4$, the inverse of $(123)$ is the permutation $(132)$.
+    \end{solution}
+
+
+    \paragraph{Exercise 7.8} Call $H$ a proper subgroup of the group $G$ if $H$ is
+    neither $\{e\}$ nor all of $G$. Find a group which is isomorphic to one of its
+    proper subgroups.
+    \begin{solution}
+        Let $\Z_{even}$ denote the group of even integers. Then the map
+        $\varphi\colon \Z \to \Z_{even}$, $n \mapsto 2n$ is an isomorphism.
+    \end{solution}
+    
+    \paragraph{Exercise 7.9} Suppose $G$ is a cyclic group. If $x$ generates $G$,
+    and if $\varphi\colon G \to G$ is an isomorphism, prove that $\varphi$ is
+    completely determined by $\varphi(x)$ and that $\varphi(x)$ also generates $G$.
+    Use these facts to find all isomorphisms from $\Z$ to $\Z$, and all isomorphisms
+    from $\Z_{12}$ to $\Z_{12}$.
+    \begin{solution}
+        Note that any $y \in G$ can be written as $y = x^k$ for some integer $k$,
+        hence $\varphi(y) = \varphi(x^k) = \varphi(x)^k$, which means that $\varphi$
+        is determined by $G$. Furthermore, every $y$ has a unique $z =
+        \varphi^{-1}(y)$, hence $y = \varphi(z) = \varphi(x)^\ell$ for some $\ell$,
+        which means that $\varphi(x)$ generates $G$.
+
+        Note that the only generators of $\Z$ are $1$ and $-1$, hence there are 2
+        isomorphisms from $\Z$ to $\Z$; the first which maps $1 \to 1$, the second
+        which maps $1 \to -1$.
+
+        The only generators of $\Z_{12}$ are $1, 5, 7, 11$. Thus, there are $4$
+        isomorphisms from $\Z_{12}$ to $\Z_{12}$, with each one mapping $1$ to one
+        of these four generators.
+    \end{solution}
+    
+    \paragraph{Exercise 7.10} Show that $\R$ is not isomorphic to $\Q$ and that $\R
+    - \{0\}$ is not isomorphic to $\Q - \{0\}$. Is $\R$ isomorphic to $\R - \{0\}$?
+    \begin{solution}
+        We see that $\R$ and $\Q$ cannot be isomorphic since there exists no
+        bijection between their elements; one is uncountably infinite and the other
+        is countably infinite. The same applies for $\R - \{0\}$ and $\Q - \{0\}$.
+
+        Here, we suppose that $\R$ has addition as the group operation, and $\R -
+        \{0\}$ has multiplication as the group operation. Again, they are not
+        isomorphic because $\R - \{0\}$ contains one element of order 2 ($-1$),
+        while $\R$ has no elements of order $2$.
+    \end{solution}
+    
+    \paragraph{Exercise 7.11} Prove that the subgroup of $S_6$ generated by $(1234)$
+    and $(56)$ is isomorphic to the group described in Exercise~7.2.
+    \begin{solution}
+        Note that elements of this subgroup $H$ are $e$, $(1234)$, $(13)(24)$,
+        $(1432)$, $(56)$, $(1234)(56)$, $(13)(24)(56)$, $(1432)(56)$. \[
+        \tiny
+        \begin{array}{r|rrrrrrrr}
+            & e & (1234) & (1432) & (13)(24) & (56) & (1234)(56) & (1432)(56) &
+            (13)(24)(56) \\\hline
+        e   & e & (1234) & (1432) & (13)(24) & (56) & (1234)(56) & (1432)(56) &
+            (13)(24)(56)\\
+        (1234) & (1234) & (13)(24) & e & (1432) & (1234)(56) & (13)(24)(56) & (56) & 
+        (1432)(56)\\
+        (1432) & (1432) & e & (13)(24) & (1234) & (1432)(56) & (56) & (13)(24)(56)
+        & (1234)(56) \\
+        (13)(24) & (13)(24) & (1432) & (1234) & e & (13)(24)(56) & (1432)(56) &
+        (1234)(56) & (56) \\
+        (56)   & (56) & (1234)(56) & (1432)(56) & (13)(24)(56) &e & (1234) & (1432) &
+        (13)(24)\\
+        (1234)(56) & (1234)(56) & (13)(24)(56) & (56) & (1432)(56) & (1234) &
+        (13)(24) & e & (1432)\\
+        (1432)(56) & (1432)(56) & (56) & (13)(24)(56) & (1234)(56) & (1432) &e &
+        (13)(24) & (1234) \\
+        (13)(24)(56) & (13)(24)(56) & (1432)(56) & (1234)(56) & (56) & (13)(24)
+        & (1432) & (1234) &e \\
+        \end{array}
+        \]
+        Thus, the map which sends $1, 3, 7, 9, 11, 13, 17, 19$ to the elements $e,
+        (1234), (1432), (13)(24)$, $(56), (1234)(56), (1432)(56), (13)(24)(56)$
+        respectively is an isomorphism.
+    \end{solution}
+
+    \paragraph{Exercise 7.12} Show that the subgroup of $S_4$ generated by $(1234)$
+    and $(24)$ is isomorphic to $D_4$.
+    \begin{solution}
+        Map $(1234) \to r$ and $(24) \to s$. By interpreting $1, 2, 3, 4$ as
+        vertices of a square (marked anti-clockwise), we see that $(1234)$
+        corresponds to a rotation by $\pi / 2$ and $(24)$ corresponds to a
+        reflection about the diagonal $14$. Any combination of these permutations is
+        a plane symmetry of the square; conversely, any plane symmetry of the square
+        is an element of $D_4$, and is hence of the form $r^k$ or $r^ks$ meaning
+        that it is a combination of the two given permutations from $S_4$. This,
+        together with the fact that the elements of this subgroup of $S_4$ combine
+        in the same way as the corresponding elements of $D_4$, proves that the
+        given map is an isomorphism.
+
+
+        Note that the sufficient relations on $D_4$ are $r^4 = e$, $s^2 = e$, $sr =
+        r^3s$. We see that $(1234)^4 = e$, $(24)^2 = e$, and $(24)(1234) =
+        (14)(23)$, $(1234)^3 = (1432)$, $(1432)(24) = (23)(14) = (14)(23)$. This is
+        sufficient to generate all the other relations in the subgroup of $S_4$, and
+        verify that they are identical to those in $D_4$.
+    \end{solution}
+    
 \end{document}
 % vim: set tabstop=4 shiftwidth=4 softtabstop=4:
