@@ -20,8 +20,9 @@ def trapezoidal(y, step):
 
 def simpson(y, step):
     '''
-    Returns the trapezoidal approximation of the integral under the curve
+    Returns the Simpson's approximation of the integral under the curve
     whose points are (x_i, y_i) where x_i are equally spaced by step.
+    Note that there must be an odd number of points x_i.
     '''
 
     # Must have an odd number of points
@@ -39,6 +40,6 @@ def f(x):
 x, h = np.linspace(0, 10, 101, retstep=True)
 y = f(x)
 print("Integral of x^2 from 0 to 10 : {:.4f}".format(10 ** 3 / 3))
-print("Rectangular approximation : {:.4f}".format(rectangular(y, h)))
-print("Trapezoidal approximation : {:.4f}".format(trapezoidal(y, h)))
-print("Simpson's approximation   : {:.4f}".format(simpson(y, h)))
+print("Rectangular approximation    : {:.4f}".format(rectangular(y, h)))
+print("Trapezoidal approximation    : {:.4f}".format(trapezoidal(y, h)))
+print("Simpson's approximation      : {:.4f}".format(simpson(y, h)))
