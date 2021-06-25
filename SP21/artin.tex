@@ -31,6 +31,7 @@
 \DeclareMathOperator\lcm{lcm}
 \DeclareMathOperator\aut{Aut}
 \DeclareMathOperator\im{im}
+\DeclareMathOperator\sgn{sgn}
 
 \renewcommand\vec\boldsymbol
 \def\vx{\vec{x}}
@@ -2621,7 +2622,7 @@
         which immediately gives $\varphi$ is injective and hence an isomorphism.
 
         The last fact can be verified by noting that $\im{\varphi} = G$, hence
-        $|\ker{\vaprhi}| = |G| / |\im{\varphi}| = 1$.
+        $|\ker{\varphi}| = |G| / |\im{\varphi}| = 1$.
 
         \item If $G$ is an abelian group of order $n$, the map $\varphi\colon G \to
         G$, $\varphi(x) = x^m$ where $m$ and $n$ are coprime is an automorphism.
@@ -2774,6 +2775,415 @@
         including it) with slope $y_0 / x_0$.
     \end{solution}
     
+
+
+    \section{Restriction of a Homomorphism to a Subgroup}
+
+    \paragraph{Exercise 1.} Let $G$ and $G'$ be finite groups whose orders have no
+    common factor. Prove that the only homomorphism $\varphi\colon G \to G'$ is the
+    trivial one $\varphi(x) = 1$ for all $x$.
+    \begin{solution}
+        This follows directly from $|G| = |\ker{\varphi}|\cdot|\im{\varphi}|$. Note
+        that $|\im{\varphi}|$ is a factor of $|G'|$, which forces $|\im{\varphi}| =
+        1$, hence $|\ker{\varphi}| = |G|$. Thus, $\ker{\varphi} = G$, which means
+        that $\varphi(x) = 1$ for all $x \in G$.
+    \end{solution}
+
+    \paragraph{Exercise 2.} Give an example of a permutation of even order which is
+    odd and an example of one which is even.
+    \begin{solution}
+        The permutation $(12)$ has odd sign, but $(12)^2 = 1$.
+        The permutation $(123)$ has even sign, but $(123)^3 = 1$.
+    \end{solution}
+
+    \paragraph{Exercise 3.} \mbox{}
+    \begin{enumerate}
+        \itemsep0em
+        \item Let $H$ and $K$ be subgroups of a group $G$. Prove that the
+        intersection $xH \cap yK$ of two cosets of $H$ and $K$ is either empty or
+        else is a coset of the subgroup $H \cap K$.
+        \item Prove that if $H$ and $K$ have finite index in $G$ then $H \cap K$
+        also has finite index.
+    \end{enumerate}
+    \begin{solution} \mbox{}
+    \begin{enumerate}
+        \item The intersection $H \cap K$ contains elements of the form $z = xh =
+        yk$, where $h \in H, k \in K$. Either this intersection is empty, or
+        contains at least one such $z$. Such an element demands $x = zh^{-1}$, and
+        $y = zk^{-1}$. In other words, $x$ and $y$ are elements of the coset
+        $z(H\cap K)$ (recall that $H \cap K$ is indeed a subgroup). Now pick any
+        element in $z(H \cap K)$, say $z' = zg$ where $g \in H \cap K$. Then, $z' =
+        (xh)g = x(hg)$, and $z' = (yk)g = y(kg)$, with $hg \in H$ and $kg \in K$,
+        hence $z' \in xH \cap yK$. Thus, we have shown that $xH \cap yK = z(H \cap
+        K)$.
+
+        \item If $H$ and $K$ have finite indices, that means that there are finitely
+        many cosets $x_iH$ and $y_jK$. Every combination $x_iH \cap y_jK$
+        corresponds to at most one coset $z_{ij}(H \cap K)$.
+        Furthermore, given some coset $z(H \cap K)$, we have elements $z' = zg$ with
+        $g \in H \cap K$, hence $z' \in zH \cap zK$. Thus, we have exhausted all
+        cosets of $H \cap K$, which must be finite.
+    \end{enumerate} 
+    \end{solution}
+    
+    \paragraph{Exercise 4.} Prove Proposition~7.1.
+    \begin{quote}
+        The intersection $K \cap H$ of two subgroups is a subgroup of $G$. If $K$ is
+        a normal subgroup of $G$, then $K \cap H$ is a normal subgroup of $H$.
+    \end{quote}
+    \begin{solution}
+        First, note that $1 \in K$ and $1 \in H$, hence $1 \in K \cap H$. Next, pick
+        $x, y \in K \cap H$. Then we have $xy \in H$ and $xy \in K$ due to the
+        closure of multiplication in each of the groups, hence $xy \in K \cap H$.
+        Finally, pick $x \in K \cap H$, whence $x^{-1} \in K$ and $x^{-1} \in H$
+        hence $x^{-1} \in K \cap H$. This proves that $K \cap H$ is a subgroup of
+        $G$.
+
+        Suppose that $K$ is a normal subgroup of $G$. Pick some $x \in K \cap H$,
+        and $g \in G$. Note that $x \in K$ implies that the conjugate $gxg^{-1} \in
+        K$, hence $gxg^{-1} \in K \cap H$. This proves that $K \cap H$ is a normal
+        subgroup of $G$.
+    \end{solution}
+
+    \paragraph{Exercise 5.} Let $H, N$ be subgroups of a group $G$, with $N$ normal.
+    Prove $HN = NH$ and that this set is a subgroup.
+    \begin{solution}
+        Pick $x \in HN$, hence $x = hn$ for some $h \in H$, $n \in N$. Since $n \in
+        N$ is in a normal subgroup, we must have $hnh^{-1} = n' \in N$. Thus, $hn =
+        n'h$, hence $x = n'h$, so $HN \subseteq NH$. A similar argument can be used
+        to show $NH \subseteq HN$, hence $HN = NH$.
+
+        Note that $1 \in H$ and $1 \in N$, hence $1 \in HN$. Next, pick $x, y \in HN
+        = NH$, thus we can choose $x = h_1n_1$ and $y = n_2h2$, so $xy = h_1n_1n2h_2
+        = h_1n_3h_2$. Further note that $n_3h_2 \in NH = HN$, hence $n_3h_2 =
+        h_4n_4$, so $xy = h_1h_4n_4 = (h_1h_4)n_4 \in HN$. Finally, pick $x \in HN$,
+        so $x = hn$, whence $x^{-1} = n^{-1}h^{-1} \in NH = HN$. This proves that
+        $HN = NH$ is a subgroup.
+    \end{solution}
+    
+    \paragraph{Exercise 6.} Let $\varphi\colon G \to G'$ be a group homomorphism
+    with kernel $K$, and let $H$ be another subgroup of $G$. Describe
+    $\varphi^{-1}(\varphi(H))$ in terms of $H$ and $K$.
+    \begin{solution}
+        We claim that $\varphi^{-1}(\varphi(H)) = KH$. First, let $x \in KH$, i.e.\
+        $x = kh$ for some $k \in K$, $h \in K$. Then, $\varphi(x) = \varphi(kh) =
+        \varphi(k)\varphi(h) = \varphi(h)$, hence $x \in \varphi^{-1}(\varphi(H))$.
+        Next, let $x \in \varphi^{-1}(\varphi(H))$, i.e.\ $\varphi(x) = \varphi(h)$
+        for some choice of $h \in H$. Then, $\varphi(x)\varphi(h)^{-1} = 1$, which
+        gives $\varphi(xh^{-1}) = 1$. Thus, $xh^{-1} \in K$ so $xh^{-1} = k$ for
+        some $k \in K$. This gives $x = kh \in KH$.
+    \end{solution}
+
+    \paragraph{Exercise 7.} Prove that a group of order $30$ can have at most $7$
+    subgroups of order $5$.
+    \begin{solution}
+        Consider the intersection $G_1 \cap G_2$ of two subgroups of $G$, both of
+        order $5$. Note that $G_1 \cap G_2$ is also a subgroup of $G_1$ as well as
+        $G_2$. Lagrange's Theorem gives \[
+            |G_1 \cap G_2| \text{ divides } |G_1| = |G_2| = 5.
+        \] This forces $|G_1 \cap G_2| = 1$ for distinct subgroups $G_1$ and $G_2$,
+        i.e.\ distinct subgroups intersect only at the identity element. Thus, $n$
+        subgroups require at least $1 + (5 - 1)n = 1 + 4k$ distinct elements in the
+        group $G$. Eight or more subgroups require $1 + 4\times 8 = 33$ elements in
+        $G$, a contradiction.
+    \end{solution}
+    
+    \paragraph{Exercise 8.} Prove the \textit{Correspondence Theorem}: Let
+    $\varphi\colon G \to G'$ be a surjective group homomorphism with kernel $N$. The
+    set of subgroups $H'$ of $G'$ is in bijective correspondence with the set of
+    subgroups $H$ of $G$ which contain $N$, the correspondence being defined by the
+    maps $H \rightsquigarrow \varphi(H)$ and $H' \rightsquigarrow \varphi^{-1}(H')$.
+    Moreover, normal subgroups of $G$ correspond to normal subgroups of $G'$.
+    \begin{solution}
+        
+    \end{solution}
+
+    \paragraph{Exercise 9.} Let $G$ and $G'$ be cyclic groups of orders $12$ and $6$
+    generated by elements $x$, $y$ respectively, and let $\varphi\colon G \to G'$ be
+    the map defined by $\varphi(x^i) = y^i$. Exhibit the correspondence referred to
+    in the previous problem explicitly.
+    \begin{solution}
+        It is clear that the kernel of $\varphi$ is the set $\{1, x^6\}$. We now
+        illustrate the correspondence between those subgroups of $G$ containing this
+        kernel, and the subgroups of $G'$ (whose entirety is the image of $\varphi$).
+        \[
+        \begin{array}{rl}
+             \{1, x^6\} &\rightsquigarrow \{1\}, \\
+             \{1, x^3, x^6, x^9\} &\rightsquigarrow \{1, y^3\}, \\
+             \{1, x^2, x^4, x^6, x^8, x^{10}\} &\rightsquigarrow \{1, y^2, y^4\}, \\
+             \{1, x, x^2, x^3, x^4, \dots, x^{10}, x^{11}\} &\rightsquigarrow \{1, y,
+             y^2, y^3, y^4, y^5\}.
+        \end{array}
+        \] Note that we have exhausted all subgroups of $G'$ on the right. All
+        subgroups here are normal, since cyclic groups are abelian.
+    \end{solution}
+    
+
+
+    \section{Products of Groups}
+
+    \paragraph{Exercise 1.} Let $G$, $G'$ be groups. What is the order of the
+    product group $G \times G'$?
+    \begin{solution}
+        Clearly, the Cartesian product $G\times G'$ contains $|G|\,|G'|$ elements,
+        which must then be the order of the product group.
+    \end{solution}
+    
+    \paragraph{Exercise 2.} Is the symmetric group $S_3$ a direct product of
+    non-trivial groups?
+    \begin{solution}
+        No. Suppose that $S_3$ is isomorphic to $G_1\times G_2$ for non-trivial
+        groups $G_1$, $G_2$. Since $|S_3| = 6$, the previous exercise forces $|G_1|
+        = 2$, $|G_2| = 3$ (or the other way around). These are cyclic groups (note
+        that a group of order $3$ must contain the elements $1, b, b^{-1}$).
+        Thus, if $G_1 = \{1, a\}$, $G_2 = \{1, b, b^2\}$, the element $(a, b)$ turns
+        out to have order $6$. \[
+            (a, b)^2 = (1, b^2), \qquad (a, b)^3 = (a, 1), \qquad (a, b)^4 = (1, b),
+            \qquad (a, b)^5 = (a, b^2), \qquad (a, b)^6 = (1, 1).
+        \] However, $S_3$ contains no element of order $6$.
+    \end{solution}
+    
+    \paragraph{Exercise 3.} Prove that a finite cyclic group of order $rs$ is
+    isomorphic to the product of cyclic groups of orders $r$ and $s$ if and only if
+    $r$ and $s$ have no common factor.
+    \begin{solution}
+        Suppose that $C_n$ is a cyclic group of order $n$, and $n = rs$ with
+        $\gcd(r, s) = 1$. Consider the homomorphism \[
+            \varphi\colon C_n \to C_r\times C_s, \qquad x^i\rightsquigarrow (y^i,
+            z^i)
+        \] where $C_n, C_r, C_s$ are generated by $x, y, z$ respectively. Note that
+        the power maps $x^i \rightsquigarrow y^i$ and $x^i \rightsquigarrow z^i$ are
+        homomorphisms individually. The kernel of $\varphi$ is the pre-image of $(1,
+        1)$, hence any $x^j$ in the kernel satisfies $y^j = 1$ and $z^j = 1$. Note
+        that $y$ and $z$ have orders $r$ and $s$, so we have $r \,|\, j$ and $s\,|\,
+        j$. Because $r$ and $s$ are coprime, the smallest positive solution for $j$
+        is $rs = n$. Thus, the kernel of $\varphi$ contains only $x^n = 1$, hence
+        this map is injective. The orders of $C_n$ and $C_r\times C_s$ are equal,
+        hence $\varphi$ is an isomorphism.
+
+        Now suppose that $C_n$ is isomorphic to $C_r\times C_s$, with $\varphi\colon
+        C_n \to C_r\times C_s$ being such an isomorphism. We demand $n = rs$ by
+        equating the orders of the groups. If $r$ and $s$ share a common factor $t >
+        1$, note that \[
+            (y, z)^{rs / t} = ((y^{r})^{s / t}, (z^{s})^{r / t}) = (1, 1),
+        \] with $rs / t = n / t < n$. Thus, the kernel of $\varphi$ is non-trivial,
+        meaning that $\varphi$ cannot have been an isomorphism.
+    \end{solution}
+    
+    \paragraph{Exercise 4.} In each of the following cases, determine whether or not
+    $G$ is isomorphic to the product of $H$ and $K$.
+    \begin{enumerate}
+        \itemsep0em
+        \item $G = \R^\times$, $H = \{\pm 1\}$, $K = \{\text{positive real
+        numbers}\}$.
+        \item $G = \{\text{invertible upper triangular }2\times 2\text{
+        matrices}\}$, $H = \{\text{invertible diagonal matrices}\}$, $K =
+        \{\text{upper triangular matrices with diagonal entries }1\}$.
+        \item $G = \C^\times$, $H = \{\text{unit circle}\}$, $K = \{\text{positive
+        reals}\}$.
+    \end{enumerate}
+    \begin{solution} \mbox{}
+    \begin{enumerate}
+        \item Yes. Consider the map \[
+            \varphi\colon \R^\times \to \{\pm 1\}\times \R^{pos}, \qquad
+            x \rightsquigarrow (\sgn{x}, |x|).
+        \] Clearly, if $z = xy$ where $x, y \in \R^\times$, we have \[
+            (\sgn{x}, |x|)\cdot(\sgn{y}, |y|) = (\sgn{x}\sgn{y}, |x| |y|) =
+            (\sgn{xy}, |xy|) = (\sgn{z}, |z|).
+        \] Furthermore, every element $(s, r) \in \{\pm 1\}\times\R^{pos}$
+        corresponds to $sr$ in $\R^\times$, and if $(s_1, r_1) = (s_2, r_2)$, then
+        we demand $s_1 = s_2$ and $r_1 = r_2$, hence $s_1r1 = s_2r2$. Thus,
+        $\varphi$ is an isomorphism.
+
+        \item No. Note that both $H$ and $K$ are abelian groups, but $G$ is not.
+
+        Note that $(h_1, k_1)(h_2, k_2) = (h_1h_2, k_1k_2) = (h_2h_1, k_2k_1) = (h_2,
+        k_2)(h_1, k_1)$ when $H$ and $K$ are both abelian, hence if $\varphi\colon
+        H\times K \to G$ is to be an isomorphism, with $\varphi(h_i, k_i) = g_i$, we
+        demand $g_1g_2 = g_2g_1$.
+
+        \item Yes. Note that every point in the unit circle can be uniquely assigned
+        an angle $x \in [0, 2\pi)$, and hence every point on the unit circle is
+        associated with the unique complex number $e^{ix}$. Now, construct the map
+        \[
+            \varphi\colon \{e^{ix}\}\times \R^{pos} \to \C^\times, \qquad
+            (e^{ix}, r) \rightsquigarrow re^{ix}.
+        \] This map is clearly a bijection (every complex number has a unique
+        positive norm, and can be assigned a unique argument/angle; two complex
+        numbers that are equal have the same norm and the same argument).
+        Furthermore, note that \[
+            (e^{ix_1}, r_1)\cdot (e^{ix_2}, r_2) = (e^{i(x_1 + x_2)}, r_1r_2), \qquad 
+            r_1e^{ix_1} r_2e^{ix_2} = r_1r_2 e^{i(x_1 + x_2)},
+        \] which proves that $\varphi$ is an isomorphism.
+    \end{enumerate}
+    \end{solution}
+    
+    \paragraph{Exercise 5.} Prove that the product of two infinite cyclic groups is
+    not infinite cyclic.
+    \begin{solution}
+        Suppose that $G$ and $H$ are infinite cyclic groups generated by $g$
+        and $h$ respectively, and suppose that $G_1 \times G_2$ is generated by
+        the element $(g^i, h^j)$. This requires every element of $G\times H$ to be
+        of the form $(g^{in}, h^{jn})$ for integers $n$. Now, $(g, 1)$ is in the
+        desired group, so $g^{in} = g$, and $h^{jn} = 1$. Thus, $j = 0$. A similar
+        argument with $(1, h)$ forces $i = 0$, but clearly $(g^i, h^j) = (1, 1)$
+        cannot generate $(g, h)$. Thus, the product $G\times H$ is not cyclic.
+    \end{solution}
+    
+    \paragraph{Exercise 6.} Prove that the centre of the product of two groups is
+    the product of their centres.
+    \begin{solution}
+        Suppose that some $(x, y)$ commutes with all choices of $(a, b) \in G\times
+        H$. This immediately gives $xa = ax$, $yb = by$ for all choices of $a \in
+        G$, $b \in H$ hence $x, y$ are in the centres of $G$, $H$ respectively.
+
+        Similarly, if $xa = ax$ for all $a \in G$ and $yb = by$ for all $b \in G$,
+        we must have $(x, y)(a, b) = (xa, yb) = (ax, by) = (a, b)(x, y)$ for all
+        $(a, b) \in G\times H$, which means that $(x, y)$ is in the centre of
+        $G\times H$.
+    \end{solution}
+    
+    \paragraph{Exercise 7.} \mbox{}
+    \begin{enumerate}
+        \itemsep0em
+        \item Let $H$, $K$ be subgroups of a group $G$. Show that the set of
+        products $HK = \{hk: h \in H, k \in K\}$ is a subgroup if and only if $HK =
+        KH$.
+        \item Give an example of a group $G$ and two subgroups $H$, $K$ such that
+        $HK$ is not a subgroup.
+    \end{enumerate}
+    \begin{solution} \mbox{}
+    \begin{enumerate}
+        \item Suppose that $HK = KH$. Clearly, $HK$ contains $1 1 = 1$, and if $x
+        \in HK$, then $x = hk$ for some $h\in H$, $k \in K$ so $x^{-1} =
+        k^{-1}h^{-1} \in KH = HK$. Finally if $x = h_1k_1$, $y = h_2k_2$ for $h_i
+        \in H, k_i \in K$, then $xy = h_1k_1h_2k_2 = h_1(k_1h_2)k_2 =
+        h_1(h_2'k_1')k_2 = (h_1h_2')(k_1'k_2) \in HK$, since $k_1h_2 \in KH = HK$.
+        This proves that $HK$ is a subgroup of $G$.
+
+        \item Consider $G = S_4$, $H = \{1, (14)\}$, $K = \{1, (123), (132)\}$. We
+        compute \[
+            HK = \{1, (14), (123), (1234), (132), (1324)\},
+        \] \[
+            KH = \{1, (14), (123), (1423), (132), (1432)\}.
+        \] It is clear that $HK$ is not a subgroup; note that the inverse
+        $(1234)^{-1} = (1432)$ is not present in $HK$.
+    \end{enumerate}
+    \end{solution}
+
+    \paragraph{Exercise 8.} Let $G$ be a group containing normal subgroups of orders
+    3 and 5 respectively. Prove that G contains an element of order 15.
+    \begin{solution}
+        Recall that in Section~2.7,~Exercise~5, we have shown that for subgroups $H$
+        and $K$ of $G$ with either one normal, $HK = KH$ and hence $HK$ is a
+        subgroup of $G$. Section~2.6,~Exercise~3 shows that each of the
+        groups $H$ and $K$ of prime orders $3$ and $5$ contain an element each of
+        order $3$ and $5$, say $x$ and $y$. In other words, $x$ and $y$ generate
+        $H$ and $K$, so they are cyclic, abelian groups. Section~2.6,~Exercise~5
+        shows that $H$ and $K$ are disjoint. Proposition~8.6~(c) shows that $HK$ is
+        isomorphic to $H \times K$. Section~2.8,~Exercise~3 shows that $H\times K$
+        is isomorphic to the finite cyclic group of order $15$. The generator of
+        this group has order $15$, thus $G$ contains an element of order $15$.
+    \end{solution}
+
+    \paragraph{Exercise 9.} Let $G$ be a finite group whose order is a product of
+    two integers: $n = ab$. Let $H$, $K$ be subgroups of $G$ of orders $a$ and $b$
+    respectively. Assume that $H \cap K = \{1\}$. Prove that $HK = G$. Is $G$
+    isomorphic to the product group $H \times K$?
+    \begin{solution}
+        It is clear that $HK \subseteq G$. We claim that all $ab$ possible products
+        $h_ik_j$ in $HK$ are distinct, which would force $HK = G$. Suppose that
+        $h_1k_1 = h_2k_2$, where either $h_1 \neq h_2$ or $k_1 \neq k_2$ or both.
+        The possibility that exactly one of $h_1 = h_2$ and $k_1 = k_2$ can be
+        discarded immediately by cancellation. Thus, $h_1 \neq h_2$ and $k_1 \neq
+        k_2$. We have $h_1 = h_2k_2k_1^{-1} = h_2 (k_2k_1^{-1})$, thus $h_2^{-1}h_1
+        = k_2k_1^{-1}$, with neither side equal to $1$. This is a contradiction,
+        since $H \cap K = \{1\}$.
+
+        Consider $G = D_3$, $H = \{1, s\}$, $K = \{1, r, r^2\}$. Note that $H \times
+        K$ is the cyclic group of order $6$, and hence cannot be isomorphic to
+        $D_3$.
+    \end{solution}
+
+    \paragraph{Exercise 10.} Let $x \in G$ have order $m$, and let $y \in G'$ have
+    order $n$. What is the order of $(x, y)$ in $G \times G'$?
+    \begin{solution}
+        We claim that the desired order is $\lcm(m, n) = mn / d$, where $d = \gcd(m,
+        n)$. Clearly, \[
+            (x, y)^{mn / d} = ((x^m)^{n / d}, (y^n)^{m / d}) = (1, 1),
+        \] so the order of $(x, y)$ must divide $mn / d$. Suppose that the order of
+        $(x, y)$ is $mn / dt$ for $t > 1$. This means that both $x^{mn / dt} = 1$
+        and $y^{mn / dt} = 1$, so $m$ and $n$ both divide $mn / dt$. Thus, $n / dt$
+        and $m / dt$ are both integers, meaning that $dt$ is a common factor of $m$
+        and $n$, contradicting the maximality of $d$ as the greatest common factor.
+    \end{solution}
+    
+    \paragraph{Exercise 11.} Let $H$ be a subgroup of a group $G$, and let
+    $\varphi\colon G \to H$ be a homomorphism whose restriction to $H$ is the
+    identity map: $\varphi(h) = h$, if $h \in H$. Let $N = \ker{\varphi}$.
+    \begin{enumerate}
+        \itemsep0em
+        \item Prove that if $G$ is abelian then it is isomorphic to the product
+        group $H \times N$.
+        \item Find a bijective map $G \to H \times N$ without the assumption that
+        $G$ is abelian, but show by an example that $G$ need not be isomorphic to
+        the product group.
+    \end{enumerate}
+    \begin{solution} \mbox{}
+    \begin{enumerate}
+        \item We claim that $HN = G$. Recall that $N$ is a normal subgroup, so $HN =
+        NH$ hence $HN$ is a subgroup of $G$. Now, suppose that $g \in G$ such that
+        $g \notin HN$, i.e.\ there is no choice of $h \in H$, $n \in N$ such that $g
+        = hn$. Thus, $g' = \varphi(g) \notin H$ (if it were, then $\varphi(g) = h =
+        \varphi(h)$, so $\varphi(gh^{-1}) = 1$ hence $gh^{-1} = n$ for some $n \in
+        N$). This is a contradiction, since $\im{\varphi} = H$, proving that $HN =
+        G$. Furthermore, $H \cap N = \{1\}$; to see this, note that for all $x \in H
+        \cap N$, $\varphi(x) = x$ and $\varphi(x) = 1$. Thus, every element $g \in
+        G$ has a unique decomposition $g = hn$ where $h \in H$, $n \in N$. If $g =
+        hn = h'n'$, then $h'^{-1}h = n'n^{-1}$ with the left side in $H$ and the
+        right in $N$, forcing both to be equal to $1$ hence $h = h'$, $n = n'$.
+
+        The above establishes that the map $\psi\colon G \to H\times N$, $g
+        \rightsquigarrow (h, n)$ where $g = hn$ with $h \in H$, $n \in N$ is a
+        bijection. To show that this is an isomorphism, note that for $g_1 = h_1n_1$
+        and $g_2 = h_2n2$, we have $g_1g_2 = h_1n_1h_2n_2 = h_1h_2n_1n_2$ hence
+        $\psi(g_1g_2) = (h_1h_2, n_1n_2) = \psi(g_1)\psi(g_2)$, using the fact that
+        $G$ is abelian. Thus, $G$ is isomorphic to $H \times N$.
+
+        \item The map $\psi$ described earlier is the required bijection. It need
+        not be an isomorphism when $G$ is not abelian; choose $G$, $H$, $N$ as in
+        Exercise~4(b), i.e.\ let $G$ be the set of invertible upper triangular
+        matrices, let $H$ be the set of invertible diagonal matrices, and let $N$ be
+        the set of upper triangular matrices with diagonal entries $1$. With the
+        homomorphism $\varphi\colon G \to H$, \[
+            \begin{bmatrix}
+                a & b \\ 0 & d
+            \end{bmatrix} \rightsquigarrow \begin{bmatrix}
+                a & 0 \\ 0 & d
+            \end{bmatrix},
+        \] where $ad \neq 0$, we see that $\varphi$ fixes $H$, with $N$ being the
+        kernel. Note that $\varphi$ is indeed a homomorphism, because \[
+            \begin{bmatrix}
+                a_1 & b_1 \\ 0 & d_1
+            \end{bmatrix} \begin{bmatrix}
+                a_2 & b_2 \\ 0 & d_2
+            \end{bmatrix} = \begin{bmatrix}
+                a_1a_2 & a_1b_2 + b_1d_2 \\ 0 & d_1d_2
+            \end{bmatrix} \rightsquigarrow \begin{bmatrix}
+                a_1a_2 & 0 \\ 0 & d_1d_2
+            \end{bmatrix},
+        \] \[
+            \begin{bmatrix}
+                a_1 & 0 \\ 0 & d_1
+            \end{bmatrix} \begin{bmatrix}
+                a_2 & 0 \\ 0 & d_2
+            \end{bmatrix} = \begin{bmatrix}
+                a_1a_2 & 0 \\ 0 & d_1d_2
+            \end{bmatrix}.
+        \] However, as we have already noted earlier, the product group $H \times N$
+        is not isomorphic to $G$, the former being abelian while the latter is not.
+    \end{enumerate}
+    \end{solution}  
     
     
 \end{document}
