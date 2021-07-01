@@ -1,0 +1,88 @@
+\documentclass[11pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{bm}
+\usepackage[scr]{rsfso}
+\usepackage{xcolor}
+\usepackage{hyperref}
+
+\geometry{a4paper, margin=1in, headheight=14pt}
+
+\renewcommand{\labelenumi}{(\alph{enumi})}
+\renewcommand{\labelenumii}{(\roman{enumii})}
+
+\def\C{\mathbb{C}}
+\def\R{\mathbb{R}}
+\def\Q{\mathbb{Q}}
+\def\Z{\mathbb{Z}}
+\def\N{\mathbb{N}}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\newtheorem*{example}{Example}
+\newtheorem*{solution}{Solution}
+
+\title{
+    \Large\textsc{Summer Programme 2021} \\
+    \vspace{10pt}
+    \textit{\Large Approximating continuous functions by smooth functions:} \\
+    \huge The Stone-Weierstrass Theorem
+}
+\author{
+    \large Satvik Saha%
+    % \thanks{Email: \tt ss19ms154@iiserkol.ac.in}
+    \\\textsc{\small 19MS154}
+}
+\date{\normalsize
+    \textit{Indian Institute of Science Education and Research, Kolkata, \\
+    Mohanpur, West Bengal, 741246, India.} \\
+    % \vspace{10pt}
+    % \today
+}
+
+
+\begin{document}
+    \maketitle
+
+    \section{Continuous functions}
+    \begin{definition}
+        A function $f\colon X \to Y$ is continuous if $f^{-1}(\mathscr{O})$ is open
+        in $X$ for every open set $\mathscr{O}$ in $Y$.
+    \end{definition}
+
+    \begin{lemma}
+        If $X$ and $Y$ are metric spaces, a function $f\colon X \to Y$ is continuous
+        if given $x \in X$ and $\epsilon > 0$, there exists $\delta > 0$ such that
+        $d(f(x), f(x')) < \epsilon$ for all $x' \in X$ satisfying $d(x, x') <
+        \delta$.
+    \end{lemma}
+
+    \begin{definition}
+        Let $X$ and $Y$ be metric spaces.  A function $f\colon X \to Y$ is uniformly
+        continuous if given $\epsilon > 0$, there exists $\delta > 0$ such that
+        $d(f(x), f(x')) < \epsilon$ for all $x, x' \in X$ satisfying $d(x, x') <
+        \delta$.
+    \end{definition}
+
+    \begin{theorem}
+        A continuous function on a compact metric space is uniformly continuous.
+    \end{theorem}
+
+    \section{The Stone-Weierstrass Theorem}
+    \begin{theorem}
+        Let $\mathscr{A}$ be an algebra of real continuous functions on a compact
+        set $K$. If $\mathcr{A}$ separates points on $K$ and vanishes at no point of
+        $K$, then the uniform closure of $\mathscr{A}$ consists of all real
+        continuous functions on $K$.
+    \end{theorem}
+
+\end{document}
