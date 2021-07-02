@@ -37,9 +37,10 @@ def f(x):
 
     return x**2
 
-x, h = np.linspace(0, 10, 101, retstep=True)
-y = f(x)
-print("Integral of x^2 from 0 to 10 : {:.4f}".format(10 ** 3 / 3))
-print("Rectangular approximation    : {:.4f}".format(rectangular(y, h)))
-print("Trapezoidal approximation    : {:.4f}".format(trapezoidal(y, h)))
-print("Simpson's approximation      : {:.4f}".format(simpson(y, h)))
+if __name__ == '__main__':
+    x, h = np.linspace(0, 10, 101, retstep=True)
+    y = f(x)
+    print("Integral of x^2 from 0 to 10 : {:.4f}".format(10 ** 3 / 3))
+    print("Rectangular approximation    : {:.4f}".format(rectangular(y, h)))
+    print("Trapezoidal approximation    : {:.4f}".format(trapezoidal(y, h)))
+    print("Simpson's approximation      : {:.4f}".format(simpson(y, h)))
