@@ -3212,7 +3212,485 @@
         is not isomorphic to $G$, the former being abelian while the latter is not.
     \end{enumerate}
     \end{solution}  
+
+
+    \section{Modular Arithmetic}
+
+    \paragraph{Exercise 1.} Compute $(7 + 14)(3 - 16)$ modulo 17.
+    \begin{solution}
+        We have \[
+            (7 + 14)(3 - 16) \equiv (21)(-13) \equiv (4)(4) \equiv 16 \pmod{17}.
+        \] 
+    \end{solution}
+
+    \paragraph{Exercise 2.} \mbox{}
+    \begin{enumerate}
+        \itemsep0em
+        \item Prove that the square $a^2$ of an integer $a$ is congruent to 0 or 1
+        modulo 4.
+        \item What are the possible values of $a^2$ modulo $8$?
+    \end{enumerate}
+    \begin{solution} \mbox{}
+    \begin{enumerate}
+        \item Note that $a \bmod{4}$ is exactly one of $0, 1, 2, 3$, hence the
+        corresponding possibilities for $a^2 \bmod{4}$ are $0, 1, 4, 9$, which reduce
+        to just $0$ or $1$ modulo 4.
+        \item Again, the possibilities for $a\bmod{8}$ are $0, \pm 1, \pm 2, \pm 3,
+        4$ only, hence $a^2 \bmod{8}$ must be one of $0, 1, 4, 9, 16$ which reduce to
+        $0, 1, 4$ modulo 8.
+    \end{enumerate}
+    \end{solution}
+
+    \paragraph{Exercise 3.} \mbox{}
+    \begin{enumerate}
+        \itemsep0em
+        \item Prove that $2$ has no inverse modulo $6$.
+        \item Determine all integers $n$ such that $2$ has an inverse modulo $n$.
+    \end{enumerate}
+    \begin{solution} \mbox{}
+    \begin{enumerate}
+        \item We need only check the products of $2$ with $0, 1, 2, 3, 4, 5$, which
+        are $0, 2, 4, 6, 8, 10$, reducing to just $0, 2, 4$ modulo $6$. Thus, $2$ has
+        no inverse modulo $6$.
+        \item For all odd natural numbers $n = 2k - 1$, we have $2\cdot k \equiv 1
+        \pmod{n}$.
+
+        For all even integers $n = 2k$, note that $2\cdot m \equiv 1 \pmod{n}$ would
+        imply that $2m - 1 = n\ell = 2k\ell$ for some multiplier $\ell$, which is
+        absurd because the left side is odd while the right is even.
+    \end{enumerate}
+    \end{solution}
+
+    \paragraph{Exercise 4.} Prove that every integer $a$ is congruent to the sum of
+    its decimal digits modulo 9.
+    \begin{solution}
+        Note that $10 \equiv 1 \pmod{9}$, hence $10^k \equiv 1 \pmod{9}$ for all
+        powers $10^k$. Thus, given any integer $a$, we can expand it in base $10$ as
+        \[
+            a = \sum_{k = 0}^n a_k 10^k \equiv \sum_{k = 1}^n a_k \pmod{9},
+        \] but the latter sum is simply the sum of all the decimal digits of $a$.
+        Here, $n$ denotes the highest power of $10$ in $a$.
+    \end{solution}
+    
+    \paragraph{Exercise 5.} Solve the congruence $2x = 5$ (a) modulo 9 and (b) modulo
+    6.
+    \begin{solution} \mbox{}
+    \begin{enumerate}
+        \item We can have $x = 0, \pm 1, \pm 2, \pm 3, \pm 4$, hence $2x = 0, \pm 1,
+        \pm 4, \pm 6, \pm 8$ $\equiv 0, \pm 1, \pm 4, \mp 3, \mp 1 \pmod{9}$. Now, $5
+        \equiv -4 \pmod{9}$, so the only solutions are $x = -2 \equv 7 \pmod{9}$.
+        Thus, the complete class of solutions is $x = 9k + 7$, where $k \in \Z$.
+
+        \item There are no solutions, since $2x \equiv 5 \pmod{6}$ requires $2x = 5 +
+        6k$ for some $k$, which is absurd since the left side is even but the right
+        is odd.
+    \end{enumerate}
+    \end{solution}
+    
+    \paragraph{Exercise 6.} Determine the integers $n$ for which the congruences $x +
+    y = 2$, $2x - 3y = 3$ (modulo $n$) have a solution.
+    \begin{solution}
+        By adding and subtracting the equations, we obtain the congruences $5x = 9$,
+        $5y = 1$ modulo $n$. Thus, $5x + pn = 9$, $5y + qn = 1$ for integers $p, q$.
+        The second Diophantine equation admits solutions if and only if $\gcd(5, n)$
+        divides $1$, i.e.\ $n$ is co-prime with $5$ (this is made obvious by the fact
+        that if $5$ divided $n$, then $5x + qn$ would be a multiple of $5$ but $1$ is
+        not).
+
+        We thus examine the four possibilities of $n = 1, 2, 3, 4$ modulo 5. In each,
+        we can find integers $a$, $b$ such that $5a + nb = 1$, i.e.\ $5a \equiv 1$
+        modulo $n$; $5$ is invertible in $\Z_n^\times$. Thus immediately gives the
+        solution $x = 9a$, $y = a$. Thus, our equations have solutions precisely when
+        $n$ is not a multiple of $5$.
+    \end{solution}
+    
+    \paragraph{Exercise 7.} Prove the associative and commutative laws for
+    multiplication in $\Z / n\Z$.
+    
+
+    \paragraph{Exercise 8.} Use Proposition~(2.6) to prove the \textit{Chinese
+    Remainder Theorem}: Let $m, n, a, b$ be integers, and assume that the greatest
+    common divisor of $m$ and $n$ is $1$. Then there is an integer $x$ such that $x =
+    a \pmod{m}$ and $x = b \pmod{n}$.
+    \begin{solution}
+        Since $\gcd(m, n) = 1$, we find integers $p, q$ such that $pm + qn = 1$.
+        Thus, with $p' = (b - a)p$ and $q' = (b - a)q$, we have $p'm + q'n = b - a$,
+        so set $a + p'm = b - q'n = x$. This clearly satisfies the desired
+        conditions.
+    \end{solution}
+
+
+
+    \section{Quotient Groups}
+    
+    \paragraph{Exercise 1.} Let $G$ be the group of invertible real upper triangular
+    $2 \times 2$ matrices. Determine whether or not the following conditions describe
+    normal subgroups $H$ of $G$. If they do, use the First Isomorphism Theorem to
+    identify the quotient group $G/H$. \\
+    (a) $a_{11} = 1$ (b) $a_{12} = 0$ (c) $a_{11} = a_{22}$ (d) $a_{11} = a_{22} =
+    1$.
+    \begin{solution}
+        It is useful to note that multiplication in $G$ is of the form \[
+            \begin{bmatrix}
+                a & b \\ 0 & d
+            \end{bmatrix} \begin{bmatrix}
+                a' & b' \\ 0 & d'
+            \end{bmatrix} = \begin{bmatrix}
+                aa' & ab' + bd' \\ 0 & dd'
+            \end{bmatrix}, \qquad
+            \begin{bmatrix}
+                a & b \\ 0 & d
+            \end{bmatrix}^{-1} = \begin{bmatrix}
+                1 / a & -b / ad \\ 0 & 1 / d
+            \end{bmatrix}.
+        \] Specifically, the $a_{11}$ and $a_{22}$ terms all multiply without
+        interference from the other terms. Invertibility guarantees $ad \neq 0$.
+        \begin{enumerate}
+            \item Consider the general conjugate \[
+                \begin{bmatrix}
+                    a & b \\ 0 & d
+                \end{bmatrix} \begin{bmatrix}
+                    1 & x \\ 0 & y
+                \end{bmatrix} \begin{bmatrix}
+                    1 / a & -b / ad \\ 0 & 1 / d
+                \end{bmatrix}.
+            \] Since the $a_{11}$ and $a_{22}$ elements multiply in order, the result
+            also obeys $a_{11} = (a)(1)(1 / a) = 1$, hence all conjugates are in $H$
+            making it a normal subgroup of $G$.
+
+            Consider the map $\varphi\colon G \to G$, defined by \[
+                \begin{bmatrix}
+                    a & b \\ 0 & d
+                \end{bmatrix} \rightsquigarrow \begin{bmatrix}
+                    a & 0 \\ 0 & 1
+                \end{bmatrix}.
+            \] This is a homomorphism, since \[
+                \begin{bmatrix}
+                    a & b \\ 0 & d
+                \end{bmatrix} \begin{bmatrix}
+                    a' & b' \\ 0 & d'
+                \end{bmatrix} = \begin{bmatrix}
+                    aa' & ab' + bd' \\ 0 & dd'
+                \end{bmatrix} \rightsquigarrow \begin{bmatrix}
+                    aa' & 0 \\ 0 & 1
+                \end{bmatrix} = \begin{bmatrix}
+                    a & 0 \\ 0 & 1
+                \end{bmatrix} \begin{bmatrix}
+                    a' & 0 \\ 0 & 1
+                \end{bmatrix}.
+            \] The kernel of this map is clearly $H$, and the image is the set of all
+            diagonal matrices with $a_{22} = 1$. Call this subgroup $H'$, and note
+            that this is isomorphic to $\R^\times$ (the multiplicative group on
+            $\R\setminus\{0\}$) via the isomorphism \[
+                \begin{bmatrix}
+                    a & 0 \\ 0 & 1
+                \end{bmatrix} \rightsquigarrow a.
+            \] Thus, the First Isomorphism Theorem produces the identification $G /H
+            \sim H'$, and $H' \sim \R^\times$. This means that the quotient group
+            $G/H$ is simply $\R^\times$ upto isomorphism.
+            
+            \item Consider the general conjugate \[
+                \begin{bmatrix}
+                    a & b \\ 0 & d
+                \end{bmatrix} \begin{bmatrix}
+                    x & 0 \\ 0 & y
+                \end{bmatrix} \begin{bmatrix}
+                    1 / a & -b / ad \\ 0 & 1 / d
+                \end{bmatrix} = \begin{bmatrix}
+                    a & b \\ 0 & d
+                \end{bmatrix} \begin{bmatrix}
+                    x / a & -xb / ad \\ 0 & y / d
+                \end{bmatrix} = \begin{bmatrix}
+                    x & -xb / d + yb / d \\ 0 & y
+                \end{bmatrix}.
+            \] In general, the resultant $a_{12} = (y - x) b / d \neq 0$.
+            Specifically, choose $a = b = d = 1$, and $x = 1$, $y = 2$. Thus, $H$ is
+            not a normal subgroup of $G$.
+            
+            \item Consider the general conjugate \[
+                \begin{bmatrix}
+                    a & b \\ 0 & d
+                \end{bmatrix} \begin{bmatrix}
+                    x & y \\ 0 & x
+                \end{bmatrix} \begin{bmatrix}
+                    1 / a & -b / ad \\ 0 & 1 / d
+                \end{bmatrix}.
+            \] Again, the diagonal elements in the result must be $a_{11} = (a)(x)(1
+            / a) = x$, and $a_{22} = (d)(x)(1 / d) = x$, which means that the
+            conjugate is in $H$. This makes $H$ a normal subgroup of $G$.
+
+            Consider the map $\varphi \colon G \to G$, defined by \[
+                \begin{bmatrix}
+                    a & b \\ 0 & d
+                \end{bmatrix} \rightsquigarrow \begin{bmatrix}
+                    a / d & 0 \\ 0 & 1
+                \end{bmatrix}.
+            \] This is a homomorphism because \[
+                \begin{bmatrix}
+                    a & b \\ 0 & d
+                \end{bmatrix} \begin{bmatrix}
+                    a' & b' \\ 0 & d'
+                \end{bmatrix} = \begin{bmatrix}
+                    aa' & ab' + bd' \\ 0 & dd'
+                \end{bmatrix} \rightsquigarrow \begin{bmatrix}
+                    aa' / dd' & 0 \\ 0 & 1
+                \end{bmatrix} = \begin{bmatrix}
+                    a / d & 0 \\ 0 & 1
+                \end{bmatrix} \begin{bmatrix}
+                    a' / d' & 0 \\ 0 & 1
+                \end{bmatrix}.
+            \] The kernel of $\varphi$ is clearly $H$, and the image is the set of
+            all diagonal matrices with $a_{22} = 1$, which we have already seen is
+            isomorphic to $\R^\times$. Thus, $G / H$ is $\R^\times$ upto isomorphism.
+
+            \item Following the previous part, we see that any conjugate of the form \[
+                \begin{bmatrix}
+                    a & b \\ 0 & d
+                \end{bmatrix} \begin{bmatrix}
+                    1 & y \\ 0 & 1
+                \end{bmatrix} \begin{bmatrix}
+                    1 / a & -b / ad \\ 0 & 1 / d
+                \end{bmatrix}
+            \] belongs to $H$, with both diagonal elements equal to $1$. This makes
+            $H$ a normal subgroup of $G$.
+
+            Consider the map $\varphi\colon G \to G$, defined by \[
+                \begin{bmatrix}
+                    a & b \\ 0 & d
+                \end{bmatrix} \rightsquigarrow \begin{bmatrix}
+                    a & 0 \\ 0 & d
+                \end{bmatrix}.
+            \] This is a homomorphism, because \[
+                \begin{bmatrix}
+                    a & b \\ 0 & d
+                \end{bmatrix} \begin{bmatrix}
+                    a' & b' \\ 0 & d'
+                \end{bmatrix} = \begin{bmatrix}
+                    aa' & ab' + bd' \\ 0 & dd'
+                \end{bmatrix} \rightsquigarrow \begin{bmatrix}
+                    aa' & 0 \\ 0 & dd'
+                \end{bmatrix} = \begin{bmatrix}
+                    a & 0 \\ 0 & d
+                \end{bmatrix} \begin{bmatrix}
+                    a' & 0 \\ 0 & d'
+                \end{bmatrix}.
+            \] The kernel of $\varphi$ is $H$, and the image is the set of all
+            ($2\times 2$) diagonal matrices. This in turn is isomorphic to $\R^\times
+            \times \R^\times$,
+            via the isomorphism \[
+                \begin{bmatrix}
+                    a & 0 \\ 0 & d
+                \end{bmatrix} \rightsquigarrow (a, d).
+            \] Thus, $G / H$ is the product group $\R^\times \times \R^\times$ upto
+            isomorphism.
+        \end{enumerate}
+    \end{solution}
+
+    \paragraph{Exercise 2.} Write out the proof of (10.1) in terms of elements.
+    \begin{quote}
+        Let $N$ be a normal subgroup of a group $G$. Then the product of two cosets
+        $aN$, $bN$ is again a coset, in fact \[
+            (aN)(bN) = abN.
+        \]
+    \end{quote}
+    \begin{solution}
+        Fix $a, b \in G$.
+
+        First, pick an element from the left hand side, which must be of the form
+        $x = an_1bn_2$ for some $n_1, n_2 \in G$. From the normality of $N$, we can
+        choose $n_1b = bn_1'$, hence $x = abn_1'n_2 = (ab)(n_1'n_2)$, which is an
+        element of $anN$. This gives $(aN)(bN) \subseteq abN$.
+
+        Next, pick an element from the right hand side, which must be of the form
+        $abn$ for some $n \in N$> Simply rewriting this as $(a1)(bn)$ shows that this
+        is an element of $(aN)(bN)$, giving $(aN)(bN) \supseteq abN$.
+    \end{solution}
+
+    \paragraph{Exercise 3.} Let $P$ be a partition of a group $G$ with the property
+    that for any pair of elements $A$, $B$ of the partition, the product $AB$ is
+    contained entirely within another element $C$ of the partition. Let $N$ be the
+    element of $P$ which contains $1$. Prove that $N$ is a normal subgroup of $G$ and
+    that $P$ is the set of its cosets.
+    \begin{solution}
+        To show that $N$ is a subgroup of $G$, first note that $1 \in N$ by
+        construction. Next, if $x \in N$ but $x^{-1} \notin N$, suppose $x^{-1} \in
+        A$ for some $A \in P$. Then, $1 = x^{-1}x \in AN \subseteq C$ for some $C
+        \in P$, but $N$ is the only element of the partition containing $1$, forcing
+        $C = N$. This immediately gives $x^{-1}1 \in N$, a contradiction. Thus, we
+        have $x^{-1} \in N$. Finally, pick $x, y \in N$ and suppose that the product
+        $xy \notin A \neq N$ for some $A \in P$. Then, $x = (xy)y^{-1} \in AN
+        \subseteq C$ for some $C \in P$, but as before, the only element of $P$
+        containing $x$ is $N$. This means that $C = N$, so $(xy)1 \in N$, a
+        contradiction. Thus, we have $xy \in N$.
+
+        Next, to show that $N$ is a normal subgroup of $G$, pick $x\in N$ and
+        consider the conjugate $axa^{-1}$ for some $a \in A \in P$. Note that this
+        choice of $A$ is unique; if $A = N$, clearly $axa^{-1} \in N$ as desired.
+        Otherwise, note that $ax \in AN \subseteq C$ for some $C \in P$. This set $C$
+        also contains $a 1 \in AN$, hence we must have $C = A$. Thus, $axa^{-1} \in
+        A A' \subseteq D$, where $A'\in P$ is chosen to contain $a^{-1}$ and $D \in
+        P$. Now, the element $1 = a a^{-1} \in A A' \subseteq D$, which forces $D =
+        N$. As a result, $axa^{-1} \in N$, making $N$ a normal subgroup of $G$.
+
+        To show that every element of $P$ is a coset of $N$, pick $A \in P$. If $A =
+        N$, we are done, otherwise pick some $a \in A$. We claim that $A = aN$.
+        Recall that we have already shown that $AN \subseteq A$, hence $aN \subseteq
+        AN \subseteq A$. Next, pick some $b \in A$, and let $A' \in P$ be the set
+        containing $a^{-1}$. As before, $1 \in A A' \subseteq C$ for some $C \in P$,
+        forcing $C = N$. Thus, $ba^{-1} \in A A' \subseteq N$, hence $b \in aN$.
+        This proves that $A \subseteq aN$, thus $A = aN$.
+
+        Note that we have shown that every element in $P$ is a coset of $N$.
+        Furthermore, $P$ must contain every coset of $N$, since every $a \in G$
+        belongs to exactly one $A \in P$, hence $aN = A \in P$ for every coset $aN$.
+    \end{solution}
+
+    \paragraph{Exercise 4.} \mbox{}
+    \begin{enumerate}
+        \itemsep0em
+        \item Consider the presentation (1.17) of the symmetric group $S_3$. Let $H$
+        be the subgroup $\{1, y\}$. Compute the product sets $(1H)(xH)$ and
+        $(1H)(x^2H)$, and verify that they are not cosets.
+        \item Show that a cyclic group of order $6$ has two generators satisfying the
+        rules $x^3 = 1$, $y^2 = 1$, $yx = xy$.
+        \item Repeat the computation of (a), replacing the relations (1.18) by the
+        relations given in part (b). Explain.
+    \end{enumerate}
+    \begin{solution} \mbox{}
+    \begin{enumerate}
+        \item Recall that we have $x^3 = 1$, $y^2 = 1$, $yx = x^2y$. For $(1H)(xH)$,
+        compute $1x1 = x$, $1xy = xy$, $yx1 = x^2y$, $yxy = x^2y y = x^2$ hence
+        $(1H)(xH) = \{x, x^2, xy, x^2y\}$. Similarly for $(1H)(x^2H)$, compute $1x^21
+        = x^2$, $1x^2y = x^2y$, $yx^21 = x^2yx = x^4y = xy$, $yx^2y = xy y = x$ hence
+        $(1H)(x^2H) = \{x, x^2, xy, x^2y\}$. This cannot be a coset of any subgroup
+        of $S_3$, since any coset must contain the same number of elements as the
+        corresponding subgroup but Lagrange's Theorem prevents any subgroup of $S_3$
+        from having 4 elements.
+
+        \item Let $C_6 = \langle a \rangle$, and set $x = a^2$, $y = a^3$. Then we
+        clearly have $x^3 = y^2 = 1$ and $yx = xy = a^5$. Furthermore, $x$ and $y$ do
+        indeed generate $C_6$, because $yx^{-1} = a$ generates $C_6$.
+
+        \item For $(1H)(xH)$, compute $1x1 = x$, $1xy = xy$, $yx1 = xy$, $yxy = xy y
+        = x$ hence $(1H)(xH) = \{x, xy\}$. Similarly for $(1H)(x^2H)$, compute $1x^21
+        = x^2$, $1x^2y = x^2y$, $yx^21 = xyx = x^2y$, $yx^2y = x^2y y = x^2$ hence
+        $(1H)(x^2H) = \{x^2, x^2y\}$. Now, the first product is the coset $xH$ and
+        the second is the product $x^2H$.
+
+        Note that $C_6$ is abelian, which guarantees that $H$ is a normal subgroup.
+        Thus, Proposition~$10.1$ ensures that the product of cosets of $H$ is another
+        coset of $H$.
+    \end{enumerate}
+    \end{solution}
+
+    \paragraph{Exercise 5.} Identify the quotient group $\R^\times / P$, where $P$
+    denotes the subgroup of positive real numbers.
+    \begin{solution}
+        Note that the $\sgn$ map where $\sgn{x} = x / |x|$ is a homomorphism whose
+        kernel is precisely $P$. Thus, the First Isomorphism Theorem shows that
+        $\R^\times /P$ is isomorphic to $\im(\sgn) = \{\pm 1\}$, the cyclic group of
+        two elements.
+    \end{solution}
+
+    \paragraph{Exercise 6.} Let $H = \{\pm 1, \pm i\}$ be the subgroup of $G =
+    \C^\times$ of fourth roots of unity. Describe the cosets of $H$ in $G$
+    explicitly, and prove that $G / H$ is isomorphic to $G$.
+    \begin{solution}
+        Given some $z \in \C^\times$, the coset $zH = \{\pm z, \pm iz\}$. This
+        represents all four rotations of $z$ in the complex plane by multiples of
+        $\pi / 2$.
+
+        Consider the map $\varphi\colon \C^\times \to \C^\times$, defined by $z
+        \rightsquigarrow z^4$. Note that this is a homomorphism, since
+        $\varphi(x)\varphi(y) = x^4y^4 = (xy)^4 = \varphi(xy)$ for all $x, y \in
+        \C^\times$. It's kernel consists of the solutions of $z^4 = 1$, which is
+        precisely $H$. Furthermore, $\varphi$ is surjective since every $z \in
+        \C^\times$ can be written in the form $re^{i\theta}$ for $r > 0$, hence
+        $\varphi(r^{1 / 4}e^{i\theta / 4}) = z$. Thus, the First Isomorphism Theorem
+        shows that $G / H$ is isomorphic to $G$.
+    \end{solution}
+
+    \paragraph{Exercise 7.} Find all normal subgroups $N$ of the quaternion group
+    $H$, and identify the quotients $H / N$.
+    \begin{solution}
+        Recall that in Section~4,~Exercise~8(b), we have shown that all subgroups of
+        the quaternion group are normal. We consider all possible cases below.
+        \begin{itemize}
+            \itemsep0em
+            \item For $N = \{1\}$, we trivially have $H / N \sim H$.
+
+            \item For $N = \{\pm 1\}$, note that the cosets of $N$ are $\{\pm 1\}$,
+            $\{\pm i\}$, $\{\pm j\}$ and $\{\pm k\}$. It is clear that $H / N$ is
+            isomorphic to the Klein four group, since we have the relations$\{\pm
+            i\}\cdot \{\pm j\} = \{\pm k\} = \{\pm j\}\cdot \{\pm k\}$ and all other
+            similar ones.
+
+            \item For $N = \{\pm 1, \pm i\}$, note that the cosets of $N$ are $\{\pm
+            1, \pm i\}$ and $\{\pm j, \pm k\}$. Thus, $H / N$ is isomorphic to $C_2$.
+            The cases replacing $i$ with $j$ or $k$ are identical.
+
+            \item For $N = H$, we trivially have $H / N \sim \{1\}$.
+        \end{itemize}
+    \end{solution}
+    
+    \paragraph{Exercise 8.} Prove that the subset $H$ of $G = GL_n(\R)$ or matrices
+    whose determinant is positive forms a normal subgroup, and describe the quotient
+    group $G / H$.
+    \begin{solution}
+        Consider the map $\varphi\colon GL_n(\R) \to \{\pm 1\}$, defined by $X
+        \rightsquigarrow \sgn(\det{X})$. This is clearly a homomorphism, being the
+        composition of two homomorphisms. Furthermore, the kernel of $\varphi$ is
+        precisely $H$, and $\varphi$ is surjective because $\pm \mathbb{I}
+        \rightsquigarrow \pm 1$. Thus, $H$ must be a normal subgroup, and $G / H$
+        must be isomorphic to $\{\pm 1\}$.
+    \end{solution}
+
+    \paragraph{Exercise 9.} Prove that the subset $G \times 1$ of the product group
+    $G \times G'$ is a normal subgroup isomorphic to $G$ and that $(G \times G') / (G
+    \times 1)$ is isomorphic to $G'$.
+    \begin{solution}
+        Consider the map $\varphi\colon G \times G' \to G'$, defined by $(x, y)
+        \rightsquigarrow y$. This is a homomorphism since it is a projection
+        map; furthermore, it's kernel is precisely the set $G \times 1$, and
+        $\varphi$ is surjective because every $y \in G'$ has the pre-image $(1, y)
+        \in G\times G'$. Thus, $G \times 1$ is a normal subgroup of $G \times G'$,
+        and the quotient group $(G \times G') / (G \times 1)$ is isomorphic to $G'$.
+    \end{solution}
+
+    \paragraph{Exercise 10.} Describe the quotient groups $\C^\times / P$ and
+    $\C^\times / U$, where $U$ is the subgroup of complex numbers of absolute value
+    $1$ and $P$ denotes the positive reals.
+    \begin{solution}
+        First, let $\varphi\colon \C^\times \to U$ be the map defined by $z
+        \rightsquigarrow z / |z|$. It is clear that this is a homomorphism, and its
+        kernel is the set of solutions of $z = |z|$, i.e.\ precisely the set $P$.
+        Furthermore, this map is surjective, since every $e^{ix} \in U$ has itself as
+        a pre-image. Thus, the quotient group $\C^\times / P$ is isomorphic to $U$,
+        i.e.\ the unit circle/set of rotations in 2D.
+
+        Next, let $\varphi\colon \C^\times \to P$ be the absolute value map. We have
+        already shown that this is a homomorphism. It's kernel is the set of
+        solutions of $|z|= 1$, i.e.\ precisely the set $U$. Furthermore, this map is
+        surjective, fixing $P$. Thus, the quotient group $\C^\times / U$ is isomorphic
+        to $P$, i.e.\ the multiplicative group of positive reals.
+    \end{solution}
+
+    \paragraph{Exercise 11.} Prove that the groups $\R^+ / \Z^+$ and $\R^+ / 2\pi\Z^+$
+    are isomorphic.
+    \begin{solution}
+        We claim that all groups of the form $\R^+ / t\Z^+$ for non-zero $t$ are
+        isomorphic (note that without loss of generality, we can choose positive
+        $t$). Let $\varphi_t\colon\colon \R^+ \to U$ be the map define by $x
+        \rightsquigarrow e^{2\pi i x / t}$. This is clearly a homomorphism since
+        $e^{x + y} = e^{x}e^{y}$. Furthermore, the kernel of $\varphi_t$ is the set
+        of solutions to $e^{2\pi ix / t} = 1$, i.e.\ $x = tn$ for integers $n$, which
+        is precisely the set $t\Z^+$; we also see that $\varphi_t$ is surjective
+        since any $e^{ix} \in U$ has the pre-image $tx / 2\pi \in \R^+$. Thus, all
+        quotient groups of the form $\R^/t\Z^+$ are isomorphic to the unit circle,
+        and hence to each other.
+    \end{solution}
     
     
+
 \end{document}
 % vim: set tabstop=4 shiftwidth=4 softtabstop=4:
