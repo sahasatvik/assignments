@@ -5,6 +5,8 @@
 \usepackage{amsmath, amssymb, amsthm}
 \usepackage{bm}
 \usepackage[scr]{rsfso}
+\usepackage{graphicx}
+\usepackage{float}
 \usepackage{xcolor}
 \usepackage{hyperref}
 
@@ -272,8 +274,16 @@
         \] 
     \end{definition}
     \begin{remark}
-        Each polynomial $B_n^k$ on the interval $[0, 1]$ peaks at $x = k / n$.
+        Each polynomial $B_n^k$ on the interval $[0, 1]$ peaks at $x = k / n$. See
+        Figure~\ref{fig:bernstein_7}.
     \end{remark}
+    \begin{figure}
+        \centering
+        \includegraphics[width=0.75\textwidth]{./img/bernstein_7.png}
+        \caption{The Bernstein polynomials of degree $7$. The peaks at $x = k / 7$ have
+        been marked.}
+        \label{fig:bernstein_7}
+    \end{figure}
 
     \begin{definition}[Bernstein expansions]
         Let $f$ be a real valued function on $[0, 1]$. The Bernstein polynomial
@@ -282,6 +292,17 @@
             \frac{k}{n} \right).
         \]
     \end{definition}
+
+    \begin{figure}[t]
+        \centering
+        \includegraphics[width=0.9\textwidth]{./img/expansion_20.png}
+        \caption{The Bernstein polynomial expansion of order $20$ (orange) of the
+        curve $f(x) = e^x\cos(2\pi x)$ (red) on $[0, 1]$. Each term of the sum has
+        been shown in blue. Note that only the marked points at $x = k / 20$ have
+        been sampled from $f$.}
+        \label{fig:expansion_20}
+    \end{figure}
+
     \begin{lemma}
         The following identities hold. \[
             B_n(1, x) = 1, \qquad B_n(x, x) = x, \qquad B_n(x^2, x) = \frac{x}{n} +
@@ -361,6 +382,14 @@
             |B_{n_0}(f, x_0) - f(x_0)| < \epsilon.
         \] Since $x_0 \in [0, 1]$ was arbitrary, this concludes the proof.
     \end{proof}
+    
+    \begin{figure}[ht]
+        \centering
+        \includegraphics[width=0.9\textwidth]{./img/expansions.png}
+        \caption{The first 250 Bernstein expansions of $e^x\cos(2\pi x)$ on $[0, 1]$.
+        Note that convergence is fairly slow.}
+        \label{fig:expansion}
+    \end{figure}
 
     \begin{corollary}
         Given any real valued continuous function $f$ on $[0, 1]$, there exists a
@@ -435,7 +464,7 @@
     \end{definition}
 
     \begin{definition}
-        An algebra $\amthscr{A}$ is uniformly closed if given any sequence of
+        An algebra $\mathscr{A}$ is uniformly closed if given any sequence of
         functions $\{f_n\}$ in $\mathscr{A}$ such that $f_n \to f$ uniformly, we have
         $f \in \mathscr{A}$.
     \end{definition}
@@ -484,8 +513,8 @@
             \] \[
                 |g_n(x) - g(x)| < \frac{\epsilon}{2M_1}, \quad \text{ for all } n
                 \geq n_2.
-            \] It immediately follows that for all $x \in E$ and $n \geq \geq
-            \max(n_0, n_1, n_2)$, we have \[
+            \] It immediately follows that for all $x \in E$ and $n \geq \max(n_0,
+            n_1, n_2)$, we have \[
                 |f_n(x)g_n(x) - f(x)g(x)| < M_1\frac{\epsilon}{2M_1} +
                 \frac{\epsilon}{2M_2}M_2 = \epsilon.
             \] 
@@ -639,6 +668,14 @@
         Thus, for all $x \in K$, we have \[
             g_s(x) > f(x) - \epsilon.
         \] 
+        
+        \begin{figure}[ht]
+            \centering
+            \includegraphics[width=1.0\textwidth]{./img/weierstrass_A_4.png}
+            \caption{The construction of $g_s$. Here, we only required three points
+            $T = \{t_1, t_2, t_3\}$.}
+            \label{fig:weierstrass_A}
+        \end{figure}
 
         We repeat this process again, this time to obtain an upper bound. For each $s
         \in K$, the continuity of $g_s$ means that there exists an open set $U_s
@@ -657,7 +694,15 @@
             f(x) - \epsilon < g(x) < f(x) + \epsilon,
         \] or $|g(x) - f(x)| < \epsilon$. Thus, $f$ is the uniform limit of functions
         in $\mathscr{B}$, proving that the uniform closure of $\mathscr{A}$ is the
-        set $\mathscr{C}(K)$.
+        set $\mathscr{C}(K)$. \qedhere
+        
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=1.0\textwidth]{./img/weierstrass_B_4.png}
+            \caption{The construction of $g$. Again, we only required three points
+            $S = \{s_1, s_2, s_3\}$.}
+            \label{fig:weierstrass_B}
+        \end{figure}
     \end{proof}
 
     \begin{corollary}
@@ -720,14 +765,34 @@
         $\cos(x_1) \neq \cos(x_2)$, because the map $x \mapsto \cos(x)$ is strictly
         decreasing on $[0, \pi]$, and hence is injective. Thus, $\mathscr{F}$
         separates points on $[0, \pi]$.
-
     \end{proof}
     \begin{remark}
         Note that $\mathscr{F}$ does not separate the points $0$ and $2\pi$, due to
-        the periodicity of the cosine and sine functions. Naturally, in order to
-        extend the domain to $[0, \pi\alpha]$, we may redefine $\mathscr{F}$ to
-        consist of functions of the form \[
+        the periodicity of the cosine and sine functions. In order to extend the
+        domain to $[0, \pi\alpha]$, we may redefine $\mathscr{F}$ to consist of
+        functions of the form \[
             f(x) = a_0 + \sum_{n = 1}^N a_n \cos(nx / \alpha) + b_n\sin(nx/\alpha).
+        \] 
+    \end{remark}
+    \begin{remark}
+        Instead, consider the unit circle $S^1$ (which is compact under the usual
+        Euclidean topology on $\R^2$) as our domain. Let $\tilde{\mathscr{F}}$ be the
+        algebra of functions of the form \[
+            \tilde{f}(e^{ix}) = a_0 + \sum_{n = 1}^N a_n \cos(nx) + b_n\sin(nx).
+        \] Here, we use the usual identification of $S^1$ with the unit circle in
+        $\C$ described by the set of points satisfying $|z| = 1$. The closure of this
+        algebra is the set of all real continuous functions on $S^1$, each of which
+        can be identified with a unique real continuous, $\alpha$-periodic function
+        on $\R$. \[
+            \mathbb{I}\colon \mathscr{F} \to \tilde{\mathscr{F}}, \qquad
+            f \mapsto \tilde{f}, \qquad
+            \tilde{f}(e^{ix}) = f(\alpha x / 2\pi).
+        \] Thus, given an arbitrary real valued, continuous function $f$ on $\R$ with
+        period $\alpha$ and $\epsilon > 0$, pick $\tilde{g} \in \tilde{\mathscr{F}}$
+        such that $|\tilde{g}(z) - \tilde{f}(z)| < \epsilon$ on $S^1$. Thus, for all
+        $x \in \R$, we have \[
+            |g(x) - f(x)| = |\tilde{g}(e^{2\pi ix / \alpha}) - \tilde{f}(e^{2\pi i x /
+            \alpha})| < \epsilon.
         \] 
     \end{remark}
 
