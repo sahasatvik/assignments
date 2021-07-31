@@ -258,7 +258,7 @@
                 \end{cases}
             \] Note that $f_n \to 0$ pointwise on the compact interval $[0, 1]$,
             because given any $x_0 \in (0, 1]$, we can choose sufficiently large $n_0
-            \in \N$ such that $n_ox_0 > 1$, hence $f_n(x_0) = 0$ for all $n \geq
+            \in \N$ such that $n_0x_0 > 1$, hence $f_n(x_0) = 0$ for all $n \geq
             n_0$; if $x_0 = 0$, then $f_n(0) = 0$ for all $n \in \N$ anyway. However,
             the sequence $\{f_n\}$ is not monotonic, and indeed this convergence is
             not uniform on $[0, 1]$. Note that $f_n(1 / 2n) = 1 / 2$ for all $n \in
@@ -459,7 +459,7 @@
     \section{Algebras of functions}
     \begin{definition}
         A family $\mathscr{A}$ of real valued functions on a set $E$ is called an
-        algebra if $f + g \\in \matscr{A}$, $fg \in \mathscr{A}$, and $cf \in
+        algebra if $f + g \in \mathscr{A}$, $fg \in \mathscr{A}$, and $cf \in
         \mathscr{A}$ for all $f, g\in \mathscr{A}$ and $c \in \R$.
     \end{definition}
 
@@ -578,7 +578,7 @@
         \] Since $\epsilon > 0$ was arbitrary and $\mathscr{B}$ is uniformly closed,
         we have shown that $|f| \in \mathscr{B}$.
 
-        To show that $\max(f, g) \in \mathsc{B}$ and $\min(f, g) \in \mathscr{B}$,
+        To show that $\max(f, g) \in \mathscr{B}$ and $\min(f, g) \in \mathscr{B}$,
         simply observe that \[
             \max(f, g) = \frac{1}{2}(f + g) + \frac{1}{2}|f - g|,
         \] \[
@@ -652,10 +652,10 @@
         completing the proof.
 
         Let $\epsilon > 0$, and let $s, t \in K$. Using
-        Theorem~\ref{theo:interpolate}, find the functions $g_{st} \in \mathscr{B}$
-        such that $g(s) = f(s)$ and $g(t) = f(t)$. Fix $s$, and note that for each $t
-        \in K$, the continuity of $g_{st}$ means that there exists an open set
-        $U_{st} \subseteq K$ such that \[
+        Theorem~\ref{theo:interpolate}, find functions $g_{st} \in \mathscr{B}$ such
+        that $g_{st}(s) = f(s)$ and $g_{st}(t) = f(t)$. Fix $s$, and note that for
+        each $t \in K$, the continuity of $g_{st}$ means that there exists an open
+        set $U_{st} \subseteq K$ such that \[
             g_{st}(x) > f(x) - \epsilon
         \] for all $x \in U_{st}$. Now, the collection of open sets $\{U_{st}\}_{t
         \in K}$ clearly covers the compact set $K$, hence we can choose a finite
