@@ -1,0 +1,151 @@
+\documentclass[11pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage[scr]{rsfso}
+\usepackage{bm}
+\usepackage[%
+    hidealllines=true,%
+    innerbottommargin=15,%
+    nobreak=true,%
+]{mdframed}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+
+\geometry{a4paper, margin=1in, headheight=14pt}
+
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand\headrulewidth{0.4pt}
+\fancyhead[L]{\scshape MA3101: Analysis III}
+\fancyhead[R]{\scshape \leftmark}
+\rfoot{\footnotesize\it Updated on \today}
+\cfoot{\thepage}
+
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+
+\newcommand{\ip}[2]{\langle #1, #2 \rangle}
+\newcommand{\norm}[1]{\Vert #1 \Vert}
+\renewcommand{\vec}[1]{\boldsymbol{#1}}
+
+\newcommand{\vx}{\vec{x}}
+\newcommand{\vy}{\vec{y}}
+\newcommand{\vv}{\vec{v}}
+\newcommand{\vw}{\vec{w}}
+\newcommand{\ve}{\vec{e}}
+
+\newmdtheoremenv[%
+    backgroundcolor=blue!10!white,%
+]{theorem}{Theorem}[section]
+\newmdtheoremenv[%
+    backgroundcolor=violet!10!white,%
+]{corollary}{Corollary}[theorem]
+\newmdtheoremenv[%
+    backgroundcolor=teal!10!white,%
+]{lemma}[theorem]{Lemma}
+
+\theoremstyle{definition}
+\newmdtheoremenv[%
+    backgroundcolor=green!10!white,%
+]{definition}{Definition}[section]
+\newmdtheoremenv[%
+    backgroundcolor=red!10!white,%
+]{exercise}{Exercise}[section]
+
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\newtheorem*{example}{Example}
+\newtheorem*{solution}{Solution}
+
+\surroundwithmdframed[%
+    linecolor=black!20!white,%
+    hidealllines=false,%
+    innertopmargin=5,%
+    innerbottommargin=10,%
+    skipabove=0,%
+    skipbelow=0,%
+]{example}
+
+\numberwithin{equation}{section}
+
+\title{
+    \Large\textsc{MA3101} \\
+    \Huge \textbf{Analysis III} \\
+    \vspace{5pt}
+    \Large{Autumn 2021}
+}
+\author{
+    \large Satvik Saha
+    \\\textsc{\small 19MS154}
+}
+\date{\normalsize
+    \textit{Indian Institute of Science Education and Research, Kolkata, \\
+    Mohanpur, West Bengal, 741246, India.} \\
+}
+
+\begin{document}
+    \maketitle
+
+    \tableofcontents
+
+    \section{Euclidean spaces}
+    We are familiar with the vector space $\R^n$, with the standard inner product \[
+        \ip{\vx}{\vy} = x_1y_1 + \dots + x_ny_n.
+    \] The standard norm is define as \[
+        \norm{\vx - \vy}^2 = \ip{\vx - \vy}{\vx - \vy} = \sum_{k = 1}^n (x_i -
+        y_i)^2.
+    \]
+
+    \begin{exercise}
+        What are all possible inner products on $\R^n$?
+    \end{exercise}
+
+    \begin{theorem}[Cauchy-Schwarz]
+        Given two vectors $\vv, \vw \in \R^n$, we have \[
+            |\ip{\vv}{\vw}| \leq \norm{\vv}\norm{\vw}.
+        \] 
+    \end{theorem}
+    
+    \begin{theorem}[Triangle inequality]
+        Given two vectors $\vv, \vw \in \R^n$, we have \[
+            \norm{\vv + \vw} \leq \norm{\vv} + \norm{\vw}.
+        \] 
+    \end{theorem}
+    This allows us to define the standard metric on $\R^n$, seen as a point set. \[
+        d(\vx, \vy) = \norm{\vx - \vy}.
+    \] 
+
+    \begin{definition}
+        For any $\epsilon > 0$, the set \[
+            B_\epsilon(\vx) = \{\vy \in \R^n : d(\vx, \vy) < \epsilon\}
+        \] is called the open ball centred at $\vx \in \R^n$ with radius $\epsilon$.
+        This is also called the $\epsilon$ neighbourhood of $\vx$.
+    \end{definition}
+
+    \begin{definition}
+        A set $U$ is open in $\R^n$ if for every $\vx \in U$, there exists an
+        open ball $B_\epsilon(\vx) \subset U$.
+        \begin{remark}
+            Every open ball in $\R^n$ is open.
+        \end{remark}
+        \begin{remark}
+            Both $\emptyset$ and $\R^n$ are open.
+        \end{remark}
+    \end{definition}
+    
+    \begin{definition}
+        A set $F$ is closed in $\R^n$ if its complement $\R^n \setminus F$ is open in
+        $\R^n$.
+        \begin{remark}
+            Both $\emptyset$ and $\R^n$ are closed.
+        \end{remark}
+    \end{definition}
+    
+\end{document}
