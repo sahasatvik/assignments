@@ -98,13 +98,27 @@
     \section{Euclidean spaces}
     We are familiar with the vector space $\R^n$, with the standard inner product \[
         \ip{\vx}{\vy} = x_1y_1 + \dots + x_ny_n.
-    \] The standard norm is define as \[
+    \] The standard norm is defined as \[
         \norm{\vx - \vy}^2 = \ip{\vx - \vy}{\vx - \vy} = \sum_{k = 1}^n (x_i -
         y_i)^2.
     \]
 
     \begin{exercise}
         What are all possible inner products on $\R^n$?
+        \begin{solution}
+            Note that an inner product is a bilinear, symmetric map such that
+            $\ip{\vx}{\vx} \geq 0$, and $\ip{\vx}{\vx} = 0$ if and only if $\vx =
+            \vec{0}$. Thus, an product map on $\R^n$ is completely and uniquely
+            determined by the values $\ip{\ve_i}{\ve_j} = a_{ij}$. Let $A$ be the
+            $n \times n$ matrix with entries $a_{ij}$. Note that $A$ is a real
+            symmetric matrix with positive entries. Now, \[
+                \ip{\vx}{\ve_j} = x_1a_{1j} + \dots + x_na_{nj} = \vx^\top \vec{a}_j,
+            \] where $\vec{a}_j$ is the $j^\text{th}$ column of $A$. Thus, \[
+                \ip{\vx}{\vy} = \vx^\top \vec{a}_1 y_1 + \dots + \vx^\top
+                \vec{a}_n y_n = \vx^\top A \vy.
+            \] Furthermore, any choice of real symmetric $A$ with positive
+            entries produces an inner product.
+        \end{solution}
     \end{exercise}
 
     \begin{theorem}[Cauchy-Schwarz]
@@ -112,12 +126,31 @@
             |\ip{\vv}{\vw}| \leq \norm{\vv}\norm{\vw}.
         \] 
     \end{theorem}
+    \begin{proof}
+        This is trivial when $\vw = \vec{0}$. When $\vw \neq \vec{0}$, set $\lambda =
+        \ip{\vv}{\vw} / \norm{\vw}^2$. Thus, \[
+            0 \leq \norm{\vv - \lambda \vw}^2 = \norm{\vv}^2 - 2\lambda \ip{\vv}{\vw}
+            + \lambda^2\norm{\vw}^2.
+        \] Simplifying, \[
+            0 \leq \norm{\vv}^2 - \frac{|\ip{\vv}{\vw}|^2}{\norm{\vw}^2}.
+        \] This gives the desired result. Clearly, equality holds if and only if $\vv
+        = \lambda \vw$.
+    \end{proof}
     
     \begin{theorem}[Triangle inequality]
         Given two vectors $\vv, \vw \in \R^n$, we have \[
             \norm{\vv + \vw} \leq \norm{\vv} + \norm{\vw}.
         \] 
     \end{theorem}
+    \begin{proof}
+        Write \[
+            \norm{\vv + \vw}^2 = \norm{\vv}^2 + 2\ip{\vv}{\vw} + \norm{\vw}^2
+            \leq \norm{\vv}^2 + 2|\ip{\vv}{\vw}| + \norm{\vw}^2.
+        \] Applying Cauchy-Schwarz gives \[
+            \norm{\vv + \vw}^2 \leq (\norm{\vv} + \norm{\vw})^2.
+        \] 
+        Equality holds if and only if $\vv = \lambda \vw$ for $\lambda \geq 0$.
+    \end{proof}
     This allows us to define the standard metric on $\R^n$, seen as a point set. \[
         d(\vx, \vy) = \norm{\vx - \vy}.
     \] 
