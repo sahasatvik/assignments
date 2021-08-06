@@ -1,0 +1,144 @@
+\documentclass[11pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage[scr]{rsfso}
+\usepackage[%
+    hidealllines=true,%
+    innerbottommargin=15,%
+    nobreak=true,%
+]{mdframed}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+
+\geometry{a4paper, margin=1in, headheight=14pt}
+
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand\headrulewidth{0.4pt}
+\fancyhead[L]{\scshape MA3102: Algebra I}
+\fancyhead[R]{\scshape \leftmark}
+\rfoot{\footnotesize\it Updated on \today}
+\cfoot{\thepage}
+
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+
+\newmdtheoremenv[%
+    backgroundcolor=blue!10!white,%
+]{theorem}{Theorem}[section]
+\newmdtheoremenv[%
+    backgroundcolor=violet!10!white,%
+]{corollary}{Corollary}[theorem]
+\newmdtheoremenv[%
+    backgroundcolor=teal!10!white,%
+]{lemma}[theorem]{Lemma}
+
+\theoremstyle{definition}
+\newmdtheoremenv[%
+    backgroundcolor=green!10!white,%
+]{definition}{Definition}[section]
+\newmdtheoremenv[%
+    backgroundcolor=red!10!white,%
+]{exercise}{Exercise}[section]
+
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\newtheorem*{example}{Example}
+\newtheorem*{solution}{Solution}
+
+\surroundwithmdframed[%
+    linecolor=black!20!white,%
+    hidealllines=false,%
+    innertopmargin=5,%
+    innerbottommargin=10,%
+    skipabove=0,%
+    skipbelow=0,%
+]{example}
+
+\numberwithin{equation}{section}
+
+\title{
+    \Large\textsc{MA3102} \\
+    \Huge \textbf{Algebra I} \\
+    \vspace{5pt}
+    \Large{Autumn 2021}
+}
+\author{
+    \large Satvik Saha
+    \\\textsc{\small 19MS154}
+}
+\date{\normalsize
+    \textit{Indian Institute of Science Education and Research, Kolkata, \\
+    Mohanpur, West Bengal, 741246, India.} \\
+}
+
+\begin{document}
+    \maketitle
+
+    \tableofcontents
+
+    \section{Groups and Symmetries}
+    \subsection{Symmetries of plane figures}
+    A symmetry of a plane figure can be thought of as a rigid motion which
+    \emph{preserves its structure}, i.e.\ sends it to itself.
+
+    For example, consider an equilateral triangle; there is the identity symmetry
+    (which does nothing), two rotations by $2\pi / 3$ and $2\pi / 3$, and three
+    reflections. This gives us a total of $6$ symmetries. Coincidentally, the plane
+    symmetries of an equilateral triangle are precisely the set of $3! = 6$
+    permutations of its vertices.
+
+    The same cannot be said of a square; there are $4! = 24$ of its vertices, but
+    only $8$ of them are rigid motions. Here, we see $4$ rotations and $4$
+    reflections.
+
+    In general, a regular $n$-gon has $2n$ plane symmetries, of which $n$ are
+    rotations and $n$ are reflections. This can be seen by noting that a symmetry of
+    an $n$-gon is completely determined by its action on an edge; once the final
+    positions of the first two vertices is determined, the rest are forced. There are
+    $n$ positions for the first vertex, which leaves only $2$ positions for the
+    second vertex. One of these choices results in a rotation (since it preserves the
+    cyclicity of the vertices) and the other a reflection (since it reverses the
+    cyclicity of the vertices).
+
+    Note that these symmetries can be \emph{composed}, i.e.\ applied in succession.
+    For example, a rotation by $2\pi / n$ can be applied repeatedly to obtain every
+    possible rotational symmetry. Similarly, we can perform rotations and reflections
+    in succession, and we always end up with another symmetry. This composition is
+    associative, there is an identity symmetry, and each symmetry has an inverse.
+    The collection of such symmetries forms a \emph{group}.
+
+    The group of plane symmetries of a regular $n$-gon is called the \emph{dihedral
+    group}, denoted as $D_{2n}$.
+
+    \subsection{Basic definitions}
+    \begin{definition}
+        A group is a set $G$ with a binary operation of composition, satisfying the
+        following properties.
+        \begin{enumerate}
+        \itemsep0em
+            \item \emph{Associativity}: For all $a, b, c \in G$, $a(bc) = (ab)c$.
+            \item \emph{Existence of an identity element}: There exists $e \in G$
+            such that for all $a \in G$, $ae = e = ea$.
+            \item \emph{Existence of inverse elements}: For all $a \in G$, there
+            exists $b \in G$ such that $ab = e = ba$. We denote $b = a^{-1}$.
+        \end{enumerate}
+    \end{definition}
+    \begin{example}
+        The integers $\Z$ form a group under addition.
+    \end{example}
+    \begin{example}
+        The set $\{-1, +1\}$ forms a group under multiplication.
+    \end{example}
+    \begin{example}
+        The symmetries of a tetrahedron form a group under composition of symmetries.
+    \end{example}
+    
+\end{document}
