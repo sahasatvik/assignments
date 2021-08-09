@@ -96,6 +96,9 @@
     \tableofcontents
 
     \section{Euclidean spaces}
+
+    \subsection{$\R^n$ as a vector space}
+    
     We are familiar with the vector space $\R^n$, with the standard inner product \[
         \ip{\vx}{\vy} = x_1y_1 + \dots + x_ny_n.
     \] The standard norm is defined as \[
@@ -151,20 +154,24 @@
         \] 
         Equality holds if and only if $\vv = \lambda \vw$ for $\lambda \geq 0$.
     \end{proof}
-    This allows us to define the standard metric on $\R^n$, seen as a point set. \[
+
+    \subsection{$\R^n$ as a metric space}
+
+    Our previous observations allow us to define the standard metric on $\R^n$, seen
+    as a point set. \[
         d(\vx, \vy) = \norm{\vx - \vy}.
     \] 
 
     \begin{definition}
-        For any $\epsilon > 0$, the set \[
-            B_\epsilon(\vx) = \{\vy \in \R^n : d(\vx, \vy) < \epsilon\}
-        \] is called the open ball centred at $\vx \in \R^n$ with radius $\epsilon$.
-        This is also called the $\epsilon$ neighbourhood of $\vx$.
+        For any $\delta > 0$, the set \[
+            B_\delta(\vx) = \{\vy \in \R^n : d(\vx, \vy) < \delta\}
+        \] is called the open ball centred at $\vx \in \R^n$ with radius $\delta$.
+        This is also called the $\delta$ neighbourhood of $\vx$.
     \end{definition}
 
     \begin{definition}
         A set $U$ is open in $\R^n$ if for every $\vx \in U$, there exists an
-        open ball $B_\epsilon(\vx) \subset U$.
+        open ball $B_\delta(\vx) \subset U$.
         \begin{remark}
             Every open ball in $\R^n$ is open.
         \end{remark}
@@ -179,6 +186,81 @@
         \begin{remark}
             Both $\emptyset$ and $\R^n$ are closed.
         \end{remark}
+        \begin{remark}
+            Finite sets in $\R^n$ are closed.
+        \end{remark}
     \end{definition}
+
+    \begin{theorem}
+        Unions and finite intersections of open sets are open.
+    \end{theorem}
+    \begin{corollary}
+        Intersections and finite unions of closed sets are closed.
+    \end{corollary}
+
+    \begin{definition}
+        An interior point $x$ of a set $S \subseteq \R^n$ is such that there is a
+        neighbourhood of $x$ contained within $S$.
+    \end{definition}
+    \begin{definition}
+        An exterior point $x$ of a set $S \subseteq \R^n$ is an interior point of the
+        complement $\R^n \setminus S$.
+    \end{definition}
+    \begin{definition}
+        A boundary point of a set is neither an interior point, nor an exterior point.
+    \end{definition}
+
+    \begin{definition}
+        A limit point $x$ of a set $S \subseteq \R^n$ is such that every
+        neighbourhood of $x$ contains a point from $S$.
+    \end{definition}
+    \begin{definition}
+        The closure of a set $S \subseteq \R^n$ is the union of $S$ and its limit
+        points.
+        \begin{remark}
+            The closure of a set is the smallest closed set containing it.
+        \end{remark}
+    \end{definition}
+
+    \subsection{Continuous maps}
+    \begin{definition}
+        A map $f\colon X \to Y$ is continuous if the pre-image of every open set from
+        $Y$ is open in $X$.
+    \end{definition}
+    \begin{lemma}
+        A map $f\colon X \to Y$ is continuous if the pre-image of every closed set from
+        $Y$ is closed in $X$.
+    \end{lemma}
+
+    \begin{theorem}
+        The projection maps $\pi_i\colon \R^n \to \R$, $\vx \mapsto x_i$ are continuous.
+    \end{theorem}
+    \begin{proof}
+        Let $U \subseteq \R$ be open; we claim that $\pi_i^{-1}(U)$ is open. Pick
+        $\vx \in \pi_i^{-1}(U)$, and note that $\pi_i(\vx) = x_i \in U$. Thus, there
+        exists $\delta > 0$ such that $(x_i - \delta, x_i + \delta) \subset U$. Now
+        examine $B_\delta(\vx)$; for any point $\vy$ within this open ball, we have
+        $d(\vx, \vy) < \delta$ hence \[
+            |x_i - y_i|^2 \leq \sum_{k = 1}^n (x_k - y_k)^2 = d(\vx, \vy)^2 <
+            \delta^2.
+        \] In other words, $\pi_i(\vy) = y_i \in (x_i - \delta, x_i + \delta)$, hence
+        $\pi_i \,B_\delta(\vx) \subseteq (x_i - \delta, x_i + \delta) \subset
+        U$. Thus, given arbitrary $\vx \in \pi_i^{-1}(U)$, we have found an open ball
+        $B_\delta(\vx) \subset \pi_i^{-1}(U)$.
+    \end{proof}
+
+    \begin{lemma}
+        Finite sums, products, and compositions of continuous functions are continuous.
+    \end{lemma}
+
+    \begin{theorem}
+        All polynomial functions of the coordinates in $\R^n$ are continuous.
+    \end{theorem}
+    \begin{example}
+        The unit sphere $S^{n - 1} \subset \R^n$ is closed. It is by definition the
+        pre-image of the singleton closed set $\{1\}$ under the continuous map \[
+            \vx \mapsto x_1^2 + \dots + x_n^2.
+        \] 
+    \end{example}
     
 \end{document}
