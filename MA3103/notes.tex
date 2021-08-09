@@ -90,7 +90,7 @@
     
     The diagram below depicts a region in the city of K\"onigsberg, Prussia. There
     are two islands, connected with the mainland and to each other via seven bridges.
-    The Seven Bridges Problem is posed thus: is it possible to walk through the
+    The Seven Bridges Problem is posed as follows: is it possible to walk through the
     entire city, visiting each one of the four landmasses by crossing each of the
     bridges exactly once?
 
@@ -123,5 +123,79 @@
     However, all four vertices in our graph connect to an odd number of edges. Since
     we require at least two vertices to act as intermediate points on our path, the
     desired walk is impossible.
+
+    \subsection{Basic definitions}
+    \begin{definition}
+        A graph $G(V, E)$ is an ordered pair of the set of vertices $V$ and the set
+        of edges $E$.
+    \end{definition}
+    \begin{definition}
+        A simple graph is undirected, unweighted, and contains no self-loops or
+        multiple edges joining vertices.
+    \end{definition}
+    \begin{definition}
+        For a simple undirected graph, the set of edges $E$ consists of two-element
+        subsets of the set of vertices $V$.
+        \begin{remark}
+            For a directed, unweighted graph, the set of edges $E$ consists of ordered
+            pairs of elements from the set of vertices $V$.
+        \end{remark}
+    \end{definition}
+    \begin{definition}
+        A vertex is incident to an edge if that edge joins that vertex.
+    \end{definition}
+    \begin{definition}
+        Two vertices are adjacent if there exists an edge connecting them.
+        Two edges are adjacent if they connect to a common vertex.
+    \end{definition}
+    \begin{definition}
+        The neighbours of a vertex consist of all vertices adjacent to it.
+        The neighbours of an edge consist of all edges adjacent to it.
+
+        The number of neighbours of a vertex is called the degree of that vertex.
+    \end{definition}
+
+    \begin{lemma}[Pigeonhole Principle]
+        If $n + 1$ objects are placed in $n$ boxes, then we can fin a box containing
+        at least $2$ objects.
+    \end{lemma}
+    \begin{proof}
+        If every box contains at most $1$ objects, then the total number of objects
+        falls short.
+    \end{proof}
+
+    \begin{theorem}
+        There are no simple graphs where the degrees of all vertices are distinct.
+    \end{theorem}
+    \begin{proof}
+        Let $G(V, E)$ be a simple graph with $n$ vertices. The degrees of each of
+        these vertices must be an integer among $0, 1, \dots, n - 1$. We now consider
+        two cases. \\
+
+        \textbf{Case I}: There is a vertex of degree $0$. Thus, this vertex is
+        connected to no other vertex, which means that no vertex can have the full
+        degree $n - 1$. This means that the remaining vertices have degrees among $1,
+        2, \dots, n - 2$, i.e.\ $n - 2$ choices of degree for $n - 1$ vertices.
+
+        \textbf{Case II}: There is no vertex of degree $0$. Thus, the vertices have
+        degrees among $1, 2, \dots, n - 1$, i.e.\ $n - 1$ choices of degree for $n$
+        vertices. \\
+
+        In either case, the Pigeonhole Principle forces at least two vertices to
+        share the same degree.
+    \end{proof}
+
+    \begin{lemma}[Strong Pigeonhole Principle]
+        Let $q_1, q_2, \dots, q_n$ be positive integers. If \[
+            N = q_1 + \dots + q_n - n + 1
+        \] objects are placed in $n$ boxes, then we can find a box $i$ containing at
+        least $q_i$ objects.
+    \end{lemma}
+    \begin{proof}
+        If every box $i$ contains at most $q_i - 1$ objects, then the total number of
+        objects falls short. \[
+            N \leq (q_1 - 1) + \dots + (q_n - 1) = q_1 + \dots + q_n - n = N - 1 \qedhere
+        \] 
+    \end{proof}
 
 \end{document}
