@@ -9,6 +9,7 @@
     innerbottommargin=15,%
     nobreak=true,%
 ]{mdframed}
+\usepackage{bm}
 \usepackage{xcolor}
 \usepackage{graphicx}
 \usepackage{fancyhdr}
@@ -29,6 +30,18 @@
 \newcommand{\Q}{\mathbb{Q}}
 \newcommand{\Z}{\mathbb{Z}}
 \newcommand{\N}{\mathbb{N}}
+
+\renewcommand{\vec}[1]{\boldsymbol{#1}}
+\newcommand{\vv}{\vec{v}}
+\newcommand{\vw}{\vec{w}}
+\newcommand{\vx}{\vec{x}}
+\newcommand{\vy}{\vec{y}}
+\newcommand{\ve}{\vec{e}}
+\newcommand{\va}{\vec{a}}
+\newcommand{\vb}{\vec{b}}
+
+\newcommand{\norm}[1]{\Vert #1 \Vert}
+\newcommand{\ip}[2]{\langle #1, #2 \rangle}
 
 \newmdtheoremenv[%
     backgroundcolor=blue!10!white,%
@@ -117,6 +130,72 @@
 
     The group of plane symmetries of a regular $n$-gon is called the \emph{dihedral
     group}, denoted as $D_{2n}$.
+
+    \subsection{Symmetries of the Euclidean plane}
+    Consider the class of isometries of the plane, i.e.\ all bijections $f\colon \R^2
+    \to \R^2$ such that $\norm{f(\vv) - f(\vw)} = \norm{\vv - \vw}$. These constitute
+    symmetries of the Euclidean plane $\R^2$. The three basic forms of such
+    symmetries are rotations, reflections, and translations; it can be shown that
+    every symmetry of $\R^2$ is a combination of at most three reflections.  Another
+    representation for each symmetry is \[
+        f(\vv) = A\vv + \vv_0,
+    \] where $A \in O_2(\R)$ is an orthogonal matrix, accounting for the rotational
+    and reflectional part of the transformation.
+
+    To show this, set $\vv_0 = f(\vec{0})$ and define $g = f - \vv_0$. Thus,
+    $g(\vec{0}) = \vec{0}$, and $g$ is also an isometry.
+    
+    Not that for all $\vv, \vw \in \R^2$, we can write
+    \begin{align*}
+        \norm{g(\vv) - g(\vw)}^2 &= \norm{g(\vv)}^2 + \norm{g(\vw)}^2 -
+        2\ip{g(\vv)}{g(\vw)}, \\
+        \norm{\vv - \vw}^2 &= \norm{\vv}^2 + \norm{\vw}^2 -
+        2\ip{\vv}{\vw}.
+    \end{align*}
+    On the other hand, $\norm{g(\vv) - g(\vw)}^2 = \norm{\vv - \vw}^2$, and
+    $\norm{g(\vv)}^2 = \norm{\vv}^2$, $\norm{g(\vw)}^2 = \norm{\vw}^2$. This gives
+    $\ip{g(\vv)}{g(\vw)} = \ip{\vv}{\vw}$, i.e.\ $g$ preserves the inner product.
+
+    We claim that $g(\alpha\vv) = \alpha g(\vv)$ for all $\alpha \in \R$, $\vv
+    \in \R^2$. Set $\vw = g(\vv)$, and note that $\norm{g(\alpha\vv)} =
+    \norm{\alpha\vv} = |\alpha|v$. Now,
+    \begin{align*}
+        \norm{g(\alpha\vv) - \alpha g(\vv)}^2 &= \norm{g(\alpha\vv)}^2 + \norm{\alpha
+        g(\vv)}^2 - 2\ip{g(\alpha\vv)}{\alpha g(\vv)} \\
+        &= 2\alpha^2v^2 - 2\alpha\ip{g(\alpha\vv)}{g(\vv)} \\
+        &= 2\alpha^2v^2 - 2\alpha\ip{\alpha\vv}{\vv} \\
+        &= 2\alpha^2v^2 - 2\alpha^2v^2 \\
+        &= 0.
+    \end{align*}    
+    This proves that $g(\alpha\vv) = \alpha g(\vv)$.
+
+    Next, we claim that $g(\vv + \vw) = g(\vv) + g(\vw)$ for all $\vv, \vw \in
+    \R^2$. Write
+    \begin{align*}
+        \norm{g(\vv + \vw) - g(\vv) - g(\vw)}^2 &= \norm{g(\vv + \vw) - g(\vv)}^2 +
+        \norm{g(\vw)}^2 - 2\ip{g(\vv + \vw) - g(\vv)}{g(\vw)} \\
+        &= \norm{\vv + \vw - \vv}^2 + \norm{\vw}^2 - 2\ip{\vv + \vw}{\vw} +
+        2\ip{\vv}{\vw} \\
+        &= w^2 + w^2 - 2\ip{\vv}{\vw} - 2w^2 + 2\ip{\vv}{\vw} \\
+        &= 0.
+    \end{align*}
+    This proves that $g(\vv + \vw) = g(\vv) + g(\vw)$. Thus, $g$ is a linear map.
+
+    Now let $g(\ve_1) = \va$ and $g(\ve_2) = \vb$. Clearly, $\norm{\va} = \norm{\vb}
+    = 1$. For arbitrary $\vv\in \R^2$, we immediately get $g(\vv) = v_x\va + v_y\vb$,
+    so by arranging $\va$ and $\vb$ as the columns of a $2\times 2$ matrix $A$, we
+    have $g(\vv) = A\vv$. We clearly have $A^\top A = \mathbb{I}_2$ from $\va^\top\va
+    = \vb^\top\vb = 1$, and $\ip{\va}{\vb} = \ip{\ve_1}{\ve_2} = 0$. Thus, $A \in
+    O_2(\R)$. Substituting this back into $f$, we have \[
+        f(\vv) = A\vv + \vv_0
+    \] as desired.
+
+    It can be further shown (algebraically) that every member of $O_2(\R)$ is of the
+    form \[
+        \begin{bmatrix}
+            \cos\theta & \mp\sin\theta \\ \sin\theta & \pm \cos\theta
+        \end{bmatrix}.
+    \] 
 
     \subsection{Basic definitions}
     \begin{definition}
