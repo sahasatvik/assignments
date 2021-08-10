@@ -157,13 +157,12 @@
     $\ip{g(\vv)}{g(\vw)} = \ip{\vv}{\vw}$, i.e.\ $g$ preserves the inner product.
 
     We claim that $g(\alpha\vv) = \alpha g(\vv)$ for all $\alpha \in \R$, $\vv
-    \in \R^2$. Set $\vw = g(\vv)$, and note that $\norm{g(\alpha\vv)} =
-    \norm{\alpha\vv} = |\alpha|v$. Now,
+    \in \R^2$. Note that $\norm{g(\alpha\vv)} = \norm{\alpha\vv} = \norm{\alpha g(\vv)}$.
+    Now,
     \begin{align*}
         \norm{g(\alpha\vv) - \alpha g(\vv)}^2 &= \norm{g(\alpha\vv)}^2 + \norm{\alpha
         g(\vv)}^2 - 2\ip{g(\alpha\vv)}{\alpha g(\vv)} \\
-        &= 2\alpha^2v^2 - 2\alpha\ip{g(\alpha\vv)}{g(\vv)} \\
-        &= 2\alpha^2v^2 - 2\alpha\ip{\alpha\vv}{\vv} \\
+        &= \alpha^2v^2 + \alpha^2v^2 - 2\alpha\ip{\alpha\vv}{\vv} \\
         &= 2\alpha^2v^2 - 2\alpha^2v^2 \\
         &= 0.
     \end{align*}    
