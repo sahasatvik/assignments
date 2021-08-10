@@ -173,7 +173,7 @@
         two cases. \\
 
         \textbf{Case I}: There is a vertex of degree $0$. Thus, this vertex is
-        connected to no other vertex, which means that no vertex can have the full
+        adjacent to no other vertex, which means that no vertex can have the full
         degree $n - 1$. This means that the remaining vertices have degrees among $1,
         2, \dots, n - 2$, i.e.\ $n - 2$ choices of degree for $n - 1$ vertices.
 
@@ -197,5 +197,32 @@
             N \leq (q_1 - 1) + \dots + (q_n - 1) = q_1 + \dots + q_n - n = N - 1 \qedhere
         \] 
     \end{proof}
+
+    \begin{theorem}
+        The sum of the degrees of all vertices in a simple graph is twice the number
+        of its edges. 
+    \end{theorem}
+    \begin{proof}
+        Let $G((V, E)$ be a simple graph. 
+        Define the incidence function $I\colon E \times V \to \{0, 1\}$, such that
+        $I(e, v) = 1$ if $e$ and $v$ are incident, $0$ otherwise. We perform the
+        double counting, \[
+            \sum_{v\in V}\sum_{e \in E} I(e, v) = \sum_{e \in E}\sum_{v \in V} I(e,
+            v).
+        \] Now, the number of edges incident to a vertex is simply its degree, so
+        $\sum_{e \in E} I(e, v) = d(v)$. Also, every edge is incident to exactly two
+        vertices, so $\sum_{v \in V} I(e, v) = 2$. Thus, we have \[
+            \sum_{v \in V} d(v) = 2 |E|. \qedhere
+        \] 
+    \end{proof}
+
+    \begin{theorem}[Inclusion-Exclusion Principle]
+        For finite sets $A_1, A_2, \dots, A_n$, the number of elements in their union
+        is given by \[
+            \sum_{i=1}^n |A_i| - \sum_{1 \leq i < j \leq n} |A_i\cap A_j| +
+            \sum_{1 \leq i < j < k \leq n} |A_i \cap A_j\cap A_k| - \dots + 
+            (-1)^{n-1} \left|A_1\cap\cdots\cap A_n\right|.
+        \] 
+    \end{theorem}
 
 \end{document}
