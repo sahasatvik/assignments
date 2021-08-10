@@ -202,13 +202,23 @@
         An interior point $x$ of a set $S \subseteq \R^n$ is such that there is a
         neighbourhood of $x$ contained within $S$.
     \end{definition}
+    \begin{example}
+        Every point in an open set is an interior point by definition. The interior
+        of a set is the largest open set contained within it.
+    \end{example}
+
     \begin{definition}
         An exterior point $x$ of a set $S \subseteq \R^n$ is an interior point of the
         complement $\R^n \setminus S$.
     \end{definition}
+
     \begin{definition}
         A boundary point of a set is neither an interior point, nor an exterior point.
     \end{definition}
+    \begin{example}
+        The boundary of the unit open ball $B_0(0) \subset \R^n$ is the sphere $S^{n
+        - 1}$.
+    \end{example}
 
     \begin{definition}
         A limit point $x$ of a set $S \subseteq \R^n$ is such that every
@@ -221,6 +231,92 @@
             The closure of a set is the smallest closed set containing it.
         \end{remark}
     \end{definition}
+
+    \subsection{$\R^n$ as a topological space}
+    \begin{definition}
+        A topology on a set $X$ is a collection of sets $\tau$ such that
+        \begin{enumerate}
+            \itemsep0em
+            \item $\emptyset \in \tau$
+            \item $X \in \tau$
+            \item Arbitrary union of sets from $\tau$ belong to $\tau$.
+            \item Finite intersections of sets from $\tau$ belong to $\tau$.
+        \end{enumerate}
+        Sets from $\tau$ are called open sets.
+    \end{definition}
+
+    \begin{theorem}
+        The Euclidean metric $d$ induces the standard topology $\tau_d$ on $\R^n$.
+    \end{theorem}
+
+    \begin{definition}
+        Given a topological space $(X, \tau)$ and a subset $Y\subseteq X$, the
+        collection of sets $U \cap Y$ where $U \in \tau$ is a topology $\tau_Y$ on
+        $Y$. We call this collection the subspace topology on $Y$, induced by the
+        topology on $X$.
+    \end{definition}
+
+    \begin{definition}
+        A set $K \subset X$ in a topological space is compact if every open cover of
+        $K$ has a finite sub-cover. That is, for every collection if $\{U\}_{\alpha \in A}$
+        of open sets such that $K$ is contained in their union, then there exists a
+        finite sub-collection $U_{\alpha_1}, \dots, U_{\alpha_k}$ such that $K$ is
+        also contained in their union.
+    \end{definition}
+    \begin{example}
+        All finite sets are compact.
+    \end{example}
+    \begin{example}
+        Given a convergent sequence of real numbers $x_n \to x$, the collection
+        $\{x_n\}_{n \in \N} \cup \{x\}$ is compact.
+    \end{example}
+    \begin{example}
+        In $\R^n$, compact sets are precisely those sets which are closed and
+        bounded. This is the Heine-Borel Theorem.
+    \end{example}
+
+    \begin{theorem}
+        The closed intervals $[a, b] \subset \R$ are compact.
+        \begin{remark}
+            This can be extended to show that any $k$-cell $[a_1, b_1]\times \dots
+            \times [a_n, b_n] \subset \R^n$ is compact.
+        \end{remark}
+    \end{theorem}
+    \begin{proof}
+        Let $\{U_\alpha\}_{\alpha \in A}$ be an open cover of $[a, b]$, and suppose
+        that $I_1 = [a, b]$ has no finite sub-cover. Then, at least one of the
+        intervals $[a, (a + b) / 2]$ and $[(a + b)/ 2, b]$ must not have a finite
+        sub-cover; pick one and call it $I_2$. Similarly, one of the halves of $I_2$
+        must not have a finite sub-cover; call it $I_3$. In this process, we generate
+        a sequence of closed intervals $I_1 \supset I_2 \supset \dots$, none of which
+        have a finite sub-cover. The length of each interval is given by \[
+            |I_n| = 2^{-n + 1}\norm{b - a} \to 0.
+        \] Now, pick a sequence of points $\{x_n\}$ where each $x_n \in I_n$. Then,
+        $\{x_n\}$ is a Cauchy sequence. To see this, given any $\epsilon > 0$, we can
+        find sufficiently large $n_0$ such that $2^{-n_0 + 1}\norm{b - a} <
+        \epsilon$. Thus, $x_n \in I_n \subset I_{n_0}$ for all $n \geq n_0$, which
+        means that for any $m, n \geq n_0$, we have $x_m, x_n \in I_{n_0}$ forcing\footnote{
+            If $x_1, x_2 \in [a, b]$ with $x_1 < x_2$, note that $a \leq x_1 < x_2
+            \leq b$, so\[
+                |x_2 - x_1| = x_2 - x_1 \leq b - a.
+            \] 
+        } \[
+            \norm{x_m - x_n} \leq |I_{n_0}| = 2^{-n_0 + 1}\norm{b - a} < \epsilon.
+        \] From the completeness of $\R$, this sequence must converge in $\R$,
+        specifically in $[a, b]$. Thus, $x_n \to x$ for some $x \in [a, b]$. It can
+        also be seen that  the limit $x \in I_n$ for all $n \in \N$; if not, say $x
+        \notin I_{n_0}$, then $x \in [a, b] \setminus I_{n_0}$ which is open, hence
+        there is an open interval such that $(x - \delta, x + \delta) \cap I_{n_0} =
+        \emptyset$.  However, $I_{n_0}$ contains all $x_{n \geq n_0}$, thus this
+        $\delta$-neighbourhood of $x$ would miss out a tail of $\{x_n\}$.
+
+        Now, pick the open set $U \in \{U_\alpha\}$ which covers the point $x$. Thus,
+        $x \in U$ so $U$ contains some non-empty open interval $(x - \delta, x +
+        \delta)$ around $x$. Choose $n_0$ such that $2^{-n_0 + 1} \norm{b - a} <
+        \delta$; this immediately gives $I_{n_0} \subseteq (x - \delta, x + \delta)
+        \subset U$.  This contradicts that fact that $I_{n_0}$ has no finite
+        sub-cover from $\{U_\alpha\}$, completing the proof.
+    \end{proof}
 
     \subsection{Continuous maps}
     \begin{definition}
