@@ -216,7 +216,7 @@
         A boundary point of a set is neither an interior point, nor an exterior point.
     \end{definition}
     \begin{example}
-        The boundary of the unit open ball $B_0(0) \subset \R^n$ is the sphere $S^{n
+        The boundary of the unit open ball $B_1(0) \subset \R^n$ is the sphere $S^{n
         - 1}$.
     \end{example}
 
@@ -232,9 +232,18 @@
         \end{remark}
     \end{definition}
 
+    \begin{lemma}
+        Every open set in $\R^n$ is a union of open balls.
+    \end{lemma}
+    \begin{proof}
+        Let $U\subseteq \R^n$ be open. Thus, for every $\vx\in\R^n$, we can choose
+        $\delta_x > 0$ such that $B_{\delta_x}(\vx) \subset U$. The union of all such
+        open balls is precisely the set $U$.
+    \end{proof}
+
     \subsection{$\R^n$ as a topological space}
     \begin{definition}
-        A topology on a set $X$ is a collection of sets $\tau$ such that
+        A topology on a set $X$ is a collection $\tau$ of subsets of $X$ such that
         \begin{enumerate}
             \itemsep0em
             \item $\emptyset \in \tau$
@@ -258,10 +267,10 @@
 
     \begin{definition}
         A set $K \subset X$ in a topological space is compact if every open cover of
-        $K$ has a finite sub-cover. That is, for every collection if $\{U\}_{\alpha \in A}$
-        of open sets such that $K$ is contained in their union, then there exists a
-        finite sub-collection $U_{\alpha_1}, \dots, U_{\alpha_k}$ such that $K$ is
-        also contained in their union.
+        $K$ has a finite sub-cover. That is, for every collection if
+        $\{U_\alpha\}_{\alpha \in A}$ of open sets such that $K$ is contained in
+        their union, there exists a finite sub-collection $U_{\alpha_1}, \dots,
+        U_{\alpha_k}$ such that $K$ is also contained in their union.
     \end{definition}
     \begin{example}
         All finite sets are compact.
@@ -317,6 +326,25 @@
         \subset U$.  This contradicts that fact that $I_{n_0}$ has no finite
         sub-cover from $\{U_\alpha\}$, completing the proof.
     \end{proof}
+    \begin{remark}
+        The fact that Cauchy sequences in $\R^n$ converge isn't immediately obvious;
+        it is a consequence of the completeness of $\R^n$. Start by noting that $\R$
+        has the Least Upper Bound property, from which the Monotone Convergence
+        Theorem follows; every monotonic, bounded sequence of reals converges. It
+        can also be shown that any sequence of reals with contain a monotone
+        subsequence, from which it follows that every bounded sequence contains a
+        convergent subsequence (Bolzano-Weierstrass). Finally, it can be shown that
+        if a subsequence of a Cauchy sequence converges, then the entire sequence
+        also converges to the same limit, giving us the desired result for $\R$. For
+        sequence in $\R^n$, we may apply this coordinate-wise to obtain the result.
+    \end{remark}
+
+    \begin{lemma}
+        Compact sets in $\R^n$ are closed and bounded.
+    \end{lemma}
+    \begin{lemma}
+        The intersection of a closed set and a compact set is compact.
+    \end{lemma}
 
     \subsection{Continuous maps}
     \begin{definition}
