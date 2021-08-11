@@ -14,6 +14,7 @@
 \usepackage{graphicx}
 \usepackage{fancyhdr}
 \usepackage{hyperref}
+\usepackage{epstopdf}
 
 \geometry{a4paper, margin=1in, headheight=14pt}
 
@@ -107,6 +108,10 @@
     reflections. This gives us a total of $6$ symmetries. Coincidentally, the plane
     symmetries of an equilateral triangle are precisely the set of $3! = 6$
     permutations of its vertices.
+
+    \begin{center}
+        \includegraphics[width=0.6\textwidth]{./triangle_square.eps}
+    \end{center}
 
     The same cannot be said of a square; there are $4! = 24$ of its vertices, but
     only $8$ of them are rigid motions. Here, we see $4$ rotations and $4$
@@ -204,9 +209,11 @@
     be preserved by a symmetry.
 
     The following graph is called the Petersen graph, with 10 vertices and 15 edges.
+
     \begin{center}
-        \includegraphics[width=0.35\textwidth]{./petersen.png}
+        \includegraphics[width=0.5\textwidth]{./petersen.eps}
     \end{center}
+
     We can show that this graph has $120$ symmetries. This can be done by looking at
     all $2$ element subsets of $\{1, 2, 3, 4, 5\}$, of which there are $10$. Place
     these subsets as the vertices of a new graph, and connect two such sets with an
