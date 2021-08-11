@@ -212,6 +212,20 @@
         \end{remark}
     \end{definition}
 
+    \begin{theorem}
+        Let $T \in \algL(V)$ where $V$ is finite dimensional, let $c_1, \dots, c_k$
+        be distinct eigenvalues of $T$, and let $W_i = \ker(T - c_iI)$ be the
+        corresponding eigenspaces. The following are equivalent.
+        \begin{enumerate}
+            \itemsep0em
+            \item $T$ is diagonalizable.
+            \item The characteristic polynomial of $T$ is of the form \[
+                f(x) = (x - c_1)^{d_1} \dots (x - c_k)^{d_k}
+            \] where each $d_i = \dim{W_i}$.
+            \item $\dim{V} = \dim{W_1} + \dots + \dim{W_k}$.
+        \end{enumerate}
+    \end{theorem}
+
     \subsection{Annihilating polynomials}
     
     \begin{definition}
@@ -301,6 +315,109 @@
         The minimal polynomial of $T$ in a finite-dimensional vector space $V$ is
         at most $\dim{V}$.
     \end{corollary}
+
+    \begin{theorem}
+        The minimal polynomial for a diagonalizable linear operator $T$ in a
+        finite-dimensional vector space is \[
+            p(x) = (x - c_1) \dots (x - c_k),
+        \] where $c_1, \dots, c_k$ are distinct eigenvalues of $T$.
+    \end{theorem}
+    \begin{proof}
+        The diagonalizability of $T$ implies that $V$ admits a basis of eigenvectors
+        of $T$. Thus, for any such eigenvector $\vv_i$, the operator $T - c_iI$ kills
+        it where $c_i$ is the corresponding eigenvalue. Thus, $p(T)\vv_i$ vanishes
+        for every basis vector $\vv_i$
+    \end{proof}
+    \begin{remark}
+        The converse is also true, i.e.\ $T$ is diagonalizable if and only if the
+        minimal polynomial is the product of distinct linear factors.
+    \end{remark}
+
+    \subsection{Invariant subspaces}
+
+    \begin{definition}
+        Let $T \in \algL(V)$ where $V$ is finite-dimensional, and let $W \subseteq V$
+        be a subspace. We say that $W$ is invariant under $T$ if $T(W) \subseteq W$.
+
+        If a subspace $W$ is invariant under $T$, we define the linear map
+        $T_W \in\algL(W)$ as the restriction of $T$ to $W$ in the natural way, by
+        setting $T_W(\vw) = T(\vw)$ for all $\vw \in W$.
+    \end{definition}
+
+    \begin{lemma}
+        If $W$ is an invariant subspace under $T \in \algL(V)$, then there is a basis of
+        $V$ in which $T$ has the block triangular form \[
+            [T]_\beta = \begin{bmatrix}
+                A & B \\ 0 & C
+            \end{bmatrix},
+        \] where $A$ is an $r \times r$ matrix, $r = \dim{W}$.
+    \end{lemma}
+    \begin{proof}
+        Let $\beta_W = \{\vv_1, \dots, \vv_r\}$ be an ordered basis of $W$, and
+        extend it to an ordered basis $\beta = \{\vv_1, \dots, \vv_n\}$ of $V$. Thus,
+        the matrix $[T]_\beta$ has coefficients $a_{ij}$ such that \[
+            T\vv_j = a_{1j}\vv_1 + \dots  + a_{rj}\vv_r + \dots + a_{nj}\vv_n.
+        \] However for all $j \leq r$, $T\vv_j \in W$ by the invariance of $W$, so
+        the coefficients of $\vv_{i > r}$ in the expansion of $T\vv_j$ must vanish.
+        Thus, all $a_{ij} = 0$ where $i > r$, $j \leq r$.
+    \end{proof}
+
+    \begin{lemma}
+        If $W$ is an invariant subspace under $T \in \algL(V)$, the characteristic
+        polynomial of $T_W$ divides the characteristic polynomial of $T$, and the
+        minimal polynomial of $T_W$ divides the minimal polynomial of $T$.
+    \end{lemma}
+    \begin{proof}
+        Choose an ordered basis $\beta$ of $V$ such that \[
+            [T]_\beta = \begin{bmatrix}
+                A & B \\ 0 & C
+            \end{bmatrix} = D.
+        \] Note that the matrix of $T_W$ in the restricted basis $\beta_W$ is just
+        $A$. It can be shown that \[
+            \det(xI - D) = \det(xI - A)\,\det(xI - C),
+        \] which immediately gives the first result.
+
+        Now, it can also be shown that the powers of $D$ are of the form \[
+            [T^k]_\beta = \begin{bmatrix}
+                A^k & B_k \\ 0 & C^k
+            \end{bmatrix} = D^k.
+        \] Thus, if $T^k\vv = \vec{0}$ implies $T_W^k\vv = \vec{0}$, hence any
+        polynomial which annihilates $T$ also annihilates $T_W$. This gives the
+        second result.
+    \end{proof}
+
+    \begin{definition}
+        Let $W$ be an invariant subspace under $T \in \algL(V)$, and let $\vv \in V$.
+        We define the $T$-conductor of $\vv$ into $W$ as the set $S_T(\vv; W)$ of all
+        polynomials $g$ such that $g(T)\vv \in W$.
+
+        When $W = \{0\}$, $S_T(\vv, \{0\})$ is called the $T$-annihilator of
+        $\vv$.
+    \end{definition}
+
+    \begin{lemma}
+        If $W$ is invariant under $T$, then it is invariant under all polynomials of
+        $T$. Thus, the conductor $S_T(\vv, W)$ is an ideal in the ring of polynomials
+        $\F[x]$.
+    \end{lemma}
+
+    \begin{definition}
+        If $W$ is an invariant subspace under $T \ni \algL(V)$, and $\vv \in V$, then
+        the unique monic generator of $S_T(\vv, W)$ is also called the $T$-conductor
+        of $\vv$ into $\V$.
+
+        The unique monic generator of $S_T(\vv, \{0\})$ is also called the
+        $T$-annihilator of $\vv$.
+        \begin{remark}
+            The $T$-annihilator of $\vv$ is the unique monic polynomial $g$ of least
+            degree such that $g(T)\vv = \vec{0}$.
+        \end{remark}
+        \begin{remark}
+            The minimal polynomial is a $T$-conductor for every $\vv \in V$, thus
+            every $T$-conductor divides the minimal polynomial of $T$.
+        \end{remark}
+    \end{definition}
+
 
     
 \end{document}
