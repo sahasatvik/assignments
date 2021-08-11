@@ -1,0 +1,286 @@
+\documentclass[11pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage[scr]{rsfso}
+\usepackage{bm}
+\usepackage{listings}
+\usepackage[%
+    hidealllines=true,%
+    innerbottommargin=15,%
+    nobreak=true,%
+]{mdframed}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+
+\geometry{a4paper, margin=1in, headheight=14pt}
+
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand\headrulewidth{0.4pt}
+\fancyhead[L]{\scshape MA3105: Numerical Analysis}
+\fancyhead[R]{\scshape \leftmark}
+\rfoot{\footnotesize\it Updated on \today}
+\cfoot{\thepage}
+
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+
+\newcommand{\ip}[2]{\langle #1, #2 \rangle}
+\newcommand{\norm}[1]{\Vert #1 \Vert}
+\renewcommand{\vec}[1]{\boldsymbol{#1}}
+
+\newcommand{\vx}{\vec{x}}
+\newcommand{\vy}{\vec{y}}
+\newcommand{\vv}{\vec{v}}
+\newcommand{\vw}{\vec{w}}
+\newcommand{\ve}{\vec{e}}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{1,1,1}
+
+\newmdtheoremenv[%
+    backgroundcolor=blue!10!white,%
+]{theorem}{Theorem}[section]
+\newmdtheoremenv[%
+    backgroundcolor=violet!10!white,%
+]{corollary}{Corollary}[theorem]
+\newmdtheoremenv[%
+    backgroundcolor=teal!10!white,%
+]{lemma}[theorem]{Lemma}
+
+\theoremstyle{definition}
+\newmdtheoremenv[%
+    backgroundcolor=green!10!white,%
+]{definition}{Definition}[section]
+\newmdtheoremenv[%
+    backgroundcolor=red!10!white,%
+]{exercise}{Exercise}[section]
+
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\newtheorem*{example}{Example}
+\newtheorem*{solution}{Solution}
+
+\surroundwithmdframed[%
+    linecolor=black!20!white,%
+    hidealllines=false,%
+    innertopmargin=5,%
+    innerbottommargin=10,%
+    skipabove=0,%
+    skipbelow=0,%
+]{example}
+
+\numberwithin{equation}{section}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{blue},
+    numbers=none,
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,
+    breaklines=true,
+    keepspaces=true,
+    numbers=left,
+    numbersep=5pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=4
+}
+
+\lstset{style=mystyle}
+
+\title{
+    \Large\textsc{MA3105} \\
+    \Huge \textbf{Numerical Analysis} \\
+    \vspace{5pt}
+    \Large{Autumn 2021}
+}
+\author{
+    \large Satvik Saha
+    \\\textsc{\small 19MS154}
+}
+\date{\normalsize
+    \textit{Indian Institute of Science Education and Research, Kolkata, \\
+    Mohanpur, West Bengal, 741246, India.} \\
+}
+
+\begin{document}
+    \maketitle
+
+    \tableofcontents
+
+    \section{Time complexity}
+
+    \subsection{Runtime cost}
+    When designing or implementing an algorithm, we care about its efficiency -- both
+    in terms of execution time, and the use of resources. This gives us a rough way
+    of comparing two algorithms. However, such metrics are architecture and language
+    dependent; different machines, or the same program implemented in different
+    programming languages, may consume different amounts of time or resources while
+    executing the same algorithm. Thus, we seek a way of measuring the `cost' in time
+    for a given algorithm.
+
+    For example, we may look at each statement in a program, and associate a cost
+    $c_i$ with each of them. Consider the following statements.
+
+    \begin{minipage}{\linewidth}  
+    \begin{lstlisting}[language=C, numbers=none]
+
+                one = 1;                            // c_1
+                two = 2;                            // c_2
+                three = 3;                          // c_3
+    \end{lstlisting}
+    \end{minipage}
+
+    The total cost of running these statements can be calculated as $T = c_1 + c_2 +
+    c_3$, simply by adding up the cost of each statement. Similarly, consider the
+    following loop construct.
+
+    \begin{minipage}{\linewidth}  
+    \begin{lstlisting}[language=C, numbers=none]
+
+                sum = 0;                            // c_1
+                for (i = 0; i < n; i++)             // c_2
+                    sum += a[i];                    // c_3
+    \end{lstlisting}
+    \end{minipage}
+
+    The total cost can be shown to be $T(n) = c_1 + c_2(n + 1) + c_3n$; this time, we
+    must take into account the number of times a given statement is executed. Note
+    that this is linear. Another example is as follows.
+
+    \begin{minipage}{\linewidth}  
+    \begin{lstlisting}[language=C, numbers=none]
+
+                sum = 0;                            // c_1
+                for (i = 0; i < n; i++)             // c_2
+                    for (j = 0; j < n; j++)         // c_2
+                        sum += a[i][j];             // c_4
+    \end{lstlisting}
+    \end{minipage}
+
+    The total cost can be shown to be $T(n) = c_1 + c_2(n + 1) + c_3n(n + 1) +
+    c_4n^2$. Note that this is quadratic. Finally, consider the following recursive call.
+
+    \begin{minipage}{\linewidth}  
+    \begin{lstlisting}[language=C, numbers=none]
+
+                int factorial (int n) {             // c_1
+                    if (n == 0)                     // c_2
+                        return 1;                   // c_3
+                    return n * factorial(n - 1);    // c_4
+                }
+
+                f = factorial(n);                   // c_5
+    \end{lstlisting}
+    \end{minipage}
+    The cost can be shown to be $T(n) = c_5 + (c_1 + c_2)(n + 1) + c_3 + c_4 n$. This
+    turns out to be linear.
+
+    In all these cases, we care about our total cost as a function of the input size
+    $n$. Moreover, we are interested mostly in the \emph{growth} of our total cost;
+    as our input size grows, the total cost can often be compared with some simple
+    function of $n$. Thus, we can classify our cost functions in terms of their
+    asymptotic growths.
+
+    \subsection{Asymptotic growth}
+
+    \begin{definition}
+        The set $O(g(n))$ denotes the class of functions $f$ which are asymptotically
+        bounded above by $g$. In other words, $f(n) \in O(g(n))$ if there exists $M >
+        0$ and $n_0 \in \N$ such that for all $n \geq n_0$, \[
+            |f(n)| \leq M g(n).
+        \] This amounts to writing \[
+            \limsup_{n \to \infty} \frac{|f(n)|}{g(n)} < \infty.
+        \] 
+    \end{definition}
+    \begin{example}
+        Consider a function defined by $f(n) = an + b$, where $a > 0$. Then, we can
+        write $f(n) \in O(n)$. To see why, note that for all $n \geq 1$, we have \[
+            |f(n)| = |an + b| \leq an + |b| \leq (a + |b|)n.
+        \] Thus, setting $M = a + |b| > 0$ completes the proof.
+    \end{example}
+    \begin{example}
+        Consider a polynomial function defined by \[
+            f(n) = a_kn^k + a_{k - 1}n^{k - 1} + \dots + a_1n + a_0,
+        \] with some non-zero coefficient. Then, we can write $f(n) \in O(n^k)$. Like
+        before, note that for all $n \geq 1$, we have \[
+            |f(n)| \leq \sum_{i = 0}^k |a_{i}|n^i \leq \sum_{i = 0}^k |a_i| n^k =
+            (|a_k| + |a_{k - 1}| + \dots + |a_0|)n^k.
+        \]  Thus, setting $M = |a_k| + \dots + |a_0| > 0$ completes the proof.
+    \end{example}
+
+    \begin{theorem}
+        If $f_1(n) \in O(g_1(n))$ and $f_2(n) \in O(g_2(n))$, then \[
+            f_1(n) + f_2(n) \in O(\max\{g_1(n), g_2(n)\}).
+        \]
+    \end{theorem}
+
+    \begin{definition}
+        The set $\Omega(g(n))$ denotes the class of functions $f$ are asymptotically
+        bounded below by $g$. In other words, $f(n) \in \Omega(g(n))$ if there exists
+        $M > 0$ and $n_0 \in \N$ such that for all $n \geq n_0$, \[
+            |f(n)| \geq M g(n).
+        \] This amounts to writing \[
+            \liminf_{n \to \infty} \frac{f(n)}{g(n)} > 0.
+        \] 
+    \end{definition}
+
+    \begin{definition}
+        The set $\Theta(g(n))$ denotes the class of functions $f$ which are
+        asymptotically bounded both above and below by $g$.  In other words, $f(n)
+        \in \Theta(g(n))$ if there exist $M_1, M_2 > 0$ and $n_0 \in \N$ such that
+        for all $n \geq n_0$, \[
+            M_1 g(n) \leq |f(n)| \leq M_2 g(n).
+        \] This amounts to writing $f(n) \in O(g(n))$ and $f(n) \in \Omega(g(n))$.
+    \end{definition}
+    
+    Another class of notation uses the idea of dominated growth.
+
+    \begin{definition}
+        The set $o(g(n))$ denotes the class of functions $f$ which are asymptotically
+        dominated by $g$. In other words, $f(n) \in o(g(n))$ if for all $M >
+        0$, there exists $n_0 \in \N$ such that for all $n \geq n_0$, \[
+            |f(n)| < M g(n).
+        \] This amounts to writing \[
+            \lim_{n \to \infty} \frac{|f(n)|}{g(n)} = 0.
+        \] 
+    \end{definition}
+    
+    \begin{definition}
+        The set $\omega(g(n))$ denotes the class of functions $f$ which
+        asymptotically dominate $g$. In other words, $f(n) \in \omega(g(n))$ if for
+        all $M > 0$, there exists $n_0 \in \N$ such that for all $n \geq n_0$, \[
+            |f(n)| > M g(n).
+        \] This amounts to writing \[
+            \lim_{n \to \infty} \frac{|f(n)|}{g(n)} = \infty.
+        \] 
+    \end{definition}
+    
+    \begin{definition}
+        We say that $f(n) \sim g(n)$ if $f$ is asymptotically equal to $g$.
+        In other words, $f(n) \sim g(n)$ if for all $\epsilon > 0$, there exists $n_0
+        \in \N$ such that for all $n \geq n_0$, \[
+            \left| \frac{f(n)}{g(n)} - 1 \right| < \epsilon.
+        \] This amounts to writing \[
+            \lim_{n \to \infty} \frac{f(n)}{g(n)} = 1.
+        \] 
+    \end{definition}
+
+    We often abuse notation and treat the following as equivalent. \[
+        T(n) \in O(g(n)), \qquad T(n) = O(g(n)).
+    \] 
+    
+\end{document}
