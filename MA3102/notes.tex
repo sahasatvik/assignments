@@ -196,17 +196,48 @@
         \end{bmatrix}.
     \] 
 
+
+    \subsection{Symmetries of the Petersen graph}
+    Consider a graph $G(V, E)$. A symmetry of $G$ is a bijection $f\colon V \to V$
+    on the set of vertices, which preserves the edges. In other words, it preserves
+    the adjacency function. Thus, it can be shown that the degree of each vertex will
+    be preserved by a symmetry.
+
+    The following graph is called the Petersen graph, with 10 vertices and 15 edges.
+    \begin{center}
+        \includegraphics[width=0.35\textwidth]{./petersen.png}
+    \end{center}
+    We can show that this graph has $120$ symmetries. This can be done by looking at
+    all $2$ element subsets of $\{1, 2, 3, 4, 5\}$, of which there are $10$. Place
+    these subsets as the vertices of a new graph, and connect two such sets with an
+    edge if they \emph{are disjoint}. The resulting graph can be shown to be
+    identical to the Petersen graph. It is immediately clear that any permutation of
+    the set $\{1, 2, 3, 4, 5\}$ produces a relabelling of the vertices, which
+    nevertheless preserves the Petersen graph. This gives us at least $5! = 120$
+    symmetries.
+
+    To show that there are at most $120$ symmetries, note that every vertex has
+    exactly 3 neighbours. Thus, when sending a vertex $V$ to its image, we have $10$
+    choices, but we have $3$ choices for the first neighbour $V_1$, $2$ for the
+    second neighbour $V_2$. and $1$ for the third neighbour $V_3$. Finally, choose a
+    neighbour of $V_3$, say $V_4$ and place it in on of the $2$ remaining positions.
+    It can be shown that this completely determines the symmetry; each remaining
+    vertex has a complete characterization in terms of the ones already fixed. Thus,
+    we have an upper bound of $10 \times 3 \times 2 \times 1 \times 2 = 120$
+    symmetries.
+    
+
     \subsection{Basic definitions}
     \begin{definition}
         A group is a set $G$ with a binary operation of composition, satisfying the
         following properties.
         \begin{enumerate}
         \itemsep0em
-            \item \emph{Associativity}: For all $a, b, c \in G$, $a(bc) = (ab)c$.
+            \item \emph{Associativity}: For all $x, y, z \in G$, $x(yz) = (xy)z$.
             \item \emph{Existence of an identity element}: There exists $e \in G$
-            such that for all $a \in G$, $ae = e = ea$.
-            \item \emph{Existence of inverse elements}: For all $a \in G$, there
-            exists $b \in G$ such that $ab = e = ba$. We denote $b = a^{-1}$.
+            such that for all $x \in G$, $ex = e = xe$.
+            \item \emph{Existence of inverse elements}: For every $x \in G$, there
+            exists some $y \in G$ such that $xy = e = yx$. We denote $y = x^{-1}$.
         \end{enumerate}
     \end{definition}
     \begin{example}
@@ -218,5 +249,46 @@
     \begin{example}
         The symmetries of a tetrahedron form a group under composition of symmetries.
     \end{example}
+
+    \begin{lemma}
+        The identity element in a group is unique.
+    \end{lemma}
+    \begin{proof}
+        Let $G$ be a group, and suppose that $e, e' \in G$ satisfy \[
+            ex = x = xe, \qquad e'x = x = xe'
+        \] for all $x \in G$. Thus, we specifically have \[
+            ee' = e' = e'e, \qquad e'e = e = ee',
+        \] hence $e = e'$.
+    \end{proof}
+
+    \begin{lemma}
+        The inverse of an element in a group is unique.
+    \end{lemma}
+    \begin{proof}
+        Let $G$ be a group, and let $x \in G$. Suppose that $y, y' \in G$ satisfy \[
+            xy = e = yx, \qquad xy' = e = y'x.
+        \] Thus \[
+            y = ye = y(xy') = (yx)y' = ey' = y'. \qedhere
+        \] 
+    \end{proof}
+
+    \begin{lemma}
+        The inverse of the inverse of an element in a group is the element itself.
+    \end{lemma}
+    \begin{proof}
+        Let $G$ be a group, and let $x \in G$. Set $w = (x^{-1})^{-1}$. We have \[
+            x^{-1}x = e = x x^{-1}, \qquad wx^{-1} = e = x^{-1}w.
+        \] Thus, \[
+            w = we = w(x^{-1}x) = (wx^{-1})x = ex = x. \qedhere
+        \] 
+    \end{proof}
+
+    \begin{lemma}[Cancellation Law]
+        Let $G$ be a group, and let $x, a, b \in G$ such that $xa = xb$. Then, $a =
+        b$. Analogously, if $ax = bx$, then $a = b$.
+    \end{lemma}
+    \begin{proof}
+        Simply multiply by $x^{-1}$ as appropriate.
+    \end{proof}
     
 \end{document}
