@@ -435,7 +435,7 @@
             g = (x - c_i)h.
         \] The minimality of $g$ ensures that $\vv = h(T)\vw \notin W$. Finally, note
         that \[
-            (T - c_iI)\vv = (T - c_i)h(T)\vw = g(T)\vw \in W.
+            (T - c_iI)\vv = (T - c_i)h(T)\vw = g(T)\vw \in W. \qedhere
         \] 
     \end{proof}
 
@@ -475,6 +475,40 @@
         linear polynomials.
     \end{proof}
 
+    \begin{corollary}
+        In an algebraically closed field $\F$, any $n\times n$ over $\F$ is
+        triangulable.
+    \end{corollary}
+
+    \begin{theorem}
+        Let $T \in \alg{L}(V)$ for finite-dimensional $V$. Then, $T$ is diagonalizable
+        if and only if the minimal polynomial is a product of distinct linear
+        factors, i.e.\ \[
+            p(x) = (x - c_1) \dots (x - c_k)
+        \] where $c_i$ are distinct eigenvalues of $T$.
+    \end{theorem}
+    \begin{proof}
+        We have already shown that if $T$ is diagonalizable, then its minimal
+        polynomial must have the given form.
+
+        Next, let the minimal polynomial of $T$ have the given form. Let $W$ be the
+        subspace spanned by all eigenvectors of $V$. Suppose that $W \neq V$. Using
+        the fact that $W$ is an invariant subspace under $T$ and the previous lemma,
+        we find $\vv \notin W$ and an eigenvalue $c_j$ such that $\vw = (T - c_jI)\vv
+        \in W$. Now, $\vw$ can be written as the sum of eigenvectors \[
+            \vw = \vw_1 + \dots + \vw_k
+        \] where each $T\vw_i = c_i\vw_i$. Thus for every polynomial $h$, we have \[
+            h(T)\vw = h(c_1)\vw_1 + \dots + h(c_k)\vw_k \in W.
+        \] Since $c_j$ is an eigenvalue of $T$, write $p = (x - c_j)q$ for some
+        polynomial $q$. Further write $q - q(c_j) = (x - c_j)h$ using the Remainder
+        Theorem. Thus, \[
+            q(T)\vv - q(c_j)\vv = h(T)(T - c_jI)\vv = h(T)\vw \in W.
+        \] Since \[
+            \vec{0} = p(T)\vv = (T - c_jI)q(T)\vv,
+        \] the vector $q(T)\vv$ is an eigenvector and hence in $W$. However, $\vv
+        \notin W$, forcing $q(c_j) = 0$. This contradicts the fact that the factor
+        $x - c_j$ appears only once in the minimal polynomial.
+    \end{proof}
 
     
 \end{document}
