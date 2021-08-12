@@ -254,19 +254,58 @@
         Sets from $\tau$ are called open sets.
     \end{definition}
     \begin{example}
+        The Euclidean metric induces the standard topology on $\R^n$.
+    \end{example}
+    \begin{example}
         The discrete topology on a set $X$ is one where every singleton set is open.
         This is the topology induced by the discrete metric, \[
             d_\text{discrete}\colon X\times X \to \R, \qquad
             (x, y) \mapsto \begin{cases}
-                1, &\text{ if }x = y, \\
-                0, &\text{ if }x \neq y.
+                0, &\text{ if }x = y, \\
+                1, &\text{ if }x \neq y.
             \end{cases}
         \] 
     \end{example}
+    \begin{example}
+        Let $X$ be an infinite set. The collection of sets consisting of $\emptyset$
+        along with all sets $A$ such that $X\setminus A$ is finite is a topology on
+        $X$. This is called the Zariski topology.
+    \end{example}
+    \begin{example}
+        Consider the set of real numbers, and let $\tau$ be the collection
+        $\emptyset$, $\R$, and all intervals $(-x, +x)$ for $x > 0$. This constitutes
+        a topology on $\R$, very different from the usual one.
 
-    \begin{theorem}
-        The Euclidean metric $d$ induces the standard topology $\tau_d$ on $\R^n$.
-    \end{theorem}
+        This topology cannot be induced by a metric; it is not metrizable.
+
+        Consider the constant sequence of zeros. In this topology $(\R, \tau)$, this
+        sequence converges to \emph{every} point in $\R$. Given any $\ell \in \R$, the
+        open neighbourhoods of $\ell$ are precisely the sets $\R$ and the open intervals
+        $(-x, +x)$ for $x > |\ell|$. The tail of the constant sequence of zeros is
+        contained within every such neighbourhood of $\ell$, hence $0 \to \ell$.
+        Indeed, the element zero belongs to every open set apart from $\emptyset$ in
+        this topology.
+    \end{example}
+    \begin{definition}
+        A topological space is called Hausdorff if for every distinct $x, y \in X$,
+        there exist disjoint neighbourhoods of $x$ and $y$.
+    \end{definition}
+    \begin{example}
+        Every metric space is Hausdorff.
+        Given distinct $x, y$ in a metric space $(X, d)$, set $\delta = d(x, y) / 3$
+        and consider the open balls $B_{\delta}(x)$ and $B_\delta(y)$.
+    \end{example}
+    
+    \begin{lemma}
+        Every convergent sequence in a Hausdorff space has exactly one limit.
+    \end{lemma}
+    \begin{proof}
+        Consider a sequence $\{x_n\}_{n \in \N}$, and suppose that it converges to
+        distinct $x_1$ and $x_2$. Construct disjoint neighbourhoods $U_1$ and $U_2$
+        around $x_1$ and $x_2$. Now, convergence implies that both $U_1$ and $U_2$
+        contain the tail of $\{x_n\}$, which is impossible since they are disjoint
+        and hence contain no elements in common.
+    \end{proof}
 
     \begin{definition}
         Given a topological space $(X, \tau)$ and a subset $Y\subseteq X$, the
@@ -275,6 +314,8 @@
         topology on $X$.
     \end{definition}
 
+    \subsection{Compact sets in $\R^n$}
+    
     \begin{definition}
         A set $K \subset X$ in a topological space is compact if every open cover of
         $K$ has a finite sub-cover. That is, for every collection if
