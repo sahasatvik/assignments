@@ -222,7 +222,7 @@
 
     \begin{definition}
         A limit point $x$ of a set $S \subseteq \R^n$ is such that every
-        neighbourhood of $x$ contains a point from $S$.
+        neighbourhood of $x$ contains a point from $S$ other than itself.
     \end{definition}
     \begin{definition}
         The closure of a set $S \subseteq \R^n$ is the union of $S$ and its limit
@@ -253,6 +253,16 @@
         \end{enumerate}
         Sets from $\tau$ are called open sets.
     \end{definition}
+    \begin{example}
+        The discrete topology on a set $X$ is one where every singleton set is open.
+        This is the topology induced by the discrete metric, \[
+            d_\text{discrete}\colon X\times X \to \R, \qquad
+            (x, y) \mapsto \begin{cases}
+                1, &\text{ if }x = y, \\
+                0, &\text{ if }x \neq y.
+            \end{cases}
+        \] 
+    \end{example}
 
     \begin{theorem}
         The Euclidean metric $d$ induces the standard topology $\tau_d$ on $\R^n$.
@@ -342,9 +352,68 @@
     \begin{lemma}
         Compact sets in $\R^n$ are closed and bounded.
     \end{lemma}
+    \begin{proof}
+        Consider a compact set $K \subset \R^n$. Let $x \in \R^n \setminus K$, and
+        let $y \in K$. Since $x \neq y$, we choose open balls $U_y$ around $y$ and
+        $V_y$ around $x$ such that $U_y\cap V_y = \emptyset$. Repeating this for all
+        $y \in K$, we generate an open cover $\{U_y\}$ of $K$ consisting of open balls. The
+        compactness of $K$ guarantees that this has a finite sub-cover, i.e.\ there
+        is a finite set $Y$ such that the collection $\{U_y\}_{y \in Y}$ covers $X$.
+        As a result, the finite intersection of all $V_y$ for $y \in Y$ is contained
+        within $\R^n \setminus K$. Thus, $x$ is in the exterior of $K$. Since $x$ was
+        chosen arbitrarily from $\R^n\setminus K$, we see that $K$ is closed.
+
+        Now, consider the open cover $\{B_1(x)\}_{x \in K}$, and extract a finite
+        sub-cover of unit open balls. The distance between any two points in $K$ is
+        at most the maximum distance between the centres of any two balls in our
+        sub-cover, plus two.
+    \end{proof}
+
     \begin{lemma}
         The intersection of a closed set and a compact set is compact.
     \end{lemma}
+    \begin{proof}
+        Let $F \subseteq \R^n$ be closed and let $K \subseteq \R^n$ be compact.
+        Suppose that the open cover $\{U_\alpha\}$ of $F \cap K$ has no finite
+        sub-cover. Now the complement $U = F^c$ is open in $\R^n$, hence the
+        collection $\{U_\alpha\} \cup \{U\}$ is an open cover of $K$, and hence must
+        admit a finite sub-cover of $K$. In particular, this must be a finite
+        sub-cover of $F \cap K$. However, we can remove the set $U$ from this
+        sub-cover since it shares no element with $F \cap K$; as a result, our
+        sub-cover must be a finite sub-collection of sets $U_\alpha$, contradicting
+        our assumption. This shows that $F \cap K$ is compact.
+    \end{proof}
+
+    \begin{lemma}[Finite intersection property]
+        Let $\{K_\alpha\}$ be a collection of compact sets in $\R^n$ which have the
+        property that any finite intersection of them is non-empty. Then, \[
+            \bigcap_{\alpha} K_\alpha \neq \emptyset.
+        \] 
+    \end{lemma}
+    \begin{proof}
+        Suppose to the contrary that the intersection of all $K_\alpha$ is empty. Fix
+        an index $\beta$, and note that no element of $K_\beta$ lies in every
+        $K_\alpha$. Set $J_\alpha = K_\alpha^c$, whence the collection $\{J_\alpha :
+        \alpha \neq \beta\}$ is an open cover of $K_\beta$. This must admit a finite
+        sub-cover $\{J_{\alpha_1},\dots, J_{\alpha_k}\}$ of $K_\beta$. Thus, we must
+        have \[
+            K_\beta^c \cup J_{\alpha_1} \cup \dots \cup J_{\alpha_k} = \R^n.
+        \] This immediately gives the contradiction \[
+            K_\beta \cap K_{\alpha_1} \cap \dots \cap K_{\alpha_k} = \emptyset.
+            \qedhere
+        \] 
+    \end{proof}
+
+    \begin{theorem}[Heine-Borel]
+        Compact sets in $\R^n$ are precisely those that are closed and bounded.
+    \end{theorem}
+    \begin{proof}
+        Given a compact set in $\R^n$, we have already shown that it must be closed
+        and bounded. Next, if $F \subset \R^n$ is closed and bounded, it can be
+        enclosed within a $k$-cell which we know is compact. Thus, $F$ is the
+        intersection of the closed set $F$ and the compact $k$-cell, proving that
+        $F$ must be compact.
+    \end{proof}
 
     \subsection{Continuous maps}
     \begin{definition}
