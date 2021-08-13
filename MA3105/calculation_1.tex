@@ -1,0 +1,126 @@
+\documentclass[10pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{xcolor}
+\usepackage{listings}
+
+\geometry{a4paper, margin=1in}
+
+\renewcommand{\labelenumi}{(\roman{enumi})}
+
+\newcounter{prob}
+\newcommand{\problem}{\stepcounter{prob}\paragraph{Exercise \arabic{prob}}}
+\newcommand{\solution}{\paragraph{Solution}}
+
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+
+\newtheorem*{lemma}{Lemma}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{1,1,1}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{blue},
+    numbers=none,
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,
+    breaklines=true,
+    keepspaces=true,
+    numbers=left,
+    numbersep=5pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=4
+}
+
+\lstset{style=mystyle}
+
+\title{Time complexity}
+\author{Satvik Saha}
+\date{}
+
+\begin{document}
+    \noindent\textbf{IISER Kolkata} \hfill \textbf{Time complexity}
+    \vspace{3pt}
+    \hrule
+    \vspace{3pt}
+    \begin{center}
+    \LARGE{\textbf{MA3105: Numerical Analysis}}
+    \end{center}
+    \vspace{3pt}
+    \hrule
+    \vspace{3pt}
+    Satvik Saha, \texttt{19MS154} \hfill \today
+    \vspace{20pt}
+
+    Consider the following code block, and suppose that the commented $c_i$'s
+    represent the time cost of executing the corresponding statement.
+    
+    \begin{minipage}{\linewidth}  
+    \begin{lstlisting}[language=C, numbers=none]
+
+                bool unique (int a[]) {
+                    for (i = 0; i <= n - 2; i++)            // c_1
+                        for (j = i + 1; i <= n - 1; j++)    // c_2
+                            if (a[i] == a[j])               // c_3
+                                return false;
+                    return true;
+                }
+    \end{lstlisting}
+    \end{minipage}
+
+    It is clear that the first \texttt{for} statement is executed $n$ times;
+    the interior is executed $n - 1$ times. Similarly, the second \texttt{for}
+    statement is executed $n - i$ times, with the interior executed $n - i - 1$
+    times. The \texttt{if} block is executed the full $n - i - 1$ times every loop at
+    worst, $1$ time at best. Thus, the total cost can be estimated as 
+    \begin{align*}
+        T(n) &= \sum_{i = 0}^{n - 1} c_1 + \sum_{i = 0}^{n - 2}\sum_{j = i + 1}^{n}
+        c_2 + \sum_{i = 0}^{n - 2}\sum_{j = i + 1}^{n - 1} c_3 \\
+        &= c_1n + \sum_{i = 0}^{n - 2} c_2(n - i) + \sum_{i = 0}^{n - 2} c_3(n - i -
+        1) \\
+        &= c_1n + (c_2 + c_3) \sum_{i = 0}^{n - 2} (n - i) - \sum_{i = 0}^{n - 2} c_3
+        \\
+        &= c_1n + (c_2 + c_3)n(n - 1) - \frac{1}{2}(c_2 + c_3)(n - 1)(n - 2) - c_3(n
+        - 1).
+    \end{align*}
+    By expanding further and collecting coefficients, we have
+    \begin{align*}
+        T(n) &= c_1n + (c_2 + c_3)n^2 - (c_2 + c_3)n - \frac{1}{2}(c_2 + c_3)n^2 +
+        \frac{3}{2}(c_2 + c_3)n - (c_2 + c_3) - c_3n + c_3 \\
+        &= \frac{1}{2}(c_2 + c_3)n^2 + \frac{1}{2}(2c_1 + c_2 - c_3)n - c_2.
+    \end{align*}
+    As $n \to \infty$, we see that $T(n)$ grows quadratically. We write $T(n) \in
+    O(n^2)$.
+
+    \begin{lemma}
+        Given any polynomial \[
+            f(n) = a_kn^k + a_{k - 1}n^{k - 1} + \dots + a_1n + a_0
+        \] with at least one non-zero coefficient $a_i$, we can write $f(n) \in
+        O(n^k)$.
+    \end{lemma}
+    \begin{proof}
+        Set $M = |a_k| + |a_{k - 1}| + \dots + |a_0|$. Then for all $n \geq 1$, the
+        triangle inequality gives
+        \begin{align*}
+            |f(n)| &= \left|a_kn^k + a_{k - 1}n^{k - 1} + \dots + a_1n + a_0\right|
+            \\
+            &\leq |a_k|n^k + |a_{k - 1}|n^{k - 1} + \dots + |a_1|n + |a_0| \\
+            &\leq |a_k|n^k + |a_{k - 1}|n^k + \dots + |a_1|n^k + |a_0|n^k \\
+            &= M n^k. \qedhere
+        \end{align*}
+    \end{proof}
+
+\end{document}

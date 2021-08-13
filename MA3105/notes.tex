@@ -282,5 +282,65 @@
     We often abuse notation and treat the following as equivalent. \[
         T(n) \in O(g(n)), \qquad T(n) = O(g(n)).
     \] 
+
+
+    \section{Root finding methods}
+
+    Consider an equation of the form $f(x) = 0$, where $f\colon [a, b] \to \R$ is
+    given. We wish to solve this equation, i.e.\ find the roots of $f$.
+
+    Note that for \emph{arbitrary} functions, this task is impossible. To see this,
+    consider a function $f$ which assumes the value $1$ on $[0, 1] \setminus
+    \{\alpha\}$ and $f(\alpha) = 0$, for some $\alpha \in [0, 1]$. There is no way of
+    pinpointing $\alpha$ without checking $f$ at every point in $[0, 1]$. Besides, a
+    computer cannot reasonably store real numbers with arbitrary precision.
+
+    Thus, we direct our attention towards \emph{continuous} functions $f$. We only
+    seek sufficiently accurate approximations of its root $\alpha \in (a, b)$.
+
+    \begin{theorem}[Intermediate Value Theorem]
+        Let $f\colon [a, b] \to \R$ be continuous. If $f(a) f(b) < 0$, then there
+        exists $\alpha \in (a, b)$ such that $f(\alpha) = 0$.
+    \end{theorem}
+
+    \subsection{Tabulation method}
+    To identify the location of a root of $f$ on an interval $I = [a, b]$, we
+    subdivide $I$ into $n$ subintervals $[x_i, x_{i + 1}]$ where $x_i = a + (b - a) i
+    / n$. Now, we simply apply the Intermediate Value Theorem to $f$ on each of these
+    intervals. If $f(x_i) f(x_{i + 1}) < 0$, then $f$ has a root somewhere in $(x_i,
+    x_{i + 1})$. Note that the error in our approximation is on the order of $|b - a|
+    / n$. The precision of this method can be improved by increasing $n$.
+    
+    To reach a degree of approximation $\epsilon$, we must iterate $n$ times, where \[
+        n > \frac{b - a}{\epsilon}.
+    \] 
+
+
+    \subsection{Bisection method}
+    Here, we first verify that $f(a) f(b) < 0$, thus ensuring that $f$ has a root
+    within $(a, b)$. Now, set $x_1 = a + (b - a) / 2$ and apply the Intermediate
+    Value Theorem on the subintervals $[a, x_1]$ and $[x_1, b]$. One of these
+    \emph{must} contain a root of $f$. Note that if $f(x_1) = 0$, we are done;
+    otherwise, let $I_1 = [a_1, b_1]$ be the subinterval containing the root.  Repeat
+    the above process, obtaining successive subintervals $I_n$ with lengths $|b - a|
+    / 2^n$. The error in our approximation is of this order, and can be controlled by
+    stopping at appropriately large $n$.
+
+    The quantity $x_{n + 1} = (a_n + b_n) / 2$ is a good approximation for the actual
+    root $\alpha$ since we know that $x_{n + 1}, \alpha \in [a_n, b_n]$, so \[
+        |x_{n + 1} - \alpha| \leq |b_n - a_n| = 2^{-n} |b - a| \to 0.
+    \] 
+
+    To reach a degree of approximation $\epsilon$, we must iterate $n$ times, where \[
+        n > \log_2{\frac{b - a}{\epsilon}}.
+    \] 
+
+    \subsection{Newton's method}
+
+    \subsection{Secant method}
+
+    \subsection{Fixed point method}
+    
+    
     
 \end{document}
