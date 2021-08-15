@@ -236,7 +236,7 @@
 
     \subsection{Basic definitions}
     \begin{definition}
-        A group is a set $G$ with a binary operation of composition, satisfying the
+        A group is a set $G$ equipped with a binary operation, satisfying the
         following properties.
         \begin{enumerate}
         \itemsep0em
@@ -296,6 +296,36 @@
     \end{lemma}
     \begin{proof}
         Simply multiply by $x^{-1}$ as appropriate.
+    \end{proof}
+
+    \begin{definition}
+        Let $G$ be a group, and let $H \subseteq G$. We call $H$ a subgroup of $G$ if
+        \begin{enumerate}
+        \itemsep0em
+            \item $e \in H$.
+            \item For all $x, y \in H$, $xy \in H$.
+            \item For all $x \in H$, $x^{-1} \in H$.
+        \end{enumerate}
+        Note that this is enough to guarantee that $H$ is a group under the same
+        group operation as $G$.
+    \end{definition}
+
+    \begin{theorem}
+        Let $\Z$ be the group of integers under addition. Then, every subgroup of
+        $\Z$ is of the form $\{0\}$ or $n\Z = \{nk: k \in \Z\}$.
+        \begin{remark}
+            The same argument shows that every subgroup of a cyclic group is cyclic.
+        \end{remark}
+    \end{theorem}
+    \begin{proof}
+        Let $H \subseteq \Z$ be a subgroup. If $H = \{0\}$, we are done.  Otherwise,
+        $H$ contains some positive integers; this is clear since $H$ must contain
+        some non-zero integers, whose inverses have the opposite sign. Let $n \in H$
+        be the smallest positive integer; we immediately have $n\Z \subseteq H$. Now
+        let $m \in H$ be any other element.  Now, use Euclid's Division Lemma to
+        write $m = nq + r$, where $0 \leq r < n$.  Now, note that $n \in H$ implies
+        that $nq \in H$, hence the quantity $r = m - nq \in H$. The minimality of $n$
+        forces $r = 0$, hence $m = nq$. This gives $H \subseteq n\Z$.
     \end{proof}
     
 \end{document}
