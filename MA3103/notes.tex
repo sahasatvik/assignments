@@ -268,4 +268,22 @@
         real $\lambda$.
     \end{lemma}
 
+    \begin{theorem}[Mantel]
+        In a simple graph with $n$ vertices, the condition $|E| > n^2 / 4$ is
+        sufficient to ensure the existence of a triangle.
+    \end{theorem}
+    \begin{proof}
+        Let $G$ be a simple graph with $n$ vertices which is triangle-free. Thus, for
+        any edge $\{x, y\} \in E$, the neighbour sets $A$ and $B$ of $x$ and $y$
+        intersect at no vertex. Thus, we can write \[
+            d(x) + d(y) = |A \cup B| \leq n.
+        \] Sum this over all possible edges. On the right, we have $n|E|$. On the
+        left, we have the sum \[
+            \sum_{x \in V} d(x)^2 \geq \frac{1}{n} \left(\sum_{x \in V} d(x)\right)^2
+            \geq \frac{1}{n} \cdot 4|E|^2
+        \] This gives \[
+            \frac{4|E|^2}{n} \leq n |E|, \qquad |E| \leq \frac{n^2}{4}. \qedhere
+        \] 
+    \end{proof}
+
 \end{document}
