@@ -497,4 +497,70 @@
         \] 
     \end{example}
     
+    \begin{theorem}
+        The continuous image of a compact set is a compact set.
+    \end{theorem}
+    \begin{proof}
+        Let $f\colon X \to Y$ be continuous, where $Y$ is the image of the compact
+        set $X$, and let $\{U_\alpha\}$ be an open cover of $Y$. Then, the collection
+        $\{f^{-1}(U_\alpha)\}$ is an open cover of $X$. Using the compactness of $X$,
+        extract a finite sub-cover $f^{-1}(U_{\alpha_1}), \dots,
+        f^{-1}(U_{\alpha_k})$ of $X$. It follows that the collection $U_{\alpha_1},
+        \dots, U_{\alpha_k}$ is a finite sub-cover of $Y$.
+    \end{proof}
+
+    \subsection{Connectedness}
+    \begin{definition}
+        Let $X$ be a topological space. A separation of $X$ is a pair $U, V$ of
+        non-empty disjoint open subsets such that $X = U \cup V$.
+    \end{definition}
+
+    \begin{definition}
+        A connected topological space is one which cannot be separated.
+    \end{definition}
+    \begin{lemma}
+        A topological space $X$ is connected if and only if the only sets which are
+        both open and closed are $\emptyset$ and $X$.
+    \end{lemma}
+
+    \begin{example}
+        The intervals $(a, b) \subset \R$ are connected. To see this, suppose that
+        $U$, $V$ is a separation of $(a, b)$. Pick $x \in U$, $y \in V$, and without
+        loss of generality let $x < y$. Define $S = [x, y] \cap U$, and set $c =
+        \sup{S}$. It can be argued that $c \in (a, b)$, but $c \notin U$, $c \notin
+        V$, using the properties of the supremum.
+    \end{example}
+
+    \begin{theorem}
+        The continuous image of a connected set is connected.
+    \end{theorem}
+    \begin{proof}
+        Let $f$ be a continuous map on the connected set $X$, and let $Y$ be the
+        image of $X$. If $U$, $V$ is a separation of $Y$, then it can be shown that
+        $f^{-1}(U)$, $f^{-1}(V)$ constitutes a separation of $X$, which is a
+        contradiction.
+    \end{proof}
+
+    \begin{definition}
+        A path $\gamma$ joining two points $x, y \in X$ is a continuous map
+        $\gamma\colon [a, b] \to X$ such that $\gamma(a) = x$, $\gamma(b) = y$.
+    \end{definition}
+
+    \begin{definition}
+        A set in $X$ is path connected if given any two distinct points in $X$, there
+        exists a path joining them.
+    \end{definition}
+
+    \begin{lemma}
+        Every path connected set is connected.
+    \end{lemma}
+    \begin{proof}
+        Let $X$ be path connected, and suppose that $U$, $V$ is a separation of $X$.
+        Then, pick $x \in U$, $y \in V$, and choose a path $\gamma\colon [0, 1] \to
+        X$ between $x$ and $y$. The sets $f^{-1}(U)$ and $f^{-1}(V)$ separate the
+        interval $[0, 1]$, which is a contradiction.
+    \end{proof}
+    
+
+    
 \end{document}
