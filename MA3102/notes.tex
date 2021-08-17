@@ -309,6 +309,11 @@
         Note that this is enough to guarantee that $H$ is a group under the same
         group operation as $G$.
     \end{definition}
+    \begin{example}
+        Consider the group $\C\setminus\{0\}$ of non-zero complex numbers under
+        multiplication. The non-zero reals $\R\setminus\{0\}$ form a subgroup of this
+        group.
+    \end{example}
 
     \begin{theorem}
         Let $\Z$ be the group of integers under addition. Then, every subgroup of
@@ -318,7 +323,7 @@
         \end{remark}
     \end{theorem}
     \begin{proof}
-        Let $H \subseteq \Z$ be a subgroup. If $H = \{0\}$, we are done.  Otherwise,
+        Let $H \subseteq \Z$ be a subgroup. If $H = \{0\}$, we are done. Otherwise,
         $H$ contains some positive integers; this is clear since $H$ must contain
         some non-zero integers, whose inverses have the opposite sign. Let $n \in H$
         be the smallest positive integer; we immediately have $n\Z \subseteq H$. Now
@@ -327,5 +332,42 @@
         that $nq \in H$, hence the quantity $r = m - nq \in H$. The minimality of $n$
         forces $r = 0$, hence $m = nq$. This gives $H \subseteq n\Z$.
     \end{proof}
-    
+
+    \begin{theorem}
+        Let $\C^\times$ be the group of non-zero complex numbers under
+        multiplication. Then, every finite subgroup of $\C^\times$ is of the form
+        $H_n = \{z^k : k \in \N\}$ for some $n$\textsuperscript{th} root of unity
+        $z$.
+    \end{theorem}
+    \begin{proof}
+        Let $H \subset \C^\times$ be a finite subgroup. Note that we demand $1 \in
+        H$. If this is the only element of $H$, we are done, otherwise choose a
+        different $z \in H$. Now, if $|z| \neq 1$, note that there are infinitely
+        many elements $z, z^2, z^3, \dots$ which must belong to $H$, which is a
+        contradiction; note that these generated elements are distinct as they have
+        different magnitudes. Thus we demand $|z| = 1$, so write $e^{2\pi ix}$.
+
+        Examine the elements $1, z, z^2, \dots, z^n, \dots \in H$ for all $n \in \N$.
+        Since $H$ is finite, some pair of these must be equal. This means that $z^a =
+        z^b$ for some $a < b$, so cancellation gives $z^{b - a} = 1$. Thus, $z$ is a
+        root of unity, which means that $z = e^{2\pi i k / n}$ for some $n
+        \in \N$, $0 < k < n$.
+
+        We have shown that every non-identity element in $H$ is a root of unity.
+        Thus, pick $w = e^{2\pi ix} \in H$ such that $0 < x < 1$ and $x$ is minimal.
+        Furthermore, set $x = k / n$, $0 < k < n$ with $k$ and $n$ co-prime. We claim
+        that $H$ consists solely of the $n$\textsuperscript{th} roots of unity. The
+        fact that $H$ contains all powers of $w$, hence all $n$\textsuperscript{th}
+        roots of unity is clear. Conversely, pick arbitrary $z = e^{2\pi i y} \in H$,
+        $z \neq 1, w$; since $z$ is a root of unity, write $y = k' / n'$ where $0 <
+        k' < n'$, $k'$ and $n'$ are co-prime. The minimality of $x$ gives $x < y$,
+        hence $y - x = (k'n - kn') / n n' > 0$. Set $p = k'n$, $q = kn'$, and using
+        $p > q$ write $p = aq + r$ where $0 \leq r < q$. Then, \[
+            z = e^{2\pi i p / nn'} = e^{2\pi i (aq + r) / n n'} = e^{2\pi i aq / nn'}
+            e^{2\pi i r / n n'} = w^a e^{2\pi i r / n n'}.
+        \] Thus, $z w^{-a} = e^{2\pi i r / n n'} \in H$. However, note that $r / nn'
+        < q / nn' = x$; the minimality of $x$ forces $r = 0$. This gives $z = w^a$,
+        proving the result.
+    \end{proof}
+
 \end{document}
