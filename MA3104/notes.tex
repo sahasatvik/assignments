@@ -381,7 +381,7 @@
             [T^k]_\beta = \begin{bmatrix}
                 A^k & B_k \\ 0 & C^k
             \end{bmatrix} = D^k.
-        \] Thus, if $T^k\vv = \vec{0}$ implies $T_W^k\vv = \vec{0}$, hence any
+        \] Now, $T^k\vv = \vec{0}$ implies $T_W^k\vv = \vec{0}$, hence any
         polynomial which annihilates $T$ also annihilates $T_W$. This gives the
         second result.
     \end{proof}
@@ -439,6 +439,9 @@
         \] 
     \end{proof}
 
+    \subsection{Triangulability and diagonalizability}
+    
+
     \begin{theorem}
         Let $T \in \alg{L}(V)$ for finite-dimensional $V$. Then, $T$ is triangulable
         if and only if the minimal polynomial is a product of linear polynomials.
@@ -476,7 +479,7 @@
     \end{proof}
 
     \begin{corollary}
-        In an algebraically closed field $\F$, any $n\times n$ over $\F$ is
+        In an algebraically closed field $\F$, any $n\times n$ matrix over $\F$ is
         triangulable.
     \end{corollary}
 
@@ -510,5 +513,24 @@
         $x - c_j$ appears only once in the minimal polynomial.
     \end{proof}
 
+
+    \subsection{Simultaneous triangulation and diagonalization}
+
+    \begin{definition}
+        Let $V$ be a finite-dimensional vector space, and let $\mathscr{F}$ be a
+        family of linear operators on $V$. The family $\mathscr{F}$ is said to be
+        simultaneously triangulable if there exists a basis of $V$ in which every
+        operator in $\mathscr{F}$ is represented by an upper triangular matrix.
+
+        An analogous definition holds for simultaneous diagonalizability.
+    \end{definition}
+
+    \begin{lemma}
+        Let $\mathscr{F}$ be a simultaneously diagonalizable family of linear
+        operators. Then, every pair of operators from $\mathscr{F}$ commute.
+    \end{lemma}
+    \begin{proof}
+        This follows trivially from the fact that diagonal matrices commute.
+    \end{proof}
     
 \end{document}
