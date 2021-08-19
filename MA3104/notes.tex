@@ -41,10 +41,12 @@
 
 \newcommand{\alg}[1]{\mathscr{#1}}
 \newcommand{\algL}{\alg{L}}
+\newcommand{\algF}{\alg{F}}
 
 \newcommand{\ip}[2]{\langle #1, #2 \rangle}
 
 \renewcommand{\ker}{\operatorname{ker}}
+\newcommand{\span}{\operatorname{span}}
 \newcommand{\im}{\operatorname{im}}
 \newcommand{\dim}{\operatorname{dim}}
 \newcommand{\adj}{\operatorname{adj}}
@@ -418,7 +420,7 @@
         \end{remark}
     \end{definition}
 
-    \begin{lemma}
+    \begin{lemma} \label{lemma:tri_span}
         Let $T \in \alg{L}(V)$ for finite-dimensional $V$, where the minimal
         polynomial of $T$ is a product of linear operators \[
             p(x) = (x - c_1)^{r_1} \dots (x - c_k)^{r_k}.
@@ -435,14 +437,14 @@
             g = (x - c_i)h.
         \] The minimality of $g$ ensures that $\vv = h(T)\vw \notin W$. Finally, note
         that \[
-            (T - c_iI)\vv = (T - c_i)h(T)\vw = g(T)\vw \in W. \qedhere
+            (T - c_iI)\vv = (T - c_iI)h(T)\vw = g(T)\vw \in W. \qedhere
         \] 
     \end{proof}
 
     \subsection{Triangulability and diagonalizability}
     
 
-    \begin{theorem}
+    \begin{theorem} \label{theorem:triangulation}
         Let $T \in \alg{L}(V)$ for finite-dimensional $V$. Then, $T$ is triangulable
         if and only if the minimal polynomial is a product of linear polynomials.
     \end{theorem}
@@ -517,20 +519,59 @@
     \subsection{Simultaneous triangulation and diagonalization}
 
     \begin{definition}
-        Let $V$ be a finite-dimensional vector space, and let $\mathscr{F}$ be a
-        family of linear operators on $V$. The family $\mathscr{F}$ is said to be
+        Let $V$ be a finite-dimensional vector space, and let $\algF$ be a
+        family of linear operators on $V$. The family $\algF$ is said to be
         simultaneously triangulable if there exists a basis of $V$ in which every
-        operator in $\mathscr{F}$ is represented by an upper triangular matrix.
+        operator in $\algF$ is represented by an upper triangular matrix.
 
         An analogous definition holds for simultaneous diagonalizability.
     \end{definition}
 
     \begin{lemma}
-        Let $\mathscr{F}$ be a simultaneously diagonalizable family of linear
-        operators. Then, every pair of operators from $\mathscr{F}$ commute.
+        Let $\algF$ be a simultaneously diagonalizable family of linear
+        operators. Then, every pair of operators from $\algF$ commute.
     \end{lemma}
     \begin{proof}
         This follows trivially from the fact that diagonal matrices commute.
+    \end{proof}
+
+    \begin{definition}
+        A subspace $W$ is invariant under a family of linear operators $\algF$
+        if it is invariant under every operator $T \in \algF$.
+    \end{definition}
+
+    \begin{lemma}
+        Let $\algF$ be a commuting family of triangulable linear operators on
+        $V$, and let $W \subset V$ be a proper subspace invariant under
+        $\algF$. Then, there exists a vector $\vv \in V$ such that $\vv \notin
+        W$ and $T\vv \in \span\{\vv, W\}$ for each $T \in \algF$.
+    \end{lemma}
+    \begin{proof}
+        We observe that we can assume that $\algF$ contains only finitely many
+        operators, without loss of generality. This is because of the finite
+        dimensionality of $V$, which enables us to pick a finite basis of $\algL(V)$.
+
+        Using Lemma~\ref{lemma:tri_span}, we can find vectors $\vv_1 \notin W$ and
+        $c_1$ such that $(T_1 - c_1I)\vv_1 \in W$, for $T_1 \in \algF$. Define
+        \[
+            V_1 = \{\vv \in V: (T_1 - c_1I)\vv \in W\}.
+        \] Note that $V_1$ is a subspace which properly contains $W$. Furthermore,
+        $V_1$ is invariant under $\algF$ -- this uses the fact that the operators
+        from $\algF$ commute. Now, let $U_2$ be the restriction of $T_2$ to $V_1$.
+        Apply the lemma the find to $U_2$, $W$, $V_1$ to obtain $\vv_2 \in V_1$,
+        $\vv_2 \notin W$ such that $(U_2 - c_2I)\vv_2 \in W$. Note that $(T_i - c_i
+        I) \vv_2 \in W$ for $i = 1, 2$. Construct $V_2$ as before, and repeat this
+        process until we have exhausted all linear operators in $\algF$.  The final
+        vector $\vv_j$ satisfies the desired properties.
+    \end{proof}
+
+    \begin{theorem}
+        Let $\algF$ be a commuting family of triangulable linear operators on
+        $V$. There exists an ordered basis of $V$ which simultaneously triangulates
+        $\algF$.
+    \end{theorem}
+    \begin{proof}
+        The proof is identical to that of Theorem~\ref{theorem:triangulation}.
     \end{proof}
     
 \end{document}
