@@ -498,7 +498,7 @@
     \end{example}
     
     \begin{theorem}
-        The continuous image of a compact set is a compact set.
+        The continuous image of a compact set is compact.
     \end{theorem}
     \begin{proof}
         Let $f\colon X \to Y$ be continuous, where $Y$ is the image of the compact
@@ -560,6 +560,41 @@
         X$ between $x$ and $y$. The sets $f^{-1}(U)$ and $f^{-1}(V)$ separate the
         interval $[0, 1]$, which is a contradiction.
     \end{proof}
+    \begin{example}
+        All connected sets are not path connected. Consider the topologist's sine
+        curve, \[
+            \left\{\left(x, \sin{\frac{1}{x}}\right): 0 < x \leq 1\right\} \cup \{(0,
+            0)\}.
+        \] 
+    \end{example}
+
+
+    \begin{definition}
+        The $\epsilon$ neighbourhood of a set $K$ in a metric space $X$ is defined as \[
+             \bigcup_{a \in K} B_\epsilon(a) = \bigcup_{a \in K} \{x \in X: d(x, a) <
+             \epsilon\}.
+        \] 
+    \end{definition}
+
+    \begin{exercise}
+        Let $K \subseteq \R^n$ be compact, and define $f\colon \R^n \to \R$, \[
+            f(x) = \operatorname{dist}(x, K) = \inf_{a \in K} d(x, a).
+        \] Show that $f$ is continuous on $\R^n$, and $f^{-1}(\{0\}) = K$.
+    \end{exercise}
+
+    \begin{exercise}
+        If $K \subseteq \R^n$ is compact and $K \cap L = \emptyset$, then \[
+            \operatorname{dist}(K, L) = \inf_{a \in K} \operatorname{dist}(a, L) > 0.
+        \] 
+    \end{exercise}
+
+    \begin{exercise}
+        If $K \subseteq \R^n$ is compact and $U$ is an open set containing $K$, then
+        there exists $\epsilon > 0$ such that $U$ contains the $\epsilon$
+        neighbourhood of $K$.
+
+        Is the compactness of $K$ necessary?
+    \end{exercise}
     
 
     
