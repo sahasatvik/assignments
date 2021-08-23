@@ -574,4 +574,25 @@
         The proof is identical to that of Theorem~\ref{theorem:triangulation}.
     \end{proof}
     
+    \begin{theorem}
+        Let $\algF$ be a commuting family of diagonalizable linear operators on $V$.
+        There exists an ordered basis of $V$ which simultaneously diagonalizes
+        $\algF$.
+    \end{theorem}
+    \begin{proof}
+        We perform induction on the dimension of $V$. The theorem is trivial when
+        $\dim{V} = 1$; suppose that it holds for vector spaces of dimension less than
+        $n$, and let $\dim{V} = n$. Pick $T \in \algF$ such that $T$ is not a scalar
+        multiple of $I_n$. Let $c_1, \dots, c_k$ be distinct eigenvalues of $T$, and
+        let $W_i$ be the corresponding eigenspaces. Each $W_i$ is invariant under all
+        operators which commute with $T$. Now let $\algF_i$ be the family of
+        operators from $\algF$, restricted to the invariant subspace $W_i$. Note that
+        each operator in $\algF_i$ is diagonalizable. Furthermore, $\dim{W_i} <
+        \dim{V}$, so the induction hypothesis says that $\algF_i$ is simultaneously
+        diagonalizable; let $\beta_i$ be the corresponding basis. Each vector in
+        $\beta_i$ is an eigenvector for every operator in $\algF_i$. Let $\beta$
+        consist of the such vectors from all $\beta_i$ generated in this way. Since
+        $T$ is diagonal, this is indeed an basis of $V$, as desired.
+    \end{proof}
+    
 \end{document}
