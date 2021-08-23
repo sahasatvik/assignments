@@ -155,6 +155,11 @@
         The number of neighbours of a vertex is called the degree of that vertex.
     \end{definition}
 
+    \begin{definition}
+        A complete graph is such that every pair of vertices is connected by an
+        edge. The complete (simple) graph of $n$ vertices is denoted by $K_n$.
+    \end{definition}
+
     \subsection{Some principles}
     
     \begin{lemma}[Pigeonhole Principle]
@@ -285,5 +290,59 @@
             \frac{4|E|^2}{n} \leq n |E|, \qquad |E| \leq \frac{n^2}{4}. \qedhere
         \] 
     \end{proof}
+    \begin{example}
+        Consider a circle, with 21 points on its circumference. It follows that among
+        the angles subtended by these points at the center, at most 110 are greater
+        than $2\pi / 3$. \\
+
+        Note that there are $\binom{21}{2} = 210$ angles. Furthermore, given any 3
+        points on the circle (forming a triangle), all three angles subtended by them
+        cannot be greater than $2\pi / 3$. Construct a graph with these $n = 21$
+        points as vertices, such that two vertices are connected by an edge if and
+        only if the angle subtended by them is greater than $2\pi / 3$.  Now, note
+        that $n^2 / 4 = 110.25$, thus if there are more than $110$ edges, there must
+        exist a triangle of vertices in which all three angles are greater than $2\pi
+        / 3$ -- a contradiction!
+    \end{example}
+
+    \subsection{Bipartite graphs}
+    \begin{definition}
+        A graph $G(V, E)$ is called bipartite if the vertex set $V$ can be
+        partitioned into 2 parts $V_1$, $V_2$ such that every edge in $E$ joins a
+        vertex of $V_1$ to a vertex of $V_2$. In other words, there exists a 2-
+        colouring of the vertices such that no edge connects two vertices of the same
+        colour.
+
+        \begin{remark}
+            The sum of the degree of the vertices in one part is exactly equal to
+            the number of edges, which in turn is equal to the sum of the degrees of
+            the vertices in the other part.
+        \end{remark}
+    \end{definition}
+
+    \begin{definition}
+        A complete bipartite graph is such that each vertex in one part is connected
+        to every vertex in the other part. Such a graph is denoted by $K_{m,n}$,
+        where the parts have $m$ and $n$ vertices respectively.
+
+        \begin{remark}
+            The total number of edges must be the product of the numbers of vertices
+            in each part.
+        \end{remark}
+    \end{definition}
+
+    \begin{definition}
+        A set of vertices (or edges) in a graph is called independent if no two
+        elements in that set are adjacent.
+    \end{definition}
+
+    \begin{lemma}
+        A bipartite graph is triangle free.
+    \end{lemma}
+
+    \begin{corollary}
+        If we choose even $n$, we can achieve a triangle free graph with $n^2 / 4$
+        edges, namely $K_{n / 2, n / 2}$
+    \end{corollary}
 
 \end{document}
