@@ -486,6 +486,10 @@
     \begin{lemma}
         Finite sums, products, and compositions of continuous functions are continuous.
     \end{lemma}
+    \begin{corollary}
+        A function $f\colon [a, b] \to \R^n$ is continuous if and only if the
+        components, $\pi_i \circ f$, are continuous.
+    \end{corollary}
 
     \begin{theorem}
         All polynomial functions of the coordinates in $\R^n$ are continuous.
@@ -596,6 +600,22 @@
         Is the compactness of $K$ necessary?
     \end{exercise}
     
+    \subsection{Differentiability}
+    \begin{definition}
+        Let $f \colon (a, b) \to \R^n$, and let $f_i = \pi_i\circ f$ be its
+        components. Then, $f$ is differentiable at $x \in (a, b)$ if the following
+        limit exists. \[
+            \lim_{h \to 0} \frac{f(x + h) - f(x)}{h}.
+        \] 
+    \end{definition}
+
+    \begin{definition}
+        Let $U \subseteq \R^n$ be open, and let $f\colon U \to \R^m$. Then, $f$ is
+        differentiable at $x \in U$ if there exists a linear transformation
+        $\lambda\colon \R^n \to \R^m$ such that \[
+            \lim_{h \to 0} \frac{\norm{f(x + h) - f(x) - \lambda h}}{\norm{h}} = 0.
+        \] 
+    \end{definition}
 
     
 \end{document}
