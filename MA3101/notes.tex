@@ -603,10 +603,15 @@
     \subsection{Differentiability}
     \begin{definition}
         Let $f \colon (a, b) \to \R^n$, and let $f_i = \pi_i\circ f$ be its
-        components. Then, $f$ is differentiable at $x \in (a, b)$ if the following
+        components. Then, $f$ is differentiable at $t_0 \in (a, b)$ if the following
         limit exists. \[
-            \lim_{h \to 0} \frac{f(x + h) - f(x)}{h}.
+            f'(t_0) = \lim_{h \to 0} \frac{f(t_0 + h) - f(t_0)}{h}.
         \] 
+        \begin{remark}
+            The vector $f'(t_0)$ represents the tangent to the curve $f$ at the point
+            $f(t_0)$. The full tangent line is the parametric curve $f(t) + f'(t_0)(t
+            - t_0)$.
+        \end{remark}
     \end{definition}
 
     \begin{definition}
@@ -614,8 +619,37 @@
         differentiable at $x \in U$ if there exists a linear transformation
         $\lambda\colon \R^n \to \R^m$ such that \[
             \lim_{h \to 0} \frac{\norm{f(x + h) - f(x) - \lambda h}}{\norm{h}} = 0.
-        \] 
+        \] The derivative of $f$ at $x$ is denoted by $\lambda = D_xf$.
+        \begin{remark}
+            In a neighbourhood of $x$, we may approximate \[
+                f(x + h) \approx f(x) + D_xf(h).
+            \] 
+        \end{remark}
+        \begin{remark}
+            The statement that this norm goes to zero means that each of the $m$
+            components must also go to zero. For each of these limits, there are $n$
+            axes along which we can let $h \to 0$. As a result, we obtain $m\times n$
+            limits, which allow us to identify the $m\times n$ components of the
+            matrix representing the linear transformation $\lambda$ (in the standard
+            basis). These are the partial derivatives of $f$, and the matrix of
+            $\lambda$ is the Jacobian matrix of $f$ evaluated at $x$.
+        \end{remark}
     \end{definition}
+
+    \begin{example}
+        Let $T\colon \R^n \to \R^m$ be a linear map. By choosing $\lambda = T$, we
+        see that $T$ is differentiable everywhere.
+    \end{example}
+
+    \begin{lemma}
+        If $f\colon \R^n \to \R^m$ is differentiable at $x \in \R^n$, with derivative
+        $D_xf$, then
+        \begin{enumerate}
+            \itemsep0em
+            \item $f$ is continuous at $x$.
+            \item The linear transformation $D_xf$ is unique.
+        \end{enumerate}
+    \end{lemma}
 
     
 \end{document}
