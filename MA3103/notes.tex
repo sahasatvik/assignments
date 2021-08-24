@@ -342,7 +342,66 @@
 
     \begin{corollary}
         If we choose even $n$, we can achieve a triangle free graph with $n^2 / 4$
-        edges, namely $K_{n / 2, n / 2}$
+        edges, namely $K_{n / 2, n / 2}$. Similarly, if $n$ is odd but $\lfloor n^2 /
+        4\rfloor$ factors into natural numbers $\lceil n / 2\rceil$ and $\lfloor n /
+        2 \rfloor$, then $K_{\lceil n / 2\rceil, \lfloor n / 2 \rfloor}$ achieves the
+        upper bound again.
     \end{corollary}
+    
+    \begin{lemma}
+        An $r$-partite graph is $K_r$ free.
+    \end{lemma}
+
+    \begin{exercise}
+        Consider a complete $r$-partite graph on $n$ vertices. What is the maximum
+        number of edges possible?
+        \begin{solution}
+            Consider $K_{n_1, \dots, n_r}$, where $n = n_1 + \dots + n_r$. The number
+            of edges is \[
+                |E| = \sum_{i < j} n_i n_j.
+            \] Cauchy-Schwarz gives \[
+                n^2 = \sum_{i} n_i^2 + 2\sum_{i < j} n_i n_j \geq \frac{n^2}{r} +
+                2|E|.
+            \] Thus, \[
+                |E| \leq \frac{n^2}{2}\left(1 - \frac{1}{r}\right).
+            \] Equality is achieved when $n_1 = \dots = n_r$.
+        \end{solution}
+    \end{exercise}
+
+    \begin{definition}
+        The complete $r$-partite graph $K_{n_1, \dots, n_r}$ on $n$ vertices, such
+        that $|n_i - n_j| \leq 1$ for all $i, j$ is called Turan's graph, $T_{n, r}$.
+    \end{definition}
+
+    \begin{theorem}[Turan's Theorem]
+        The number of edges in a $K_{r + 1}$ free graph on $n$ vertices is at most \[
+            |E(T_{n, r})| = \frac{n^2}{2} \left(1 - \frac{1}{r}\right).
+        \]
+    \end{theorem}
+    \begin{proof}
+        Fix $r$; we prove the theorem by induction on $n$. The base case $n = 2$ has
+        already been shown. Suppose that this holds for all $K_{r + 1}$ free graphs
+        with less than $n$ vertices. Note that whenever $n \leq r$, the claim is
+        obvious, since \[
+            |E| \leq \frac{n (n - 1)}{2} \leq \frac{n^2}{2}\left(1 -
+            \frac{1}{r}\right).
+        \] Otherwise, we have $n \geq n + 1$. Let $G$ have the maximum number of
+        edges such that it is $K_{r + 1}$ free. We argue that $G$ must contain $K_r$;
+        if not, there is still scope for adding edges. Call the vertices in this
+        subset $A$, and the remaining vertices $B$. Clearly, $|A| = r$ and $|B| = n -
+        r$. Set $e_A$ equal to the number of edges within $A$, $e_B$ the number of
+        edges within $B$, and $e_{AB}$ the number of edges between $A$ and $B$. We
+        must have $|E| = e_A + e_B + e_B$. Now, $A$ has the structure of $K_r$, so
+        $e_A = r(r - 1) / 2$. Since the structure of $B$ is $K_{r + 1}$ free, we can
+        apply the induction hypothesis on it, giving $e_{B} \leq (n - r)^2(r - 1) /
+        2r$. Finally, no vertex in $B$ can be connected to every vertex in $A$, so we
+        have $e_{AB} \leq (r - 1)(n - r)$. Adding everything together, 
+        \begin{align*}
+            |E| &\leq \frac{r (r - 1)}{2} + \frac{(n - r)^2(r - 1)}{2r} + (r - 1)(n -
+            r) \\
+            &= \frac{1}{2} \left[r^2 + (n - r)^2 + 2r(n - r)\right]\frac{r - 1}{r} \\
+            &= \frac{n^2}{2}\left(1 - \frac{1}{r}\right). \qedhere
+        \end{align*}
+    \end{proof}
 
 \end{document}
