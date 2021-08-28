@@ -349,7 +349,7 @@
     \end{corollary}
     
     \begin{lemma}
-        An $r$-partite graph is $K_r$ free.
+        An $r$-partite graph is $K_{r + 1}$ free.
     \end{lemma}
 
     \begin{exercise}
@@ -400,8 +400,30 @@
             |E| &\leq \frac{r (r - 1)}{2} + \frac{(n - r)^2(r - 1)}{2r} + (r - 1)(n -
             r) \\
             &= \frac{1}{2} \left[r^2 + (n - r)^2 + 2r(n - r)\right]\frac{r - 1}{r} \\
-            &= \frac{n^2}{2}\left(1 - \frac{1}{r}\right). \qedhere
+            &= \frac{n^2}{2}\left(1 - \frac{1}{r}\right).
         \end{align*}
+        Note that for equality to hold, we require every vertex in $B$ to be
+        connected to $r - 1$ vertices in $A$. This means that $B$ is the Turan's
+        graph $T_{n - r, r}$, so $G$ is the Turan's graph $T_{n, r}$.
     \end{proof}
+
+    \begin{example}
+        We give a second proof of Mantel's Theorem. Let $G$ be a triangle free graph
+        on $n$ vertices. Let $A$ be an independent set of $G$, and let $B$ be the set
+        of remaining vertices. Furthermore, let $A$ be a \emph{largest} independent
+        set of $G$. Now note that in a triangle free graph, the neighbouring set of
+        any vertex must be an independent set. This gives an upper bound of $|A|$ on
+        the degree of any vertex. Also note that given an arbitrary edge, one of its
+        endpoints must lie in $B$ (both endpoints cannot lie in $A$ since it is an
+        independent set). This forces \[
+            |E| \leq \sum_{x \in B} d(x) \leq |A| |B| \leq \frac{1}{4}(|A| + |B|)^2 =
+            \frac{n^2}{4}.
+        \] 
+        Now, note that for equality in the first case, we require no edges in $B$,
+        i.e.\ $B$ must be independent. This forces $G$ to be bipartite. For the
+        second equality, we need every vertex in $B$ to have the full degree $|A|$,
+        so $G$ is a complete bipartite graph. For the third equality, we demand $|A|
+        = |B|$, so $G = T_{n, 2}$.
+    \end{example}
 
 \end{document}
