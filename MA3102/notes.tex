@@ -336,6 +336,30 @@
         that $nq \in H$, hence the quantity $r = m - nq \in H$. The minimality of $n$
         forces $r = 0$, hence $m = nq$. This gives $H \subseteq n\Z$.
     \end{proof}
+    \begin{corollary}
+        If $a$ and $b$ are coprime integers, there exist integers $m$ and $n$ such
+        that $am + bn = 1$.
+    \end{corollary}
+    \begin{proof}
+        If $a$ and $b$ are coprime, they share no common factors greater than $1$.
+        Note that $a\Z + b\Z$ is a subgroup of the integers, and hence there is
+        exists a unique positive integer $d$ such that $a\Z + b\Z = d\Z$. Since $a, b
+        \in a\Z + b\Z$, we have $a, b \in d\Z$ so there exist $r_1$, $r_2$ such that
+        $a = dr_1$, $b = dr_2$. This means that $d$ is a common factor of $a$ and
+        $b$, forcing $d = 1$, i.e.\ $a\Z + b\Z = \Z$. Since $1 \in \Z$, $1 \in
+        a\Z + b\Z$, hence there exists a combination $am + bn = 1$.
+    \end{proof}
+    \begin{corollary}
+        The unique positive integer $d$ such that $a\Z + b\Z = d\Z$ is the greatest
+        common divisor of $a$ and $b$.
+    \end{corollary}
+    \begin{proof}
+        Let $d$ be the greatest common divisor of $a$ and $b$. Write $a = a'd$, $b =
+        b'd$, and note that $a'$ and $b'$ are coprime. Thus, pick $m$ and $n$ such
+        that $a'm + b'n = 1$. This gives $d = am + bn$, so $d\Z \subseteq a\Z + b\Z$.
+        Now, consider an arbitrary combination $ap + bq \in a\Z + b\Z$; simply write
+        $ap + bq = (a'p + b'q)d \in d\Z$, hence $a\Z + b\Z \subseteq d\Z$.
+    \end{proof}
 
     \begin{theorem}
         Let $\C^\times$ be the group of non-zero complex numbers under
@@ -359,12 +383,12 @@
 
         We have shown that every non-identity element in $H$ is a root of unity.
         Thus, pick $w = e^{2\pi ix} \in H$ such that $0 < x < 1$ and $x$ is minimal.
-        Furthermore, set $x = k / n$, $0 < k < n$ with $k$ and $n$ co-prime. We claim
+        Furthermore, set $x = k / n$, $0 < k < n$ with $k$ and $n$ coprime. We claim
         that $H$ consists solely of the $n$\textsuperscript{th} roots of unity. The
         fact that $H$ contains all powers of $w$, hence all $n$\textsuperscript{th}
         roots of unity is clear. Conversely, pick arbitrary $z = e^{2\pi i y} \in H$,
         $z \neq 1, w$; since $z$ is a root of unity, write $y = k' / n'$ where $0 <
-        k' < n'$, $k'$ and $n'$ are co-prime. The minimality of $x$ gives $x < y$,
+        k' < n'$, $k'$ and $n'$ are coprime. The minimality of $x$ gives $x < y$,
         hence $y - x = (k'n - kn') / n n' > 0$. Set $p = k'n$, $q = kn'$, and using
         $p > q$ write $p = aq + r$ where $0 \leq r < q$. Then, \[
             z = e^{2\pi i p / nn'} = e^{2\pi i (aq + r) / n n'} = e^{2\pi i aq / nn'}
@@ -412,7 +436,7 @@
     \begin{lemma}
         Let $G$ be a cyclic group of $n$ elements. Then, it has $\phi(n)$
         generators, where $\phi$ is Euler's Totient function denoting the number
-        of integers coprime to $n$.
+        of positive integers less than and coprime to $n$.
     \end{lemma}
     \begin{proof}
         Write $G = \{e, g, \dots, g^{n - 1}\}$. We claim that $g^m$ generates $G$ if
@@ -433,14 +457,4 @@
         means that $g^{kd} = g^{nq + r} = g^{r'd} \in \{e, g^d, \dots, g^{(n' -
         1)d}\}$. This proves the result.
     \end{proof}
-    \begin{remark}
-        If $m$ and $n$ are coprime, they share no common factors greater than $1$.
-        Note that $m\Z + n\Z$ is a subgroup of the integers, and hence there is
-        exists a unique positive integer $d$ such that $m\Z + n\Z = d\Z$. Since $m, n
-        \in m\Z + n\Z$, we have $m, n \in d\Z$ so there exist $r_1$, $r_2$ such that
-        $m = dr_1$, $n = dr_2$. This means that $d$ is a common factor of $m$ and
-        $n$, forcing $d = 1$, i.e.\ $m\Z + n\Z = \Z$. Since $1 \in \Z$, $1 \in
-        m\Z + n\Z$, hence there exists a combination $mp + nq = 1$.
-    \end{remark}
-
 \end{document}
