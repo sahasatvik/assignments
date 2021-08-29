@@ -457,4 +457,95 @@
         means that $g^{kd} = g^{nq + r} = g^{r'd} \in \{e, g^d, \dots, g^{(n' -
         1)d}\}$. This proves the result.
     \end{proof}
+
+    \subsection{Cosets and Lagrange's Theorem}
+
+    \begin{definition}
+        Let $G$ be a group, and let $H$ be a subgroup of $G$. A left coset of $H$ is
+        the set \[
+            gH = \{gh : h \in H\}
+        \] for some $g \in G$.
+    \end{definition}
+
+    \begin{lemma}
+        All left cosets of $H$ contain the same number of elements.
+    \end{lemma}
+    \begin{proof}
+        Consider the bijection \[
+            f\colon H \to gH, \qquad h \mapsto gh.
+        \] This map is injective by cancellation, and surjective by construction.
+        Thus, all cosets of $H$ contain exactly the same number of elements as in
+        $H$.
+    \end{proof}
+
+    \begin{lemma}
+        The left cosets of $H$ partition the group $G$.
+        \begin{remark}
+            Two left cosets are either equal, or disjoint.
+        \end{remark}
+    \end{lemma}
+    \begin{proof}
+        Define the equivalence relation $\sim_H$, where $a \sim b$ if and only if $a
+        = bh$ for some $h \in H$. Clearly, this is reflexive ($e \in H$), symmetric
+        ($h^{-1} \in H$) and transitive ($h_1h_1 \in H$ when $h_1, h_2 \in H$). Thus,
+        this is an equivalence relation, and its equivalence classes partition the
+        group $G$. However, we see that the equivalence class $[g]$ is precisely the
+        left coset $gH$.
+    \end{proof}
+
+    \begin{definition}
+        The index of $H$ in $G$, denoted by $[G : H]$, is the number of left cosets
+        of $H$ in $G$.
+    \end{definition}
+
+    \begin{theorem}[Lagrange's Theorem]
+        Let $G$ be a finite group, and let $H$ be a subgroup of $G$. The order of $H$
+        divides the order of $G$. In fact, \[
+            |G| = [G : H] |H|.
+        \] 
+    \end{theorem}
+    \begin{proof}
+        This follows directly from the previous two lemmas. Each coset of $H$
+        contains $|H|$ many elements, are disjoint, and cover the entire group $G$.
+    \end{proof}
+
+    \begin{corollary}
+        Let $G$ be a finite group of $n$ elements. Then, $g^n = e$ for any $g \in G$.
+    \end{corollary}
+    \begin{proof}
+        Consider the cyclic subgroup $H = \langle g\rangle$ of $G$, and suppose that
+        it has $m$ elements. Then, $g^m = e$. However, Lagrange's Theorem says that
+        $m$ divides $n$, so $g^n = e$.
+    \end{proof}
+
+    \begin{theorem}
+        The set of integers between $1$ and $n$ which are coprime to $n$ form a
+        multiplicative group modulo $n$.
+    \end{theorem}
+    \begin{proof}
+        Let $\Z_n^\times$ be the set of these integers. Clearly, $1 \in G$ which is
+        our identity. Multiplication modulo $n$ is associative. Finally, let $m \in
+        \Z_n^\times$.  Since $m$ and $n$ are coprime, we can find $p$ and $q$ such
+        that $mp + nq = 1$, which means that $mp = 1$ modulo $n$. Furthermore, $p$ is
+        coprime to $n$, since any common divisor of $p$ and $n$ must also divide $mp
+        + nq = 1$. Thus, every $m \in \Z_n^\times$ has an inverse, which proves that
+        this is a multiplicative group.
+    \end{proof}
+
+    \begin{corollary}[Euler's Theorem]
+        Let $n$ be a positive integer, and let $1 \leq a < n$ be coprime to $n$.
+        Then, \[
+            a^{\phi(n)} \equiv 1 \pmod{n}.
+        \] 
+    \end{corollary}
+    \begin{proof}
+        This follows directly from the fact that $|\Z_n^\times| = \phi(n)$.
+    \end{proof}
+    \begin{corollary}[Fermat's Little Theorem]
+        Let $p$ be a prime. Then, \[
+            a^p \equiv a \pmod{p}.
+        \] 
+    \end{corollary}
+
+
 \end{document}
