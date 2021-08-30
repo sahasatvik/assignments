@@ -1,0 +1,51 @@
+\documentclass[10pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+
+\geometry{a4paper, margin=1in}
+
+\renewcommand{\labelenumi}{(\roman{enumi})}
+
+\newcounter{prob}
+\newcommand{\problem}{\stepcounter{prob}\paragraph{Exercise \arabic{prob}}}
+\newcommand{\solution}{\paragraph{Solution}}
+
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+
+\title{MA3103: Introduction to Graph Theory and Combinatorics}
+\author{Satvik Saha}
+\date{}
+
+\begin{document}
+    \noindent\textbf{IISER Kolkata} \hfill \textbf{Assignment I}
+    \vspace{3pt}
+    \hrule
+    \vspace{3pt}
+    \begin{center}
+    \LARGE{\textbf{MA3101 : Introduction to Graph Theory and Combinatorics}}
+    \end{center}
+    \vspace{3pt}
+    \hrule
+    \vspace{3pt}
+    Satvik Saha, \texttt{19MS154} \hfill \today
+    \vspace{20pt}
+
+    \problem Show that if $n + 1$ integers are chosen from the set $\{1, 2, \dots,
+    mn\}$, then there are always two which differ by less than $m$.
+
+    \solution Consider the set $S_a = \{am + b: 1 \leq b \leq m\}$ for each $0 \leq a
+    < n$. These are disjoint, and their union is precisely $\{1, 2, \dots, mn\}$.
+    Since there are a total of $n$ sets, the Pigeonhole Principle guarantees that
+    upon choosing $n + 1$ integers from $\{1, 2, \dots, mn\}$, there are at least two
+    which belong to the same set; say $p, q \in S_a$ for some $a$.  Thus write $p =
+    am + b_p$, $q = am + b_q$, let $p > q$ without loss of generality, and note that
+    $p - q = b_p - b_q \leq m - 1 < m.
+    
+
+\end{document}

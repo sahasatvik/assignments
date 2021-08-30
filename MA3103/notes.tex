@@ -426,4 +426,47 @@
         = |B|$, so $G = T_{n, 2}$.
     \end{example}
 
+    \subsection{Subgraphs}
+    \begin{definition}
+        Let $G(V, E)$ be a graph. We say that $G'(V', E')$ is a subgraph of $G(V, E)$
+        if $V' \subseteq V$ and $E' \subseteq E$. We write $G' \subseteq G$.
+    \end{definition}
+
+    \begin{definition}
+        The subgraph $G'$ induced by a set of vertices $V' \subseteq V$ is such that
+        $G'$ contains all the edges of $G$ that connect vertices from $V'$. We write
+        $G' = G[V']$.
+    \end{definition}
+
+    \begin{definition}
+        A $k$-clique of $G$ is an induced subgraph on $k$ vertices which is complete.
+    \end{definition}
+
+    \begin{definition}
+        The subgraph $G'$ spans its parent $G$ if the vertex sets $V' = V$.
+    \end{definition}
+
+    \begin{theorem}
+        For every $n \geq 1$, there is a lower bound $p_0$ such that for every prime
+        $p \geq p_0$, the following congruence has a solution. \[
+            x^n + y^n \equiv z^n \pmod{p}.
+        \] 
+    \end{theorem}
+
+    \begin{theorem}[Schur's Theorem]
+        For any positive integer $r$, there exists a positive integer $S(r)$ such
+        that for every partition of the integers $\{1, 2, \dots, S(r)\}$ into $r$
+        parts, there exists one part which contains integers $x, y, z$ where $x + y =
+        z$.
+        
+        \begin{remark}
+            This can be rephrased in the following manner. For any $r$ colouring of
+            the integers $1, 2, \dots, S(r)$, one can pick integers $x, y, z$ all of
+            the same colour such that $x + y = z$.
+        \end{remark}
+        \begin{remark}
+            The integers $x,y,z$ are not necessarily distinct!
+        \end{remark}
+    \end{theorem}
+
 \end{document}
