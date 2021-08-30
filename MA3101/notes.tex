@@ -45,6 +45,7 @@
 \newcommand{\pp}[2]{\frac{\partial #1}{\partial #2}}
 \newcommand{\ddn}[2][]{\frac{d^{#1} #2}{d^{#1} #3}}
 \newcommand{\ppn}[2][]{\frac{\partial^{#1} #2}{\partial^{#1} #3}}
+\newcommand{\grad}{\nabla}
 
 \newmdtheoremenv[%
     backgroundcolor=blue!10!white,%
@@ -690,5 +691,116 @@
         \] Note that $f$ is not differentiable at $(0, 0)$; it is not even continuous
         there. However, both partial derivatives of $f$ exist at $(0, 0)$.
     \end{example}
-    
+
+    \begin{definition}
+        Let $C^1(\R^n)$ be the set of real-valued differentiable functions on $\R^n$.
+        Fix a point $a \in \R^n$, then fix a tangent vector $v \in \R^n$. Then, the
+        map \[
+            \grad_v\colon C^1(\R^n) \to \R, \qquad f\mapsto Df(a)(v)
+        \] is a linear functional. The quantity $\grad_v f$ is called the
+        directional derivative of $f$ in the direction $v$ at the point $a$.
+        \begin{remark}
+            We can represent $\grad_v$ as the map \[
+                \grad_v (\cdot) = D(\cdot)(a)(v) = \sum_i v_i \pp{}{x_i}\Big|_a =
+                v\cdot \grad (\cdot).
+            \]
+        \end{remark}
+    \end{definition}
+
+    \begin{lemma}
+        The directional derivatives $\grad_v$ form a vector space called the tangent
+        space, attached to the point $a \in \R^n$. This can be identified with the
+        vector space $\R^n$ by the natural map $\grad_v \mapsto v$. The standard
+        basis can be informally denoted by the vectors \[
+            \grad_{\ve_1} \equiv \pp{}{x_1}, \dots, \grad_{\ve_n} \equiv \pp{}{x_n}.
+        \] 
+    \end{lemma}
+
+    \subsubsection{Differentiation on manifolds}
+    \begin{definition}
+        A homeomorphism is a continuous, bijective map whose inverse is also continuous.
+    \end{definition}
+
+    \begin{lemma}
+        Let $f\colon \R^n \to \R$ be continuous. Denote the graph of $f$ as \[
+            \Gamma(f) = \{(x, f(x)): x \in \R^n\}.
+        \] Then, $\Gamma(f)$ is a smooth manifold.
+    \end{lemma}
+    \begin{proof}
+        Consider the homeomorphism \[
+            \varphi\colon \Gamma(f) \to \R^n, \qquad (x, f(x)) \mapsto x.
+        \] This is clearly bijective, continuous (restriction of a projection map),
+        with a continuous inverse (from the continuity of $f$). Call this
+        homeomorphism $\varphi$ a coordinate map on $\Gamma(f)$.
+    \end{proof}
+
+    \begin{definition}
+        Let $f\colon M \to \R$ where $M$ is a smooth manifold, with a coordinate map
+        $\varphi\colon M \to \R^n$. We say that $f$ is differentiable at a point $a
+        \in M$ if $f\circ \varphi^{-1}\colon \R^n \to \R$ is differentiable at
+        $\varphi(a)$.
+    \end{definition}
+
+    \begin{definition}
+        Let $f\colon M \to \R$ where $M$ is a smooth manifold, let $\varphi\colon M
+        \to \R^n$ be a coordinate map, and let $a \in M$. Let $\gamma\colon \R \to M$
+        be a curve such that $\gamma(0) = a$, and further let $\gamma$ be
+        differentiable in the sense that $\varphi\circ \gamma\colon \R \to \R^n$ is
+        differentiable. The directional derivative of $f$ at $a$ along $\gamma$ is
+        defined as \[
+            \dd{}{t} f(\gamma(t))\Big|_{t = 0} = \lim_{h \to 0} \frac{f(\gamma(t +
+            h)) - f(\gamma(t))}{h}\Big|_{t = 0}.
+        \] Note that we are taking the derivative of $f\circ \gamma\colon \R \to \R$
+        in the conventional sense.
+    \end{definition}
+
+    \begin{lemma}
+        Let $\gamma_1$ and $\gamma_2$ be two curves in $M$ such that $\gamma_1(0) =
+        \gamma_2(0) = a$, and \[
+            \dd{}{t} \varphi\circ \gamma_1(t)\Big|_{t = 0} = \dd{}{t} \varphi\circ
+            \gamma_2(t)\Big|_{t = 0}.
+        \] In other words, $\gamma_1$ and $\gamma_2$ pass through the same point $a$
+        at $t = 0$, and have the same velocities there. Then, the directional
+        derivatives of $f$ at $a$ along $\gamma_1$ and $\gamma_2$ are the same.
+    \end{lemma}
+
+    \begin{definition}
+        Let $M$ be a smooth manifold, and let $a \in M$. Consider the following
+        equivalence relation on the set of all curves $\gamma$ in $M$ such that
+        $\gamma(0) = a$. \[
+            \gamma_1 \sim \gamma_2 \quad\Longleftrightarrow\quad \dd{}{t} \varphi\circ
+            \gamma_1(t)\Big|_{t = 0} = \dd{}{t} \varphi\circ \gamma_2(t)\Big|_{t =
+            0}.
+        \] Each resultant equivalence class of curves is called a tangent vector at
+        $a \in M$. Note that all these curves in a particular equivalence class pass
+        through $a$ with the same velocity vector.
+
+        The collection of all such tangent vectors, i.e.\ the space of all curves
+        through $a$ modulo the equivalence relation which identifies curves with the
+        same velocity vector through $a$, is called the tangent space to $M$ at $a$,
+        denoted $T_aM$.
+
+        \begin{remark}
+            Each tangent vector $v\in T_aM$ acts on a differentiable function
+            $f\colon M \to \R$ yielding a (well-defined) directional derivative at
+            $a$. \[
+                v\colon C^1(M) \to \R, \qquad f\mapsto \dd{}{t}
+                f(\gamma_v(t))\Big|_{t = 0}.
+            \]
+            Thus, the tangent space represents all the directions in which taking a
+            derivative of $f$ makes sense.
+        \end{remark}
+        \begin{remark}
+            The tangent space $T_aM$ is a vector space. Upon fixing $f$, the map
+            $Df(a)\colon T_aM \to \R$, $v \mapsto vf(a)$ is a linear functional on
+            the tangent space.
+        \end{remark}
+        \begin{remark}
+            Given a tangent vector $v \in T_aM$, it can be identified with its
+            corresponding velocity vector in $\R^n$. Thus, the tangent space $T_aM$
+            can be identified with the geometric tangent plane drawn to the manifold
+            $M$ at the point $a$.
+        \end{remark}
+    \end{definition}
+
 \end{document}
