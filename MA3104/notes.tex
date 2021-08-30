@@ -50,6 +50,8 @@
 \newcommand{\im}{\operatorname{im}}
 \newcommand{\dim}{\operatorname{dim}}
 \newcommand{\adj}{\operatorname{adj}}
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\trace}{\operatorname{trace}}
 
 \newmdtheoremenv[%
     backgroundcolor=blue!10!white,%
@@ -594,5 +596,79 @@
         consist of the such vectors from all $\beta_i$ generated in this way. Since
         $T$ is diagonal, this is indeed an basis of $V$, as desired.
     \end{proof}
+
+    \subsection{Direct sum decompositions}
+    \begin{definition}
+        Let $W_1, \dots, W_k$ be subspaces of $V$. We say that these $W_i$ are
+        independent if \[
+            \vw_1 + \dots + \vw_k = \vec{0}
+        \] where $\vw_i \in W_i$ implies that each $\vw_i = \vec{0}$.
+    \end{definition}
+
+    \begin{lemma}
+        If $W_1, \dots, W_k$ are independent, then each vector $\vw \in W_1 + ... +
+        W_k$ has a unique representation \[
+            \vw = \vw_1 + \dots + \vw_k
+        \] where each $\vw_i \in W_i$.
+    \end{lemma}
+
+    \begin{definition}
+        The sum of independent subspaces $W_1 + \dots + W_k$ is called a direct sum,
+        denoted \[
+            W_1 \oplus \dots \oplus W_k.
+        \] 
+    \end{definition}
+
+    \begin{lemma}
+        Let $V$ be a finite-dimensional vector space, let $W_1, \dots, W_k$ be
+        subspaces of $V$, and let $W = W_1 + \dots + W_k$. Then, the following are
+        equivalent. \begin{enumerate}
+            \itemsep0em
+            \item $W_1, \dots, W_k$ are independent.
+            \item For each $2 \leq j \leq k$, \[
+                W_j \cap (W_1 + \dots + W_{j - 1}) = \{\vec{0}\}.
+            \]
+            \item If $\beta_i$ are bases of $W_i$, then the set $\beta$ consisting of
+            all these vectors is a basis of $W$.
+        \end{enumerate}
+    \end{lemma}
+
+    \subsection{Projections maps}
+    \begin{definition}
+        A projection map on a vector space $V$ is a linear operator $E$ such that
+        $E^2 = E$. In other words, $E$ is idempotent.
+    \end{definition}
+
+    \begin{lemma}
+        Let $E$ be a projection map on $V$, and let $R = \im{E}$, $N = \ker{E}$.
+        \begin{enumerate}
+            \itemsep0em
+            \item A vector $\vv \in R$ if and only if $E\vv = \vv$.
+            \item Any vector $\vv \in V$ has the unique representation $\vv =
+            E\vv + (\vv - E\vv)$, with $E\vv \in R$ and $\vv - E\vv \in N$.
+            \item $V = R\oplus N$.
+        \end{enumerate}
+        \begin{remark}
+            If $R$ and $N$ are two subspaces of $V$ such that $V = R\oplus N$, then
+            there is exactly one projection map $E$ such that $R = \im{E}$ and $N =
+            \ker{E}$. Namely, send $\vv \mapsto \vv_R$ where $\vv = \vv_R + \vv_N$ is
+            the unique decomposition of $\vv$.
+        \end{remark}
+    \end{lemma}
+
+    \begin{lemma}
+        A projection map is trivially diagonalizable.
+    \end{lemma}
+    \begin{proof}
+        Note that $x^2 - x = x(x -1)$ annihilates any projection map. Also note that
+        any projection map restricted to its range is the identity map. Thus,
+        $\trace{E} = \rank{E}$.
+    \end{proof}
+
+    \begin{lemma}
+        Let $V = W_1 \oplus \dots \oplus W_k$, and let $\vv = \vv_1 + \dots + \vv_k$
+        with $\vv_i \in W_i$. Define the maps $E_i$ such that $E_i\vv = \vv_i$. Then,
+        each $E_i$ is the projection map along $W_i$.
+    \end{lemma}
     
 \end{document}
