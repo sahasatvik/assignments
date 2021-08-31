@@ -439,10 +439,6 @@
     \end{definition}
 
     \begin{definition}
-        A $k$-clique of $G$ is an induced subgraph on $k$ vertices which is complete.
-    \end{definition}
-
-    \begin{definition}
         The subgraph $G'$ spans its parent $G$ if the vertex sets $V' = V$.
     \end{definition}
 
@@ -468,5 +464,53 @@
             The integers $x,y,z$ are not necessarily distinct!
         \end{remark}
     \end{theorem}
+
+    \begin{definition}
+        A $k$-clique of $G$ is an induced subgraph on $k$ vertices which is complete.
+    \end{definition}
+
+    \begin{definition}
+        The Ramsey number $R(s, t)$ is the least positive integer for which every
+        complete graph on that many vertices, with its edges coloured in red and
+        blue, must contain either a red $s$-clique or a blue $t$-clique.
+    \end{definition}
+    \begin{example}
+        We can see that $R(s, t) = R(t, s)$, $R(1, r) = 1$, $R(2, r) = r$.
+    \end{example}
+    \begin{example}
+        We can show that $R(3, 3) = 6$. Indeed, every colouring of $K_6$ must contain
+        at least \emph{two} monochromatic triangles.
+    \end{example}
+    \begin{example}
+        Consider any graph $G$ on $6$ vertices. Construct a new graph $G'$ on $6$
+        vertices where two vertices are joined by a red edge if there exists a
+        corresponding edge in $G$, and blue if not. Thus, $G'$ is a 2-coloured
+        complete graph and hence contains a monochromatic triangle. This means that
+        there are 3 vertices in $G$ where either all of them are connected to each
+        other, or none of them are.
+    \end{example}
+    \begin{lemma}
+        The number $R(s, t)$ is the smallest positive integer such that any graph on
+        $R(s, t)$ vertices contains either an independent set of size $s$, or a
+        $t$-clique.
+    \end{lemma}
+
+    \begin{theorem}[Ramsey Theorem]
+        The Ramsey number $R(s, t)$ is always finite.
+    \end{theorem}
+    \begin{proof}
+        We show this for all $s, t \geq 3$ by induction on $s + t$. Note that when $s
+        + t = 6$, we know that $R(1, 5)$, $R(2, 4)$, $R(3, 3)$ are all finite.
+        Furthermore, $R(s, 1) = R(1, t) = 1$. Suppose that $R(s - 1, t)$ and $R(s, t
+        - 1)$ are both finite; we claim that $R(s, t) < R(s - 1, t) + R(s, t - 1)$.
+        Without loss of generality, let $s \geq t$. Consider a complete graph $K_n$ on
+        $R(s - 1, t) + R(s, t - 1) = n$ vertices. Choose a vertex $v$, and let $V_R$
+        be the set of its neighbours connected by red edges, $V_B$ be the neighbours
+        connected by blue edges. Clearly, $n = |V_R| + |V_B| + 1$, so either $|V_R|
+        \geq R(s - 1, t)$ or $|V_B| \geq R(s, t - 1)$. In the first case, the
+        consider the subgraph induced by $V_R$; either it contains a blue $t$-clique,
+        or a red $s - 1$ clique which means that $V_R \cup \{v\}$ contains a
+        $s$-clique. In either case, we are done. The case with $V_B$ is analogous.
+    \end{proof}
 
 \end{document}
