@@ -669,6 +669,87 @@
         Let $V = W_1 \oplus \dots \oplus W_k$, and let $\vv = \vv_1 + \dots + \vv_k$
         with $\vv_i \in W_i$. Define the maps $E_i$ such that $E_i\vv = \vv_i$. Then,
         each $E_i$ is the projection map along $W_i$.
+        \begin{remark}
+            Observe that \[
+                I_k = E_1 + \dots + E_k.
+            \] Furthermore, we have $E_iE_j = 0$ for all $i \neq j$, which means that
+            $\im{E_j} \subseteq \ker{E_i}$.
+        \end{remark}
     \end{lemma}
+
+    \begin{theorem}
+        If $V = W_1 + \dots + W_k$, then there exist $k$ linear operators $E_1,
+        \dots, E_k$ on $V$ such that 
+        \begin{enumerate}
+            \itemsep0em
+            \item $E_i^2 = E_i$.
+            \item $E_iE_j = 0$ for all $i \neq j$.
+            \item $I_k = E_1 + \dots + E_k$.
+            \item $\im{E_i} = W_i$.
+        \end{enumerate}
+        Conversely, if there exist linear $k$ linear operators which satisfy
+        properties 1, 2, 3 and label $\im{E_i} = W_i$, then $V = W_1 \oplus \dots
+        \oplus W_k$.
+    \end{theorem}
+    \begin{proof}
+        We only need to prove the converse. Let $E_i, \dots, E_k$ satisfy the
+        properties 1, 2, 3 and let $\im{E_i} = W_i$. Pick $\vv\in V$, hence \[
+            \vv = I_k\vv = E_1\vv + \dots + E_k\vv \in W_1 + \dots + W_k,
+        \] which shows that $V = W_1 + \dots + W_k$. We claim that this
+        representation of $\vv$ is unique. In other words, suppose that \[
+            \vv = \vv_1 + \dots + \vv_k
+        \] where each $\vv_i \in W_i$; we claim that $\vv_i = E_i\vv$ is the only
+        choice. Since $\vv_i \in W_i$, write $\vv_i = E_i\vw_i$. Then, \[
+            E_j\vv = \sum_{i = 1}^k E_j \vv_i = \sum_{i = 1}^k E_j E_i\vw_i =
+            E_j^2\vw_j = E_j\vw_j = \vv_j. \qedhere
+        \] 
+    \end{proof}
+
+    \begin{definition}
+        Let $V = W_1 \oplus \dots \oplus W_k$, and let $T \in \algL(V)$.
+        Additionally, let each $W_i$ be invariant under $T$, hence $T\vv_i \in W_i$. Define the
+        linear operators $T_i \algL(W_i)$, which are the restrictions of $T$ to
+        $W_i$. Then, given any $\vv \in V$, there is a unique representation $\vv =
+        \vv_1 + \dots + \vv_k$ where $\vv_i \in W_i$, so \[
+            T\vv = T\vv_1 + \dots + T\vv_k = T_1\vv_1 + \dots + T_k\vv_k = \vv_1 +
+            \dots + \vv_k.
+        \] This representation must be unique. We say that $T$ is the direct sum of
+        the linear operators $T_1, \dots, T_k$.
+    \end{definition}
+
+    \begin{lemma}
+        Let $V = W_1 \oplus \dots \oplus W_k$, let $\beta_i$ be ordered basses of
+        $W_i$, and let $\beta$ be the basis formed by combining all these vectors.
+        Let $T \in \algL(V)$ and suppose that each $W_i$ is invariant under $T$.
+        Then, by setting $[T_i]_{\beta_i} = A_i$, we have the block diagonal form \[
+            [T]_\beta = \begin{bmatrix}
+                A_1 & 0 & \cdots & 0 \\
+                0 & A_1 & \cdots & 0 \\
+                \vdots & \vdots & \ddots & \vdots \\
+                0 & 0 & \cdots & A_k
+            \end{bmatrix}.
+        \] 
+    \end{lemma}
+
+    \begin{theorem}
+        Let $V = W_1 \oplus \dots \oplus W_k$, let $E_i$ be the projections along
+        $W_i$, and $T \in \algL(V)$. Then, each $W_i$ is invariant under $T$ if and
+        only if $T$ commutes with each of the projections $E_i$.
+    \end{theorem}
+    \begin{proof}
+        Suppose that $T$ commutes with each $E_i$, i.e.\ $TE_i = E_iT$. We want to
+        show that each $W_i = \im{E_i}$ is invariant under $T$. Let $\vv \in W_i$,
+        hence $\vv = E_i\vv$ and \[
+            T\vv = TE_i\vv = E_iT\vv.
+        \] Thus, $T\vv \in W_i$ as desired.
+
+        Conversely, suppose that each $W_i$ is invariant under $T$. Pick $\vv = \vv_1
+        + \dots + \vv_k \in V$ where $\vv_i \in W_i$. Set $\vw_i = T\vv_i \in W_i$,
+        and compute \[
+            E_iT\vv = E_iT(\vv_1 + \dots + \vv_k) = E_i(\vw_1 + \dots + \vw_k) =
+            \vw_i = T\vv_i = TE_i\vv. \qedhere
+        \] 
+    \end{proof}
+
     
 \end{document}
