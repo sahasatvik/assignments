@@ -671,7 +671,7 @@
 
     \begin{definition}
         Let $U \subseteq \R^n$ be open, and let $f\colon U \to \R$. The partial
-        derivative of $f$ with respect to the coordinate $x_j$ at some $a \in \U$
+        derivative of $f$ with respect to the coordinate $x_j$ at some $a \in U$
         is defined by the following limit, if it exists. \[
             \pp{f}{x_j}(a) = \lim_{h \to 0} \frac{f(a + h\vec{e}_j) - f(a)}{h}.
         \] 
@@ -700,7 +700,7 @@
         \] is a linear functional. The quantity $\grad_v f$ is called the
         directional derivative of $f$ in the direction $v$ at the point $a$.
         \begin{remark}
-            We can represent $\grad_v$ as the map \[
+            We can represent $\grad_v$ as the operator \[
                 \grad_v (\cdot) = D(\cdot)(a)(v) = \sum_i v_i \pp{}{x_i}\Big|_a =
                 v\cdot \grad (\cdot).
             \]
@@ -802,5 +802,53 @@
             $M$ at the point $a$.
         \end{remark}
     \end{definition}
+
+    \subsubsection{Chain rule}
+    \begin{exercise}
+        Let $T\colon \R^n \to \R^m$ be a linear transformation. Then, there exists $M
+        > 0$ such that for all $x \in \R^n$, we have \[
+            \norm{Tx} \leq M\norm{x}.
+        \] 
+    \end{exercise}
+    \begin{theorem}
+        Let $f\colon \R^n \to \R^m$, $g\colon \R^m \to \R^k$ where $f$ is
+        differentiable at $a \in \R^n$ and $g$ is differentiable at $f(a) \in \R^m$.
+        Then, $g\circ f$ is differentiable, with $D(g\circ f)(a) = Dg(f(a)) \circ
+        Df(a)$. Note that this means that the Jacobian matrices simply multiply.
+    \end{theorem}
+    \begin{proof}
+        Set $b = f(a) \in \R^m$, $\lambda = Df(a)$, $\mu = Dg(f(a))$. Define 
+        \begin{align*}
+            \varphi\colon \R^n \to \R^m,\qquad \varphi(x) &= f(x) - f(a) - \lambda(x
+            - a), \\
+            \psi\colon \R^m \to \R^k,\qquad \psi(y) &= g(y) - g(b) - \mu(y - b).
+        \end{align*}
+        We claim that \[
+            \lim_{x \to a} \frac{g\circ f(x) - g\circ f(a) - \mu\circ \lambda(x
+            - a)}{\norm{x - a}} = 0.
+        \] Write the numerator as \[
+            g\circ f(x) - g\circ f(a) - \mu\circ \lambda(x - a) = \psi(f(x)) +
+            \mu(\varphi(x)).
+        \] Note that \[
+            \lim_{x \to a} \frac{\varphi(x)}{\norm{x - a}} = 0, \qquad 
+            \lim_{y \to b} \frac{\psi(y)}{\norm{y - b}} = 0.
+        \] Thus, find $M > 0$ such that $\norm{\mu(\varphi(x))} \leq
+        \norm{\varphi(x)}$ for all $x \in \R^n$, hence \[
+            \lim_{x \to a} \frac{\norm{\mu(\varphi(x))}}{\norm{x - a}} \leq \lim_{x
+            \to a} \frac{M\norm{\varphi(x)}}{\norm{x - a}} = 0.
+        \] Now write \[
+            \lim_{f(x) \to b} \frac{\psi(f(x))}{\norm{f(x) - b}} = 0, 
+        \] hence for any $\epsilon > 0$, there is a neighbourhood of $b$ on which \[
+            \norm{\psi(f(x))} \leq \epsilon \norm{f(x) - b} = \epsilon
+            \norm{\varphi(x) + \lambda(x - a)}.
+        \] Apply the triangle inequality and find $M' > 0$ such that \[
+            \norm{\psi(f(x))} \leq
+            \epsilon\norm{\varphi(x)} + \epsilon M'\norm{x - a}.
+        \] Thus, \[
+            \lim_{x \to a} \frac{\norm{\psi(f(x))}}{\norm{x - a}} \leq
+            \lim_{x \to a} \frac{\epsilon\norm{\varphi(x)}}{\norm{x - a}} + \epsilon
+            M' = \epsilon M'.
+        \] Since $\epsilon > 0$ was arbitrary, this limit is zero, completing the proof.
+    \end{proof} 
 
 \end{document}
