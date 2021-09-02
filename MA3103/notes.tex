@@ -512,5 +512,40 @@
         or a red $s - 1$ clique which means that $V_R \cup \{v\}$ contains a
         $s$-clique. In either case, we are done. The case with $V_B$ is analogous.
     \end{proof}
+    \begin{remark}
+        This upper bound can be sharpened to $R(s - 1, t) + R(s, t - 1) - 1$ when
+        both $R(s - 1, t)$, $R(s, t - 1)$ are even.
+    \end{remark}
+    \begin{example}
+        Consider $R(4, 3)$. We have $R(3, 3) = 6$ and $R(4, 2) = 4$, hence $R(4, 3)
+        \leq 6 + 4 - 1 = 9$. We show this is a different way. Note that $R(4, 3) =
+        R(3, 4)$. In the manner of the previous proof, look at the case $|V_R| \geq
+        |V_B|$. Since $|V_B| + |V_R| + 1 = 9$, we have $|V_R| \geq 4$. If $V_R$
+        contains one red edge, then we have found a red 3-clique. Otherwise, $V_R$
+        contains a blue 4-clique, so we are done.
+    \end{example}
+
+    \begin{definition}
+        The Ramsey number $R(n_1, \dots, n_r)$ is the least positive integer for
+        which every complete graph on that many vertices, with the edges coloured in
+        $r$ different colours, must contain some $n_i$-clique with colour $i$.
+    \end{definition}
+
+    \begin{theorem}
+        The Ramsey number $R(n_1, \dots, n_r)$ is always finite.
+    \end{theorem}
+    \begin{proof}
+        Apply induction on the number of colours $r$. Note that we have already
+        proved the theorem for $r = 2$. Suppose that the statement holds for $r - 1$
+        colours. We claim that \[
+            R(n_1, \dots, n_r) \leq R(n_1, \dots, n_{r - 2}, R(n_{r - 1}, n_r)).
+        \] Consider a complete graph $K_n$ on $R(n_1, \dots, n_{r - 2}, R(n_{r - 1},
+        r)) = n$ vertices, with the edges coloured in $1, \dots, r$. Thus, the
+        induction hypothesis gurantees that this graph must contain at least one
+        $n_i$-clique in colour $i$ for $1 \leq i \leq r - 2$, or an $R(n_{r - 1},
+        n_r)$-clique in colour $r-1$ and $r$. However, the latter case means that the
+        clique contains either an $n_{r - 1}$-clique in colour $r - 1$, or an
+        $n_r$-clique in colour $r$.
+    \end{proof}
 
 \end{document}
