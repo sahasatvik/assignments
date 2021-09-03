@@ -635,4 +635,71 @@
         \] 
     \end{lemma}
 
+    \subsection{Homomorphisms}
+    \begin{definition}
+        Let $\varphi\colon G \to G'$ where $G, G'$ are groups. We say that $\varphi$
+        is a homomorphism if $\varphi(gh) = \varphi(g)\varphi(h)$ for all $g, h \in
+        G$. In other words, $\varphi$ preserves the multiplicative structure of $G$.
+    \end{definition}
+    \begin{example}
+        The map sending every element from $G$ to the identity element in $G'$ is
+        trivially a homomorphism.
+    \end{example}
+    \begin{example}
+        The absolute value map as well as the sign map are homomorphisms on
+        $\R^\times$. The former sends the group to the multiplicative group of
+        positive reals, the latter to the group $\{\pm 1\}$.
+    \end{example}
+    \begin{example}
+        The determinant map is a homomorphism from $GL_n(\R)$ to $\R^\times$.
+    \end{example}
+
+    \begin{lemma}
+        Let $\vaphi\colon G \to G'$ be a homomorphism. Then, $\varphi(e) = e'$, i.e.\
+        $\varphi$ sends the identity in $G$ to the identity in $G'$.
+    \end{lemma}
+    \begin{proof}
+        Note that \[
+            \varphi(e) = \varphi(ee) = \varphi(e)\varphi(e),
+        \] whence cancellation gives $\varphi(e) = e'$.
+    \end{proof}
+    \begin{lemma}
+        Let $\vaphi\colon G \to G'$ be a homomorphism. Then, $\varphi(g^{-1}) =
+        \varphi(g)^{-1}$ for all $g \in G$.
+    \end{lemma}
+    \begin{proof}
+        Note that \[
+            e' = \varphi(e) = \varphi(g^{-1}g) = \varphi(g^{-1})\varphi(g). \qedhere
+        \] 
+    \end{proof}
+
+    \begin{definition}
+        Let $\varphi\colon G \to G'$ be a homomorphism. The set $\varphi^{-1}(e')
+        \subseteq G$ is called the kernel of $\varphi$, and $\varphi(G) \subseteq G'$
+        is called its image.
+    \end{definition}
+    \begin{lemma}
+        The kernel of a homomorphism is a group, and so is its image.
+    \end{lemma}
+
+    \begin{definition}
+        Let $\varphi\colon G \to G'$ be a homomorphism, and $g' \in \varphi(G)$. The
+        set $\varphi^{-1}(g')$ is called a fibre of $\varphi$.
+    \end{definition}
+    \begin{lemma}
+        The fibres of a homomorphism are cosets of its kernel.
+    \end{lemma}
+    \begin{proof}
+        Let $\varphi\colon G \to G'$, $N = \varphi^{-1}(e')$, and $g' \in
+        \varphi(G)$. Select $g \in G$ such that $\varphi(g) = g'$. We claim that
+        $\varphi^{-1}(g') = gN$. It is clear that $\varphi(gn) = \varphi(g) = g'$ for
+        any $n \in N$, hence $gN \subseteq \varphi^{-1}(g')$. Conversely, pick $h \in
+        \varphi^{-1}(g')$, and note that $\varphi(g^{-1}h) = g'^{-1}g' = e'$, hence
+        $g^{-1}h \in N$. Thus, $h = g(g^{-1}h) \in gN$, giving $\varphi^{-1}(g')
+        \subseteq gN$.
+    \end{proof}
+    \begin{corollary}
+        A homomorphism is injective if and only if its kernel is trivial.
+    \end{corollary}
+
 \end{document}
