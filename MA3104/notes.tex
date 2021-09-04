@@ -671,20 +671,20 @@
         each $E_i$ is the projection map along $W_i$.
         \begin{remark}
             Observe that \[
-                I_k = E_1 + \dots + E_k.
+                I = E_1 + \dots + E_k.
             \] Furthermore, we have $E_iE_j = 0$ for all $i \neq j$, which means that
             $\im{E_j} \subseteq \ker{E_i}$.
         \end{remark}
     \end{lemma}
 
-    \begin{theorem}
+    \begin{theorem}\label{thm:direct_sum_proj}
         If $V = W_1 + \dots + W_k$, then there exist $k$ linear operators $E_1,
         \dots, E_k$ on $V$ such that 
         \begin{enumerate}
             \itemsep0em
             \item $E_i^2 = E_i$.
             \item $E_iE_j = 0$ for all $i \neq j$.
-            \item $I_k = E_1 + \dots + E_k$.
+            \item $I = E_1 + \dots + E_k$.
             \item $\im{E_i} = W_i$.
         \end{enumerate}
         Conversely, if there exist linear $k$ linear operators which satisfy
@@ -751,5 +751,77 @@
         \] 
     \end{proof}
 
+    \begin{theorem}
+        Let $T\in\algL(V)$ where $V$ is a finite-dimensional vector space. If $T$ is
+        diagonalizable and $c_1, \dots, c_k$ are the distinct eigenvalues of $T$,
+        then there are non-zero linear operators $E_1, \dots, E_k$ on $V$ which
+        satisfy the following.
+        \begin{enumerate}
+            \itemsep0em
+            \item $T = c_1E_1 + \dots + c_kE_k$.
+            \item $I = E_1 + \dots + E_k$.
+            \item $E_iE_j = 0$ for all $i \neq j$.
+            \item $E_i^2 = E_i$.
+            \item $\im{E_i} = \ker(T - c_iI)$.
+        \end{enumerate}
+        Conversely, if there exist $k$ distinct scalars $c_1, \dots, c_k$ and $k$
+        non-zero linear operators which satisfy properties 1, 2, 3, then $T$ is
+        diagonalizable, $c_1, \dots, c_k$ are the eigenvalues of $T$, and properties
+        $4, 5$ are also satisfied.
+    \end{theorem}
+    \begin{proof}
+        Suppose that $T$ is diagonalizable, with distinct eigenvalues $c_1, \dots,
+        c_k$. Let $W_i = \ker(T - c_iI)$, and note that $V = W_1 \oplus \dots \oplus
+        W_k$. Let $E_1, \dots, E_k$ be the projections associated with this
+        decomposition. This immediately gives us the properties 2, 3, 4, 5. To show
+        that property 1 holds, pick arbitrary $\vv \in V$ and write $\vv = E_1\vv +
+        \dots + E_k\vv$. Then, note that $E_i\vv$ are eigenvectors, hence \[
+            T\vv = TE_1\vv + \dots + TE_k\vv = c_1E_1\vv + \dots + c_kE_k\vv.
+        \] 
+
+        Conversely, let $T \in \algL(V)$ and suppose that $c_1, \dots, c_k$ and
+        non-zero $E_1, \dots, E_k$ satisfy properties 1, 2, 3. Then, note that \[
+            E_i = E_iI = E_i(E_1 + \dots + E_k) = E_i^2,
+        \] giving property 4. Also, \[
+            TE_i = (c_1E_1 + \dots + c_kE_k)E_i = c_iE_i^2 = c_iE_i,
+        \] hence $\im{E_i} \neq \{\vec{0}\}$ is an eigenspace of $T$ corresponding to
+        the eigenvalue $c_i$, i.e.\ $\im{E_i} \subseteq \ker(T - c_iI)$. We claim
+        that there are no other eigenvalues; suppose that $\ker(T - cI)$ is non-zero.
+        Write \[
+            T - cI = c_1E_1 + \dots + c_kE_k - cI = (c_1 - c)E_1 + \dots + (c_k -
+            c)E_k.
+        \] Pick non-zero $\vv \in V$ such that $(T - cI)\vv = 0$. Then, some $E_i\vv
+        \neq \vec{0}$ (this is because the images of the projection operators are
+        independent, and $I = E_1 + \dots + E_k$). On the other hand, we must have
+        each $(c_i - c)E_i\vv = \vec{0}$, forcing $c = c_i$. Finally, $I = E_1 +
+        \dots + E_k$ says that $V$ is the direct sum of the $\im{E_i}$, which are
+        are contained within the eigenspaces of T. This means that $T$ is
+        diagonalizable.
+
+        We finally show that $\im{E_i} = \ker(T - c_iI)$. Pick $\vv \in \ker(T -
+        c_iI)$, which means that \[
+            (c_1 - c_i)E_1\vv + \dots + (c_k - c_i)E_k\vv = 0.
+        \] By the independence of each $\im{E_i}$, each $(c_j - c_i)E_j\vv =
+        \vec{0}$, or $E_j\vv = \vec{0}$ for $j \neq i$. Thus, \[
+            \vv = E_1\vv + \dots + E_k\vv = E_i\vv,
+        \] so $\vv \in \im{E_i}$. This proves that $\im{E_i} = \ker(T - c_iI)$.
+    \end{proof}
+
+    \begin{lemma}
+        The Lagrange polynomials $p_i$ of degree $n$ form a basis of the vector space
+        of polynomials of degree at most $n$. If we have $p_i(t_j) = \delta_{ij}$,
+        then for any polynomial $f$ of degree $n$, we have \[
+            f = \sum f(t_i)p_i.
+        \] 
+    \end{lemma}
     
+    \begin{lemma}
+        If $T$ is diagonalizable with $T = c_1E_1 + \dots + c_kE_k$ where $E_i$ are
+        projections as discussed earlier, Then, for any polynomial $g$, we have \[
+            g(T) = g(c_1)E_1 + \dots + g(c_k)E_k.
+        \] Thus, if $p_1, \dots, p_k$ are the Lagrange polynomials corresponding to
+        the points $c_1, \dots, c_k$ and we put $g = c_i$, then each $p_i(T) = E_i$.
+        Thus, each $E_i$ is a polynomial in $T$.
+    \end{lemma}
+
 \end{document}
