@@ -44,6 +44,9 @@
 \newcommand{\norm}[1]{\Vert #1 \Vert}
 \newcommand{\ip}[2]{\langle #1, #2 \rangle}
 
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\sign}{\operatorname{sgn}}
+
 \newmdtheoremenv[%
     backgroundcolor=blue!10!white,%
 ]{theorem}{Theorem}[section]
@@ -655,7 +658,7 @@
     \end{example}
 
     \begin{lemma}
-        Let $\vaphi\colon G \to G'$ be a homomorphism. Then, $\varphi(e) = e'$, i.e.\
+        Let $\varphi\colon G \to G'$ be a homomorphism. Then, $\varphi(e) = e'$, i.e.\
         $\varphi$ sends the identity in $G$ to the identity in $G'$.
     \end{lemma}
     \begin{proof}
@@ -664,7 +667,7 @@
         \] whence cancellation gives $\varphi(e) = e'$.
     \end{proof}
     \begin{lemma}
-        Let $\vaphi\colon G \to G'$ be a homomorphism. Then, $\varphi(g^{-1}) =
+        Let $\varphi\colon G \to G'$ be a homomorphism. Then, $\varphi(g^{-1}) =
         \varphi(g)^{-1}$ for all $g \in G$.
     \end{lemma}
     \begin{proof}
@@ -699,7 +702,37 @@
         \subseteq gN$.
     \end{proof}
     \begin{corollary}
+        If $\varphi\colon G \to G'$ is a homomorphism, then \[
+            |G| = |\im{\varphi}|\cdot|\ker{\varphi}|.
+        \] 
+    \end{corollary}
+    \begin{corollary}
         A homomorphism is injective if and only if its kernel is trivial.
     \end{corollary}
+
+    \begin{example}
+        Consider the sign homomorphism on the group of permutations, defined by \[
+            \sign\colon S_n \to \{\pm 1\}, \qquad \sigma \mapsto \prod_{i > j}
+            \frac{\sigma(i) - \sigma(j)}{i - j}.
+        \] To see that this is indeed a homomorphism, note that \[
+            \prod_{i > j} \frac{\sigma\tau(i) - \sigma\tau(j)}{i - j} = 
+            \prod_{i > j} \frac{\sigma\tau(i) - \sigma\tau(j)}{\tau(i) - \tau(j)}
+            \cdot \prod_{i > j} \frac{\tau(i) - \tau(j)}{i - j}.
+        \] Now, note that the sign of any transposition (2-cycle) is always $-1$.
+        Since every $k$-cycle is a product of $k - 1$ transpositions, we see that the
+        sign of any $k$-cycle is $(-1)^{k + 1}$. Using the fact that any permutation
+        can be decomposed into a product of cycles which in turn are products of
+        transpositions, we have a simple way of computing the sign of any permutation.
+    \end{example}
+
+    \subsection{Normal subgroups}
+    \begin{definition}
+        Let $N$ be a subgroup of the group $G$. We say that $N$ is a normal subgroup
+        of for every $n \in N$, we have $g^{-1} ng \in N$ for all $g \in G$.
+    \end{definition}
+    \begin{lemma}
+        A subgroup $N$ is normal if and only if $gN = Ng$ for all $g \in G$. In other
+        words, the left and right cosets of $H$ coincide.
+    \end{lemma}
 
 \end{document}
