@@ -548,4 +548,54 @@
         $n_r$-clique in colour $r$.
     \end{proof}
 
+    \begin{theorem}
+        \[
+            R(s, t) \leq \binom{s + t - 2}{s - 1}
+        \] 
+    \end{theorem}
+    \begin{proof}
+        Perform induction on $s + t$. This is true whenever $s + t \leq 5$. Suppose
+        that this holds for all $s + t - 1$. Now, \[
+            R(s, t) \leq R(s, t - 1) + R(s - 1, t) \leq \binom{s + t - 3}{s} +
+            \binom{s + t - 3}{s - 1} = \binom{s + t - 2}{s - 1}.
+        \] 
+    \end{proof}
+
+    \begin{lemma}
+        \[
+           \binom{2k}{k} \leq 2^{2k}.
+        \] 
+    \end{lemma}
+    \begin{corollary}
+        \[
+            R(s, s) \leq \binom{2s - 2}{s - 1} \leq 2^{2s - 2} < 4^s.
+        \] 
+    \end{corollary}
+
+    \begin{theorem}[Erd\H{o}s]
+        For all $s > 3$, $R(s, s) > \lfloor 2^{s / 2}\rfloor$.
+    \end{theorem}
+    \begin{proof}
+        We show that there exists a way of colouring $K_n$, $n = \lfloor 2^{s /
+        2}\rfloor$ in red and blue such that there is no monochromatic $s$-clique.
+
+        Let $A_R$ denote the event in which an induced subgraph $K_n[R]$ on $R
+        \subseteq V$ vertices is monochromatic. For any edge, let the probability of
+        it being coloured red or blue be the same, i.e.\ $1 / 2$. Thus, $K_s$ is
+        red with probability \[
+            \left(\frac{1}{2}\right)^{\binom{s}{2}}.
+        \] When $|R| = s$, compute $P(A_R)$ is twice the above probability. We will
+        show that the probability of the existence of a monochromatic $s$-clique is
+        strictly less than $1$. To see this, apply the Inclusion-Exclusion principle,
+        whence the required probability is \[
+            \sum_{|R| = s} 2\left(\frac{1}{2}\right)^{\binom{s}{s}} = \binom{n}{s}
+            2^{1 - \binom{s}{2}} \leq \frac{n^s}{s!}\cdot 2^{1 + s / 2} \cdot2^{-s^2
+            / 2}.
+        \] Putting the value of $n$, we see that this is \[
+            \frac{2^{s^2 / 2}}{s!} \cdot 2^{1 + s / 2} \cdot2^{-s^2 / 2} =
+            \frac{1}{s!}2^{1 + s / 2}.
+        \] However, it is easy to see that $s! > 2^s$ for all $s \geq 4$, which gives
+        the result.
+    \end{proof}
+
 \end{document}
