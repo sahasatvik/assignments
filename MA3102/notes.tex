@@ -727,12 +727,72 @@
 
     \subsection{Normal subgroups}
     \begin{definition}
-        Let $N$ be a subgroup of the group $G$. We say that $N$ is a normal subgroup
-        of for every $n \in N$, we have $g^{-1} ng \in N$ for all $g \in G$.
+        Let $H$ be a subgroup of the group $G$. We say that $H$ is a normal subgroup
+        of for every $h \in H$, we have $g^{-1} hg \in H$ for all $g \in G$. We
+        denote $H \trianglelefteq G$.
     \end{definition}
     \begin{lemma}
-        A subgroup $N$ is normal if and only if $gN = Ng$ for all $g \in G$. In other
+        A subgroup $H$ is normal if and only if $gH = Hg$ for all $g \in G$. In other
         words, the left and right cosets of $H$ coincide.
     \end{lemma}
+    \begin{example}
+        Every subgroup of an abelian group is normal.
+    \end{example}
+    \begin{example}
+        The kernel of a homomorphism is a normal subgroup of the domain.
+    \end{example}
+
+    \begin{lemma}
+        Let $H \trianglelefteq G$. Then, the product of two cosets is a coset.
+    \end{lemma}
+    \begin{proof}
+        We claim that $(xH)(yH) = xyH$. Note that given any element $xyh \in xyH$, we
+        have $xyh = (xe)(yh) \in (xH)(yH)$, so $xyH \subseteq (xH)(yH)$. Now, using
+        the fact that $H$ is normal, let $xh_1 \in xH$ and $h_2y \in Hy = yH$. Then,
+        $xh_1h_2y = xh_3y$ for some $h_3 \in H$; but $h_3y \in Hy = yH$ hence $h_3y =
+        yh_4$ for some $h_4 \in H$, hence $(xh_1)(h_2y) = xyh_4 \in xyH$ so $(xH)(yH)
+        \subseteq xyH$.
+    \end{proof}
+
+    \begin{lemma}
+        Conjugacy is an equivalence relation. Thus, this partitions a group into
+        conjugacy classes.
+    \end{lemma}
+    \begin{proof}
+        It is clear that every element is conjugate to itself. If $x = gyg^{-1}$,
+        then $y = g^{-1}xg$. Finally, if $x = g_1yg-^{-1}$ and $y = g_2zg_2^{-1}$,
+        then $x = (g_1g_2)z(g_1g_2)^{-1}$.
+    \end{proof}
+
+    \begin{lemma}
+        The conjugacy class of an element in a symmetric group is precisely the set
+        of elements with the same cycle type.
+    \end{lemma}
+    \begin{proof}
+        Pick the conjugate elements $h, h' = ghg^{-1} \in S_n$. Observe that if
+        $h(\alpha) = \beta$, then $(ghg^{-1})(g(\alpha)) = g(\beta)$. This is
+        sufficient to show that $h$ and $h'$ have the same cycle types.
+
+        Furthermore, given $h, h' \in G$ with the same cycle type, it can be shown
+        that they are conjugate.
+    \end{proof}
+    \begin{corollary}
+        The group of all $2,2$ cycles in $S_4$ (which is isomorphic to the Klein four
+        group) is a normal subgroup.
+    \end{corollary}
+
+    \subsection{Quotient groups}
+    \begin{definition}
+        Let $H \trianglelefteq G$, and let $G/H$ be the quotient space defined by the
+        partition of $G$ into the cosets of $H$. Then, $G/H$ is a quotient group
+        whose elements are the cosets $gH$ for $g \in G$. The group operation is
+        defined as \[
+            (xH)(yH) = xyH.
+        \] 
+        \begin{remark}
+            It is easy to verify that this operation is associative. The group
+            identity is the coset $H$. The inverse of $gH$ is $g^{-1}H$.
+        \end{remark}
+    \end{definition}
 
 \end{document}
