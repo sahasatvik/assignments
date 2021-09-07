@@ -40,11 +40,13 @@
 \newcommand{\vv}{\vec{v}}
 \newcommand{\vw}{\vec{w}}
 \newcommand{\ve}{\vec{e}}
+\newcommand{\va}{\vec{a}}
+\newcommand{\vb}{\vec{b}}
 
 \newcommand{\dd}[2]{\frac{d #1}{d #2}}
 \newcommand{\pp}[2]{\frac{\partial #1}{\partial #2}}
-\newcommand{\ddn}[2][]{\frac{d^{#1} #2}{d^{#1} #3}}
-\newcommand{\ppn}[2][]{\frac{\partial^{#1} #2}{\partial^{#1} #3}}
+\newcommand{\ddn}[3][]{\frac{d^{#1} #2}{d #3^{#1}}}
+\newcommand{\ppn}[3][]{\frac{\partial^{#1} #2}{\partial #3^{#1}}}
 \newcommand{\grad}{\nabla}
 
 \newmdtheoremenv[%
@@ -669,6 +671,57 @@
         \] a contradiction.
     \end{proof}
 
+    \subsubsection{Chain rule}
+
+    \begin{exercise}
+        Let $T\colon \R^n \to \R^m$ be a linear transformation. Then, there exists $M
+        > 0$ such that for all $x \in \R^n$, we have \[
+            \norm{Tx} \leq M\norm{x}.
+        \] 
+    \end{exercise}
+    \begin{theorem}
+        Let $f\colon \R^n \to \R^m$, $g\colon \R^m \to \R^k$ where $f$ is
+        differentiable at $a \in \R^n$ and $g$ is differentiable at $f(a) \in \R^m$.
+        Then, $g\circ f$ is differentiable, with $D(g\circ f)(a) = Dg(f(a)) \circ
+        Df(a)$. Note that this means that the Jacobian matrices simply multiply.
+    \end{theorem}
+    \begin{proof}
+        Set $b = f(a) \in \R^m$, $\lambda = Df(a)$, $\mu = Dg(f(a))$. Define 
+        \begin{align*}
+            \varphi\colon \R^n \to \R^m,\qquad \varphi(x) &= f(x) - f(a) - \lambda(x
+            - a), \\
+            \psi\colon \R^m \to \R^k,\qquad \psi(y) &= g(y) - g(b) - \mu(y - b).
+        \end{align*}
+        We claim that \[
+            \lim_{x \to a} \frac{g\circ f(x) - g\circ f(a) - \mu\circ \lambda(x
+            - a)}{\norm{x - a}} = 0.
+        \] Write the numerator as \[
+            g\circ f(x) - g\circ f(a) - \mu\circ \lambda(x - a) = \psi(f(x)) +
+            \mu(\varphi(x)).
+        \] Note that \[
+            \lim_{x \to a} \frac{\varphi(x)}{\norm{x - a}} = 0, \qquad 
+            \lim_{y \to b} \frac{\psi(y)}{\norm{y - b}} = 0.
+        \] Thus, find $M > 0$ such that $\norm{\mu(\varphi(x))} \leq
+        \norm{\varphi(x)}$ for all $x \in \R^n$, hence \[
+            \lim_{x \to a} \frac{\norm{\mu(\varphi(x))}}{\norm{x - a}} \leq \lim_{x
+            \to a} \frac{M\norm{\varphi(x)}}{\norm{x - a}} = 0.
+        \] Now write \[
+            \lim_{f(x) \to b} \frac{\psi(f(x))}{\norm{f(x) - b}} = 0, 
+        \] hence for any $\epsilon > 0$, there is a neighbourhood of $b$ on which \[
+            \norm{\psi(f(x))} \leq \epsilon \norm{f(x) - b} = \epsilon
+            \norm{\varphi(x) + \lambda(x - a)}.
+        \] Apply the triangle inequality and find $M' > 0$ such that \[
+            \norm{\psi(f(x))} \leq
+            \epsilon\norm{\varphi(x)} + \epsilon M'\norm{x - a}.
+        \] Thus, \[
+            \lim_{x \to a} \frac{\norm{\psi(f(x))}}{\norm{x - a}} \leq
+            \lim_{x \to a} \frac{\epsilon\norm{\varphi(x)}}{\norm{x - a}} + \epsilon
+            M' = \epsilon M'.
+        \] Since $\epsilon > 0$ was arbitrary, this limit is zero, completing the proof.
+    \end{proof} 
+
+    \subsubsection{Partial derivatives}
+
     \begin{definition}
         Let $U \subseteq \R^n$ be open, and let $f\colon U \to \R$. The partial
         derivative of $f$ with respect to the coordinate $x_j$ at some $a \in U$
@@ -691,6 +744,91 @@
         \] Note that $f$ is not differentiable at $(0, 0)$; it is not even continuous
         there. However, both partial derivatives of $f$ exist at $(0, 0)$.
     \end{example}
+
+    \begin{lemma}
+        If $f\colon \R^n \to \R^m$ is differentiable at $a \in \R^n$, then the matrix
+        representation of $Df(a)$ in the standard basis is given by \[
+            [Df(a)] = \left[\pp{f_i}{x_j}(a)\right]_{ij}.
+        \] 
+    \end{lemma}
+
+    \begin{lemma}
+        Let $f\colon \R^n \to \R^m$ be differentiable at $a \in \R^n$, and let
+        $g\colon \R^m \to \R^k$ be differentiable at $f(a) \in \R^m$. Then, the
+        matrix representation of $D(g\circ f)(a)$ in the standard basis is the
+        product \[
+            [D(g\circ f)(a)] = [Dg(f(a))][Df(a)] = \left[\sum_{\ell = 1}^m
+            \pp{g_i}{y_\ell}\pp{f_\ell}{x_j}\right]_{ij}.
+        \] In other words, \[
+            \pp{}{x_j}(g\circ f)_i(a) = \sum_{\ell = 1}^m \pp{g_i}{y_\ell}(f(a))
+            \pp{f_\ell}{x_j}(a).
+        \] 
+    \end{lemma}
+
+    \begin{example}
+        Let $f\colon \R^2\to \R$ be differentiable, and let $\Gamma(f) = \{(x, y,
+        f(x, y)): x, y \in \R\}$ be the graph of $f$. Now, let $\gamma\colon [-1, 1]
+        \to \Gamma(f)$ be a differentiable curve, represented by \[
+            \gamma(t) = (g(t), h(t), f(g(t), h(t))).
+        \] Then, we can compute the derivative \[
+            \gamma'(a) = \left(g'(a),\, h'(a),\, g'(a)\pp{f}{x} + h'(a)\pp{f}{y}
+            \;\Big|_{(g(a), h(a))}\right)
+        \] 
+    \end{example}
+
+    \begin{exercise}
+        Consider the inner product map, $\ip{\cdot}{\cdot}\colon \R^n \times \R^n \to
+        \R$. What is its derivative?
+        \begin{solution}
+            We treat the inner product as a map $g\colon \R^{2n} \to \R$, which acts
+            as \[
+                \ip{\vx}{\vy} \cong g(x_1, \dots, x_n, y_1, \dots, y_n) = x_1y_1 +
+                \dots + x_ny_n.
+            \] Now, note that \[
+                \pp{g}{x_i} = y_i, \qquad \pp{g}{y_i} = x_i.
+            \] Thus, \begin{align*}
+                Dg(\va, \vb)(\vx, \vy) &= \sum_{i = 1}^n x_i \pp{g}{x_i}(\va, \vb) +
+                \sum_{i = 1}^n y_i \pp{g}{y_i}(\va, \vb) \\
+                &= \sum_{i = 1}^n x_i b_i + \sum_{i = 1}^n y_i a_i \\
+                &= \ip{\vx}{\vb} + \ip{\vy}{\va}.
+            \end{align*}
+            In other words, the matrix representation of the derivative of the inner
+            product map at the point $(\va, \vb)$ is given by $[\vb^\top \;
+            \va^\top]$.
+        \end{solution}
+    \end{exercise}
+
+    \begin{exercise}
+        Let $\gamma\colon \R \to \R^n$ be a differentiable curve. What is the
+        derivative of the real map $t \mapsto \norm{\gamma(t)}^2$?
+        \begin{solution}
+            We write this map as $t \mapsto \ip{\gamma(t)}{\gamma(t)}$. Consider the
+            scheme \[
+                \R \to \R^{2n} \to \R, \qquad
+                t \mapsto \begin{bmatrix}
+                    \gamma(t) \\ \gamma(t)
+                \end{bmatrix} \mapsto \ip{\gamma(t)}{\gamma(t)}.
+            \] Pick a point $t\in \R$, whence the derivative of the map at $t$ is \[
+                \begin{bmatrix}
+                    \gamma(t)^\top & \gamma(t)^\top
+                \end{bmatrix} \begin{bmatrix}
+                    \gamma'(t) \\ \gamma'(t)
+                \end{bmatrix} = 2\ip{\gamma(t)}{\gamma'(t)}.
+            \] 
+        \end{solution}
+        \begin{remark}
+            Consider the surface $S^{n - 1} \subset \R^n$, and pick an arbitrary
+            differentiable curve $\gamma\colon \R \to S^{n - 1}$. Now, the tangent
+            vector $\gamma'(t)$ is tangent to the sphere $S^{n - 1}$ at any point
+            $\gamma(t)$. We claim that this tangent drawn at $\gamma(t)$ is always
+            perpendicular to the position vector $\gamma(t)$. This is made trivial by
+            our exercise: the map $t \mapsto \norm{\gamma(t)}^2 = 1$ is a constant
+            map since $\gamma$ is a curve on the unit sphere. This means that it has
+            zero derivative, forcing $\ip{\gamma(t)}{\gamma'(t)} = 0$.
+        \end{remark}
+    \end{exercise}
+
+    \subsubsection{Directional derivatives}
 
     \begin{definition}
         Let $C^1(\R^n)$ be the set of real-valued differentiable functions on $\R^n$.
@@ -717,6 +855,7 @@
     \end{lemma}
 
     \subsubsection{Differentiation on manifolds}
+
     \begin{definition}
         A homeomorphism is a continuous, bijective map whose inverse is also continuous.
     \end{definition}
@@ -803,52 +942,5 @@
         \end{remark}
     \end{definition}
 
-    \subsubsection{Chain rule}
-    \begin{exercise}
-        Let $T\colon \R^n \to \R^m$ be a linear transformation. Then, there exists $M
-        > 0$ such that for all $x \in \R^n$, we have \[
-            \norm{Tx} \leq M\norm{x}.
-        \] 
-    \end{exercise}
-    \begin{theorem}
-        Let $f\colon \R^n \to \R^m$, $g\colon \R^m \to \R^k$ where $f$ is
-        differentiable at $a \in \R^n$ and $g$ is differentiable at $f(a) \in \R^m$.
-        Then, $g\circ f$ is differentiable, with $D(g\circ f)(a) = Dg(f(a)) \circ
-        Df(a)$. Note that this means that the Jacobian matrices simply multiply.
-    \end{theorem}
-    \begin{proof}
-        Set $b = f(a) \in \R^m$, $\lambda = Df(a)$, $\mu = Dg(f(a))$. Define 
-        \begin{align*}
-            \varphi\colon \R^n \to \R^m,\qquad \varphi(x) &= f(x) - f(a) - \lambda(x
-            - a), \\
-            \psi\colon \R^m \to \R^k,\qquad \psi(y) &= g(y) - g(b) - \mu(y - b).
-        \end{align*}
-        We claim that \[
-            \lim_{x \to a} \frac{g\circ f(x) - g\circ f(a) - \mu\circ \lambda(x
-            - a)}{\norm{x - a}} = 0.
-        \] Write the numerator as \[
-            g\circ f(x) - g\circ f(a) - \mu\circ \lambda(x - a) = \psi(f(x)) +
-            \mu(\varphi(x)).
-        \] Note that \[
-            \lim_{x \to a} \frac{\varphi(x)}{\norm{x - a}} = 0, \qquad 
-            \lim_{y \to b} \frac{\psi(y)}{\norm{y - b}} = 0.
-        \] Thus, find $M > 0$ such that $\norm{\mu(\varphi(x))} \leq
-        \norm{\varphi(x)}$ for all $x \in \R^n$, hence \[
-            \lim_{x \to a} \frac{\norm{\mu(\varphi(x))}}{\norm{x - a}} \leq \lim_{x
-            \to a} \frac{M\norm{\varphi(x)}}{\norm{x - a}} = 0.
-        \] Now write \[
-            \lim_{f(x) \to b} \frac{\psi(f(x))}{\norm{f(x) - b}} = 0, 
-        \] hence for any $\epsilon > 0$, there is a neighbourhood of $b$ on which \[
-            \norm{\psi(f(x))} \leq \epsilon \norm{f(x) - b} = \epsilon
-            \norm{\varphi(x) + \lambda(x - a)}.
-        \] Apply the triangle inequality and find $M' > 0$ such that \[
-            \norm{\psi(f(x))} \leq
-            \epsilon\norm{\varphi(x)} + \epsilon M'\norm{x - a}.
-        \] Thus, \[
-            \lim_{x \to a} \frac{\norm{\psi(f(x))}}{\norm{x - a}} \leq
-            \lim_{x \to a} \frac{\epsilon\norm{\varphi(x)}}{\norm{x - a}} + \epsilon
-            M' = \epsilon M'.
-        \] Since $\epsilon > 0$ was arbitrary, this limit is zero, completing the proof.
-    \end{proof} 
 
 \end{document}
