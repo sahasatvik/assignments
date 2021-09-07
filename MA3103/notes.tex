@@ -442,29 +442,6 @@
         The subgraph $G'$ spans its parent $G$ if the vertex sets $V' = V$.
     \end{definition}
 
-    \begin{theorem}
-        For every $n \geq 1$, there is a lower bound $p_0$ such that for every prime
-        $p \geq p_0$, the following congruence has a solution. \[
-            x^n + y^n \equiv z^n \pmod{p}.
-        \] 
-    \end{theorem}
-
-    \begin{theorem}[Schur's Theorem]
-        For any positive integer $r$, there exists a positive integer $S(r)$ such
-        that for every partition of the integers $\{1, 2, \dots, S(r)\}$ into $r$
-        parts, there exists one part which contains integers $x, y, z$ where $x + y =
-        z$.
-        
-        \begin{remark}
-            This can be rephrased in the following manner. For any $r$ colouring of
-            the integers $1, 2, \dots, S(r)$, one can pick integers $x, y, z$ all of
-            the same colour such that $x + y = z$.
-        \end{remark}
-        \begin{remark}
-            The integers $x,y,z$ are not necessarily distinct!
-        \end{remark}
-    \end{theorem}
-
     \begin{definition}
         A $k$-clique of $G$ is an induced subgraph on $k$ vertices which is complete.
     \end{definition}
@@ -584,10 +561,10 @@
         it being coloured red or blue be the same, i.e.\ $1 / 2$. Thus, $K_s$ is
         red with probability \[
             \left(\frac{1}{2}\right)^{\binom{s}{2}}.
-        \] When $|R| = s$, compute $P(A_R)$ is twice the above probability. We will
-        show that the probability of the existence of a monochromatic $s$-clique is
-        strictly less than $1$. To see this, apply the Inclusion-Exclusion principle,
-        whence the required probability is \[
+        \] When $|R| = s$, $P(A_R)$ is twice the above probability. We will show that
+        the probability of the existence of a monochromatic $s$-clique is strictly
+        less than $1$. To see this, apply the Inclusion-Exclusion principle, whence
+        the required probability is \[
             \sum_{|R| = s} 2\left(\frac{1}{2}\right)^{\binom{s}{s}} = \binom{n}{s}
             2^{1 - \binom{s}{2}} \leq \frac{n^s}{s!}\cdot 2^{1 + s / 2} \cdot2^{-s^2
             / 2}.
@@ -596,6 +573,73 @@
             \frac{1}{s!}2^{1 + s / 2}.
         \] However, it is easy to see that $s! > 2^s$ for all $s \geq 4$, which gives
         the result.
+    \end{proof}
+
+    \begin{theorem}
+        For every $n \geq 1$, there is a lower bound $p_0$ such that for every prime
+        $p \geq p_0$, the following congruence has a solution. \[
+            x^n + y^n \equiv z^n \pmod{p}.
+        \] 
+    \end{theorem}
+
+    \begin{theorem}[Schur's Theorem]
+        For any positive integer $r$, there exists a positive integer $S(r)$ such
+        that for every partition of the integers $\{1, 2, \dots, S(r)\}$ into $r$
+        parts, there exists one part which contains integers $x, y, z$ where $x + y =
+        z$.
+        
+        \begin{remark}
+            This can be rephrased in the following manner. For any $r$ colouring of
+            the integers $1, 2, \dots, S(r)$, one can pick integers $x, y, z$ all of
+            the same colour such that $x + y = z$.
+        \end{remark}
+        \begin{remark}
+            The integers $x,y,z$ are not necessarily distinct!
+        \end{remark}
+    \end{theorem}
+    \begin{proof}
+        We show this for $r \geq 2$. Let $n = R(3, 3, \dots, 3)$ where there are $r$
+        colours; we claim that this choice of $n$ satisfies the desired property,
+        i.e.\ $S(r) \leq n$.
+        
+        Let $C\colon \{1, 2, \dots, n\} \to \{1, \dots, r\}$ be an arbitrary
+        colouring of the integers.  Construct the graph $K_n$, and colour its edges
+        using the following map. \[
+            \chi\colon E(K_n) \to \{1, \dots, r\}, \qquad \{v_1, v_2\} \mapsto C(|i -
+            j|).
+        \] We immediately deduce the existence of a monochromatic triangle, say $v_i,
+        v_j, v_j$ with $i < j < k$. Set $x = j - i$, $y = k - j$, $z = k - i$. Then,
+        $x + y = z$ and $C(x) = C(y) = C(z)$.
+    \end{proof}
+
+    \subsection{Degree sequences}
+    \begin{definition}
+        Let $G$ be a graph on $n$ vertices, labelled $1, \dots, n$. Then, we call the
+        sequence $d(1), \dots, d(n)$ the degree sequence of the graph.
+        \begin{remark}
+            Recall that given a degree sequence, the sum of the numbers is always
+            twice the number of edges, i.e.\ the sum is always even. Also, we know
+            that at least two vertices have the same degree.
+        \end{remark}
+    \end{definition}
+
+    \begin{theorem}
+        Let $d_i$ be a graphic sequence with $d_1 \geq d_2 \geq \dots \geq d_n$.
+        Then, there is a simple graph with the vertex set $\{x_1, \dots, x_n\}$ such
+        that $d(x_i) = d_i$ and the neighbour set \[
+            N(x_1) = \{x_2, x_3, \dots, x_{d_1 + 1}\}.
+        \] 
+    \end{theorem}
+    \begin{proof}
+        Let $G$ be one of the graphs with the degree sequence $d_i$, $d(x_i) = d_i$.
+        Furthermore, choose $G$ such that the following number is maximised. \[
+            r_G =  |N(x_1) \cap \{x_2, \dots, x_{d_1 + 1}\}|.
+        \] If $r = d_1$, we are done. Otherwise, suppose that $r < d_1$, in which
+        case one of the vertices $x_s$, $2 \leq s \leq d_1 + 1$ which is not adjacent
+        to $x_1$. This also means that there is some vertex $x_t$, $t > d_1 + 1$
+        adjacent to $x_1$. Note that $1 \leq d(x_t) \leq d(x_s)$, so $x_s$ is
+        connected to at least one vertex $x_k \neq x_1$; we can also choose $x_k \neq
+        x_t$, and $x_k$ not connected to $x_t$.
     \end{proof}
 
 \end{document}
