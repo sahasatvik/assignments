@@ -486,12 +486,45 @@
             -\frac{f''(\eta)}{2f'(\kappa)},
         \] This gives \[
             \lim_{x_{n - 1} \to \alpha}\lim_{x_n \to \alpha} |\psi(x_n, x_{n - 1})| =
-            \frac{f''(\alpha)}{2f'(\alpha)}.
-        \] 
+            \frac{f''(\alpha)}{2f'(\alpha)} = C.
+        \] Now, suppose that \[
+            \lim_{n \to \infty} \frac{|\alpha - x_{n + 1}|}{|\alpha - x_n|^q} = A >
+            0.
+        \] Dividing, we have \[
+            \lim_{n \to \infty} \frac{|\alpha - x_n|^{q - 1}}{|\alpha - x_{n - 1}|} =
+            \frac{C}{A}, \qquad
+            \lim_{n \to \infty} \frac{|\alpha - x_n|}{|\alpha - x_{n - 1}|^{1 / (q -
+            1)}} = \left(\frac{C}{A}\right)^{1 / (q - 1)} > 0.
+        \] For $q$ to be minimal, we must have $1 / (q - 1) = q$, or $q$ is the
+        golden ratio
+        $\varphi$.
     \end{proof}
 
     \subsection{Fixed point method}
+    Note that a root of $f$ is simply a fixed point of $f + x$.
+
+    \begin{theorem}
+        Let $f\colon [a, b] \to [a, b]$ be continuous. Then, $f$ has a fixed point
+        $\beta \in [a, b]$, $f(\beta) = \beta$.
+    \end{theorem}
     
+    Thus, let $f\colon [a, b] \to [a, b]$ be continuous. Define the fixed point
+    sequence $x_{n + 1} = f(x_n)$, seeded by some $x_0 \in [a, b]$. Note that if this
+    sequence converges with $x_n \to \beta$, then $\beta$ is a fixed point of $f$.
+
+    \begin{definition}
+        A function $f\colon [a, b] \to \R$ is said to be a contraction if there
+        exists $L \in (0, 1)$ such that $|f(x) - f(y)| \leq L|x - y|$ for all $x,
+        y\in [a, b]$.
+        \begin{remark}
+            Note that $f$ is Lipschitz continuous. If $f$ is also differentiable,
+            then $|f'| < 1$.
+        \end{remark}
+    \end{definition}
     
+    \begin{theorem}
+        Let $f\colon [a, b] \to [a, b]$ be a contraction map. Then, any fixed point
+        sequence converges to the unique fixed point of $f$.
+    \end{theorem}
     
 \end{document}
