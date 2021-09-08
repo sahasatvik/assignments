@@ -707,10 +707,10 @@
 
     \begin{definition}
         Let $V = W_1 \oplus \dots \oplus W_k$, and let $T \in \algL(V)$.
-        Additionally, let each $W_i$ be invariant under $T$, hence $T\vv_i \in W_i$. Define the
-        linear operators $T_i \algL(W_i)$, which are the restrictions of $T$ to
-        $W_i$. Then, given any $\vv \in V$, there is a unique representation $\vv =
-        \vv_1 + \dots + \vv_k$ where $\vv_i \in W_i$, so \[
+        Additionally, let each $W_i$ be invariant under $T$, hence $T\vv_i \in W_i$.
+        Define the linear operators $T_i \in \algL(W_i)$, which are the restrictions
+        of $T$ to $W_i$. Then, given any $\vv \in V$, there is a unique
+        representation $\vv = \vv_1 + \dots + \vv_k$ where $\vv_i \in W_i$, so \[
             T\vv = T\vv_1 + \dots + T\vv_k = T_1\vv_1 + \dots + T_k\vv_k = \vv_1 +
             \dots + \vv_k.
         \] This representation must be unique. We say that $T$ is the direct sum of
@@ -823,5 +823,90 @@
         the points $c_1, \dots, c_k$ and we put $g = c_i$, then each $p_i(T) = E_i$.
         Thus, each $E_i$ is a polynomial in $T$.
     \end{lemma}
+
+    \begin{theorem}[Primary Decomposition Theorem]
+        Let $T \in \algL(V)$ where $V$ is finite-dimensional, and let $p$ be the
+        minimal polynomial of $T$, where \[
+            p = p_1^{r_1} \dots p_k^{r_k}
+        \] where $p_i$ are distinct, irreducible polynomials. Let $W_i =
+        \ker{p_i(T)^{r_i}}$, then 
+        \begin{enumerate}
+            \itemsep0em
+            \item $V = W_1 \oplus \dots \oplus W_k$.
+            \item Each $W_i$ is invariant under $T$.
+            \item If $T_i$ is the restriction of $T$ to $W_i$, then the minimal
+            polynomial of $T_i$ is $p_i^{r_i}$.
+        \end{enumerate}
+    \end{theorem}
+    \begin{proof}
+        Set \[
+            f_i = \frac{p}{p_i^{r_i}} = \prod_{j \neq i} p_j^{r_j}.
+        \] Since the polynomials $f_i$ are relatively prime, we can pick polynomials
+        $g_i$ such that \[
+            f_1g_1 + \dots + f_kg_k = 1.
+        \] Note that when $i \neq j$, we have $p | f_if_j$. Set $h_i = f_ig_i$, and
+        let $E_i = h_i(T)$. We have $E_1 + \dots + E_k = I$, and $E_iE_j = 0$ for $i
+        \neq j$ (the $f_if_j(T)$ term contains $p(T) = 0$). This shows that $E_i$ are
+        projections corresponding to some direct sum decomposition of $V$. We claim
+        that $\im{E_i} = W_i$. To see this, first let $\vv \in \im{E_i}$, whence $\vv
+        = E_i\vv$ so \[
+            p_i(T)^{r_i}\vv = p_i(T)^{r_i}E_i\vv = p_i(T)^{r_i}f_i(T)g_i(T)\vv =
+            \vec{0}.
+        \] Conversely, if $\vv \in W_i$, when $p_i(T)^{r_i}\vv = \vec{0}$. Now, for
+        $i \neq j$, we have $p_i^{r_i} | f_jg_j$ hence $E_j\vv = f_jg_j(T)\vv =
+        \vec{0}$ for $i \neq j$. This leaves \[
+            \vv = I\vv = (E_1 + \dots + E_k)\vv = E_i\vv,
+        \] hence $\vv \in \im{E_i}$. This proves (i).
+
+        It is clear that $W_i$ is invariant under $T$. Pick arbitrary $\vv \in W_i$,
+        whence $\vv = E_i\vv$ so $T\vv = TE_i\vv = E_iT\vv \in W_i$. This proves
+        (ii).
+
+        Since $p_i(T)^{r_i} = 0$ on $W_i$, we have $p_i(T_i)^{r_i} = 0$, hence the
+        minimal polynomial of $T_i$ divides $p_i^{r_i}$. Conversely, if $g(T_i) = 0$
+        for some polynomial $g$, then $g(T)f_i(T) = 0$ ($g$ kills everything in
+        $W_i$, while $f_i$ kills everything in the other $W_j \neq W_i$). Thus, $p =
+        p_i^{r_i}f_i$ divides $gf_i$, or $p_i^{r_i}$ divides $g$. Hence, the minimal
+        polynomial of $T_i$ is precisely $p_i^{r_i}$. This proves (iii).
+    \end{proof}
+
+    \begin{corollary}
+        Let $E_1, \dots, E_k$ be the projections associated with the primary
+        decomposition of $T$. Then, each $E_i$ is a polynomial in $T$, so any
+        operator which commutes with $T$ must also commute with each $E_i$. The
+        subspaces $W_i$ are thus invariant under any any operator which commutes with
+        $T$.
+    \end{corollary}
+
+
+    \begin{theorem}
+        Let $T \in \algL(V)$ where $V$ is finite-dimensional, and let the minimal
+        polynomial of $p$ be of the form \[
+            p = (x - c_1)^{r_1} \cdots (x - c_k)^{r_k}.
+        \] Then, there is a unique diagonalizable operator $D$ and a unique nilpotent
+        operator $N$ such that $T = D + N$, $DN = ND$, and both are polynomials in
+        $T$.
+    \end{theorem}
+    \begin{proof}
+        Set $D = c_1E_1 + \dots + c_kE_k$, $N = T - D$. Note that $D$ is
+        diagonalizable, and \[
+            N = (T - c_1I)E_i + \dots + (T - c_kI)E_k.
+        \] It can be shown that \[
+            N^r = (T - c_1I)^rE_i + \dots + (T - c_kI)^rE_k,
+        \] hence $N^r = 0$ when $r$ is equal to the maximum of the $r_i$.
+
+        We now claim that this choice of $D$ and $N$ is unique. Let $D'$ and $N'$
+        also satisfy the above properties; since $D'$ and $N'$ commute and $T = D' +
+        N'$, all the operators $T, D, N, D', N'$ commute. Write $D + N = D' + N'$,
+        hence \[
+            D - D' = N' - N.
+        \] Since $D$ and $D'$ commute, they are simultaneously diagonalizable, hence
+        $D - D'$ is diagonalizable. Now, note that \[
+            (N' - N)^r = \sum_{j = 0}^r \binom{r}{j} (N')^{r - j}(-N)^{j}.
+        \] Since $N'$ and $N$ are both nilpotent, the right hand side is zero for
+        sufficiently high $r$. In other words, $N' - N$ is nilpotent, hence so is $D
+        - D'$. This forces $D = D'$, since the only nilpotent diagonalizable operator
+        is the zero operator.
+    \end{proof}
 
 \end{document}
