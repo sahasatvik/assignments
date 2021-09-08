@@ -742,6 +742,14 @@
         The kernel of a homomorphism is a normal subgroup of the domain.
     \end{example}
 
+    \begin{corollary}
+        Any subgroup $H \subset G$ of index $2$ is normal.
+    \end{corollary}
+    \begin{proof}
+        Let $g \notin H$, and note that $H, gH$ are the only left cosets of $H$,
+        and $H, Hg$ are the only right cosets of $H$. This forces $gH = Hg$.
+    \end{proof}
+
     \begin{lemma}
         Let $H \trianglelefteq G$. Then, the product of two cosets is a coset.
     \end{lemma}
@@ -774,12 +782,62 @@
         sufficient to show that $h$ and $h'$ have the same cycle types.
 
         Furthermore, given $h, h' \in G$ with the same cycle type, it can be shown
-        that they are conjugate.
+        that they are conjugate. Suppose that $h$ and $h'$ have a $k$-cycle, $h$
+        containing $(a_1 \;\dots\; a_k)$ and $h'$ containing $(a_1' \;\dots\; a_k')$.
+        Define the permutation $s(a_i) = a_i'$, hence $shs^{-1} = h'$ for the
+        elements $a_1', \dots, a_k'$. We can extend the definition of $s$ to cover
+        all the cycles in $h$ and $h'$.
     \end{proof}
     \begin{corollary}
         The group of all $2,2$ cycles in $S_4$ (which is isomorphic to the Klein four
         group) is a normal subgroup.
     \end{corollary}
+
+    \begin{lemma}
+        A group $G$ in which $g^2 = e$ for every $g \in G$ is abelian.
+    \end{lemma}
+    \begin{proof}
+        Let $g, h \in G$. Then, $g^2 = h^2 = e$, $(gh)^2 = e$ hence $ghgh = e$.
+        On the other hand, $ghhg = gg = e$, hence cancellation gives $gh = hg$.
+    \end{proof}
+
+    \begin{lemma}
+        Let $G$ be a finite group of even order. Then, $G$ contains an element of
+        order $2$.
+    \end{lemma}
+    \begin{proof}
+        Suppose to the contrary that $G$ contains no element of order $2$. In other
+        words, $g \neq g^{-1}$ for any $g \in G\setminus\{e\}$. Thus, each of the
+        pairs $\{g, g^{-1}\}$ for $g \neq e$ contains $2$ elements, and every element
+        in $G\setminus\{e\}$ appears in exactly one such pair. This is a
+        contradiction, since $G\setminus\{e\}$ contains an odd number of elements.
+    \end{proof}
+
+    \begin{example}
+        The only groups of order $6$ are the cyclic group $C_6$ and the symmetric
+        group $S_3$.
+        
+        Let $G$ be a group with $|G| = 6$. The order of each element is either $1, 2,
+        3, 6$ by Lagrange's Theorem.
+
+        If $G$ contains an element of order $6$, we immediately have $G\cong C_6$.
+
+        If every element of $G$ has order $2$, $G$ is abelian. Pick $x, y \in G$, $x,
+        y \neq e$, $x \neq y$. Now, $x^2 = y^2 = (xy)^2 = e$, and $xy = yx$. Thus,
+        $\{1, x, y, xy\} \cong V_4$ is a subgroup of $G$, which contradicts
+        Lagrange's Theorem.
+
+        Thus, pick $x, y \in G$ where $x$ has order $2$, $y$ has order $3$. Then,
+        $x^2 = e$, $y^3 = e$. The elements $\{e, x, y, y^2, xy, xy^2\}$ are all
+        distinct and hence exhaust $G$, and we can verify that indeed $G \cong S_3
+        \cong D_3$.
+
+        Note that in the latter case, we must argue that $yx = xy^2$. We do this by
+        noting that $\{e, y, y^2\}$ must be a normal subgroup of $G$, hence $yx$ must
+        be one of $y, xy, xy^2$. The first is ruled out since $x \neq e$; the second
+        is ruled out because it implies that $xy = yx$ i.e.\ $G$ is abelian, forcing
+        $xy$ to have order $6$.
+    \end{example}
 
     \subsection{Quotient groups}
     \begin{definition}
