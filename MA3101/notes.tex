@@ -608,6 +608,8 @@
         Is the compactness of $K$ necessary?
     \end{exercise}
     
+    \section{Differential calculus}
+    
     \subsection{Differentiability}
     \begin{definition}
         Let $f \colon (a, b) \to \R^n$, and let $f_i = \pi_i\circ f$ be its
@@ -671,7 +673,7 @@
         \] a contradiction.
     \end{proof}
 
-    \subsubsection{Chain rule}
+    \subsection{Chain rule}
 
     \begin{exercise}
         Let $T\colon \R^n \to \R^m$ be a linear transformation. Then, there exists $M
@@ -720,7 +722,7 @@
         \] Since $\epsilon > 0$ was arbitrary, this limit is zero, completing the proof.
     \end{proof} 
 
-    \subsubsection{Partial derivatives}
+    \subsection{Partial derivatives}
 
     \begin{definition}
         Let $U \subseteq \R^n$ be open, and let $f\colon U \to \R$. The partial
@@ -828,7 +830,7 @@
         \end{remark}
     \end{exercise}
 
-    \subsubsection{Directional derivatives}
+    \subsubsection{Directional derivatives *}
 
     \begin{definition}
         Let $C^1(\R^n)$ be the set of real-valued differentiable functions on $\R^n$.
@@ -854,7 +856,7 @@
         \] 
     \end{lemma}
 
-    \subsubsection{Differentiation on manifolds}
+    \subsubsection{Differentiation on manifolds *}
 
     \begin{definition}
         A homeomorphism is a continuous, bijective map whose inverse is also continuous.
@@ -941,6 +943,71 @@
             $M$ at the point $a$.
         \end{remark}
     \end{definition}
+
+    \subsection{Mean value theorem}
+    Consider a differentiable function $f\colon \R^n \to \R$, and fix $a \in \R^n$.
+    Define the functions \[
+        g_i\colon \R \to \R, \qquad g_i(x) = f(a_1, \dots, a_{i - 1}, x, a_{i + 1},
+        \dots, a_n).
+    \] Then, each $g_i$ is differentiable, with \[
+        g_i'(x) = \pp{f}{x_i}(a_1, \dots, a_{i - 1}, x, a_{i + 1}, \dots, a_n).
+    \] By applying the Mean Value Theorem on some interval $[c, d]$, we can find
+    $\alpha \in (c, d)$ such that $g_i(d) - g_i(c) = g_i'(\alpha)(d - c)$. In other
+    words,
+    \[
+        f(\dots, d, \dots) - f(\dots, c, \dots) = \pp{f}{x_i}(\dots, \alpha, \dots)(d
+        - c).
+    \] 
+
+    \begin{theorem}
+        Let $f\colon \R^n \to \R^m$ and $a \in \R^n$. Then, $f$ is differentiable at
+        $a$ if all the partial derivatives $\partial f / \partial x_j$ exist in a
+        neighbourhood of $a$ and are continuous at $a$.
+    \end{theorem}
+    \begin{proof}
+        Without loss of generality, let $m = 1$. We claim that \[
+            \lim_{h \to 0} \;\frac{1}{\norm{h}}\norm{f(a + h) - f(a) - \sum_{i = 0}^n
+            \pp{f}{x_i}(a)h_i} = 0.
+        \] Examine \begin{align*}
+            f(a + h) - f(a) &= f(a_1 + h_1, \dots, a_n + h_n) - f(a_1, \dots, a_n) \\
+            &= f(a_1 + h_1, \dots, a_n + h_n) - f(a_1 + h_1, \dots, a_{n - 1} + h_{n
+            - 1}, a_n) + \\ 
+            &\;\quad f(a_1 + h_1, \dots, a_{n - 1} + h_{n - 1}, a_n) - f(a_1 + h_1,
+            \dots, a_{n - 1}, a_n) + \\
+            &\;\quad \vdots \\
+            &\;\quad f(a_1 + h_1, a_2, \dots, a_n) - f(a_1, \dots, a_n) \\
+            &= \pp{f}{x_n}(c_n)h_n + \dots + \pp{f}{x_1}(c_1)h_1.
+        \end{align*}
+        The last step follows from the Mean Value Theorem. As $h \to 0$, each $c_i
+        \to a$. Thus, \begin{align*}
+            \frac{1}{\norm{h}}\norm{f(a + h) - f(a) - \sum_{i = 0}^n
+            \pp{f}{x_i}(a)h_i} 
+            &= \frac{1}{\norm{h}}\norm{\sum_{i = 0}^n \left(\pp{f}{x_i}(c_i) -
+            \pp{f}{x_i}(a)\right)h_i} \\
+            &\leq \sum_{i = 0}^n \left|\pp{f}{x_i}(c_i) - \pp{f}{x_i}(a)\right|
+            \frac{|h_i|}{\norm{h}} \\
+            &\leq \sum_{i = 0}^n \left|\pp{f}{x_i}(c_i) - \pp{f}{x_i}(a)\right|.
+        \end{align*}
+        Taking the limit $h \to 0$, observe that $\partial f / \partial x_i (c_i) \to
+        \partial f / \partial x_i (a)$ by the continuity of the partial derivatives,
+        completing the proof.
+    \end{proof}
+
+    \begin{corollary}
+        All polynomial functions on $\R^n$ are differentiable.
+    \end{corollary}
+
+    \begin{theorem}
+        Let $f\colon \R^n \to \R$ be differentiable with continuous partial
+        derivatives, and let $a \in \R^n$ be a point of local maximum. Then, $Df(a) =
+        0$.
+    \end{theorem}
+    \begin{proof}
+        We need only show that each \[
+            \pp{f}{x_i}(a) = 0.
+        \] This must be true, since $a$ is also a local maximum of each of the
+        restrictions $g_i$ as defined earlier.
+    \end{proof}
 
 
 \end{document}
