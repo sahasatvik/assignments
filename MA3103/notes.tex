@@ -634,12 +634,27 @@
         Let $G$ be one of the graphs with the degree sequence $d_i$, $d(x_i) = d_i$.
         Furthermore, choose $G$ such that the following number is maximised. \[
             r_G =  |N(x_1) \cap \{x_2, \dots, x_{d_1 + 1}\}|.
-        \] If $r = d_1$, we are done. Otherwise, suppose that $r < d_1$, in which
+        \] If $r = d_1$, we are done. Otherwise, suppose that $r_G < d_1$, in which
         case one of the vertices $x_s$, $2 \leq s \leq d_1 + 1$ which is not adjacent
         to $x_1$. This also means that there is some vertex $x_t$, $t > d_1 + 1$
         adjacent to $x_1$. Note that $1 \leq d(x_t) \leq d(x_s)$, so $x_s$ is
         connected to at least one vertex $x_k \neq x_1$; we can also choose $x_k \neq
-        x_t$, and $x_k$ not connected to $x_t$.
+        x_t$, and $x_k$ not connected to $x_t$. This is simply because $d_s \geq
+        d_t$: every neighbour of $x_s$ cannot be connected to $x_t$ as well. Now, we
+        simply remove the edges $\{x_1, x_t\}$, $\{x_s, x_k\}$, and add the edges
+        $\{x_1, x_s\}$, $\{x_t, x_k\}$ to obtain the graph $G'$. In doing so, we have
+        not preserved the degrees of every vertex, but observe that $r_{G'} > r_{G}$,
+        contradicting the maximality of $r_G$.
+    \end{proof}
+
+    \begin{corollary}[Havel-Hakimi]
+        A sequence $d_i$ with $d_1 \geq \dots \geq d_n$ is graphic if and only if the
+        sequence $d_2 - 1, d_3 - 1, \dots, d_{d_1 + 1} - 1, d_{d_1 + 2}, \dots, d_n$
+        is graphic.
+    \end{corollary}
+    \begin{proof}
+        Simply delete the highest degree vertex in the first case to reach the
+        second, and vice versa.
     \end{proof}
 
 \end{document}
