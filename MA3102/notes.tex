@@ -46,6 +46,7 @@
 
 \newcommand{\im}{\operatorname{im}}
 \newcommand{\sign}{\operatorname{sgn}}
+\newcommand{\aut}{\operatorname{Aut}}
 
 \newmdtheoremenv[%
     backgroundcolor=blue!10!white,%
@@ -725,6 +726,43 @@
         transpositions, we have a simple way of computing the sign of any permutation.
     \end{example}
 
+    \begin{definition}
+        An endomorphism is a homomorphism from a group to itself.
+    \end{definition}
+
+    \subsection{Isomorphisms}
+    \begin{definition}
+        An isomorphism $\varphi\colon G \to G'$ is a bijective homomorphism.
+    \end{definition}
+
+    \begin{lemma}
+        The inverse of an isomorphism is an isomorphism.
+    \end{lemma}
+
+    \begin{lemma}
+        An isomorphism preserves the orders of elements.
+    \end{lemma}
+
+    \begin{definition}
+        An automorphism is an isomorphism from a group to itself.
+    \end{definition}
+
+    \begin{example}
+        Conjugation is an automorphism, called an inner automorphism. Note that if
+        the group $G$ is abelian, then the inner automorphisms are just identity maps.
+    \end{example}
+
+    \begin{lemma}
+        The automorphisms of a group $G$ form a group of their own, denoted
+        $\aut(G)$, where the group operation is the composition of functions.
+    \end{lemma}
+
+    \begin{example}
+        Consider the Klein four group $V_4 = \{e, a, b, c\}$. Then, $\aut(G) \cong
+        S_3$. It is easy to check that any permutation of $\{a, b, c\}$ gives an
+        automorphism of $V_4$.
+    \end{example}
+    
     \subsection{Normal subgroups}
     \begin{definition}
         Let $H$ be a subgroup of the group $G$. We say that $H$ is a normal subgroup
