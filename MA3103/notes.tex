@@ -657,4 +657,56 @@
         second, and vice versa.
     \end{proof}
 
+    \subsection{Independent sets and vertex covers}
+
+    \begin{definition}
+        An independent set in a graph is maximal if it is not a subset of any other
+        independent set.
+    \end{definition}
+
+    \begin{definition}
+        A largest maximal independent set in a graph is called a maximum independent
+        set. We denote its cardinality as $\alpha(\cdot)$.
+    \end{definition}
+    \begin{example}
+        Given a path $P_n$, we have $\alpha(P_n) = \lceil n / 2\rceil$. Similarly,
+        given a cycle $C_n$, we have $\alpha(C_n) = \lfloor n / 2\rfloor$.
+    \end{example}
+
+    \begin{definition}
+        A vertex covers an edge and vice versa if they are incident.
+    \end{definition}
+
+    \begin{definition}
+        A vertex cover of a graph is a set of vertices which cover all its edges.
+    \end{definition}
+
+    \begin{definition}
+        A minimal vertex cover of a graph is one which has no vertex cover as a
+        subset.
+    \end{definition}
+
+    \begin{definition}
+        A smallest vertex cover of a graph is called a minimum vertex cover. We
+        denote its cardinality as $\beta(\cdot)$.
+    \end{definition}
+
+    \begin{lemma}
+        The complement of a vertex cover of a graph is independent, and vice versa.
+    \end{lemma}
+    \begin{proof}
+        Consider a vertex cover $K$, and pick two vertices $x, y$ in its complement.
+        If $x$ is adjacent to $y$, then $\{x, y\}$ is not covered by $K$.
+
+        Consider an independent set $U$, and pick an arbitrary edge $\{x, y\}$. Both
+        $x$ and $y$ cannot be in $U$, hence the complement of $U$ covers this edge.
+    \end{proof}
+
+    \begin{corollary}
+        Given any graph $G$ on $n$ vertices, we have $\alpha(G) + \beta(G) = n$. The
+        complement of any maximum independent set is a minimum vertex cover, and vice
+        versa.
+    \end{corollary}
+    
+
 \end{document}
