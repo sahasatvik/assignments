@@ -45,7 +45,353 @@
     upon choosing $n + 1$ integers from $\{1, 2, \dots, mn\}$, there are at least two
     which belong to the same set; say $p, q \in S_a$ for some $a$.  Thus write $p =
     am + b_p$, $q = am + b_q$, let $p > q$ without loss of generality, and note that
-    $p - q = b_p - b_q \leq m - 1 < m.
+    $p - q = b_p - b_q \leq m - 1 < m$.
+
+    \problem From the integers $1, 2, ... , 200$, if we choose 101 integers, show
+    that among the integers chosen, there are two such that one of them is divisible
+    by the other.
+
+    \solution Note that every positive integer can be written uniquely in the form $n
+    = 2^ab$, where $b$ is odd (this is a consequence of the uniqueness of the prime
+    factorization of natural numbers). Define the sets $S_b = \{2^ab : a \in \Z_{\geq
+    0}\}$ for odd $b$. Then, the numbers $1, 2, \dots, 200$ are covered by the sets
+    $S_1, S_3, \dots, S_{199}$ of which there are $100$. Thus, upon choosing $101$
+    integers from $1, 2, \dots, 200$, two of them must lie in the same set $S_b$ by
+    the Pigeonhole Principle; say $p, q \in S_b$ with $p > q$. Thus, $p = 2^{a_p}b$,
+    $q = 2^{a_q}b$ with $a_p > a_q$, giving $q | p$ (with quotient $2^{a_p - a_q}$).
+
+    \problem $n + 2$ numbers between $0$ and $2n + 1$ are chosen. Show that two of
+    them sum to $2n + 1$.
+
+    \solution Consider the sets $\{0, 2n + 1\}, \{1, 2n\}, \dots \{n, n + 1\}$ of
+    which there are $n + 1$. Each of them is of the form $\{j, 2n + 1 - j\}$ where $0
+    \leq j \leq n$, hence the sum of the elements in each set is precisely $2n + 1$.
+    Also, their union is precisely $\{0, 1, \dots, 2n + 1\}$.  The Pigeonhole
+    Principle guarantees that upon choosing $n + 2$ (distinct) numbers from $0, 1,
+    \dots, 2n + 1$, two must lie in the same set, completing the proof.
+
+    \problem Suppose 9 points are randomly placed inside a unit square. Show that 3
+    of the points form a triangle whose area is at most $1 / 8$ units.
+
+    \solution Cut the square into four congruent squares, each of side length $1 / 2$
+    units (we do not care how the common boundaries are distributed among the
+    squares). The Pigeonhole Principle (strong form) guarantees that upon choosing $9
+    = 2\cdot 4 + 1$ points from the unit square, 3 must lie within one of our four
+    smaller squares. We state without proof that any triangle enclosed by a square
+    has area at most half that of the square. Thus, these three selected points have
+    area at most $(1 / 2)^2 / 2 = 1 / 8$ square units.
+
+    \problem 51 points are placed, in a random way, into a square of side 1
+    unit. Prove or disprove that 3 of these points can be covered by a circle of
+    radius $1 / 7$ units.
+
+    \solution Note that a circle of radius $1 / 7$ contains an inscribed square of
+    side length $\sqrt{2} / 7$. Now, consider a $5\times 5$ grid of such squares;
+    since $5\cdot \sqrt{2} / 7 > 1$ (note that $25\cdot 2 > 49$), our unit square can
+    be placed within this grid, which thus divides the unit square into $25$ parts.
+    The Pigeonhole Principle guarantees that upon choosing $51 = 2\cdot 25 + 1$
+    points from our unit square, 3 must lie within the same part, i.e.\ a square of
+    side length $\sqrt{2} / 7$. Simply inscribe this square in a circle of radius $1
+    / 7$, completing the proof.
+
+    \problem There are 13 points randomly placed on the periphery of a circle. Now
+    construct a graph where the vertices are the given 13 points and two points are
+    connected by an edge if and only if the angle formed by extending two points to
+    the center is less than $\pi / 2$. Show that there are at least 7 triangles in
+    that graph.
+
+    \solution Divide the periphery of the triangle into 4 equal arcs, each subtending
+    $\pi / 2$. Thus, any two points on the same arc subtend an angle less than $\pi /
+    2$, meaning that any three points on the same arc form a triangle in our graph.
+    The Pigeonhole Principle guarantees that upon choosing $13 = 3\cdot 4 + 1$ points
+    on the circumference, at least 4 must lie on the same arc. Thus, without loss of
+    generality, let the number of points on the four arcs be $w \geq x \geq y \geq
+    z$. If $w \geq 5$, we already have $\binom{5}{3} = 10$ triangles so we are done.
+    Otherwise, we are forced to have $w = 4$ giving us $\binom{4}{3} = 4$ triangles.
+    Now, $x + y + z = 13 - 4 = 9$, forcing $x \geq 3$ (otherwise $x + y + z < 3 + 3 +
+    3 = 9$). If $x = 4$, we have another $\binom{4}{3} = 4$ triangles, bringing the
+    total to $4 + 4 = 8$ so we are done. Otherwise, $x = 3$ gives us $1$ additional
+    triangle, bringing the total to $4 + 1 = 5$. Now, $y + z = 9 - 3 = 6$, so $y \geq
+    3$ (otherwise $y + z < 3 + 3 = 6$). This forces $y = 3, z = 3$, giving us $1 + 1
+    = 2$ additional triangles, bringing the total to $5 + 2 = 7$, as desired.
+
+    \problem In how many ways can you write the numbers $1, 2, \dots, n$ in a
+    different order such that any number $i$ does not occupy the
+    $i$\textsuperscript{th} position?
+
+    \solution We want to count the number of permutations of $1, 2, \dots, n$ that do
+    not fix any of the numbers. Let $P_i$ be the set of permutations of $1, 2, \dots,
+    n$ that fix the number $i$. It is clear that such permutations send $i
+    \rightsquigarrow i$, and the remaining numbers in all possible ways amongst
+    themselves, giving $|P_i| = (n - 1)!$. Now, any intersection of the form $P_A =
+    P_{i_1} \cap \dots \cap P_{i_k}$ where $A = \{i_1, \dots, i_k\}$ contains those
+    permutations which fix $k$ numbers, hence there are $(n - k)!$ of them. Further
+    note that there are $\binom{n}{k}$ such subsets of the form $A$. We want to
+    calculate the number of permutations of $1, 2, \dots, n$ which fix \emph{none} of
+    the elements, i.e.\ $n! - |P_1 \cup \dots P_n|$ (note that there are $n!$
+    permutations in general). The Principle of Inclusion and Exclusion gives 
+    \begin{align*}
+        |P_1 \cup \dots \cup P_n| &= \sum_{k=1}^n (-1)^{k - 1}\sum_{\substack{A
+        \subseteq \{1, 2, \dots, n\} \\ |A| = k}} |P_A| \\
+        &= \sum_{k = 1}^n (-1)^{k - 1} \binom{n}{k} (n - k)! \\
+        &= \sum_{k = 1}^n (-1)^{k - 1} \frac{n!}{k!}.
+    \end{align*}
+    Thus, the number of permutations under consideration are 
+    \begin{align*}
+        n! - |P_1 \cup \dots \cup P_n| &= n! - \sum_{k = 1}^n (-1)^{n - 1}
+        \frac{n!}{k!} \\
+        &= n!\sum_{k = 0}^n \frac{(-1)^{k}}{k!}.
+    \end{align*}
+    \emph{Remark.} As $n \to \infty$, the ratio of such permutations to the total
+    number of permutations $n!$ approaches $e^{-1} \approx 0.37$.
+
+    \problem Let $S = \{1, 2, \dots, 280\}$. Find the smallest natural number $n$
+    such that every $n$ element subset of $S$ contains 5 pairwise relatively prime numbers.
+
+    \problem There are 1990 scientists. Every one of them has collaborated with at
+    least 1327 others. Show that we can find 4 scientists, every pair of them
+    collaborated with each other.
+
+    \solution Construct a graph $G$ on 1990 vertices representing these scientists,
+    such that two vertices are connected by ad edge if and only if the corresponding
+    scientists have collaborated. We claim that this graph contains $K_4$. Note that
+    each vertex has degree at least $1327$, hence the number of edges is \[
+        |E| = \frac{1}{2}\sum_{v \in V} d(v) \geq \frac{1}{2}\cdot 1327|V| =
+        1,320,365.
+    \] Now, note that \[
+        \frac{|V|^2}{2}\left(1 - \frac{1}{3}\right) = 1,320,033 \frac{1}{3}.
+    \] Thus, Turan's Theorem guarantees the existence of a 4-clique, as
+    desired\footnote{It is perhaps easier to note that $1327 > 2\cdot 1990 / 3$.}.
+
+    \problem There are five boxes with colours red, blue, yellow, green, and white
+    respectively. There are also five balls with the colours red, blue, yellow,
+    green, and white, respectively. How many ways can one arrange one ball in each
+    box such that no box contains the ball with the same colour.
+
+    \solution We use the result from Exercise 7 to see that the number of ways is \[
+        5!\left[1 - \frac{1}{1!} + \frac{1}{2!} - \frac{1}{3!} + \frac{1}{4!} -
+        \frac{1}{5!}\right] = 44.
+    \]
+
+    \problem Let $X$ be the set of $n$ points randomly located on a closed disc of
+    radius $1 / \sqrt{2}$. Construct a graph with all these points as vertices; two
+    points are connected by an edge if and only if the distance between them is
+    greater than $1$. Prove or disprove that there is no $K_4$ in that graph.
+
+    \solution None of these graphs contains $K_4$. This is clear for $n < 4$. In
+    general, we show that given any four points on the unit disc, the minimum
+    distance between them is at most $1$. This in turn implies that given any four
+    vertices from our graph, there is at least one pair which is not connected by an
+    edge, proving the result.
+
+    We first show that two points in the same quadrant are separated by at most $1$
+    unit. In other words, if $\theta$ is the (smaller) angle subtended by the line
+    segment joining the points with the center, we claim that when $\theta \leq \pi /
+    2$, the length of this line segment is at most $1$ unit. This is clear from the
+    cosine rule and the triangle inequality: let the distances between the points and
+    the center of the disc be $r_1$, $r_2$. Clearly $0 \leq r_1, r_2 \leq 1 /
+    \sqrt{2}$, and when $0 \leq \theta \leq \pi / 2$, we have $0 \leq \cos\theta \leq
+    1$ so the square of the distance between the points is \[
+        r_1^2 + r_2^2 - 2r_1r_2\cos\theta \leq \frac{1}{2} + \frac{1}{2} -
+        \frac{2}{2}\cdot 0 = 1.
+    \] The contrapositive says that if the distance between two points is greater
+    than $1$, then their angular separation (with respect to the center) is strictly
+    greater than $\pi / 2$.  Now, if four points $P, Q, R, S$ are such that their
+    pairwise distances are all greater than $1$ unit, then let $\theta_1, \theta_2,
+    \theta_3, \theta_4$ be the angles between $P$ and $Q$, $Q$ and $R$, $R$ and $S$,
+    $S$ and $P$, where $P, Q, R, S$ have been labelled anticlockwise about the
+    center. This ensures that each $0 \leq \theta_i < 2\pi$, and that the angles
+    $\theta_i$ must sum to exactly one full turn $2\pi$.  We now demand $\theta_1 +
+    \theta_2 + \theta_3 + \theta_4 > 4\cdot \pi /2 = 2\pi$ due to the distance
+    property, which is absurd.
+
+    \problem Let $e(n)$ denote the largest number of edges among all triangle-free
+    graphs that are non-bipartite. For all $n \geq 5$, prove that 
+    \begin{enumerate}
+        \itemsep0em
+        \item $e(n) \leq ((n - 1)^2 + 4) / 4$
+        \item $e(n) = ((n - 1)^2 + 4) / 4$, if $n$ is odd.
+    \end{enumerate}
+
+    \solution \mbox{}
+    \begin{enumerate}
+        \item \textbf{(Attempt)}
+        Let $G$ be a triangle-free non-bipartite graph on $n$ vertices and $m$ edges.
+        Furthermore, let $A$ be a maximal independent set of vertices within $G$ with
+        $|A| = r$, and let $B$ be the set of remaining $n - r$ vertices.  If $n = r$,
+        we are done ($G$ has no edges). Now, $B$ \emph{cannot} be independent since
+        $G$ is not bipartite; this also ensures that $n - r \geq 2$ or $r \leq n -
+        2$. Let $e_{AB}$ denote the number of edges between $A$ and $B$, and $e_{B}$
+        denote the number of edges within $B$ (clearly $e_A = 0$), hence $m = e_{AB}
+        + e_B$. Since $A$ is the maximal independent set, the degree of any vertex
+        (which is the number of elements in its neighbouring set, which in turn is
+        independent since $G$ is triangle-free) is at most $|A| = r$. Also, every
+        edge in $G$ has an endpoint in $B$ (both endpoints cannot be in $A$ since it
+        is an independent set).
+
+        First note that every vertex $b \in B$ must be connected to at least one
+        vertex in $A$; otherwise, $A\cup \{b\}$ is an independent set, contradicting
+        the maximality of $A$. Given any edge $\{x, y\} \subset B$, both $x$ and $y$
+        cannot be connected to the same vertex in $A$, since that would form a
+        triangle.
+
+        Suppose that there is a vertex $v_0$ with degree $0$. Let $G_0$ be the graph
+        on $n - 1$ vertices and $m$ edges obtained by removing $v_0$ from $G$. Since
+        $G_0$ is triangle-free, Mantel's Theorem guarantees that $m \leq (n - 1)^2 /
+        4 < (n - 1)^2 / 4 + 1$ as desired.
+
+        Similarly, suppose that there is a vertex $v_1$ with degree $1$. Let $G_1 =
+        G\setminus\{v_1\}$ be the induced subgraph on $n - 1$ vertices and $m - 1$
+        edges, whence $m - 1 \leq (n - 1)^2 / 4$, or $m \leq (n - 1)^2 / 4 + 1$ as
+        desired.
+
+        \item Set $s = \lfloor n / 2\rfloor = (n - 1) / 2$, and construct the graph
+        $G$ by taking the complete bipartite graph, $K_{s, s}$, removing an edge
+        $\{x, y\}$ (note that $x$ and $y$ belong to separate partites) and inserting
+        a vertex $v$ and the edges $\{x, v\}$, $\{v, y\}$. In other words, we have
+        inserted the vertex $v$ `inside' one of the edges bridging the two partites.
+        This graph has $2s + 1 = n$ vertices, $s^2 + 1 = ((n - 1)^2 + 4) / 4$ edges.
+        Furthermore, this graph is non-bipartite; the vertices in the already
+        existing partites must remain there, since every vertex from one partite has
+        an edge connecting it to the other. This leaves no choice for the vertex $v$,
+        which is connected to both partites. Thus, we have achieved the upper bound.
+    \end{enumerate} 
+
+    \problem Let $G$ be a graph on $n$ vertices and $m$ edges. Then, show that
+    \begin{enumerate}
+        \itemsep0em
+        \item $G$ contains at least $4m/3n \cdot (m - n^2 / 4)$ triangles.
+        \item $G$ contains at least $\lfloor n / 2\rfloor$ triangles if $m \geq
+        \lfloor n^2 / 4\rfloor + 1$.
+    \end{enumerate}
+
+    \solution \mbox{}
+    \begin{enumerate}
+        \item Let $G$ be a graph on $n$ vertices and $m$ edges. Pick an arbitrary
+        edge $\{x, y\}$ and let $A$ and $B$ be the neighbouring sets of $x$ and $y$
+        respectively, both excluding the vertices $x$ and $y$. We denote the degree of
+        a vertex $v$ by $d(v)$. Now, for every vertex $z \in A \cap B$, observe that
+        $x,y,z$ form a triangle. Furthermore, $|A| = d(x) - 1$, $|B| = d(y) - 1$, $|A
+        \cup B| \leq n - 2$, so \[
+            |A \cap B| \geq d(x) - 1 + d(y) - 1 - n + 2 = d(x) + d(y) - n.
+        \] We sum this over all $m$ edges of the given form. On the left, we have
+        counted the total number of triangles thrice (each triangle has been included
+        once for each of its three sides). On the right, each $d(x)$ appears as many
+        times as $x$ is in an edge, i.e.\ $d(x)$ many times. Thus, thrice the number
+        of triangles is at least \[
+            \sum_{x \in V} d(x)^2 - mn \geq \frac{1}{n}\left(\sum_{x \in
+            V}d(x)\right)^2 - mn = \frac{(2m)^2}{n} - mn = \frac{4m^2}{n} - mn.
+        \] The number of triangles is at least \[
+            \frac{1}{3}\left(\frac{4m^2}{n} - mn\right) = \frac{4m}{3n}\left(m -
+            \frac{n^2}{4}\right).
+        \] 
+
+        \item We show this by induction on $n$. The base cases $n < 5$ are clear
+        by inspection, so we let $n \geq 5$ and suppose that the statement holds for
+        all lower $n$.
+
+        \textbf{Case I} When $n = 2k + 1$ is odd, we want to show that there are
+        $\lfloor n / 2\rfloor = k$ triangles if $m = \lfloor n^2 / 4\rfloor + 1 =
+        k^2 + k + 1$; clearly, adding more edges will only increase the number of
+        triangles. Now, we claim that there is a vertex $v$ such that $d(v) \leq k$;
+        if not, then all vertices have degree greater than $k$ hence the sum of the
+        degrees is at least $n(k + 1) = 2k^2 + 3k + 1$, but the sum of degrees is
+        exactly $2m = 2k^2 + 2k + 2$. This forces $2k^2 + 2k + 2 \geq 2k^2 + 3k + 1$,
+        or $1 \geq k$, a contradiction. Thus, upon selecting this vertex $v$, remove
+        it from the graph, yielding a new graph $G'$ with $n - 1 = 2k$ vertices and
+        at least $m - k = k^2 + 1 = \lfloor (n - 1)^2 / 4\rfloor + 1$ edges. Applying
+        the induction hypothesis, $G'$ contains at least $\lfloor (n - 1) / 2\rfloor
+        = k$ triangles, and hence so does $G$.
+        
+        \textbf{Case II} When $n = 2k$ is even, we want to show that there are
+        $\lfloor n / 2\rfloor = k$ triangles if $m = \lfloor n^2 / 4\rfloor + 1 =
+        k^2 + 1$. Again, we claim that there is a vertex $v$ such that $d(v) \leq k$;
+        if not, the sum of degrees $2k^2 + 2 = 2m \geq n(k + 1) = 2k^2 + 2k$, forcing
+        $1 \geq k$, a contradiction.
+
+        First suppose that $d(v) < k$, hence the graph $G'$ obtained by removing $v$
+        has $n - 1 = 2k - 1$ vertices and at least $m - (k - 1) = k^2 - k + 2 =
+        \lfloor(n - 1)^2 / 4\rfloor + 2$ edges. Thus, it must contain at least
+        $\lfloor (n - 1) / 2\rfloor = k - 1$ triangles. Now, select a triangle from
+        $G'$ and remove an edge from it to obtain the graph $G''$, which thus has at
+        least $\lfloor(n - 1)^2 / 4\rfloor + 1$ edges and hence contains at least $k
+        - 1$ triangles. Add the missing edge back to see that $G'$ has at least $(k -
+        1) + 1 = k$ triangles, and hence so does $G$.
+
+        Otherwise, all vertices have degree at least $k$. Suppose that $G$ has less
+        than $k$ triangles. Note that every edge cannot
+        be part of a triangle; if so, the total number of edges would be less than
+        $3k < k^2 + 1$. Thus, pick such an edge $\{x, y\}$ and remove both $x$ and
+        $y$ from $G$ to obtain $G'$. Let $A$ and $B$ be the neighbouring sets of $x$
+        and $y$ in $G$, excluding $x, y$. Thus, $A \cap B = \emptyset$ since $\{x,
+        y\}$ does not contribute to a triangle, and $|A|, |B| \geq k - 1$ since $x,
+        y$ have degrees at least $k$. In other words, $|A \cup B| \geq 2k - 2 = n -
+        2$, but $|G'| = n - 2$, which means that every vertex in $G'$ is in one of
+        $A$ or $B$ as well as $|A| = |B| = k - 1$. Thus, we have removed exactly $1
+        + (k - 1) + (k - 1) = 2k - 1 = n - 1$ edges from $G$ to obtain $G'$, hence it
+        contains $k^2 + 1 - (2k - 1) = k^2 - 2k + 2 = \lfloor (n - 2)^2 / 4\rfloor +
+        1$ edges. Thus, $G'$ contains at least $\lfloor (n - 2) / 2\rfloor = k - 1$
+        triangles. Since $G$ has less than $k$ triangles, this forces $G$ and $G'$ to
+        have exactly $k - 1$ triangles. Thus there are no edges within $A$, nor in
+        $B$; if there were, they would introduce an additional triangle into $G$ via
+        $x$ or $y$. In other words, $G'$ is a bipartite graph, hence triangle free,
+        which is a contradiction.
+    \end{enumerate}
+
+    \problem Let $S$ be a set of $n$ points in $\R^2$ such that the distance between
+    any pair of points is at most $1$. Prove that there are at most $\lfloor n^2 /
+    3\rfloor$ pairs of points in $S$ whose distance is greater than $1 / \sqrt{2}$.
+
+    \solution Let $G$ be the graph on $n$ vertices each representing a point in $S$,
+    and let two vertices be connected by an edge if and only if the distance between
+    them is greater than $1 / \sqrt{2}$. We will show that this graph is $K_4$ free,
+    whence Turan's Theorem guarantees that \[
+        |E| \leq \left\lfloor \frac{n^2}{2} \left(1 - \frac{1}{3}\right)\right\rfloor
+        = \left\lfloor \frac{n^2}{3}\right\rfloor.
+    \] Suppose to the contrary that $G$ contains a $K_4$, formed by the vertices $P,
+    Q, R, S$. Make sure that these labels are such that $PQRS$ is a simple
+    quadrilateral. Each of the segments has length greater than $1 / \sqrt{2}$, and
+    at most $1$ (this prevents any three points from being collinear, $2\cdot 1 /
+    \sqrt{2} = \sqrt{2} > 1$). Let $\theta$ be the (smaller, positive) angle $\angle
+    PQR$, $x = PQ$, $y = QR$, $z = PR$.  The cosine rule gives \[
+        z^2 = x^2 + y^2 - 2xy\cos\theta, \qquad \cos\theta = \frac{x^2 + y^2 -
+        z^2}{2xy} > 0.
+    \] The latter follows because $x^2 + y^2 - z^2 > \frac{1}{2} + \frac{1}{2} - 1 =
+    0$. Thus, we have $\theta < \pi / 2$. Repeating this for all possible angles, we
+    see that the quadrilateral $PQRS$ is convex, saving us from accounting for reflex
+    angles; to see this, note that a concave quadrilateral has at most one reflex
+    angle, say $\angle PQR$. However, the interior angles $\angle PQS$ and $\angle
+    SQR$ must both be strictly less than $\pi / 2$, hence their sum is less than
+    $\pi$.  Furthermore, we demand that the sum of the four interior angles in the
+    quadrilateral $PQRS$ must be strictly less than $4\cdot \pi / 2 = 2\pi$, which is
+    absurd.
+
+    \problem Let $G$ be a graph on $n$ vertices and without any cycle of length $4$.
+    Show that $G$ has at most $n / 2 \cdot (\sqrt{n} + 1)$ edges.
+
+    \solution Let $m$ be the number of edges in $G$. Consider an arrangement of
+    vertices $w, x, y$ where $\{w, x\}$ and $\{x, y\}$ are edges -- this forms a
+    V-shape. Upon fixing the extreme points $w, y$, we see that this pair can
+    contribute to at most one V-shape in order for $G$ to be $C_4$ free (otherwise,
+    $w, x, y, x'$ would be a 4-cycle). This means that there are at most \[
+        \binom{n}{2} = \frac{1}{2}n(n - 1)
+    \] such V-shapes. On the other hand, upon fixing the central point $x$, we see
+    that it is part of exactly $\binom{d(x)}{2}$ V-shapes since there are $d(x)$
+    neighbours of $x$ to choose from. This means that the total number of V-shapes
+    is \[
+        \frac{1}{2}\sum_{x \in V} [d(x)^2 - d(x)] \geq
+        \frac{1}{2}\left[\frac{4m^2}{n} - 2m\right].
+    \] Comparing, we have \[
+        n(n - 1) \geq \frac{4m^2}{n} - 2m, \qquad 4m^2 - 2mn - n^2(n - 1) \leq 0.
+    \] This is a quadratic in $m$; for this to hold, we demand \[
+        m \leq \frac{1}{8}[2n + \sqrt{4n^2 + 4\cdot 4\cdot n^2(n - 1)}] =
+        \frac{1}{4}[n + \sqrt{4n^3 - 3n^2}]
+    \] We claim $\sqrt{4n - 3} \leq 1 + 2\sqrt{n}$, which is true since $4n - 3 \leq
+    (1 + 2\sqrt{n})^2 = 1 + 4n + 4\sqrt{n}$, i.e.\ $0 \leq 4 + 4\sqrt{n}$. This
+    immediately gives \[
+        m \leq \frac{n}{2}\cdot \frac{1 + \sqrt{4n - 3}}{2} \leq \frac{n}{2}\cdot
+        \frac{1 + 1 + 2\sqrt{n}}{2} = \frac{n}{2}(1 + \sqrt{n}).
+    \] 
     
 
 \end{document}
