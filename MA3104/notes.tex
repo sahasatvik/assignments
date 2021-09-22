@@ -46,9 +46,8 @@
 \newcommand{\ip}[2]{\langle #1, #2 \rangle}
 
 \renewcommand{\ker}{\operatorname{ker}}
-\newcommand{\span}{\operatorname{span}}
+\newcommand{\spn}{\operatorname{span}}
 \newcommand{\im}{\operatorname{im}}
-\newcommand{\dim}{\operatorname{dim}}
 \newcommand{\adj}{\operatorname{adj}}
 \newcommand{\rank}{\operatorname{rank}}
 \newcommand{\trace}{\operatorname{trace}}
@@ -546,7 +545,7 @@
         Let $\algF$ be a commuting family of triangulable linear operators on
         $V$, and let $W \subset V$ be a proper subspace invariant under
         $\algF$. Then, there exists a vector $\vv \in V$ such that $\vv \notin
-        W$ and $T\vv \in \span\{\vv, W\}$ for each $T \in \algF$.
+        W$ and $T\vv \in \spn\{\vv, W\}$ for each $T \in \algF$.
     \end{lemma}
     \begin{proof}
         We observe that we can assume that $\algF$ contains only finitely many
@@ -856,18 +855,18 @@
         $i \neq j$, we have $p_i^{r_i} | f_jg_j$ hence $E_j\vv = f_jg_j(T)\vv =
         \vec{0}$ for $i \neq j$. This leaves \[
             \vv = I\vv = (E_1 + \dots + E_k)\vv = E_i\vv,
-        \] hence $\vv \in \im{E_i}$. This proves (i).
+        \] hence $\vv \in \im{E_i}$. This proves 1.
 
         It is clear that $W_i$ is invariant under $T$. Pick arbitrary $\vv \in W_i$,
         whence $\vv = E_i\vv$ so $T\vv = TE_i\vv = E_iT\vv \in W_i$. This proves
-        (ii).
+        2.
 
         Since $p_i(T)^{r_i} = 0$ on $W_i$, we have $p_i(T_i)^{r_i} = 0$, hence the
         minimal polynomial of $T_i$ divides $p_i^{r_i}$. Conversely, if $g(T_i) = 0$
         for some polynomial $g$, then $g(T)f_i(T) = 0$ ($g$ kills everything in
         $W_i$, while $f_i$ kills everything in the other $W_j \neq W_i$). Thus, $p =
         p_i^{r_i}f_i$ divides $gf_i$, or $p_i^{r_i}$ divides $g$. Hence, the minimal
-        polynomial of $T_i$ is precisely $p_i^{r_i}$. This proves (iii).
+        polynomial of $T_i$ is precisely $p_i^{r_i}$. This proves 3.
     \end{proof}
 
     \begin{corollary}
@@ -907,6 +906,66 @@
         sufficiently high $r$. In other words, $N' - N$ is nilpotent, hence so is $D
         - D'$. This forces $D = D'$, since the only nilpotent diagonalizable operator
         is the zero operator.
+    \end{proof}
+
+    \subsection{Cyclic subspaces}
+    \begin{lemma}
+        Let $T \in \algL(V)$ where $V$ is finite-dimensional, and let $\vv \in V$.
+        There is a smallest invariant subspace $W$ containing $\vv$, namely the
+        intersection of all invariant subspaces containing $\vv$. Then, $W$ is the
+        collection of $g(T)\vv$, for all polynomials $g$.
+    \end{lemma}
+    \begin{proof}
+        It is clear that the collection $\{g(T) \vv\}$ is a $T$-invariant
+        subspace containing $\vv$. We now show that this is contained within every
+        $T$-invariant subspace containing $\vv$. Let $W'$ be a $T$-invariant subspace
+        containing $\vv$. Then, $T\vv \in W'$, hence all $T^k\vv \in W'$. This means
+        that all polynomials $g(T)\vv \in W'$, as desired.
+    \end{proof}
+
+    \begin{definition}
+        Let $T \in \algL(V)$, and $\vv \in V$. We define the $T$-cyclic subspace
+        generated $\vv$ as \[
+            Z(\vv, T) = \{g(T)\vv: g\in \F[x]\}.
+        \]
+        If $V = Z(\vv, T)$, then $\vv$ is called a cyclic vector for $T$.
+    \end{definition}
+
+    \begin{theorem}
+        Let $T \in \algL(V)$, let $\vv \in V$ be non-zero, and let $p_{\vv}$ be the
+        $T$-annihilator of $\vv$. Then,
+        \begin{enumerate}
+            \itemsep0em
+            \item $\dim{Z(\vv, T)} = \deg{p_{\vv}}$.
+            \item If $\deg{p_{\vv}} = k$, then $\vv, T\vv, \dots, T^{k - 1}\vv$ forms a
+            basis of $Z(\vv, T)$.
+            \item If $U$ is the restriction of $T$ to $Z(\vv, T)$, then $p_{\vv}$ is
+            the minimal polynomial of $U$.
+        \end{enumerate}
+        \begin{remark}
+            If $V$ contains a $T$-cyclic vector $\vv$, then $Z(\vv, T)$, then the
+            minimal polynomial of $T$ is precisely its characteristic polynomial.
+        \end{remark}
+    \end{theorem}
+    \begin{proof}
+        First note that \[
+            \vec{0} = p_{\vv}(T)\vv = a_kT^k\vv + a_{k - 1}T^{k - 1}\vv + \dots +
+            a_0\vv.
+        \] Since $a_k \neq 0$, this immediately gives $T^k\vv$ as a linear combination
+        of $\vv, \dots, T^{k - 1}\vv$. Thus, $Z(\vv, T)$ is spanned by $\vv, \dots,
+        T^{k - 1}\vv$. The same thing can be shown by using the Division Lemma to
+        write $g = p_{\vv}q + r$ where $0 \leq \deg{r} < k$.
+
+        We now show that $\vv, \dots, T^{k - 1}\vv$ are linearly independent. If not,
+        then \[
+            a_0\vv + \dots + a_{k - 1}T^{k - 1}\vv = \vec{0}
+        \] for at least one $a_i \neq 0$. This contradicts the minimality of the
+        degree of the $T$-annihilator of $\vv$. Thus, we have properties 1, 2.
+
+        Note that $p_{\vv}(U) = 0$. Any polynomial of lower degree such that $p(U)\vv
+        = 0$ must be the zero polynomial by the linear independence of $\vv, \dots,
+        T^{k - 1}\vv$. This means that $p_{\vv}$ must be the minimal polynomial of
+        $Z(\vv, T)$, proving 3.
     \end{proof}
 
 \end{document}
