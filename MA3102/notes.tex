@@ -726,6 +726,10 @@
         transpositions, we have a simple way of computing the sign of any permutation.
     \end{example}
 
+    \begin{lemma}
+        The pre-image of a subgroup under a homomorphism is a subgroup.
+    \end{lemma}
+
     \begin{definition}
         An endomorphism is a homomorphism from a group to itself.
     \end{definition}
@@ -890,5 +894,29 @@
             identity is the coset $H$. The inverse of $gH$ is $g^{-1}H$.
         \end{remark}
     \end{definition}
+
+    \begin{lemma}
+        The map $\pi\colon G \to G/H$, $g \mapsto gH$ where $H \trianglelefteq G$
+        is a homomorphism.
+    \end{lemma}
+
+    \begin{theorem}[Correspondence]
+        Let $H \trianglelefteq G$. There is a bijection between the set of subgroups
+        of $G$ containing $H$, and the subgroups of $G / H$, given by the map $X
+        \mapsto \pi(X)$.
+    \end{theorem}
+
+    \begin{theorem}[First isomorphism theorem]
+        If $\varphi\colon G \to G'$ is a homomorphism, then $G / \ker{\varphi} \cong
+        \im{\varphi}$.
+    \end{theorem}
+    \begin{proof}
+        Set $N = \ker{\varphi}$. Define the map $f\colon G / \ker{\varphi} \to
+        \im{\varphi}$ which sends the coset $gN \mapsto \varphi(g)$. It can be shown
+        that this map is well defined, and is a homomorphism. Furthermore, the
+        kernel of $f$ is the singleton set $N$, hence $f$ is injective. Given any $g'
+        \in \im{\varphi}$, we can choose $g \in G$ such that $\varphi(g) = g'$, hence
+        $f(gN) = g'$ which shows that $f$ is also surjective.
+    \end{proof}
 
 \end{document}
