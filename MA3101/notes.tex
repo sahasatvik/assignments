@@ -650,7 +650,7 @@
         Let $T\colon \R^n \to \R^m$ be a linear map. By choosing $\lambda = T$, we
         see that $T$ is differentiable everywhere, with $DT(x) = T$ for every choice
         of $x \in \R^n$. This is made obvious by the fact that the best linear
-        approximation of a linear map at some point is the ma itself; indeed, the
+        approximation of a linear map at some point is the map itself; indeed, the
         `approximation' is exact.
     \end{example}
 
@@ -677,9 +677,20 @@
 
     \begin{exercise}
         Let $T\colon \R^n \to \R^m$ be a linear transformation. Then, there exists $M
-        > 0$ such that for all $x \in \R^n$, we have \[
-            \norm{Tx} \leq M\norm{x}.
+        > 0$ such that for all $\vx \in \R^n$, we have \[
+            \norm{T\vx} \leq M\norm{\vx}.
         \] 
+        \begin{solution}
+            Set $\vv_i = T(\ve_i)$ where $\ve_i$ are the standard unit basis vectors of
+            $\R^n$. Then, \[
+                \norm{T\vx} = \norm{\sum_{i}x_i\vv_i} \leq \sum_{i}\norm{x_i\vv_i}
+                \leq \max{\norm{\vv_i}} \sum_i |x_i|.
+            \] Since each $|x_i| \leq \norm{\vx}$, set $M = n\max{\norm{\vv_i}}$ and
+            write \[
+                \norm{T\vx} \leq \max{\norm{\vv_i}}\sum_i |x_i| \leq
+                \max{\norm{\vv_i}} \cdot n\norm{\vx} = M\norm{\vx}.
+            \] 
+        \end{solution}
     \end{exercise}
     \begin{theorem}
         Let $f\colon \R^n \to \R^m$, $g\colon \R^m \to \R^k$ where $f$ is
@@ -1008,6 +1019,15 @@
         \] This must be true, since $a$ is also a local maximum of each of the
         restrictions $g_i$ as defined earlier.
     \end{proof}
+
+    \subsection{Inverse function theorem}
+    \begin{theorem}
+        Let $f\colon \R^n \to \R^n$ be continuously differentiable on a neighbourhood
+        of $a \in \R^n$, and let $\det(Df(a)) \neq 0$. Then, there exist neighbourhoods
+        $U$ of $a$ and $W$ of $f(a)$ such that the restriction $f\colon U \to W$ is
+        invertible. Furthermore, $f^{-1}$ is continuous on $U$ and differentiable on
+        $U$.
+    \end{theorem}
 
 
 \end{document}
