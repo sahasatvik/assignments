@@ -526,5 +526,31 @@
         Let $f\colon [a, b] \to [a, b]$ be a contraction map. Then, any fixed point
         sequence converges to the unique fixed point of $f$.
     \end{theorem}
+    \begin{proof}
+        First, we show that $f$ has at most one fixed point. Let $\beta_1, \beta_2$
+        be fixed points of $f$. Then, $|f(\beta_1) - f(\beta_2)| \leq L|\beta_1 -
+        \beta_2|$ where $L \in (0, 1)$. This forces $\beta_1 = \beta_2$. Thus, $f$
+        has a unique fixed point in $[a, b]$.
+
+        Let $\{x_n\}$ be a fixed point iteration. Then, \[
+            |x_{n + 1} - \beta| = |f(x_n) - f(\beta)| \leq L |x_n - \beta|,
+        \] which directly gives $x_n \to \beta$.
+    \end{proof}
+
+
+    \section{Interpolation}
+    \subsection{Lagrange interpolation}
+    \begin{theorem}
+        Let $x_1, \dots, x_n \in \R$ be distinct, and let $y_1, \dots, y_n \in \R$.
+        Then, the following polynomial of degree $n - 1$ satisfies $p(x_i) = y_i$. \[
+            p(x) = \sum_{i = 1}^{n} \prod_{j \neq i} \frac{x - x_j}{x_i - x_j} y_i.
+        \] Furthermore, this choice of $p$ is unique.
+    \end{theorem}
+    \begin{proof}
+        The polynomials \[
+            p_i(x) = \prod_{j \neq i} \frac{x - x_j}{x_i - x_j}
+        \] satisfy $p_i(x_j) = \delta_{ij}$. These $p_i$ form a basis of
+        $\mathscr{P}^{n - 1}$, the space of polynomials of degree at most $n - 1$.
+    \end{proof}
     
 \end{document}
