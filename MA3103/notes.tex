@@ -707,6 +707,17 @@
         complement of any maximum independent set is a minimum vertex cover, and vice
         versa.
     \end{corollary}
-    
+
+    \begin{example}
+        Consider a river crossing problem, involving a boat with $k$ extra seats, and
+        $n$ objects on one side. Let $G$ represent the conflict graph between these
+        objects. Then, the number of extra seats must satisfy \[
+            \beta(G) \leq k \leq \beta(G) + 1.
+        \] To see this, we must take a vertex cover of $G$ with us on the first step
+        so that we leave an independent set behind. On the other hand, it is enough
+        to keep the minimum vertex cover permanently on the boat, and ferry the
+        remaining objects (which are independent) one by one.
+    \end{example}
+
 
 \end{document}
