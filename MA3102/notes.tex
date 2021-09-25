@@ -894,6 +894,10 @@
             identity is the coset $H$. The inverse of $gH$ is $g^{-1}H$.
         \end{remark}
     \end{definition}
+    \begin{example}
+        The quotient group $\Z/n\Z$ represents the integers modulo $n$. All integers
+        of the form $nk + m$ have been identified to the same class $[m] = n\Z + m$.
+    \end{example}
 
     \begin{lemma}
         The map $\pi\colon G \to G/H$, $g \mapsto gH$ where $H \trianglelefteq G$
@@ -918,5 +922,41 @@
         \in \im{\varphi}$, we can choose $g \in G$ such that $\varphi(g) = g'$, hence
         $f(gN) = g'$ which shows that $f$ is also surjective.
     \end{proof}
+
+    \subsection{Group actions}
+    \begin{definition}
+        Let $G$ be a group and let $X$ be a set. We say that $G$ acts on $X$ if there
+        is a map $G\times X \to X$ sending $(g, x) \mapsto gx$, such that $(e, x)
+        \mapsto x$ and $g(h(x)) = (gh)(x)$ for all $x \in X$, $g, h \in G$.
+        \begin{remark}
+            Fix $g \in G$. Then the map $x \mapsto gx$ is a bijection.
+        \end{remark}
+    \end{definition}
+    \begin{example}
+        The left multiplication map $G \times G \to G$, $(g, h) \mapsto gh$ is a
+        group action.
+    \end{example}
+    \begin{example}
+        The conjugation map $G \times G \to G$, $(g, h) \mapsto ghg^{-1}$ is also a
+        group action.
+    \end{example}
+
+    \begin{definition}
+        The orbit of $x \in X$ is the set $Gx = \{gx : g \in G\}$.
+
+        Consider the equivalence relation on $X$ where $x \sim y$ if there exists $g
+        \in G$ such that $x = gy$. This induces a partition of $X$. The equivalence
+        class of $x \in X$ is precisely its orbit.
+    \end{definition}
+
+    \begin{definition}
+        The stabilizer of $x \in X$ is the set of all elements $g \in G$ such that
+        $gx = x$. We denote this as $G_x$.
+    \end{definition}
+
+    \begin{lemma}
+        The stabilizer of an element in $X$ is a subgroup of $G$. Thus, $|G_x|$
+        always divides $|G|$.
+    \end{lemma}
 
 \end{document}
