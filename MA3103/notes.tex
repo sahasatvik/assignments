@@ -719,5 +719,67 @@
         remaining objects (which are independent) one by one.
     \end{example}
 
+    \subsection{Dominating vertex sets}
+
+    \begin{definition}
+        A set of vertices in a graph is called a dominating set if every vertex in
+        the graph is either part of this set, or a neighbour of some vertex in this
+        set.
+    \end{definition}
+
+    \begin{definition}
+        A smallest dominating set of a graph is called a minimum dominating set. We
+        denote its cardinality as $\gamma(\cdot)$.
+    \end{definition}
+
+    \begin{lemma}
+        In a connected graph, every vertex cover is also a dominating set.
+    \end{lemma}
+
+    \begin{lemma}
+        Every maximal independent set is also a dominating set. This immediately
+        gives \[
+            \alpha(G) \geq \gamma(G).
+        \] 
+    \end{lemma}
+
+    \begin{corollary}
+        Every connected graph has at least two disjoint dominating sets. This gives
+        \[
+            \gamma(G) \leq \frac{n}{2}.
+        \] 
+    \end{corollary}
+
+    \begin{definition}
+        Any dominating set which is independent is also maximally independent.
+    \end{definition}
+    
+    \subsection{Matching edges}
+
+    \begin{definition}
+        A set of independent edges is called a matching set.
+    \end{definition}
+
+    \begin{definition}
+        We denote the cardinality of the maximum matching set as $\alpha'(\cdot)$.
+    \end{definition}
+
+    \begin{definition}
+        A perfect matching covers all the vertices in the graph.
+    \end{definition}
+
+    \begin{definition}
+        A complete matching from independent sets $A$ to $B$ is one which covers all
+        vertices in the smaller set $A$.
+    \end{definition}
+
+    \begin{example}
+        Let $\mathscr{A} = \{A_1, \dots, A_n\}$ be a family of subsets of $X$. The
+        problem of finding $n$ distinct elements such that each $x_i \in A_i$ can be
+        reframed as a graph theoretical one. Construct a bipartite graph with the
+        sets $A_i$ on one side and the elements $x_j$ on the other, and connect $A_i$
+        with $x_j$ if $x_j \in A_i$. We seek a complete matching from $\mathscr{A}$
+        to $X$.
+    \end{example}
 
 \end{document}
