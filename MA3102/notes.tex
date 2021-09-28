@@ -959,4 +959,18 @@
         always divides $|G|$.
     \end{lemma}
 
+    \begin{lemma}
+        Let $\mathscr{O} \subseteq X$ be an orbit, and let $x, y \in \mathscr{O}$.
+        Then, $|G_x| = |G_y|$.
+    \end{lemma}
+    \begin{proof}
+        If $x = gy$, then $G_x = gG_yg^{-1}$. Indeed, $G_x \cong G_y$ since
+        conjugation by an element is an isomorphism.
+    \end{proof}
+
+    \begin{theorem}[Orbit-Stabilizer theorem]
+        Let $\mathscr{O} \subseteq X$ be an orbit, and let $x \in \mathscr{O}$.
+        Then, $|G| = |G_x|\cdot |\mathscr{O}|$.
+    \end{theorem}
+
 \end{document}
