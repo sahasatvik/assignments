@@ -1020,17 +1020,48 @@
         if and only if they have the same characteristic polynomial.
     \end{corollary}
 
-    \begin{theorem}[Cyclic Decomposition Theorem]
-        Let $T \in \algL(V)$. Then, $V$ can be written as the direct sum of
-        $T$-cyclic subspaces. Thus, $T$ can be written as the direct sum of linear
-        operators, each of which have a cyclic vector.
-    \end{theorem}
-
     \begin{definition}
         Let $T \in \algL(V)$ and let $W \subseteq V$ be a $T$-invariant subspace. We
         say that $W$ is $T$-admissible if the following condition holds: if $f(T) \vv
         \in W$ for some polynomial $f$, then there exists $\vw \in W$ such that
         $f(T)\vv = f(T)\vw$.
     \end{definition}
+
+    \begin{theorem}[Cyclic Decomposition Theorem]
+        Let $T \in \algL(V)$, and let $W_0 \subset V$ be a proper $T$-admissible
+        subspace. Then, there exist non-zero vectors $\vv_1, \dots, \vv_1$, with
+        respective $T$-annihilators $p_1, \dots, p_r$ such that \begin{enumerate}
+            \itemsep0em
+            \item $V = W_0 \oplus Z(\vv_1, T) \oplus \dots \oplus Z(\vv_r, T)$.
+            \item $p_k$ divides $p_{k - 1}$.
+        \end{enumerate}
+        The integer $r$ and the annihilators $p_1, \dots, p_r$ are uniquely
+        determined by 1 and 2.
+    \end{theorem}
+
+    \begin{corollary}
+        Every $T$-admissible subspace of $V$ has a complementary $T$-invariant
+        subspace.
+    \end{corollary}
+
+    \begin{corollary}
+        The annihilator $p_1$ is the minimal polynomial of $T$.
+    \end{corollary}
+    \begin{proof}
+        Choose $W_0 = \{\vec{0}\}$, hence $V$ is the direct sum of $T$-cyclic
+        subspaces. Since each $p_k$ divides $p_{k - 1}$, we see that $p_1$
+        annihilates every vector in $V$. Its minimality is guaranteed by the fact
+        that it is the minimal polynomial of $Z(\vv_1, T)$.
+    \end{proof}
+
+    \begin{corollary}
+        Given any $T \in \algL(V)$, there exists $\vv \in V$ such that its
+        $T$-annihilator is the minimal polynomial of $T$.
+    \end{corollary}
+
+    \begin{corollary}
+        Given, $T \in \algL(V)$, $T$ has a cyclic vector if and only if its minimal
+        and characteristic polynomials are identical.
+    \end{corollary}
 
 \end{document}
