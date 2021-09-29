@@ -552,5 +552,26 @@
         \] satisfy $p_i(x_j) = \delta_{ij}$. These $p_i$ form a basis of
         $\mathscr{P}^{n - 1}$, the space of polynomials of degree at most $n - 1$.
     \end{proof}
+
+    \begin{theorem}
+        Let $f\colon [a, b] \to \R$ be $n$ times differentiable, and let $p$ be the
+        Lagrange interpolating polynomial of $f$ on the points $x_1, \dots, x_n$.
+        Then, for any $x \in [a, b]$, there exists $\xi \in (a, b)$ such that \[
+            f(x) - p(x) = \frac{f^{(n)}(\xi)}{n!} \prod_{i} (x - x_i)
+        \] 
+    \end{theorem}
+    \begin{proof}
+        This is clear when $x = x_i$. Suppose that $x \neq x_i$ for any $i$.  Define
+        \[
+            g\colon [a, b] \to \R, \qquad g(t) = f(t) - p(t) - (f(x) - p(x))
+            \prod_{i} \frac{t - x_i}{x - x_i}
+        \] We see that each $g(x_i) = 0$, as well as $g(x) = 0$, hence $g$ has $n +
+        1$ distinct roots. Hence, $g'$ has exactly $n$ distinct roots, and continuing
+        in this fashion, $g^{(n)}$ has one root. Set $\xi$ such that $g^{(n)}(\xi) =
+        0$. On the other hand, \[
+            g^{(n)}(\xi) = f^{(n)}(\xi) - \frac{f(x) - p(x)}{n!}\prod_i \frac{1}{x
+            - x_i}. \qedhere
+        \] 
+    \end{proof}
     
 \end{document}
