@@ -781,5 +781,38 @@
         with $x_j$ if $x_j \in A_i$. We seek a complete matching from $\mathscr{A}$
         to $X$.
     \end{example}
+    \begin{example}
+        Observe that for a complete matching from $A$ to $B$ to exist, we must have
+        the following: for any subset $X$ of $A$, we need $|X| \leq |N(X)|$ where
+        $N(X)$ is the neighbouring set of $X$. Indeed, this is sufficient.
+    \end{example}
+
+    \begin{theorem}[Hall's Marriage theorem]
+        A bipartite graph $G$ with vertex sets $V_1$ and $V_2$ contains a complete
+        matching from $V_1$ to $V_2$ if and only if given any subset $X \subseteq
+        V_1$, we have $|X| \leq |N(X)|$.
+    \end{theorem}
+    \begin{proof}
+        It is clear that this condition is necessary, by employing the Pigeonhole
+        Principle. To show that this is sufficient, we use induction on $|V_1| = m$.
+        This is trivial for $m = 1$; suppose that this holds for all $1, \dots, m -
+        1$. Consider the following cases. \\
+
+        \textbf{Case I}: All groups of $k$ members from $V_1$, with $1 \leq k < m$,
+        are connected to at least $k + 1$ members from $V_2$. Note that every vertex
+        from $V_1$ has degree $2$. Fix one arbitrary edge. The remaining graph
+        satisfies the induction hypothesis, hence there exists a complete matching.
+
+        \textbf{Case II}: There are some groups of $k$ members from $V_1$, with $1
+        \leq k < m$, which are connected to exactly $k$ members from $V_2$. Fix such
+        $k$, label this group $X$, and note that $X$ can be completely matched with
+        its neighbouring set by the induction hypothesis. Now, we claim that the
+        remaining sets, namely $V_1 \setminus X$ and $V_2 \setminus N(X)$, satisfy
+        the induction hypothesis. Suppose that some set $Y \subseteq V_1 \setminus X$
+        has too few neighbours, i.e.\ $|Y| > |N(Y)|$. Then, examine the union $X \cup
+        Y$, which has size $k + |Y|$ but has strictly less than $k + |N(Y)|$
+        neighbours. This is a contradiction, hence the remaining elements also admit
+        a complete matching.
+    \end{proof}
 
 \end{document}
