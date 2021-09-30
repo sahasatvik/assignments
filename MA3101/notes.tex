@@ -1029,5 +1029,43 @@
         $U$.
     \end{theorem}
 
+    \begin{lemma}
+        Consider a continuously differentiable function $f\colon \R^n \to \R$, and
+        let $M$ denote the surface defined by the zero set of $f$. Then, $M$ can be
+        represented as the graph of a differentiable function $h\colon \R^{n - 1} \to
+        \R$ at those points where $Df \neq 0$.
+    \end{lemma}
+    \begin{proof}
+        Without loss of generality, suppose that $\partial f / \partial x_n \neq 0$
+        at some point $a \in M$. It can be shown that the map \[
+            F\colon \R^n \to \R^n , \qquad x \mapsto (x_1, x_2, \dots, x_{n - 1},
+            f(x))
+        \] is invertible in a neighbourhood $W$ of $a$, with a continuous and
+        differentiable inverse of the form \[
+            G\colon \R^n \to \R^n, \qquad u \mapsto (u_1, u_2, \dots, u_{n - 1},
+            g(u)).
+        \] Since $F\circ G$ must be the identity map on $W$, we demand \[
+            (x_1, x_2, \dots, x_{n - 1}, f(x_1, x_2, \dots, x_{n - 1}, g(x))) = (x_1,
+            x_2, \dots, x_{n - 1}, x_n).
+        \] Thus, the zero set of $f$ in this neighbourhood of $a$ satisfies $x_n =
+        0$, hence \[
+            f(x_1, x_2, \dots, x_{n - 1}, g(x_1, x_2, \dots, x_{n - 1}, 0)) = 0.
+        \] In other words, the part of the surface $M$ in the neighbourhood of $a$ is
+        precisely the set of points \[
+            (x_1, x_2, \dots, x_{n - 1}, g(x_1, x_2, \dots, x_{n - 1}, 0)).
+        \] Simply set \[
+            h\colon \R^{n - 1} \to \R, \qquad x \mapsto g(x_1, x_2, \dots, x_{n - 1},
+            0),
+        \] whence the surface $M$ is locally represented by the graph of $h$.
+    \end{proof}
+    \begin{remark}
+        Note that by using \[
+            f(x_1, \dots, x_{n - 1}, h(x_1, \dots, x_{n - 1})) = 0
+        \] on the surface, we can use the chain rule to conclude that for all $1 \leq
+        i < n$, we have \[
+            \pp{f}{x_i}(a) + \pp{f}{x_n}(a)\pp{h}{x_i}(a_1, \dots, a_{n - 1}) = 0.
+        \] 
+    \end{remark}
+
 
 \end{document}
