@@ -1020,8 +1020,8 @@
         restrictions $g_i$ as defined earlier.
     \end{proof}
 
-    \subsection{Inverse function theorem}
-    \begin{theorem}
+    \subsection{Inverse and implicit function theorems}
+    \begin{theorem}[Inverse function theorem]
         Let $f\colon \R^n \to \R^n$ be continuously differentiable on a neighbourhood
         of $a \in \R^n$, and let $\det(Df(a)) \neq 0$. Then, there exist neighbourhoods
         $U$ of $a$ and $W$ of $f(a)$ such that the restriction $f\colon U \to W$ is
@@ -1066,6 +1066,19 @@
             \pp{f}{x_i}(a) + \pp{f}{x_n}(a)\pp{h}{x_i}(a_1, \dots, a_{n - 1}) = 0.
         \] 
     \end{remark}
+
+    \begin{theorem}[Implicit function theorem]
+        Let $f\colon \R^n\times \R^m \to \R^m$ be continuously differentiable in an
+        open set containing $(a, b)$, with $f(a, b) = 0$. Let $\det(\partial f^j /
+        \partial x_{n + k} (a, b)) \neq 0$. Then, there exists an open set $U \subset
+        \R^n$ containing $a$, an open set $V \subset \R^m$ containing $b$, and a
+        differentiable function $g\colon U \to V$ such that $f(x, g(x)) = 0$.
+
+        \begin{remark}
+            The condition on the determinant can be rephrased as
+            $\operatorname{rank}{Df(a, b)} = m$.
+        \end{remark}
+    \end{theorem}
 
 
 \end{document}
