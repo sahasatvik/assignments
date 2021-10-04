@@ -908,7 +908,7 @@
         is the zero operator.
     \end{proof}
 
-    \subsection{Cyclic subspaces}
+    \subsection{Cyclic subspaces and the Rational form}
     \begin{lemma}
         Let $T \in \algL(V)$ where $V$ is finite-dimensional, and let $\vv \in V$.
         There is a smallest invariant subspace $W$ containing $\vv$, namely the
@@ -1081,5 +1081,25 @@
         to be of equal size, the divisibility property forces $p_i = p_j$ for the
         corresponding blocks, so these blocks are exactly equal.
     \end{proof}
+
+    \begin{theorem}[Generalized Cayley-Hamilton Theorem]
+        Let $T \in \algL(V)$, let $p$ be its minimal polynomial, and let $f$ be its
+        characteristic polynomial. Then $p$ divides $f$, $p$ and $f$ have the same
+        prime factors except for multiplicities, and if the prime factorization of
+        $p$ is \[
+            p = f_1^{r_1}\dots f_k^{r_k},
+        \] then the prime factorization of $f$ is of the form \[
+            f = f_1^{d_1}\dots f_k^{d_k}
+        \] with $d_i = \dim{\ker{(f_i^{r_i})}} / \deg{f_i}$.
+    \end{theorem}
+
+    \subsection{Jordan form}
+    \begin{lemma}
+        The rational form of a nilpotent matrix contains only $1$'s and $0$'s on the
+        lower off-diagonal. Each choice of $k_1\geq k_2\geq \dots\geq k_r \geq 1$
+        with $k_1 + \dots + k_r = n$, i.e.\ each partition of $n$ completely
+        determines a similarity class of nilpotent $n \times n$ matrices.
+    \end{lemma}
+
 
 \end{document}
