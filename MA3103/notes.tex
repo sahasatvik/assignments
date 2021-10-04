@@ -815,4 +815,65 @@
         a complete matching.
     \end{proof}
 
+
+    \subsection{Walks}
+    \begin{definition}
+        A walk on a graph is a sequence of alternating vertices and edges, with two
+        adjacent elements in the sequence being incident in the graph. The number of
+        edges involved is called the length of the walk.
+    \end{definition}
+
+    \begin{definition}
+        A walk with distinct edges is called a trail.
+    \end{definition}
+
+    \begin{definition}
+        A walk with distinct vertices is called a path.
+        \begin{remark}
+            We can immediately see that every path is also a trail.
+        \end{remark}
+    \end{definition}
+
+    \begin{definition}
+        A path that starts and ends on the same vertex (closed) is called a cycle.
+    \end{definition}
+
+    \begin{definition}
+        A closed trail is called a circuit.
+    \end{definition}
+
+    \begin{definition}
+        A circuit which contains all the edges in a graph is called an Eulerian
+        circuit. A graph which admits such an Eulerian circuit is called an Eulerian
+        graph.
+    \end{definition}
+
+    \begin{definition}
+        A cycle which contains all the vertices in a graph is called a Hamiltonian
+        cycle. A graph which admits such a Hamiltonian cycle is called a Hamiltonian
+        graph.
+    \end{definition}
+
+    \begin{lemma}
+        In an Eulerian graph, every vertex has even degree.
+    \end{lemma}
+
+    \begin{theorem}
+        The edge set of a graph can be partitioned into cycles if and only if every
+        vertex has even degree.
+    \end{theorem}
+    \begin{proof}
+        Consider a graph which is the union of edge disjoint cycles. It is clear that
+        a vertex which is part of $k$ different cycles must have degree $2k$.
+
+        Conversely, consider a graph in which every vertex has even degree. Let $x_0,
+        \dots, x_l$ be a path of maximal length $l$ in $G$. Since $d(x_0) \geq 2$,
+        there must exist another vertex $y \neq x_1$ connected to $x_0$. Now, if $y$
+        is not one of $x_2, \dots, x_l$, then we can extend out path by starting from
+        $y$, contradicting the maximality of the path. Thus, $y = x_i$ for some $2
+        \leq i \leq l$, hence we have found a cycle $x_0, \dots, x_i$. Remove these
+        edges from the graph, and note that every vertex in the new graph still has
+        even degree. By repeating this procedure, we will exhaust every edge.
+    \end{proof}
+
 \end{document}
