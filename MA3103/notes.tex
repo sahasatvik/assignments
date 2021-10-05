@@ -876,4 +876,45 @@
         even degree. By repeating this procedure, we will exhaust every edge.
     \end{proof}
 
+    \begin{definition}
+        A connected graph is one in which given any pair of vertices $x, y$, there
+        exists a path between them.
+    \end{definition}
+
+    \begin{definition}
+        In a connected graph, the distance between two vertices is the length of the
+        shortest path joining them. We denote this as $d(\cdot, \cdot)$.
+    \end{definition}
+
+    \begin{definition}
+        A maximal connected subgraph is called a component of the graph.
+    \end{definition}
+
+    \begin{definition}
+        A vertex whose deletion would increase the number of components in the graph
+        is called a cut vertex.
+    \end{definition}
+
+    \begin{definition}
+        An edge whose deletion would increase the number of components in the graph
+        is called a bridge.
+    \end{definition}
+
+    \begin{definition}
+        The maximum distance between a given vertex and the other vertices in a graph
+        is called its eccentricity. We denote this as $\epsilon(\cdot)$.
+    \end{definition}
+
+    \begin{definition}
+        The minimum eccentricity in a graph is called its radius. The maximum
+        eccentricity is called its diameter.
+
+        A central vertex is one whose eccentricity is equal to the radius.
+    \end{definition}
+
+    \begin{definition}
+        A graph in which every vertex has the same degree $k$ is called a $k$-regular
+        graph.
+    \end{definition}
+
 \end{document}
