@@ -841,7 +841,42 @@
         \end{remark}
     \end{exercise}
 
-    \subsubsection{Directional derivatives *}
+    \subsubsection{Directional derivatives}
+
+    \begin{definition}
+        Let $U \subseteq \R^n$ be open, and let $f\colon U \to \R$. The directional
+        derivative of $f$ along a direction $\vv \in \R^n$ at a point $a \in U$ is
+        defined by the following limit, if it exists. \[
+            \grad_v f(a) = \lim_{h \to 0} \frac{f(a + h\vv) - f(a)}{h}.
+        \] 
+    \end{definition}
+
+    \begin{example}
+        Consider \[
+            f\colon \R^2 \to \R, \qquad (x, y) \mapsto \begin{cases}
+                x^3/(x^2 + y^2), &\text{ if } (x, y) \neq (0, 0), \\
+                0, &\text{ if } (x, y) = (0, 0).
+            \end{cases}
+        \] Note that $f$ is not differentiable at $(0, 0)$. However, all directional
+        derivatives derivatives of $f$ exist at $(0, 0)$. Indeed, consider a
+        direction $(\cos\theta, \sin\theta)$, and examine the limit \[
+            \lim_{t \to 0} \frac{1}{t}\left[f(t\cos\theta, t\sin\theta) - f(0,
+            0)\right] = \cos^3\theta.
+        \] 
+    \end{example}
+
+    \begin{definition}
+        Let $f\colon \R^n \to \R$ be differentiable. The gradient of $f$ is defined
+        as the map \[
+            \grad{f}\colon \R^n \to \R^n, \qquad x \mapsto
+            \left[\pp{f}{x_i}(x)\right]_i.
+        \] 
+        \begin{remark}
+            The gradient at a point $x \in \R^n$ is thought of as a vector. In
+            contrast, the derivative is thought of as a linear transformation.
+            Otherwise, we see that $\grad{f}(x) = [Df(x)]$.
+        \end{remark}
+    \end{definition}
 
     \begin{definition}
         Let $C^1(\R^n)$ be the set of real-valued differentiable functions on $\R^n$.
@@ -857,7 +892,7 @@
             \]
         \end{remark}
     \end{definition}
-
+    
     \begin{lemma}
         The directional derivatives $\grad_v$ form a vector space called the tangent
         space, attached to the point $a \in \R^n$. This can be identified with the
@@ -866,6 +901,7 @@
             \grad_{\ve_1} \equiv \pp{}{x_1}, \dots, \grad_{\ve_n} \equiv \pp{}{x_n}.
         \] 
     \end{lemma}
+
 
     \subsubsection{Differentiation on manifolds *}
 
@@ -954,6 +990,7 @@
             $M$ at the point $a$.
         \end{remark}
     \end{definition}
+    
 
     \subsection{Mean value theorem}
     Consider a differentiable function $f\colon \R^n \to \R$, and fix $a \in \R^n$.
@@ -1080,5 +1117,22 @@
         \end{remark}
     \end{theorem}
 
+    \begin{theorem}
+        Let $f\colon \R^n \to \R$ be continuously differentiable, and let $M$ be the
+        surface defined by its zero set. Furthermore, let $\grad{f}(a) \neq 0$ for
+        some $a \in M$; thus, $M$ can be locally represented by a graph on $\R^{n -
+        1}$. Then, $\grad{f}(a)$ is normal to the tangent vectors drawn at $a$ to
+        $M$; in fact, the perpendicular space of $\grad{f}(a)$ is precisely the
+        tangent space $T_aM$.
+    \end{theorem}
+    \begin{proof}
+        Consider a tangent vector drawn at $a$ to $M$, represented by the
+        differentiable curve $\gamma\colon \R \to M$, $\gamma(0) = a$; note that
+        we use the identification $\gamma'(0) = v \in \R^n$. Then, calculate \[
+            \dd{}{t}f(\gamma(t))\Big|_{t = 0} = Df(\gamma(0))(\gamma'(0)) = Df(a)(v).
+        \] On the other hand, we have $f(\gamma(t)) = 0$ identically. Thus, \[
+            v\cdot \grad{f}(a) = Df(a)(v) = 0. \qedhere
+        \]
+    \end{proof}
 
 \end{document}
