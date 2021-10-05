@@ -14,7 +14,6 @@
 \usepackage{graphicx}
 \usepackage{fancyhdr}
 \usepackage{hyperref}
-\usepackage{epstopdf}
 
 \geometry{a4paper, margin=1in, headheight=14pt}
 
@@ -979,9 +978,97 @@
     \end{definition}
 
     \begin{definition}
-        The center of $G$ is the set of elements from $G$ such that every pair of
-        them commute. This can also be characterized as the union of all singleton
+        The center of a group $G$ is the set of elements which commute with every
+        element of $G$. This can also be characterized as the union of all singleton
         orbits under the conjugation action.
     \end{definition}
+
+    \begin{lemma}
+        The center $Z(G)$ of a group $G$ is a normal subgroup of $G$.
+    \end{lemma}
+
+    \begin{definition}
+        We say that $G$ is a $p$-group where $p$ is prime if $|G| = p^n$ for some $n
+        \in \N$.
+    \end{definition}
+
+    \begin{lemma}
+        The center of a $p$-group is non-trivial.
+    \end{lemma}
+    \begin{proof}
+        Let $G$ be a group with $|G| = p^n$. Note that $G$ can be written as the
+        union of $Z(G)$ and those conjugacy classes with more than one element. Let
+        $C$ be a conjugacy class with $|C| > 1$. Then, the orbit-stabilizer theorem
+        guarantees that $|C| = p^k$ for some $1 \leq k < n$. Now, $p \,|\, |G|$ and
+        $p \,|\, |C|$ for every other conjugacy class, hence $p \,|\, |Z(G)|$ which
+        forces $|Z(G)| \geq p > 1$.
+    \end{proof}
+
+    \begin{lemma}
+        If $G / Z(G)$ is cyclic, then $G$ is abelian.
+    \end{lemma}
+    \begin{proof}
+        Consider the natural homomorphism $\varphi\colon G \to G / Z(G)$. Let
+        $\bar{x}$ be a generator of $G / Z(G)$, and let $\varphi(x) = \bar{x}$. In
+        other words, $\bar{x} = xZ(G)$. It is easy to see that for any power,
+        $\bar{x}^k = x^k Z(G)$ because $Z(G)$ commutes with every element of $G$.
+        Thus, every element of $G / Z(G)$ is of this form, so $G$ is a union of all
+        such cosets.
+
+        Pick arbitrary $a, b \in G$, and suppose that $a \in x^m Z(G)$ and $b \in x^n
+        Z(G)$. Then we can write $a = x^mz_a$, $b = x^nz_b$ for $z_a, z_b \in Z(G)$.
+        Thus, $ab = x^mz_ax^nz_b = z_a x^{m + n}z_b = z_b x^{m + n} z_a = ba$.
+    \end{proof}
+
+    \begin{theorem}
+        A group $G$ with $|G| = p^2$ for some prime $p$ is abelian.
+    \end{theorem}
+    \begin{proof}
+        Recall that $|Z(G)|$ is either $p$ or $p^2$, so $|G / Z(G)|$ is either $p$ or
+        $1$. This forces it to be cyclic, hence $G$ is abelian.
+    \end{proof}
+
+    \begin{theorem}
+        A group $G$ with $|G| = p^2$ is either $C_{p^2}$ or $C_p \times C_p$.
+    \end{theorem}
+    \begin{proof}
+        If $G$ contains an element of order $p^2$, we immediately have $G \cong
+        C_{p^2}$. Otherwise, every non-identity element must have order $p$. Pick
+        non-identity $x \in G$, and let $H = \langle x \rangle$. Next, pick $y$ from
+        $G \setminus H$, and let $K = \langle y\rangle$. Now, both $|H| = |K| = p$,
+        and $H \cap K = \{e\}$. Clearly, $H, K \cong C_p$, hence $H \times K \cong
+        C_p \times C_p$. We now claim that the map $(h, k) \mapsto hk$ is an
+        isomorphism. The fact that this map is a homomorphism follows directly from
+        the fact that $G$ is abelian. The fact that $G$ is injective follows from the
+        fact that the kernel of this map is trivial: to see this, if $(h, k) \mapsto
+        e$, then $hk = e$ or $h = k^{-1}$. Since $H \cap K = \{e\}$, we must have $h
+        = k = e$.
+    \end{proof}
+
+
+    \subsection{Sylow's Theorems}
+
+    \begin{definition}
+        Let $G$ be a finite group, and let $p$ be a prime number which divides $|G|$.
+        In other words, $|G| = p^k n$ where $k \geq 1$ is the highest possible power.
+        A $p$-Sylow subgroup of $G$ is one of order $p^k$.
+    \end{definition}
+
+    \begin{theorem}
+        A $p$-Sylow subgroup always exists.
+    \end{theorem}
+
+    \begin{theorem}
+        Any two $p$-Sylow subgroups are conjugate.
+    \end{theorem}
+    \begin{corollary}
+        Any two $p$-Sylow subgroups are isomorphic.
+    \end{corollary}
+    
+    \begin{theorem}
+        Let $s_p$ be the number of $p$-Sylow subgroups. Then, $s_p \equiv 1
+        \pmod{p}$, and $s_p | n$ where $|G| = p^k n$.
+    \end{theorem}
+
 
 \end{document}
