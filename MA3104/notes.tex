@@ -1099,7 +1099,39 @@
         lower off-diagonal. Each choice of $k_1\geq k_2\geq \dots\geq k_r \geq 1$
         with $k_1 + \dots + k_r = n$, i.e.\ each partition of $n$ completely
         determines a similarity class of nilpotent $n \times n$ matrices.
+
+        \begin{remark}
+            Note that $r = \dim{\ker{N}}$.
+        \end{remark}
     \end{lemma}
+
+    \begin{definition}
+        Let $T \in \algL(V)$ such that its minimal polynomial is a product of
+        linear factors, \[
+            p = (x - c_1)^{r_1} \dots (x - x_k)^{r_k}.
+        \] The Primary Decomposition Theorem guarantees that by defining $W_i =
+        \ker{(T - c_iI)^{r_i}}$, we have $V = W_1 \oplus \dots \oplus W_k$.
+        Furthermore, if $T_i$ are the restrictions of $T$ to $W_i$, the minimal
+        polynomials for $T_i$ are $(x - c_i)^{r_i}$, hence $T_i = N_i + c_iI$ for
+        nilpotent operators $N_i$. In a cyclic basis, each $T_i$ is the direct sum of
+        matrices \[
+            \begin{bmatrix}
+                c_i & 0 & \dots & 0 & 0 \\
+                1 & c_i & \dots & 0 & 0 \\
+                \vdots & \vdots & \ddots & \vdots & \vdots \\
+                0 & 0 & \dots & c_i & 0 \\
+                0 & 0 & \dots & 1 & c_i
+            \end{bmatrix},
+        \] descending in size. These are called elementary Jordan matrices with
+        characteristic value $c_i$. Since $T$ is a direct sum of each $W_i$, the
+        matrix representation of $T$ in a appropriate basis is in a block diagonal
+        form with eigenvalues along the diagonal, and 1's and 0's along the
+        off-diagonal. This is called the Jordan form of $T$.
+    \end{definition}
+
+    \begin{theorem}
+        The Jordan form of a linear operator is unique, up to permutation of the blocks.
+    \end{theorem}
 
 
 \end{document}
