@@ -1054,9 +1054,47 @@
         A $p$-Sylow subgroup of $G$ is one of order $p^k$.
     \end{definition}
 
+    \begin{lemma}
+        Let $p$ be a prime, and let $n \in \N$. Then, \[
+            \binom{p^k n}{p^k} \equiv n \pmod{p}.
+        \] 
+    \end{lemma}
+    \begin{proof}
+        Note that for any integer $x$, we have \[
+            (1 + x)^p \equiv 1 + m^p \pmod{p}.
+        \] Again, \[
+            (1 + x)^{p^2} \equiv ((1 + x)^p)^p \equiv 1 + x^{p^2} \pmod{p}.
+        \] Repeating, \[
+            (1 + x)^{p^k} \equiv 1 + x^{p^{k}} \pmod{p}.
+        \] Now, \[
+            (1 + x)^{p^k n} \equiv (1 + x^{p^k})^n \equiv 1 + nx^{p^k} +
+            \binom{n}{2}x^{2p^k} + \dots + x^{p^k} \pmod{p}.
+        \] Comparing the coefficients of $x^{p^kn}$ on both sides, \[
+            \binom{p^kn}{p^k} \equiv n \pmod{p}. \qedhere
+        \] 
+    \end{proof}
+
     \begin{theorem}
         A $p$-Sylow subgroup always exists.
     \end{theorem}
+    \begin{proof}
+        Let $X$ be the set of subsets of $G$, each of size $p^k$. The number of such
+        choices are \[
+            \binom{p^k n}{p^n} \equiv n \pmod{p}.
+        \] Using the fact that $p$ and $n$ are relatively prime, we see that $p$ does
+        \emph{not} divide $|X|$. Now, let $G$ act on $X$ by left multiplication as
+        follows: for $g \in G$ and $A \in X$, $g\cdot A = gA$. Now, $X$ is precisely
+        the disjoint union of the orbits of its elements. Thus, there must exist an
+        orbit $\mathscr{O} \subseteq X$ such that $p$ does not divide
+        $|\mathscr{O}|$. Pick $A \in \mathscr{O}$, and use the orbit-stabilizer
+        theorem to write \[
+            |G| = |G_A|\cdot |\mathscr{O}|.
+        \] Since $p^k$ divides $|G|$ but not $|\mathscr{O}|$, it must divide $|G_A|$,
+        which is a subgroup of $G$. It remains to show that $p^k = |G_A|$.  Note that
+        $G_A$ stabilizes $A$, and $|A| = p^k$. Fix $a \in A$, and note that $g \in
+        Aa^{-1}$ for all $g \in G_A$ forcing $|G_A| \leq |Aa^{-1}| = p^k$. This
+        completes the proof.
+    \end{proof}
 
     \begin{theorem}
         Any two $p$-Sylow subgroups are conjugate.
