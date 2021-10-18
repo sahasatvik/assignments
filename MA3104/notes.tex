@@ -36,6 +36,7 @@
 \renewcommand{\vec}[1]{\boldsymbol{#1}}
 \newcommand{\vx}{\vec{x}}
 \newcommand{\vy}{\vec{y}}
+\newcommand{\vu}{\vec{u}}
 \newcommand{\vv}{\vec{v}}
 \newcommand{\vw}{\vec{w}}
 
@@ -44,6 +45,7 @@
 \newcommand{\algF}{\alg{F}}
 
 \newcommand{\ip}[2]{\langle #1, #2 \rangle}
+\newcommand{\norm}[1]{\Vert #1 \Vert}
 
 \renewcommand{\ker}{\operatorname{ker}}
 \newcommand{\spn}{\operatorname{span}}
@@ -1132,6 +1134,61 @@
     \begin{theorem}
         The Jordan form of a linear operator is unique, up to permutation of the blocks.
     \end{theorem}
+
+
+
+
+    \section{Inner product spaces}
+
+    \subsection{Preliminaries}
+    \begin{definition}
+        Let $\F$ either the field of real or complex numbers, and let $V$ be a vector
+        space over $\F$. An inner product on $V$ is a function
+        $\ip{\cdot}{\cdot}\colon V \times V \to \F$ satisfying the following
+        conditions. \begin{enumerate}
+            \itemsep0em
+            \item $\ip{\vu + \vv}{\vw} = \ip{\vu}{\vw} + \ip{\vv}{\vw}$.
+            \item $\ip{\alpha\vv}{\vw} = \alpha\ip{\vv}{\vw}$.
+            \item $\ip{\vv}{\vw} = \overline{\ip{\vw}{\vv}}$.
+            \item $\ip{\vv}{\vv} > 0$ for all $\vv \neq \vec{0}$.
+        \end{enumerate}
+        \begin{remark}
+            An inner product is completely determined by its real part.
+        \end{remark}
+    \end{definition}
+
+    \begin{definition}
+        The standard inner product on the vector space $\F^n$ is defined as \[
+            \ip{\vv}{\vw} = \sum_{i = 1}^n v_i\overline{w_i}.
+        \] 
+    \end{definition}
+
+    \begin{definition}
+        A norm is a function $\norm{\cdot}\colon V \to \R$ if \begin{enumerate}
+            \itemsep0em
+            \item $\norm{\vv} \geq 0$, and $\norm{\vv} = 0$ implies $\vv = \vec{0}$.
+            \item $\norm{\alpha\vv} = |\alpha|\norm{\vv}$.
+            \item $\norm{\vv + \vw} \leq \norm{\vv} + \norm{\vw}$.
+        \end{enumerate}
+        \begin{remark}
+            Any inner product induces a norm, via $\norm{\vv} =
+            \sqrt{\ip{\vv}{\vv}}$.
+        \end{remark}
+    \end{definition}
+
+    \begin{lemma}[Polarization identity]
+        \[
+            4\ip{\vv}{\vw} = \sum_{k = 1}^4 \norm{\vv + i^k\vw}^2.
+        \] 
+    \end{lemma}
+
+    \begin{lemma}
+        A norm arises from an inner product if and only if it satisfies the
+        parallelogram identity, \[
+            \norm{\vv + \vw}^2 + \norm{\vv - \vw}^2 = 2(\norm{\vv}^2 + \norm{\vw}^2).
+        \] 
+    \end{lemma}
+    
 
 
 \end{document}
