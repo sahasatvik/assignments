@@ -569,9 +569,35 @@
         1$ distinct roots. Hence, $g'$ has exactly $n$ distinct roots, and continuing
         in this fashion, $g^{(n)}$ has one root. Set $\xi$ such that $g^{(n)}(\xi) =
         0$. On the other hand, \[
-            g^{(n)}(\xi) = f^{(n)}(\xi) - \frac{f(x) - p(x)}{n!}\prod_i \frac{1}{x
+            g^{(n)}(\xi) = f^{(n)}(\xi) - n!(f(x) - p(x)) \prod_i \frac{1}{x
             - x_i}. \qedhere
         \] 
     \end{proof}
     
+
+    \subsection{Newton's divided difference}
+    \begin{theorem}
+        Let $x_1, \dots, x_n \in \R$ be distinct, and let $y_1, \dots, y_n \in \R$.
+        Define the divided difference recursively as \[
+            \Delta(x_i) = y_i, \qquad
+            \Delta(x_i, \dots, x_j) = \frac{\Delta(x_{i + 1}, \dots, x_j) -
+            \Delta(x_i, \dots, x_{j - 1})}{x_j - x_i}.
+        \] Further denote \[
+            \Delta^k = \Delta(x_1, \dots, x_k).
+        \] Then, the following polynomial of degree $n - 1$ interpolates the given
+        data. \[
+            p(x) = \Delta^1 + (x - x_1)\Delta^2 + (x - x_1)(x - x_2)\Delta^3 + \dots
+            + (x - x_1)\cdots(x - x_{n - 1})\Delta^n.
+        \]
+
+        \begin{remark}
+            We already know that this must be identical to the Lagrange interpolating
+            polynomial, hence all its properties carry over.
+        \end{remark}
+        \begin{remark}
+            The divided difference $\Delta(x_1, \dots, x_k)$ is independent of the
+            order of $x_1, \dots, x_k$.
+        \end{remark}
+    \end{theorem}
+
 \end{document}
