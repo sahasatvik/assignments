@@ -1135,4 +1135,30 @@
         \]
     \end{proof}
 
+    \subsection{Taylor's theorem}
+    
+    \begin{theorem}
+        Let $f\colon \R^n \to \R^n$ have continuous second order partial derivatives.
+        Then, \[
+            \frac{\partial^2 f}{\partial x_i\partial x_j} = \frac{\partial^2
+            f}{\partial x_j\partial x_i}.
+        \] 
+    \end{theorem}
+
+    \begin{theorem}
+        Let $f\colon \R^2 \to \R$ have continuous second order partial derivatives,
+        and let $(x_0, y_0) \in \R^2$. Then, there exists $\epsilon > 0$ such that
+        for all $\norm{(x - x_0, y - y_0)} < \epsilon$, 
+        \begin{align*}
+            f(x, y) \;=\; &f(x_0, y_0) + \pp{f}{x}(x - x_0) + \pp{f}{y}(y - y_0) \\
+            & + \frac{1}{2}\ppn[2]{f}{x}(x - x_0)^2 + \frac{1}{2}\ppn[2]{f}{y}(y -
+            y_0)^2 \\
+            & + \frac{\partial^2 f}{\partial x\partial y}(x - x_0)(y - x_0) + R(x,
+            y),
+        \end{align*}
+        where as $(x, y) \to (x_0, y_0) \to 0$, the remainder term vanishes as \[
+            \frac{|R(x, y)|}{\norm{(x - x_0, y - y_0)}^2} \to 0.
+        \] All partial derivatives here are evaluated at $(x_0, y_0)$.
+    \end{theorem}
+
 \end{document}
