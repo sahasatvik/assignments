@@ -916,5 +916,30 @@
         A graph in which every vertex has the same degree $k$ is called a $k$-regular
         graph.
     \end{definition}
+    \begin{example}
+        A cube $Q_k$ is a $k$-regular graph.
+    \end{example}
+    \begin{example}
+        The Petersen graph is a 3-regular graph.
+    \end{example}
+
+    \begin{theorem}[Ore's theorem]
+        Let $G$ be a simple graph of order $n \geq 3$ such that given any
+        non-adjacent vertices $x, y$, we have $d(x) + d(y) \geq n$. Then, $G$ is
+        Hamiltonian.
+    \end{theorem}
+    \begin{proof}
+        Let $G$ be a non-Hamiltonian graph; we claim that there exists a pair of
+        non-adjacent vertices $x, y$, $d(x) + d(y) < n$. Suppose that $G$ has maximal
+        edges (addition of any edge makes it Hamiltonian). Pick two non-adjacent
+        vertices $x$, $y$: by construction, $G + \{x, y\}$ contains a Hamiltonian
+        cycle, hence $G$ contains a Hamiltonian path whose endpoints are $x$ and $y$,
+        say $x = v_1, \dots, v_{n - 1}, v_n = y$. Now, we cannot have both $v_1 \sim
+        v_{i + 1}$ and $v_i \sim v_n$ where $2 \leq i \leq n - 2$ -- if so, we can
+        see that $v_1, v_2, \dots, v_i, v_n, v_{n - 1}, \dots, v_{i + 1}, v_1$ is a
+        Hamiltonian cycle. Thus, if $x$ is connected to $v_{i_1}, \dots, v_{i_k}$, then
+        $y$ cannot be connected to $v_{i_1 - 1}, \dots, v_{i_k - 1}$, hence $d(y)
+        \leq n - 1 - d(x)$.
+    \end{proof}
 
 \end{document}
