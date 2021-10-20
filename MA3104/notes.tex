@@ -1188,6 +1188,77 @@
             \norm{\vv + \vw}^2 + \norm{\vv - \vw}^2 = 2(\norm{\vv}^2 + \norm{\vw}^2).
         \] 
     \end{lemma}
+
+    \begin{lemma}
+        Let $V$ be finite dimensional, with an ordered basis $\beta = \{\vv_1, \dots,
+        \vv_n\}$. Then for any $\vu, \vw \in V$, we have \[
+            \ip{\vu}{\vw} = \sum_{i = 1}^n \sum_{j = 1}^n u_i\overline{w_j}
+            \ip{\vv_i}{\vv_j}.  \] By setting $a_{ij} = \ip{\vv_j}{\vv_i}$ and
+            letting $A = [a_{ij}]$, we can
+        write \[
+            \ip{\vu}{\vw} = \vw^* A \vu.
+        \] Note that the $\vu, \vw$ on the right hand side denote the coordinate
+        column vectors in the basis $\beta$. We see that $A$ is a Hermitian matrix,
+        satisfying $A^* = A$. Furthermore, $A$ is invertible because $\ip{\vu}{\vu} =
+        \vu^*A\vu > 0$ for all $\vu \neq \vec{0}$. Conversely, any such matrix
+        defined an inner product.
+    \end{lemma}
+
+    \begin{definition}
+        A positive linear operator satisfies $\ip{T\vv}{\vv} > 0$ for all $\vv \in
+        V$.
+        \begin{remark}
+            We will see that this conditions on $T$ implies that it is Hermitian.
+        \end{remark}
+    \end{definition}
+
+    \begin{lemma}
+        If $\ip{T\vv}{\vv} = 0$ for all $\vv\in V$ where $V$ is a complex inner
+        product space, then $T = 0$.
+    \end{lemma}
+
+
+    \subsection{Orthogonality}
+    \begin{definition}
+        Two vectors $\vv, \vw \in V$ are orthogonal if $\ip{\vv}{\vw} = 0$.
+    \end{definition}
+
+    \begin{definition}
+        If $W \subset V$, then $W^\top$ is the set of vectors which are orthogonal to
+        all vectors in $W$.
+    \end{definition}
+
+    \begin{lemma}
+        Let $W\subset V$ be a subspace. Then, $V = W \oplus W^\top$.
+    \end{lemma}
+
+    \begin{theorem}
+        An orthogonal set of non-zero vectors is linearly independent.
+    \end{theorem}
+
+    \begin{theorem}[Gram-Schmidt]
+        Every finite-dimensional inner product space admits an orthonormal basis.
+    \end{theorem}
+
+
+    \subsection{Dual spaces and adjoints}
+    
+    \begin{lemma}
+        Every member of the dual space $V^*$ is of the form $\vv \mapsto
+        \ip{\vv}{\vw}$ for unique $\vw \in V$. This gives a canonical identification
+        between $V$ and $V^*$.
+    \end{lemma}
+
+    \begin{definition}
+        The adjoint of a linear operator $T$ is the unique linear
+        operator $T^*$ which satisfies \[
+            \ip{T\vv}{\vw} = \ip{\vv}{T^*\vw}
+        \] for all $\vv, \vw \in V$.
+        \begin{remark}
+            The matrix of $T^*$ is the conjugate transpose of the matrix of $T$,
+            given an orthonormal basis.
+        \end{remark}
+    \end{definition}
     
 
 
