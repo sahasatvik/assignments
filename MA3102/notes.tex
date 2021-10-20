@@ -1061,7 +1061,7 @@
     \end{lemma}
     \begin{proof}
         Note that for any integer $x$, we have \[
-            (1 + x)^p \equiv 1 + m^p \pmod{p}.
+            (1 + x)^p \equiv 1 + x^p \pmod{p}.
         \] Again, \[
             (1 + x)^{p^2} \equiv ((1 + x)^p)^p \equiv 1 + x^{p^2} \pmod{p}.
         \] Repeating, \[
@@ -1099,6 +1099,26 @@
     \begin{theorem}
         Any two $p$-Sylow subgroups are conjugate.
     \end{theorem}
+    \begin{proof}
+        Let $P$ be a $p$-group, i.e.\ $|P| = p^k$, and let $P$ act on a finite set
+        $X$. Denote $X^P$ as the set of fixed points of $X$; this is the union of all
+        singleton orbits. Now examine $X\setminus X^P$ -- this is the union of all
+        orbits which have more than one element. Furthermore, all orbits are disjoint
+        and the cardinality of each orbit divides $|P| = p^k$. As a result, $p$
+        divides $|X\setminus X^P|$, hence $|X| \equiv |X^P| \pmod{p}$.
+        This means that if $p$ does not divide $|X|$, then $|X^P|$ is non-empty,
+        i.e.\ $X$ has a fixed point.
+
+        Let $P$, $Q$ be two $p$-Sylow subgroups of $G$. Note that $G$ acts on $G/P$
+        (the left cosets of $P$) in the natural way, and $|G / P| = n$ which is not
+        divisible by $p$. By considering $Q$ acting on $G / P$, we see that there is
+        at least one left coset of $P$, say $gP$, which is fixed by the action of
+        $Q$. In other words, for all $q \in Q$, we have $qgP = gP$, hence
+        $(g^{-1}qg)P = P$. This forces $g^{-1}qg \in P$, or $q \in gPg^{-1}$ for all
+        $q \in Q$. This immediately gives $Q = gPg^{-1}$.
+    \end{proof}
+
+
     \begin{corollary}
         Any two $p$-Sylow subgroups are isomorphic.
     \end{corollary}
@@ -1107,6 +1127,15 @@
         Let $s_p$ be the number of $p$-Sylow subgroups. Then, $s_p \equiv 1
         \pmod{p}$, and $s_p | n$ where $|G| = p^k n$.
     \end{theorem}
+    \begin{proof}
+        Let $S$ be the set of $p$-Sylow subgroups, and let $G$ act on $S$ by
+        conjugation. The previous theorem shows that there is only one orbit, i.e.\
+        $G$ acts transitively on $S$. This means that $|G| = |S|\cdot |G_P|$ for any $P
+        \in S$. Note that $G_P$ is the \emph{normalizer} of $P$, i.e\ the set of all
+        $g \in G$ such that $g^{-1}Pg = P$. It is clear that $P \subseteq G_P$, hence
+        $|G_P|$ is some multiple of $p^k$. This means that $|S| = s_p$ must divide
+        $n$.
+    \end{proof}
 
 
 \end{document}
