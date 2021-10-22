@@ -1160,5 +1160,42 @@
             \frac{|R(x, y)|}{\norm{(x - x_0, y - y_0)}^2} \to 0.
         \] All partial derivatives here are evaluated at $(x_0, y_0)$.
     \end{theorem}
+    \begin{proof}
+        This follows from applying the Taylor's Theorem in one variable to the real
+        function $g\colon \R \to \R$, $t \mapsto f((1 - t)(x_0, y_0) + t(x, y))$.
+    \end{proof}
+
+
+    \subsection{Critical points and extrema}
+    \begin{definition}
+        We say that $a \in \R^n$ is a critical point of $f\colon \R^n \to \R$ if all
+        $\partial f / \partial x^j = 0$ there.
+    \end{definition}
+
+    \begin{lemma}
+        All points of extrema of a differentiable function are critical points.
+    \end{lemma}
+    \begin{proof}
+        We already know that $Df(a) = 0$ where $a$ is either a point of maximum or
+        minimum.
+    \end{proof}
+
+    \begin{example}
+        In order to find a point of extrema of a $C^2$-smooth function $f\colon \R^2
+        \to \R$, we first identify a critical point $(x_0, y_0)$. Next, we must find
+        a neighbourhood of $(x_0, y_0)$ which contains no other critical points -- to
+        do this, apply Taylor's Theorem. Indeed, we see that \[
+            f(x, y) = f(x_0, y_0) + A(x - x_0)^2 + 2B(x - x_0)(y - y_0) + C(y -
+            y_0)^2 + R_2.
+        \] For non-degeneracy of solutions, we demand $AC - B^2 \neq 0$, i.e.\ at
+        $(x_0, y_0)$, we want \[
+            \left[\frac{\partial^2 f}{\partial x \partial y}\right]^2 \neq \pp{f}{x}
+            \pp{f}{y}.
+        \] 
+
+        If $AC - B^2 > 0$ and $\partial^2f / \partial x^2 > 0$, then we have found a
+        point of minima; if $\partial^2 f / \partial x^2 < 0$, then we have found a
+        point of maximum. If $AC - B^2 < 0$, then we have found a saddle point.
+    \end{example}
 
 \end{document}
