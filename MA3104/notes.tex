@@ -1216,6 +1216,11 @@
         If $\ip{T\vv}{\vv} = 0$ for all $\vv\in V$ where $V$ is a complex inner
         product space, then $T = 0$.
     \end{lemma}
+    \begin{proof}
+        Expand $\ip{T(\vv + \vw)}{\vv + \vw} = 0$ and $\ip{T(\vv + i\vw)}{\vv + i\vw}
+        = 0$ to conclude that $\ip{T\vv}{\vw} = 0$ for all $\vv, \vw \in V$. Setting
+        $\vw = T\vv$ immediately gives the result.
+    \end{proof}
 
 
     \subsection{Orthogonality}
@@ -1224,12 +1229,12 @@
     \end{definition}
 
     \begin{definition}
-        If $W \subset V$, then $W^\top$ is the set of vectors which are orthogonal to
+        If $W \subset V$, then $W^\perp$ is the set of vectors which are orthogonal to
         all vectors in $W$.
     \end{definition}
 
     \begin{lemma}
-        Let $W\subset V$ be a subspace. Then, $V = W \oplus W^\top$.
+        Let $W\subset V$ be a subspace. Then, $V = W \oplus W^\perp$.
     \end{lemma}
 
     \begin{theorem}
@@ -1250,16 +1255,49 @@
     \end{lemma}
 
     \begin{definition}
-        The adjoint of a linear operator $T$ is the unique linear
-        operator $T^*$ which satisfies \[
+        The adjoint of a linear operator $T$ on a finite-dimensional inner product
+        space $V$ is the unique linear operator $T^*$ which satisfies \[
             \ip{T\vv}{\vw} = \ip{\vv}{T^*\vw}
         \] for all $\vv, \vw \in V$.
         \begin{remark}
             The matrix of $T^*$ is the conjugate transpose of the matrix of $T$,
             given an orthonormal basis.
         \end{remark}
+        \begin{remark}
+            An operator such that $T = T^*$ is called self-adjoint, or Hermitian.
+        \end{remark}
     \end{definition}
+    \begin{example}
+        Given any operator $T$, we can write \[
+            T = \frac{1}{2}(T + T^*) + i\cdot\frac{1}{2i}(T - T^*)
+        \] where both $(T + T^2) / 2$ and $(T - T^*) / 2i$ are Hermitian.
+    \end{example}
     
+    \begin{lemma}
+        Let $V = R \oplus N$; then, there is a unique projection $E$ with range $R$
+        and kernel $N$. When $N = R^\perp$, we call $E$ the orthogonal projection into
+        $R$. Here, we have $E = E^*$.
+    \end{lemma}
+    \begin{proof}
+        We prove the latter, i.e\ for all $\vv, \vw \in V$, we have \[
+            \ip{E\vv}{\vw} = \ip{\vv}{E\vw}.
+        \] Note that we can expand \[
+            \vv = E\vv + (I - E)\vv, \qquad
+            \vw = E\vw + (I - E)\vw,
+        \] hence \[
+            \ip{E\vv}{\vw} = \ip{E\vv}{E\vw} + \ip{E\vv}{(I - E)\vw} =
+            \ip{E\vv}{E\vw},
+        \] \[
+            \ip{\vv}{E\vw} = \ip{E\vv}{E\vw} + \ip{(I - E)\vv}{E\vw} =
+            \ip{E\vv}{E\vw}. \qedhere
+        \] 
+    \end{proof}
+    
+    \begin{lemma}
+        A linear operator $T$ is Hermitian if and only if $\ip{T\vv}{\vv}$ is real
+        for all $\vv \in V$.
+    \end{lemma}
+
 
 
 \end{document}
