@@ -1122,6 +1122,10 @@
     \begin{corollary}
         Any two $p$-Sylow subgroups are isomorphic.
     \end{corollary}
+    \begin{corollary}
+        A $p$-Sylow subgroup is normal if and only if it is the only such $p$-Sylow
+        subgroup.
+    \end{corollary}
     
     \begin{theorem}
         Let $s_p$ be the number of $p$-Sylow subgroups. Then, $s_p \equiv 1
@@ -1135,6 +1139,14 @@
         $g \in G$ such that $g^{-1}Pg = P$. It is clear that $P \subseteq G_P$, hence
         $|G_P|$ is some multiple of $p^k$. This means that $|S| = s_p$ must divide
         $n$.
+
+        Now by considering the action of $P$ on $S$, we have $|S^P| \equiv |S|
+        \pmod{p}$. However, it is clear that $|S^P| = 1$, with the only fixed point
+        being $P$ itself. To see this, note that if $Q \in S$ is fixed by $P$, then
+        $gQg^{-1} = Q$ for all $g \in P$. This means that $P \subseteq G_Q$, but we
+        also know that $Q \subseteq G_Q$. By definition, $Q$ is a normal subgroup in
+        $G_Q$; the corollary of the second Sylow theorem shows that this is the only
+        Sylow subgroup in $G_Q$, hence $Q = P$. This gives $s_p \equiv 1 \pmod{p}$.
     \end{proof}
 
 
