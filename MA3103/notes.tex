@@ -942,6 +942,26 @@
         \leq n - 1 - d(x)$.
     \end{proof}
 
+    \begin{lemma}
+        A graph on $n$ vertices with at least $\binom{n - 1}{2} + 1$ edges is
+        connected.
+    \end{lemma}
+    \begin{proof}
+        Let $G$ be an arbitrary graph on $n$ vertices with $\binom{n - 1}{2} + 1$
+        vertices, and suppose that it is disconnected. Partition the vertices of $G$
+        into two groups of size $n_1$ and $n_2$, such that the corresponding
+        subgraphs are disconnected. Then, the total number of edges in $G$ is at most
+        \[
+            \binom{n_1}{2} + \binom{n_2}{2}.
+        \] However, with the constraint $n_1 + n_2 = n$, this quantity is at most
+        $\binom{n - 1}{2}$, a contradiction.
+    \end{proof}
+
+    \begin{lemma}
+        A graph on $n$ vertices with at least $\binom{n - 1}{2} + 2$ edges is
+        Hamiltonian.
+    \end{lemma}
+
 
     \subsection{Labelled trees}
     
@@ -971,6 +991,10 @@
         It can be shown that there is a bijection between distinct labelled trees and
         all possible Pr\"ufer sequences, which immediately completes the proof.
     \end{proof}
+
+    \begin{corollary}
+        There are $n^{n - 2}$ spanning trees of $K_n$.
+    \end{corollary}
 
 
 \end{document}
