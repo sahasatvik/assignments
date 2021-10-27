@@ -1198,4 +1198,37 @@
         point of maximum. If $AC - B^2 < 0$, then we have found a saddle point.
     \end{example}
 
+    \begin{example}
+        Suppose that we wish to maximize the function $f\colon \R^2 \to \R$, given an
+        equation of constraint $g = 0$, where $g\colon \R^2 \to \R$. Using the method
+        of Lagrange multipliers, we look for solutions of the system \[
+            \begin{cases}
+                \grad{f}(x, y) + \lambda \grad{g}(x, y) = 0, \\
+                g(x, y) = 0.
+            \end{cases}
+        \]
+    \end{example}
+
+
+
+
+    \section{Integral calculus}
+    
+    \subsection{Path integrals}
+    
+    \begin{definition}
+        A closed curve $\gamma\colon [a, b] \to \R^n$ is closed if $\gamma(a) =
+        \gamma(b)$. It is called simple if it has no self intersections.
+    \end{definition}
+    
+    \begin{definition}
+        Let $p, q\colon U \to \R$ be continuous, where $U \subseteq \R^2$ is an open
+        set, and let $\gamma \colon [a, b] \to U$ be piecewise smooth, i.e.\ smooth
+        on $(a, b)$ at all but finitely many points. Then, we define \[
+            \int_\gamma p\:dx + q\:dy = \int_a^b p(\gamma(t))\:\gamma_1'(t) +
+            q(\gamma(t)) \:\gamma_2'(t) \:dt.
+        \] 
+    \end{definition}
+
+
 \end{document}
