@@ -1178,7 +1178,7 @@
 
     \begin{lemma}[Polarization identity]
         \[
-            4\ip{\vv}{\vw} = \sum_{k = 1}^4 \norm{\vv + i^k\vw}^2.
+            4\ip{\vv}{\vw} = \sum_{k = 1}^4 i^k\norm{\vv + i^k\vw}^2.
         \] 
     \end{lemma}
 
@@ -1324,6 +1324,82 @@
         eigenvectors. Conversely, any diagonalizable operator with an orthonormal
         basis is normal.
     \end{theorem}
+
+
+    \subsection{Inner product space isomorphisms}
+    \begin{definition}
+        A linear map $T\colon V \to W$ is an inner product space isomorphism if it is
+        bijective and preserves the inner products of $V$ and $W$.
+    \end{definition}
+
+    \begin{theorem}
+        Let $T\colon V \to W$, where $V$ and $W$ are finite dimensional inner product
+        spaces of the same dimension. The following are equivalent. \begin{enumerate}
+            \itemsep0em
+            \item $T$ preserves the inner product.
+            \item $T$ is an inner product space isomorphism.
+            \item $T$ maps every orthonormal basis of $V$ to an orthonormal basis of
+            $W$.
+            \item $T$ maps some orthonormal basis of $V$ to an orthonormal basis of
+            $W$.
+        \end{enumerate}
+    \end{theorem}
+    \begin{proof}
+        The implications 1 $\Rightarrow$ 2 $\Rightarrow$ 3 $\Rightarrow$ 4 are
+        trivial. To show 4 $\Rightarrow$ 1, suppose that $T$ maps the orthonormal
+        basis $\vv_1, \dots, \vv_n$ to $\vw_1, \dots, \vw_n$. Then given any $\vv =
+        a_1\vv_1 + \dots + a_n\vv_n$, $\vu = b_1\vv_1 + \dots + b_n\vv_n$, we can
+        calculate \[
+            \ip{\vv}{\vu} = \sum_{i = 1}^n\sum_{j = 1}^n
+            a_i\overline{b_j}\ip{\vv_i}{\vv_j} = \sum_{i = 1}^n
+            a_i\overline{b_i},
+        \] \[
+            \ip{T\vv}{T\vu} = \sum_{i = 1}^n\sum_{j = 1}^n
+            a_i\overline{b_j}\ip{T\vv_i}{T\vv_j} = \sum_{i = 1}^n\sum_{j = 1}^n
+            a_i\overline{b_j}\ip{\vw_i}{\vw_j} = \sum_{i = 1}^n
+            a_i\overline{b_i}. \qedhere
+        \] 
+    \end{proof}
+
+    \begin{corollary}
+        Two finite dimensional inner product spaces over the same field are
+        isomorphic if and only if they have the same dimension.
+    \end{corollary}
+
+    \begin{lemma}
+        A linear isomorphism $T\colon V \to W$ is inner product preserving if and
+        only if it is norm preserving.
+    \end{lemma}
+
+
+    \begin{definition}
+        A unitary operator on an inner product space is an isomorphism of the space
+        to itself.
+        \begin{remark}
+            The products and inverses of unitary operators are also unitary. Thus,
+            the unitary operators on an inner product space form a group.
+        \end{remark}
+    \end{definition}
+
+    \begin{theorem}
+        A linear operator $U$ is unitary if and only if its adjoint $U^*$ exists and
+        $U^*U = UU^* = I$.
+    \end{theorem}
+    \begin{proof}
+        We have $U^* = U^{-1}$, since \[
+            \ip{U\vv}{\vw} = \ip{U\vv}{UU^{-1}\vw} = \ip{\vv}{U^{-1}\vw}.
+        \] Conversely if we know that $U^*U = UU^* = I$, then we immediately get
+        $U^{-1} = U^*$. To show that it is inner product preserving, write \[
+            \ip{U\vv}{U\vw} = \ip{\vv}{U^*U\vw} = \ip{\vv}{\vw}. \qedhere
+        \] 
+    \end{proof}
+
+    \begin{theorem}
+        A linear operator is unitary if and only if its matrix representation in some
+        orthonormal basis is unitary, i.e.\ satisfies $A^*A = I$.
+    \end{theorem}
+
+    
 
 
 
