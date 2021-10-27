@@ -660,7 +660,24 @@
     \] We may iterate $y_0(x) = y_0$, and \[
         y_{n + 1}(x) = y_0 + \int_{x_0}^x f(t, y_n(t))\:dt.
     \] 
+
+    It can be shown that the Picard iterates do indeed converge to a solution of the
+    given ODE.
     
+    \begin{theorem}[Picard-Lindel\"of theorem]
+        Let $f$ be uniformly Lipschitz continuous in $y$. Then the initial value
+        problem has a unique solution $y$ on some neighbourhood of $x_0$.
+    \end{theorem}
+
+    
+    \subsection{Euler's method}
+
+    Assume that a solution $y$ exists on $[x_0, x_M]$. Construct the $n$ evenly
+    spaced mesh points $x_0, x_1, x_2, \dots, x_n$, where $x_n = x_M$. Setting $h =
+    \Delta x$, we can approximate \[
+        y(x_{k + 1}) = y(x_k + h) \approx y(x_k) + hy'(x_k) = y(x_k) + hf(x_k,
+        y(x_k)).
+    \] This gives an iterative scheme to approximate $y(x)$ on these mesh points.
     
     
     
