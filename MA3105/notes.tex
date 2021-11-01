@@ -678,6 +678,33 @@
         y(x_{k + 1}) = y(x_k + h) \approx y(x_k) + hy'(x_k) = y(x_k) + hf(x_k,
         y(x_k)).
     \] This gives an iterative scheme to approximate $y(x)$ on these mesh points.
+
+
+    \subsection{Trapezoidal method}
+    
+    Here, we use perform the iterations \[
+        y(x_{n + 1}) \approx y(x_n) + \frac{1}{2}h(f(x_n, y(x_n)) + f(x_{n + 1},
+        y(x_{n + 1}))).
+    \] In order to use this implicit relation, we can use Newton's method or fixed
+    point iteration.
+
+
+    \subsection{Runge-Kutta methods}
+    
+    The second order Runge-Kutta method uses the following iterations. \[
+        y_{n + 1} = y_n + h(ak_1 + bk_2), \qquad 
+        k_1 = f(x_n, y_n), \qquad 
+        k_2 = f(x_n + \alpha h, y_n + \beta hk_1).
+    \] Additionally, we choose $\beta = \alpha$, $a = 1 - 1 / 2\alpha$, $b = 1 - a$.
+
+    The fourth order Runge-Kutta method uses the iterations \[
+        y_{n + 1} = y_n + \frac{1}{6}h(k_1 + 2k_2 + 2k_3 + k_4),
+    \] \[
+        k_1 = f(x_n, y_n), \qquad k_2 = f(x_{n + \frac{1}{2}}, y_n + \frac{1}{2}hk_1), 
+    \] \[
+        k_3 = f(x_{n + \frac{1}{2}}, y_n + \frac{1}{2}hk_2), \qquad
+        k_4 = f(x_{n + 1}, y_n + hk_2).
+    \] 
     
     
     
