@@ -997,4 +997,45 @@
     \end{corollary}
 
 
+    \subsection{Graph isomorphisms}
+    \begin{definition}
+        An isomorphism from a graph $G$ to a graph $H$ is a bijective mapping $f$
+        from the vertex set of $G$ to that of $H$, such that it preserves the
+        adjacency function. This means that \[
+            \{x, y\} \in E(G) \;\Longleftrightarrow\; \{f(x), f(y)\} \in E(H).
+        \] 
+    \end{definition}
+
+    \begin{definition}
+        A graph automorphism is an isomorphism from a graph to itself.
+    \end{definition}
+    \begin{example}
+        The complete graph $K_n$ has $n!$ automorphisms, since any permutation of its
+        vertices preserves its structure.
+    \end{example}
+
+    \begin{lemma}
+        The automorphisms of a graph form a group, under composition.
+    \end{lemma}
+    \begin{example}
+        The automorphism group of any graph is isomorphic to that of its complement
+        graph.
+    \end{example}
+
+    \begin{theorem}[Frucht]
+        For every finite group, there exists a finite graph such that their
+        automorphism groups are isomorphic.
+    \end{theorem}
+
+    \begin{definition}
+        A vertex transitive graph is one in which all vertices are similar. In other
+        words, given any two arbitrary vertices, there exists an isomorphism of the
+        graph which sends one to the other.
+    \end{definition}
+    \begin{example}
+        Every vertex transitive graph is regular. The converse is not true.
+    \end{example}
+    
+
+
 \end{document}
