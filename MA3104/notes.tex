@@ -1399,6 +1399,25 @@
         orthonormal basis is unitary, i.e.\ satisfies $A^*A = I$.
     \end{theorem}
 
+    \begin{definition}
+        A square matrix $A$ is called orthogonal if  it satisfies $A^\top A = I$.
+        \begin{remark}
+            A unitary matrix is orthogonal if and only if it is real.
+        \end{remark}
+    \end{definition}
+
+
+    \begin{theorem}
+        For every complex, invertible $n \times n$ matrix $B$, there exists a unique
+        lower triangular $M$ with positive real entries on the main diagonal such
+        that $MB$ is unitary.
+    \end{theorem}
+    \begin{proof}
+        The rows of $B$ are linearly independent, and hence form a basis of $\C^n$.
+        Perform Gram-Schmidt orthonormalization on $B$, and simply let $M$ be the
+        matrix of this transformation.
+    \end{proof}
+
     
 
 
