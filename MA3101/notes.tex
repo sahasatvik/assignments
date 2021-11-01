@@ -1225,10 +1225,80 @@
         Let $p, q\colon U \to \R$ be continuous, where $U \subseteq \R^2$ is an open
         set, and let $\gamma \colon [a, b] \to U$ be piecewise smooth, i.e.\ smooth
         on $(a, b)$ at all but finitely many points. Then, we define \[
-            \int_\gamma p\:dx + q\:dy = \int_a^b p(\gamma(t))\:\gamma_1'(t) +
-            q(\gamma(t)) \:\gamma_2'(t) \:dt.
+            \int_\gamma p\:dx + q\:dy = \int_a^b p(\gamma(t))\,\gamma_1'(t) +
+            q(\gamma(t)) \,\gamma_2'(t) \:dt.
         \] 
     \end{definition}
+
+    \begin{lemma}
+        Let $\gamma\colon [a, b] \to \R^2$ be a smooth curve, and let $\varphi\colon
+        [c, d] \to [a, b]$ be smooth, such that $\varphi(c) = a$ and $\varphi(d) =
+        b$. Then, the composition $\gamma\colon \varphi\colon [c, d] \to \R^2$ is a
+        smooth curve, and \[
+            \int_{\gamma\circ \varphi} p\:dx + q\:dy = \int_c^d \left[p(\gamma\circ
+            \varphi(s))\, \gamma_1'(\varphi(s)) + p(\gamma\circ
+            \varphi(s))\, \gamma_2'(\varphi(s))\right] \varphi'(s) \:ds.
+        \] By substituting the parameter $\varphi(s) = t$, $\varphi'(s)\:ds = dt$, we
+        retrieve \[
+            \int_{\gamma\circ \varphi} p\:dx + q\:dy = \int_a^b
+            p(\gamma(t))\,\gamma_1'(t) + q(\gamma(t)) \,\gamma_2'(t) \:dt =
+            \int_\gamma p\:dx + q\:dy.
+        \]
+    \end{lemma}
+
+    \begin{theorem}
+        Let $p, q\colon U \to \R^2$ be continuous, and let $\gamma \colon [a, b] \to
+        U$ be a smooth curve. The integral \[
+            \int_\gamma p\:dx + q\:dy
+        \] depends only on the endpoints of $\gamma$ if and only if there exists
+        $u\colon U \to \R$ such that \[
+            p = \pp{u}{x}, \qquad q = \pp{u}{y}.
+        \] In other words, we demand that that the vector field $(p, q)$ be the
+        gradient of $u$.
+    \end{theorem}
+    \begin{proof}
+        First suppose that there exists $u$ such that $\grad{u} = (p, q)$. Then, \[
+            \int_\gamma p\:dx + q\:dy = \int_a^b \pp{u}{x}(\gamma(t))\gamma_1'(t) +
+            \pp{u}{y}(\gamma(t))\gamma_2'(t)\:dt.
+        \] The chain rule shows that this is simply \[
+            \int_a^b \dd{}{t} u(\gamma(t))\:dt = u(\gamma(b)) - u(\gamma(a)).
+        \] Conversely, suppose that the given integral depends only on the endpoints
+        of $\gamma$. Given two points $\alpha, \beta \in U$, we construct a path
+        from $\alpha$ to $\beta$ by travelling only along the axes. Pick $(x, y) \in
+        U$, and define $u\colon U \to \R$, \[
+            u(x, y) = \int_\gamma p\:dx + q\:dy,
+        \] where $\gamma$ is such a polygonal path from a fixed point $\alpha$ to
+        $(x, y)$. Note that $u$ is well-defined by the independence of choice of path
+        $\gamma$.
+    \end{proof}
+
+    \begin{example}
+        Let $f\colon \R^2 \to \R^2$ be continuous, and let $\gamma$ be a smooth curve
+        in $\R^2$. We may denote \[
+            \int_\gamma \cdot ds = \int_\gamma f^1\:dx + f^2\:dy.
+        \] 
+    \end{example}
+
+    
+    \subsection{Multiple integrals}
+    \begin{definition}
+        Let $f\colon [a_1, b_1]\times [a_2, b_2] \to \R$ be continuous. Now, let
+        $P$ be a partition of the rectangular domain into $n \times n$
+        sub-rectangles, and define \[
+            M_{ij} = \sup_{[x_{i}, x_{i + 1}]\times [y_{j}, y_{j + 1}]} f(x, y), \qquad
+            y_{ij} = \inf_{[x_{i}, x_{i + 1}]\times [y_{j}, y_{j + 1}]} f(x, y).
+        \] We also define, \[
+            U(f, P) = \sum_{i, j} M_{ij}(x_i - x_{i - 1})(y_j - y_{j - 1}), \qquad 
+            L(f, P) = \sum_{i, j} m_{ij}(x_i - x_{i - 1})(y_j - y_{j - 1}).
+        \] Finally define the upper and lower sums \[
+            U(f) = \sup_{P} U(f, P), \qquad
+            L(f) = \sup_{P} L(f, P).
+        \] Then, $f$ is Riemann integrable if $U(f) = L(f)$, and this integral is
+        denoted by \[
+            \int_{[a_1, b_1] \times [a_2, b_2]} f(x, y) \:dx\:dy.
+        \] 
+    \end{definition}
+    
 
 
 \end{document}
