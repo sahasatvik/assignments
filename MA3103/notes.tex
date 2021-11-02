@@ -1035,6 +1035,34 @@
     \begin{example}
         Every vertex transitive graph is regular. The converse is not true.
     \end{example}
+
+
+    \begin{definition}
+        A proper colouring of a graph is an assignment of colours to its vertices
+        such that adjacent vertices have distinct colours.
+        \begin{remark}
+            This is equivalent to realizing the graph as a $k$-partite graph.
+        \end{remark}
+    \end{definition}
+
+    \begin{definition}
+        The chromatic number of a graph is the minimum number of colours needed to
+        construct a proper colouring. We denote it as $\chi(\cdot)$.
+    \end{definition}
+    \begin{example}
+        For any complete graph, $\chi(K_n) = n$.
+    \end{example}
+    \begin{example}
+        For cycles, $\chi(C_{2n}) = 2$ and $\chi(C_{2n + 1}) = 3$.
+    \end{example}
+    \begin{example}
+        For any $k$-partite graph $G$, we clearly have $\chi(G) \leq k$.
+    \end{example}
+
+    \begin{lemma}
+        The greedy algorithm produces a colouring where at most $d + 1$ colours are
+        used, where $d$ is the highest degree of the vertices in the graph.
+    \end{lemma}
     
 
 
