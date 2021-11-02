@@ -1274,6 +1274,19 @@
     \end{example}
     
     \begin{lemma}
+        Let $T \in \alg{L}$. Then, the subspace $W$ is invariant under $T$ if and
+        only if $W^\perp$ is invariant under $T^*$.
+    \end{lemma}
+
+    \begin{definition}
+        A reducing subspace of $T \in \alg{L}$ is invariant under both $T$ and $T^*$.
+        \begin{remark}
+            If $W$ is a reducing subspace of $T$, then $W$ and $W^\perp$ are both
+            invariant under $T$,
+        \end{remark}
+    \end{definition}
+
+    \begin{lemma}
         Let $V = R \oplus N$; then, there is a unique projection $E$ with range $R$
         and kernel $N$. When $N = R^\perp$, we call $E$ the orthogonal projection into
         $R$. Here, we have $E = E^*$.
@@ -1417,6 +1430,16 @@
         Perform Gram-Schmidt orthonormalization on $B$, and simply let $M$ be the
         matrix of this transformation.
     \end{proof}
+
+
+    \begin{definition}
+        Two complex matrices are said to be unitarily equivalent if they are
+        conjugate via a unitary matrix.
+        \begin{remark}
+            The analogous definition for orthogonally equivalent matrices applies
+            for real matrices.
+        \end{remark}
+    \end{definition}
 
     
 
