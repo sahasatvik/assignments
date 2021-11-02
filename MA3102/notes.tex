@@ -1149,5 +1149,58 @@
         Sylow subgroup in $G_Q$, hence $Q = P$. This gives $s_p \equiv 1 \pmod{p}$.
     \end{proof}
 
+    \begin{example}
+        Any group of size $15$ is cyclic. To see this, note that if $G$ contains $15$
+        elements, then $G$ has one 3-Sylow subgroup $H$, and one 5-Sylow subgroup
+        $K$. Since each of these are unique, they are normal. Also, $H \cap K =
+        \{e\}$, because the intersection of subgroups is itself a subgroup.
+        Furthermore, $H$ and $K$ are cyclic, since they have prime orders.  This is
+        enough to show that $G \cong H \times N$, which is also cyclic.
+    \end{example}
+
+
+    \subsection{Simple groups}
+    
+    \begin{definition}
+        A group is called simple if it contains no normal subgroup apart from $\{e\}$
+        and $G$ itself.
+    \end{definition}
+    \begin{example}
+        Groups of of prime order are simple.
+    \end{example}
+    
+    \begin{lemma}
+        If $G$ is a simple, abelian group, then $G$ is a cyclic group of prime order.
+    \end{lemma}
+    \begin{proof}
+        Any non-identity element from $G$ generates a normal subgroup of $G$. Since
+        $G$ is simple, these must all be $G$ itself, hence $G$ is cyclic. Since $G$
+        contains no cyclic subgroups, the order of $G$ is prime.
+    \end{proof}
+
+    \begin{lemma}
+        If $G$ is a simple $p$-group, then $G$ is a cyclic group of prime order.
+    \end{lemma}
+    \begin{proof}
+        The center of $G$ is a normal subgroup -- since $G$ is a $p$-group, the
+        center is non-trivial and hence must be $G$ itself. Thus, $G$ is also
+        abelian, from which the result follows.
+    \end{proof}
+
+    \begin{theorem}
+        The groups $A_n$ for $n \geq 5$ are simple. The group $A_5$ is the smallest
+        non-abelian simple group, with order $60$.
+    \end{theorem}
+    \begin{proof}
+        First, we show that $A_5$ is the smallest non-abelian simple group. Note that
+        in our search, we must discard all $p$-groups. Discard $6$ since the only
+        groups of that order are $C_6$ and $S_3$. Similarly, discard all groups whose
+        order is the product of primes $pq$ -- the $q$-Sylow subgroup, $p < q$, is
+        unique hence normal. We are left with $12, 18, 20, 24, 28, 30, \dots$. It can
+        be shown that any group of order $p^2q$ is not simple.
+    \end{proof}
+
+
+
 
 \end{document}
