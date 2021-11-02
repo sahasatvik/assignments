@@ -1279,6 +1279,7 @@
         \] 
     \end{example}
 
+
     
     \subsection{Multiple integrals}
     \begin{definition}
@@ -1295,10 +1296,71 @@
             L(f) = \sup_{P} L(f, P).
         \] Then, $f$ is Riemann integrable if $U(f) = L(f)$, and this integral is
         denoted by \[
-            \int_{[a_1, b_1] \times [a_2, b_2]} f(x, y) \:dx\:dy.
+            \int_{[a_1, b_1] \times [a_2, b_2]} f
         \] 
+
+        \begin{remark}
+            This definition naturally extends to integrals over any $k$-cell.
+        \end{remark}
     \end{definition}
+
+
+    \begin{definition}
+        A measure zero set $E \subset \R^n$ is such that given any $\epsilon > 0$,
+        there exists a countable collection of rectangles $\{A_j\}$ such that their
+        union contains $E$, and the sum of their volumes is less than $\epsilon$.
+    \end{definition}
+    \begin{example}
+        Any countable subset of $\R^n$ has measure zero.
+    \end{example}
+    \begin{example}
+        Any line in $\R^2$, plane in $\R^3$, etc.\ has measure zero.
+    \end{example}
+
+    \begin{lemma}
+        The countable union of measure zero sets has measure zero.
+    \end{lemma}
+
+    \begin{theorem}
+        A bounded function $f\colon A \to \R$ where $A \subset \R^n$ is a rectangle
+        is integrable if and only if for every $\epsilon > 0$, there exists a
+        partition $P$ of $A$ such that $U(f, P) - L(f, P) < \epsilon$.
+    \end{theorem}
+
+    \begin{theorem}
+        Let $f\colon A \to \R$ be bounded, where $A \subset \R^n$ is a rectangle.
+        Then, $f$ is Riemann integrable if and only if its set of discontinuities has
+        measure zero.
+    \end{theorem}
+
+
+    \begin{theorem}
+        Let $f\colon A_1 \times A_2 \to \R$ be continuous, where $A_1 \subset \R^n$
+        and $A_2 \subset \R^m$ are closed rectangles. Then, we can write \[
+            \int_{A_1 \times A_2} f = \int_{A_2} \left( \int_{A_1} f(x,
+            y)\:dx\right)\:dy = \int_{A_1} \left( \int_{A_2} f(x, y)\:dy\right)\:dx.
+        \] 
+    \end{theorem}
     
+    \begin{theorem}[Green's theorem]
+        Let $\gamma$ be a smooth simple closed curve in $\R^2$ oriented
+        counter-clockwise, and let $\Omega$ be the region enclosed by $\gamma$. If
+        $p, q \colon \Omega \to \R$ have continuous partial derivatives, then \[
+            \int_\gamma p\:dx + q\:dy = \iint_\Omega \left(\pp{q}{x} -
+            \pp{p}{y}\right) \:dx\:dy.
+        \] 
+    \end{theorem}
+    \begin{example}
+        Let $\gamma \colon [0, 2\pi] \to \R$, $\gamma(t) = (\cos{t}, \sin{t})$. Then,
+        $\gamma$ enclosed the unit disc in $\R^2$. To calculate its area, we can set
+        $p = 0$, $q = x$, giving \[
+            \iint_{\Omega} dx\:dy = \int_0^{2\pi} \cos^2{t}\:dt = \pi.
+        \] Another option is to set $p = -y / 2$, $q = x / 2$, giving \[
+            \iint_{\Omega} dx\:dy = \frac{1}{2}\int_0^{2\pi} \cos^2{t}+
+            \sin^2{t}\:dt = \frac{1}{2}\int_0^{2\pi} dt = \pi.
+        \] 
+    \end{example}
+
 
 
 \end{document}
