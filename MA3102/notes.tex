@@ -1187,6 +1187,29 @@
         abelian, from which the result follows.
     \end{proof}
 
+    \begin{lemma}
+        If $|G| = p^2q$ for primes $p, q$, then $G$ is not simple.
+    \end{lemma}
+
+    \begin{theorem}[Burnside]
+        No group of the form $p^\alpha q^\beta$ is simple.
+    \end{theorem}
+
+    \begin{lemma}
+        Let $H$ be a subgroup of a simple group $G$, with $[G : H] = n \geq 3$. Then,
+        $|G| \leq n!$.
+    \end{lemma}
+    \begin{proof}
+        Let $G$ act on $X = G / H$; then each element $g \in G$ gives a permutation
+        of $X$ (each left coset is sent to another left coset). This gives a
+        homomorphism $\varphi\colon G \to S_n$. Now, we claim that the normal
+        subgroup $\ker{G}$ is a proper subgroup. To see this, pick $g \in \ker{G}$,
+        hence $g$ is the identity permutation, $gx = x$ for all $x \in X$. Choose $x
+        = H$, hence $gH = H$ or $g \in H$. Thus, $\ker{G} \subseteq H$ which is a
+        proper subgroup of $G$. Since $G$ is simple, this forces $|\ker{G}| = 1$,
+        i.e.\ $\varphi$ is injective. Thus, $|G| \leq |S_n| = n!$.
+    \end{proof}
+
     \begin{theorem}
         The groups $A_n$ for $n \geq 5$ are simple. The group $A_5$ is the smallest
         non-abelian simple group, with order $60$.
