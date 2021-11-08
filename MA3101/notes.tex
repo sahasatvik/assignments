@@ -1362,5 +1362,14 @@
     \end{example}
 
 
+    \begin{theorem}[Change of variables]
+        Let $U \subset \R^n$ be an open set, and get $g\colon U \to \R^n$ be a
+        bijective, continuously differentiable map such that $\det{Dg(x)} \neq 0$ on
+        $U$. If $f\colon g(U) \to \R$ is integrable, then \[
+            \int_{g(U)} f = \int_U f\circ g\:|\det{Dg}|
+        \] 
+    \end{theorem}
+
+
 
 \end{document}
