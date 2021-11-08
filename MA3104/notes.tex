@@ -1274,7 +1274,7 @@
     \end{example}
     
     \begin{lemma}
-        Let $T \in \alg{L}$. Then, the subspace $W$ is invariant under $T$ if and
+        Let $T \in \algL(V)$. Then, the subspace $W$ is invariant under $T$ if and
         only if $W^\perp$ is invariant under $T^*$.
     \end{lemma}
 
@@ -1441,7 +1441,81 @@
         \end{remark}
     \end{definition}
 
+    \begin{theorem}
+        Let $T\in \algL(V)$, and let $\beta$ be an orthonormal basis of $V$. Suppose
+        that $A = [T]_\beta$ is upper triangular. Then, $T$ is normal if and only if
+        $A$ is diagonal.
+    \end{theorem}
+    \begin{proof}
+        It is clear that if $A$ is diagonal, then $T$ is normal since $A$ and $A^*$
+        commute. Now, suppose that $T$ is normal. Enumerate $\beta = \{\vv_1, \dots,
+        \vv_n\}$. Since $T\vv_1 = a_{11}\vv_1$, we have $T^*\vv_1 =
+        \overline{a}_{11}\vv_1$. We can also use $A^* = [T^*]_\beta$ to compute \[
+            T^*\vv_1 = \overline{a}_{11}\vv_1 + \overline{a}_{12}\vv_2 + \dots +
+            \overline{a}_{1n}\vv_n,
+        \] hence we must have all $a_{12}, \dots, a_{1n} = 0$. Now, $T\vv_2 =
+        a_{22}\vv_2$, hence $T^*\vv_2 = \overline{a}_{22}\vv_2$: repeat the same
+        procedure as above to conclude that all off-diagonal entries of $A$ must
+        vanish, completing the proof.
+    \end{proof}
+
+    \begin{theorem}
+        Let $T \in \algL(V)$ where $V$ is a finite-dimensional complex inner product
+        space. Then, there exists an orthonormal basis of $V$ such that $[T]_\beta$
+        is upper triangular.
+    \end{theorem}
+    \begin{corollary}
+        Every complex $n\times n$ matrix is unitarily similar to an upper triangular
+        matrix.
+    \end{corollary}
+    \begin{corollary}
+        Let $T\in algL(V)$ be a normal operator on a finite-dimensional complex inner
+        product space. Then, there exists an orthonormal basis of $V$ in which the
+        matrix representation of $T$ is diagonal.
+    \end{corollary}
+
+
+    \begin{theorem}[Spectral theorem]
+        Let $T$ be a normal operator on a finite-dimensional complex inner product
+        space, and let $c_1, \dots, c_k$ be distinct eigenvalues. Let $W_i = \ker(T -
+        c_iI)$, and $E_i$ be the orthogonal projections of $V$ into $W_i$. Then, $V$
+        is the orthogonal direct sum of $W_1, \dots, W_k$ and $T = c_1E_1 + \dots +
+        c_kE_k$.
+    \end{theorem}
+
+    \begin{definition}
+        Let $T$ be a normal operator on a finite-dimensional complex inner product
+        space, and let \[
+            T = c_1E_1 + \dots + c_kE_k
+        \] be its spectral resolution. Suppose that $f$ is a function whose domain
+        contains the spectrum of $T$. Then, the linear operator $f(T)$ is defined by
+        \[
+            f(T) = f(c_1)E_1 + \dots + f(c_k)E_k.
+        \] 
+    \end{definition}
+
+
+    \begin{definition}
+        A linear operator $T \in \algL(V)$ is called non-negative if $\ip{T\vv}{\vv}
+        \geq 0$ for all $\vv \in V$.
+    \end{definition}
+
+    \begin{lemma}
+        A non-negative operator is self-adjoint, and its spectrum is non-negative.
+    \end{lemma}
+
+    \begin{example}
+        For any operator $T$, the operators $T^*T$ and $TT^*$ are non-negative. To
+        see this, \[
+            \ip{T^*T \vv}{\vv} = \ip{T\vv}{T\vv} \geq 0.
+        \] 
+    \end{example}
     
+    \begin{lemma}
+        An linear operator $T$ is positive if and only if we can write $T = S^*S$ for
+        some linear operator $S$.
+    \end{lemma}
+
 
 
 
