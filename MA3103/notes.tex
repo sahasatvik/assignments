@@ -1061,8 +1061,24 @@
 
     \begin{lemma}
         The greedy algorithm produces a colouring where at most $d + 1$ colours are
-        used, where $d$ is the highest degree of the vertices in the graph.
+        used, where $d$ is the highest degree of the vertices in the graph. As a
+        result, $\chi(G) \leq d + 1$.
     \end{lemma}
+
+    \begin{theorem}[Szekeres-Wilf]
+        Let $\delta(G)$ denote the minimum vertex degree of $G$. Then, $\chi(G) \leq
+        1 + \max(\delta(G'))$, where the maximum is taken over all induced subgraphs
+        $G'$ of $G$.
+    \end{theorem}
+    \begin{proof}
+        Let $\chi(G) = k$, and let $H$ be a minimal induced subgraph, in the sense
+        that $\chi(H) = k$ and the chromatic number of any of its subgraphs drops,
+        i.e.\ $H - v$ is always $k - 1$ colourable. This immediately shows that for
+        any $v \in H$, $d(v) \geq k - 1$; note that if $v$ had fewer neighbours, then
+        they could not exhaust the $k - 1$ colours of $H - v$, leaving one free for
+        $v$ and thus making $H$ $k - 1$ colourable. In other words, $\max(\delta(G'))
+        \geq \delta(H) \geq k - 1$, completing the proof.
+    \end{proof}
     
 
 
