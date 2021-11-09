@@ -1371,5 +1371,51 @@
     \end{theorem}
 
 
+    \begin{definition}
+        For $S \subset A \subset \R^n$ where $A$ is a rectangle, we can define \[
+            \int_S f = \int_A f\cdot \chi_S.
+        \] Here, $\chi_S$ is the characteristic function of $S$, defined as \[
+            \chi_S(x) = \begin{cases}
+                1, &\text{ if } x \in S, \\
+                0, &\text{ if } x \notin S.
+            \end{cases}
+        \] 
+    \end{definition}
+
+    \begin{lemma}
+        For any set $A \subset \R^n$, the characteristic function $\chi_A$ is
+        continuous precisely on $\R^n \setminus \partial A$, and discontinuous on
+        $\partial A$.
+    \end{lemma}
+
+
+    \begin{definition}
+        Let $A \subset \R^n$, and let $\{U_\alpha\}$ be an open cover of $A$. Suppose
+        that $\{\psi_\alpha\}$ are smooth functions defined on a neighbourhood of
+        $A$, satisfying the following properties.
+        \begin{enumerate}
+            \itemsep0em
+            \item $0 \leq \psi_\alpha \leq 1$ on $A$.
+            \item For each $x \in A$, there exists a neighbourhood $U_x$ of $x$ such
+            that only finitely many $\psi_\alpha$ are non-zero on $U_x$.
+            \item $\sum_\alpha \psi_\alpha = 1$ on $A$.
+            \item Each support of $\psi_\alpha$ is contained in $U_\alpha$.
+        \end{enumerate}
+        \begin{remark}
+            The support of a function is the closure of the set on which it is
+            non-zero.
+        \end{remark}
+
+        The collection $\{\psi_\alpha\}$ is called a partition of unity subordinate
+        to the open cover $\{U_\alpha\}$.
+    \end{definition}
+
+    \begin{theorem}
+        For every set $A\subset \R^n$ and every locally finite open cover
+        $\{U_\alpha\}$ of $A$, there exists a partition of unity subordinate to that
+        open cover.
+    \end{theorem}
+
+
 
 \end{document}
