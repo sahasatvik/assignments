@@ -1079,7 +1079,39 @@
         $v$ and thus making $H$ $k - 1$ colourable. In other words, $\max(\delta(G'))
         \geq \delta(H) \geq k - 1$, completing the proof.
     \end{proof}
-    
+
+    \begin{lemma}
+        Let the vertices of a graph be labelled in decreasing order of their degrees.
+        Then, applying the greedy algorithm will give \[
+            \chi(G) \leq \max(\min(d_i + 1, i)).
+        \] 
+    \end{lemma}
+
+    \begin{lemma}
+        Given any vertex in $G$, we can see that \[
+            \chi(G) - 1 \leq \chi(G - v) \leq \chi(G).
+        \] In other words, removing a vertex from $G$ causes its chromatic number to
+        drop by one of 0 or 1.
+    \end{lemma}
+
+    \begin{definition}
+        A $k$-chromatic graph $G$ is called critically $k$-chromatic if the deletion
+        of any of its vertices causes its chromatic number to decrease (by one).
+    \end{definition}
+    \begin{example}
+        All complete graphs $K_n$ are critically $n$-chromatic.
+    \end{example}
+
+    \begin{lemma}
+        Any critically $k$-chromatic graph is connected.
+    \end{lemma}
+    \begin{proof}
+        If a critically $k$-chromatic graph $G$ has at least two components, then
+        deleting a vertex $v$ from either component gives a $k - 1$ colouring of $G -
+        v$. In other words, the other component was always $k - 1$ colourable, giving
+        $\chi(G) \leq k - 1$, a contradiction.
+    \end{proof}
+
 
 
 \end{document}
