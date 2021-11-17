@@ -1045,6 +1045,9 @@
         \end{remark}
     \end{definition}
 
+
+    \subsection{Graph colourings}
+
     \begin{definition}
         The chromatic number of a graph is the minimum number of colours needed to
         construct a proper colouring. We denote it as $\chi(\cdot)$.
@@ -1112,6 +1115,153 @@
         $\chi(G) \leq k - 1$, a contradiction.
     \end{proof}
 
+    \begin{lemma}
+        Any critically $k$-chromatic graph has no cut vertex.
+    \end{lemma}
+    \begin{proof}
+        If a critically $k$-chromatic graph $G$ has a cut vertex $v$, then $G - v$
+        partitions into components $G_i$. Let $G_i' = G_i + v$; note that each of
+        these is $k - 1$ colourable. Thus, it is possible to colour each of these
+        induced subgraphs with $k - 1$ colours, and this can be done keeping a common
+        colour for $v$ without any conflicts. This shows that $G$ is $k - 1$
+        colourable, a contradiction.
+    \end{proof}
 
+    \begin{lemma}
+        If $G$ is critically $k$-chromatic, then $\delta(G) \geq k - 1$.
+    \end{lemma}
+    \begin{proof}
+        Suppose that the minimum degree vertex $v$ has $d(v) < k - 1$. Note that $G -
+        v$ is $k - 1$ colourable; the neighbours of $v$ cannot exhaust all of these
+        colours. This gives a $k - 1$ colouring of $G$, a contradiction.
+    \end{proof}
+
+
+    \begin{definition}
+        Let $G$ be a simple graph, and let $p_G(k)$ be the number of ways in which
+        $G$ can be properly coloured with $k$ colours. Then, $p_G$ is called the
+        chromatic function/polynomial of $G$.
+    \end{definition}
+    \begin{example}
+        For a connected graph $K_n$, we have \[
+            p_{K_n}(k) = k \cdot (k - 1) \cdots (k - n + 1) =
+            \frac{k!}{(k - n)!}.
+        \] 
+    \end{example}
+    \begin{example}
+        For a path $P_n$, we have \[
+            p_{P_n}(k) = k\cdot (k - 1)^{n - 1}.
+        \] 
+    \end{example}
+
+    \begin{theorem}
+        Consider a simple graph $G$, and perform an edge contraction to get $G/e$,
+        i.e.\ pick an edge $e = \{x, y\}$ and collapse it into a single vertex $v$.
+        Then,
+        \[
+            p_G = p_{G - e} - p_{G / e}.
+        \] 
+    \end{theorem}
+    \begin{proof}
+        When colouring $G - e$, the vertices $x, y$ either get the same colour, or
+        different colours. We must discard the former case; each of these cases
+        directly corresponds to a colouring of $G / e$.
+    \end{proof}
+
+    \begin{example}
+        Given a cycle $C_n$, we have \[
+            p_{C_n} = p_{P_n} - p_{C_{n - 1}}.
+        \] 
+    \end{example}
+
+    \begin{theorem}
+        We can write \[
+            p_G(k) = \sum_r f(r)\, \mathcal{K}_{(r)},
+        \] where $f(r)$ is the number of ways of partitioning the vertices of $G$
+        into $r$ independent sets, and $\mathcal{K}_{(r)}$ is the number of ways of
+        colouring the parts of such a partition.
+    \end{theorem}
+
+    \begin{theorem}[Brook]
+        If $G$ is a connected graph that is neither a complete graph nor an odd
+        cycle, then $\chi(G) \leq \Delta(G)$.
+    \end{theorem}
+
+
+    \subsection{Planar graphs}
+    \begin{definition}
+        A planar graph is one which can be drawn on a plane without any edge
+        crossings.
+    \end{definition}
+
+    \begin{example}
+        The graphs $Q_3$, $K_4$, $K_{2, n}$ are all planar. The graphs $K_5$, $K_{3,
+        3}$ are not.
+    \end{example}
+    \begin{example}
+        Any tree is planar.
+    \end{example}
+
+    \begin{definition}
+        A planar graph partitions the plane into a number of arc-wise connected open
+        sets, called faces.
+    \end{definition}
+
+    \begin{theorem}[Euler]
+        A connected planar graph with $n$ vertices, $m$ edges, and $f$ faces obeys \[
+            n - m + f = 2.
+        \] 
+        \begin{remark}
+            If $G$ is planar but not connected, say with $k$ components, then \[
+                n - m + f = k + 1.
+            \] 
+        \end{remark}
+    \end{theorem}
+
+    \begin{definition}
+        The girth of a graph $G$ is the length of the smallest cycle present in it.
+        \begin{remark}
+            We set the girth of an acyclic graph to be $\infty$.
+        \end{remark}
+    \end{definition}
+
+    \begin{theorem}
+        A simple planar graph on $n$ vertices with girth at least $g \geq 3$ has at
+        most $\max(g(n - 2)/(g - 2), n - 1)$ edges.
+    \end{theorem}
+    \begin{proof}
+        First suppose that $G$ is acyclic. Note that a tree has exactly $n - 1$
+        edges, thus a forest will have at most that many edges.
+
+        Otherwise for cyclic graphs $G$, we apply induction on $n$. The base case $n
+        = 3$, $g = 3$ is easily checked. Now suppose that the theorem holds for any
+        simple planar graph on less than $n$ vertices. Without loss of generality,
+        let $G$ be a connected simple planar graph on $n$ vertices.
+
+        \paragraph{Case I:} $G$ has a bridge, say $\{x, y\}$. In other words,
+        removing this edge gives two disjoint subgraphs $G_1$ and $G_2$. Now, the
+        girths of each of these must be at least $g$. Then, \[
+            m \leq m_1 + m_2 + 1 \leq \max\left(\frac{g_1(n_1 - 2)}{g_1 - 2}, n_1 -
+            1\right) + \max\left(\frac{g_2(n_2 - 2)}{g_2 - 2}, n_2 - 1\right) + 1.
+        \] The desired inequality follows by taking cases (both have cycles, exactly
+        one has a cycle).
+
+        \paragraph{Case II:} $G$ does not have a bridge. Then, every edge is part of
+        some cycle, hence every edge separates two distinct faces. Let $G$ have $f$
+        faces, and let $f_i$ be the number of faces incident to exactly $i$ edges.
+        Then, \[
+            f = \sum_i f_i, \qquad 2m = \sum_i if_i = \sum_{i \geq g} if_i \geq gf =
+            g(2 - n + m).
+        \] Rearranging, $m \leq g(n - 2) / (g - 2)$ as desired.
+    \end{proof}
+
+    \begin{corollary}
+        For any planar graph, $\delta(G) \leq 5$.
+    \end{corollary}
+    \begin{proof}
+        This is trivial for $n \geq 3$. Otherwise, \[
+            \delta(G)\cdot n \leq \sum_i d_i = 2m \leq 2\cdot 3(n - 2) = 6n - 12.
+        \] Thus, $\delta(G) \leq 5$.
+    \end{proof}
 
 \end{document}
