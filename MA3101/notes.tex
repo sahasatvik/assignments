@@ -549,8 +549,8 @@
     \begin{proof}
         Let $f$ be a continuous map on the connected set $X$, and let $Y$ be the
         image of $X$. If $U$, $V$ is a separation of $Y$, then it can be shown that
-        $f^{-1}(U)$, $f^{-1}(V)$ constitutes a separation of $X$, which is a
-        contradiction.
+        $\gamma^{-1}(U)$, $\gamma^{-1}(V)$ constitutes a separation of $X$, which is
+        a contradiction.
     \end{proof}
 
     \begin{definition}
@@ -1138,7 +1138,7 @@
     \subsection{Taylor's theorem}
     
     \begin{theorem}
-        Let $f\colon \R^n \to \R^n$ have continuous second order partial derivatives.
+        Let $f\colon \R^n \to \R$ have continuous second order partial derivatives.
         Then, \[
             \frac{\partial^2 f}{\partial x_i\partial x_j} = \frac{\partial^2
             f}{\partial x_j\partial x_i}.
@@ -1156,7 +1156,7 @@
             & + \frac{\partial^2 f}{\partial x\partial y}(x - x_0)(y - x_0) + R(x,
             y),
         \end{align*}
-        where as $(x, y) \to (x_0, y_0) \to 0$, the remainder term vanishes as \[
+        where as $(x, y) \to (x_0, y_0)$, the remainder term vanishes as \[
             \frac{|R(x, y)|}{\norm{(x - x_0, y - y_0)}^2} \to 0.
         \] All partial derivatives here are evaluated at $(x_0, y_0)$.
     \end{theorem}
@@ -1189,8 +1189,9 @@
             y_0)^2 + R_2.
         \] For non-degeneracy of solutions, we demand $AC - B^2 \neq 0$, i.e.\ at
         $(x_0, y_0)$, we want \[
-            \left[\frac{\partial^2 f}{\partial x \partial y}\right]^2 \neq \pp{f}{x}
-            \pp{f}{y}.
+            \left[\frac{\partial^2 f}{\partial x \partial y}\right]^2 \neq
+            \frac{\partial^2 f}{\partial x^2}
+            \frac{\partial^2 f}{\partial y^2}.
         \] 
 
         If $AC - B^2 > 0$ and $\partial^2f / \partial x^2 > 0$, then we have found a
@@ -1275,7 +1276,7 @@
     \begin{example}
         Let $f\colon \R^2 \to \R^2$ be continuous, and let $\gamma$ be a smooth curve
         in $\R^2$. We may denote \[
-            \int_\gamma \cdot ds = \int_\gamma f^1\:dx + f^2\:dy.
+            \int_\gamma f \cdot ds = \int_\gamma f^1\:dx + f^2\:dy.
         \] 
     \end{example}
 
