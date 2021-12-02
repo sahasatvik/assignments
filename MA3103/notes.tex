@@ -385,7 +385,7 @@
         obvious, since \[
             |E| \leq \frac{n (n - 1)}{2} \leq \frac{n^2}{2}\left(1 -
             \frac{1}{r}\right).
-        \] Otherwise, we have $n \geq n + 1$. Let $G$ have the maximum number of
+        \] Otherwise, we have $n \geq r + 1$. Let $G$ have the maximum number of
         edges such that it is $K_{r + 1}$ free. We argue that $G$ must contain $K_r$;
         if not, there is still scope for adding edges. Call the vertices in this
         subset $A$, and the remaining vertices $B$. Clearly, $|A| = r$ and $|B| = n -
@@ -480,14 +480,15 @@
         + t = 6$, we know that $R(1, 5)$, $R(2, 4)$, $R(3, 3)$ are all finite.
         Furthermore, $R(s, 1) = R(1, t) = 1$. Suppose that $R(s - 1, t)$ and $R(s, t
         - 1)$ are both finite; we claim that $R(s, t) < R(s - 1, t) + R(s, t - 1)$.
-        Without loss of generality, let $s \geq t$. Consider a complete graph $K_n$ on
-        $R(s - 1, t) + R(s, t - 1) = n$ vertices. Choose a vertex $v$, and let $V_R$
-        be the set of its neighbours connected by red edges, $V_B$ be the neighbours
-        connected by blue edges. Clearly, $n = |V_R| + |V_B| + 1$, so either $|V_R|
-        \geq R(s - 1, t)$ or $|V_B| \geq R(s, t - 1)$. In the first case, the
-        consider the subgraph induced by $V_R$; either it contains a blue $t$-clique,
-        or a red $s - 1$ clique which means that $V_R \cup \{v\}$ contains a
-        $s$-clique. In either case, we are done. The case with $V_B$ is analogous.
+        Without loss of generality, let $s \geq t$. Consider a complete graph $K_n$
+        on $R(s - 1, t) + R(s, t - 1) = n$ vertices. Choose a vertex $v$, and let
+        $V_R$ be the set of its neighbours connected by red edges, $V_B$ be the
+        neighbours connected by blue edges. Clearly, $n = |V_R| + |V_B| + 1$, so
+        either $|V_R| \geq R(s - 1, t)$ or $|V_B| \geq R(s, t - 1)$. In the first
+        case, consider the subgraph induced by $V_R$; either it contains a blue
+        $t$-clique, or a red $s - 1$ clique which means that $V_R \cup \{v\}$
+        contains a red $s$-clique. In either case, we are done. The case with $V_B$
+        is analogous.
     \end{proof}
     \begin{remark}
         This upper bound can be sharpened to $R(s - 1, t) + R(s, t - 1) - 1$ when
@@ -750,9 +751,9 @@
         \] 
     \end{corollary}
 
-    \begin{definition}
+    \begin{lemma}
         Any dominating set which is independent is also maximally independent.
-    \end{definition}
+    \end{lemma}
     
     \subsection{Matching edges}
 
@@ -979,7 +980,7 @@
         - 2}$ --- called a Pr\"ufer code --- of $n - 2$ elements (not necessarily
         distinct) from $\{1, 2, \dots, n\}$. In the first step, pick a leaf with the
         smallest label, and call it $b_1$. Set $a_1$ to the adjacent vertex of $b_1$.
-        Now, delete $b_1$ from the tree. The Pr\"fer sequence of our original
+        Now, delete $b_1$ from the tree. The Pr\"ufer sequence of our original
         tree is $a_1$, followed by the sequence corresponding to the new tree.
         
         Given a Pr\"ufer sequence, we can construct a tree. Let $b_1$ be the smallest
@@ -1029,13 +1030,16 @@
 
     \begin{definition}
         A vertex transitive graph is one in which all vertices are similar. In other
-        words, given any two arbitrary vertices, there exists an isomorphism of the
-        graph which sends one to the other.
+        words, given any two arbitrary vertices, there exists graph automorphism
+        which sends one to the other.
     \end{definition}
     \begin{example}
         Every vertex transitive graph is regular. The converse is not true.
     \end{example}
 
+
+
+    \subsection{Graph colourings}
 
     \begin{definition}
         A proper colouring of a graph is an assignment of colours to its vertices
@@ -1044,9 +1048,6 @@
             This is equivalent to realizing the graph as a $k$-partite graph.
         \end{remark}
     \end{definition}
-
-
-    \subsection{Graph colourings}
 
     \begin{definition}
         The chromatic number of a graph is the minimum number of colours needed to
