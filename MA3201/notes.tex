@@ -1,0 +1,158 @@
+\documentclass[11pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage[scr]{rsfso}
+\usepackage{bm}
+\usepackage[%
+    hidealllines=true,%
+    innerbottommargin=15,%
+    nobreak=true,%
+]{mdframed}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+
+\geometry{a4paper, margin=1in, headheight=14pt}
+
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand\headrulewidth{0.4pt}
+\fancyhead[L]{\scshape MA3201: Topology}
+\fancyhead[R]{\scshape \leftmark}
+\rfoot{\footnotesize\it Updated on \today}
+\cfoot{\thepage}
+
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+
+\newmdtheoremenv[%
+    backgroundcolor=blue!10!white,%
+]{theorem}{Theorem}[section]
+\newmdtheoremenv[%
+    backgroundcolor=violet!10!white,%
+]{corollary}{Corollary}[theorem]
+\newmdtheoremenv[%
+    backgroundcolor=teal!10!white,%
+]{lemma}[theorem]{Lemma}
+
+\theoremstyle{definition}
+\newmdtheoremenv[%
+    backgroundcolor=green!10!white,%
+]{definition}{Definition}[section]
+\newmdtheoremenv[%
+    backgroundcolor=red!10!white,%
+]{exercise}{Exercise}[section]
+
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\newtheorem*{example}{Example}
+\newtheorem*{solution}{Solution}
+
+\surroundwithmdframed[%
+    linecolor=black!20!white,%
+    hidealllines=false,%
+    innertopmargin=5,%
+    innerbottommargin=10,%
+    skipabove=0,%
+    skipbelow=0,%
+]{example}
+
+\numberwithin{equation}{section}
+
+\title{
+    \Large\textsc{MA3201} \\
+    \Huge \textbf{Topology} \\
+    \vspace{5pt}
+    \Large{Spring 2022}
+}
+\author{
+    \large Satvik Saha
+    \\\textsc{\small 19MS154}
+}
+\date{\normalsize
+    \textit{Indian Institute of Science Education and Research, Kolkata, \\
+    Mohanpur, West Bengal, 741246, India.} \\
+}
+
+\begin{document}
+    \maketitle
+
+    \tableofcontents
+
+    \section{Introduction}
+    
+    \subsection{Topological spaces}
+
+    \begin{definition}
+        A topology on some set $X$ is a family $\tau$ of subsets of $X$,
+        satisfying the following.
+        \begin{enumerate}
+            \itemsep0em
+            \item $\emptyset, X \in \tau$.
+            \item All unions of elements from $\tau$ are in $\tau$.
+            \item All finite intersections of elements from $\tau$ are in $\tau$.
+        \end{enumerate}
+        The sets from $\tau$ are declared to be open sets in the topological space
+        $(X, \tau)$.
+    \end{definition}
+    \begin{example}
+        Any set $X$ admits the indiscrete topology $\tau_{id} = \{\emptyset, X\}$, as
+        well as the discrete topology $\tau_{d} = \mathcal{P}(X)$. Both of these are
+        trivial examples.
+    \end{example}
+    \begin{example}
+        Let $X$ be a set. The cofinite topology on $X$ is the collection of
+        complements of finite sets, along with the empty set. Note that when $X$ is
+        finite, this is simply the discrete topology.
+    \end{example}
+
+    \begin{definition}
+        Let $\tau, \tau'$ be two topologies on the set $X$. We say that $\tau$ is
+        finer than $\tau'$ if $\tau$ has more open sets than $\tau'$. In such a case,
+        we also say that $\tau'$ is coarser than $\tau$.
+    \end{definition}
+
+    \begin{definition}
+        Let $(X, \tau)$ be a topological space. We say that $\beta \subseteq
+        \tau$ is a base of the topology $\tau$ such that every open set $U \in \tau$
+        is expressible as a union of elements from $\beta$. 
+    \end{definition}
+
+    \begin{definition}
+        Let $X$ be a set, and let $\beta$ be a collection of subsets of $X$
+        satisfying the following.
+        \begin{enumerate}
+            \itemsep0em
+            \item For every $x \in X$, there exists $x \in B \in \beta$.
+            \item For every $x \in X$ such that $x \in B_1 \cap B_2$, $B_1, B_2 \in
+            \beta$, there exists $x \in B \subseteq B_1 \cap B_2$ such that $B \in
+            \beta$.
+        \end{enumerate}
+        Then, $\beta$ generates a topology on $X$, namely the collection of all
+        unions of elements of $\beta$.
+    \end{definition}
+
+
+    \subsection{Continuous maps}
+
+    \begin{definition}
+        Let $f\colon X \to Y$ be a function between the topological spaces $(X,
+        \tau_X)$ and $(Y, \tau_Y)$. We say that $f$ is continuous if for every $U
+        \in \tau_Y$, we have $f^{-1}(U) \in \tau_X$. In other words, the pre-image of
+        every open set in $Y$ must be open in $X$.
+    \end{definition}
+
+    \begin{definition}
+        Let $f\colon X \to Y$ be a function between the topological spaces $(X,
+        \tau_X)$ and $(Y, \tau_Y)$. We say that $f$ is a homeomorphism if $f$ is
+        continuous, $f$ is invertible, and $f^{-1}$ is continuous. We also say that
+        $X$ and $Y$ are homeomorphic when such a homeomorphism between them exists.
+    \end{definition}
+
+\end{document}
