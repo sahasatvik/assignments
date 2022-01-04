@@ -1,0 +1,188 @@
+\documentclass[11pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage[scr]{rsfso}
+\usepackage{bm}
+\usepackage[%
+    hidealllines=true,%
+    innerbottommargin=15,%
+    nobreak=true,%
+]{mdframed}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+
+\geometry{a4paper, margin=1in, headheight=14pt}
+
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand\headrulewidth{0.4pt}
+\fancyhead[L]{\scshape MA3205: Geometry of Curves and Surfaces}
+\fancyhead[R]{\scshape \leftmark}
+\rfoot{\footnotesize\it Updated on \today}
+\cfoot{\thepage}
+
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+
+\newcommand{\ip}[2]{\langle #1, #2 \rangle}
+\newcommand{\norm}[1]{\Vert #1 \Vert}
+\renewcommand{\vec}[1]{\boldsymbol{#1}}
+
+\newcommand{\vx}{\vec{x}}
+\newcommand{\vy}{\vec{y}}
+\newcommand{\vv}{\vec{v}}
+\newcommand{\vw}{\vec{w}}
+\newcommand{\ve}{\vec{e}}
+
+\newcommand{\dd}[2]{\frac{d #1}{d #2}}
+\newcommand{\pp}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\ddn}[3][]{\frac{d^{#1} #2}{d #3^{#1}}}
+\newcommand{\ppn}[3][]{\frac{\partial^{#1} #2}{\partial #3^{#1}}}
+\newcommand{\grad}{\nabla}
+
+\newmdtheoremenv[%
+    backgroundcolor=blue!10!white,%
+]{theorem}{Theorem}[section]
+\newmdtheoremenv[%
+    backgroundcolor=violet!10!white,%
+]{corollary}{Corollary}[theorem]
+\newmdtheoremenv[%
+    backgroundcolor=teal!10!white,%
+]{lemma}[theorem]{Lemma}
+
+\theoremstyle{definition}
+\newmdtheoremenv[%
+    backgroundcolor=green!10!white,%
+]{definition}{Definition}[section]
+\newmdtheoremenv[%
+    backgroundcolor=red!10!white,%
+]{exercise}{Exercise}[section]
+
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\newtheorem*{example}{Example}
+\newtheorem*{solution}{Solution}
+
+\surroundwithmdframed[%
+    linecolor=black!20!white,%
+    hidealllines=false,%
+    innertopmargin=5,%
+    innerbottommargin=10,%
+    skipabove=0,%
+    skipbelow=0,%
+]{example}
+
+\numberwithin{equation}{section}
+
+\title{
+    \Large\textsc{MA3205} \\
+    \Huge \textbf{Geometry of Curves and Surfaces} \\
+    \vspace{5pt}
+    \Large{Spring 2022}
+}
+\author{
+    \large Satvik Saha
+    \\\textsc{\small 19MS154}
+}
+\date{\normalsize
+    \textit{Indian Institute of Science Education and Research, Kolkata, \\
+    Mohanpur, West Bengal, 741246, India.} \\
+}
+
+\begin{document}
+    \maketitle
+
+    \tableofcontents
+    
+    \section{Introduction}
+    
+    \subsection{Curves}
+    
+    \begin{definition}
+        A curve is a continuous map $\gamma\colon \R \to \R^n$.
+    \end{definition}
+
+    \begin{definition}
+        A smooth curve $\gamma\colon \R \to \R^n$ is $C^\infty$, i.e.\ differentiable
+        arbitrarily times.
+    \end{definition}
+
+    \begin{definition}
+        A closed curve $\gamma\colon \R \to \R^n$ is periodic, i.e\ there exists some
+        $c$ such that $\gamma(t + c) = \gamma(t)$ for all $t \in \R$.
+    \end{definition}
+    \begin{example}
+        Alternatively, a closed curve can be thought of as a continuous map
+        $\gamma\colon S^1 \to \R^n$. For instance, given a closed curve $\gamma\colon
+        \R \to \R^n$ with period $c$, we can define the corresponding map \[
+            \tilde{\gamma}\colon S^1 \to \R^n, \qquad \tilde{\gamma}(e^{it}) =
+            \gamma(ct / 2\pi).
+        \] 
+    \end{example}
+
+    \begin{definition}
+        A simple curve $\gamma\colon \R \to \R^n$ is injective on its period.
+    \end{definition}
+
+    \begin{theorem}[Four Vertex Theorem]
+        The curvature of a simple, closed, smooth plane curve has at least two local
+        minima and two local maxima.
+    \end{theorem}
+
+
+    \begin{definition}
+        A knot is a simple closed curve in $\R^3$.
+    \end{definition}
+
+    \begin{definition}
+        The total absolute curvature of a knot $K$ is the integral of the absolute
+        value of the curvature, taken over the curve, i.e.\ it is the quantity \[
+            \oint_K |\kappa(s)|\:ds.
+        \] 
+    \end{definition}
+    \begin{example}
+        The total absolute curvature of a circle is always $2\pi$.
+    \end{example}
+
+    \begin{theorem}[F\'ary-Milnor Theorem]
+        If the total absolute curvature of a knot $K$ is at most $4\pi$, then $K$ is
+        an unknot.
+    \end{theorem}
+
+    \begin{definition}
+        An immersed loop $\gamma$ is such that $\gamma'$ is never zero.
+    \end{definition}
+
+    \begin{definition}
+        Two loops are isotopic if there exists an interpolating family of loops
+        between them. Two immersed loops are isotopic if we can choose such an
+        interpolating family of immersed loops.
+    \end{definition}
+    \begin{example}
+        Without the restriction of immersion, any two loops $\gamma, \eta\colon S^1
+        \to \R^n$ would be isotopic, since we can always construct the linear
+        interpolations \[
+            H\colon S^1 \times [0, 1] \to \R^n, \qquad H(e^{i\theta}, t) = (1 -
+            t)\gamma(e^{i\theta}) + t\eta(e^{i\theta}).
+        \] 
+    \end{example}
+
+    \begin{theorem}[Hirsch-Smale Theory]
+        \mbox{}
+        \begin{enumerate}
+            \itemsep0em
+            \item Any two immersed loops in $\R^2$ are isotopic if and only if the
+            winding numbers match.
+            \item Any two immersed loops in $S^2$ are isotopic if and only if the
+            winding numbers modulo 2 match.
+        \end{enumerate}
+    \end{theorem}
+
+\end{document}
