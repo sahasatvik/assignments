@@ -1,0 +1,181 @@
+\documentclass[11pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage[scr]{rsfso}
+\usepackage{bm}
+\usepackage[%
+    hidealllines=true,%
+    innerbottommargin=15,%
+    nobreak=true,%
+]{mdframed}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+
+\geometry{a4paper, margin=1in, headheight=14pt}
+
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand\headrulewidth{0.4pt}
+\fancyhead[L]{\scshape MA3202: Algebra II}
+\fancyhead[R]{\scshape \leftmark}
+\rfoot{\footnotesize\it Updated on \today}
+\cfoot{\thepage}
+
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+
+\newmdtheoremenv[%
+    backgroundcolor=blue!10!white,%
+]{theorem}{Theorem}[section]
+\newmdtheoremenv[%
+    backgroundcolor=violet!10!white,%
+]{corollary}{Corollary}[theorem]
+\newmdtheoremenv[%
+    backgroundcolor=teal!10!white,%
+]{lemma}[theorem]{Lemma}
+
+\theoremstyle{definition}
+\newmdtheoremenv[%
+    backgroundcolor=green!10!white,%
+]{definition}{Definition}[section]
+\newmdtheoremenv[%
+    backgroundcolor=red!10!white,%
+]{exercise}{Exercise}[section]
+
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\newtheorem*{example}{Example}
+\newtheorem*{solution}{Solution}
+
+\surroundwithmdframed[%
+    linecolor=black!20!white,%
+    hidealllines=false,%
+    innertopmargin=5,%
+    innerbottommargin=10,%
+    skipabove=0,%
+    skipbelow=0,%
+]{example}
+
+\numberwithin{equation}{section}
+
+\title{
+    \Large\textsc{MA3202} \\
+    \Huge \textbf{Algebra II} \\
+    \vspace{5pt}
+    \Large{Spring 2022}
+}
+\author{
+    \large Satvik Saha
+    \\\textsc{\small 19MS154}
+}
+\date{\normalsize
+    \textit{Indian Institute of Science Education and Research, Kolkata, \\
+    Mohanpur, West Bengal, 741246, India.} \\
+}
+
+\begin{document}
+    \maketitle
+
+    \tableofcontents
+
+    \section{Rings}
+    
+    \subsection{Basic definitions}
+    \begin{definition}
+        A ring is a set $R$ equipped with two binary operations, namely addition and
+        multiplication, such that 
+        \begin{enumerate}
+            \itemsep0em
+            \item $(R, +)$ is an abelian group.
+            \begin{enumerate}
+                \itemsep0em
+                \item $a + b \in R$ for all $a, b \in R$.
+                \item $(a + b) + c = a + (b + c)$ for all $a, b, c \in R$.
+                \item $a + b = b + a$ for all $a, b \in R$.
+                \item There exists $0 \in R$ such that $a + 0 = a$ for all $a \in R$.
+                \item For each $a \in R$, there exists $-a \in R$ such that $a + (-a)
+                = 0$.
+            \end{enumerate}
+            \item $(R, \cdot)$ is a semi-group.
+            \begin{enumerate}
+                \itemsep0em
+                \item $a\cdot b \in R$ for all $a, b \in R$.
+                \item $(a\cdot b)\cdot c = a\cdot(b\cdot c)$ for all $a, b, c \in R$.
+            \end{enumerate}
+            \item Multiplication distributes over addition.
+            \begin{enumerate}
+                \itemsep0em
+                \item $a\cdot (b + c) = (a\cdot b) + (a\cdot c)$ for all $a, b, c \in R$.
+                \item $(b + c)\cdot a = (b\cdot a) + (c\cdot a)$ for all $a, b, c \in R$.
+            \end{enumerate}
+        \end{enumerate}
+        \begin{remark}
+            The following properties follow immediately,
+            \begin{enumerate}
+                \itemsep0em
+                \item $0\cdot a = 0$ for all $a \in R$.
+                \item $(-a)\cdot b = -(a\cdot b) = a\cdot(-b)$ for all $a, b \in R$.
+                \item $(na)\cdot b = n(a\cdot b) = a\cdot (nb)$ for all $a, b \in R$.
+            \end{enumerate}
+        \end{remark}
+    \end{definition}
+
+    \begin{example}
+        The integers $\Z$ form a ring, under the usual addition and multiplication.
+    \end{example}
+    \begin{example}
+        All fields, for instance the rational numbers $\Q$ or the real numbers $\R$,
+        are rings.
+    \end{example}
+    \begin{example}
+        The integers modulo $n$, namely $\Z/n\Z$, form a ring.
+    \end{example}
+    \begin{example}
+        If $R$ is a ring, then the algebra of polynomials $R[X]$ with coefficients
+        from $R$ form a ring.
+    \end{example}
+    \begin{example}
+        If $R$ is a ring, then the $n \times n$ matrices $M_n(R)$ with entries from
+        $R$ form a ring.
+    \end{example}
+
+    \begin{definition}
+        If $R$ is a ring and $(R, \cdot)$ is a monoid i.e.\ has an identity, then
+        this identity is unique and called the unity of the ring $R$. Such a ring $R$
+        is called a unit ring.
+    \end{definition}
+    \begin{example}
+        The even integers $2\Z$ form a ring, but do not contain the identity.
+    \end{example}
+
+    \begin{definition}
+        If $R$ is a ring and $(R, \cdot)$ is commutative, then $R$ is called a
+        commutative ring.
+    \end{definition}
+
+    \begin{definition}
+        Let $R$ be a unit ring. An element $a \in R$ is called a unit if there exists
+        $b \in R$ such that $a\cdot b = 1 = b\cdot a$. This $b \in R$ is unique, and
+        denoted by $a^{-1}$.
+    \end{definition}
+    \begin{example}
+        The units in $\Z$ are $\{1, -1\}$.
+    \end{example}
+
+    \begin{definition}
+        Let $R$ be a ring, and let $S \subseteq R$. We say $S$ is a subring of $R$ if
+        the structure $(S, +, \cdot)$ is a ring, with addition and multiplication
+        inherited from $R$.
+    \end{definition}
+    \begin{example}
+        The rings $n\Z$ for $n \in \N$ are all subrings of $\Z$.
+    \end{example}
+
+\end{document}
