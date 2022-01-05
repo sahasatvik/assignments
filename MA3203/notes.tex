@@ -1,0 +1,173 @@
+\documentclass[11pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage[scr]{rsfso}
+\usepackage{bm}
+\usepackage[%
+    hidealllines=true,%
+    innerbottommargin=15,%
+    nobreak=true,%
+]{mdframed}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+
+\geometry{a4paper, margin=1in, headheight=14pt}
+
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand\headrulewidth{0.4pt}
+\fancyhead[L]{\scshape MA3203: Analysis IV}
+\fancyhead[R]{\scshape \leftmark}
+\rfoot{\footnotesize\it Updated on \today}
+\cfoot{\thepage}
+
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+
+\newcommand{\ip}[2]{\langle #1, #2 \rangle}
+\newcommand{\norm}[1]{\Vert #1 \Vert}
+\renewcommand{\vec}[1]{\boldsymbol{#1}}
+
+\newcommand{\vx}{\vec{x}}
+\newcommand{\vy}{\vec{y}}
+\newcommand{\vv}{\vec{v}}
+\newcommand{\vw}{\vec{w}}
+\newcommand{\ve}{\vec{e}}
+
+\newcommand{\dd}[2]{\frac{d #1}{d #2}}
+\newcommand{\pp}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\ddn}[3][]{\frac{d^{#1} #2}{d #3^{#1}}}
+\newcommand{\ppn}[3][]{\frac{\partial^{#1} #2}{\partial #3^{#1}}}
+\newcommand{\grad}{\nabla}
+
+\newmdtheoremenv[%
+    backgroundcolor=blue!10!white,%
+]{theorem}{Theorem}[section]
+\newmdtheoremenv[%
+    backgroundcolor=violet!10!white,%
+]{corollary}{Corollary}[theorem]
+\newmdtheoremenv[%
+    backgroundcolor=teal!10!white,%
+]{lemma}[theorem]{Lemma}
+
+\theoremstyle{definition}
+\newmdtheoremenv[%
+    backgroundcolor=green!10!white,%
+]{definition}{Definition}[section]
+\newmdtheoremenv[%
+    backgroundcolor=red!10!white,%
+]{exercise}{Exercise}[section]
+
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\newtheorem*{example}{Example}
+\newtheorem*{solution}{Solution}
+
+\surroundwithmdframed[%
+    linecolor=black!20!white,%
+    hidealllines=false,%
+    innertopmargin=5,%
+    innerbottommargin=10,%
+    skipabove=0,%
+    skipbelow=0,%
+]{example}
+
+\numberwithin{equation}{section}
+
+\title{
+    \Large\textsc{MA3203} \\
+    \Huge \textbf{Analysis IV} \\
+    \vspace{5pt}
+    \Large{Spring 2022}
+}
+\author{
+    \large Satvik Saha
+    \\\textsc{\small 19MS154}
+}
+\date{\normalsize
+    \textit{Indian Institute of Science Education and Research, Kolkata, \\
+    Mohanpur, West Bengal, 741246, India.} \\
+}
+
+\begin{document}
+    \maketitle
+
+    \tableofcontents
+
+    \section{Measure theory}
+
+    \subsection{Introduction}
+    Measure theory seeks to generalize the notions of \emph{length}, \emph{area},
+    \emph{volume} to more general sets: this new notion is called a \emph{measure}.
+    This also allows us to generalize the notion of Riemann integration to a broader
+    class of functions.
+
+    Recall that continuous functions, or at least functions with finitely many
+    discontinuities on a closed interval are Riemann integrable. The Dirichlet
+    function, which is discontinuous everywhere, is not. \[
+        f\colon \R \to \R, \qquad x \mapsto \begin{cases}
+            1, &\text{ if } x \in \Q, \\
+            0, &\text{ if } x \notin \Q.
+        \end{cases}
+    \] This is simply because every non-empty interval contains at least one rational
+    and one irrational number, so the Darboux lower sum is always 0 and the upper sum
+    is always 1 regardless of the choice of partition.
+
+    On the other hand, if we had to assign a particular value to this integral,
+    intuition tells us that it ought to be zero. After all, the function $f$ attains
+    a non-zero value only on the countable set $\Q \cap [0, 1]$; it is zero almost
+    everywhere. Formally, we will show that $f$ is non-zero on a set of zero
+    Lebesgue measure, which will allow us to set this Lebesgue integral to zero. We
+    will see that with this new formulation of integration, we end up partitioning
+    the range of $f$ rather than it's domain, and write \[
+        \int f = 0\cdot \mu([0, 1]\setminus \Q) + 1\cdot \mu([0, 1] \cap \Q) = 0.
+    \] 
+    
+    \subsection{Basic definitions}
+
+    \begin{definition}
+        Let $X$ be a set, and let $\Sigma$ be a collection of subsets of $X$. We say
+        that $\Sigma$ is a $\sigma$-algebra over $X$ if it satisfies the following.
+        \begin{enumerate}
+            \itemsep0em
+            \item $\Sigma$ is closed under complementation.
+            \item $\Sigma$ contains $X$.
+            \item $\Sigma$ is closed under countable unions.
+        \end{enumerate}
+        \begin{remark}
+            The following properties follow immediately.
+            \begin{enumerate}
+                \itemsep0em
+                \item $\Sigma$ contains $\emptyset$.
+                \item $\Sigma$ is closed under countable intersections.
+            \end{enumerate}
+        \end{remark}
+    \end{definition}
+
+
+    \begin{definition}
+        Let $X$ be a set, and let $\Sigma$ be a $\sigma$-algebra over $X$. We say
+        that a function $\mu\colon \Sigma \to \R \cup \{-\infty, +\infty\}$ is called
+        a measure if it satisfies the following.
+        \begin{enumerate}
+            \itemsep0em
+            \item $\mu$ is non-negative.
+            \item $\mu(\emptyset) = 0$.
+            \item $\mu$ is additive over countable unions, i.e.\ for any countable
+            collection $\{E_i\}_{i = 1}^\infty$, we have \[
+                \mu\left(\bigcup_{i = 1}^\infty E_i\right) = \sum_{i = 1}^\infty
+                \mu(E_i).
+            \] 
+        \end{enumerate}
+    \end{definition}
+    
+
+
+\end{document}
