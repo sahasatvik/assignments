@@ -31,6 +31,8 @@
 \newcommand{\Z}{\mathbb{Z}}
 \newcommand{\N}{\mathbb{N}}
 
+\DeclareMathOperator{\ch}{ch}
+
 \newmdtheoremenv[%
     backgroundcolor=blue!10!white,%
 ]{theorem}{Theorem}[section]
@@ -174,6 +176,9 @@
         The units in $\Z$ are $\{1, -1\}$.
     \end{example}
 
+
+    \subsection{Subrings}
+
     \begin{definition}
         Let $R$ be a ring, and let $S \subseteq R$. We say $S$ is a subring of $R$ if
         the structure $(S, +, \cdot)$ is a ring, with addition and multiplication
@@ -181,6 +186,14 @@
     \end{definition}
     \begin{example}
         The rings $n\Z$ for $n \in \N$ are all subrings of $\Z$.
+    \end{example}
+    \begin{example}
+        Consider the rings $2\Z \subset \Z$. Here, $\Z$ is a unit ring but $2\Z$ is
+        not.
+    \end{example}
+    \begin{example}
+        Consider the rings $4\Z/12\Z \subset 2\Z/12\Z$. Here, $2\Z/12\Z$ is not a
+        unit ring but $4\Z/12\Z$ is.
     \end{example}
 
     \begin{lemma}
@@ -203,6 +216,9 @@
         Consider the ring $\Q$ and the subring $\Z$. It cal be shown that $\Q/\Z$ is
         not a ring under the `natural' multiplication.
     \end{example}
+
+    
+    \subsection{Ideals}
 
     \begin{definition}
         Let $R$ be a ring and let $I$ be a subset of $R$. We say that $I$ is an ideal
@@ -244,6 +260,14 @@
         Every ideal of $\Z$ is a principal ideal.
     \end{example}
 
+    \begin{lemma}
+        Let $R$ be a unit ring, and $I \subseteq R$ be an ideal. Then, $I = R$ if and
+        only if $I$ contains a unit.
+    \end{lemma}
+
+    
+    \subsection{Integral domains}
+    
     \begin{definition}
         Let $R$ be a ring and $a, b \in R$, $a, b \neq 0$. If $ab = 0$, we call $a$ a
         left zero divisor and $b$ a right zero divisor.
@@ -260,5 +284,76 @@
         When $p$ is prime, the rings $\Z/p\Z$ are integral domains. Note that this
         set is a group under both $+$ and $\cdot$.
     \end{example}
+
+    \begin{lemma}
+        Every field is an integral domain.
+    \end{lemma}
+
+    \begin{theorem}
+        Every finite integral domain is a field.
+    \end{theorem}
+    \begin{proof}
+        Let $R = \{x_1, \dots, x_n\}$ be a finite integral domain. We first show that
+        $R$ contains an identity $1$. Pick $x \neq 0$, and note that $x x_1, x x_2,
+        \dots, x x_n$ must all be distinct: otherwise $x x_i = x x_j$ would force
+        $x(x_i - x_j) = 0$. This forces $x = x x_k$ for some $x_k \neq 0$. Now, we
+        claim that $x_k$ is our identity. Indeed, given any $y \neq 0$, we write $y =
+        xx_l$ for some $x_l \neq 0$, hence $yx_k = x x_l x_k = x_l(x x_k) = x_lx =
+        y$.
+
+        Next, we show that every non-zero $x \in R$ has an inverse. Indeed, $1 = x_k$
+        must be one of the $x x_1, \dots, x x_n$, hence $1 = x x_m$ for some non-zero
+        $x_m$. This means that $x_m = x^{-1}$.
+    \end{proof}
+
+    \begin{definition}
+        Let $R$ be a ring. The characteristic of $R$ is the smallest positive integer
+        $n$ such that $nx = 0$ for all $x \in R$. If no such number $n$ exists, we
+        say that the characteristic of $R$ is zero. We denote the characteristic of
+        $R$ by $\ch(R)$.
+    \end{definition}
+    \begin{example}
+        We have $\ch(\Z) = 0$, $\ch(\Z/n\Z) = n$.
+    \end{example}
+
+    \begin{lemma}
+        Let $R$ be a unit ring. Then, $\ch(R)$ is the smallest positive integer $n$
+        such that $n\cdot 1 = 0$; if no such $n$ exists, then $\ch(R)$ is zero.
+    \end{lemma}
+
+    \begin{theorem}
+        Let $R$ be an integral domain. Then, $\ch(R)$ is either zero or a prime.
+    \end{theorem}
+    \begin{proof}
+        Let $R$ be an integral domain such that $\ch(R) = n \neq 0$. If $n$ is not a
+        prime, write $n = n_1n_2$ for $n_1, n_1 < n$. Then for any non-zero $x \in
+        R$, write $0 = n(x^2) = (n_1x)(n_2x)$. This forces one of $n_1x, n_2x = 0$;
+        say $n_1x = 0$. Now for any $y \in R$, we have $x(n_1 y) = (n_1 x)y = 0$.
+        Since $x \neq 0$, we have $n_1y = 0$ for all $y \in R$, contradicting the
+        minimality of $n$.
+    \end{proof}
+
+
+    \subsection{Simple rings}
+
+    \begin{definition}
+        A simple ring is one which has no non-trivial ideals. We typically demand
+        that multiplication in $R$ is non-trivial.
+    \end{definition}
+
+    \begin{lemma}
+        Every field is a simple ring.
+    \end{lemma}
+    \begin{proof}
+        If $R$ is a field and $I\subset R$ is an ideal with non-zero $a \in I$, then
+        $a^{-1} \in R$ hence $a^{-1}a = 1 \in I$. This immediately forces $I = R$.
+    \end{proof}
+    \begin{lemma}
+        If $R$ is a commutative, simple, unit ring, then $R$ is a field.
+    \end{lemma}
+    \begin{proof}
+        Pick non-zero $a \in R$, and set $I = (a)$. Since $R$ is simple, $I = R$,
+        hence $1 \in I = (a)$. In other words, $1 = ab$ for some $b \in R$.
+    \end{proof}
 
 \end{document}
