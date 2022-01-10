@@ -129,6 +129,14 @@
     the range of $f$ rather than it's domain, and write \[
         \int f = 0\cdot \mu([0, 1]\setminus \Q) + 1\cdot \mu([0, 1] \cap \Q) = 0.
     \] 
+
+    \begin{theorem}[Lebesgue criterion]
+        A function $f\colon [a, b] \to \R$ is Riemann integrable if and only if it is
+        bounded and its set of discontinuities has Lebesgue measure zero. This means
+        that the set of discontinuities of $f$ must be coverable by countably many
+        intervals $(x_i, y_i)$ such that the sum of lengths $y_i - x_i$ can be made
+        arbitrarily small.
+    \end{theorem}
     
     \subsection{Basic definitions}
 
@@ -147,6 +155,7 @@
                 \itemsep0em
                 \item $\Sigma$ contains $\emptyset$.
                 \item $\Sigma$ is closed under countable intersections.
+                \item $\Sigma$ is closed under differences.
             \end{enumerate}
         \end{remark}
     \end{definition}
@@ -167,6 +176,14 @@
             \] 
         \end{enumerate}
     \end{definition}
+
+    \begin{example}
+        In probability theory, we look at the event space $\mathcal{E}$ as a
+        $\sigma$-algebra over the sample space $\Omega$. The probability function $P$
+        is a measure on this event space such that $P(\Omega) = 1$.
+    \end{example}
+
+
     
 
 
