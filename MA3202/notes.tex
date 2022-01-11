@@ -265,6 +265,17 @@
         only if $I$ contains a unit.
     \end{lemma}
 
+    \begin{definition}
+        The sum of two ideals $I, J \subset R$ is defined \[
+            I + J = \{x + y: x \in I, y \in J\}.
+        \] Their product is defined \[
+            IJ = \{\sum_{i = 1}^n x_iy_i: x_i \in I, y_i \in J\}.
+        \]
+    \end{definition}
+
+    \begin{lemma}
+        The sum and product of two ideals of a ring are also ideals of that ring.
+    \end{lemma}
     
     \subsection{Integral domains}
     
@@ -355,5 +366,20 @@
         Pick non-zero $a \in R$, and set $I = (a)$. Since $R$ is simple, $I = R$,
         hence $1 \in I = (a)$. In other words, $1 = ab$ for some $b \in R$.
     \end{proof}
+
+
+    \subsection{Homomorphisms}
+    
+    \begin{definition}
+        Let $R, S$ be rings, and let $\varphi\colon R \to S$. We say that $\varphi$
+        is a ring homomorphism if $\varphi(x + y) = \varphi(x) + \varphi(y)$ and
+        $\varphi(xy) = \varphi(x)\varphi(y)$ for all $x, y \in R$. If $R$ and $S$ are
+        unit rings, we also demand that $\varphi(1_R) = 1_S$.
+    \end{definition}
+
+    \begin{definition}
+        A bijective homomorphism between two rings is called an isomorphism. If an
+        isomorphism exists between two rings, we say that they are isomorphic.
+    \end{definition}
 
 \end{document}
