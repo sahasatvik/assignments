@@ -368,18 +368,108 @@
     \end{proof}
 
 
-    \subsection{Homomorphisms}
+    \subsection{Homomorphisms and isomorphisms}
     
     \begin{definition}
         Let $R, S$ be rings, and let $\varphi\colon R \to S$. We say that $\varphi$
-        is a ring homomorphism if $\varphi(x + y) = \varphi(x) + \varphi(y)$ and
-        $\varphi(xy) = \varphi(x)\varphi(y)$ for all $x, y \in R$. If $R$ and $S$ are
-        unit rings, we also demand that $\varphi(1_R) = 1_S$.
+        is a ring homomorphism if 
+        \begin{enumerate}
+            \itemsep0em
+            \item $\varphi(x + y) = \varphi(x) + \varphi(y)$ for all $x, y \in R$.
+            \item $\varphi(xy) = \varphi(x)\varphi(y)$ for all $x, y \in R$.
+            \item $\varphi(1_R) = 1_S$.
+        \end{enumerate}
+        We only insist on 3 if both $R$ and $S$ are unit rings.
+        \begin{remark}
+            The following properties follow immediately.
+            \begin{enumerate}
+                \itemsep0em
+                \item $\varphi(0_R) = 0_S$.
+                \item $\varphi(-x) = -\varphi(x)$ for all $x \in R$.
+                \item $\varphi(nx) = n\varphi(x)$ for all $x \in R$, $n \in \Z$.
+                \item $\varphi(x - y) = \varphi(x) - \varphi(y)$ for all $x, y \in R$.
+            \end{enumerate}
+        \end{remark}
     \end{definition}
+
+    \begin{example}
+        The map $\varphi\colon \Z \to \Z/n\Z$, $k \mapsto k \bmod{n}$ is a
+        homomorphism.
+    \end{example}
 
     \begin{definition}
         A bijective homomorphism between two rings is called an isomorphism. If an
         isomorphism exists between two rings, we say that they are isomorphic.
     \end{definition}
+
+    \begin{example}
+        The map $\varphi\colon \Z \to n\Z$, $k \mapsto nk$ is an isomorphism.
+    \end{example}
+    \begin{example}
+        The map $\varphi\colon \C \to \C$, $z \mapsto \bar{z}$ is an isomorphism.
+    \end{example}
+
+    \begin{lemma}
+        The only isomorphism $\Z \to \Z$ is the identity map.
+    \end{lemma}
+    \begin{theorem}
+        The only isomorphism $\Q \to \Q$ is the identity map.
+    \end{theorem}
+    \begin{proof}
+        Let $\varphi\colon \Q \to \Q$ be an isomorphism. We must have $\varphi(1) =
+        1$, which immediately gives $\varphi(n) = n$ for all $n \in \Z$. Now for any
+        rational $p / q \in \Q$, note that $1 = \varphi(q \cdot 1 / q) = q \cdot
+        \varphi(1 / q)$, forcing $\varphi(1 / q) = 1 / q$. Thus, $\varphi(p / q) = p
+        / q$, completing the proof.
+    \end{proof}
+    
+    \begin{theorem}
+        The only isomorphism $\R \to \R$ is the identity map.
+    \end{theorem}
+    \begin{proof}
+        Let $\varphi\colon \R \to \R$ be an isomorphism. We must have $\varphi(q)
+        = q$ for all $q \in \Q$.
+
+        First we show that $\varphi$ is strictly increasing. Note that when $x > 0$,
+        $\varphi(x) = \varphi(\sqrt{x})^2 > 0$. Thus when $x > y$, $\varphi(x - y) >
+        0$, hence $\varphi(x) > \varphi(y)$.
+
+        Now let $x \in \R$; if $\varphi(x) \neq x$, we must have one of $\varphi(x) >
+        x$ or $\varphi(x) < x$. Assume the former, and find $q \in \Q$ such that
+        $\varphi(x) > q > x$. Now, $q > x$ gives $q = \varphi(q) > \varphi(x)$, a
+        contradiction.  An analogous argument gives a contradiction when $\varphi(x)
+        < x$, completing the proof.
+    \end{proof}
+    
+    \begin{theorem}
+        The only homomorphism $\R \to \R$ is the identity map.
+    \end{theorem}
+    \begin{proof}
+        If $\varphi\colon \R \to \R$ is a homomorphism, it is easy to check that
+        $\varphi^{-1}(0)$ is an ideal. Since $\R$ is simple, this must be $\{0\}$ or
+        $\R$; the latter can be ruled out since $\varphi(1) = 1$. In other words,
+        $\varphi^{-1} = \{0\}$ so $\varphi$ is injective. Following the previous
+        proof, $\varphi$ must be an isomorphism, hence the identity map.
+    \end{proof}
+
+    \begin{theorem}
+        The only isomorphisms $\C \to \C$ which sends $\R \to \R$ are the maps $z
+        \mapsto z$ and $z \mapsto \bar{z}$.
+    \end{theorem}
+    \begin{proof}
+        The previous theorem guarantees that any such isomorphism $\varphi\colon \C
+        \to \C$ is completely determined by $\varphi(i)$. Now, $-1 = \varphi(-1) =
+        \varphi(i)^2$, forcing $\varphi(i) = \pm i$.
+    \end{proof}
+
+    \begin{lemma}
+        The kernel of a ring homomorphism $\varphi\colon R \to S$ is an ideal of $R$.
+    \end{lemma}
+    \begin{proof}
+        If $x \in \ker\varphi$, then $\varphi(x) = 0$, hence for any $r \in R$ we
+        have $\varphi(rx) = \varphi(r) \varphi(x) = 0$. Thus, $rx \in
+        \varphi^{-1}(0)$. Also, recall that $\varphi^{-1}(0)$ is an additive subgroup
+        of $R$.
+    \end{proof}
 
 \end{document}
