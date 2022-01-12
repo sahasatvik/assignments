@@ -145,10 +145,13 @@
         that $\Sigma$ is a $\sigma$-algebra over $X$ if it satisfies the following.
         \begin{enumerate}
             \itemsep0em
-            \item $\Sigma$ is closed under complementation.
             \item $\Sigma$ contains $X$.
+            \item $\Sigma$ is closed under complementation.
             \item $\Sigma$ is closed under countable unions.
         \end{enumerate}
+        \begin{remark}
+            The first condition can be replaced by forcing $\Sigma$ to be non-empty.
+        \end{remark}
         \begin{remark}
             The following properties follow immediately.
             \begin{enumerate}
@@ -159,6 +162,20 @@
             \end{enumerate}
         \end{remark}
     \end{definition}
+    
+    \begin{example}
+        Given a set $X$, its power set forms a $\sigma$-algebra over $X$.
+    \end{example}
+    \begin{example}
+        Given a set $X$, the set $\{\emptyset, X\}$ forms a $\sigma$-algebra over
+        $X$.
+    \end{example}
+    \begin{example}
+        Given an uncountable set $X$, the following set forms a $\sigma$-algebra over
+        $X$. \[
+            \{E \subseteq X : E\text{ is countable or } E^c\text{ is countable}\}.
+        \] 
+    \end{example}
 
 
     \begin{definition}
@@ -169,8 +186,9 @@
             \itemsep0em
             \item $\mu$ is non-negative.
             \item $\mu(\emptyset) = 0$.
-            \item $\mu$ is additive over countable unions, i.e.\ for any countable
-            collection $\{E_i\}_{i = 1}^\infty$, we have \[
+            \item $\mu$ is additive over countable unions of disjoint sets, i.e.\ for
+            any countable collection $\{E_i\}_{i = 1}^\infty$ such that $E_i \cap E_j
+            = \emptyset$ for all pairs, we have \[
                 \mu\left(\bigcup_{i = 1}^\infty E_i\right) = \sum_{i = 1}^\infty
                 \mu(E_i).
             \] 
@@ -178,9 +196,21 @@
     \end{definition}
 
     \begin{example}
+        The trivial zero measure sends every set to zero.
+    \end{example}
+    \begin{example}
         In probability theory, we look at the event space $\mathcal{E}$ as a
         $\sigma$-algebra over the sample space $\Omega$. The probability function $P$
         is a measure on this event space such that $P(\Omega) = 1$.
+    \end{example}
+    \begin{example}
+        Let $X$ be a set, and let $\Sigma$ be its power set as a $\sigma$-algebra
+        over $X$. Fix $x_0 \in X$, and define \[
+            \mu\colon \Sigma \to [0, \infty], \qquad E \mapsto \begin{cases}
+                1, &\text{ if } x_0 \in E, \\
+                0, &\text{ if } x_0 \notin E. \\
+            \end{cases}
+        \] This is called the Dirac measure.
     \end{example}
 
 
