@@ -32,6 +32,7 @@
 \newcommand{\N}{\mathbb{N}}
 
 \DeclareMathOperator{\ch}{ch}
+\DeclareMathOperator{\im}{im}
 
 \newmdtheoremenv[%
     backgroundcolor=blue!10!white,%
@@ -276,6 +277,15 @@
     \begin{lemma}
         The sum and product of two ideals of a ring are also ideals of that ring.
     \end{lemma}
+
+    \begin{lemma}
+        Let $I, J \subset R$ be ideals in the commutative ring $R$. Then, $IJ \subset
+        I \cap J$.
+    \end{lemma}
+    \begin{example}
+        Note that for $2\Z, 2\Z \in \Z$, $(2\Z)(2\Z) = 4\Z$ but $2\Z \cap 2\Z = 2\Z$.
+        A related example is $R = 2\Z$, $I = 4\Z$, $J = 6\Z$.
+    \end{example}
     
     \subsection{Integral domains}
     
@@ -464,12 +474,64 @@
 
     \begin{lemma}
         The kernel of a ring homomorphism $\varphi\colon R \to S$ is an ideal of $R$.
+        Its image is a subring of $S$.
     \end{lemma}
     \begin{proof}
         If $x \in \ker\varphi$, then $\varphi(x) = 0$, hence for any $r \in R$ we
         have $\varphi(rx) = \varphi(r) \varphi(x) = 0$. Thus, $rx \in
         \varphi^{-1}(0)$. Also, recall that $\varphi^{-1}(0)$ is an additive subgroup
         of $R$.
+    \end{proof}
+
+    \begin{theorem}[First isomorphism theorem]
+        Let $\varphi\colon R \to S$ be a surjective ring homomorphism. Then, \[
+            R / \ker{\varphi} \cong \im{\varphi}.
+        \] 
+    \end{theorem}
+    \begin{proof}
+        Denote $I = \ker{\varphi}$, so the elements of $R/I$ are the cosets $x + I$
+        for $x \in R$. This gives us the natural map \[
+            \phi\colon R/I \to S, \qquad x + I \mapsto \varphi(x).
+        \] It can be shown that this map is well defined: if $x + I = y + I$, then $x
+        - y \in I$ so $\varphi(x - y) = 0$, or $\varphi(x) = \varphi(y)$. Now,
+        $\phi((x + I) + (y + I)) = \varphi(x + y) = \varphi(x) + \varphi(y) = \phi(x
+        + I) + \phi(y + I)$, and $\phi((x + I)(y + I)) = \varphi(xy) =
+        \varphi(x)\varphi(y) = \phi(x + I)\phi(y + I)$. Additionally, if $R$ and $S$
+        are both unit rings, then $\phi(1_R + I) = \varphi(1_R) = 1_S$. Thus, $\phi$
+        is a homomorphism. It is obvious that $\phi$ is surjective; also observe that
+        $\phi^{-1}(0) = 0 + I$, hence $\phi$ is also injective. This proves that
+        $\phi$ is an isomorphism, as desired.
+    \end{proof}
+
+    \begin{theorem}
+        Let $I, J \subset R$ be ideals. Then, \[
+            (I + J)/J \cong I/(I \cap J).
+        \] 
+    \end{theorem}
+    \begin{proof}
+        The map $\phi\colon I \to (I + J)/J$, $x \mapsto x + J$ can be shown to be a
+        surjective homomorphism. It's kernel consists of the elements in $I$ that get
+        mapped to $0 + J$, so $\ker{\phi} = I \cap J$. Applying the first isomorphism
+        theorem gives the desired result.
+    \end{proof}
+
+    \begin{lemma}
+        Let $I \subset R$ be an ideal, and let $\varphi\colon R \to S$ be a
+        surjective ring homomorphism, then $\varphi(I)$ is an ideal in $S$.
+    \end{lemma}
+
+    \begin{theorem}[Correspondence theorem]
+        Let $I \subset R$ be an ideal. Then there exists a one-to-one correspondence
+        between the ideals of $R$ containing $I$ with the ideals of $R/I$.
+    \end{theorem}
+    \begin{proof}
+        Use the surjective ring homomorphism $\phi\colon R \to R/I$, $x \mapsto x +
+        I$, which maps ideals in $R$ to ideals in $R/I$. Furthermore, given ideals
+        $J, J' \subset R$ such that $\varphi(J) = \varphi(J')$, note that $x \in J$
+        implies $\varphi(x) \in \varphi(J) = \varphi(J')$ so $x \in J'$; this shows
+        that $J = J'$, hence our map is injective. Finally, given an ideal $K$ in
+        $R/I$, its pre-image under our map is the ideal $L = \{x \in R: x + I \in
+        K\}.
     \end{proof}
 
 \end{document}
