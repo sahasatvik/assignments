@@ -171,8 +171,8 @@
         $X$.
     \end{example}
     \begin{example}
-        Given an uncountable set $X$, the following set forms a $\sigma$-algebra over
-        $X$. \[
+        Given an uncountable set $X$, the following set forms the co-countable
+        $\sigma$-algebra over $X$. \[
             \{E \subseteq X : E\text{ is countable or } E^c\text{ is countable}\}.
         \] 
     \end{example}
@@ -213,6 +213,91 @@
         \] This is called the Dirac measure.
     \end{example}
 
+    \begin{example}
+        Let $X$ be a set, and let $\Sigma$ be its power set as a $\sigma$-algebra
+        over $X$. Define \[
+            \mu\colon \Sigma \to [0, \infty], \qquad E \mapsto \begin{cases}
+                0, &\text{ if } E = \emptyset, \\
+                |E|, &\text{ if } E\text{ is finite},\\
+                \infty, &\text{ otherwise}.
+            \end{cases}
+        \] This is called the counting measure.
+    \end{example}
+
+    \begin{example}
+        Let $X$ be an uncountable set, and let $\Sigma$ be its co-countable sigma
+        algebra. Define \[
+            \mu\colon \Sigma \to [0, \infty], \qquad E \mapsto \begin{cases}
+                0, &\text{ if } E \text{ is countable},\\
+                1, &\text{ if } E^c \text{ is countable}.\\
+            \end{cases}
+        \] 
+    \end{example}
+
+    \begin{lemma}
+        Let $(X, \Sigma, \mu)$ be a measure space. Then, the following properties
+        hold. \begin{enumerate}
+            \itemsep0em
+            \item If $A, B \in \Sigma$ such that $A \subseteq B$, then $\mu(A) \leq
+            \mu(B)$.
+            \item If $A, B \in \Sigma$ such that $A \subseteq B$ and $\mu(A)$ is
+            finite, then $\mu(B - A) = \mu(B) - \mu(A)$.
+            \item If $\{E_i\}_{i = 1}^\infty$ such that $E_i \in \Sigma$, then \[
+                \mu\left(\bigcup_{i = 1}^\infty E_i\right) \leq \sum_{i = 1}^\infty
+                \mu(E_i).
+            \] 
+        \end{enumerate}
+    \end{lemma}
+
+    \begin{theorem}[Continuity from below]
+        Let $(X, \Sigma, \mu)$ be a measure space, and let $\{E_i\}_{i = 1}^\infty$
+        be a sequence of measurable sets such that $E_i \subseteq E_j$ for all $i <
+        j$. Then, \[
+            \mu\left(\bigcup_{i = 1}^\infty E_i\right) = \lim_{n \to \infty}
+            \mu(E_n).
+        \] 
+    \end{theorem}
+    \begin{proof}
+        Define $F_i = E_i - E_{i - 1}$, denoting $E_0 = \emptyset$. Thus, \[
+            \mu\left(\bigcup_{i = 1}^\infty E_i\right) = \mu\left(\bigcup_{i =
+            1}^\infty F_i\right) = \sum_{i = 1}^\infty \mu(F_i).
+        \] Also note that \[
+            \sum_{i = 1}^n \mu(F_i) = \mu\left(\bigcup_{i = 1}^\infty F_n\right) =
+            \mu(E_n).
+        \] Since the infinite sum in the first part is the limit of partial sums, we
+        have our result.
+    \end{proof}
+    
+    \begin{theorem}[Continuity from above]
+        Let $(X, \Sigma, \mu)$ be a measure space, and let $\{E_i\}_{i = 1}^\infty$
+        be a sequence of measurable sets such that $E_i \supseteq E_j$ for all $i <
+        j$. Further assume that $\mu(E_1)$ is finite. Then, \[
+            \mu\left(\bigcap_{i = 1}^\infty E_i\right) = \lim_{n \to \infty}
+            \mu(E_n).
+        \] 
+    \end{theorem}
+    \begin{proof}
+        Define $F_i = E_1 - E_n$, and note that $F_i \subseteq F_j$ for all $i < j$.
+        Thus, \[
+            \mu\left(\bigcup_{i = 1}^\infty F_i\right) = \lim_{n \to \infty}
+            \mu(F_n).
+        \] This can be rewritten as \[
+            \mu\left(E_1 - \bigcap_{i = 1}^\infty E_i\right) = \lim_{n \to \infty}
+            \mu(E_1 - E_n).
+        \] Using the subtractive property and the fact that each $\mu(E_i)$ is
+        finite, \[
+            \mu(E_1) - \mu\left(\bigcap_{i = 1}^\infty E_i\right) = \lim_{n \to \infty}
+            \mu(E_1) - \mu(E_n).
+        \] Pulling the constant $\mu(E_1)$ out from the limit and subtracting from
+        both sides gives our result.
+    \end{proof}
+    \begin{example}
+        Consider the counting measure $\mu$ on $(\N, \mathcal{P}(\N))$, and define
+        $E_n = \{n, n + 1, \dots \}$. Then, \[
+            \mu\left(\bigcap_{i = 1}^\infty E_i\right) = 0, \qquad \lim_{n \to
+            \infty} \mu(E_n) = \infty.
+        \] 
+    \end{example}
 
     
 
