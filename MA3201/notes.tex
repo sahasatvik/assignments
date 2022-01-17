@@ -289,7 +289,51 @@
     \begin{example}
         The order topology on $\N$ is precisely the discrete topology.
     \end{example}
+
+    \begin{definition}
+        Let $X_1, X_2$ be simply ordered sets. The dictionary order on $X_1 \times
+        X_2$ is defined as follows: $(x_1, x_2) < (y_1, y_2)$ if $x_1 < y_1$, or if
+        $x_1 = y_1$ and $x_2 < y_2$.
+    \end{definition}
     
+    \begin{example}
+        Consider $X = \{1, 2\} \times \N$, where both $\{1, 2\}$ and $\N$ are endowed
+        with the discrete topology. Note that the product topology on $X$ is the
+        discrete topology.
+
+        Now consider the dictionary order on $X$. Here, $(1, 1)$ is the smallest
+        element, so we can list the elements of $X$ in ascending order. Note that
+        every $(1, m) < (2, n)$, for all $m, n \in \N$. Now, note that all singletons
+        $\{(1, m)\}$ are open in the order topology on $X$. The same is true for the
+        singletons $\{(1, n)\}$ for all $n > 1$. However, the singleton $\{(2, 1)\}$
+        is \emph{not} open in the order topology.
+    \end{example}
+
+    \begin{example}
+        Consider $\R$ with the usual topology, and $X = [0, 1) \cup \{2\}$. Then,
+        $\{2\}$ is open in the subspace topology on $X$, but it is not open in the
+        order topology on $X$.
+    \end{example}
+
+    \begin{lemma}
+        The open rays of the form $(a, +\infty)$ and $(-\infty, a)$ in $X$ form a
+        sub-basis of the order topology on $X$.
+    \end{lemma}
+    \begin{proof}
+        Note that $(a, b) = (-\infty, b) \cap (a, +\infty)$, $[a_0, b) = (-\infty,
+        b)$, and $(a, b_0] = (a, +\infty)$.
+    \end{proof}
+
+    \begin{definition}
+        Let $X$ be a simply ordered set, and $Y \subseteq X$. Then, we say that $Y$
+        is convex in $X$ if given $a, b \in Y$ such that $a < b$, the interval $(a,
+        b) = \{x \in X: a < x < b\} \subseteq Y$.
+    \end{definition}
+
+    \begin{theorem}
+        Let $Y$ be convex in $X$. Then, the subspace topology and the order topology
+        on $Y$ induced from the order topology on $X$ coincide.
+    \end{theorem}
 
 
     \subsection{Continuous maps}
