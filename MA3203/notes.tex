@@ -31,6 +31,8 @@
 \newcommand{\Z}{\mathbb{Z}}
 \newcommand{\N}{\mathbb{N}}
 
+\newcommand{\M}{\mathcal{M}}
+
 \newcommand{\ip}[2]{\langle #1, #2 \rangle}
 \newcommand{\norm}[1]{\Vert #1 \Vert}
 \renewcommand{\vec}[1]{\boldsymbol{#1}}
@@ -141,24 +143,24 @@
     \subsection{Basic definitions}
 
     \begin{definition}
-        Let $X$ be a set, and let $\Sigma$ be a collection of subsets of $X$. We say
-        that $\Sigma$ is a $\sigma$-algebra over $X$ if it satisfies the following.
+        Let $X$ be a set, and let $\M$ be a collection of subsets of $X$. We say
+        that $\M$ is a $\sigma$-algebra over $X$ if it satisfies the following.
         \begin{enumerate}
             \itemsep0em
-            \item $\Sigma$ contains $X$.
-            \item $\Sigma$ is closed under complementation.
-            \item $\Sigma$ is closed under countable unions.
+            \item $\M$ contains $X$.
+            \item $\M$ is closed under complementation.
+            \item $\M$ is closed under countable unions.
         \end{enumerate}
         \begin{remark}
-            The first condition can be replaced by forcing $\Sigma$ to be non-empty.
+            The first condition can be replaced by forcing $\M$ to be non-empty.
         \end{remark}
         \begin{remark}
             The following properties follow immediately.
             \begin{enumerate}
                 \itemsep0em
-                \item $\Sigma$ contains $\emptyset$.
-                \item $\Sigma$ is closed under countable intersections.
-                \item $\Sigma$ is closed under differences.
+                \item $\M$ contains $\emptyset$.
+                \item $\M$ is closed under countable intersections.
+                \item $\M$ is closed under differences.
             \end{enumerate}
         \end{remark}
     \end{definition}
@@ -179,8 +181,8 @@
 
 
     \begin{definition}
-        Let $X$ be a set, and let $\Sigma$ be a $\sigma$-algebra over $X$. We say
-        that a function $\mu\colon \Sigma \to \R \cup \{-\infty, +\infty\}$ is called
+        Let $X$ be a set, and let $\M$ be a $\sigma$-algebra over $X$. We say
+        that a function $\mu\colon \M \to \R \cup \{-\infty, +\infty\}$ is called
         a measure if it satisfies the following.
         \begin{enumerate}
             \itemsep0em
@@ -204,9 +206,9 @@
         is a measure on this event space such that $P(\Omega) = 1$.
     \end{example}
     \begin{example}
-        Let $X$ be a set, and let $\Sigma$ be its power set as a $\sigma$-algebra
+        Let $X$ be a set, and let $\M$ be its power set as a $\sigma$-algebra
         over $X$. Fix $x_0 \in X$, and define \[
-            \mu\colon \Sigma \to [0, \infty], \qquad E \mapsto \begin{cases}
+            \mu\colon \M \to [0, \infty], \qquad E \mapsto \begin{cases}
                 1, &\text{ if } x_0 \in E, \\
                 0, &\text{ if } x_0 \notin E. \\
             \end{cases}
@@ -214,9 +216,9 @@
     \end{example}
 
     \begin{example}
-        Let $X$ be a set, and let $\Sigma$ be its power set as a $\sigma$-algebra
+        Let $X$ be a set, and let $\M$ be its power set as a $\sigma$-algebra
         over $X$. Define \[
-            \mu\colon \Sigma \to [0, \infty], \qquad E \mapsto \begin{cases}
+            \mu\colon \M \to [0, \infty], \qquad E \mapsto \begin{cases}
                 0, &\text{ if } E = \emptyset, \\
                 |E|, &\text{ if } E\text{ is finite},\\
                 \infty, &\text{ otherwise}.
@@ -225,32 +227,52 @@
     \end{example}
 
     \begin{example}
-        Let $X$ be an uncountable set, and let $\Sigma$ be its co-countable sigma
+        Let $X$ be an uncountable set, and let $\M$ be its co-countable sigma
         algebra. Define \[
-            \mu\colon \Sigma \to [0, \infty], \qquad E \mapsto \begin{cases}
+            \mu\colon \M \to [0, \infty], \qquad E \mapsto \begin{cases}
                 0, &\text{ if } E \text{ is countable},\\
                 1, &\text{ if } E^c \text{ is countable}.\\
             \end{cases}
         \] 
     \end{example}
 
+
+    \begin{definition}
+        Let $(X, \M, \mu)$ be a measure space. \begin{enumerate}
+            \itemsep0em
+            \item We say that $\mu$ is finite if $\mu(E)$ is finite for all $E \in
+            \M$.
+            \item We say that $\mu$ is $\sigma$-finite if given $E \in \M$, we
+            can write \[
+                E = \bigcup_{i = 1}^\infty E_i
+            \] for $E_i \in \M$ such that each $\mu(E_i)$ is finite.
+        \end{enumerate}
+    \end{definition}
+
+
+    \subsection{Basic properties}
+
     \begin{lemma}
-        Let $(X, \Sigma, \mu)$ be a measure space. Then, the following properties
+        Let $(X, \M, \mu)$ be a measure space. Then, the following properties
         hold. \begin{enumerate}
             \itemsep0em
-            \item If $A, B \in \Sigma$ such that $A \subseteq B$, then $\mu(A) \leq
+            \item If $A, B \in \M$ such that $A \subseteq B$, then $\mu(A) \leq
             \mu(B)$.
-            \item If $A, B \in \Sigma$ such that $A \subseteq B$ and $\mu(A)$ is
+            \item If $A, B \in \M$ such that $A \subseteq B$ and $\mu(A)$ is
             finite, then $\mu(B - A) = \mu(B) - \mu(A)$.
-            \item If $\{E_i\}_{i = 1}^\infty$ such that $E_i \in \Sigma$, then \[
+            \item If $\{E_i\}_{i = 1}^\infty$ such that $E_i \in \M$, then \[
                 \mu\left(\bigcup_{i = 1}^\infty E_i\right) \leq \sum_{i = 1}^\infty
                 \mu(E_i).
             \] 
         \end{enumerate}
     \end{lemma}
 
+    \begin{corollary}
+        A measure $\mu$ is finite if and only if $\mu(X)$ is finite.
+    \end{corollary}
+
     \begin{theorem}[Continuity from below]
-        Let $(X, \Sigma, \mu)$ be a measure space, and let $\{E_i\}_{i = 1}^\infty$
+        Let $(X, \M, \mu)$ be a measure space, and let $\{E_i\}_{i = 1}^\infty$
         be a sequence of measurable sets such that $E_i \subseteq E_j$ for all $i <
         j$. Then, \[
             \mu\left(\bigcup_{i = 1}^\infty E_i\right) = \lim_{n \to \infty}
@@ -269,7 +291,7 @@
     \end{proof}
     
     \begin{theorem}[Continuity from above]
-        Let $(X, \Sigma, \mu)$ be a measure space, and let $\{E_i\}_{i = 1}^\infty$
+        Let $(X, \M, \mu)$ be a measure space, and let $\{E_i\}_{i = 1}^\infty$
         be a sequence of measurable sets such that $E_i \supseteq E_j$ for all $i <
         j$. Further assume that $\mu(E_1)$ is finite. Then, \[
             \mu\left(\bigcap_{i = 1}^\infty E_i\right) = \lim_{n \to \infty}
@@ -298,6 +320,37 @@
             \infty} \mu(E_n) = \infty.
         \] 
     \end{example}
+
+
+    \subsection{The Borel $\sigma$-algebra}
+
+    \begin{theorem}
+        Let $X$ be a set, and let $S$ be a collection of subsets of $X$. Then, there
+        exists a smallest $\sigma$-algebra containing $S$. This is called the
+        $\sigma$ algebra generated by $S$, denoted $\M(S)$.
+    \end{theorem}
+    \begin{proof}
+        Let $\Omega$ be the collection of all $\sigma$-algebras on $X$ containing
+        $S$. Note that $\Omega \neq \emptyset$, since it contains the power set of
+        $X$. Consider the intersection of all the sigma algebras in $\Omega$, \[
+            \M = \bigcap_{\M_\lambda \in \Omega} \M_\lambda.
+        \] We claim that $\M$ is indeed a $\sigma$-algebra. To see this, first note
+        that $X \in \M$. Next, pick $E \in \M \subseteq \M_\lambda$, so $E^c \in
+        \M_\lambda$ for all $\M_\lambda \in \Omega$, hence $E^c \in \M$. Finally,
+        pick $\{E_i\}_{i = 1}^\infty$ where $E_i \in \M \subseteq \M_\lambda$, which
+        shows that the union of these $E_i$ is in every $\M_\lambda$, hence in $\M$.
+    \end{proof}
+
+    \begin{definition}
+        Let $(X, \tau)$ be a topological space. The $\sigma$ algebra generated by
+        $\tau$ is called the Borel $\sigma$-algebra, $\mathcal{B}_X = \M(\tau)$.
+        \begin{remark}
+            The Borel $\sigma$-algebra $\mathcal{B}_X$ contains all open as well as
+            all closed sets in $X$, as well as their countable unions and
+            intersections.
+        \end{remark}
+    \end{definition}
+    
 
     
 
