@@ -103,7 +103,7 @@
     
     \section{Introduction}
     
-    \subsection{Curves}
+    \subsection{Some results}
     
     \begin{definition}
         A curve is a continuous map $\gamma\colon \R \to \R^n$.
@@ -178,11 +178,63 @@
         \mbox{}
         \begin{enumerate}
             \itemsep0em
-            \item Any two immersed loops in $\R^2$ are isotopic if and only if the
-            winding numbers match.
-            \item Any two immersed loops in $S^2$ are isotopic if and only if the
-            winding numbers modulo 2 match.
+            \item Any two immersed loops in $\R^2$ are isotopic if and only if their
+            turning numbers match.
+            \item Any two immersed loops in $S^2$ are isotopic if and only if their
+            turning numbers modulo 2 match.
         \end{enumerate}
     \end{theorem}
+
+
+    \subsection{Whitney's theorem}
+    
+    \begin{lemma}
+        Let $\Omega \subset \R^n$ be open and let $C \subseteq \Omega$ be closed.
+        Then there exists a continuous function $f\colon \Omega \to \R$ such that
+        $f^{-1}(0) = C$.
+        \begin{remark}
+            The converse, i.e.\ $f^{-1}(0) = C$ implies $C$ is closed, where $f$ is
+            continuous on $\Omega$, is trivial.
+        \end{remark}
+    \end{lemma}
+    \begin{proof}
+        Set $f$ to be the distance function from $C$, i.e.\ \[
+            f(x) = \inf_{y \in C} d(x, y). \qedhere
+        \] 
+    \end{proof}
+
+    \begin{theorem}[Whitney's Theorem]
+        Let $\Omega \subset \R^n$ be open and let $C \subseteq \Omega$ be closed.
+        Then there exists a smooth function $f\colon \Omega \to \R$ such that
+        $f^{-1}(0) = C$.
+    \end{theorem}
+
+    \begin{definition}
+        A parametrized curve in $\R^n$ is a smooth map $\gamma\colon (\alpha, \beta)
+        \to \R^n$ for some $\alpha, \beta$ with $-\infty \leq \alpha < \beta \leq
+        \infty$.
+        \begin{remark}
+            Here, we will always implicitly assume that maps are continuous.
+        \end{remark}
+        \begin{remark}
+            Such a curve is called regular if $\gamma'(t) \neq 0$ for all $t \in
+            (\alpha, \beta)$.
+        \end{remark}
+    \end{definition}
+    \begin{example}
+        The curve defined by \[
+            \gamma\colon \R \to \R^n, \qquad t \mapsto a + tb
+        \] is a straight line through the point $a$, in the direction $b$.
+    \end{example}
+    \begin{example}
+        The curve defined by \[
+            \gamma\colon \R \to \R^2, \qquad t \mapsto (\cos{t}, \sin{t})
+        \] is the unit circle in $\R^2$, counter-clockwise.
+    \end{example}
+    \begin{example}
+        The curve defined by \[
+            \gamma\colon \R \to \R^3, \qquad t \mapsto (t, \cos{t}, \sin{t})
+        \] is a helix in $\R^3$, wrapped around the $x$-axis.
+    \end{example}
 
 \end{document}
