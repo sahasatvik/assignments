@@ -286,6 +286,17 @@
         Note that for $2\Z, 2\Z \in \Z$, $(2\Z)(2\Z) = 4\Z$ but $2\Z \cap 2\Z = 2\Z$.
         A related example is $R = 2\Z$, $I = 4\Z$, $J = 6\Z$.
     \end{example}
+
+    \begin{lemma}
+        If $I, J \subset R$ are ideals in a unit commutative ring $R$, and $I + J =
+        R$, then $IJ = I \cap J$.
+    \end{lemma}
+    \begin{proof}
+        We already know that $IJ \subseteq I + J$. Since $I + J = R$, we can pick $x
+        \in I, y \in J$ such that $x + y = I$. Now pick $a \in I\cap J$, hence
+        $a\cdot 1 = ax + ay \in I \cap J$; but this is also an element of $IJ$
+        proving $I \cap J \subseteq IJ$.
+    \end{proof}
     
     \subsection{Integral domains}
     
@@ -531,7 +542,28 @@
         implies $\varphi(x) \in \varphi(J) = \varphi(J')$ so $x \in J'$; this shows
         that $J = J'$, hence our map is injective. Finally, given an ideal $K$ in
         $R/I$, its pre-image under our map is the ideal $L = \{x \in R: x + I \in
-        K\}.
+        K\}$.
+    \end{proof}
+
+
+    \begin{theorem}[Chinese remainder theorem]
+        Let $R$ be a commutative unit ring, and $I, J \subset R$ be ideals such that
+        $I + J = R$. Then, \[
+            R / IJ \cong R/I \times R/J.
+        \] 
+    \end{theorem}
+    \begin{proof}
+        Consider the map \[
+            \varphi\colon R \to R/I \times R/J, \qquad x \mapsto (x + I, x + J).
+        \] It is clear that this is a ring homomorphism. Furthermore, $\varphi$ is
+        surjective to see this, pick $a \in I$, $b \in J$ such that $a + b = 1$.
+        Then \[
+            \varphi(ay + bx) = (a(y - x) + x + I, b(x - y) + y + J) = (x + I, y + J).
+        \] 
+
+        Now, note that $\varphi(x) = (I, J)$ forces $x \in I \cap J$; but the latter
+        is just $IJ$ by a previous lemma. Applying the first isomorphism theorem
+        gives the desired result.
     \end{proof}
 
 \end{document}
