@@ -350,7 +350,52 @@
             intersections.
         \end{remark}
     \end{definition}
+
+    \begin{theorem}
+        Consider the collection $\beta$ of open intervals in $\R$, and the standard
+        topology $\tau$ on $\R$. Then, both $\beta$ and $\tau$ generate the same
+        Borel $\sigma$-algebra $\mathcal{B}_\R$.
+    \end{theorem}
+    \begin{proof}
+        This relies on the fact that every open set $U \subseteq \R$ can be written
+        as a countable union of open intervals. To see this, pick $x \in U$, and an
+        open interval $x \in (a, b) \subset U$. Now pick $p, q \in \Q$ such that $a <
+        p < x < q < b$, hence $x \in (p, q) \subset U$. Now, $U$ is precisely the
+        union of all such intervals $(p, q)$. This collection is countable, due to
+        the countability of the rationals.
+    \end{proof}
+    \begin{remark}
+        The same holds if we consider the collection $\beta'$ of closed intervals in
+        $\R$. This can be shown using the standard trick \[
+            (a, b) = \bigcup_{n = 1}^\infty \left[a + \frac{1}{n}, b -
+            \frac{1}{n}\right].
+        \] Indeed, we may also consider the collection of intervals of the form $[a,
+        b)$, or the collection of intervals $(a, b]$, or even the collection of
+        intervals $(a, \infty)$, or $(-\infty, b)$, or $[a, \infty)$, or $(-\infty,
+        b]$.
+    \end{remark}
+
+    \begin{definition}
+        A countable union of closed sets is called an $F_\sigma$ set. A countable
+        intersection of open sets is called a $G_\delta$ set.
+    \end{definition}
     
+
+    \begin{definition}
+        Let $(X, \M_X)$, $(Y, \M_Y)$ be measure spaces. We say that a function
+        $f\colon X \to Y$ is $(\M_X, \M_Y)$ measurable if for every $E \in \M_Y$, we
+        have $f^{-1}(E) = \M_X$.
+    \end{definition}
+    \begin{example}
+        Consider the Borel $\sigma$-algebra $\mathcal{B}_\R$ on $\R$, and fix $E \in
+        \mathcal{B}_\R$. Define the characteristic function \[
+            \chi_E\colon \R \to \R, \qquad x \mapsto \begin{cases}
+                1, &\text{ if } x \in E, \\
+                0, &\text{ if } x \notin E.
+            \end{cases}
+        \] Then, $\chi_E$ is measurable. However, we can choose $E$ to be closed and
+        not open, so that $\chi_E$ is not continuous.
+    \end{example}
 
     
 
