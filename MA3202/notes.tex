@@ -556,7 +556,7 @@
         Consider the map \[
             \varphi\colon R \to R/I \times R/J, \qquad x \mapsto (x + I, x + J).
         \] It is clear that this is a ring homomorphism. Furthermore, $\varphi$ is
-        surjective to see this, pick $a \in I$, $b \in J$ such that $a + b = 1$.
+        surjective: to see this, pick $a \in I$, $b \in J$ such that $a + b = 1$.
         Then \[
             \varphi(ay + bx) = (a(y - x) + x + I, b(x - y) + y + J) = (x + I, y + J).
         \] 
@@ -565,5 +565,40 @@
         is just $IJ$ by a previous lemma. Applying the first isomorphism theorem
         gives the desired result.
     \end{proof}
+
+
+    \subsection{Quotient field}
+
+    We recall the standard construction of $\Q$ from $\Z$, and generalize this to the
+    construction of the field $Q(R)$ from an integral domain $R$. Consider the
+    equivalence relation on the set $R \times R\setminus\{0\}$ defined by \[
+        (a, b) \sim (c, d) \;\Longleftrightarrow\; ad = bc.
+    \] This partitions $R \times R\setminus\{0\}$ into equivalence classes; let $Q(R)$
+    be the collection of these equivalence classes. Now define addition and
+    multiplication of elements from $Q(R)$ as \[
+        [a, b] + [c, d] = [ad + bc, bd], \qquad [a, b] \cdot [c, d] = [ac, bd].
+    \] It can be verified that this is well defined. Furthermore, we have an additive
+    identity $[0, a]$, a multiplicative identity $[a, a]$, and every non-zero element
+    $[a, b]$ has a multiplicative inverse $[b, a]$. The remaining properties can be
+    checked to show that $Q(R)$ is a field. We can now embed $R$ in $Q(R)$ via the
+    map \[
+        i\colon R \to Q(R), \qquad x \mapsto [ax, a].
+    \] It can also be shown that $Q(R)$ is the smallest field containing $R$. Indeed
+    if $j\colon R \to F$ is an embedding of $R$ in the field $F$, we can embed $Q(R)$
+    in $F$ using the map $[a, b] \mapsto j(a)\cdot j(b)^{-1}$.
+
+    \begin{remark}
+        We do not require $R$ to have a multiplicative identity!
+    \end{remark}
+
+    \begin{definition}
+        The field $Q(R)$ constructed as above is called the field of fractions, or
+        quotient field of the integral domain $R$.
+    \end{definition}
+
+    \begin{lemma}
+        Let $R_1, R_2$be integral domains. If $R_1 \cong R_2$, then $Q(R_1) \cong
+        Q(R_2)$.
+    \end{lemma}
 
 \end{document}
