@@ -85,17 +85,17 @@
 
     \tableofcontents
 
-    \section{Analysing data}
+    \section{Introduction}
 
-    \subsection{Categorizing data}
-    
     We are interested in two types of data: \emph{categorical} and \emph{numerical}.
     Categorical data used named qualities to describe a particular observation. This
     can be further categorized into \emph{nominal} and \emph{ordinal}; the latter
     admit a natural ordering. Numerical data uses numbers, and can be further
     categorized into \emph{discrete} and \emph{continuous}.
     
-    \subsection{Measures of central tendency}
+    \section{Measures of central tendency}
+
+    \subsection{Arithmetic mean}
     
     Suppose that we have been given a collection of $n$ numeric observations, denoted
     $x_1, x_2, \dots, x_n$. These may be concentrated around some specific point, or
@@ -136,7 +136,10 @@
     at most $f_ih / 2$, and the net deviation overall is at most $Nh / 2$. Putting
     everything together, we have \[
         |\bar{x} - \bar{x}^*| \leq \frac{h}{2}.
-    \] \\
+    \]
+
+    
+    \subsection{Geometric mean}
 
     Another measure of central tendency is the geometric mean $G$, calculated \[
         G = \sqrt[n]{x_1x_2\cdots x_n}.
@@ -147,13 +150,40 @@
     of the sets as \[
         \log{G} = \frac{1}{N}\sum_{i = 1}^k n_i\log{G_i}, \qquad N = \sum_{i = 1}^k
         n_i.
-    \] \\
+    \]
+    
+    \subsection{Harmonic mean}
 
     Another measure of central tendency is the harmonic mean $G$, calculated \[
         \frac{1}{H} = \frac{1}{n}\sum_{i = 1}^n \frac{1}{x_i}.
     \] The Harmonic means of combined data and sets of data are related as \[
         \frac{N}{H} = \sum_{i = 1}^k \frac{n_i}{H_i}, \qquad N = \sum_{i = 1}^k n_i.
     \] 
+
+    \begin{theorem}
+        Given two positive numbers, their arithmetic, geometric, and harmonic means
+        all lie between them.
+    \end{theorem}
+    \begin{proof}
+        Without loss of generality, let $x \geq y > 0$. Then for any $a, b$, we have
+        \[
+            x = \frac{ax + bx}{a + b} \geq \frac{ax + by}{a + b} \geq \frac{ay +
+            by}{a + b} = y.
+        \] Setting $a = b = 1 / 2$ give the result for the arithmetic mean. Now, the
+        logarithm function is monotonic for positive reals, so $\log{x} \geq
+        \log{y}$. Applying the above gives \[
+            \log{x} \geq \frac{1}{2}(\log{x} + \log{y}) \geq \log{y},
+        \] and taking exponentials yields \[
+            x \geq \sqrt{xy} \geq y.
+        \] Finally, applying the result to $1 / y \geq 1 / x$, we have \[
+            \frac{1}{y} \geq \frac{a / y + b / x}{a + b} \geq \frac{1}{x},
+        \] which we can rearrange and set $a = b = 1 / 2$ to get \[
+            x \geq \frac{2}{1 / x + 1 / y} \geq y. \qedhere
+        \] 
+    \end{proof}
+    \begin{remark}
+        The same proof applies for weighted means.
+    \end{remark}
 
     \begin{theorem}
         For $n$ observations $x_1, \dots, x_n$, the arithmetic mean, geometric mean,
@@ -193,6 +223,43 @@
             \sqrt[n]{x_1\cdots x_n} \geq \frac{n}{\sum_{i = 1}^n 1 / x_i}
         \] which is precisely $GM \geq HM$.
     \end{proof}
+
+
+    \subsection{Median}
+    
+    The median of a collection of ordered observations $x_1 \leq x_2 \leq \dots \leq
+    x_n$ is defined to be their middle value: $x_{k + 1}$ if $n = 2k + 1$ is odd, and
+    the mean $(x_{k} + x_{k + 1}) / 2$ if $n = 2k$ is even.
+
+    For grouped data, we assume that the observations are evenly distributed over
+    the median class $(l, u]$ with frequency $f_0$, width $h$. If the total frequency
+    is denoted by $N$, we write \[
+        \frac{M - l}{h} = \frac{N / 2 - n_l}{f_0}.
+    \] Here, $n_l$ is the cumulative frequency of the preceding classes. This will
+    give \[
+        M = l + \frac{N / 2 - n_l}{f_0}\cdot h.
+    \] 
+
+    \begin{theorem}
+        Let $\varphi$ be a monotone function, and let two variables be related as $y
+        = \varphi(x)$. Then their medians are related as $M_y = \varphi(M_x)$.
+    \end{theorem}
+    
+    \begin{theorem}
+        The median of a combination of two sets of observations lies in between the
+        individual medians.
+    \end{theorem}
+
+
+    \subsection{Mode}
+    
+    The mode of a collection of observations $x_1, \dots, x_n$ is the value with the
+    highest frequency.
+
+    For grouped data, we pick the value with the highest frequency density. Let $f_m$
+    denote the frequency of the modal class $(l, u]$. We approximate \[
+        M_0 = l + \frac{f_m - f_{m - 1}}{2f_m - f_{m - 1} - f_{m + 1}} \cdot c.
+    \] 
 
 
 \end{document}
