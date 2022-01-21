@@ -403,7 +403,105 @@
     \end{theorem}
 
 
-    \subsection{Continuous maps}
+    \begin{definition}
+        Let $A \subseteq X$ where $(X, \tau)$ is a topological space. We say that $x
+        \in X$ is a limit point of $X$ if for every open set $U$ containing $x$, the
+        deleted neighbourhood $U \setminus\{x\}$ has non-empty intersection with $A$.
+        The set of limit points of $A$ is denoted by $A'$.
+    \end{definition}
+
+    \begin{example}
+        Let $X$ be a set endowed with the discrete topology. Then, given any set $A
+        \subseteq X$, we have $A' = \emptyset$.
+    \end{example}
+
+    \begin{lemma}
+        A closed set contains all its limit points.
+    \end{lemma}
+    \begin{proof}
+        Let $F \subseteq X$ be closed in $X$, and let $x \in F'$. Then given any open
+        set containing $x$, we have $U \cap F \supseteq (U\setminus\{x\}) \cap F \neq
+        \emptyset$, hence $x \in \overline{F} = F$.
+    \end{proof}
+
+    \begin{lemma}
+        Let $A \subseteq X$ where $(X, \tau)$ is a topological space. Then,
+        $\overline{A} = A \cup A'$.
+    \end{lemma}
+    \begin{proof}
+        It is clear that $\overline{A} \supseteq A \cup A'$. Now pick $x \in
+        \overline{A}$. If $x \notin A$, then we know that given any open
+        neighbourhood $U$ of $x$, we have non-empty $U \cap A$. Furthermore, this
+        intersection can never contain $x$, hence $x \in A'$. This proves that
+        $\overline{A} \subseteq A \cup A'$.
+    \end{proof}
+
+
+    \subsection{Convergence of sequences}
+
+    \begin{definition}
+        Let $\{x_n\}_{n = 1}^\infty$ be a sequence of points from $(X, \tau)$, and
+        let $x \in X$. We say that this sequence converges to $x$, denoted $x_n \to
+        x$, if every open neighbourhood of $x$ contains the tail of this sequence. In
+        other words, given $U \in \tau$ such that $x \in U$, there must exist $N \in
+        \N$ such that $x_n \in U$ for all $n \geq N$.
+    \end{definition}
+
+    \begin{example}
+        Let $X = \{a, b, c\}$, and $\tau = \{\emptyset, \{b\}, \{a, b\}, \{b, c\},
+        X\}$. Then, the constant sequence of $b$'s converges to all three points $a,
+        b, c$.
+    \end{example}
+    \begin{example}
+        Let $X = \R$, and $\tau$ be the collection of all intervals $(-a, a)$
+        together with $\emptyset, \R$. Then, the constant sequence of $0$'s converges
+        to every point in $\R$.
+    \end{example}
+
+    \begin{definition}
+        Let $(X, \tau)$ be a topological space. We say that this topological space is
+        Hausdorff if given any two distinct points $x, y \in X$, there exist open
+        sets $U, V \in \tau$ such that $x \in U$, $y \in V$, and $U \cap V =
+        \emptyset$.
+    \end{definition}
+
+    \begin{example}
+        The real numbers under the standard topology is Hausdorff.
+    \end{example}
+
+    \begin{theorem}
+        Let $(X, \tau)$ be a Hausdorff topological space, and let $\{x_n\}_{n =
+        1}^\infty$ be a sequence of points in $X$. Then, this sequence can converge
+        to at most one point in $X$.
+    \end{theorem}
+    \begin{proof}
+        Suppose that $\{x_n\}_{n = 1}^\infty$ converges to distinct points $x, y \in
+        X$. Then there exist disjoint open neighbourhoods $U, V$ such that $x \in U$,
+        $y \in V$. Convergence means that both $U$ and $V$ contain a tail of the
+        sequence, which is a contradiction.
+    \end{proof}
+
+    \begin{lemma}
+        The singleton sets in a Hausdorff space are closed.
+    \end{lemma}
+    \begin{proof}
+        Let $x \in X$ where $(X, \tau)$ is Hausdorff. Pick $y \neq x$, whence there
+        exist $U_y, V_y \in \tau$, such that $x \in U_y$, $y \in V_y$, and $U_y \cap
+        V_y = \emptyset$. In particular, $\{x\} \cap V_y = \emptyset$. We now have \[
+            X\setminus \{x\} = \bigcup_{y \neq x} V_y,
+        \] which is open.
+    \end{proof}
+
+    \begin{theorem}
+        The topology induced by a metric is Hausdorff.
+    \end{theorem}
+    \begin{proof}
+        Given a metric space $X$ and distinct points $x, y \in X$, we set $r = |x -
+        y|$, $U = B(x, r/3)$, $V = B(y, r/3)$.
+    \end{proof}
+    
+
+    \section{Continuous maps}
 
     \begin{definition}
         Let $f\colon X \to Y$ be a function between the topological spaces $(X,
@@ -411,6 +509,16 @@
         \in \tau_Y$, we have $f^{-1}(U) \in \tau_X$. In other words, the pre-image of
         every open set in $Y$ must be open in $X$.
     \end{definition}
+
+    \begin{lemma}
+        A function $f\colon X \to Y$ is continuous if and only if given a base
+        $\beta$ of $Y$, we have $f^{-1}(U) \in \tau_X$ for every $U \in \beta$.
+    \end{lemma}
+    \begin{example}
+        The identity function $\operatorname{id}\colon \R_\ell \to \R$ is continuous, while the
+        identity function $\operatorname{id}\colon \R \to \R_\ell$ is not. This is
+        because the topology on $\R_\ell$ is strictly finer than that on $\R$.
+    \end{example}
 
     \begin{definition}
         Let $f\colon X \to Y$ be a function between the topological spaces $(X,
