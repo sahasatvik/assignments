@@ -103,7 +103,7 @@
     
     \section{Introduction}
     
-    \subsection{Some results}
+    \subsection{Curves}
     
     \begin{definition}
         A curve is a continuous map $\gamma\colon \R \to \R^n$.
@@ -185,30 +185,6 @@
         \end{enumerate}
     \end{theorem}
 
-
-    \subsection{Whitney's theorem}
-    
-    \begin{lemma}
-        Let $\Omega \subset \R^n$ be open and let $C \subseteq \Omega$ be closed.
-        Then there exists a continuous function $f\colon \Omega \to \R$ such that
-        $f^{-1}(0) = C$.
-        \begin{remark}
-            The converse, i.e.\ $f^{-1}(0) = C$ implies $C$ is closed, where $f$ is
-            continuous on $\Omega$, is trivial.
-        \end{remark}
-    \end{lemma}
-    \begin{proof}
-        Set $f$ to be the distance function from $C$, i.e.\ \[
-            f(x) = \inf_{y \in C} d(x, y). \qedhere
-        \] 
-    \end{proof}
-
-    \begin{theorem}[Whitney's Theorem]
-        Let $\Omega \subset \R^n$ be open and let $C \subseteq \Omega$ be closed.
-        Then there exists a smooth function $f\colon \Omega \to \R$ such that
-        $f^{-1}(0) = C$.
-    \end{theorem}
-
     \begin{definition}
         A parametrized curve in $\R^n$ is a smooth map $\gamma\colon (\alpha, \beta)
         \to \R^n$ for some $\alpha, \beta$ with $-\infty \leq \alpha < \beta \leq
@@ -236,5 +212,57 @@
             \gamma\colon \R \to \R^3, \qquad t \mapsto (t, \cos{t}, \sin{t})
         \] is a helix in $\R^3$, wrapped around the $x$-axis.
     \end{example}
+
+
+    \subsection{Whitney's theorem}
+    
+    \begin{lemma}
+        Let $\Omega \subset \R^n$ be open and let $C \subseteq \Omega$ be closed.
+        Then there exists a continuous function $f\colon \Omega \to \R$ such that
+        $f^{-1}(0) = C$.
+        \begin{remark}
+            The converse, i.e.\ $f^{-1}(0) = C$ implies $C$ is closed, where $f$ is
+            continuous on $\Omega$, is trivial.
+        \end{remark}
+    \end{lemma}
+    \begin{proof}
+        Set $f$ to be the distance function from $C$, i.e.\ \[
+            f(x) = \inf_{y \in C} d(x, y). \qedhere
+        \] 
+    \end{proof}
+
+    \begin{theorem}[Whitney's Theorem]
+        Let $\Omega \subset \R^n$ be open and let $C \subseteq \Omega$ be closed.
+        Then there exists a smooth function $f\colon \Omega \to \R$ such that
+        $f^{-1}(0) = C$.
+    \end{theorem}
+    \begin{proof}
+        Set $V = \Omega\setminus C$, and cover $V$ by a countable collection of open
+        balls, \[
+            V = \bigcup_{i = 1}^\infty B(q_k, r_k).
+        \] This can always be done since $V$ is open, and using the density of $\Q$
+        in $\R$ to pick only rational $q_k, r_k$. Now for each open ball $B(q_k,
+        r_k)$, we can construct a smooth bump functions $f_k$ such that $f^{-1}(0) =
+        \R^n\setminus B(q_k, r_k)$, $f^{-1}(1) = \overline{B(q_k, r_k / 2)}$, and all
+        derivatives of $f_k$ vanish on $\R^n\setminus B(q_k, r_k)$.
+
+        Define the weights \[
+            c_k = \max_{|\alpha| \leq k, y \in \overline{B(q_k, r_k)}}
+            \left|\ppn[\alpha]{f_k}{x}(y)\right|.
+        \] Note that each $c_k$ is well-defined: there are finitely many multi-indices
+        $\alpha$ given $k$, and each of the partials $\partial^\alpha f / \partial
+        x^\alpha$ is a smooth function over a compact set, hence bounded.
+        Furthermore, each $c_k \geq 1$. Finally, set \[
+            f = \sum_{k = 1}^\infty \frac{f_k}{2^k c_k}.
+        \] It is clear that $f^{-1}(0) = C$. We can show that the partial sums $s_n$
+        converge; let $\epsilon > 0$ and choose sufficiently large $N$ such that $1 /
+        2^N < \epsilon$. Now for $m > n \geq N$, examine \[
+            |s_m(x) - s_n(x)| = \sum_{k = n + 1}^m \frac{f_k(x)}{2^k c_k} \leq
+            \sum_{k = n + 1}^m \frac{1}{2^k} \leq \frac{1}{2^N} < \epsilon
+        \] Thus, the convergence is uniform, and $f$ is $C^0$. For higher
+        derivatives, we examine some $\alpha$ partial of the sums, and use the same
+        argument; at each stage, $|\partial^\alpha f/ \partial x^\alpha| < c_k$
+        whenever $|\alpha| < k$.
+    \end{proof}
 
 \end{document}
