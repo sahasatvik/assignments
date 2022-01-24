@@ -443,6 +443,14 @@
         (c, d)$. The pre-image of such an open set under $f$ is $u^{-1}((a, b)) \cap
         v^{-1}((c, d))$, which is clearly a measurable set in $X$.
     \end{proof}
+    
+    \begin{lemma}
+        The maximum and minimum of measurable functions are measurable.
+    \end{lemma}
+    \begin{corollary}
+        The positive and negative parts of a measurable function are measurable.
+    \end{corollary}
+    
 
     \begin{corollary}
         Let $f, g\colon (X, \M) \to (\R, \mathcal{B}_\R)$ be $(\M, \mathcal{B}_\R)$
@@ -463,6 +471,18 @@
     \end{example}
 
     \begin{theorem}
+        Let $\{f_n\}_{n = 1}^\infty$ be a collection of measurable functions $f\colon
+        X \to \R \cup \{-\infty, +\infty\}$, and let $f_n \to f$ pointwise on $X$.
+        Then, their supremum and infinimum are measurable.
+    \end{theorem}
+    
+    \begin{theorem}
+        Let $\{f_n\}_{n = 1}^\infty$ be a sequence of measurable functions $f\colon X
+        \to \R$. Then, $\limsup_{n \to \infty} f_n$ and $\liminf_{n \to \infty} f_n$
+        are measurable.
+    \end{theorem}
+    
+    \begin{theorem}
         Let $\{f_n\}_{n = 1}^\infty$ be a sequence of measurable functions $f\colon X
         \to \R$, and let $f_n \to f$ pointwise on $X$. Then, $f$ is measurable.
         \begin{remark}
@@ -470,7 +490,7 @@
             continuous functions.
         \end{remark}
     \end{theorem}
-    
+
 
 
 \end{document}
