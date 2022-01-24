@@ -1,0 +1,157 @@
+\documentclass[10pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+
+\geometry{a4paper, margin=1in}
+
+\renewcommand{\labelenumi}{(\roman{enumi})}
+
+\newcounter{prob}
+\newcommand{\problem}{\stepcounter{prob}\paragraph{Exercise \arabic{prob}}}
+\newcommand{\solution}{\paragraph{Solution}}
+
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+
+\title{Exercise Sheet I}
+\author{Satvik Saha}
+\date{}
+
+\begin{document}
+    \noindent\textbf{IISER Kolkata} \hfill \textbf{Excercise Sheet I}
+    \vspace{3pt}
+    \hrule
+    \vspace{3pt}
+    \begin{center}
+    \LARGE{\textbf{MA3202: Algebra II}}
+    \end{center}
+    \vspace{3pt}
+    \hrule
+    \vspace{3pt}
+    Satvik Saha, \texttt{19MS154} \hfill \today
+    \vspace{20pt}
+
+
+    \problem Give an example of a non-commutative ring without identity.
+
+    \solution Consider $M_2(\R) \times 2\Z$. This is non-commutative, because \[
+        \left(\begin{bmatrix}
+            0 & 1 \\ 0 & 0
+        \end{bmatrix}, 0\right)\cdot \left(\begin{bmatrix}
+            0 & 0 \\ 1 & 0
+        \end{bmatrix}, 0\right) = \left(\begin{bmatrix}
+            1  & 0 \\ 0 & 0
+        \end{bmatrix}, 0\right),
+    \] \[
+        \left(\begin{bmatrix}
+            0 & 0 \\ 1 & 0
+        \end{bmatrix}, 0\right)\cdot \left(\begin{bmatrix}
+            0 & 1 \\ 0 & 0
+        \end{bmatrix}, 0\right) = \left(\begin{bmatrix}
+            0  & 0 \\ 0 & 1
+        \end{bmatrix}, 0\right),
+    \] Also, this has no identity because for $(M, 2)\cdot (A, n) = (M, 2)$, we
+    demand $2n = 2$ but there is no such identity element $n$ in $2\Z$.
+
+
+    \problem Let $R$ be a ring with $1$ and $a \in R$. Suppose that there exists a
+    positive integer $n$ such that $a^n = 0$. Show that $1 + a$ and $1 - a$ are
+    units.
+
+    \solution We use the factorizations \begin{align*}
+        1 = 1 - a^n &= (1 + a)\cdot(1 - a + a^2 - \dots + (-1)^{n - 1}a^{n - 1}), \\
+                    &= (1 - a)\cdot(1 + a + a^2 + \dots + a^{n - 1}).
+    \end{align*}
+
+
+    \problem Let $R$ be a ring such that $r^2 = r$ for all $r \in R$. Show that $R$
+    is commutative.
+
+    \solution Pick $x \in R$. Then, \[
+        2x = x + x = (x + x)^2 = 4x^2 = 4x, \qquad 2x = 0, \qquad x = -x.
+    \] Now, pick $x, y \in R$. Then, \[
+        x + y = (x + y)^2 = x^2 + xy + yx + y^2 = (xy + yx) + x + y,
+    \] whence \[
+        xy + yx = 0, \qquad xy = -yx = yx.
+    \] 
+
+
+    \problem Let $R$ be a ring with $1$, and $a, b \in R$. Prove that $1 - ab \in
+    R^*$ if and only if $1 - ba \in R^*$.
+
+    \solution Suppose that $1 - ba$ is a unit, hence pick $x \in R$ such that $(1 -
+    ba)x = 1$. This means that $x - bax = 1$, or $bax = x - 1$. Calculate
+    \begin{align*}
+        (1 - ab)(1 + axb) &= 1 + axb - ab - abaxb \\
+            &= 1 + axb - ab - a(x - 1)b \\
+            &= 1 + axb - ab - axb + ab \\
+            &= 1.
+    \end{align*}
+
+
+    \problem Does there exists a non-commutative ring with $77$ elements?
+
+    \solution Let $R$ be a ring with $77$ elements. Then consider its additive group;
+    Sylow's theorems tell us that there is exactly one 7-Sylow subgroup, and one
+    $11$-Sylow subgroup. Both of these are normal, hence $(R, +) \cong C_7 \times
+    C_{11}$ is cyclic. In other words, we can pick a generator $a \in R$ such that
+    every element is of the form $na$. It is now easy to check that $(ma) \cdot (na)
+    = (mn)a = (na)\cdot (ma)$, hence $R$ is commutative.
+
+
+    \problem Let $R$ be a ring and let $R[x]$ be the polynomial ring over $R$. Show
+    that $R[x]$ forms a ring over the usual addition and multiplication of
+    polynomials.
+
+    
+    \problem Does there exist an infinite ring with finite characteristic?
+
+    \solution Yes, the polynomial ring $\Z_2[x]$ has characteristic $2$. Here, $\Z_n$
+    denotes $\Z/n\Z$.
+
+
+    \problem Does there exist a finite ring with characteristic zero?
+
+    \solution No; let $R$ be a finite ring and pick non-zero $a \in R$. Now, examine
+    the collection of elements $0, a, 2a, \dots, na, \dots$. Since $R$ is finite,
+    these cannot all be distinct. Thus, $na = ma$ for some $n < m$, hence $(m - n)a$.
+
+
+    \problem Determine the smallest subring of $\Q$ that contains $1 / 2$.
+
+    \solution It is easy to check that this ring contains all elements of the form \[
+        \sum_{k = 0^n} \frac{q_k}{2^k},
+    \] for $q_k \in \Q$, $n \geq 0$.
+
+
+    \problem Let $R$ be an integral domain and $kx = 0$ for some non-zero $x \in R$
+    and some integer $k \neq 0$. Prove that $R$ is of finite characteristic.
+
+    \solution Without loss of generality, let $k$ be positive. Pick non-zero $y \in
+    R$, and examine $k(xy)$. Factorizing this one way gives $(kx)\cdit y = 0$, and
+    factoring this the other gives $x\cdot (ky)$. Since $x \neq 0$ and $R$ is an
+    integral domain, $x\cdot (ky) = 0$ forces $ky = 0$. Thus, every non-zero $y$ has
+    positive characteristic, hence $R$ has finite characteristic as well.
+
+
+    \problem Give an example of a non-commutative simple ring.
+
+    \solution Consider the ring of quaternions, which is clearly non-commutative from
+    $i^2 = j^2 = k^2 = ijk = -1$, hence $ij = k$, $ji = -k$. Let $I$ be a non-trivial
+    ideal, and let $a + bi + cj + dk \in I$ be non-zero. Then, note that
+    \begin{align*}
+    (a + bi + cj + dk)\cdot(x + yi + zj + wk) &= ax - by - cz - dw \\
+        &\;\; + (ay + bx + cw - dz)i \\
+        &\;\; + (az + cx + dy - bw)j \\
+        &\;\; + (aw + dx + bz - cy)k.
+    \end{align*} In particular, \[
+        (a + bi + cj + dk)\cdot(a - bi - cj - dk) = a^2 + b^2 + c^2 + d^2 \in I.
+    \] Since this is non-zero, we have $1 \in I$, forcing $I$ to be the entire ring
+    of quaternions. This shows that the ring of quaternions is simple.
+
+\end{document}

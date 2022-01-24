@@ -1,0 +1,187 @@
+\documentclass[10pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+
+\geometry{a4paper, margin=1in}
+
+\renewcommand{\labelenumi}{(\roman{enumi})}
+
+\newcounter{prob}
+\newcommand{\problem}{\stepcounter{prob}\paragraph{Exercise \arabic{prob}}}
+\newcommand{\solution}{\paragraph{Solution}}
+
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+
+\title{Exercise Sheet II}
+\author{Satvik Saha}
+\date{}
+
+\begin{document}
+    \noindent\textbf{IISER Kolkata} \hfill \textbf{Excercise Sheet II}
+    \vspace{3pt}
+    \hrule
+    \vspace{3pt}
+    \begin{center}
+    \LARGE{\textbf{MA3202: Algebra II}}
+    \end{center}
+    \vspace{3pt}
+    \hrule
+    \vspace{3pt}
+    Satvik Saha, \texttt{19MS154} \hfill \today
+    \vspace{20pt}
+
+
+    \problem Let $R$ be a commutative ring, and consider the nilradical of $R$
+    defined by \[
+        N = \{x \in R: x^n = 0 \text{ for some } n\}.
+    \] Prove that $N$ is an ideal of $R$.
+
+    \solution It is clear that if $x, y \in N$ with $x^m = y^n = 0$, then \[
+        (x + y)^{m + n} = \sum_{k = 0}^{m + n} \binom{m + n}{k} x^ky^{m + n - k} = 0.
+    \] This is because in each term, either the power of $x$ is at least $m$, or the
+    power of $y$ is at least $n$. Also, \[
+        (xy)^{m + n} = x^{m + n} \cdot y^{m + n} = 0,
+    \] hence $x + y, xy \in N$. Finally, note that for even $m$, \[
+        x^m - (-x)^m = (x + (-x))\cdot (x^{m - 1} - x^{m - 2}\cdot(-x) + \dots -
+        (-x)^{m - 1}) = 0,
+    \] and for odd $m$, \[
+        x^m + (-x)^m = (x + (-x))\cdot (x^{m - 1} - x^{m - 2}\cdot(-x) + \dots +
+        (-x)^{m - 1}) = 0.
+    \] Hence, $(-x)^m = 0$ giving $-x \in N$. Finally, given $a \in R$, we clearly
+    have \[
+        (ax)^m = a^m \cdot x^m = 0,
+    \] giving $ax \in N$.
+
+
+    \problem Give examples of two rings $R, S$ such that $(R, +)$ and $(S, +)$ are
+    isomorphic, but $(R, +, \cdot)$ and $(S, +, \cdot)$ are not.
+
+    \solution It is clear that $\Z$ and $2\Z$ are isomorphic as additive groups.
+    However, they are not isomorphic as rings; if $\varphi\colon \Z \to 2\Z$ were an
+    isomorphism, then we demand $\varphi(1) = \varphi(1^2) = \varphi(1)^2$ which is
+    impossible unless $\varphi(1) = 0$, but this is no longer an isomorphism.
+
+
+    \problem True or false? \begin{enumerate}
+        \item Ring homomorphisms (non-trivial) map zero-divisors to zero-divisors.
+        \item Ring homomorphisms (non-trivial) map nilpotent elements to nilpotent
+        elements.
+    \end{enumerate}
+
+    \solution \mbox{}
+    \begin{enumerate}
+        \item False. Consider the homomorphism $\varphi\colon \Z_4 \to \Z_2$, $n
+        \mapsto n\pmod{2}$. Then $2 \in \Z_4$ is a zero-divisor since $2\cdot 2 = 4
+        \equiv 0$. However, $\Z_2$ has no zero-divisors.
+
+        \item True. Let $\varphi\colon R \to S$ be a non-trivial ring homomorphism,
+        and let $a \in R$ such that $a^n = 0$. Then, $\varphi(a)^n = \varphi(a^n) =
+        \varphi(0) = 0$.
+    \end{enumerate}
+
+
+    \problem Let $R$ be the ring of all $2\times 2$ real matrices of the form \[
+        \begin{pmatrix}
+            a & b \\ -b & a
+        \end{pmatrix}.
+    \] Prove that $R$ is isomorphic to the ring of complex numbers $\C$.
+
+    \solution We define the map \[
+        \varphi\colon \R \to \C, \qquad \begin{pmatrix}
+            a & b \\ -b & a
+        \end{pmatrix} \mapsto a + bi.
+    \] It can be checked that this is indeed an isomorphism.
+
+
+    \problem How many ring homomorphisms are there from $\Z_3$ to $\Z_7$?
+
+    \solution There is only the trivial/zero homomorphism. Any other homomorphism
+    must map $0 \mapsto 0$, $1 \mapsto 1$, hence $2 = 1 + 1 \mapsto 2$. Now, this
+    requires $1 + 1 + 1 \mapsto 3$, but $1 + 1 + 1 \equiv 0$, a contradiction.
+
+
+    \problem Let $R$ be a commutative ring and $I \subset R$ be an ideal. Consider
+    the radical \[
+        \sqrt{I} = \{x \in R: x^n \in I \text{ for some }n\}.
+    \] \begin{enumerate}
+        \item Prove that $\sqrt{I}$ is an ideal of $R$.
+        \item Let $f\colon R \to S$ be a surjective ring homomorphism such that
+        $\ker{f} \subset I$. Prove that $f(\sqrt{I}) = \sqrt{f(I)}$.
+    \end{enumerate}
+
+    \solution \mbox{}
+    \begin{enumerate}
+        \item Let $x, y \in \sqrt{I}$ such that $x^m, y^n \in I$. Then it is clear
+        from previous arguments that $-x, xy, x + y \in I$. Furthermore, given $a \in
+        R$, we have $(ax)^m = a^mx^m \in I$, hence $ax \in \sqrt{I}$.
+
+        \item First, pick $x \in f(\sqrt{I})$. Thus, there exists $y \in \sqrt{I}$,
+        $y^n \in I$ for some $n$, such that $x = f(y)$. Thus, $x^n = f(y^n) \in
+        f(I)$, hence $x \in \sqrt{f(I)}$.
+
+        Next, pick $x \in \sqrt{f(I)}$, with $x^m \in f(I)$ for some $m$. Thus, there
+        exists $w \in I$ such that $x^m = f(w)$. From the surjectivity of $f$, there
+        exists $y \in R$ such that $x = f(y)$, hence $x^m = f(y^m)$. This gives us
+        $f(w - y^m) = 0$, hence $w - y^n \in \ker{f} \subset I$. Since $w \in I$, we
+        are forced to have $y^m \in I$, $y \in \sqrt{I}$. Thus, we have $x = f(y) \in
+        f(\sqrt{I})$.
+    \end{enumerate}
+
+
+    \problem Show that every field contains a subring isomorphic to $\Q$ or $\Z/p\Z$
+    for some prime $p$.
+
+    \solution Let $F$ be a field, and let $1 \in F$ be its multiplicative identity.
+    Define a homomorphism $\varphi$, such that $\varphi(1) = 1$. Then, the image of
+    $\Z$ is a subring of $F$; if it is finite, then this image is a finite integral
+    domain, hence isomorphic to $\Z / p\Z$ for some prime $p$. Otherwise, we have
+    embedded $\Z$ inside $F$. Now, extend $\varphi$ so that $\varphi(1 / n) = n^{-1}$
+    in $F$, and $\varphi(p / q) = p\cdot q^{-1}$ in $F$. This gives an embedding of
+    $\Q$ in $F$.
+
+
+    \problem Let $R$ and $S$ be commutative rings with identities, and let $T =
+    R\times S$. Show that every ideal $I$ of $T$ is of the form $I = J \times K$,
+    where $J$ and $K$ are ideals of $R$ and $S$ respectively.
+
+    \solution Let $I$ be an ideal in $R \times S$. Then given non-zero $(r, s) \in
+    I$, we demand $(r, 0) = (r, s)\cdot (1, 0) \in I$, as well as $(0, s) = (r,
+    s)\cdot (0, 1) \in I$. Now if $(r', s') \in I$, we immediately have $(r', s), (r,
+    s') \in I$. In other words, if we set $J$ to be the set of first coordinates of
+    elements in $I$, and $K$ to be set of second coordinates of elements in $I$, then
+    $I = J \times K$.
+
+    To show that $J$ is an ideal in $R$, note that given any $x, y \in J$, we have
+    $(x, 0), (y, 0) \in I$, hence $(-x, 0), (x + y, 0), (xy, 0) \in I$. By definition
+    of $J$, we have $-x, x + y, xy \in I$. A similar argument shows that $K$ is an
+    ideal in $S$.
+
+    
+    \problem How many isomorphisms $\varphi\colon \C \to \C$ are there such that
+    $\varphi(\R) \subset \R$?
+
+    \solution Two. Note that $\varphi(1) = 1$ forces $\varphi$ to fix the integers,
+    hence the rationals, hence the reals. Now, $\varphi(i)^2 = \varphi(i^2) =
+    \varphi(-1) = -1$, forcing one of $\varphi(i) = \pm i$. It can be checked that
+    both choices determine distinct isomorphisms.
+
+
+    \problem Let $f\colon R \to S$ be a ring homomorphism and $I, J$ be ideals of $R,
+    S$ respectively. Assume that $f(I) \subset J$. Show that $f$ defined a
+    homomorphism $\tilde{f}\colon R/I \to S/J$. What is the kernel of $\tilde{f}$?
+
+    \solution Define the natural homomorphism \[
+        \tilde{f}\colon R/I \to S/J, \qquad x + J \mapsto f(x) + J.
+    \] It is easily checked that this is indeed a homomorphism. \\
+
+    Suppose that $x + I \in \ker{\tilde{f}} = K$. In other words, $x + I \mapsto J$,
+    hence $f(x) + J \sim J$ or $f(x) \in J$. Thus, $x \in f^{-1}(J) \supset I$, so $K
+    = f^{-1}(J)/I$.
+
+\end{document}
