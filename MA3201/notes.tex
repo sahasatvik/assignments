@@ -520,6 +520,52 @@
         because the topology on $\R_\ell$ is strictly finer than that on $\R$.
     \end{example}
 
+    \begin{lemma}
+        A function $f\colon X \to Y$ is continuous if and only if for every closed
+        set $F \subseteq Y$, we have $f^{-1}(F)$ closed in $X$.
+    \end{lemma}
+
+    \begin{lemma}
+        A function $f\colon X \to Y$ is continuous if and only if given any $x \in X$
+        and an open set $V \subseteq Y$ such that $f(x) \in V$, there exists an open
+        set $U \subseteq X$ such that $x \in U$, $f(U) \subseteq V$.
+    \end{lemma}
+
+    \begin{lemma}
+        Let $f\colon X \to Y$ be continuous, and let $A \subset X$. Then the
+        restriction of $f$ to $A$ is continuous.
+    \end{lemma}
+
+    \begin{theorem}
+        Let $f\colon X \to Y$, and let $X$ be the union of the collection of open
+        sets $\{A_\lambda\}_{\lambda \in \Lambda}$. If the restrictions of $f$ to
+        each $A_\lambda$ are continuous, then $f$ is continuous.
+    \end{theorem}
+    \begin{proof}
+        Pick $x \in X$, hence $x \in A_\lambda$ for some $\lambda \in \Lambda$. Now
+        if $f(x) \in V \subset Y$, where $V$ is open in $Y$, then the continuity of
+        the restriction of $f$ to $A_\lambda$ gives us an open set $U \subseteq
+        A_\lambda$ such that $f(U) \subseteq V$. Finally since $A_\lambda$ is open in
+        $X$, so is $U$.
+    \end{proof}
+    
+    \begin{definition}
+        Let $X$ be the union of the collection of open sets $\{A_\lambda\}_{\lambda
+        \in \Lambda}$. We say that this collection is a locally finite cover of $X$
+        if given $x \in X$, there exists a neighbourhood $U$ of $x$ such that $U \cap
+        A_\lambda$ is non-empty for only finitely many $\lambda \in \Lambda$.
+    \end{definition}
+    
+    \begin{theorem}
+        Let $f\colon X \to Y$, and let $\{F_\lambda\}_{\lambda \in \Lambda}$ be a
+        locally finite collection of closed sets covering $X$. If the restrictions of
+        $f$ to each $F_\lambda$ are continuous, then $f$ is continuous.
+    \end{theorem}
+
+    \begin{theorem}
+        The composition of continuous functions is continuous.
+    \end{theorem}
+
     \begin{definition}
         Let $f\colon X \to Y$ be a function between the topological spaces $(X,
         \tau_X)$ and $(Y, \tau_Y)$. We say that $f$ is a homeomorphism if $f$ is
