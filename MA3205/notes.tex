@@ -185,34 +185,6 @@
         \end{enumerate}
     \end{theorem}
 
-    \begin{definition}
-        A parametrized curve in $\R^n$ is a smooth map $\gamma\colon (\alpha, \beta)
-        \to \R^n$ for some $\alpha, \beta$ with $-\infty \leq \alpha < \beta \leq
-        \infty$.
-        \begin{remark}
-            Here, we will always implicitly assume that maps are continuous.
-        \end{remark}
-        \begin{remark}
-            Such a curve is called regular if $\gamma'(t) \neq 0$ for all $t \in
-            (\alpha, \beta)$.
-        \end{remark}
-    \end{definition}
-    \begin{example}
-        The curve defined by \[
-            \gamma\colon \R \to \R^n, \qquad t \mapsto a + tb
-        \] is a straight line through the point $a$, in the direction $b$.
-    \end{example}
-    \begin{example}
-        The curve defined by \[
-            \gamma\colon \R \to \R^2, \qquad t \mapsto (\cos{t}, \sin{t})
-        \] is the unit circle in $\R^2$, counter-clockwise.
-    \end{example}
-    \begin{example}
-        The curve defined by \[
-            \gamma\colon \R \to \R^3, \qquad t \mapsto (t, \cos{t}, \sin{t})
-        \] is a helix in $\R^3$, wrapped around the $x$-axis.
-    \end{example}
-
 
     \subsection{Whitney's theorem}
     
@@ -247,7 +219,7 @@
         derivatives of $f_k$ vanish on $\R^n\setminus B(q_k, r_k)$.
 
         Define the weights \[
-            c_k = \max_{|\alpha| \leq k, y \in \overline{B(q_k, r_k)}}
+            c_k = \max_{\substack{|\alpha| \leq k \\ y \in \overline{B(q_k, r_k)}}}
             \left|\ppn[\alpha]{f_k}{x}(y)\right|.
         \] Note that each $c_k$ is well-defined: there are finitely many multi-indices
         $\alpha$ given $k$, and each of the partials $\partial^\alpha f / \partial
@@ -264,5 +236,53 @@
         argument; at each stage, $|\partial^\alpha f/ \partial x^\alpha| < c_k$
         whenever $|\alpha| < k$.
     \end{proof}
+
+    
+    \subsection{Parametrized curves}
+    
+    \begin{definition}
+        A parametrized curve in $\R^n$ is a smooth map $\gamma\colon (\alpha, \beta)
+        \to \R^n$ for some $\alpha, \beta$ with $-\infty \leq \alpha < \beta \leq
+        \infty$.
+        \begin{remark}
+            Here, we will always implicitly assume that maps are continuous.
+        \end{remark}
+        \begin{remark}
+            Such a curve is called regular if $\gamma'(t) \neq 0$ for all $t \in
+            (\alpha, \beta)$.
+        \end{remark}
+    \end{definition}
+    \begin{example}
+        The curve defined by \[
+            \gamma\colon \R \to \R^n, \qquad t \mapsto a + tb
+        \] is a straight line through the point $a$, in the direction $b$.
+    \end{example}
+    \begin{example}
+        The curve defined by \[
+            \gamma\colon \R \to \R^2, \qquad t \mapsto (\cos{t}, \sin{t})
+        \] is the unit circle in $\R^2$, counter-clockwise.
+    \end{example}
+    \begin{example}
+        The curve defined by \[
+            \gamma\colon \R \to \R^3, \qquad t \mapsto (t, \cos{t}, \sin{t})
+        \] is a helix in $\R^3$, wrapped around the $x$-axis.
+    \end{example}
+
+    \begin{definition}
+        A diffeomorphism is a smooth map with a smooth inverse.
+    \end{definition}
+
+    \begin{example}
+        Suppose that $\gamma\colon (\alpha, \beta) \to \R^n$ is a smooth curve. If we
+        have a diffeomorphism $\varphi\colon (\alpha', \beta') \to (\alpha, \beta)$,
+        then the smooth curve $\gamma\circ \varphi$ is a reparametrization of
+        $\gamma$.
+    \end{example}
+
+    \begin{lemma}
+        If $\varphi\colon (\alpha', \beta') \to (\alpha, \beta)$ is a diffeomorphism,
+        then $\varphi'(t) \neq 0$ for all $t \in (\alpha', \beta')$.
+    \end{lemma}
+
 
 \end{document}
