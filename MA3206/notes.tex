@@ -232,13 +232,17 @@
     the mean $(x_{k} + x_{k + 1}) / 2$ if $n = 2k$ is even.
 
     For grouped data, we assume that the observations are evenly distributed over
-    the median class $(l, u]$ with frequency $f_0$, width $h$. If the total frequency
+    the median class $(l, u]$ with frequency $f_m$, width $h$. If the total frequency
     is denoted by $N$, we write \[
-        \frac{M - l}{h} = \frac{N / 2 - n_l}{f_0}.
+        \frac{M - l}{h} = \frac{N / 2 - n_l}{f_m}.
     \] Here, $n_l$ is the cumulative frequency of the preceding classes. This will
     give \[
-        M = l + \frac{N / 2 - n_l}{f_0}\cdot h.
-    \] 
+        M = l + \frac{N / 2 - n_l}{f_m}\cdot h.
+    \] Another way of estimating the median of grouped data is by drawing the more than
+    and less than ogives, and picking the abscissa of their intersection point. In
+    the median class, the ogives have the equations \[
+        y = n_l + \frac{f_m}{h}(x - l), \qquad y = N - n_l - \frac{f_m}{h}(x - l).
+    \] Solving for their intersection, we recover our formula.
 
     \begin{theorem}
         Let $\varphi$ be a monotone function, and let two variables be related as $y
@@ -258,7 +262,111 @@
 
     For grouped data, we pick the value with the highest frequency density. Let $f_m$
     denote the frequency of the modal class $(l, u]$. We approximate \[
-        M_0 = l + \frac{f_m - f_{m - 1}}{2f_m - f_{m - 1} - f_{m + 1}} \cdot c.
+        M_0 = l + \frac{f_m - f_{m - 1}}{2f_m - f_{m - 1} - f_{m + 1}} \cdot h.
+    \] 
+
+
+    \begin{theorem}
+        An empirical relation between these measures of central tendency is given by
+        \[
+            \text{mean} - \text{mode} \,\approx\, 3(\text{mean} - \text{median}).
+        \] 
+    \end{theorem}
+
+
+    \section{Measures of dispersion}
+    
+    \subsection{Range}
+
+    The range is a simple way of measuring how \emph{dispersed} or scattered a set of
+    observations is. This is simply the difference between the maximum and the
+    minimum value in the set.
+
+    \begin{theorem}
+        If two variables are related by $y = a + bx$, then their ranges are related
+        by \[
+            R_Y = |b|\cdot R_X.
+        \] 
+    \end{theorem}
+
+    \subsection{Mean deviation}
+    
+    The mean deviation about some value $\alpha$ is defined by \[
+        MD(\alpha) = \frac{1}{n}\sum_{i = 1}^n |x_i - \alpha|.
+    \] 
+    
+
+    \begin{theorem}
+        If two variables are related by $y = a + bx$, then \[
+            MD_Y(\alpha) = |b|\cdot MD_X(\alpha).
+        \] 
+    \end{theorem}
+
+    \begin{theorem}
+        The mean deviation about a point is minimized at the median.
+    \end{theorem}
+
+
+    \subsection{Root mean square deviation}
+    
+    The RMS deviation about some value $\alpha$ is defined by \[
+        RMS(\alpha) = \sqrt{\frac{1}{n} \sum_{i = 1}^n (x_i - \alpha)^2}.
+    \] We call $RMS(\bar{x})$ the standard deviation $\sigma$, and its square the
+    variance. We can calculate \[
+        \sigma^2 = \frac{1}{n} \sum_{i = 1}^n x_i^2 - \bar{x}^2.
+    \] 
+
+    \begin{theorem}
+        The root mean square deviation about a point is minimized at the mean.
+    \end{theorem}
+
+    \begin{theorem}
+        The standard deviations of two sets of observations are related by \[
+            \sigma^2 = \frac{n_1\sigma_1^2 + n_2\sigma_2^2}{n_1 + n_2} +
+            \frac{n_1(\bar{x}_1 - \bar{x})^2 + n_2(\bar{x}_2 - \bar{x})^2}{n_1 +
+            n_2}.
+        \] In general, for $k$ sets of observations, we have \[
+            \sigma^2 = \frac{1}{N}\sum_{i = 1}^k n_i\sigma_i^2 + n_i(\bar{x}_i -
+            \bar{x})^2.
+        \] 
+    \end{theorem}
+
+    \begin{theorem}
+        If two variables are related by $y = a + bx$, then \[
+            \sigma_Y = |b|\cdot \sigma_X.
+        \] 
+    \end{theorem}
+
+    \begin{theorem}
+        If a single observation $\alpha$ is added to a set of $n$ values, then the
+        standard deviation increases only if \[
+            |\bar{x} - \alpha| > \sqrt{\frac{n + 1}{n}}\cdot \sigma.
+        \] 
+    \end{theorem}
+
+    \begin{theorem}
+        The mean deviation about the mean cannot exceed the standard deviation.
+    \end{theorem}
+    \begin{theorem}
+        The difference between the mean and median cannot exceed the standard
+        deviation.
+    \end{theorem}
+
+    \begin{theorem}
+        The range and standard deviation obey \[
+            \frac{R^2}{2n} \leq \sigma^2 \leq \frac{R^2}{4}.
+        \] 
+    \end{theorem}
+    
+
+    \subsection{Quartile deviation}
+    
+    A \emph{quantile} of order $p$ is such a value of the variable such that a
+    proportion $p$ of all the values are less than or equal to it. For grouped data,
+    we estimate \[
+        z_p = l + \frac{np - n_l}{f_m}\cdot h.
+    \] The quartile deviation, or semi-interquartile range is defined \[
+        Q = \frac{Q_3 - Q_1}{2} = \frac{z_{3 / 4} - z_{1 / 4}}{2}.
     \] 
 
 
