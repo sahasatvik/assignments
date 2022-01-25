@@ -160,10 +160,10 @@
         \frac{N}{H} = \sum_{i = 1}^k \frac{n_i}{H_i}, \qquad N = \sum_{i = 1}^k n_i.
     \] 
 
-    \begin{theorem}
+    \begin{exercise}
         Given two positive numbers, their arithmetic, geometric, and harmonic means
         all lie between them.
-    \end{theorem}
+    \end{exercise}
     \begin{proof}
         Without loss of generality, let $x \geq y > 0$. Then for any $a, b$, we have
         \[
@@ -306,6 +306,13 @@
         The mean deviation about a point is minimized at the median.
     \end{theorem}
 
+    \begin{exercise}
+        The mean deviation is given by \[
+            n\cdot MD(\alpha) = S_2 - S_1 + \alpha(n_1 - n_2).
+        \] Here, $n_1$ is the number of values less than $\alpha$ and $S_1$ is their
+        sum, and $n_2$ is the number of values more than $\alpha$ and $S_2$ is their
+        sum.
+    \end{exercise}
 
     \subsection{Root mean square deviation}
     
@@ -337,12 +344,28 @@
         \] 
     \end{theorem}
 
-    \begin{theorem}
+    \begin{exercise}
         If a single observation $\alpha$ is added to a set of $n$ values, then the
         standard deviation increases only if \[
             |\bar{x} - \alpha| > \sqrt{\frac{n + 1}{n}}\cdot \sigma.
         \] 
-    \end{theorem}
+    \end{exercise}
+    \begin{proof}
+        Without loss of generality, let $\bar{x} = 0$; this can be done by
+        relabelling the data $x_i - \bar{x}$, putting the mean at zero without
+        affecting the variance. Thus, we have \[
+            n\sigma^2 = \sum_{i = 1}^n x_i^2.
+        \] Upon adding the point $\alpha$ to our data, the new mean is \[
+            \bar{x}_n = \frac{\alpha}{n + 1},
+        \] so our new variance is related as \begin{align*}
+            (n + 1)\sigma_n^2 &= \sum_{i = 1}^n x_i^2 + \alpha^2 - (n + 1)\bar{x}_n^2 \\
+                &= n\sigma^2 + \alpha^2 - \frac{1}{n + 1}\alpha^2, \\
+            (n + 1)(\sigma_n^2 - \sigma^2) &= -\sigma^2 + \frac{n}{n + 1}\alpha^2.
+        \end{align*}
+        For the standard deviation to increase, this must be positive, hence \[
+            \alpha^2 > \frac{n + 1}{n}\sigma^2
+        \] as desired.
+    \end{proof}
 
     \begin{theorem}
         The mean deviation about the mean cannot exceed the standard deviation.
@@ -352,11 +375,36 @@
         deviation.
     \end{theorem}
 
-    \begin{theorem}
+    \begin{exercise}
         The range and standard deviation obey \[
             \frac{R^2}{2n} \leq \sigma^2 \leq \frac{R^2}{4}.
         \] 
-    \end{theorem}
+    \end{exercise}
+    \begin{proof}
+        Without loss of generality, let $\bar{x} = 0$. Then, \[
+            n\sigma^2 = \sum_{i = 1}^n x_i^2, \qquad R = x_n - x_1.
+        \] Set $\alpha = (x_n + x_1) / 2$. Since the RMS deviation is minimized at
+        the mean, we have \begin{align*}
+            n\sigma^2 &\leq \sum_{i = 1}^n (x_i - \alpha)^2 \\
+                &= \sum_{x_i < \alpha} (x_i - \alpha)^2 + \sum_{x_i \geq \alpha} (x_i
+                - \alpha)^2 \\
+                &\leq \sum_{x_i < \alpha} (x_1 - \alpha)^2 + \sum_{x_i \geq \alpha}
+                (x_n - \alpha)^2 \\
+                &= \sum_{x_i < \alpha} \frac{R^2}{4} + \sum_{x_i \geq \alpha}
+                \frac{R^2}{4} \\
+                &= \frac{nR^2}{4}.
+        \end{align*}
+        Finally note that $RMS \geq AM$ gives \[
+            n\sigma^2 \geq x_n^2 + x_1^2 \geq \frac{(|x_n| + |x_1|)^2}{2} =
+            \frac{R^2}{2}.
+        \] 
+    \end{proof}
+
+    \begin{lemma}
+        The standard deviation is given by \[
+            \sigma^2 = \frac{1}{2n^2}\sum_{i, j} (x_i - x_j)^2.
+        \] 
+    \end{lemma}
     
 
     \subsection{Quartile deviation}
@@ -368,6 +416,182 @@
     \] The quartile deviation, or semi-interquartile range is defined \[
         Q = \frac{Q_3 - Q_1}{2} = \frac{z_{3 / 4} - z_{1 / 4}}{2}.
     \] 
+
+
+    \subsection{Coefficient of variation}
+
+    Unlike the previous measures, the coefficient of variation is a \emph{relative}
+    measure of dispersion, expressed as a percentage. \[
+        CV = \frac{\sigma}{\bar{x}}.
+    \] A variable having a lower coefficient of variation is considered to be more
+    stable. Similar coefficients are \[
+        CV(\alpha) = \frac{MD(\alpha)}{\alpha}
+    \] where $\alpha$ is the mean or median.
+
+
+    \begin{exercise}
+        Suppose that the deviations $x_i - \bar{x}$ are small, so that $((x_i -
+        \bar{x}) / \bar{x})^3$ and higher powers can be neglected. Then, \begin{enumerate}
+            \item $GM \approx \bar{x}(1 - \sigma^2 / 2\bar{x}^2)$.
+            \item $HM \approx \bar{x}(1 - \sigma^2 / \bar{x}^2)$.
+            \item $\bar{x}^2 - GM^2 \approx \sigma^2$.
+            \item $\bar{x} - 2GM + HM \approx 0$.
+            \item $E(\sqrt{X}) \approx \sqrt{\bar{x}}(1 - \sigma^2 / 8\bar{x}^2)$.
+        \end{enumerate}
+    \end{exercise}
+    \begin{proof} \mbox{}
+        \begin{enumerate}
+            \item Write \[
+                \log{GM} = \frac{1}{n}\sum \log{x_i} = \frac{1}{n}\sum
+                \log\left[\bar{x}\left(1 + \frac{x_i -
+                \bar{x}}{\bar{x}}\right)\right].
+            \] Using the series expansion of the logarithm, this is approximately \[
+                \log{\bar{x}} + \frac{1}{n}\sum \frac{x_i - \bar{x}}{\bar{x}} +
+                \frac{(x_i - \bar{x})^2}{2\bar{x}^2} = 
+                \log{\bar{x}} - \frac{\sigma^2}{2\bar{x}^2}.
+            \] Finally, use $e^\alpha \approx 1 + \alpha$ to write \[
+                GM \approx \bar{x}\left(1 - \frac{\sigma^2}{2\bar{x}^2}\right).
+            \] 
+
+
+            \item Write \[
+                \frac{1}{HM} = \frac{1}{n}\sum \frac{1}{x_i} = \frac{1}{n\bar{x}}\sum
+                \left[1 + \frac{x_i - \bar{x}}{\bar{x}}\right]^{-1}.
+            \] Using the series expansion of $1 / (1 + x)$, this is approximately \[
+                \frac{1}{n\bar{x}}\sum 1 - \frac{x_i - \bar{x}}{\bar{x}} + \frac{(x_i
+                - \bar{x})^2}{\bar{x}^2} = \frac{1}{\bar{x}} \left(1 +
+                \frac{\sigma^2}{\bar{x}^2}\right).
+            \] Taking the reciprocal and approximating $(1 + \alpha)^{-1} \approx 1 -
+            \alpha$ gives \[
+                HM \approx \bar{x}\left(1 - \frac{\sigma^2}{\bar{x}^2}\right).
+            \] 
+
+            \item Use the first approximation to estimate \[
+                \bar{x}^2 - GM^2 \approx \bar{x}^2\left[1 - \left(1 -
+                \frac{\sigma^2}{2\bar{x}^2}\right)^2\right].
+            \] Use $(1 - x)^2 \approx 1 - 2x$ to write \[
+                \bar{x}^2 - GM^2 \approx \bar{x}^2\left[1 - 1 +
+                \frac{\sigma^2}{\bar{x}^2}\right] = \sigma^2.
+            \] 
+
+
+            \item Use the first two approximations to write \[
+                \bar{x} - 2GM + HM \approx 0.
+            \] 
+
+
+            \item Write \[
+                E[\sqrt{X}] = \frac{1}{n}\sum \sqrt{x_i} = \frac{\sqrt{\bar{x}}}{n}\sum
+                \left[1 + \frac{x_i - \bar{x}}{\bar{x}}\right]^{1 / 2}.
+            \] Using the series expansion of the square root, this is approximately
+            \[
+                E[\sqrt{X}] \approx \frac{\sqrt{\bar{x}}}{n}\sum 1 + \frac{x_i -
+                \bar{x}}{2\bar{x}} - \frac{(x_i - \bar{x})^2}{8\bar{x}^2} =
+                \sqrt{\bar{x}} \left(1 - \frac{\sigma^2}{8\bar{x}^2}\right).
+            \] 
+        \end{enumerate}
+    \end{proof}
+
+
+    \subsection{Moments}
+    
+    The $r$th order moment about $\alpha$ is given by \[
+        m_r(\alpha) = \frac{1}{n}\sum_{i = 1}^n (x - \alpha)^r.
+    \] The corresponding central moment is simply \[
+        m_r = \frac{1}{n}\sum_{i = 1}^n (x - \bar{x})^r.
+    \] The $r$th order raw moment is simply $m_r' = m_r(0)$.
+
+    \begin{lemma}
+        If two variables are related by $y = a + bx$, then \[
+            m_{r, Y} = b^r\cdot m_{r, X}.
+        \] 
+    \end{lemma}
+
+    \begin{lemma}
+        The central moments can be expressed in terms of raw moments as \[
+            m_r = \sum_{k = 0}^r \binom{n}{k} (-1)^k m'_{r - k}(m'_1)^k.
+        \]
+    \end{lemma}
+
+    \begin{definition}
+        Define \[
+            b_1 = \frac{m_3^2}{m_2^3}, \qquad b_2 = \frac{m_4}{m_2^2}.
+        \] 
+    \end{definition}
+
+    \begin{theorem}
+        For any frequency distribution, $b_1 \geq 1$, $b_2 > b_1$, $b_2 \geq b_1 +
+        1$. Equality holds only when the variable takes two values with equal
+        frequency.
+    \end{theorem}
+    
+    The absolute $r$th order moment about $\alpha$ is given by \[
+        \nu_r(\alpha) = \frac{1}{n}\sum_{i = 1}^n |x - \alpha|^r.
+    \] For absolute central moments, we have $\nu_r = \nu'(\bar{x})$.
+
+
+    \begin{theorem}
+        \[
+            \nu_{b}^{a - c} \leq \nu_{c}^{a - b}\,\nu_{a}^{b - c}, \qquad
+            a > b > c \geq 0.
+        \] 
+    \end{theorem}
+    \begin{corollary}
+        \[
+            \nu_{k + l}^2 < \nu_{2k}\,\nu_{2l}, \qquad
+            m_{k + l}^2 < m_{2k}\,m_{2l}.
+        \] 
+    \end{corollary}
+    
+    \begin{theorem}[Liapunov]
+        $\nu_{x}^{1 / x}$ is increasing in $x$.
+    \end{theorem}
+
+
+    \section{Skew and kurtosis}
+
+    \subsection{Skew}
+    
+    Skewness is a measure of lack of symmetry in a frequency distribution. A
+    positively skewed distribution has a longer tail to the right.
+
+    The odd central moments of a symmetric distribution are all zero for a symmetric
+    distribution, positive for a positively skewed distribution. Thus, one measure of
+    skewness is \[
+        g_1 = \frac{m_3}{m_2^{3 / 2}}.
+    \]
+
+    \begin{lemma}
+        For a positively skewed distribution, we have \[
+            \text{mean} > \text{median} > \text{mode}.
+        \] 
+    \end{lemma}
+
+    Thus, \[
+        s_k = \frac{\text{mean} - \text{mode}}{\sigma}
+    \] is considered a measure of skewness. We have seen the empirical relation
+    between mean, median, mode, and standard deviation, hence we typically have \[
+        -3 \leq s_k \leq 3.
+    \] This measure $s_k$ is called Pearson's coefficient of skewness.
+
+    For a positively skewed distribution, $Q_1$ is nearer to $Q_2$ than $Q_3$. Thus,
+    Bowley's coefficient of skewness is \[
+        s_k = \frac{Q_3 - 2Q_2 + Q_1}{Q_3 - Q_1} \in [-1, 1].
+    \]
+
+
+    \subsection{Kurtosis}
+    
+    Kurtosis is a measure of the peakedness of a frequency distribution. We look at
+    $m_4$, normalized as $b_2 = m_4 / m_2^2$ as a measure of kurtosis.
+
+    \begin{lemma}
+        For a normal distribution, $b_2 = 3$.
+    \end{lemma}
+
+    Thus, $g_2 = b_2 - 3$ is also a measure of kurtosis. A distribution with $g_2 =
+    0$ is called \emph{mesokurtic}, $g_2 > 0$ is called \emph{leptokurtic}, and $g_2
+    < 0$ is called \emph{platykurtic}.
 
 
 \end{document}
