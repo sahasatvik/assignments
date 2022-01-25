@@ -308,11 +308,24 @@
 
     \begin{exercise}
         The mean deviation is given by \[
-            n\cdot MD(\alpha) = S_2 - S_1 + \alpha(n_1 - n_2).
+            n\cdot MD(\alpha) = S_2 - S_1 + (n_1 - n_2)\alpha.
         \] Here, $n_1$ is the number of values less than $\alpha$ and $S_1$ is their
         sum, and $n_2$ is the number of values more than $\alpha$ and $S_2$ is their
         sum.
     \end{exercise}
+    \begin{proof}
+        Calculate \begin{align*}
+            n\cdot MD(\alpha) &= \sum_{i = 1}^n |x_i - \alpha| \\
+                &= \sum_{x_i < \alpha} \alpha - x_i + \sum_{x_i \geq \alpha} x_i -
+                \alpha \\
+                &= n_1\alpha - S_1 + S_2 - n_2\alpha \\
+                &= S_2 - S_1 + (n_1 - n_2)\alpha. \qedhere
+        \end{align*}
+        By denoting $n_\alpha$ to be the number of values less than $\alpha$,
+        $S_\alpha$ to be their sum, and $S$ to be the sum of all elements, we have \[
+            n\cdot MD(\alpha) = S - 2S_\alpha + (2n_\alpha - n)\alpha.
+        \] 
+    \end{proof}
 
     \subsection{Root mean square deviation}
     
@@ -527,7 +540,7 @@
     
     The absolute $r$th order moment about $\alpha$ is given by \[
         \nu_r(\alpha) = \frac{1}{n}\sum_{i = 1}^n |x - \alpha|^r.
-    \] For absolute central moments, we have $\nu_r = \nu'(\bar{x})$.
+    \] For absolute central moments, we have $\nu_r = \nu'_r(\bar{x})$.
 
 
     \begin{theorem}
