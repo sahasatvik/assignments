@@ -275,14 +275,69 @@
     \begin{example}
         Suppose that $\gamma\colon (\alpha, \beta) \to \R^n$ is a smooth curve. If we
         have a diffeomorphism $\varphi\colon (\alpha', \beta') \to (\alpha, \beta)$,
-        then the smooth curve $\gamma\circ \varphi$ is a reparametrization of
-        $\gamma$.
+        then the smooth curve $\eta = \gamma\circ \varphi$ is a reparametrization of
+        $\gamma$. Note that \[
+            \eta'(t) = \gamma'(\varphi(t))\, \varphi'(t).
+        \] 
     \end{example}
 
     \begin{lemma}
         If $\varphi\colon (\alpha', \beta') \to (\alpha, \beta)$ is a diffeomorphism,
         then $\varphi'(t) \neq 0$ for all $t \in (\alpha', \beta')$.
     \end{lemma}
+
+    \begin{definition}
+        If the diffeomorphism $\varphi' > 0$, we say that it it orientation
+        preserving. If $\varphi' < 0$, we say that it is orientation reversing.
+    \end{definition}
+
+    \begin{definition}
+        The arc length of a differentiable curve $\gamma\colon (\alpha, \beta) \to
+        \R^n$, starting at $t_0$, is defined as \[
+            s(t) = \int_{t_0}^t \norm{\gamma'(u)}\:du.
+        \] We call $s$ the arch length parameter.
+
+        \begin{remark}
+            If $\gamma'(t) \neq 0$, then $s'(t) > 0$.
+        \end{remark}
+    \end{definition}
+
+    \begin{definition}
+        A unit speed curve $\gamma$ is one where $\norm{\gamma} = 1$
+    \end{definition}
+
+    \begin{lemma}
+        Let $\gamma$ be a regular smooth curve. Then its arc length parameter is a
+        smooth function.
+    \end{lemma}
+    \begin{proof}
+        Note that $\gamma'$ and $\ip{\cdot}{\cdot}$ are smooth functions. Thus, \[
+            \dd{s}{t} = \norm{\gamma'(t)} = \sqrt{\ip{\gamma'(t)}{\gamma'(t)}} > 0,
+        \] showing that $ds / dt$ is smooth.
+    \end{proof}
+
+    \begin{lemma}
+        The arc length function $s$ is a diffeomorphism onto its image.
+    \end{lemma}
+    \begin{proof}
+        This follows from the Inverse Function Theorem, using the smoothness of $s$.
+    \end{proof}
+
+    \begin{lemma}
+        Let $\varphi$ denote $s^{-1}\colon (\alpha', \beta') \to (\alpha, \beta)$.
+        Then, $\gamma\circ \varphi$ is a unit speed reparametrization of $\gamma$.
+
+        \begin{remark}
+            Any other unit speed reparametrization is related to $s$ by shifts and
+            reflections.
+        \end{remark}
+    \end{lemma}
+    \begin{proof}
+        Note that $s$ is strictly increasing, so $s', \varphi' > 0$. Now, \[
+            \norm{(\gamma\circ \varphi)'(t)} = \norm{\gamma'(\varphi(t))}\cdot
+            |\varphi'(t)| = s'(\varphi(t))\varphi'(t) = (s\circ \varphi)'(t) = 1. \qedhere
+        \] 
+    \end{proof}
 
 
 \end{document}
