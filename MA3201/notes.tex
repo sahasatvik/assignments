@@ -531,6 +531,13 @@
         set $U \subseteq X$ such that $x \in U$, $f(U) \subseteq V$.
     \end{lemma}
 
+    \begin{theorem}
+        The composition of continuous functions is continuous.
+    \end{theorem}
+
+    
+    \subsection{Restricting and enlarging the domain}
+
     \begin{lemma}
         Let $f\colon X \to Y$ be continuous, and let $A \subset X$. Then the
         restriction of $f$ to $A$ is continuous.
@@ -562,15 +569,61 @@
         $f$ to each $F_\lambda$ are continuous, then $f$ is continuous.
     \end{theorem}
 
+    \begin{corollary}[Pasting lemma]
+        Let $X = A\cup B$, with $A, B$ closed in $X$. Let $f\colon A \to Y$, $g\colon
+        B \to Y$ be continuous, with $f(x) = g(x)$ on $A \cap B$. Then the function
+        $h\colon X \to Y$, defined by $x\mapsto f(x)$ on $A$ and $x\mapsto g(x)$ on
+        $B$, is continuous.
+    \end{corollary}
+
+    \begin{definition}
+        A path is a continuous function $\gamma\colon [0, 1] \to X$.
+    \end{definition}
+
+    \begin{lemma}
+        Two paths $\gamma_1, \gamma_2$ can be concatenated when $\gamma_1(1) =
+        \gamma_2(0)$.
+    \end{lemma}
+
+
+    \subsection{Projection maps}
+
     \begin{theorem}
-        The composition of continuous functions is continuous.
+        The projection maps $\pi_i\colon X_1\times \dots \times X_k \to X_i$ are
+        continuous, when the domain is equipped with the product topology.
+        Furthermore, the product topology is the coarsest topology on the domain for
+        which the projection maps are continuous.
     \end{theorem}
+
+    \begin{lemma}
+        Let $f\colon A \to X_1 \times \dots \times X_k$, where the co-domain is
+        equipped with the product topology. Then, $f$ is continuous if and only if
+        the component functions $f_i = \pi_i\circ f$ are continuous.
+    \end{lemma}
+    \begin{proof}
+        Note that if $f$ is continuous, the compositions $\pi_i\circ f$ are
+        immediately continuous. Conversely suppose that each $f_i$ is continuous, and
+        write \[
+            f(t) = (f_1(t), \dots, f_k(t)).
+        \] The sets $U_1 \times \dots \times U_k$, where each $U_i \subseteq X_i$ is
+        open, form a basis of the co-domain. Furthermore, their pre-images under $f$
+        are $f_1^{-1}(U_1) \cap \dots \cap f_k^{-1}(U_k)$, which are open in $A$.
+        This shows that $f$ is continuous.
+    \end{proof}
+    
+
+    \subsection{Homeomorphisms}
 
     \begin{definition}
         Let $f\colon X \to Y$ be a function between the topological spaces $(X,
         \tau_X)$ and $(Y, \tau_Y)$. We say that $f$ is a homeomorphism if $f$ is
-        continuous, $f$ is invertible, and $f^{-1}$ is continuous. We also say that
+        continuous, $f$ is bijective, and $f^{-1}$ is continuous. We also say that
         $X$ and $Y$ are homeomorphic when such a homeomorphism between them exists.
     \end{definition}
+    \begin{example}
+        The interval $(-1, 1)$ is homeomorphic to $\R$; for instance, the map $x
+        \mapsto \tan(2x/ \pi)$ on $(-1, 1)$ is a homeomorphism. A simpler
+        construction is the map $x \mapsto x / (1 - x^2)$.
+    \end{example}
 
 \end{document}
