@@ -574,7 +574,7 @@
     \end{proof}
 
 
-    \subsection{Quotient field}
+    \subsection{Quotient fields}
 
     We recall the standard construction of $\Q$ from $\Z$, and generalize this to the
     construction of the field $Q(R)$ from an integral domain $R$. Consider the
@@ -612,5 +612,47 @@
         Let $R_1, R_2$ be integral domains. If $R_1 \cong R_2$, then $Q(R_1) \cong
         Q(R_2)$.
     \end{lemma}
+
+
+    \subsection{Prime and maximal ideals}
+    
+    \begin{definition}
+        An ideal $I \subseteq R$ is called a prime ideal if it is proper, and $xy \in
+        I$ implies that at least one of $x, y \in I$ for all $x, y \in R$.
+    \end{definition}
+
+    \begin{lemma}
+        An ideal $I \subseteq P$ is prime if and only if $JK \subset I$ forces either
+        $J \subset I$ or $K \subset I$ for all ideals $J, K \subseteq R$.
+    \end{lemma}
+
+    \begin{example}
+        The prime ideals of $\Z$ are $\{0\}$ and $p\Z$
+    \end{example}
+    \begin{example}
+        A commutative ring is an integral domain if and only if $\{0\}$ is a prime
+        ideal.
+    \end{example}
+
+    \begin{theorem}
+        Let $R$ be a commutative ring, and $I$ be a proper ideal. Then, $I$ is a
+        proper ideal if and only if $R/I$ is an integral domain.
+    \end{theorem}
+    \begin{example}
+        The quotients $\Z/p\Z$ are integral domains precisely for primes $p$.
+    \end{example}
+
+    \begin{definition}
+        An ideal $I \subseteq R$ is called maximal if it is proper, and for any ideal
+        $J \subseteq R$ with $I \subseteq J \subseteq R$, either $J = I$ or $J = R$.
+    \end{definition}
+    \begin{example}
+        The maximal ideals of $\Z$ are $p\Z$.
+    \end{example}
+
+    \begin{theorem}
+        Let $R$ be a commutative unit ring, and $I$ be a proper ideal. Then $I$ is a
+        maximal ideal if and only if $R/I$ is a field.
+    \end{theorem}
 
 \end{document}
