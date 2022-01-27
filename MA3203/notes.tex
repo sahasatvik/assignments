@@ -444,14 +444,6 @@
         v^{-1}((c, d))$, which is clearly a measurable set in $X$.
     \end{proof}
     
-    \begin{lemma}
-        The maximum and minimum of measurable functions are measurable.
-    \end{lemma}
-    \begin{corollary}
-        The positive and negative parts of a measurable function are measurable.
-    \end{corollary}
-    
-
     \begin{corollary}
         Let $f, g\colon (X, \M) \to (\R, \mathcal{B}_\R)$ be $(\M, \mathcal{B}_\R)$
         measurable. Then the sum $f + g$ and the product $u\cdot g$ are also $(\M,
@@ -469,6 +461,22 @@
             s\colon X \to \R, \qquad x \mapsto \sum_{i = 1}^n c_i \chi_{A_i}(x)
         \] is measurable. Such functions are called simple functions.
     \end{example}
+    
+    \begin{lemma}
+        The maximum and minimum of measurable functions are measurable.
+    \end{lemma}
+    \begin{corollary}
+        The positive and negative parts of a measurable function are measurable.
+        \begin{remark}
+            Recall that \[
+                f^+ = \max\{f, 0\}, \qquad f^{-1} = -\min\{f, 0\}, \qquad f = f^+ -
+                f^-.
+            \] Thus, in order to show that a result holds for all measurable
+            functions, it suffices to show the result only for all non-negative
+            measurable functions.
+        \end{remark}
+    \end{corollary}
+    
 
     \begin{theorem}
         Let $\{f_n\}_{n = 1}^\infty$ be a collection of measurable functions $f\colon
@@ -491,6 +499,98 @@
         \end{remark}
     \end{theorem}
 
+    
+
+    \subsection{Lebesgue integration}
+
+    \begin{theorem}
+        Let $f\colon X \to [0, \infty]$ be measurable. Then, there exists a sequence
+        of simple functions $s_n\colon X \to [0, \infty)$ such that \[
+            0 \leq s_1 \leq s_2 \leq \dots \leq s_n \leq f
+        \] for all $n \in \N$, and $s_n \to f$.
+    \end{theorem}
+    \begin{corollary}
+        Any measurable function $f\colon X \to [-\infty, \infty]$ can be written as
+        the limit of a sequence of simple functions $\{s_n\}_{n = 1}^\infty$, $s_n
+        \to \infty$.
+    \end{corollary}
+
+    \begin{definition}
+        When dealing with the extended reals in measure theory, we use the convention
+        $0\cdot \infty = \infty \cdot 0 = 0$.
+        \begin{remark}
+            We want to have \[
+                \int_0^\infty 0 = 0\cdot \mu(f^{-1}(0)) = 0\cdot \mu([0, \infty)) =
+                0.
+            \] 
+        \end{remark}
+    \end{definition}
+
+    
+    \begin{definition}
+        Let $(X, \M, \mu)$ be a measure space, and let $s\colon X \to [0, \infty)$ be
+        a simple, measurable function, of the form \[
+            s = \sum_{i = 1}^n c_i\chi_{A_i}, \qquad A_i \in \M
+        \] where $c_1, \dots, c_n$ are distinct values of $s$. Then, the Lebesgue
+        integral of $s$ on $E \in \M$ is defined as \[
+            \int_E s\:d\mu = \sum_{i = 1}^n c_i\cdot \mu(E \cap A_i).
+        \] 
+    \end{definition}
+    \begin{example}
+        The Dirichlet function is the simple function $x\mapsto \chi_\Q$. Thus, upon
+        assigning a $\sigma$-algebra and a measure $\mu$ on $\R$, we will be able to
+        assign its Lebesgue integral on $\R$ as the value $\mu(\Q)$.
+    \end{example}
+    
+    \begin{definition}
+        Let $(X, \M, \mu)$ be a measure space, and let $f\colon X \to [0, \infty)$ be
+        a measurable function. Then, the Lebesgue integral of $f$ on $E \in \M$ is
+        defined as \[ 
+            \int_E f\:d\mu = \sup\left\{\int_E s\:d\mu, \text{ for all simple
+            functions }s, \text{where }0 \leq s \leq f\right\}.
+        \] 
+    \end{definition}
+
+    \begin{theorem}
+        Let $f, g\colon X \to [0, \infty]$ be measurable functions.
+        \begin{enumerate}
+            \item If $0 \leq f \leq g$, then \[
+                \int_E f\:d\mu \leq \int_E g\:d\mu.
+            \] 
+            \item If $A \subset B$, then \[
+                \int_A f\:d\mu \leq \int_B f\:d\mu.
+            \] 
+            \item For $c \in \R$, \[
+                \int_E cf\:d\mu = c\int_E f\:d\mu.
+            \] 
+            \item If $f = 0$, then \[
+                \int_E f\:d\mu = 0.
+            \] 
+            \item If $\mu(E) = 0$, then \[
+                \int_E f\:d\mu = 0.
+            \] 
+        \end{enumerate}
+    \end{theorem}
+
+    \begin{definition}
+        We say that a statement is true \emph{almost everywhere} on $X$ if it is true
+        everywhere on $X\setminus E$ for a measure zero set $E$.
+    \end{definition}
+    
+    \begin{lemma}
+        Let $f\colon X \to [0, \infty]$ be a measurable function. If \[
+            \int_X f\:d\mu = 0,
+        \] then $f = 0$ almost everywhere.
+    \end{lemma}
+    \begin{proof}
+        We wish to show that the set $E = f^{-1}(0, \infty]$ has measure zero. Now,
+        note that this is the union of the measurable sets $E_n = f^{-1}(1 / n,
+        \infty]$. Since $E_n \subset E \subseteq X$, we have \[
+            \int_{E_n} \frac{1}{n}\:d\mu \leq \int_{E_n} f\:d\mu \leq \int_X f\:d\mu.
+        \] However, this is just \[
+            0 \leq \frac{1}{n}\mu(E_n) \leq \int_{E_n} f\:d\mu \leq 0,
+        \] hence each $\mu(E_n) = 0$. Continuity from below gives $\mu(E) = 0$.
+    \end{proof}
 
 
 \end{document}
