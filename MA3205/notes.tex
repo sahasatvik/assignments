@@ -303,7 +303,7 @@
     \end{definition}
 
     \begin{definition}
-        A unit speed curve $\gamma$ is one where $\norm{\gamma} = 1$
+        A unit speed curve $\gamma$ is one where $\norm{\gamma'} = 1$
     \end{definition}
 
     \begin{lemma}
@@ -338,6 +338,20 @@
             |\varphi'(t)| = s'(\varphi(t))\varphi'(t) = (s\circ \varphi)'(t) = 1. \qedhere
         \] 
     \end{proof}
+
+
+    \subsection{Curvature}
+    
+    \begin{definition}
+        Let $\gamma\colon (a, b) \to \R^n$ be a regular curve. Let $\Delta s$ be the
+        length of the curve from $\gamma(t)$ to $\gamma(t + \Delta t)$, and let
+        $\Delta\theta$ be the angle between these two vectors. Then, the curvature of
+        $\gamma$ at $\gamma(t)$ is defined as \[
+            \lim_{\Delta t \to 0} \frac{\Delta\theta}{\Delta s}.
+        \] \begin{remark}
+            For a unit speed curve, the curvature is precisely $\norm{\gamma''(s)}$.
+        \end{remark}
+    \end{definition}
 
 
 \end{document}
