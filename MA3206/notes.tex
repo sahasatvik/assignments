@@ -409,7 +409,7 @@
         \end{align*}
         Finally note that $RMS \geq AM$ gives \[
             n\sigma^2 \geq x_n^2 + x_1^2 \geq \frac{(|x_n| + |x_1|)^2}{2} =
-            \frac{R^2}{2}.
+            \frac{R^2}{2}. \qedhere
         \] 
     \end{proof}
 
@@ -418,6 +418,12 @@
             \sigma^2 = \frac{1}{2n^2}\sum_{i, j} (x_i - x_j)^2.
         \] 
     \end{lemma}
+    \begin{proof}
+        Observe that \[
+            \sum_{ij} (x_i - x_j)^2 = 2\sum_{ij}x_i^2 - \sum_{ij}2x_jx_j = 2n\sum_i x_i^2
+            - 2\sum_i x_i\sum_j x_j = 2n\sum_i x_j^2 - 2n^2\bar{x}^2. \qedhere
+        \] 
+    \end{proof}
     
 
     \subsection{Quartile deviation}
