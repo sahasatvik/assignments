@@ -343,14 +343,41 @@
     \subsection{Curvature}
     
     \begin{definition}
-        Let $\gamma\colon (a, b) \to \R^n$ be a regular curve. Let $\Delta s$ be the
-        length of the curve from $\gamma(t)$ to $\gamma(t + \Delta t)$, and let
-        $\Delta\theta$ be the angle between these two vectors. Then, the curvature of
-        $\gamma$ at $\gamma(t)$ is defined as \[
+        Let $\gamma\colon (\alpha, \beta) \to \R^n$ be a regular curve. Let $\Delta
+        s$ be the length of the curve from $\gamma(t)$ to $\gamma(t + \Delta t)$, and
+        let $\Delta\theta$ be the angle between these two vectors. Then, the
+        curvature of $\gamma$ at $\gamma(t)$ is defined as \[
             \lim_{\Delta t \to 0} \frac{\Delta\theta}{\Delta s}.
         \] \begin{remark}
             For a unit speed curve, the curvature is precisely $\norm{\gamma''(s)}$.
         \end{remark}
+    \end{definition}
+    \begin{example}
+        For a straight line $a + bt$, the curvature vanishes identically.
+    \end{example}
+    \begin{example}
+        For a circle of radius $R$, the curvature is $1 / R$. Note that we
+        parametrize \[
+            \gamma(s) = (x_0 + R\cos(t / R), y_0 + R\sin(t / R)).
+        \] 
+    \end{example}
+
+    \begin{definition}
+        Let $\gamma\colon (\alpha, \beta) \to \R^3$ be a regular $C^2$ curve. Its
+        curvature is defined as \[
+            \kappa(t) = \frac{\norm{\gamma'(t) \times
+            \gamma''(t)}}{\norm{\gamma'(t)}^3}.
+        \] 
+        \begin{remark}
+            It is easy to check that the curvature at a point is independent of
+            parametrization.
+        \end{remark}
+    \end{definition}
+
+    \begin{definition}
+        Given a $C^2$ plane curve $\gamma$ such that $\ddot{\gamma}(0) \neq 0$, it is
+        said to turn to the right when $\det(\dot{\gamma}(0), \ddot{\gamma}(0))$ is
+        negative.
     \end{definition}
 
 
