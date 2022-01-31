@@ -31,6 +31,9 @@
 \newcommand{\Z}{\mathbb{Z}}
 \newcommand{\N}{\mathbb{N}}
 
+\DeclareMathOperator{\var}{Var}
+\DeclareMathOperator{\cov}{Cov}
+
 \newmdtheoremenv[%
     backgroundcolor=blue!10!white,%
 ]{theorem}{Theorem}[section]
@@ -612,5 +615,52 @@
     0$ is called \emph{mesokurtic}, $g_2 > 0$ is called \emph{leptokurtic}, and $g_2
     < 0$ is called \emph{platykurtic}.
 
+
+    
+    \section{Bivariate data}
+    
+    Here, out data items are in the form of points $(x_i, y_i)$. We are typically
+    interested in predicting the values of one of these variables (called the
+    \emph{study} variable) given knowledge of the other (called the \emph{auxiliary}
+    variable).
+
+
+    \subsection{Correlation}
+    Correlation is a measure of how change in one variable is associated with change
+    in the other. Here, we only examine linear correlation. Two variables are said to
+    be \emph{positively} correlated if one variable increases with average increase
+    in the other, or \emph{negatively} correlated if one variable decreases with
+    average increase in the other.
+
+    We define the covariance between two variables as \[
+        \cov(x, y) = \frac{1}{n}\sum_{i = 1}^n (x_i - \bar{x})(y_i - \bar{y}).
+    \] The Pearson's product moment correlation coefficient is now defined as \[
+        r(x, y) = \frac{\cov(x, y)}{\sigma_x\cdot \sigma_y}.
+    \]
+
+    \begin{lemma}
+        \[
+            \cov(x, y) = \frac{1}{n}\sum_{i = 1}^n x_iy_i - \bar{x}\bar{y}.
+        \] 
+    \end{lemma}
+
+    \begin{lemma}
+        \[
+            \cov(ax + by, cx + dy) = ac\sigma_x^2 + bd\sigma_y^2 + (ad + bc)\cov(x,
+            y).
+        \]
+    \end{lemma}
+
+    \begin{lemma}
+        The numerical value of $r$ is invariant under shifting and scaling.
+    \end{lemma}
+    
+    \begin{lemma}
+        We have \[
+            -1 \leq r(x, y) \leq 1.
+        \] Furthermore, equality holds if and only if $(x_i - \bar{x}) = k(y_i -
+        \bar{y})$, $k = \pm \sigma_x / \sigma_y$.
+    \end{lemma}
+    
 
 \end{document}
