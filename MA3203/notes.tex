@@ -479,20 +479,20 @@
     
 
     \begin{theorem}
-        Let $\{f_n\}_{n = 1}^\infty$ be a collection of measurable functions $f\colon
-        X \to \R \cup \{-\infty, +\infty\}$, and let $f_n \to f$ pointwise on $X$.
-        Then, their supremum and infinimum are measurable.
+        Let $\{f_n\}_{n = 1}^\infty$ be a collection of measurable functions
+        $f_n\colon X \to \R \cup \{-\infty, +\infty\}$, and let $f_n \to f$ pointwise
+        on $X$.  Then, their supremum and infinimum are measurable.
     \end{theorem}
     
     \begin{theorem}
-        Let $\{f_n\}_{n = 1}^\infty$ be a sequence of measurable functions $f\colon X
-        \to \R$. Then, $\limsup_{n \to \infty} f_n$ and $\liminf_{n \to \infty} f_n$
-        are measurable.
+        Let $\{f_n\}_{n = 1}^\infty$ be a sequence of measurable functions $f_n\colon
+        X \to \R$. Then, $\limsup_{n \to \infty} f_n$ and $\liminf_{n \to \infty}
+        f_n$ are measurable.
     \end{theorem}
     
     \begin{theorem}
-        Let $\{f_n\}_{n = 1}^\infty$ be a sequence of measurable functions $f\colon X
-        \to \R$, and let $f_n \to f$ pointwise on $X$. Then, $f$ is measurable.
+        Let $\{f_n\}_{n = 1}^\infty$ be a sequence of measurable functions $f_n\colon
+        X \to \R$, and let $f_n \to f$ pointwise on $X$. Then, $f$ is measurable.
         \begin{remark}
             This is a stronger result than the corresponding one regarding limits of
             continuous functions.
@@ -591,6 +591,23 @@
             0 \leq \frac{1}{n}\mu(E_n) \leq \int_{E_n} f\:d\mu \leq 0,
         \] hence each $\mu(E_n) = 0$. Continuity from below gives $\mu(E) = 0$.
     \end{proof}
+
+
+    \begin{lemma}
+        Let $(X, \M, \mu)$ be a measure space, and let $s\colon X \to \R$ be a
+        non-negative simple function. Define \[
+            \nu(E) = \int_E s\:d\mu, \qquad E \in \M.
+        \] Then, $\nu$ is a measure on $\M$.
+    \end{lemma}
+
+
+    \begin{theorem}[Monotone convergence]
+        Let $\{f_n\}_{n = 1}^\infty$ be a sequence of non-negative measurable
+        functions $f_n\colon X \to \R$, such that $f_n \leq f_{n + 1}$, and $f_n \to
+        f$ pointwise. Then, \[
+            \lim_{n \to \infty} \int_X f_n\:d\mu = \int_X f\:d\mu.
+        \] 
+    \end{theorem}
 
 
 \end{document}
