@@ -654,5 +654,42 @@
         Let $R$ be a commutative unit ring, and $I$ be a proper ideal. Then $I$ is a
         maximal ideal if and only if $R/I$ is a field.
     \end{theorem}
+    \begin{example}
+        Note that $4\Z$ is a maximal ideal in $2\Z$, but $2\Z / 4\Z$ is not a field.
+    \end{example}
+
+    \begin{lemma}
+        Let $R$ be a commutative unit ring. Then every maximal ideal is prime.
+    \end{lemma}
+    \begin{example}
+        Note that $(X)$ is a prime ideal in $\Z[X]$, but not maximal.
+    \end{example}
+
+
+    \begin{definition}
+        A non-empty set $S$ with a partial order $\leq$ is called a partial ordered
+        set, when we have \begin{enumerate}
+            \itemsep0em
+            \item $x \leq x$ for all $x \in S$.
+            \item $x \leq y$ and $y \leq x$ forces $x = y$.
+            \item $x \leq y$ and $y \leq z$ forces $x \leq z$.
+        \end{enumerate}
+    \end{definition}
+
+    \begin{definition}
+        A subset $T$ of $S$ is called a chain or totally ordered set if any two
+        elements are comparable. In other words, given $x, y \in T$, at least one of
+        $x \leq y$ or $y \leq x$.
+    \end{definition}
+
+    \begin{lemma}[Zorn's Lemma]
+        If $S$ is a partially ordered set such that every chain $C$ has an upper
+        bound in $S$, then for every element $x \in S$, there exists a maximal
+        element $z \in S$ such that $x \leq z$.
+    \end{lemma}
+
+    \begin{theorem}
+        Let $R$ be a commutative unit ring. Then $R$ contains a maximal ideal.
+    \end{theorem}
 
 \end{document}
