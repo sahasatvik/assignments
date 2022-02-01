@@ -31,6 +31,8 @@
 \newcommand{\Z}{\mathbb{Z}}
 \newcommand{\N}{\mathbb{N}}
 
+\DeclareMathOperator{\diam}{diam}
+
 \newmdtheoremenv[%
     backgroundcolor=blue!10!white,%
 ]{theorem}{Theorem}[section]
@@ -586,6 +588,21 @@
     \end{lemma}
 
 
+    \subsection{Homeomorphisms}
+
+    \begin{definition}
+        Let $f\colon X \to Y$ be a function between the topological spaces $(X,
+        \tau_X)$ and $(Y, \tau_Y)$. We say that $f$ is a homeomorphism if $f$ is
+        continuous, $f$ is bijective, and $f^{-1}$ is continuous. We also say that
+        $X$ and $Y$ are homeomorphic when such a homeomorphism between them exists.
+    \end{definition}
+    \begin{example}
+        The interval $(-1, 1)$ is homeomorphic to $\R$; for instance, the map $x
+        \mapsto \tan(\pi x/ 2)$ on $(-1, 1)$ is a homeomorphism. A simpler
+        construction is the map $x \mapsto x / (1 - x^2)$.
+    \end{example}
+
+    
     \subsection{Projection maps}
 
     \begin{theorem}
@@ -667,18 +684,66 @@
     \end{lemma}
     
 
-    \subsection{Homeomorphisms}
+    \section{Metric spaces}
+    
+    \begin{definition}
+        A metric space $(X, d)$ is a set equipped with a metric $d\colon X \times X
+        \to \R$, such that \begin{enumerate}
+            \itemsep0em
+            \item $d(x, y) = 0$ if and only if $x = y$.
+            \item $d(x, y) = d(y, x)$.
+            \item $d(x, z) \leq d(x, y) + d(y, z)$.
+        \end{enumerate}
+    \end{definition}
 
     \begin{definition}
-        Let $f\colon X \to Y$ be a function between the topological spaces $(X,
-        \tau_X)$ and $(Y, \tau_Y)$. We say that $f$ is a homeomorphism if $f$ is
-        continuous, $f$ is bijective, and $f^{-1}$ is continuous. We also say that
-        $X$ and $Y$ are homeomorphic when such a homeomorphism between them exists.
+        An open ball in a metric spaces is the set of points \[
+            B(x, r) = \{y \in X : d(x, y) < r\}.
+        \] 
+    \end{definition}
+
+    \begin{lemma}
+        The collection of open balls in a metric space generates its standard
+        topology.
+    \end{lemma}
+
+    \begin{example}
+        Consider a set $X$, equipped with the metric \[
+            d\colon X \times X \to \R, \qquad (x, y) \mapsto \begin{cases}
+                0, &\text{ if } x = y, \\
+                1, &\text{ if } x \neq y.
+            \end{cases}
+        \] Then, this metric induces the discrete topology on $X$.
+    \end{example}
+
+
+    \begin{definition}
+        A topological space $(X, \tau)$ is called metrizable if there exists a metric
+        $d\colon X \times X \to \R$ which induces the topology $\tau$ on $X$.
+    \end{definition}
+
+
+    \begin{definition}
+        Let $A \subseteq X$. The diameter of $A$ is defined to be \[
+            \diam(A) = \sup\{d(x, y): x, y \in A\}.
+        \] If $\diam(A)$ is finite, we say that $A$ is bounded.
     \end{definition}
     \begin{example}
-        The interval $(-1, 1)$ is homeomorphic to $\R$; for instance, the map $x
-        \mapsto \tan(\pi x/ 2)$ on $(-1, 1)$ is a homeomorphism. A simpler
-        construction is the map $x \mapsto x / (1 - x^2)$.
+        The metric \[
+            (x, y) \mapsto \frac{|x - y|}{1 + |x - y|}
+        \] generates the standard topology on $\R$. Note that $\R$ is unbounded in
+        the standard metric, but bounded in this one.
     \end{example}
+
+    \begin{definition}
+        Let $(X, d)$ be a metric space. Then the standard bounded metric
+        corresponding to $d$ is defined as \[
+            \bar{d}\colon X \times X \to \R, \qquad (x, y) \mapsto \min\{d(x, y), 1\}.
+        \] 
+    \end{definition}
+
+    \begin{lemma}
+        Both $d$ and $\bar{d}$ generate the same topology.
+    \end{lemma}
 
 \end{document}
