@@ -379,6 +379,65 @@
         said to turn to the right when $\det(\dot{\gamma}(0), \ddot{\gamma}(0))$ is
         negative.
     \end{definition}
+    
+    \begin{definition}
+        Let $\gamma\colon (\alpha, \beta) \to \R^n$ be a regular $C^2$ curve. Its
+        curvature is defined as \[
+            \kappa(t) = \frac{\norm{\gamma''\ip{\gamma'}{\gamma'} -
+            \gamma'\ip{\gamma'}{\gamma''}}}{\norm{\gamma'(t)}^4}.
+        \] 
+    \end{definition}
+
+    \begin{definition}
+        Consider a regular smooth curve $\gamma$, such that $\ddot{\gamma}(s) \neq 0$ at
+        $s$. Then, $\dot{\gamma}(s)$ and $\ddot{\gamma}(s)$ are perpendicular, and
+        span the osculating plane at $\gamma(s)$.
+    \end{definition}
+
+    \begin{theorem}
+        Consider a regular smooth curve $\gamma\colon (\alpha, \beta) \to \R^n$, such
+        that $\ddot{\gamma}(s) \neq 0$ at $s$. \begin{enumerate}
+            \itemsep0em
+            \item For $s_1, s_2, s_3$ sufficiently close to $s$, the points
+            $\gamma(s_i)$ are not colinear.  
+            \item As $s_1, s_2, s_3$ tend to $s$, the planes $A(s_1, s_2, s_3)$ tend
+            to the osculating plane at $\gamma(s)$.
+            \item The circumcircle $C(s_1, s_2, s_3)$ associated with these points
+            tend to a circle $C(s)$ lying in the osculating plane which passes
+            through $\gamma(s)$. Furthermore, this has radius $1 /
+            \norm{\ddot{\gamma}(s)}$.
+            \item For $s_1$ sufficiently close to $s$, there is a unique plane
+            containing $\gamma(s_1)$ and the tangent line to $\gamma$ at $s$. As
+            $s_1$ tends to $s$, these planes converge to the osculating plane at
+            $\gamma(s)$.
+        \end{enumerate}
+    \end{theorem}
+    \begin{proof}
+        Let $\{(s_{1n}, s_{2n}, s_{3n})\}_{n = 1}^\infty$ be a sequence converging to
+        $(s, s, s)$; assume that $s_{1n} < s_{2n} < s_{3n}$. Suppose that
+        $\gamma(s_{1n})$, $\gamma(s_{2n})$, $\gamma(s_{3n})$ line on a line $\ell_n$,
+        for every $n$. Define the planes $V_n = \ell_n^\perp$, and look at the
+        functions \[
+            f_n^v(t) = \ip{\gamma(t) - \gamma(s_{1n})}{v}, \qquad v \in V_n.
+        \] Notice that $s_{1n}, s_{2n}, s_{3n}$ are zeroes of $f_n^v$. Thus, we can
+        choose $s_{12n}, s_{23n}$, where $s_{1n} \neq s_{12n} \leq s_{2n} \leq
+        s_{23n} \leq s_{3n}$, such that $(f_n^v)'(s_{12n}) = (f_n^v)'(s_{23n}) = 0$.
+        This gives \[
+            \ip{\gamma'(s_{12n})}{v} = \ip{\gamma'(s_{23n})}{v} = 0.
+        \] Repeating yields a point $s_{n}$ such that $\ip{\gamma''(s_n)}{v} = 0$.
+        Now, there is a neighbourhood of $s$ on which \[
+            \norm{\gamma'(u) - \gamma'(s)} < \epsilon, \qquad
+            \norm{\gamma''(u) - \gamma''(s)} < \epsilon.
+        \] As a result, \[
+            \ip{\gamma'(s)}{v} \leq \norm{v}\epsilon, \qquad
+            \ip{\gamma''(s)}{v} \leq \norm{v}\epsilon.
+        \] Thus, given a vector in the osculating plane, $w = a\gamma'(s) +
+        b\gamma''(s)$, we have $\norm{w}^2 = a^2 + b^2k^2$, and \[
+            |\ip{w}{v}| \leq (|a| + |b|)\norm{v}\epsilon \leq
+            c\norm{w}\norm{v}\epsilon.
+        \] This means that the osculating plane is part of the
+        $\epsilon$-perpendicular region to $V_n$.
+    \end{proof}
 
 
 \end{document}
