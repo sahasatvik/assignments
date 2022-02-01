@@ -661,6 +661,71 @@
         \] Furthermore, equality holds if and only if $(x_i - \bar{x}) = k(y_i -
         \bar{y})$, $k = \pm \sigma_x / \sigma_y$.
     \end{lemma}
+
+
+    \subsection{Regression}
     
+    Given two variables $X, Y$, we want to relate them as \[
+        Y = \phi(X) + \epsilon = \beta_1 + \beta_2X + \epsilon.
+    \] Here, our choice of the regression function $\phi$ is linear. $X$ is called
+    the \emph{auxiliary} variable, and $Y$ is called the \emph{response} variable.
+
+    In order to determine $\beta_1, \beta_2$, we minimize the sum of squares of
+    errors $\epsilon_i = y_i - (\beta_1 + \beta_2x_i)$. This yields \[
+        \hat{\beta}_1 = \bar{y} - \hat{\beta}_2\bar{x}, \qquad
+        \hat{\beta}_2 = r_{xy} \cdot \frac{\sigma_y}{\sigma_x} = \frac{\sum_i x_iy_i
+        - n\bar{x}\bar{y}}{\sum_i x_i^2 - n\bar{x}^2}.
+    \] The regression line of $Y$ on $X$ thus is \[
+        \hat{y} = \bar{y} + r\frac{\sigma_y}{\sigma_x}(x - \bar{x}).
+    \] The slope $b_{yx}$ is called the regression coefficient of $Y$ on $X$. Note
+    that we assume that $X$ is free of error.
+
+    The regression line of $X$ on $Y$ is \[
+        \hat{x} = \bar{x} + r\frac{\sigma_x}{\sigma_y}(y - \bar{y}).
+    \] 
+
+    \begin{lemma}
+        If $u = (x - a) / c$, $v = (y - b) / d$, then \[
+            b_{yx} = \frac{d}{c}b_{vu}, \qquad
+            b_{xy} = \frac{c}{d}b_{uv}.
+        \] 
+    \end{lemma}
+
+    \begin{lemma}
+        The mean of the predicted values $\hat{y}$ is equal to the mean $\bar{y}$ of
+        the values.
+    \end{lemma}
+
+    The residuals are \[
+        \hat{\epsilon}_i = y_i - \hat{y}_i = y_i - \bar{y} - b_{yx}(x_i - \bar{x}).
+    \] 
+
+    \begin{lemma}
+        The sum of residuals is zero.
+    \end{lemma}
+
+    \begin{lemma}
+        \[
+            |r_{xy}| = \frac{\sigma_{\hat{y}}}{\sigma{y}}, \qquad
+            \sigma_{\hat{\epsilon}} = \sigma_y\sqrt{1 - r^2}.
+        \] 
+    \end{lemma}
+
+    Thus, the coefficient of determination $r^2 = b_{yx}b_{xy}$ is a measure of the
+    usefulness of the linear regression. If $r = 0$, then $\sigma_{\hat{\epsilon}} =
+    \sigma_y$, making the regression pointless.
+
+    \begin{lemma}
+        \[
+            \cov(\hat{y}, \hat{\epsilon}) = 0.  
+        \]
+    \end{lemma}
+
+    \begin{lemma}
+        The angle between both regression lines satisfies \[
+            \tan\theta = \left|\frac{1 - r^2}{r} \cdot
+            \frac{\sigma_x\sigma_y}{\sigma_x^2 + \sigma_y^2}\right|.
+        \] 
+    \end{lemma}
 
 \end{document}
