@@ -663,7 +663,7 @@
     \end{lemma}
 
 
-    \subsection{Regression}
+    \subsection{Least square regression}
     
     Given two variables $X, Y$, we want to relate them as \[
         Y = \phi(X) + \epsilon = \beta_1 + \beta_2X + \epsilon.
@@ -727,5 +727,51 @@
             \frac{\sigma_x\sigma_y}{\sigma_x^2 + \sigma_y^2}\right|.
         \] 
     \end{lemma}
+
+
+    Now suppose that our variables are empirically related as \[
+        y = f(x, \beta_1, \beta_2, \dots, \beta_n) = f(x; \beta).
+    \] Here, $\beta = (\beta_1, \dots, \beta_n)$ are unknown constants. Make an
+    initial guess $\beta^{(0)}$, and note that we wish to minimize $\beta -
+    \beta^{(0)}$. Taylor's theorem gives the approximation \[
+        y = f(x; \beta) \approx f(x; \beta^{(0)}) + (\beta - \beta^{(0)})\cdot
+        \left[\frac{\partial f}{\partial \beta_i}(\beta^{(0)})\right].
+    \] Since this is now linear, the values $\beta - \beta^{(0)}$ can be determined
+    using the least squares method as before. This gives us a new approximation
+    $\beta^{(1)}$; we can repeat this process getting better and better solutions. \\
+
+
+    Suppose that both variables are subject to error. To perform a linear regression
+    \[
+        ax + by + 1 = 0,
+    \] we minimize the sum of squares of distances from this line to the points
+    $(x_i, y_i)$, i.e.\ we want to minimize \[
+        \sum_{i = 1}^n \frac{(ax_i + by_i + 1)^2}{a^2 + b^2}.
+    \] Setting the partial derivatives to zero yields \[
+        ab^2\sum_i (x_i^2 - y_i^2) + b(b^2 - a^2)\sum_i x_iy_i + (b^2 - a^2)\sum_ix_i
+        - 2ab\sum_i y_i = na,
+    \] \[
+        a^2b\sum_i (y_i^2 - x_i^2) + a(a^2 - b^2)\sum_i x_iy_i + (a^2 - b^2)\sum_iy_i
+        - 2ab\sum_i x_i = nb,
+    \] \[
+        a\bar{x} + b\bar{y} + 1 = 0.
+    \] 
+
+    
+    \subsection{Orthogonal polynomials}
+    
+    A sequence of polynomials $\{p_i\}$ is said to be orthogonal if \[
+        \sum_x p_i(x)\cdot p_j(x) \;\begin{cases}
+            = 0, &\text{ if } i \neq j \\
+            \neq 0, &\text{ if } i = j
+        \end{cases}.
+    \] Consider the polynomials \[
+        p_n(x) = \sum_{k = 0}^n c_{nk}x^k.
+    \] When considering the first $N + 1$ such polynomials, we have $(N + 1)(N + 2) /
+    2$ unknown constants $c_{nk}$. For these to be orthogonal, we have $N(N + 1) / 2$
+    equations from the orthogonality equations. Thus, we need $N + 1$ additional
+    constraints to fully determine the coefficients. Typically, we take the
+    coefficients of the highest power, $c_{nn} = 1$. Thus, we can calculate such
+    orthogonal polynomials, given our data $x_1, \dots, x_n$.
 
 \end{document}
