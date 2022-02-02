@@ -609,5 +609,25 @@
         \] 
     \end{theorem}
 
+    \begin{lemma}
+        Let $f,g\colon X \to \R$ be measurable functions. Then, $f + g$ is measurable.
+    \end{lemma}
+
+    \begin{theorem}
+        Let $\{f_n\}_{n = 1}^\infty$ be a sequence of non-negative measurable
+        functions $f_n\colon X \to \R$. Define \[
+            f\colon X \to \R, \qquad f(x) = \sum_{n = 1}^\infty f_n(x).
+        \] Then, $f$ is measurable and \[
+            \int_X f\:d\mu = \sum_{n = 1}^\infty \int_X f_n\:d\mu.
+        \] 
+    \end{theorem}
+
+    \begin{theorem}[Fatou]
+        Let $\{f_n\}_{n = 1}^\infty$ be a sequence of non-negative measurable
+        functions $f_n\colon X \to \R$. Then, \[
+            \int_X \liminf_{n \to \infty} f_n\:d\mu \leq \liminf_{n\to \infty} \int_X
+            f_n\:d\mu.
+        \] 
+    \end{theorem}
 
 \end{document}
