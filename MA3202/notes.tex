@@ -692,4 +692,59 @@
         Let $R$ be a commutative unit ring. Then $R$ contains a maximal ideal.
     \end{theorem}
 
+
+
+    \subsection{Factorisation domains}
+    
+    In this section, all rings are integral domains with a multiplicative identity.
+
+    \begin{definition}
+        Let $a, b \in R$, $a \neq 0$. We say that $a$ divides $b$ if there exists $c
+        \in R$ such that $b = ac$. We denote this by $a\mid b$.
+    \end{definition}
+    \begin{example}
+        In $\Z[i]$, $3 + i$ divides $10$ because $10 = (3 + i)(3 - i)$.
+    \end{example}
+
+    \begin{lemma}
+        If $a, b \in R$, $a \neq 0$, then $a \mid b$ if and only if $(a)
+        \supseteq (b)$.
+    \end{lemma}
+
+    \begin{lemma}
+        Suppose that $a\mid b$ and $b \mid a$. Then, $b = ua$ for some unit $u \in
+        R$.
+    \end{lemma}
+
+    \begin{definition}
+        Two non-zero elements $a, b \in R$ are called associates of each other if $b
+        = ua$ for some unit $u \in R$.
+        \begin{remark}
+            This defines an equivalence relation on $R - \{0\}$.
+        \end{remark}
+    \end{definition}
+
+    \begin{definition}
+        A non-zero unit $a \in R$ is said to be irreducible if $a = bc$ forces either
+        $b, c$ to be a unit.
+        \begin{remark}
+            The only divisors of an irreducible element are its associates and units.
+        \end{remark}
+    \end{definition}
+
+    \begin{definition}
+        A non-zero non-unit element $p \in R$ is said to be prime if for $a, b \in
+        R$, $p \mid ab$ forces either $p \mid a$, $p \mid b$.
+    \end{definition}
+
+    \begin{lemma}
+        All prime elements are irreducible.
+    \end{lemma}
+    \begin{example}
+        Consider $x = 1 + \sqrt{-5} \in \Z[\sqrt{-5}]$; this is irreducible, but not
+        prime.
+    \end{example}
+
+
+
 \end{document}
