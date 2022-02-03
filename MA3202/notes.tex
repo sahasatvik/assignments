@@ -87,6 +87,7 @@
     \maketitle
 
     \tableofcontents
+    \clearpage
 
     \section{Rings}
     
@@ -152,7 +153,7 @@
     \begin{definition}
         If $R$ is a ring and $(R, \cdot)$ is a monoid i.e.\ has an identity, then
         this identity is unique and called the unity of the ring $R$. Such a ring $R$
-        is called a unit ring. Note that we typically demand that this identity is
+        is called a unit ring. Note that we typically demand that this identity be
         distinct from the zero element.
     \end{definition}
     \begin{example}
@@ -160,7 +161,8 @@
     \end{example}
     \begin{example}
         The trivial ring $\{0\}$ is typically not considered to be a unit ring, since
-        must serve as the additive identity as well as the multiplicative identity.
+        $0$ must serve as the additive identity as well as the multiplicative
+        identity.
     \end{example}
 
     \begin{definition}
@@ -214,7 +216,7 @@
         indeed a ring.
     \end{example}
     \begin{example}
-        Consider the ring $\Q$ and the subring $\Z$. It cal be shown that $\Q/\Z$ is
+        Consider the ring $\Q$ and the subring $\Z$. It can be shown that $\Q/\Z$ is
         not a ring under the `natural' multiplication.
     \end{example}
 
@@ -263,7 +265,7 @@
 
     \begin{lemma}
         Let $R$ be a unit ring, and $I \subseteq R$ be an ideal. Then, $I = R$ if and
-        only if $I$ contains a unit.
+        only if $I$ contains the identity.
     \end{lemma}
 
     \begin{definition}
@@ -288,12 +290,12 @@
     \end{example}
 
     \begin{lemma}
-        If $I, J \subset R$ are ideals in a unit commutative ring $R$, and $I + J =
+        If $I, J \subset R$ are ideals in a commutative unit ring $R$, and $I + J =
         R$, then $IJ = I \cap J$.
     \end{lemma}
     \begin{proof}
         We already know that $IJ \subseteq I + J$. Since $I + J = R$, we can pick $x
-        \in I, y \in J$ such that $x + y = I$. Now pick $a \in I\cap J$, hence
+        \in I, y \in J$ such that $x + y = 1$. Now pick $a \in I\cap J$, hence
         $a\cdot 1 = ax + ay \in I \cap J$; but this is also an element of $IJ$
         proving $I \cap J \subseteq IJ$.
     \end{proof}
@@ -481,7 +483,7 @@
     \end{proof}
 
     \begin{theorem}
-        The only isomorphisms $\C \to \C$ which sends $\R \to \R$ are the maps $z
+        The only isomorphisms $\C \to \C$ which send $\R \to \R$ are the maps $z
         \mapsto z$ and $z \mapsto \bar{z}$.
     \end{theorem}
     \begin{proof}
@@ -589,7 +591,7 @@
     $[a, b]$ has a multiplicative inverse $[b, a]$. The remaining properties can be
     checked to show that $Q(R)$ is a field. We can now embed $R$ in $Q(R)$ via the
     map \[
-        i\colon R \to Q(R), \qquad x \mapsto [ax, a].
+        \iota\colon R \to Q(R), \qquad x \mapsto [ax, a].
     \] It can also be shown that $Q(R)$ is the smallest field containing $R$. Indeed
     if $j\colon R \to F$ is an embedding of $R$ in the field $F$, we can embed $Q(R)$
     in $F$ using the map $[a, b] \mapsto j(a)\cdot j(b)^{-1}$.
