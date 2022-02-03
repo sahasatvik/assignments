@@ -481,7 +481,7 @@
     \begin{theorem}
         Let $\{f_n\}_{n = 1}^\infty$ be a collection of measurable functions
         $f_n\colon X \to \R \cup \{-\infty, +\infty\}$, and let $f_n \to f$ pointwise
-        on $X$.  Then, their supremum and infinimum are measurable.
+        on $X$.  Then, their supremum and infimum are measurable.
     \end{theorem}
     
     \begin{theorem}
@@ -627,6 +627,46 @@
         functions $f_n\colon X \to \R$. Then, \[
             \int_X \liminf_{n \to \infty} f_n\:d\mu \leq \liminf_{n\to \infty} \int_X
             f_n\:d\mu.
+        \] 
+    \end{theorem}
+    \begin{corollary}
+        If $f_n \to f$, then \[
+            \int_X f\:d\mu \leq \liminf_{n\to \infty} \int_X f_n\:d\mu.
+        \] 
+    \end{corollary}
+    \begin{corollary}
+        If $f_n \to f$ and each $0 \leq f_n \leq f$, then \[
+            \int_X f\:d\mu = \liminf_{n\to \infty} \int_X f_n\:d\mu.
+        \] 
+    \end{corollary}
+    \begin{example}
+        Consider the functions $f_n = \chi_{[n, n + 1)}$. Now, $f_n \to 0$ pointwise,
+        but the Lebesgue integrals of $f_n$ are all $1$.
+    \end{example}
+
+    \begin{lemma}
+        Let $\{a_{ij}\}_{i,j \in \N}$ be sequences of non-negative terms. Then, \[
+            \sum_i\sum_j a_{ij} = \sum_j\sum_i a_{ij}.
+        \] 
+    \end{lemma}
+    \begin{proof}
+        Define $f_i(j) = a_{ij}$, and $f = \sum_i f_i$. Using the counting measure, \[
+            \int_\N f_i\:d\mu = \sum_j a_{ij}.
+        \] Also, \[
+            f(j) = \sum_i a_{ij}, \qquad
+            \sum_j\sum_i a_{ij} = \sum_j f(j) = 
+            \int_\N f\:d\mu = \sum_i\int_\N f_i\:d\mu = \sum_i\sum_j a_{ij}. \qedhere
+        \] 
+    \end{proof}
+
+
+    \begin{theorem}
+        Let $f\colon X \to [0, \infty]$ be a non-negative measurable function. Define
+        \[
+            \nu(E) = \int_E f\:d\mu, \qqquad E \in \M.
+        \] Then, $\nu$ is a measure on $\M$. Furthermore, if $g\colon X \to [0,
+        \infty]$ is measurable, then \[
+            \int_X g\:d\nu = \int_X g\,f\:d\mu.
         \] 
     \end{theorem}
 
