@@ -663,10 +663,45 @@
     \begin{theorem}
         Let $f\colon X \to [0, \infty]$ be a non-negative measurable function. Define
         \[
-            \nu(E) = \int_E f\:d\mu, \qqquad E \in \M.
+            \nu(E) = \int_E f\:d\mu, \qquad E \in \M.
         \] Then, $\nu$ is a measure on $\M$. Furthermore, if $g\colon X \to [0,
         \infty]$ is measurable, then \[
             \int_X g\:d\nu = \int_X g\,f\:d\mu.
+        \] 
+    \end{theorem}
+
+    \begin{definition}
+        For a measurable function $f\colon X \to [-\infty, \infty]$, we may define \[
+            \int_X f\:d\mu = \int_X f^+\:d\mu - \int_X f^-\:d\mu,
+        \] as long as at least one of these terms is finite.
+    \end{definition}
+
+    \begin{definition}
+        Let \[
+            L^1(\mu) = \{f\colon X \to \C : f\text{ is measurable, and }\int_X
+            |f|\:d\mu \text{ is finite}\}.
+        \] For $f \in L^1(\mu)$, we may write $f = u + iv$ where $u, v$ are real
+        valued measurable functions and define \[
+            \int_X f\:d\mu = \int_X u\:d\mu + i\int_X v\:d\mu.
+        \]
+    \end{definition}
+
+    \begin{theorem}
+        When $f, g \in L^1(\mu)$, $\alpha, \beta \in \C$, we have \[
+            \int_X \alpha f + \beta g \:d\mu = \alpha\int_X f\:d\mu + \beta\int_X
+            g\:d\mu.
+        \] \[
+            \left|\int_X f \:d\mu \right| \leq \int_X |f| \:d\mu.
+        \] 
+    \end{theorem}
+
+    \begin{theorem}[Dominated convergence]
+        Let $\{f_n\}_{n = 1}^\infty$ be a sequence of complex measurable functions
+        $f_n\colon X \to \C$, such that $f_n \to f$ pointwise on $X$. Furthermore,
+        let $g\colon X \to [0, \infty)$, $g \in L^1(\mu)$ such that $|f_n| \leq g$.
+        Then, $f \in L^1(\mu)$, \[
+            \lim_{n \to \infty} \int_X |f_n - f| \:d\mu = 0, \qquad
+            \lim_{n \to \infty} \int_X f_n \:d\mu = \int_X f \:d\mu.
         \] 
     \end{theorem}
 
