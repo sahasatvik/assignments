@@ -717,6 +717,8 @@
     \end{example}
 
 
+    \subsection{Metrizable spaces}
+    
     \begin{definition}
         A topological space $(X, \tau)$ is called metrizable if there exists a metric
         $d\colon X \times X \to \R$ which induces the topology $\tau$ on $X$.
@@ -744,6 +746,53 @@
 
     \begin{lemma}
         Both $d$ and $\bar{d}$ generate the same topology.
+    \end{lemma}
+
+
+    \begin{theorem}
+        The product topology on $\R^\omega = \R \times \R \times \dots$ is
+        metrizable, using the metric \[
+            D(x, y) = \sup_n\left\{\frac{1}{n}\bar{d}(x, y)\right\}.
+        \] 
+    \end{theorem}
+
+    \begin{lemma}
+        Let $A \subseteq X$, let $x \in X$, and let the sequence $\{x_n\}_{n \in
+        \N}$, $x_n \in A$ converge with $x_n \to x$. Then, $x \in \overline{A}$.
+        \begin{remark}
+            The converse holds if $X$ is metrizable.
+        \end{remark}
+    \end{lemma}
+
+    \begin{example}
+        Consider $X = \R^\omega$ equipped with the box topology. Choose $A = \{(x_1,
+        x_2, \dots): x_i > 0\}$. Then, $0 = (0, 0, \dots) \in \overline{A}$; this is
+        clear from the fact that any open set around $0$ contains the basic open set
+        $\prod_i (a_i, b_i)$ with $a_i < 0 < b_i$. However, there is no sequence
+        $\{x_n\}_{n \in \N}$, $x_n \in A$, such that $x_n \to 0$. Note that if this
+        were the case, then each $x_n = (x_{n1}, x_{n2}, \dots)$. Now, $B = \prod_i
+        (-x_{ii}, x_{ii})$ contains none of the points $x_n$, since the $n$th
+        coordinate of $B$ eliminates the point $n$. \\
+    \end{example}
+    \begin{corollary}
+        $\R^\omega$ equipped with the box topology is not metrizable.
+    \end{corollary}
+
+
+    \section{Compactness}
+    
+    \begin{definition}
+        Let $X$ be a topological space. We say that $X$ is compact if every open
+        cover of $X$ has a finite subcover.
+    \end{definition}
+
+    \begin{lemma}
+        Let $Y \subseteq X$. Then, $Y$ is compact if and only if every open cover of
+        $Y$ by open sets in $X$ has a finite subcover.
+    \end{lemma}
+
+    \begin{lemma}
+        All compact sets in a metric space are bounded.
     \end{lemma}
 
 \end{document}
