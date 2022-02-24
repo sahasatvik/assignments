@@ -439,5 +439,72 @@
         $\epsilon$-perpendicular region to $V_n$.
     \end{proof}
 
+    \begin{lemma}
+        Let $d$ be the Euclidean distance between $\gamma(0)$ and $\gamma(s)$, and
+        $s$ be the arc length between these two points. Then, \[
+            \lim_{s \to 0} \frac{d}{s} = 1, \qquad \lim_{s \to 0} \frac{d - s}{s^3} =
+            -\frac{1}{24}\norm{\ddot{\gamma}(0)}^2
+        \] 
+    \end{lemma}
+
+
+    \subsection{Torsion}
+
+    \begin{definition}
+        Let $\gamma\colon (\alpha, \beta) \to \R^3$ be a $C^2$, regular space curve
+        such that $\ddot{\gamma}(s) \neq 0$. The torsion of $\gamma(s)$ is defined as
+        \[
+            \tau(s) = \lim_{\Delta s \to 0} \frac{\Delta \theta}{\Delta s},
+        \] where $\Delta \theta$ is the angle between the osculating planes to
+        $\gamma$ at $s$ and $s + \Delta s$.
+
+        \begin{remark}
+            When we talk of the angle between two planes, we examine the normals \[
+                n(s) = \frac{\dot{\gamma}(s) \times
+                \ddot{\gamma}(s)}{\norm{\dot{\gamma}(s) \times \ddot{\gamma}(s)}}.
+            \] 
+        \end{remark}
+    \end{definition}
+    \begin{lemma}
+        The torsion at $\gamma(s)$ can be expressed at \[
+            \tau(s) = \frac{\norm{(\dot{\gamma}(s) \times \ddot{\gamma}(s))\cdot
+            \dddot{\gamma}(s)}}{\norm{\ddot{\gamma}(s)}^2}.
+        \] 
+    \end{lemma}
+    \begin{lemma}
+        The torsion at $\gamma(s)$ can be expressed at \[
+            \tau(t) = \frac{\det(\gamma'(t)\; \gamma''(t)\;
+            \gamma'''(t))}{\norm{\gamma'(t) \times \gamma''(t)}^2}
+        \] 
+    \end{lemma}
+
+    \begin{definition}
+        The tangent, principal normal, and binormal at $\gamma(s)$ are \[
+            t(s) = \dot{\gamma}(s), \qquad
+            n(s) = \frac{\ddot{\gamma}(s)}{\norm{\ddot{\gamma}(s)}}, \qquad
+            b(s) = t(s) \times n(s).
+        \] 
+    \end{definition}
+
+    \begin{theorem}[Frennet-Seret]
+        For a unit speed curve with nowhere vanishing curvature, the following holds.
+        \[
+            \begin{bmatrix}
+                t' \\ n' \\ b'
+            \end{bmatrix} = \begin{bmatrix}
+                0 & \kappa & 0 \\
+                -\kappa  & 0 & \tau \\
+                0 & -\tau & 0 
+            \end{bmatrix} \begin{bmatrix}
+                t \\ n \\ b
+            \end{bmatrix}
+        \]
+    \end{theorem}
+    \begin{corollary}
+        A regular space curve with non-zero curvature everywhere is planar if and
+        only if $\tau = 0$.
+    \end{corollary}
+    
+
 
 \end{document}
