@@ -663,7 +663,7 @@
     \end{lemma}
 
 
-    \subsection{Least square regression}
+    \subsection{Linear regression}
     
     Given two variables $X, Y$, we want to relate them as \[
         Y = \phi(X) + \epsilon = \beta_1 + \beta_2X + \epsilon.
@@ -773,5 +773,104 @@
     constraints to fully determine the coefficients. Typically, we take the
     coefficients of the highest power, $c_{nn} = 1$. Thus, we can calculate such
     orthogonal polynomials, given our data $x_1, \dots, x_n$.
+
+
+    \subsection{Polynomial regression}
+
+    Here, our regression function is the polynomial \[
+        \phi(X) = \beta_0 + \beta_1 X + \dots + \beta_k X^k.
+    \] Naturally, we wish to minimise the least square error \[
+        \sum_{i} (y_i - \beta_0 - \beta_1 x_i - \dots - \beta_k x_i^k)^2.
+    \] This yields $k + 1$ normal equations. The estimated errors are \[
+        \hat{\epsilon}_i = y_i - \hat{\beta}_0 - \hat{\beta}_1x_i - \dots -
+        \hat{\beta}_kx_i^k.
+    \] These sum to zero, and their sum of squares is \[
+        \sum_i \hat{\epsilon}_i^2 = \sum_i y_i(y_i - \hat{\beta}_0 -
+        \hat{\beta}_1x_i - \dots - \hat{\beta}_kx_i^k) = \sum_i y_i \hat{y}_i.
+    \]
+
+    \begin{lemma}
+        This residual sum of squares is a non-increasing with $k$.
+    \end{lemma}
+
+    As usual, we will find $\cov(\hat{y}, \hat{\epsilon}) = 0$, and $r^2 =
+    \var(\hat{y}) / \var(y)$.
+
+    \begin{lemma}
+        For different degrees $k$, we have $0 \leq r_k^2 \leq r_{k + 1}^2 \leq 1$.
+    \end{lemma}
+
+    Rewrite our $k$th degree polynomial in terms of orthogonal polynomials, \[
+        \phi = \beta_0p_0 + \beta_1p_1 + \dots + \beta_kp_k.
+    \] Again, we solve the normal equations \[
+        \sum_i p_j(x_i)(y_i - \hat{\beta}_0p_0(x_i) - \dots - \hat{\beta}_kp_k(x_i)) = 0.
+    \] This immediately simplifies to \[
+        \sum_i y_ip_j(x_i) = \hat{\beta}_j\sum_i p_j^2(x_i).
+    \] It turns out that when increasing the degree of our polynomial regression, the
+    first $k$ coefficients $\hat{\beta}_i$ do not change!
+
+
+    \section{Rank correlation}
+
+    Suppose that $u_i$ is the rank of the $i$th data point with respect to character
+    A, and $v_i$ is its rank with respect to character B. Rank correlation is a
+    measure of how well these two rankings agree with each other.
+
+    \subsection{Spearman's coefficient}
+    
+    Spearman's rank correlation coefficient is given by \[
+        r_R = 1 - \sum_{i = 1}^n \frac{6d_i^2}{n(n^2 - 1)},
+    \] with $d_u = u_i - v_i$. Note that in case of ties, the group with the tie gets
+    the average of their ranks assuming no tie.
+
+    \begin{lemma}
+        Assuming no tie, \[
+            \bar{u} = \bar{v} = \frac{1}{2}(n + 1), \qquad \sigma^2_u + \sigma^2_v =
+            \frac{1}{12}(n^2 - 1).
+        \]
+    \end{lemma}
+    \begin{lemma}
+        Assuming no tie, \[
+            r_R = r_{uv} = \frac{\cov(u, v)}{\sigma_u \sigma_v}.
+        \] 
+    \end{lemma}
+
+    \begin{lemma}
+        \[
+            -1 \leq r_R \leq 1.
+        \] 
+    \end{lemma}
+
+    \begin{lemma}
+        For a tie of length $k$, the variance lowers by \[
+            \frac{k(k^2 - 1)}{12n}.
+        \] 
+    \end{lemma}
+
+
+    \subsection{Kendall's coefficient}
+
+    Here, each pair of data points with indices $(i, j)$, $i < j$, is assigned a
+    score \[
+        s_{ij} = \operatorname{sgn}\left[(u_i - u_j)(v_i - v_j)\right].
+    \] Then, Kendall's rank correlation coefficient is \[
+        \tau = \frac{\text{Total score}}{\text{Maximum possible score}}.
+    \] In the case where there are no ties, the maximum possible score is
+    $\binom{n}{2}$.
+
+    Note that by writing \[
+        a_{ij} = \operatorname{sgn}(u_i - u_j), \qquad
+        b_{ij} = \operatorname{sgn}(v_i - v_j),
+    \] we have \[
+        \tau = \frac{\sum_{i < j}a_{ij}b_{ij}}{\sqrt{\sum_{i < j} a_{ij}^2}
+        \sqrt{\sum_{i < j} b_{ij}^2}}.
+    \] 
+
+    \begin{lemma}
+        $\tau$ may be regarded as a product moment correlation coefficient.
+    \end{lemma}
+    
+    
+    
 
 \end{document}
