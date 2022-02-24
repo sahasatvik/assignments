@@ -791,8 +791,202 @@
         $Y$ by open sets in $X$ has a finite subcover.
     \end{lemma}
 
+
+    \subsection{Compact subspaces}
+    
     \begin{lemma}
         All compact sets in a metric space are bounded.
     \end{lemma}
+    \begin{proof}
+        Let $K \subseteq X$ be compact. Then, $K$ admits an open cover of open balls
+        $B(0, n)$ from which we can extract a finite subcover; however, this can be
+        reduced to just one open ball $B(0, N)$ for some $N$. Thus $K \subset B(0,
+        N)$ is bounded.
+    \end{proof}
+
+    \begin{lemma}
+        A closed subset of a compact space is compact.
+    \end{lemma}
+    \begin{proof}
+        Let $K$ be compact, and $F \subseteq K$ be closed. Consider an open cover
+        $\{U_\alpha\}_{\alpha \in J}$ of $F$. By adding $K\setminus F$ to this
+        collection, we have an open cover of $K$, from which we can extract a finite
+        subcover $U_{i_1}, U_{i_2}, \dots, U_{i_k}, K\setminus F$. By discarding the
+        latter, we have found a finite subcover of $F$.
+    \end{proof}
+
+    \begin{lemma}
+        In a Hausdorff space, every compact set is closed.
+    \end{lemma}
+    \begin{proof}
+        Let $X$ be Hausdorff, and $K \subseteq X$ be compact. Fix $x_0 \in X\setminus
+        K$, and note that given any $y \in K$, there exist open neighbourhoods $U_y,
+        V_y$ such that $x_0 \in U_y$, $y \in V_y$, $U_y \cap V_y = \emptyset$. Thus,
+        the collection of all such $\{V_y\}_{y \in K}$ is an open cover of $K$, from
+        which we can extract a finite subcover $V_{y_1}, \dots, V_{y_k}$.
+        Corresponding to this, $x_0 \in U_{y_1} \cap \dots \cap U_{y_k} \subseteq X
+        \setminus K$. Thus, $x_0$ lies in the interior of $X\setminus K$. This shows
+        that $X \setminus K$ is open, hence $K$ is closed.
+    \end{proof}
+
+    \begin{theorem}
+        The image of a compact space under a continuous map is compact.
+    \end{theorem}
+
+    \begin{lemma}
+        Let $f\colon X \to Y$ be a continuous bijection. If $X$ is compact and $Y$ is
+        Hausdorff, then $f$ is a homeomorphism.
+    \end{lemma}
+    \begin{proof}
+        We need only show that $f$ is a closed map; now every closed set $F \subseteq
+        X$ is compact because $X$ is compact, hence $f(K) \subseteq Y$ is compact.
+        Since $Y$ is Hausdorff, the compact set $f(K)$ is closed.
+    \end{proof}
+
+
+    \subsection{Products of compact spaces}
+
+    \begin{lemma}[Tube lemma]
+        Let $X, Y$ be topological spaces, and let $Y$ be compact. Let $x_0 \in X$,
+        and let $\{x_0\} \times Y \subset N \subseteq X \times Y$ where $N$ is open.
+        Then, there exists an open set $W \subseteq X$ such that $\{x_0\} \times Y
+        \subseteq W \times Y \subseteq N$.
+    \end{lemma}
+    \begin{proof}
+        Note that $\{x_0\}\times Y$ is compact, being homeomorphic to $Y$. Thus, it
+        can be covered with basic open sets $U_1\times V_1, \dots, U_k\times V_k$
+        such that each $U_i \times V_i \subset N$. Simply set $W = U_1 \cap \dots
+        \cap U_k$.
+    \end{proof}
+
+    \begin{theorem}
+        Let $X, Y$ be compact topological spaces. Then, $X \times Y$ is compact.
+    \end{theorem}
+    \begin{proof}
+        Let $\{U_\alpha\}_{\alpha \in J}$ be an open cover of $X \times Y$. Pick $x
+        \in X$, whence $\{x\} \times Y$ is compact and admits a finite subcover
+        $U_{xi_1}, \dots, U_{xi_k}$. Denote their union by $U_x$; the tube lemma
+        guarantees an open set $W_x \subseteq X$ such that $\{x\} \times Y \subseteq
+        W\times Y \subseteq U_x$. Now, the collection $\{W_x\}_{x \in X}$ is an open
+        cover of $X$, hence admits a finite subcover $W_{x_1}, \dots, W_{x_n}$. This
+        also means that $W_{x_1}\times Y, \dots, W_{x_n} \times Y$ is a finite cover
+        of $Y$. However, each $W_{x_i} \times Y \subseteq U_{x_i}$ can be covered by
+        finitely many $U_\alpha$, which means that we have a finite subcover of $X
+        \times Y$.
+    \end{proof}
+
+
+    \subsection{Euclidean spaces}
+
+    \begin{lemma}
+        Let $X$ be a simply ordered set with the least upper bound property. Then,
+        the intervals $[a, b]$ are compact.
+    \end{lemma}
+
+    \begin{theorem}[Heine-Borel]
+        Compact sets of $\R^n$ are precisely those which are closed and bounded.        
+    \end{theorem}
+
+
+    \subsection{Limit point compactness}
+
+    \begin{definition}
+        Let $X$ be a topological space. We say that $X$ is limit point compact if
+        every infinite subset of $X$ has a limit point.
+    \end{definition}
+
+    \begin{lemma}
+        A compact space is limit point compact.
+    \end{lemma}
+    \begin{proof}
+        Let $X$ be compact, and let $A \subseteq X$ have no limit points. Then, $A =
+        A \cup A' = \overline{A}$ is closed in $X$, hence compact. Now given any $a
+        \in A$, we know that $a$ is not a limit point of $A$, hence we can choose an
+        open neighbourhood $U_a$ such that $U_a \cap A = \{a\}$. The collection
+        $\{U_a\}_{a \in A}$ is now an open cover of $A$, and hence admits a finite
+        subcover $U_{a_1}, \dots, U_{a_k}$. Let $U$ denote their union, whence $A = A
+        \cap U = \{a_1, \dots, a_k\}$ is finite.
+    \end{proof}
+    \begin{example}
+        Let $X = \N \times \{0, 1\}$, where $\N$ has the discrete topology, and $\{0,
+        1\}$ has the indiscrete topology. Then, every subset of $X$ has a limit
+        point; indeed, given any $\{(n, b)\}$, we have a limit point $(n, 1 - b)$.
+        However, $X$ is clearly not compact, since the open cover of sets
+        $\{n\}\times \{0, 1\}$ does not admit any finite subcover.
+    \end{example}
+
+    \begin{theorem}
+        Let $X$ be a metrizable space. Then, $X$ is limit point compact if and only
+        if it is compact.
+    \end{theorem}
+
+
+    \section{Connectedness}
+    
+    \begin{definition}
+        Let $X$ be a topological space, and let $U, V \subseteq X$ be open,
+        non-empty, disjoint, with $U \cup V = X$. We say that $U, V$ form a
+        separation of $X$.
+    \end{definition}
+
+    \begin{definition}
+        A topological space $X$ is said to be connected if it admits no separation.
+    \end{definition}
+
+    \begin{lemma}
+        A topological space $X$ is connected if and only if the only subsets that are
+        both open and closed in it are $\emptyset, X$.
+    \end{lemma}
+
+    \begin{lemma}
+        Let $X$ be a topological space, and let $Y \subseteq X$ be a subspace. Then,
+        a separation of $Y$ is a pair of open sets $A, B \subseteq X$ such that
+        $\overline{A} \cap B = \emptyset$, $A \cap \overline{B} = \emptyset$.
+    \end{lemma}
+
+    \begin{lemma}
+        Let $C, D$ form a separation of $X$, and let $Y \subseteq X$ be a connected
+        subspace. Then, either $Y \subseteq C$, $Y \subseteq D$.
+    \end{lemma}
+
+    \begin{lemma}
+        The union of a collection of connected spaces with a common point is
+        connected.
+    \end{lemma}
+    \begin{proof}
+        Let $\{X_\alpha\}_{\alpha \in J}$ be a collection of connected spaces, with
+        the common point $x_0$, and let $X$ be their union. Suppose that $U, V$ is a
+        separation of $X$; then each of the connected $X_\alpha$ must be contained in
+        one of $U, V$. However, since all $X_\alpha$ share the common point $x_0$,
+        they must all lie in the same half, say $U$, forcing $V = \emptyset$, a
+        contradiction.
+    \end{proof}
+    
+
+    \begin{lemma}
+        Let $A \subseteq X$ be connected, and let $A \subseteq B \subseteq
+        \overline{A}$. Then, $B$ is connected.
+    \end{lemma}
+
+
+    \begin{theorem}
+        The image of a connected space under a continuous maps is connected.
+    \end{theorem}
+
+    \begin{theorem}
+        A finite Cartesian product of connected spaces is connected.
+    \end{theorem}
+    \begin{proof}
+        Let $X, Y$ be connected spaces. Fix $(a, b) \in X \times Y$. Now, $X\times
+        \{b\}$ is connected, being homeomorphic to $X$. Furthermore, each $\{x\}
+        \times Y$ is connected, for each $x \in Y$. Now, the set $T_x = \{x\} \times
+        Y \cup X\times \{b\}$ is connected, being the union of connected spaces with
+        the common point $(x, b)$. Finally, the union of all such $T_x$ is connected,
+        being the union of connected spaces with the common point $(a, b)$. This
+        union is just $X\times Y$, which is thus connected.
+    \end{proof}
+    
+
+
 
 \end{document}
