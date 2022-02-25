@@ -511,8 +511,8 @@
     \end{theorem}
     \begin{corollary}
         Any measurable function $f\colon X \to [-\infty, \infty]$ can be written as
-        the limit of a sequence of simple functions $\{s_n\}_{n = 1}^\infty$, $s_n
-        \to \infty$.
+        the limit of a sequence of simple functions $\{s_n\}_{n = 1}^\infty$, with
+        $s_n \to f$.
     \end{corollary}
 
     \begin{definition}
@@ -759,12 +759,12 @@
 
     \begin{theorem}
         Let $f\colon X \times [a, b] \to \C$, where $-\infty < a < b < \infty$, and
-        let each $f(\cdot, t) = f_t \in L_1(\mu, X)$. Define \[
+        let each $f(\cdot, t) = f_t \in L^1(\mu, X)$. Define \[
             F(t) = \int_X f(x, t)\:d\mu(x).
-        \] If $\partial f / \partial t$ exist, and let there exist $g \in L^1(\mu,
-        X)$ such that \[
+        \] Suppose that $\partial f / \partial t$ exists, with $g \in L^1(\mu, X)$
+        such that \[
             \left|\pp{f}{t}(x, t)\right| \leq g(x).
-        \] Then, $F$ is differentiable with \[
+        \] Then, $F$ is differentiable, with \[
             F'(t) = \int_X \pp{f}{t}(x, t)\:d\mu(x).
         \] 
     \end{theorem}
@@ -780,7 +780,7 @@
     \end{theorem}
     \begin{proof}
         Define \[
-            f\colon X \to \C, \qquad x \mapsto \begin{cases}
+            f_n\colon X \to \C, \qquad x \mapsto \begin{cases}
                 |f(x)|, &\text{ if } |f(x)| \leq n, \\
                 n, &\text{ if } |f(x)| > n.
             \end{cases}
