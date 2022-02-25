@@ -77,6 +77,7 @@
     innerbottommargin=10,%
     skipabove=0,%
     skipbelow=0,%
+    nobreak=false,%
 ]{example}
 
 \numberwithin{equation}{section}
@@ -101,9 +102,9 @@
 
     \tableofcontents
     
-    \section{Introduction}
+    \section{Curves}
     
-    \subsection{Curves}
+    \subsection{Introduction}
     
     \begin{definition}
         A curve is a continuous map $\gamma\colon \R \to \R^n$.
@@ -486,7 +487,7 @@
         \] 
     \end{definition}
 
-    \begin{theorem}[Frennet-Seret]
+    \begin{theorem}[Frenet-Seret]
         For a unit speed curve with nowhere vanishing curvature, the following holds.
         \[
             \begin{bmatrix}
@@ -504,6 +505,143 @@
         A regular space curve with non-zero curvature everywhere is planar if and
         only if $\tau = 0$.
     \end{corollary}
+    \begin{corollary}
+        Under suitable conditions, a space curve is completely determined by $\kappa,
+        \tau$. Two unit speed curves having the same curvature and torsion functions
+        are identical, up to a rotation and a shift.
+    \end{corollary}
+
+    \begin{example}
+        Suppose that a unit speed space curve $\gamma$ lies entirely on a sphere of
+        radius $r$. Then we have \begin{align*}
+            \norm{\gamma - a}^2 &= r^2, \\
+            2\dot{\gamma}\cdot (\gamma - a) &= 0, \\
+            t\cdot (\gamma - a) &= 0, \\
+            \dot{t}\cdot (\gamma - a) + t\cdot\dot{\gamma} &= 0, \\
+            \kappa n\cdot(\gamma - a) + 1 &= 0, \\
+            n\cdot(\gamma - a) &= -1 / \kappa, \\
+            \dot{n}\cdot(\gamma - a) + n\cdot\dot{\gamma} &= \dot{\kappa}/\kappa^2,
+            \\
+            -\kappa t\cdot(\gamma - a) + \tau b\cdot(\gamma - a) &=
+            \dot{\kappa}/\kappa^2, \\
+            b\cdot(\gamma - a) &= \dot{\kappa}/\kappa^2\tau, \\
+            \dot{b}\cdot(\gamma - a) + b\cdot\dot{\gamma} &=
+            (\dot{\kappa}/\kappa^2\tau)', \\
+            -\tau n\cdot(\gamma - a) &= (\dot{\kappa}/\kappa^2\tau)', \\
+            \tau / \kappa &= (\dot{\kappa}/\kappa^2\tau)'.
+        \end{align*}
+        Thus, our curve satisfies \[
+            \frac{\tau}{\kappa} =
+            \dd{}{s}\left(\frac{\dot{\kappa}}{\kappa^2\tau}\right).
+        \] By setting $\rho = 1 / \kappa$, $\sigma = 1 / \tau$, this reads \[
+            \rho = -\sigma \dd{}{s}(\dot{\rho}\sigma).
+        \] Conversely, assume that the above holds. Consider the quantity $\rho^2 +
+        (\dot{\rho}\sigma)^2$; differentiating this gives \[
+            2\rho \dot{\rho} + 2\dot{\rho}\sigma\dd{}{s}(\dot{\rho}\sigma) =
+            2\rho\dot{\rho} + 2\dot{\rho}(-\rho) = 0.
+        \] Thus, we have \[
+            \rho^2 + (\dot{\rho}\sigma)^2 = r^2
+        \] for some positive constant $r$. Now, define the curve \[
+            \alpha = \gamma + \rho n + \dot{\rho}\sigma b.
+        \] Then, \[
+            \dot{\alpha} = \dot{\gamma} + \dot{\rho}n + \rho\dot{n} +
+            \dd{}{s}(\dot{\rho}\sigma)b + (\dot{\rho}\sigma)\dot{b} = t + \dot{\rho}n
+            - \rho\kappa t + \rho\tau b - \rho / \sigma b - \dot{\rho}\sigma \tau n =
+            0.
+        \] This means that the curve $\alpha$ is constant, say $\alpha = a$, whence
+        \[
+            \norm{\gamma - a}^2 = \norm{\rho n + \dot{\rho}\sigma b}^2 = \rho^2 +
+            (\dot{\rho}\sigma)^2 = r^2,
+        \] hence $\gamma$ lies on a sphere.
+    \end{example}
+
+
+    \subsection{Evolutes and involutes}
+    
+    \begin{definition}
+        The evolute of a curve is the locus of the centres of its osculating circles.
+        \begin{remark}
+            Consider a curve $\gamma$, with normal $n$ and radius of curvature $\rho
+            = 1 / \kappa$. Then the equation of its evolute is given by $\gamma +
+            \rho n$.
+        \end{remark}
+    \end{definition}
+    \begin{example}
+        The evolute of a circle is a constant curve, namely its centre.
+    \end{example}
+    \begin{example}
+        The evolute of a cycloid is a shifted copy of itself.
+    \end{example}
+
+    \begin{definition}
+        The involute of a curve is the locus of a point on a piece of taut string, as
+        the string is wrapped around the curve.
+        \begin{remark}
+            Consider a curve $\gamma$, with tangent $t$. Then the equations of its
+            involutes are given by $\gamma - t(s - a)$, for different choices of $a$.
+            All such involutes are merely shifted copies of themselves.
+        \end{remark}
+    \end{definition}
+
+    \begin{theorem}
+        The evolute of an involute of a curve is the curve itself.
+    \end{theorem}
+
+
+
+    \section{Surfaces}
+
+    \subsection{Introduction}
+
+    \begin{definition}
+        A surface $\Sigma \subseteq \R^3$ is a subset satisfying the property that
+        for any $p \in \Sigma$, there exists an open set $W \subseteq \R^3$, an
+        open set $U \subseteq \R^2$, and a homeomorphism $\varphi\colon U \to W \cap
+        \Sigma$.
+        \begin{remark}
+            The pair $(W\cap \Sigma, \varphi^{-1})$ is called a chart around $p$.
+        \end{remark}
+        \begin{remark}
+            Without loss of generality, we can demand that the open set $U\subseteq
+            \R^2$ be the unit disc centred at $0$.
+        \end{remark}
+    \end{definition}
+
+    \begin{example}
+        Any affine plane in $\R^3$ is a surface.
+    \end{example}
+    \begin{example}
+        The unit sphere $S^2$ is a surface. Note that the north hemisphere is
+        homeomorphic to the unit disc via a projection map; this gives us a chart for
+        $(0, 0, 1)$. By symmetry, we can produce similar charts for any point on the
+        sphere.
+        \begin{remark}
+            The sphere cannot be realized as a surface using only a single chart.
+            This is because $S^2$ is compact while the unit disc is not, hence they
+            cannot be homeomorphic.
+        \end{remark}
+    \end{example}
+    \begin{example}
+        The cylinder defined by $x^2 + y^2 = 1$ is a surface. Note that we can
+        produce the homeomorphism $(1, \theta, z) \mapsto (e^z, \theta)$, which maps
+        the cylinder to $\R^2\setminus 0$.
+        \begin{remark}
+            Note that the cylinder is just $S^1\times \R$, and the plane minus the
+            origin is just $S^1\times (0, \infty)$. Thus we need only find a
+            homeomorphism mapping $\R \to (0, \infty)$.
+        \end{remark}
+    \end{example}
+
+    \begin{example}
+        Let $U\subseteq \R^2$ be open, and let $f\colon U \to \R$ be continuous. The
+        graph of $f$, which is the set $\Gamma_f = \{(x, y, f(x, y)): (x, y) \in
+        U\}$, is a surface.
+    \end{example}
+
+    \begin{lemma}
+        All homeomorphisms $\psi\colon \R^3 \to \R^3$ take surfaces to surfaces.
+    \end{lemma}
+    
     
 
 
