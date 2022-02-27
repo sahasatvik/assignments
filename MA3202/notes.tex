@@ -638,7 +638,7 @@
 
     \begin{theorem}
         Let $R$ be a commutative ring, and $I$ be a proper ideal. Then, $I$ is a
-        proper ideal if and only if $R/I$ is an integral domain.
+        prime ideal if and only if $R/I$ is an integral domain.
     \end{theorem}
     \begin{example}
         The quotients $\Z/p\Z$ are integral domains precisely for primes $p$.
@@ -696,7 +696,7 @@
 
 
 
-    \subsection{Factorisation domains}
+    \subsection{Divisibility}
     
     In this section, all rings are integral domains with a multiplicative identity.
 
@@ -727,8 +727,8 @@
     \end{definition}
 
     \begin{definition}
-        A non-zero unit $a \in R$ is said to be irreducible if $a = bc$ forces either
-        $b, c$ to be a unit.
+        A non-zero non-unit element $a \in R$ is said to be irreducible if $a = bc$
+        forces either $b, c$ to be a unit.
         \begin{remark}
             The only divisors of an irreducible element are its associates and units.
         \end{remark}
@@ -746,6 +746,256 @@
         Consider $x = 1 + \sqrt{-5} \in \Z[\sqrt{-5}]$; this is irreducible, but not
         prime.
     \end{example}
+
+
+    \begin{theorem}
+        Let $p \in R$ be non-zero. Then, $p$ is a prime if and only if $(p)$ is a
+        prime ideal.
+    \end{theorem}
+
+    \begin{theorem}
+        Let $x \in R$ be non-zero. Then, $x$ is irreducible if $(x)$ is maximal.
+    \end{theorem}
+
+    \begin{example}
+        Note that $X$ is irreducible in $\Z[X]$, but $(X)$ is not maximal.
+    \end{example}
+
+
+    \begin{definition}
+        Let $a, b \in R$ be non-zero. An element $d \in R$ is called a greatest
+        common divisor (gcd) of $a$ and $b$ if \begin{enumerate}
+            \itemsep0em
+            \item $d\mid a$ and $d\mid b$.
+            \item $d'\mid a$ and $d'\mid b$ forces $d'\mid d$.
+        \end{enumerate}
+    \end{definition}
+
+    \begin{definition}
+        Let $a, b \in R$ be non-zero. An element $l \in R$ is called a least common
+        multiple (lcm) of $a$ and $b$ if \begin{enumerate}
+            \itemsep0em
+            \item $a\mid l$ and $b\mid l$.
+            \item $a\mid l'$ and $b\mid l'$ forces $l\mid l'$.
+        \end{enumerate}
+    \end{definition}
+
+    \begin{example}
+        Consider the ring $\Z[\sqrt{-5}]$, with $a = 2(1 + \sqrt{-5})$, $b = 6 = (1 +
+        \sqrt{-5})(1 - \sqrt{-5})$. Then, $a$ and $b$ have no gcd or lcm.
+    \end{example}
+
+    \begin{lemma}
+        If the gcd of $a$ and $b$ does exist, then it is unique upto associates. The
+        same applies for the lcm.
+    \end{lemma}
+    
+
+    \subsection{Factorisation domains}
+    
+    \begin{definition}
+        A unit integral domain $R$ is called a factorisation domain if every
+        non-zero, non-unit $x\in R$ can be expressed as a unit times a product of
+        irreducible elements, i.e.\ $x = ux_1x_2\dots x_n$ where $u$ is a unit and
+        each $x_i$ is irreducible.
+    \end{definition}
+    \begin{example}
+        The ring $\Z[\sqrt{-5}]$ is a factorisation domain.
+    \end{example}
+    \begin{example}
+        Consider the ring if entire complex functions, i.e.\ \[
+            R = \{\sum_{n = 1}^\infty a_nz^n: a_n \in \C, \text{ the series converges
+            for all } z \in \C\}.
+        \] Then, $R$ is indeed a unit integral domain, and its units are those
+        functions which vanish nowhere. Furthermore, its irreducible elements are the
+        associates of linear polynomials $z - a$. Now if $R$ were to be a
+        factorisation domain, then every element would be an associate of a
+        polynomial function, and thus have finitely many zeroes. However, the entire
+        function $\sin$ has infinitely many zeroes.
+    \end{example}
+
+
+    \begin{definition}
+        A unit integral domain $R$ is called a unique factorisation domain if $R$ is
+        a factorisation domain and the factorisation of every element non-zero $x \in
+        R$ is unique upto associates.
+    \end{definition}
+    \begin{example}
+        The ring of integers $\Z$ is a unique factorisation domain.
+    \end{example}
+    \begin{example}
+        The ring $\Z[\sqrt{-5}]$ is not a unique factorisation domain.
+    \end{example}
+
+
+    \begin{theorem}
+        A unit integral domain $R$ is a unique factorisation domain if and only if
+        $R$ is a factorisation domain in which every irreducible element is a prime.
+    \end{theorem}
+    \begin{proof}
+        First suppose that $R$ is a unique factorisation domain. Let $x$ be an
+        irreducible element in $R$, and let $x \mid ab$. We claim that $x\mid a$ or
+        $x \mid b$. Now, $x \mid ab$ means that there exists $y \in R$, $xy = ab$. We
+        can factor $a$ and $b$, and conclude that \[
+            xy = ab = (ua_1\dots a_l)(vb_1\dots b_m),
+        \] where $u, v$ are units and $a_i, b_j$ are all irreducible. Since $R$ is a
+        unique factorisation domain and the irreducible element $x$ appears on the
+        left, it must be an associate of one of the $a_i, b_j$. If $x = wa_i$ for
+        some unit $w$, then $x\mid a_i$ hence $x\mid a$. Otherwise, $x\mid b_j$ hence
+        $x\mid b$.
+
+        Next suppose that $R$ is a factorisation domain where evert irreducible
+        element is prime. Suppose that non-zero $x \in R$ factorises into
+        irreducible elements as \[
+            x = ux_1\dots x_l = vy_1\dots y_m.
+        \] Note that all $x_i, y_j$ are primes. Suppose that $l \leq m$. Now $x_1 \mid
+        x$ implies that $x_1 \mid vy_1 \dots y_m$, hence $x_1 \mid y_k$ for some
+        $y_k$. Without loss of generality, let $x_1 \mid y_1$; the irreducibility of
+        $y_1$ means that $x_1 = u_1y_1$ for some unit $u_1$. Thus, \[
+            uu_1x_2 \dots x_l = vy_2 \dots y_m.
+        \] Continuing this process, we will reach $w = vy_{l + 1} \dots y_m$ for some
+        unit $w$, which is a contradiction if $l < m$. Thus, we are forced to have $l
+        = m$, and all $x_i = u_iy_i$ for units $u_i$.
+    \end{proof}
+
+    \begin{lemma}
+        Let $R$ be a unique factorisation domain. Then, any two non-zero elements in
+        $R$ have a gcd and an lcm.
+    \end{lemma}
+
+
+    \subsection{Principal ideal domains}
+
+    \begin{definition}
+        A unit integral domain $R$ is called a principal ideal domain if every ideal
+        of $R$ is principal.
+    \end{definition}
+    \begin{example}
+        The ring of integers $\Z$ is a principal ideal domain.
+    \end{example}
+
+    \begin{theorem}
+        Let $R$ be a principal ideal domain, and let $x \in R$ be non-zero. Then, $x$
+        is irreducible if and only if $(x)$ is maximal.
+    \end{theorem}
+    \begin{corollary}
+        Let $R$ be a principal ideal domain. Then, every non-zero prime ideal is
+        maximal.
+    \end{corollary}
+
+    \begin{example}
+        Note that $(0)$ is a prime ideal in $\Z$, but is not maximal.
+    \end{example}
+
+    \begin{lemma}
+        Let $R$ be a principal ideal domain. Then, every irreducible element is prime.
+    \end{lemma}
+
+    \begin{theorem}
+        Every principal ideal domain is a unique factorisation domain.
+    \end{theorem}
+    \begin{corollary}
+        Let $R$ be a principal ideal domain. Then, any two non-zero elements in $R$
+        have a gcd and an lcm.
+    \end{corollary}
+    \begin{example}
+        The ring $\Z[X]$ is a unique factorisation domain, but not a principal ideal
+        domain.
+    \end{example}
+
+
+    \subsection{Euclidean domains}
+    
+    \begin{definition}
+        An integral domain $R$ is called a Euclidean domain if there is a map
+        $d\colon R - \{0\} \to \Z_{\geq 0}$ such that \begin{enumerate}
+            \itemsep0em
+            \item $d(a) \leq d(ab)$ for all non-zero $a, b \in R$.
+            \item For all $a \in R$ and non-zero $b \in R$, there exist $q, r \in R$
+            such that $a = bq + r$ with either $r = 0$ or $d(r) < d(b)$.
+        \end{enumerate}
+        The map $d$ is called the algorithm map and the second property is called the
+        division algorithm.
+    \end{definition}
+    \begin{example}
+        The ring of integers $\Z$ is a Euclidean domain, with $d(n) = |n|$.
+    \end{example}
+    \begin{example}
+        The ring of Gaussian integers $\Z[i]$ is a Euclidean domain, with $d(a + ib)
+        = a^2 + b^2$.
+    \end{example}
+    \begin{example}
+        Every field is a Euclidean domain, with $d(x) = 1$.
+    \end{example}
+
+    \begin{lemma}
+        Every ideal in a Euclidean domain is principal.
+    \end{lemma}
+    \begin{proof}
+        Let $R$ be a Euclidean domain, and let $I \subseteq R$ be an ideal. If $I =
+        0$, we trivially have $I = (0)$. Thus, let $I \neq 0$, and choose non-zero $a
+        \in I$ such that $d(a)$ is minimal. We claim that $I = (a)$. Indeed, let $b
+        \in I$, and exhibit $q, r \in R$ such that $b = aq + r$. This
+        shows that $r = b - aq \in I$. Note that $d(r) < d(a)$ contradicts the
+        minimality of $d(a)$, hence we must have $r = 0$, and $b = aq \in (a)$. Thus,
+        $I = (a)$ as desired.
+    \end{proof}
+
+    \begin{lemma}
+        Every Euclidean domain is a unit ring.
+    \end{lemma}
+    \begin{proof}
+        The previous lemma shows that if $R$ is a Euclidean domain, then $R = (a)$
+        for some $a \in R$. Since $a \in R$, we must have $a = a_0a$ for some $a_0
+        \in R$. We claim that $a_0$ is the identity in $R$. Indeed, for $x \in R =
+        (a)$, we must have $x = ra$ for some $r \in R$, hence $x = ra_0a = a_0(ra) =
+        a_0x$.
+    \end{proof}
+
+    \begin{theorem}
+        Every Euclidean domain is a principal ideal domain.
+    \end{theorem}
+    \begin{example}
+        The ring $\Z[(1 + \sqrt{19}) / 2]$ is a principal ideal domain, but not a
+        Euclidean domain.
+    \end{example}
+    \begin{corollary}
+        Every Euclidean domain is a unique factorisation domain.
+    \end{corollary}
+    \begin{corollary}
+        Let $R$ be a Euclidean domain. Then, any two non-zero elements in $R$ have a
+        gcd and an lcm.
+    \end{corollary}
+
+    \begin{lemma}
+        Let $R$ be a Euclidean domain, and let $a, b \in R$. If $a$ is a proper
+        divisor of $b$, then $d(a) < d(b)$.
+    \end{lemma}
+
+
+    \subsection{Polynomial rings}
+    
+    \begin{theorem}[Eisenstein's criterion]
+        Let $R$ be a unique factorisation domain, and \[
+            f(x) = \sum_{i = 0}^n a_ix^i \in R[X].
+        \] Suppose that there is a prime $p \in R$ such that $a\mid a_i$ for $0 \leq
+        i < n$, $p\nmid a_n$, and $p^2 \nmid a_0$. Then, $f(x)$ is irreducible.
+    \end{theorem}
+    \begin{corollary}
+        Let $p$ be a prime and let $n > 1$. Then, $x^n - p \in \Z[X]$ is irreducible.
+    \end{corollary}
+
+    \begin{lemma}[Gauss lemma]
+        Let $R$ be a unique factorisation domain, and let $F$ be the field of
+        fractions of $R$. Let $f(x) \in R[X]$ be irreducible in $\R[X]$. Then, $f(x)$
+        is irreducible in $F[X]$.
+    \end{lemma}
+
+    \begin{theorem}[Gauss theorem]
+        Let $R$ be a unique factorisation domain. Then, $R[X]$ is also a unique
+        factorisation domain.
+    \end{theorem}
+    
 
 
 
