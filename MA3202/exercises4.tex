@@ -1,0 +1,199 @@
+\documentclass[10pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+
+\geometry{a4paper, margin=1in}
+
+\renewcommand{\labelenumi}{(\roman{enumi})}
+
+\newcounter{prob}
+\newcommand{\problem}{\stepcounter{prob}\paragraph{Exercise \arabic{prob}}}
+\newcommand{\solution}{\paragraph{Solution}}
+
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+
+\title{Exercise Sheet IV}
+\author{Satvik Saha}
+\date{}
+
+\begin{document}
+    \noindent\textbf{IISER Kolkata} \hfill \textbf{Excercise Sheet IV}
+    \vspace{3pt}
+    \hrule
+    \vspace{3pt}
+    \begin{center}
+    \LARGE{\textbf{MA3202: Algebra II}}
+    \end{center}
+    \vspace{3pt}
+    \hrule
+    \vspace{3pt}
+    Satvik Saha, \texttt{19MS154} \hfill \today
+    \vspace{20pt}
+
+    
+    \problem What is the field of fractions of a finite integral domain?
+
+    \solution Every finite integral domain is a field, hence its field of fractions
+    is itself.
+
+
+    \problem Check whether $4\Z$ and $6\Z$ are maximal ideals of $2\Z$.
+
+    \solution Suppose that $4\Z \subset I \subseteq 2\Z$, and $n \in I$, $n \notin
+    4\Z$. Then $n = 4k + 2$ for some $k \in Z$. Now, $4k \in 4\Z \subset I$, hence
+    $(4k + 2) - 4k = 2 \in I$. This immediately gives all $2k \in I$, hence $I =
+    2\Z$. Thus, $4\Z$ is maximal in $2\Z$.
+
+    Suppose that $6\Z \subset I \subseteq 2\Z$, and $n \in I$, $n \notin 6\Z$. Then,
+    $n = 6k \pm 2$ for some $k \in \Z$. A similar argument as before shows that $2
+    \in I$, $I = 2\Z$, thus showing that $6\Z$ is maximal in $2\Z$.
+
+
+    \problem Let $R$ be a ring. What are the prime and maximal ideals of $R\times R$?
+
+    \solution Every prime ideal of $R\times R$ is of the form $P\times R$ or $R\times
+    P$, for some prime ideal $P \subset R$. Similarly, every maximal ideal of
+    $R\times R$ is of the form $M\times R$ or $R\times M$, for some maximal ideal $M
+    \subset R$.
+
+    To see this, note that given an ideal $I\times J \subseteq R \times R$, the
+    product of the quotient maps $R \to R/I$ and $R \to R/J$, given by the surjective
+    homomorphism \[
+        \varphi\colon R\times R \to R/I \times R/J, \qquad (x, y) \mapsto (x + I, y +
+        J),
+    \] has $I\times J$ as its kernel. Thus, $(R\times R)/(I \times J) \cong R/I
+    \times R/J$. Now note that if $a \in R/I$, $b \in R/J$, then $(0, 0) = (a,
+    0)\cdot (0, b)$, hence we have zero divisors in the quotient unless one of $R/I$,
+    $R/J$ is $\{0\}$, i.e.\ one of $I, J = R$. Thus, the quotient is now isomorphic
+    to either $R/I$ or $R/J$, which must now be an integral domain/field forcing
+    either $I, J$ to be prime/maximal.
+
+
+    \problem Let $\varphi\colon R \to S$ be a surjective ring homomorphism. What can
+    you say about the following?
+    \begin{enumerate}
+        \item If $P \subset R$ is a prime ideal, then $\varphi(P)$ is a prime ideal
+        of $S$.
+        \item If $M \subset R$ is a maximal ideal, then $\varphi(M)$ is a maximal
+        ideal of $S$.
+    \end{enumerate}
+
+    \solution \mbox{}
+    \begin{enumerate}
+        \item False. Note that $(X) \subset \R[X]$ is a prime ideal, and the
+        evaluation map $p(x) \mapsto p(1)$ is a surjective ring homomorphism $\R[X]
+        \to \R$. However, $\varphi((X)) = \R$ is not a proper ideal of $\R$, hence
+        not prime.
+
+        \item False, via the same counterexample. The ideal $(X) \subset \R[X]$ is
+        indeed maximal.
+    \end{enumerate}
+
+
+    \problem Let $R$ be a commutative unit ring. Prove that $R[X]/(X)$ is isomorphic
+    to $R$. Furthermore, the ideal $(X) = X R[X]$ is prime if and only if $R$ is an
+    integral domain, and the ideal $(X) = X R[X]$ is maximal if and only if $R$ is a
+    field.
+
+    \solution The map \[
+        \varphi\colon R[X] \to R, \qquad p(x) \mapsto p(0)
+    \] is a surjective homomorphism, with kernel $(X)$. This immediately gives $R[X]
+    / (X) \cong R$. The next two criteria follow directly from the fact that $(X)$ is
+    a proper ideal in a commutative unit ring, and $R[X] / (X) \cong R$.
+
+
+    \problem Find all prime and maximal ideals of $\Z / 16\Z$.
+
+    \solution Note that the ideals of $\Z/16\Z$ are $\Z/16\Z$, $2\Z/16\Z$, $4\Z/16\Z$,
+    $8\Z/16\Z$, $\{0\}$. It is clear that $2\Z/16\Z$ is maximal, hence prime.
+    $4\Z/16\Z$, $8\Z/16\Z$, $\{0\}$ are not prime since $4 = 2\cdot 2$, $8 = 4\cdot
+    2$, $0 = 4\cdot 4$.
+
+
+    \problem Let $R$ be a commutative unit ring such that $x^2 = x$ for all $x \in
+    R$. Prove that every prime ideal of $R$ is a maximal ideal.
+
+    \solution Let $P \subset R$ be a prime ideal, and note that $R/P$ is an integral
+    domain. Now, for any $x + P \in R/P$, we have \[
+        (x + P)^2 = x^2 + 2xP + P^2 = x + P,
+    \] hence every $y \in R/P$ satisfies $y^2 = y$, $y^2 - y = y(y - 1) = 0$. Since
+    $R/P$ is an integral domain, either $y = 0$ or $y = 1$. In other words, $R/P$ is
+    the field of two elements, hence $P$ is a maximal ideal in $R$.
+
+
+    \problem Let $\varphi\colon R \to S$ be a ring homomorphism. What can you say
+    about the following?
+    \begin{enumerate}
+        \item If $P\subset S$ is a prime ideal, then $\varphi^{-1}(P)$ is a prime
+        ideal of $R$.
+        \item If $M\subset S$ is a maximal ideal, then $\varphi^{-1}(M)$ is a maximal
+        ideal of $R$.
+    \end{enumerate}
+    \solution \mbox{}
+    \begin{enumerate}
+        \item False. Note that $2\Z\times \{0\} \subset 2\Z\times 2\Z$ is a prime
+        ideal, and the map $n \mapsto (n, 0)$ is a ring homomorphism $2\Z \to
+        2\Z\times 2\Z$. However, $\varphi^{-1}(2\Z \times \{0\}) = 2\Z$ is not a
+        proper ideal of $2\Z$, hence not prime.
+
+        \item False. Note that $\{0\} \subset \Q$ is a maximal ideal, and the
+        inclusion map $\Z \to \Q$ is a ring homomorphism. However, the pre-image of
+        $\{0\}$, namely $\{0\}\subset \Z$ is not maximal.
+    \end{enumerate}
+
+
+    \problem Let $Z[X]$ be the ring of polynomials with integer coefficients.
+    Consider the ideal \[
+        J = \{f(x) \in \Z[X]: f(2) = 0\}.
+    \] \begin{enumerate}
+        \item Is $J$ a prime ideal?
+        \item Is $J$ a maximal ideal?
+    \end{enumerate}
+
+    \solution Note that $\Z[X]$ is a commutative unit ring, and the map $f(x) \to
+    f(2)$ is a surjective ring homomorphism $\Z[X] \to \Z$, whose kernel is precisely
+    $J$. Thus, $\Z[X]/J \cong \Z$, which is an integral domain but not a field. Thus,
+    $J$ is a prime ideal but not maximal.
+
+
+    \problem Show that an integral domain and its field of fractions have the same
+    characteristic.
+
+    \solution Note that if $Z$ is an integral domain with field of fractions $F$, $Z$
+    is embedded in $F$. Thus if $Z$ has characteristic $0$, so does $F$. Otherwise,
+    let $n, m$ be the characteristics of $Z, F$ respectively. We immediately have $m
+    \geq n$. Now, pick $[a, b] \in F$, hence $n[a, b] = [na, b] = [0, b] = 0 \in F$,
+    which shows that $m \leq n$. Together, $m = n$ as desired.
+
+    \problem Let $P, Q$ be two prime ideals in a ring $R$. Assume that $P \cap Q$ is
+    a prime ideal of $R$. Prove that either $P \subset Q$ or $Q \subset P$.
+
+    \solution Suppose to the contrary that neither $P \subset Q$, nor $Q \subset P$.
+    Then, we can pick $p \in P\setminus Q \subset P$, $q \in Q\setminus P \subset Q$,
+    whence $pq \in P, Q$ from the properties of ideals. Thus, $pq \in P \cap Q$;
+    since the latter is a prime ideal, we must have one of $p, q \in P \cap Q$, which
+    is a contradiction.
+
+
+    \problem Let $R = C([1, 3])$ and $I(2) = \{f \in R: f(2) = 0\}$. \begin{enumerate}
+        \item Prove that $I(2)$ is a maximal ideal.
+        \item Compute $R/I(2)$.
+    \end{enumerate}
+
+    \solution Note that the evaluation map $f \mapsto f(2)$ is a surjective ring
+    homomorphism $C([1, 3]) \to \R$, whose kernel is precisely $I(2)$. Thus,
+    $R/I(2)\cong \R$. Since $C([1, 3])$ is a commutative unit ring and $\R$ is a
+    field, $I(2)$ is a maximal ideal. It is clear that given an equivalence class in
+    $R/I(2)$, all functions within that equivalence class have the same evaluation at
+    $2$. In other words, \[
+        R/I(2) = \{\alpha + I(2): \alpha \in \R\}.
+    \] 
+
+
+\end{document}
