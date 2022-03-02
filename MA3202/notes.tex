@@ -33,6 +33,8 @@
 
 \DeclareMathOperator{\ch}{ch}
 \DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\End}{End}
 
 \newmdtheoremenv[%
     backgroundcolor=blue!10!white,%
@@ -995,8 +997,115 @@
         Let $R$ be a unique factorisation domain. Then, $R[X]$ is also a unique
         factorisation domain.
     \end{theorem}
-    
 
+
+
+
+    \section{Modules}
+    
+    \subsection{Basic definitions}
+
+    \begin{definition}
+        Let $R$ be a ring. A left $R$-module is an abelian group $(M, +)$ together
+        with a map $R\times M \to M$ given by $(a, x) \mapsto ax$ such that for all
+        $a, b \in R$, $m, n \in M$, the following hold. \begin{enumerate}
+            \itemsep0em
+            \item $a(m + n) = am + an$.
+            \item $(a + b)m = am + bm$.
+            \item $a(bm) = (ab)m$.
+            \item $1m = m$.
+        \end{enumerate}
+        \begin{remark}
+            When $R$ is commutative, we simply call this structure an $R$-module.
+        \end{remark}
+    \end{definition}
+    \begin{example}
+        Any abelian group is a $\Z$-module.
+    \end{example}
+    \begin{example}
+        Any vector space $V$ over a field $F$ is an $F$-module.
+    \end{example}
+    \begin{example}
+        Any ring $R$ is an $R$-module over itself.
+        Indeed, given an ideal $I \subseteq R$, we see that $I$ is an $R$-module.
+    \end{example}
+    
+    \begin{example}
+        Let $M$ be an $S$-module. If $\varphi\colon R \to S$ is a ring homomorphism,
+        we can treat $M$ as an $R$-module, with scalar multiplication $(a, m) \mapsto
+        \varphi(a)m$ for $a \in R$, $m \in M$.
+
+        In particular, $S$ is an $R$-module, with $(r, s) \mapsto \varphi(r)s$ for $r
+        \in R$, $s \in S$.
+
+        Using this idea, suppose that $I\subseteq R$ is an ideal, and $\pi\colon
+        R \to R/I$ is the canonical homomorphism. Then $R/I$ is an $R$-module, with
+        $(r, s + I) \mapsto rs + I$ for $r, s \in R$.
+    \end{example}
+
+
+    \begin{definition}
+        Let $M$ be a module. A subset $N\subseteq M$ is called a submodule of $M$ if
+        $N$ is a subgroup of $(M, +)$, and $rx \in N$ for all $r \in R$, $x \in N$.
+    \end{definition}
+    \begin{example}
+        Any subspace of a vector space is a submodule.
+    \end{example}
+    \begin{example}
+        All polynomials of degree at most $n$ is a submodule of the $R$ module
+        $R[x]$.
+    \end{example}
+    \begin{example}
+        The submodules of a commutative ring $R$ are precisely the ideals of $R$.
+    \end{example}
+
+    \begin{definition}
+        Let $R$ be a ring, and let $M, N$ be $R$-modules. A map $\varphi\colon M \to
+        N$ is called a homomorphism if for all $r \in R$, $m, m' \in M$, the
+        following hold. \begin{enumerate}
+            \itemsep0em
+            \item $\varphi(m + m') = \varphi(m) + \varphi(m')$.
+            \item $\varphi(rm) = r\varphi(m)$.
+        \end{enumerate}
+        The set of all $R$-module homomorphisms $\varphi\colon M \to N$ is denoted
+        $\Hom_R(M, N)$.
+    \end{definition}
+    \begin{example}
+        Any linear transformation between vector spaces over a field $F$ is a
+        homomorphism of $F$-modules.
+    \end{example}
+    \begin{definition}
+        A bijective homomorphism is called an isomorphism.
+    \end{definition}
+    \begin{definition}
+        A homomorphism $\varphi\colon M \to M$ is called an endomorphism.
+        The set of all $R$-module endomorphisms $\varphi\colon M \to N$ is denoted
+        $\End_R(M, N) = \Hom_R(M, M)$.
+    \end{definition}
+    \begin{definition}
+        A bijective endomorphism is called an automorphism.
+    \end{definition}
+
+    \begin{lemma}
+        Let $\varphi\colon M \to N$ be a homomorphism of $R$-modules. Then, the
+        following hold. \begin{enumerate}
+            \itemsep0em
+            \item The set $\ker\varphi$ is a submodule of $M$.
+            \item The set $\im\varphi$ is a submodule of $N$.
+            \item The map $\varphi$ is a injective if and only if $\ker\varphi =
+            \{0\}$.
+        \end{enumerate}
+    \end{lemma}
+
+    \begin{theorem}
+        Let $M$ be an $R$-module, and $N\subseteq M$ be a submodule. Then, the
+        quotient group $M/N$ is an $R$-module, with $r[m] \mapsto [rm]$ for $r \in
+        R$, $m \in M$.
+    \end{theorem}
+
+    \begin{theorem}
+        If $\varphi \in \Hom_R(M, M')$, then $M/\ker\varphi \cong \im\varphi$.
+    \end{theorem}
 
 
 \end{document}
