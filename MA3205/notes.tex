@@ -634,6 +634,13 @@
             homeomorphism mapping $\R \to (0, \infty)$.
         \end{remark}
     \end{example}
+    \begin{example}
+        The following is a parametrization of a torus. \[
+            (u, v) \mapsto ((a + b\cos{u})\cos{v}, (a + b\cos{u})\sin{v}, b\sin{v}).
+        \] The torus is also the zero set of the map \[
+            (x, y, z) \mapsto (\sqrt{x^2 + y^2} - a)^2 + z^2 - b^2.
+        \] 
+    \end{example}
 
     \begin{example}
         Let $U\subseteq \R^2$ be open, and let $f\colon U \to \R$ be continuous. The
@@ -643,6 +650,31 @@
 
     \begin{lemma}
         All homeomorphisms $\psi\colon \R^3 \to \R^3$ take surfaces to surfaces.
+    \end{lemma}
+    \begin{example}
+        In particular, all rigid motions take surfaces to surfaces.
+    \end{example}
+
+    \begin{theorem}
+        Let $a$ be a regular value of the smooth map $f\colon U \to \R$, where
+        $U\subseteq \R^3$ is open. Then, $S = f^{-1}(a)$ is a surface.
+    \end{theorem}
+
+    \begin{definition}
+        A surface $\Sigma \subset \R^3$ is called smooth if it admits a covering by
+        charts $\{(U_\alpha, \varphi_\alpha)\}_{\alpha \in \Lambda}$ such that
+        $\varphi_\alpha^{-1}\colon \varphi_\alpha(U_\alpha) \to \R^3$ is smooth and
+        $D_u(\varphi_\alpha^{-1})$, $D_v(\varphi_\alpha^{-1})$ are linearly
+        independent everywhere.
+        \begin{remark}
+            Such charts are called regular.
+        \end{remark}
+    \end{definition}
+
+    \begin{lemma}
+        Let $\Sigma$ be a smooth surface. For every $p \in \Sigma$, there exists a
+        smooth function $\varphi\colon U \to \R$ where $U\subseteq \R^2$ is open,
+        such that $\Gamma_\varphi$ defines a regular chart of $\Sigma$ around $p$.
     \end{lemma}
     
     
