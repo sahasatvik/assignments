@@ -31,6 +31,10 @@
 \newcommand{\Z}{\mathbb{Z}}
 \newcommand{\N}{\mathbb{N}}
 
+\newcommand{\RP}{\R\mathrm{P}}
+
+\newcommand{\norm}[1]{\Vert #1 \Vert}
+
 \DeclareMathOperator{\diam}{diam}
 
 \newmdtheoremenv[%
@@ -985,7 +989,112 @@
         being the union of connected spaces with the common point $(a, b)$. This
         union is just $X\times Y$, which is thus connected.
     \end{proof}
+    \begin{example}
+        The countable product $\R^\omega$ with the box topology is disconnected.
+        Consider \[
+            A = \text{set of all bounded sequences}, \qquad
+            B = \text{set of all unbounded sequences}.
+        \] Now, $A \cap B = \emptyset$, $A\cup B = \R^\omega$, $A, B \neq \emptyset$.
+        It can also be shown that $A, B$ are open.
+    \end{example}
+    \begin{example}
+        The countable product $\R^\omega$ with the product topology is connected. To
+        show this, define \[
+            \tilde{R}^n = \{(x_1, \dots, x_n, 0, 0, \dots): x_i \in \R\}.
+        \] Then, set $X = \bigcup_{n = 1}^\infty \tilde{R}^n$, and note that since
+        each $\tilde{R}^n \cong \R^n$ is connected with all of them sharing the
+        common point $(0, 0, \dots)$, $X$ must be connected. We now show that
+        $\overline{X} = \R^\omega$. Indeed, given $x = (x_1, x_2, \dots) \in \R^\omega$,
+        an open neighbourhood of $x$ looks like $U = U_1 \times U_2 \times \dots$,
+        where all but finitely many $I_i = \R$. In other words, there exists
+        sufficiently large $N in \N$ such that for all $n \geq N$, $U_n = \R$. Thus,
+        the point $(x_1, x_2, \dots, x_n, 0, 0, \dots) \in U \cap \tilde{R}^N$.
+    \end{example}
+
+    \begin{lemma}
+        The closed intervals $[a, b] \subset \R$ are connected.
+    \end{lemma}
+
+    \subsection{Path connectedness}
+
+    \begin{definition}
+        A topological space $X$ is said to be path connected if there exists a path
+        joining any two points in $X$. In other words, given $a, b \in X$, there
+        always exists a continuous map $\gamma\colon [0, 1] \to X$ such that
+        $\gamma(0) = a$, $\gamma(1) = b$.
+    \end{definition}
+
+    \begin{lemma}
+        All path connected spaces are connected.
+    \end{lemma}
+    \begin{proof}
+        Note that if $X = U \cup V$ is a separation of the path connected space $X$,
+        then $[0, 1] = \gamma^{-1}(U) \cup \gamma^{-1}(V)$ is a separation of the
+        connected interval $[0, 1]$, a contradiction.
+    \end{proof}
+
+    \begin{lemma}
+        The image of a path connected space under a continuous map is path connected.
+    \end{lemma}
+    \begin{example}
+        The unit sphere $S^{n - 1}$ is path connected. Note that the map \[
+            f\colon \R^n\setminus\{0\} \to S^{n - 1}, \qquad x \mapsto x / \norm{x}
+        \] is continuous and surjective. Thus, it maps the path connected set
+        $\R^n\setminus\{0\}$ to $S^{n - 1}$, which must be path connected.
+    \end{example}
+    \begin{example}
+        The set $\overline{S}$, called the topologist's sine curve, is connected but
+        not path connected. \[
+            S = \{(x, \sin(1 / x)): 0 < x \leq 1\}.
+        \] Note that $S$ is the continuous image of the connected interval $(0, 1]$,
+        hence connected. This further shows that $\overline{S}$ is connected. Now, \[
+            \overline{S} = S \cup \{(0, y): -1 \leq y \leq 1\}.
+        \] However, $\overline{S}$ is not path connected, since there exists no path
+        joining $(0, 0)$ and $(1 / \pi, 0)$. Indeed, given any path $\gamma\colon [0,
+        1] \to \overline{S}$ starting at $(0, 0)$, it cannot escape $\{0\}\times [-1,
+        1]$. To see this, write $\gamma = (\gamma_1, \gamma_2)$, $\gamma_2(0) = 0$.
+        By continuity of $\gamma_2$, we can choose $\delta > 0$ such that
+        $|\gamma_2(t)| < 1 / 2$ for all $0 \leq t \leq \delta$. Suppose that
+        $\gamma_1(t^*) = \tau > 0$ for some $0 \leq t \leq \delta$. By the
+        intermediate value theorem, $\gamma_1$ takes all the values between $0$ and
+        $\tau$ in the interval $[0, t^*]$. Choose $N$ such that $2 / \pi(2N + 1) <
+        \tau$. Again, there must exist some $0 < t_0 < t^*$ such that $\gamma_1(t_0)
+        = 2 / \pi(2n + 1)$. Now, $\gamma_2(t_0) = \sin(1 / \gamma_1(t_0)) = 1 > 1 /
+        2$, a contradiction. This means that $\gamma_1(t) = 0$ for all $t \in [0,
+        \delta]$.
+    \end{example}
+
+
+    \section{Quotient topology}
     
+    \begin{definition}
+        Let $X$ be a topological space, and let $\sim$ be an equivalence relation on
+        $X$. Then $X/\sim$ denotes the set of all equivalence classes with respect to
+        $\sim$. Its elements are of the form $[x] = \{y \in X : x \sim y\}$, for $x
+        \in X$. Define the map \[
+            \pi\colon X \to X/\sim, \qquad x \mapsto [x].
+        \] The quotient topology on $X/\sim$ is the finest topology such that $\pi$
+        is continuous. In other words, $U \subseteq X/\sim$ is open if $\pi^{-1}(U)$
+        is open in $X$.
+    \end{definition}
+
+    \begin{lemma}
+        Let $f\colon X \to Y$ be a continuous surjection, with $X$ compact and $Y$
+        Hausdorff. Define an equivalence relation $\sim$ on $X$ such that $x\sim
+        x'\Leftrightarrow f(x) = f(x')$. Then, $g\colon X/\sim \;\to Y$, $[x] \mapsto f(x)$ is a
+        homeomorphism.
+    \end{lemma}
+    \begin{example}
+        Consider the interval $[0, 1]$, with the equivalence relation $\sim$ which
+        identifies $0 \sim 1$, and leaves all other points undisturbed. Then, the
+        quotient space $[0, 1]/\sim$ is homeomorphic to the circle $S^1$.
+    \end{example}
+    \begin{example}
+        Let $X = \R^{n + 1}\setminus\{0\}$, and define an equivalence relation on $X$
+        which identifies points on the same line through the origin together. Then,
+        the resultant quotient space is called the real projective space, denoted
+        $\RP^n$.
+    \end{example}
 
 
 
