@@ -857,4 +857,60 @@
         \] 
     \end{example}
 
+
+    \subsection{$L^p$ spaces}
+    \begin{definition}
+        Let $(X, \M, \mu)$ be a measure space. For $1 \leq p < \infty$, we define \[
+            L^p(\mu) = \{f\colon X \to \C : f\text{ is measurable, and }\int_X
+            |f|^p\:d\mu \text{ is finite}\}.
+        \]
+        \begin{remark}
+            We denote \[
+                \norm{f}_p = \left(\int_X |f|^p\:d\mu\right).
+            \] 
+        \end{remark}
+    \end{definition}
+
+    \begin{definition}
+        Let $(X, \M, \mu)$ be a measure space, and let $f\colon X \to \C$ be
+        measurable. We define the essential supremum of $f$ as \[
+            \norm{f}_\infty = \inf \{M : \mu\{x \in X: |f(x)| > M\} = 0\}.
+        \]
+        \begin{remark}
+            We have $f \leq \norm{f}_\infty$ almost everywhere in $X$.
+        \end{remark}
+    \end{definition}
+    \begin{example}
+        Note that for \[
+            f\colon (0, 1) \to \R, \qquad x \mapsto 1 / x,
+        \] we have $\norm{f}_\infty = \infty$. By convention, $\inf\emptyset =
+        \infty$.
+    \end{example}
+
+    \begin{definition}
+        Let $(X, \M, \mu)$ be a measure space. We define the space of essentially
+        bounded functions as \[
+            L^\infty(\mu) = \{f\colon X \to \C : f\text{ is measurable, and }
+            \norm{f}_\infty \text{ is finite}\}.
+        \]
+    \end{definition}
+
+    \begin{lemma}[H\"older]
+        For $1 \leq p \leq \infty$, $f, g$ measurable, \[
+            \norm{fg}_1 \leq \norm{f}_p\, \norm{g}_q, \qquad \frac{1}{p}
+            + \frac{1}{q} = 1.
+        \] 
+    \end{lemma}
+    
+    \begin{lemma}[Minkowski]
+        For $1 \leq p \leq \infty$, $f, g$ measurable, \[
+            \norm{f + g}_p \leq \norm{f}_p + \norm{g}_p.
+        \] 
+    \end{lemma}
+
+    \begin{theorem}
+        The spaces of functions $L^p(\mu)$ and $L^\infty(\mu)$ are complete metric
+        spaces.
+    \end{theorem}
+
 \end{document}
