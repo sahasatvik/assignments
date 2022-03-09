@@ -1069,32 +1069,77 @@
     
     \begin{definition}
         Let $X$ be a topological space, and let $\sim$ be an equivalence relation on
-        $X$. Then $X/\sim$ denotes the set of all equivalence classes with respect to
-        $\sim$. Its elements are of the form $[x] = \{y \in X : x \sim y\}$, for $x
-        \in X$. Define the map \[
-            \pi\colon X \to X/\sim, \qquad x \mapsto [x].
+        $X$. Then $X/\!\sim$ denotes the set of all equivalence classes with respect
+        to $\sim$. Its elements are of the form $[x] = \{y \in X : x \sim y\}$, for
+        $x \in X$. Define the map \[
+            \pi\colon X \to X/\!\sim, \qquad x \mapsto [x].
         \] The quotient topology on $X/\sim$ is the finest topology such that $\pi$
-        is continuous. In other words, $U \subseteq X/\sim$ is open if $\pi^{-1}(U)$
-        is open in $X$.
+        is continuous. In other words, $U \subseteq X/\!\sim$ is open if
+        $\pi^{-1}(U)$ is open in $X$.
     \end{definition}
 
     \begin{lemma}
         Let $f\colon X \to Y$ be a continuous surjection, with $X$ compact and $Y$
         Hausdorff. Define an equivalence relation $\sim$ on $X$ such that $x\sim
-        x'\Leftrightarrow f(x) = f(x')$. Then, $g\colon X/\sim \;\to Y$, $[x] \mapsto f(x)$ is a
-        homeomorphism.
+        x'\Leftrightarrow f(x) = f(x')$. Then, $g\colon X/\!\sim \;\to Y$, $[x]
+        \mapsto f(x)$ is a homeomorphism.
     \end{lemma}
     \begin{example}
         Consider the interval $[0, 1]$, with the equivalence relation $\sim$ which
         identifies $0 \sim 1$, and leaves all other points undisturbed. Then, the
-        quotient space $[0, 1]/\sim$ is homeomorphic to the circle $S^1$.
+        quotient space $[0, 1]/\!\sim$ is homeomorphic to the circle $S^1$.
+
+        Note that the quotient map on $[0, 1]$ is not open, since the image of the
+        open set $[0, 1 / 2)$ is not open in $[0, 1]/\!\sim$.
     \end{example}
     \begin{example}
         Let $X = \R^{n + 1}\setminus\{0\}$, and define an equivalence relation on $X$
         which identifies points on the same line through the origin together. Then,
-        the resultant quotient space is called the real projective space, denoted
+        the resulting quotient space is called the real projective space, denoted
         $\RP^n$.
     \end{example}
+    \begin{example}
+        Let $S^n$ denote the $n$-sphere in $\R^{n + 1}$, and define an equivalence
+        relation on $S^n$ which identifies antipodal points. Then, the resulting
+        quotient space is also $\RP^n$. The quotient map here is an open map.
+    \end{example}
+
+    \begin{lemma}
+        Let $f\colon X \to Y$ be an open, continuous, surjective map. Define an
+        equivalence relation $\sim$ on $X$ such that $x \sim x' \Leftrightarrow
+        f(x) = f(x')$. Then, $g\colon X/\!\sim \to Y$, $[x] \mapsto f(x)$ is a
+        homeomorphism.
+    \end{lemma}
+    \begin{example}
+        By defining $f$ as a composition of maps $\R^n\setminus\{0\} \to S^n \to
+        S^n/\!\sim$, it can be shown that $\RP^n$ is compact.
+    \end{example}
+
+
+    \subsection{One-point compactification}
+
+    \begin{definition}
+        Let $X$ be a compact topological space, and let $A \subset X$ be closed. The
+        one-point compactification of $X\setminus A$ is defined by \[
+            Y = (X \setminus A) \cup\{\infty\},
+        \] with the topology \[
+            \tau_Y = \{U\subseteq X\setminus A\text{ is open}\} \cup \{Y\setminus
+            C\text{ where } C\text{ is compact in }X\setminus A\}.
+        \] 
+    \end{definition}
+
+    \begin{lemma}
+        If $X$ is compact, Hausdorff, then so is the one-point compactification $Y$
+        of $X\setminus A$.
+    \end{lemma}
+
+    \begin{lemma}
+        Let $X$ be a compact, Hausdorff space and $A\subseteq X$ be a closed set.
+        Define $\sim$ on $X$ by identifying $x \sim x'$ whenever $x, x' \in A$ and
+        leaving the remaining points undisturbed. Then, $X/\!\sim$ is homeomorphic to
+        the one-point compactification $Y = X\setminus A \cup \{\infty\}$.
+    \end{lemma}
+    
 
 
 
