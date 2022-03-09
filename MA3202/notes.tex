@@ -1045,6 +1045,8 @@
     \end{example}
 
 
+    \subsection{Submodules}
+    
     \begin{definition}
         Let $M$ be a module. A subset $N\subseteq M$ is called a submodule of $M$ if
         $N$ is a subgroup of $(M, +)$, and $rx \in N$ for all $r \in R$, $x \in N$.
@@ -1074,6 +1076,9 @@
         \] 
     \end{lemma}
 
+
+    \subsection{Homomorphisms and isomorphisms}
+    
     \begin{definition}
         Let $R$ be a ring, and let $M, N$ be $R$-modules. A map $\varphi\colon M \to
         N$ is called a homomorphism if for all $r \in R$, $m, m' \in M$, the
@@ -1123,13 +1128,15 @@
     \end{theorem}
 
 
+    \subsection{Cyclic modules}
+    
     \begin{definition}
         An $R$-module $M$ is called cyclic if $M = Rx$ for some $x \in M$.
     \end{definition}
 
     \begin{definition}
         The annihilator of an $R$-module $M$ is defined as \[
-            \Ann = \{a \in R : aM = 0\}.
+            \Ann(M) = \{a \in R : aM = 0\}.
         \] 
     \end{definition}
     \begin{definition}
@@ -1151,6 +1158,8 @@
     \end{example}
 
 
+    \subsection{Direct products and sums}
+    
     \begin{definition}
         Let $I$ be an indexing set. A family $(x_i, i \in I)$ is a function whose
         value at $i$ is $x_i$. Let $M_i$ be $R$-modules. Their direct product
@@ -1194,6 +1203,37 @@
             z = a_1x_1 + \dots + a_nx_n,
         \] for $a_i \in R$.
     \end{lemma}
+    \begin{example}
+        $\R^n$ is a free $\R$-module, with many choices of basis.
+    \end{example}
+    \begin{example}
+        $\Z/n\Z$ is not a free $\Z$-module, since $n \in \Ann(\Z/n\Z)$.
+    \end{example}
+
+    \begin{lemma}
+        Let $R$ be a commutative unit ring. Then any two bases of a free $R$-module
+        have the same number of elements.
+    \end{lemma}
+
+    \begin{definition}
+        Let $R$ be a commutative unit ring, and let $F$ be a free $R$-module with a
+        basis of $n$ elements. Then, $n$ is defined as the rank of $F$.
+    \end{definition}
+
+    \begin{lemma}
+        Let $R$ be a principal ideal domain, and let $M$ be a free $R$-module of rank
+        $n$. If $N \subseteq M$ is a submodule, then $N$ is free with rank $\leq n$.
+    \end{lemma}
+
+
+    \begin{theorem}[Structure theorem]
+        Let $M$ be a finitely generated module over a principal ideal domain $R$.
+        Then, $M$ can be expressed uniquely as \[
+            M \cong F\oplus R/(q_1) \oplus \dots \oplus R/(q_k)
+        \] where $F$ is a free $R$-module and $q_1, \dots, q_k$ are non-zero elements
+        of $R$ with $q_1\mid \dots \mid q_k$. Moreover, $F$ is unique up to
+        isomorphism, and $q_1, \dots, q_k$ are unique up to units.
+    \end{theorem}
 
 
 \end{document}
