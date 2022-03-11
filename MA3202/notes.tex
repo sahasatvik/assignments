@@ -1225,6 +1225,15 @@
         $n$. If $N \subseteq M$ is a submodule, then $N$ is free with rank $\leq n$.
     \end{lemma}
 
+    \begin{corollary}
+        Any submodule of a finitely generated module over a principal ideal domain is
+        finitely generated.
+        \begin{remark}
+            Note that a finitely generated $R$-module $M$ of rank $n$ is isomorphic
+            to $R^n/K$, where $R^n$ is a free module of rank $n$.
+        \end{remark}
+    \end{corollary}
+
 
     \begin{theorem}[Structure theorem]
         Let $M$ be a finitely generated module over a principal ideal domain $R$.
@@ -1235,5 +1244,26 @@
         isomorphism, and $q_1, \dots, q_k$ are unique up to units.
     \end{theorem}
 
+
+    \begin{definition}
+        An element $x \in M$ is a called a torsion element of the $R$-module $M$ if
+        $ax = 0$ for some non-zero $a \in R$.
+        \begin{remark}
+            The set of torsion elements in $M$, denoted $t(M)$, is a submodule of
+            $M$ when $R$ is an integral domain.
+        \end{remark}
+        \begin{remark}
+            If $t(M) = 0$, $M$ is called a torsion-free module. If $t(M) = M$, $M$ is
+            called a torsion module.
+        \end{remark}
+    \end{definition}
+
+
+    \begin{theorem}
+        Let $M$ be a finitely generated module over a principal ideal domain $R$.
+        Then, $M$ can be expressed as \[
+            M = F\oplus t(M),
+        \] where $F$ is a free $R$-module. Moreover, $F$ is unique up to isomorphism.
+    \end{theorem}
 
 \end{document}
