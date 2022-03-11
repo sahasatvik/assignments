@@ -895,22 +895,108 @@
         \]
     \end{definition}
 
+    \begin{lemma}[Young]
+        For $a, b \geq 0$, $p, q > 1$, \[
+            ab \leq \frac{a^p}{p} + \frac{b^q}{q}, \qquad \frac{1}{p} + \frac{1}{q} =
+            1.
+        \] 
+    \end{lemma}
+    \begin{proof}
+        Using Jensen's inequality on the logarithm, \[
+            \log(ta^p + (1 - t)b^q) \geq t\log(a^p) + (1 - t)\log(b^q).
+        \] Putting $t = 1 / p$ and exponentiating immediately gives the result.
+    \end{proof}
+
     \begin{lemma}[H\"older]
-        For $1 \leq p \leq \infty$, $f, g$ measurable, \[
+        For $1 \leq p, q \leq \infty$, $f, g$ measurable, \[
             \norm{fg}_1 \leq \norm{f}_p\, \norm{g}_q, \qquad \frac{1}{p}
             + \frac{1}{q} = 1.
         \] 
     \end{lemma}
+    \begin{proof}
+        This is trivial when either $f, g = 0$, or $p, q = 1$.  Otherwise, applying
+        Young's inequality and integrating gives
+        \[
+            \int_X |f(x)g(x)|\:d\mu \leq \frac{1}{p}\int_X |f(x)|^p\:d\mu +
+            \frac{1}{q}\int_X |g(x)|^q\:d\mu.
+        \] When $\norm{f}_p = \norm{g}_q = 1$, this immediately gives the desired
+        inequality since the right hand side is $1$. Otherwise, define $F = f /
+        \norm{f}_p$, $G = g / \norm{g}_q$, upon which $\norm{F}_p = \norm{G}_q = 1$,
+        hence \[
+            \norm{fg}_1 = \int_X |f(x)g(x)|\:d\mu \leq \norm{f}_p\norm{g}_q. \qedhere
+        \] 
+    \end{proof}
     
     \begin{lemma}[Minkowski]
         For $1 \leq p \leq \infty$, $f, g$ measurable, \[
             \norm{f + g}_p \leq \norm{f}_p + \norm{g}_p.
         \] 
     \end{lemma}
+    \begin{proof}
+        This is trivial when $p = 1, \infty$. Otherwise, for $1 < p < \infty$, note
+        that \[
+            |f(x) + g(x)|^p \leq \left(|f(x) + g(x)\right)^p \leq \left(2\max(f(x),
+            g(x))\right)^p \leq 2^p\left(|f(x)|^p + |g(x)|^p\right).
+        \] This shows that when $f, g \in L^p(\mu)$, we have $f + g \in L^p(\mu)$.
+        Set $F = |f + g|^{p - 1}$, when the triangle inequality followed by
+        H\"older's inequality gives \[
+            \norm{f + g}_p^p \leq \int_X F(x)|f(x)|\:d\mu + \int_X F(x)|g(x)|\:d\mu
+            \leq \norm{F(x)}_q\norm{f}_p + \norm{F(x)}_q\norm{g}_p,
+        \] where $q = 1 - 1 /p$. Using $(p - 1)q = p$, \[
+            \norm{F(x)}_q = \left(\int_X |f(x) + g(x)|^{(p - 1)^q} \:d\mu\right)^{1 /
+            q} = \left(\int_X |f(x) + g(x)|^p \:d\mu\right)^{1 - 1 / p} =
+            \frac{\norm{f + g}_p^p}{\norm{f + g}_p}.
+        \] This immediately gives the result.
+    \end{proof}
 
     \begin{theorem}
         The spaces of functions $L^p(\mu)$ and $L^\infty(\mu)$ are complete metric
         spaces.
+        \begin{remark}
+            Two functions in such a space are identified if they are equal almost
+            everywhere.
+        \end{remark}
+    \end{theorem}
+
+    \begin{theorem}
+        Let $(X, \M, \mu)$ be a finite measure space, and let $1 \leq p < q \leq
+        \infty$. Then, $L^p(\mu) \supseteq L^q(\mu)$.
+    \end{theorem}
+    \begin{proof}
+        Set $u = q / p > 1$, $v = 1 - 1 / u$, whence \[
+            \norm{|f|^p}_1 \leq \norm{|f|^p}_u\norm{1}_v = \norm{1}_v\left(\int_X
+            |f|^q\:d\mu\right)^{p / q} = \mu(X)^{1 / v} \norm{f}_q^p.
+        \] Thus, \[
+            \norm{f}_p = \norm{|f|^p}_1^{1 / q} \leq \mu(X)^{1 / p - 1 /
+            q}\norm{f}_q. \qedhere
+        \] 
+    \end{proof}
+    \begin{example}
+        Note that the map $x \mapsto 1 / \sqrt{x}$ is in $L^1(0, 1)$, but not in
+        $L^2(0, 1)$.
+    \end{example}
+
+    \begin{theorem}
+        Let $(X, \M, \mu)$ be a finite measure space. Then, $L^\infty(\mu) \subseteq
+        L^p(\mu)$ for all $1 \leq p \leq \infty$, and \[
+            \lim_{p \to \infty} \norm{f}_p = \norm{f}_\infty.
+        \] 
+    \end{theorem}
+
+    \begin{theorem}
+        Let $S$ be the set of all simple, measurable, complex valued functions which
+        are non-zero on a set of finite measure. Then, the closure of $S$ in
+        $L^p(\mu)$ is the whole of $L^p(\mu)$, for $1 \leq p < \infty$.
+    \end{theorem}
+
+    \begin{theorem}
+        The set of all continuous functions on $\R^n$ with compact support is dense
+        in $L^p(\mu)$, for $1 \leq p < \infty$.
+    \end{theorem}
+
+    \begin{theorem}
+        The set of all smooth functions on $\R^n$ with compact support is dense in
+        $L^p(\mu)$, for $1 \leq p < \infty$.
     \end{theorem}
 
 \end{document}
