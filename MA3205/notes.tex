@@ -170,8 +170,8 @@
         Without the restriction of immersion, any two loops $\gamma, \eta\colon S^1
         \to \R^n$ would be isotopic, since we can always construct the linear
         interpolations \[
-            H\colon S^1 \times [0, 1] \to \R^n, \qquad H(e^{i\theta}, t) = (1 -
-            t)\gamma(e^{i\theta}) + t\eta(e^{i\theta}).
+            H\colon S^1 \times [0, 1] \to \R^n, \qquad
+            H(e^{i\theta}, t) = (1 - t)\gamma(e^{i\theta}) + t\eta(e^{i\theta}).
         \] 
     \end{example}
 
@@ -655,6 +655,9 @@
         In particular, all rigid motions take surfaces to surfaces.
     \end{example}
 
+
+    \subsection{Smooth surfaces}    
+
     \begin{theorem}
         Let $a$ be a regular value of the smooth map $f\colon U \to \R$, where
         $U\subseteq \R^3$ is open. Then, $S = f^{-1}(a)$ is a surface.
@@ -677,7 +680,16 @@
         such that $\Gamma_\varphi$ defines a regular chart of $\Sigma$ around $p$.
     \end{lemma}
     
+
+    \subsection{Orientability}
     
+    \begin{definition}
+        Consider two charts $\varphi\colon U \to M$, $\psi\colon V \to M$ such that
+        $W = \varphi(U) \cap \psi(V)$ is non-empty. This means that we have two
+        choices of applying coordinates on the intersection. The transition map on
+        this patch is $\psi^{-1}\circ \varphi$, which is a homeomorphism between
+        $\varphi^{-1}(W)$ and $\psi^{-1}(W)$.
+    \end{definition}
 
 
 \end{document}
