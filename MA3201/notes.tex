@@ -760,7 +760,7 @@
         \] 
     \end{theorem}
 
-    \begin{lemma}
+    \begin{lemma}[Sequence lemma]
         Let $A \subseteq X$, let $x \in X$, and let the sequence $\{x_n\}_{n \in
         \N}$, $x_n \in A$ converge with $x_n \to x$. Then, $x \in \overline{A}$.
         \begin{remark}
@@ -1141,6 +1141,106 @@
     \end{lemma}
     
 
+    \section{Countability axioms}
+    
+    \subsection{First countability}
+    
+    \begin{definition}
+        Let $X$ be a topological space. A countable basis at a point $x \in X$ is a
+        countable collection $\beta$ of neighbourhoods of $x$ such that for any
+        neighbourhood $U$ of $x$, there is a basis element $B \in \beta$ such that $x
+        \in B \subseteq U$.
+    \end{definition}
+
+    \begin{definition}
+        A topological space $X$ in which every element $x \in X$ admits a countable
+        basis is called a first countable space.
+    \end{definition}
+    \begin{example}
+        All metrizable spaces are first countable. Given an element $x$, the
+        collection of all open balls centred at $x$ with rational radii forms a
+        countable basis.
+    \end{example}
+    \begin{example}
+        The space $\R_\ell$ is a non-metrizable space which is first countable.
+    \end{example}
+    
+    \begin{lemma}
+        The sequence lemma holds for first countable spaces, i.e.\ if $X$ is first
+        countable, $A \subseteq X$, and $x \in \overline{A}$, then there exists a
+        sequence $\{x_n\}_{n \in \N}$, $x_n \in A$, such that $x_n \to x$.
+    \end{lemma}
+
+    \begin{example}
+        The space $\R^\omega$ with the box topology is not first countable.
+    \end{example}
+
+
+    \subsection{Second countability}
+    
+    \begin{definition}
+        A topological space $X$ which admits a countable basis is called a second
+        countable space.
+    \end{definition}
+    \begin{example}
+        The Euclidean spaces $\R^n$ are second countable. The collection of all open
+        balls with rational radii, centred at rational points, forms a countable basis.
+    \end{example}
+    \begin{example}
+        The space $\R^\omega$ with the product topology is second countable.
+    \end{example}
+    \begin{lemma}
+        If a topological space $X$ is second countable, then any discrete subspace
+        $A\subseteq X$ must be countable.
+    \end{lemma}
+
+    \begin{proof}
+        Let $\beta = \{B_n\}_{n \in \N}$ be a countable basis of $X$. For each $a \in
+        A$, note that $\{a\}$ is open in subspace topology $A$, hence there exists a
+        basis element $B_a \in \beta$ such that $B_a \cap A = \{a\}$. Furthermore,
+        this assignment $A \to \beta$, $a \mapsto B_a$ is injective, hence $A$ must
+        be countable.
+    \end{proof}
+
+    \begin{example}
+        The space $\R^\omega$ with the uniform topology is metrizable hence first
+        countable, but not second countable. This topology is induced by the metric
+        \[
+            \rho(x, y) = \sup_{i \in \N} \bar{d}(x_i, y_i) = \sup_{i \in \N}
+            \min\{|x_i - y_i|, 1\}.
+        \] Consider the subspace $A \subset \R^\omega$, consisting of all binary
+        sequences. This is clearly an uncountable set. However, for any two distinct
+        members $x, y \in A$, we have $d(x, y) = 1$. This precisely describes the
+        discrete topology on $A$. The contrapositive of the above lemma now shows
+        that $\R^\omega$ with the uniform topology cannot be second countable.
+    \end{example}
+
+    \begin{lemma}
+        Let $X$ be a second countable space. Then, every open cover of $X$ admits a
+        countable subcover.
+        \begin{remark}
+            A topological space in which every open cover admits a countable subcover
+            is called a Lindel\"of space.
+        \end{remark}
+    \end{lemma}
+    
+    \begin{lemma}
+        Let $X$ be a second countable space. Then, there exists a countable subset
+        which is dense in $X$.
+        \begin{remark}
+            A topological space in which there exists a dense countable subset is
+            called a separable space.
+        \end{remark}
+    \end{lemma}
+    \begin{proof}
+        Let $\{B_n\}_{n \in X}$ be a countable basis of $X$. Pick one element $x_n
+        \in B_n$ for each $n \in \N$, whence the set $\{x_n\}_{n \in \N}$ is
+        countable and dense in $X$.
+    \end{proof}
+
+
+
+    
 
 
 \end{document}
