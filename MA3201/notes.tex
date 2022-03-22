@@ -1141,7 +1141,7 @@
     \end{lemma}
     
 
-    \section{Countability axioms}
+    \section{Countability and separation axioms}
     
     \subsection{First countability}
     
@@ -1223,6 +1223,14 @@
             is called a Lindel\"of space.
         \end{remark}
     \end{lemma}
+
+    \begin{example}
+        The space $\R_\ell$ is non-metrizable, first countable, and Lindel\"of, but
+        not second countable. To see the latter, let $\beta$ be a basis of $\R_\ell$.
+        Note that every $x \in [x, x + 1) \subset \R_\ell$, hence there must exist
+        $B_x \in \beta$, $x \in B_x \subseteq [x, x + 1)$. Now, the assignment $x
+        \mapsto B_x$ is injective, hence $\beta$ must be uncountable.
+    \end{example}
     
     \begin{lemma}
         Let $X$ be a second countable space. Then, there exists a countable subset
@@ -1239,7 +1247,44 @@
     \end{proof}
 
 
+    \begin{lemma}
+        Subspaces, countable products of first/second countable spaces are
+        first/second countable.
+    \end{lemma}
 
+    \begin{example}
+        The space $\R_\ell^2$, called the Sorgenfrey plane, is not Lindel\"of, even
+        though $\R_\ell$ is. This can be shown by considering the line $L = \{(x,
+        -x): x \in \R\}$. Note that $L \subset \R_\ell^2$ is closed, hence $\R_\ell^2
+        \setminus L$ is open. Start with this, and add the sets $[x, x + 1)\times [x,
+        x + 1)$ to our collection. This is an open cover of $\R_\ell^2$ which admits
+        no countable subcover.
+    \end{example}
+
+
+    \subsection{Separation axioms}
+
+    \begin{definition}
+        A topological space $X$ in which any two distinct points $x, y \in X$ admit
+        open sets $U, V$ such that $x \in U$, $y \in V$, $U \cap V = \emptyset$, is
+        called a Hausdorff space.
+    \end{definition}
+
+    \begin{definition}
+        A topological space $X$ in which any point $x \in X$ and a closed set
+        $F\subseteq X$ (not containing $x$) can be separated is called a regular
+        space.
+    \end{definition}
+    
+    \begin{definition}
+        A topological space $X$ in which any point two disjoint closed sets $F, F'
+        \subseteq X$ can be separated is called a normal space.
+    \end{definition}
+
+    \begin{lemma}
+        Consider topological spaces in which singleton sets are closed. Then, all
+        such normal spaces are regular, and all such regular spaces are Hausdorff.
+    \end{lemma}
     
 
 
