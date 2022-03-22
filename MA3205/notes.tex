@@ -691,5 +691,50 @@
         $\varphi^{-1}(W)$ and $\psi^{-1}(W)$.
     \end{definition}
 
+    \begin{definition}
+        An oriented atlas for a smooth surface $\Sigma$ is one in which the
+        determinants of the linearized transitions maps are all positive.
+        \begin{remark}
+            A surface which admits an oriented atlas is called an orientable surface.
+        \end{remark}
+    \end{definition}
+
+    \begin{example}
+        Spheres, tori, and their connected sums are all orientable.
+    \end{example}
+    \begin{example}
+        The M\"obius strip and the Klein bottle are non-orientable.
+    \end{example}
+    \begin{example}
+        The real projective plane $\R P^2$ is non-orientable.
+    \end{example}
+
+    \begin{definition}
+        Let $\sigma\colon U \to \Sigma$ describe a chart on a patch $\sigma(U)
+        \subseteq \Sigma$, where $U \subseteq \R^2$ is open. Further let $p \in
+        \sigma(U)$ be a point in this patch on the surface. Then, the map $\sigma$
+        describes a set of local coordinates at $p$, which in turn can be used to
+        describe a normal to the surface at $p$ as follows. \[
+            \N^\sigma(p) = \frac{\sigma_u\times \sigma_v}{\norm{\sigma_u \times
+            \sigma_v}}.
+        \]
+    \end{definition}
+
+    \begin{lemma}
+        Consider two regular charts $\sigma, \tilde{\sigma}$ whose associated surface
+        patches overlap. Then, the transition map $\varphi = \sigma^{-1}\circ
+        \tilde{\sigma}$ is a diffeomorphism between the domains of $\sigma,
+        \tilde{\sigma}$. If $p$ is a point in this overlap, then the normals
+        described by these charts to the surface at $p$ are related as \[
+            \N^{\tilde{\sigma}}(p) = \sgn(\det{\varphi})\, \N^{\sigma}(p).
+        \]       
+    \end{lemma}
+
+    \begin{definition}
+        Let $\Sigma$ be an oriented surface. Given a point $p \in \Sigma$, the normal
+        vectors $\N^\sigma(p)$ all agree irrespective of our choice of chart. We can
+        now define the Gauss map $\N\colon \Sigma \to S^2$ which assigns a normal
+        vector to each point $p \in \Sigma$ in our surface.
+    \end{definition}
 
 \end{document}
