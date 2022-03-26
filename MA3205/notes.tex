@@ -727,7 +727,10 @@
         \tilde{\sigma}$. If $p$ is a point in this overlap, then the normals
         described by these charts to the surface at $p$ are related as \[
             \N^{\tilde{\sigma}}(p) = \sgn(\det{\varphi})\, \N^{\sigma}(p).
-        \]       
+        \]
+        \begin{remark}
+            The normal vector at $p$ is orthogonal to the tangent space $T_p\Sigma$.
+        \end{remark}
     \end{lemma}
 
     \begin{definition}
@@ -736,5 +739,20 @@
         now define the Gauss map $\N\colon \Sigma \to S^2$ which assigns a normal
         vector to each point $p \in \Sigma$ in our surface.
     \end{definition}
+
+    \begin{lemma}
+        The following are equivalent for surfaces $\Sigma \subset \R^3$.
+        \begin{enumerate}
+            \itemsep0em
+            \item There exists an oriented atlas for $\Sigma$.
+            \item There exists a unit normal vector field $\N\colon \Sigma \to S^2$
+            such that $\N(p) \perp T_p\Sigma$ at every point $p \in \Sigma$.
+        \end{enumerate}
+    \end{lemma}
+
+    \begin{theorem}
+        Let $f\colon \R^3 \to \R$ be a smooth map. If $a \in \R$ is a regular value
+        of $f$, then $f^{-1}(a) = \Sigma_a$ is an orientable smooth surface.
+    \end{theorem}
 
 \end{document}
