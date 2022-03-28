@@ -996,15 +996,88 @@
         are non-zero on a set of finite measure. Then, the closure of $S$ in
         $L^p(\mu)$ is the whole of $L^p(\mu)$, for $1 \leq p < \infty$.
     \end{theorem}
+    
+    \begin{theorem}[Lusin]
+        Let $f\colon \R^n \to \C$ be measurable, and let $A\subseteq \R^n$ have
+        finite measure, with $f = 0$ on $\R^n \setminus A$. Given $\epsilon > 0$,
+        there exists a continuous function $g$ on $\R^n$ with compact support, such
+        that \[
+            \mu\{x: f(x) \neq g(x)\} < \epsilon.
+        \] Moreover, $g$ can be chosen such that \[
+            \sup_{x \in \R^n} |g| \leq \norm{f}_\infty.
+        \] 
+    \end{theorem}
 
     \begin{theorem}
         The set of all continuous functions on $\R^n$ with compact support is dense
         in $L^p(\mu)$, for $1 \leq p < \infty$.
     \end{theorem}
+    \begin{example}
+        The set of all continuous functions on $\R^n$ with compact support is
+        \emph{not} dense in $L^\infty(\mu)$; recall that the uniform limit of
+        continuous functions is always continuous, i.e.\ sequences of continuous
+        functions can only converge to continuous functions in $L^\infty(\mu)$.
+        Instead, the closure of this set in $L^\infty$ consists of all continuous
+        functions on $\R^n$ such such given $\epsilon > 0$, there exists compact $K
+        \subset \R^n$ where $|f| < \epsilon$ on $\R^n\setminus K$.
+    \end{example}
 
     \begin{theorem}
         The set of all smooth functions on $\R^n$ with compact support is dense in
         $L^p(\mu)$, for $1 \leq p < \infty$.
     \end{theorem}
+
+
+    \subsection{Outer measures}
+    
+    \begin{definition}
+        Let $X$ be a set, and let $\mathcal{P}(X)$ denote its power set. We say that
+        a function $\mu^*\colon \mathcal{P}(X) \to [0, \infty]$ is called an outer
+        measure if it satisfies the following.
+        \begin{enumerate}
+            \itemsep0em
+            \item $\mu^*(\emptyset) = 0$.
+            \item $\mu^*(A) \leq \mu^*(B)$ whenever $A \subseteq B$.
+            \item \[
+                \mu^*\left(\bigcup_{i = 1}^\infty A_i\right) \leq \sum_{i = 1}^\infty
+                \mu^*(A_i).
+            \] 
+        \end{enumerate}
+    \end{definition}
+
+    \begin{example}
+        Let $\xi \subseteq \mathcal{P}(X)$ such that $\emptyset, X \in \xi$, and let
+        $f\colon \xi \to [0, \infty]$ with $f(\emptyset) = 0$. For $A \subseteq X$,
+        we may define \[
+            \mu^*(A) = \inf\left\{\sum_{i = 1}^\infty f(E_i) : A \subseteq \bigcup_{i
+            = 1}^\infty E_i, E_i \in \xi\right\}.
+        \] It can be verified that this is indeed an outer measure. The first
+        property follows immediately, and the second follows from the fact that if
+        $A\subseteq B$, all covers of $B$ are also covers of $A$. For the third, let
+        \[
+            A = \bigcup_{i = 1}^\infty A_i.
+        \] Then, for arbitrary $\epsilon > 0$, we can choose $E_{ij} \in \xi$ such
+        that \[
+            \mu^*(A_i) + \frac{\epsilon}{2^i} \geq \sum_j f(E_{ij}), \qquad 
+            A_i \subseteq \bigcup_j E_{ij}.
+        \] Now, the sets $E_{ij}$ all cover $A$, so \[
+            \mu^*(A) \leq \sum_{ij} f(E_{ij}) \leq \sum_i \left[\mu^*(A_i) +
+            \frac{\epsilon}{2^i}\right] = \sum_i \mu^*(A_i) + \epsilon.
+        \] Since $\epsilon > 0$ is arbitrary, we have the desired result, \[
+            \mu^*(A) \leq \sum_i \mu^*(A_i).
+        \] 
+    \end{example}
+
+    \begin{definition}
+        A set $A \subseteq X$ is called $\mu^*$-measurable if for all $E \subseteq
+        X$, we have \[
+            \mu^*(A) = \mu^*(E \cap A) + \mu^*(E \cap A^c).
+        \]
+        \begin{remark}
+            We need only check the $\geq$ direction, and we need only check sets $E$
+            of finite outer measure.
+        \end{remark}
+    \end{definition}
+
 
 \end{document}
