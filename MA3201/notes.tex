@@ -1285,7 +1285,54 @@
         Consider topological spaces in which singleton sets are closed. Then, all
         such normal spaces are regular, and all such regular spaces are Hausdorff.
     \end{lemma}
+
+    \begin{example}
+        Consider the space $\R_K$, and note that $K$ is closed. However, there is no
+        separation of $0 \in \R$ and $K \subset \R$, hence $\R_K$ is not regular.
+    \end{example}
+
+    \begin{lemma}
+        A space $X$ is regular if and only if given any point $x$ and an open set $U
+        \subseteq X$ such that $x \in U$, there exists an open set $V$ such that $x
+        \in V \subseteq \overline{V} \subseteq U$.
+    \end{lemma}
+    \begin{example}
+        All metric spaces are regular.
+    \end{example}
+
+    \begin{lemma}
+        Products and subspaces of regular/Hausdorff spaces are also
+        regular/Hausdorff.
+    \end{lemma}
+    \begin{example}
+        The space $\R_\ell$ is regular, but not metrizable, and so is $\R_\ell^2$.
+    \end{example}
+
+    \begin{lemma}
+        All metrizable spaces are normal.
+    \end{lemma}
+    \begin{proof}
+        Let $X$ be metrizable, and let $A, B \subseteq X$ be closed, $A \cap B =
+        \emptyset$. Then for each $a \in A$, $b \in B$, we can choose $\epsilon_a,
+        \epsilon_b > 0$ such that \[
+            B(a, \epsilon_a) \cap B = \emptyset, \qquad
+            B(b, \epsilon_b) \cap A = \emptyset.
+        \] This is because the complements $X\setminus A$, $X\setminus B$ are open.
+        Now set \[
+            U = \bigcup_{a \in A} B(a, \epsilon_a / 2), \qquad
+            V = \bigcup_{b \in A} B(b, \epsilon_b / 2).
+        \] It can be checked that these are open, with $A \subseteq U$, $B \subseteq
+        V$, $U \cap V = \emptyset$.
+    \end{proof}
     
+    \begin{example}
+        The space $\R_\ell$ is normal, but not metrizable. However, $\R_\ell^2$ is
+        not normal.`
+    \end{example}
+
+    \begin{theorem}
+        All compact, Hausdorff spaces are normal.
+    \end{theorem}
 
 
 \end{document}
