@@ -36,6 +36,7 @@
 \newcommand{\norm}[1]{\Vert #1 \Vert}
 
 \DeclareMathOperator{\diam}{diam}
+\DeclareMathOperator{\supp}{supp}
 
 \newmdtheoremenv[%
     backgroundcolor=blue!10!white,%
@@ -847,6 +848,12 @@
         Since $Y$ is Hausdorff, the compact set $f(K)$ is closed.
     \end{proof}
 
+    \begin{lemma}
+        A topological space is compact if and only if for any collection of closed
+        sets $\mathscr{C}$ with the finite intersection property, we have $\bigcap_{C
+        \in \mathscr{C}} C \neq \emptyset$.
+    \end{lemma}
+
 
     \subsection{Products of compact spaces}
 
@@ -1327,12 +1334,297 @@
     
     \begin{example}
         The space $\R_\ell$ is normal, but not metrizable. However, $\R_\ell^2$ is
-        not normal.`
+        not normal.
     \end{example}
 
     \begin{theorem}
         All compact, Hausdorff spaces are normal.
     \end{theorem}
 
+    \begin{theorem}
+        All regular, second countable spaces are normal.
+    \end{theorem}
+
+    \begin{example}
+        The space $\R_\ell$ is normal but not second countable.
+    \end{example}
+
+    \begin{example}
+        The Sorgenfrey line $L \subset \R_\ell^2$ has the discrete topology. Then,
+        any subset $A \subseteq L$ is both open and closed, and $A, L\setminus A$ are
+        closed in $\R_\ell^2$. If $\R_\ell^2$ were normal, then we could separate
+        them in $\R_\ell^2$ by open sets $U_A, V_A$ with $A \subseteq U_A$,
+        $L\setminus A \subseteq V_A$, $U_A \cap V_A = \emptyset$. Let $D \subset
+        \R_\ell^2$ be the set of all points with rational coordinates; this is dense
+        in $\R_\ell^2$. Define \[
+            \theta\colon \mathcal{P}(L) \to \mathcal{P}(D), \qquad 
+            A \mapsto \begin{cases}
+                D \cap U_A, &\text{ if } \emptyset \subset A \subset L, \\
+                D, &\text{ if } A = L, \\
+                \emptyset, &\text{ if } A = \emptyset.
+            \end{cases}
+        \] Note that $U_A \cap D$ is non-empty when $A \neq \emptyset$ by the density
+        of $D$. Pick $A \neq B$, then there exists $x \in A, x \notin B$ hence $x \in
+        L \setminus B$ or $x \in U_A \cap V_B$. Thus, $D \cap U_A$ and $D \cap V_B$
+        are non-empty. There must be points in $D \cap U_A$ not in $D \cap U_B$,
+        hence $\theta$ is injective. However, this is already a contradiction, via
+        cardinalities.
+    \end{example}
+
+    \begin{example}
+        Let $X$ be a metric space, and let $A, B \subseteq X$ be closed and disjoint.
+        We can define \[
+            f\colon X \to \R, \qquad x \mapsto \frac{d(x, A)}{d(x, A) + d(x, B)}.
+        \] Then, $f$ is continuous, with $f(A) = 0$ and $f(B) = 1$. This is a
+        `functional separation' of $A$ and $B$.
+
+        Note that if $A$ and $B$ were not closed, the denominator might have been
+        zero.
+    \end{example}
+
+
+    \begin{lemma}[Urysohn]
+        A space $X$ is normal if and only if given any two non-empty closed disjoint
+        sets $A, B \subseteq X$, there exists a continuous function $f\colon X \to
+        [0, 1]$ such that $f(A) = 0$, $f(B) = 1$.
+    \end{lemma}
+
+    \begin{definition}
+        Let $X, Y$ be topological spaces. An imbedding $f\colon X \to Y$ is a
+        homeomorphism between $X$ and $f(X)$.
+    \end{definition}
+
+    \begin{theorem}[Urysohn metrization theorem]
+        All regular, second countable spaces are metrizable.
+    \end{theorem}
+
+
+
+    \subsection{Compact manifolds}
+    
+    \begin{definition}
+        An $n$-manifold is a regular, second-countable space such that each point has
+        a neighbourhood homeomorphic to an open subset of $\R^n$.
+    \end{definition}
+    \begin{example}
+        The real projective space $\RP^n$ is a compact manifold. Furthermore, it can
+        be covered by finitely many open sets, each of which is homeomorphic to an
+        open subset of $\R^n$. To see this, define \[
+            U_i = \{[x] : x \in \R^{n + 1},  x_i \neq 0\} \subset \RP^n.
+        \] It is clear that the collection of $U_i$ cover $\RP^n$. Now, define the
+        maps \[
+            \varphi_i\colon U_i \to \R^n, \qquad [x] \mapsto \left(\frac{x_1}{x_i},
+            \dots, \frac{x_{i - 1}}{x_i}, \frac{x_{i + 1}}{x_i}, \dots,
+            \frac{x_n}{x_i}\right).
+        \] Note that $\varphi_i$ is injective; if $\varphi_i([x]) = \varphi_i([y])$,
+        then each $y_j/y_i = x_j/x_i$, or $y_j = \lambda x_j$, but this is precisely
+        what it means for $x \sim y$, hence $[x] = [y]$. The map $\varphi_i$ is also
+        continuous, since the maps \[
+            x \mapsto \left(\frac{x_1}{x_i}, \dots, \frac{x_{i - 1}}{x_i}, \frac{x_{i
+            + 1}}{x_i}, \dots, \frac{x_n}{x_i}\right).
+        \] are continuous, and the quotient map $\R^{n + 1}\setminus\{0\} \to \RP^n$
+        is open. It can also be shown that $\varphi_i^{-1}$ is continuous, hence the
+        maps $\varphi_i$ are homeomorphisms.
+    \end{example}
+
+    \begin{definition}
+        Let $X$ be a topological space, and let $\mathscr{U} = \{U_1, \dots, U_k\}$
+        be an open cover. A partition of unity, dominated by $\mathscr{U}$, is a
+        collection of continuous real functions $\psi_1, \dots, \psi_k$ on $X$
+        such that each $\supp{\psi_i} \subseteq U_i$ and $\sum_{i = 1}^k \psi_i =
+        1$.
+    \end{definition}
+
+    \begin{lemma}
+        Let $X$ be a topological space, and let $\mathscr{U} = \{U_1, \dots, U_k\}$
+        be an open cover. If $X$ is normal, then there exists a partition of unity
+        dominated by $\mathscr{U}$.
+    \end{lemma}
+    \begin{proof}
+        First, we refine the open cover $\mathscr{U}$ and extract an open cover
+        $\mathscr{V} = \{V_1, \dots, V_k\}$ such that each $V_i \subseteq
+        \overline{V_i} \subseteq U_i$. To do so, first define \[
+            A_1 = X \setminus (U_2 \cup \dots \cup U_k).
+        \] Then, $A_1 \subseteq U_1$ is closed in $X$. By the normality of $X$, there
+        exists open $V_1$ such that $A_1 \subseteq V_1 \subseteq \overline{V_1}
+        \subseteq U_1$. Now, the collection $\{V_1, U_2, \dots, U_k\}$ is still an
+        open cover of $X$. This process can be repeated; if at any point we have an
+        open cover $\{V_1, \dots, V_j, U_{j + 1}, \dots, U_k\}$, set \[
+            A_{j + 1} = X\setminus (V_1 \cup \dots \cup V_j \cup U_{j + 2} \cup \dots
+            \cup U_k),
+        \] and argue as before to obtain open $V_{j + 1} \subseteq A_{j + 1}$, and
+        the open cover $\{V_1, \dots, V_{j + 1}, U_{j + 1}, \dots, U_k\}$.
+        
+        Next, perform another refinement of $\mathscr{V}$ and extract an open cover
+        $\mathscr{W} = \{W_1, \dots, W_k\}$.
+
+        Now, apply the Urysohn Lemma and exhibit continuous functions $\varphi_1,
+        \dots, \varphi_k$ on $X$ such that each $\varphi_i(\overline{W_i}) = 1$,
+        $\varphi_i(X\setminus V_i) = 0$. Note that each $\supp{\varphi_i} \subseteq
+        \overline{V_i} \subseteq U_i$. Finally, set \[
+            \psi_i = \frac{\varphi_i}{\Phi}, \qquad \Phi = \sum_{i = 1}^k \varphi_i.
+            \qedhere
+        \] 
+    \end{proof}
+
+
+    \begin{theorem}
+        Any compact Hausdorff manifold can be imbedded into some Euclidean space.
+    \end{theorem}
+    \begin{proof}
+        Let $\mathscr{U} = \{U_1, \dots, U_k\}$ be an open cover of $X$, and let
+        $\varphi_i\colon U_i \to \varphi_i(U_i) \subseteq \R^n$ be homeomorphisms.
+        Since $X$ is compact and Hausdorff, hence normal, choose a partition of unity
+        $\psi_1, \dots, \psi_k$ dominated by $\mathscr{U}$. Set $A_i = \supp{\psi_i}
+        \subseteq U_i$, and define \[
+            h_i\colon X \to \R, \qquad x\mapsto \varphi_i(x)\,\psi_i(x).
+        \] It is clear that each $h_i$ is continuous, with $h_i = 0$ on $X \setminus
+        A_i$. Now, define \[
+            f\colon X \to \underbrace{\R \times \dots \times \R}_{k \text{ times}}\times 
+            \underbrace{\R^n \times \dots \times \R^n}_{k \text{ times}}, \qquad
+            x \mapsto (\psi_1(x), \dots, \psi_k(x), h_1(x), \dots, h_k(x)).
+        \] Then, $f$ is continuous as well as injective; suppose that $f(x) = f(y)$.
+        Since $\mathscr{U}$ covers $X$, we must have some $\psi_j(x) > 0$; but
+        $\psi_j(x) = \psi_j(y) > 0$, so $x, y \in A_j \subseteq U_j$. Thus, from
+        $h_j(x) = h_j(y)$, we can cancel $\psi_j(x), \psi_j(y)$ to obtain
+        $\varphi_j(x) = \varphi_j(y)$. The bijectivity of $\varphi_j$ immediately
+        gives $x = y$. Thus, $f$ is a continuous map from a compact space to a
+        Hausdorff space, hence $f$ is a homeomorphism onto its image. In other words,
+        $f$ is an imbedding of $X$ in $\R^{(n + 1)k}$.
+    \end{proof}
+
+    \begin{theorem}
+        Any compact Hausdorff space without any isolated points is uncountable.
+    \end{theorem}
+    \begin{proof}
+        First, we show that given any $x \in X$ and an open set $U \subseteq X$, we
+        can always find non-empty open $V \subseteq U$ with $x \notin V$. To show
+        this, note that since $x \in U$ is not an isolated point, we must have some
+        distinct point $y \in U$. Since $X$ is Hausdorff, find disjoint open sets
+        $W_1, W_2$ with $x \in W_1$, $y \in W_2$. Now we can set $V = W_2 \cap U$.
+        Note that we also have $x \notin \overline{V}$ since $x \in W_1 \subseteq
+        W_2^c$.
+
+        Now, we show that there is no surjection $f\colon \N \to X$. If there was
+        such an $f$, denote $x_n = f(n)$. Set $U = X$, and use the above process to
+        find non-empty open $V_1 \subseteq U$, $x_1 \notin \overline{V_1}$. Next, set
+        $U = V_1$, and find non-empty open $V_2 \subseteq V_1$, $x_2 \notin
+        \overline{V_2}$. In this manner, we can obtain a chain of non-empty closed
+        sets \[
+            \overline{V_1} \supseteq \overline{V_2} \supseteq \dots \supseteq
+            \overline{V_i} \supseteq \dots.
+        \] These clearly have the finite intersection property, but $\bigcap_{i =
+        1}^\infty \overline{V_i} = \emptyset$ since each $x_i \notin V_i$. This
+        contradicts the compactness of $X$.
+    \end{proof}
+
+
+    \begin{theorem}[Lebesgue number]
+        Let $X$ be a compact metric space, and let $\mathscr{U}$ be an open cover of
+        $X$. Then, there exists a corresponding positive number $\delta$ such that
+        any subset of $X$ with diameter less than $\delta$ is contained in one of the
+        elements of $\mathscr{U}$.
+    \end{theorem}
+    \begin{proof}
+        Note that for any $A \subset X$, the map $x \mapsto d(x, A)$ is continuous.
+        Now, using the compactness of $X$, extract a finite subcover $U_1, \dots,
+        U_n$ from $\mathscr{U}$. Set $F_i = X\setminus U_i$, and define \[
+            f\colon X \to \R, \qquad x \mapsto \frac{1}{n}\sum_{i = 1}^n d(x, F_i).
+        \] This map is continuous, and strictly positive. Since $X$ is compact, this
+        map must attain a minimum $\delta > 0$. We now show that this $\delta$ is
+        indeed the Lebesgue number for the open cover $\mathscr{U}$.
+
+        Let $B \subseteq X$, $\diam{B} < \delta$. Pick $x_0 \in B$, whence $f(x_0)
+        \geq \delta$. Suppose that all $d(x_0, F_i) \leq d(x_0, F_k)$ for some $k$,
+        then $\delta \leq f(x_0) \leq d(x_0, F_k)$. We have \[
+            d(x_0, F_k) \geq \delta \;\implies\; \inf\{d(x_0, c) : c \notin U_k\} \geq
+            \delta.
+        \] If $B \not\subseteq U_k$, then we could have chosen $x \in B$, $x \notin
+        U_k$. From $x \in B$, we have $d(x_0, x) < \delta$; this contradicts the
+        above.
+    \end{proof}
+    \begin{corollary}
+        Let $X$ be a compact metric space. Then, all continuous functions $f\colon X
+        \to Y$, where $Y$ is a metric space, are uniformly continuous.
+    \end{corollary}
+    \begin{proof}
+        Let $f\colon X \to Y$ be continuous, and let $\epsilon > 0$. Set $\mathscr{U}
+        = \{f^{-1}(B_{\epsilon / 2}(y)) : y \in Y\}$, which is clearly an open cover
+        of $X$. Pick the corresponding Lebesgue number $\delta > 0$. Now, given any
+        two points $x, x' \in X$ such that $d_X(x, x') < \delta$, we have $\diam\{x,
+        x'\} < \delta$ hence $\{x, x'\} \subseteq f^{-1}(B_{\epsilon / 2}(y))$ for
+        some $y \in Y$.  Thus, $f(x), f(x') \in B_{\epsilon / 2}(y)$, hence
+        $d_Y(f(x), f(x')) < \epsilon$.
+    \end{proof}
+
+
+    \section{Topological groups}
+
+    \begin{definition}
+        A topological group $G$ is a topological space that is also a group, such
+        that the product and inversion maps are continuous, i.e.\ the maps $(x,
+        y) \mapsto xy$ and $x \mapsto x^{-1}$ are continuous.
+        \begin{remark}
+            We also demand that $G$ be Hausdorff.
+        \end{remark}
+    \end{definition}
+    \begin{example}
+        The group $GL_n(\R)$ is a topological group. Here, we topologize $GL_n(\R)$
+        using the Euclidean topology on $\R^{n^2}$. 
+        \begin{remark}
+            Note that the determinant map $\det\colon M_n(\R) \to \R$ is continuous,
+            being a polynomial in the entries of any given matrix. Thus, $GL_n(\R)$
+            is open in $M_n(\R)$, being the pre-image of the open set
+            $\R\setminus\{0\}$.
+        \end{remark}
+        \begin{remark}
+            Note that $GL_n(\R)$ is not connected, being the disjoint union of
+            $\det^{-1}(-\infty, 0)$ and $\det^{-1}(0, \infty)$. However, $GL_n(\C)$
+            is path connected. To show this, pick $A \in GL_n(\C)$, and let $z \in
+            \C$ such that $|z| = 1$, with no $\lambda z$ being an eigenvalue of $A$
+            (this can be done since $A$ has only finitely many eigenvalues). Now,
+            consider the map \[
+                \gamma\colon [0, 1] \to GL_n(\C), \qquad t \mapsto tA + (1 - t)zI_n.
+            \] Note that $\gamma$ is continuous and well-defined; $\gamma(0) = I_n$,
+            $\gamma(1) = A$ both of which are in $GL_n(\C)$. Now if some
+            $\det\gamma(t) = 0$ for $0 < t < 1$, there must be some non-zero vector
+            $v\in \C^n$ such that $tAv + (1 - t)zI_nv = 0$, i.e.\ $Av = -(1 -
+            t)z/t\,v$. However, $z$ was chosen such that none of its multiples are
+            eigenvectors of $A$. Thus, $\gamma$ is a path joining $I_n$ with $A$,
+            which shows that $GL_n(\C)$ is indeed path connected.
+        \end{remark}
+    \end{example}
+    \begin{example}
+        The topological group of unitary matrices $U_n(\C)$ is compact. Note that it
+        is sufficient to show that $U_n(\C)$ is closed and bounded. First, the maps
+        $A \mapsto A A^* - I_n$ and $A \mapsto A^* A - I_n$ are both continuous,
+        hence $U_n(\C)$ is closed, being the intersection of the pre-images of
+        $\{0\}$ under these maps. Next, note that given $U \in U_n(\C)$, we have $U
+        U^* = I_n$, hence the columns of $U$ are orthonormal. Thus, \[
+            \sum_{i, j} |u_{ij}|^2 = n,
+        \] showing that $U$ is bounded.
+    \end{example}
+
+    \begin{theorem}
+        Let $G$ be a topological group, and let $H$ be a closed normal subgroup of
+        $G$. If $G/H$ and $H$ are connected, then $G$ is connected.
+    \end{theorem}
+    \begin{proof}
+        Suppose that $G$ is disconnected. Then there exists a continuous, surjective
+        map $\Phi\colon G \to \{0, 1\}$. Since $H \subset G$ is connected, one of
+        $\Phi(H) = 0, 1$. Now, the quotient map $\pi\colon G \to G/H$ induces the
+        continuous surjection $\tilde{\Phi}\colon G/H \to \{0, 1\}$, $\Phi =
+        \tilde{\Phi} \circ q$, which contradicts the connectedness of $G/H$. Note
+        that we have used the fact that $\pi$ is open; to see this, if $U\subseteq G$
+        is open, we claim that $\pi(U) \subseteq G/H$ is open, i.e.\
+        $\pi^{-1}(\pi(U))$ is open in $G$. But, \[
+            \pi(U) = \{gH : g \in U\},
+        \] so \begin{align*}
+            \pi^{-1}(\pi(U)) \;&=\; \{g \in G: gH = g'H, g' \in U\} \\
+            \;&=\; \{g \in G : g'^{-1}g \in H, g' \in U\} \\
+            \;&=\; \bigcup_{h \in H} Uh.
+        \end{align*}
+        which is open in $G$.
+    \end{proof}
 
 \end{document}
