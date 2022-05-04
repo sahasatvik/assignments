@@ -31,6 +31,9 @@
 \newcommand{\Z}{\mathbb{Z}}
 \newcommand{\N}{\mathbb{N}}
 
+\newcommand{\I}{{\rm I}}
+\newcommand{\II}{{\rm I\!I}}
+
 \newcommand{\ip}[2]{\langle #1, #2 \rangle}
 \newcommand{\norm}[1]{\Vert #1 \Vert}
 \renewcommand{\vec}[1]{\boldsymbol{#1}}
@@ -40,6 +43,9 @@
 \newcommand{\vv}{\vec{v}}
 \newcommand{\vw}{\vec{w}}
 \newcommand{\ve}{\vec{e}}
+
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\trace}{trace}
 
 \newcommand{\dd}[2]{\frac{d #1}{d #2}}
 \newcommand{\pp}[2]{\frac{\partial #1}{\partial #2}}
@@ -296,7 +302,7 @@
         The arc length of a differentiable curve $\gamma\colon (\alpha, \beta) \to
         \R^n$, starting at $t_0$, is defined as \[
             s(t) = \int_{t_0}^t \norm{\gamma'(u)}\:du.
-        \] We call $s$ the arch length parameter.
+        \] We call $s$ the arc length parameter.
 
         \begin{remark}
             If $\gamma'(t) \neq 0$, then $s'(t) > 0$.
@@ -726,10 +732,16 @@
         \tilde{\sigma}$ is a diffeomorphism between the domains of $\sigma,
         \tilde{\sigma}$. If $p$ is a point in this overlap, then the normals
         described by these charts to the surface at $p$ are related as \[
-            \N^{\tilde{\sigma}}(p) = \sgn(\det{\varphi})\, \N^{\sigma}(p).
+            \N^{\tilde{\sigma}}(p) = \sgn(\det{D\varphi})\, \N^{\sigma}(p).
         \]
         \begin{remark}
             The normal vector at $p$ is orthogonal to the tangent space $T_p\Sigma$.
+        \end{remark}
+        \begin{remark}
+            We have the relation \[
+                \tilde{\sigma}_{\tilde{u}} \times \tilde{\sigma}_{\tilde{v}} =
+                \det(D\varphi) \; \sigma_u\times \sigma_v.
+            \] 
         \end{remark}
     \end{lemma}
 
@@ -753,6 +765,463 @@
     \begin{theorem}
         Let $f\colon \R^3 \to \R$ be a smooth map. If $a \in \R$ is a regular value
         of $f$, then $f^{-1}(a) = \Sigma_a$ is an orientable smooth surface.
+        \begin{remark}
+            Given $p \in \Sigma_a$, it can be shown that $\grad{f} \perp
+            T_p\Sigma_a$, hence we have the unit normal vector field
+            $\grad{f}/\norm{\grad{f}}$.
+        \end{remark}
+    \end{theorem}
+
+
+    \subsection{The First and Second Fundamental Forms}
+
+    \begin{definition}
+        The following symmetric, non-degenerate, bilinear form is called the First
+        Fundamental Form. \[
+            \I_p\colon T_p\Sigma \times T_p\Sigma \to \R, \qquad (v, w) \mapsto
+            \ip{v}{w}.
+        \] Since $\sigma_u, \sigma_v$ form a basis of $T_p\Sigma$, we set \[
+            E = \ip{\sigma_u}{\sigma_u}, \qquad
+            F = \ip{\sigma_u}{\sigma_v}, \qquad
+            G = \ip{\sigma_v}{\sigma_v}.
+        \] and we denote \[
+            \I_p^\sigma \equiv \begin{bmatrix}
+                E & F \\ F & G
+            \end{bmatrix} \equiv E\,du^2 + 2F\,du\,dv + G\,dv^2.
+        \] 
+    \end{definition}
+
+    \begin{lemma}
+        Consider two regular charts $\sigma, \tilde{\sigma}$ whose associated surface
+        patches overlap. Then, the transition map $\varphi = \sigma^{-1}\circ
+        \tilde{\sigma}$ is a diffeomorphism between the domains of $\sigma,
+        \tilde{\sigma}$. If $p$ is a point in this overlap, then the values $E, F, G$
+        and $\tilde{E}, \tilde{F}, \tilde{G}$ are related as \[
+            \begin{bmatrix}
+                \tilde{E} & \tilde{F} \\ \tilde{F} & \tilde{G}
+            \end{bmatrix} = D\varphi^\top \begin{bmatrix}
+                E & F \\ F & G
+            \end{bmatrix} D\varphi.
+        \] 
+    \end{lemma}
+
+    \begin{lemma}
+        \[
+            \norm{\sigma_u\times \sigma_v}^2 = \det \begin{bmatrix}
+                E & F \\ F & G
+            \end{bmatrix}.
+        \] 
+    \end{lemma}
+
+    \begin{definition}
+        Let $(U, \sigma)$ be a regular chart, and let $R \subseteq U$ be open. The
+        area of the region $\sigma(R)$ is defined as \[
+            A_\sigma(R) = \iint_{R} \norm{\sigma_u \times \sigma_v} \:du\,dv.
+        \] 
+    \end{definition}
+
+    
+    \begin{definition}
+        A regular chart $(U, \sigma)$ is called conformal if $E \equiv G$ and $F
+        \equiv 0$. Thus, the First Fundamental Form looks like \[
+            \I_p^\sigma = f(u, v)(du^2 + dv^2),
+        \] for some positive function $f$. The resultant coordinates $u, v$ are
+        called isothermal.
+        \begin{remark}
+            Conformal charts are angle preserving.
+        \end{remark}
+    \end{definition}
+
+
+    \begin{definition}
+        Let $(U, \sigma)$ be a regular chart. Set \begin{align*}
+            L &= \sigma_{uu}\cdot \N^\sigma = -\sigma_u\cdot \N^\sigma_u, \\
+            M &= \sigma_{uv}\cdot \N^\sigma = -\sigma_u\cdot \N^\sigma_v =
+            -\sigma_v\cdot \N^\sigma_u, \\
+            N &= \sigma_{vv}\cdot \N^\sigma = -\sigma_v\cdot \N^\sigma_v.
+        \end{align*}
+        The Second Fundamental Form is denoted \[
+            \II_p^\sigma \equiv \begin{bmatrix}
+                L & M \\ M & N
+            \end{bmatrix} \equiv L\,du^2 + 2M\,du\,dv + N\,dv^2.
+        \] 
+    \end{definition}
+
+    \begin{lemma}
+        Let $\varphi = \sigma^{-1}\circ \tilde{\sigma}$ be a transition map between
+        two regular charts. Set \[
+            J = D\varphi = \begin{bmatrix}
+                \partial u / \partial \tilde{u} & \partial u / \partial \tilde{v} \\
+                \partial v / \partial \tilde{u} & \partial v / \partial \tilde{v}
+            \end{bmatrix}.
+        \] Then, the values $L, M, N$, and $\tilde{L}, \tilde{M}, \tilde{N}$ are
+        related as \[
+            \begin{bmatrix}
+                \tilde{L} & \tilde{M} \\ \tilde{M} & \tilde{N}
+            \end{bmatrix} = \sgn(\det{J})\,J^\top \begin{bmatrix}
+                L & M \\ M & N
+            \end{bmatrix} J.
+        \] 
+    \end{lemma}
+
+    
+    \begin{example}
+        Consider the following parametrization of a sphere. \[
+            \sigma\colon (-\pi / 2, \pi / 2)\times (0, 2\pi) \to \R^3, \qquad
+            (u, v) \mapsto (R\cos{u}\cos{v}, R\cos{u}\sin{v}, R\sin{u}).
+        \] We can compute \begin{align*}
+            \sigma_u(u, v) &= (-R\sin{u}\cos{v}, -R\sin{u}\sin{v}, R\cos{u}), \\
+            \sigma_v(u, v) &= (-R\cos{u}\sin{v}, R\cos{u}\cos{v}, 0), \\
+            \sigma_u\times\sigma_v &= (-R^2\cos^2{u}\cos{v},
+            -R^2\cos^2{u}\sin{v}, -R^2\cos{u}\sin{u}), \\
+            \norm{\sigma_u\times\sigma_v} &= R^2\cos{u}, \\
+            \N^\sigma(u, v) &= (-\cos{u}\cos{v},
+            -\cos{u}\sin{v}, -\sin{u}) = -\sigma / R, \\
+            \N^\sigma_u(u, v) &= (\sin{u}\cos{v}, \sin{u}\sin{v}, -\cos{u}) \\
+            \N^\sigma_v(u, v) &= (\cos{u}\sin{v}, -\cos{u}\cos{v}, 0).
+        \end{align*}
+        Thus, \begin{align*}
+            E &= R^2, &\qquad F &= 0, &\qquad G &= R^2\cos^2{u}, \\
+            L &= R, &\qquad M &= 0, &\qquad N &= R\cos^2{u}.
+        \end{align*}
+        The First and Second Fundamental Forms are \[
+            \I^\sigma = R^2(du^2 + \cos^2{u}\,dv^2), \qquad
+            \II^\sigma = R(du^2 + \cos^2{u}\,dv^2).
+        \]
+    \end{example}
+
+    \begin{example}
+        Consider the following parametrization of a torus. \[
+            \sigma\colon (0, 2\pi)\times (0, 2\pi) \to \R^3, \qquad
+            (u, v) \mapsto ((a + b\cos{u})\cos{v}, (a + b\cos{u})\sin{v}, b\sin{u}).
+        \] We can compute \begin{align*}
+            \sigma_u(u, v) &= (-b\sin{u}\cos{v}, -b\sin{u}\sin{v}, b\cos{u}), \\
+            \sigma_v(u, v) &= (-(a + b\cos{u})\sin{v}, (a + b\cos{u})\cos{v}, 0), \\
+            \sigma_u\times\sigma_v &= (-b(a + b\cos{u})\cos{u}\cos{v}, -b(a +
+            b\cos{u})\cos{u}\sin{v}, -b(a + b\cos{u})\sin{u}), \\
+            \norm{\sigma_u\times\sigma_v} &= b(a + b\cos{u}) \\
+            \N^\sigma(u, v) &= (-\cos{u}\cos{v},
+            -\cos{u}\sin{v}, -\sin{u}) \\
+            \N^\sigma_u(u, v) &= (\sin{u}\cos{v}, \sin{u}\sin{v}, -\cos{u}) =
+            -\frac{1}{b}\sigma_u\\
+            \N^\sigma_v(u, v) &= (\cos{u}\sin{v}, -\cos{u}\cos{v}, 0) =
+            -\frac{\cos{u}}{a + b\cos{u}}\sigma_v.
+        \end{align*}
+        Thus, \begin{align*}
+            E &= b^2, &\qquad F &= 0, &\qquad G &= (a + b\cos{u})^2, \\
+            L &= b, &\qquad M &= 0, &\qquad N &= (a + b\cos{u})\cos{u}.
+        \end{align*}
+        The First and Second Fundamental Forms are \[
+            \I^\sigma = b^2\,du^2 + (a + b\cos{u})^2\,dv^2, \qquad
+            \II^\sigma = b\,du^2 + (a + b\cos{u})\cos{u}\,dv^2.
+        \]
+    \end{example}
+
+    \subsection{Curvature and the Shape Operator}
+    
+    \begin{definition}
+        The shape operator $\mathscr{S}_p\colon T_p\Sigma \to T_p\Sigma$ is defined
+        as follows. Given $v \in T_p\Sigma$, pick a representative curve
+        $\gamma\colon (-\epsilon, \epsilon) \to \Sigma$ so that $v = [\gamma]$. Next,
+        set $\eta = \sigma^{-1}\circ \gamma$, and compute $w = -(d /
+        dt)(\N^\sigma\circ \eta)\big|_{t = 0} \in T_{\sigma^{-1}(p)}U$. Finally,
+        identify $w$ with its corresponding element in $T_p\Sigma$.
+
+        \begin{remark}
+            We have $\mathscr{S}_p \equiv -D\N^{\sigma}_p$.
+        \end{remark}
+    \end{definition}
+
+    \begin{lemma}
+        The shape operator is self-adjoint.
+    \end{lemma}
+    \begin{proof}
+        We claim that \[
+            \ip{\mathscr{S}_p v}{w} = \ip{v}{\mathscr{S}_p w}
+        \] for all $v, w \in T_p\Sigma$. It is sufficient to check this for the basis
+        vectors $\sigma_u, \sigma_v$. Now, \[
+            \ip{\mathscr{S}_p\sigma_u}{\sigma_u} = \ip{-D_{\partial
+            u}\N^{\sigma}\big|_{p}}{\sigma_u} = -\ip{\N^\sigma_u}{\sigma_u} = L.
+        \] It can be similarly checked that \[
+            \ip{\mathscr{S}_p\sigma_u}{\sigma_v} =
+            \ip{\mathscr{S}_p\sigma_v}{\sigma_u} = M, \qquad
+            \ip{\mathscr{S}_p\sigma_v}{\Sigma_v} = N. \qedhere
+        \] 
+    \end{proof}
+
+    \begin{lemma}
+        The matrix of $\mathscr{S}_p^\sigma$ in the basis $\{\sigma_u, \sigma_v\}$ is
+        given by \[
+            \mathscr{S}_p^\sigma = \I_p^{-1}\II_p = \begin{bmatrix}
+                E & F \\ F & G
+            \end{bmatrix}^{-1} \begin{bmatrix}
+                L & M \\ M & N
+            \end{bmatrix}.
+        \] Furthermore, let $\varphi = \sigma^{-1}\circ \tilde{\sigma}$ be a
+        transition map between two regular charts, and set $J = D\varphi$. Then, \[
+            \mathscr{S}_p^{\tilde{\sigma}} = \pm J^{-1}\mathscr{S}_p^\sigma J.
+        \] 
+    \end{lemma}
+
+    \begin{corollary}
+        The product of the eigenvalues of $\mathscr{S}_p$ is invariant under
+        coordinate transformations, and the sum of the eigenvalues changes by at most
+        a sign.
+    \end{corollary}
+
+    \begin{definition}
+        Let $k_1, k_2$ be the two eigenvalues of $\mathscr{S}_p^\sigma$. These are
+        called the principal curvatures of at $p$. We further define the Gaussian
+        curvature \[
+            K = k_1k_2 = \det{\mathscr{S}_p^\sigma}
+        \] and the mean curvature \[
+            H = \frac{1}{2}(k_1 + k_2) = \frac{1}{2}\trace{\mathscr{S}_p^\sigma}.
+        \] 
+        \begin{remark}
+            This immediately gives \[
+                K = \frac{LN - M^2}{EG - F^2}.
+            \] 
+        \end{remark}
+    \end{definition}
+
+    \begin{lemma}
+        \[
+            \N^\sigma_u \times \N^\sigma_v = K\, \sigma_u \times \sigma_v.
+        \] 
+    \end{lemma}
+    \begin{proof}
+        Note that $\sigma_u, \sigma_v$ forms a basis of $T_p\Sigma$, hence we can
+        expand \[
+            \N^\sigma_u = a\sigma_u + b\sigma_v, \qquad
+            \N^\sigma_v = c\sigma_u + d\sigma_v.
+        \] Now, \begin{align*}
+            -L &= \N^\sigma_u \cdot \sigma_u = aE + bF, \\
+            -M &= \N^\sigma_u \cdot \sigma_v = aF + bG, \\
+            -M &= \N^\sigma_v \cdot \sigma_u = cE + dF, \\
+            -N &= \N^\sigma_u \cdot \sigma_u = cF + dG.
+        \end{align*} Then, \begin{align*}
+            \begin{bmatrix}
+                -L & -M \\ -M & -N
+            \end{bmatrix} = \begin{bmatrix}
+                E & F \\ F & G
+            \end{bmatrix} \begin{bmatrix}
+                a & c \\ b & d
+            \end{bmatrix} , \qquad
+            \begin{bmatrix}
+                a & c \\ b & d 
+            \end{bmatrix} = -\begin{bmatrix}
+                E & F \\ F & G
+            \end{bmatrix}^{-1} \begin{bmatrix}
+                L & M \\ M & N
+            \end{bmatrix}
+        \end{align*}
+        Thus, \[
+            \N^\sigma_u \times \N^\sigma_v = (ad - bc)\,\sigma_u \times \sigma_v =
+            \det(\mathscr{S}_p^\sigma)\,\sigma_u \times \sigma_v = K\,\sigma_u \times
+            \sigma_v. \qedhere
+        \] 
+    \end{proof}
+
+    \begin{corollary}
+        Let the Gauss map $\N$ map $U\subseteq \R^2$ bijectively to $\N(U) \subseteq
+        S^2$ bijectively. Then, \[
+            \iint_{\sigma(U)} |K|\:dA = A(\N(U)).
+        \] 
+    \end{corollary}
+
+
+    \begin{definition}
+        A surface $\Sigma$ is called minimal if $H \equiv 0$.
+        \begin{remark}
+            Note that $H = 0$ forces $K \leq 0$.
+        \end{remark}
+    \end{definition}
+    
+
+    \begin{theorem}
+        If $\Sigma$ is a compact surface, then there exists a point $p \in \Sigma$
+        such that $K(p) > 0$.
+    \end{theorem}
+    \begin{proof}
+        Consider the map \[
+            f\colon \Sigma \to \R, \qquad v\mapsto \norm{v}^2.
+        \] This map must attain its maximum and minimum at points $p^+, p^- \in
+        \Sigma$. At such points, $Df_p \equiv 0$, but \[
+            Df_p\colon T_p\Sigma \to T_{f(p)}\R, \qquad v \mapsto 2\ip{p}{v}.
+        \] This shows that $p \perp T_p\Sigma$, hence $\N^\sigma_p = \pm \hat{p}$
+        when $p$ is such an extremal point. Consider a regular curve $\gamma \in
+        T_{p^+}\Sigma$; note that $f\circ \gamma$ attains its maximum at $0$, hence
+        \[
+            \dd{}{t}f(\gamma(t))\Big|_{t = 0} = 0, \qquad
+            \ddn[2]{}{t}f(\gamma(t))\Big|_{t = 0} \leq 0.
+        \] Thus, \[
+            2\ip{\gamma(0)}{\dot{\gamma}(0)} = 0, \qquad
+            2[\norm{\dot{\gamma}(0)}^2 + \ip{\gamma(0)}{\ddot{\gamma}(0)}] \leq
+            0.
+        \] Now $\norm{\dot{\gamma}} = 1$, $\gamma(0) = p^+$, and
+        $\norm{\ddot{\gamma}(0)}$ is the curvature $\kappa$, so $\kappa \geq -1 /
+        \norm{p^+}$. Hence, the principal curvatures at $p^+$ also satisfy this
+        constraint giving \[
+            K(p^+) = k_1k_2 \geq \frac{1}{\norm{p^+}^2} > 0.
+        \] The same can be said of $K(p^-)$; note that $\norm{p} > 0$ at these
+        points without loss of generality, as we can always shift the surface
+        $\Sigma$ so as not to enclose the origin.
+    \end{proof}
+    
+    \begin{corollary}
+        There are no closed (compact, without boundary) minimal surfaces in $\R^3$.
+    \end{corollary}
+
+
+    \begin{theorem}[Liebmann]
+        If $\Sigma$ is a connected smooth compact surface of constant Gaussian
+        curvature $K$, then $K > 0$ and $\Sigma$ is a sphere of radius $1 /
+        \sqrt{K}$.
+    \end{theorem}
+
+    \begin{theorem}[Hopf]
+        If $\Sigma$ is a smooth surface homeomorphic to a sphere and with constant
+        mean curvature $H$, then $\Sigma$ is a sphere of radius $1 / |H|$.
+    \end{theorem}
+
+    \begin{theorem}
+        Let $k_1, k_2$ be the principal curvatures of $\Sigma$ for a regular surface
+        patch $(U, \sigma)$. Assume that $|k_1|, |k_2| < c$ on $\sigma(U)$, and let
+        $\lambda$ be a constant such that $\lambda < 1 / c$. Set \[
+            \sigma^\lambda = \sigma + \lambda \N^\sigma.
+        \] Then, the following hold.
+        \begin{enumerate}
+            \itemsep0em
+            \item $\sigma^\lambda$ also describes a regular patch.
+            \item $\N^{\sigma^\lambda} = \N^\sigma$.
+            \item \[
+                k_1(\sigma^\lambda) = \frac{k_1}{1 - \lambda k_1}, \qquad
+                k_2(\sigma^\lambda) = \frac{k_2}{1 - \lambda k_2}.
+            \] 
+            \item \[
+                K(\sigma^\lambda) = \frac{K}{1 - 2\lambda H + \lambda^2 K}, \qquad
+                H(\sigma^\lambda) = \frac{H - \lambda K}{1 - 2\lambda H + \lambda^2
+                K}.
+            \] 
+            \item \[
+                A(\Sigma^\lambda) = A(\Sigma) - 2\lambda\int_\Sigma H\:dA + \lambda^2
+                \int_\Sigma K\:dA.
+            \] 
+        \end{enumerate}
+    \end{theorem}
+
+
+    \subsection{Gauss's Theorema Egregium}
+    
+    \begin{theorem}
+        Let $(U, \sigma)$ be a regular surface patch, and further let it be an
+        orthogonal patch, i.e.\ $F \equiv 0$. Then, the Gaussian curvature is given
+        by \[
+            K = -\frac{1}{2\sqrt{EG}}\left[\left(\frac{E_v}{\sqrt{EG}}\right)_v +
+            \left(\frac{G_u}{\sqrt{EG}}\right)_u\right].
+        \] 
+        \begin{remark}
+            If we further set $E \equiv G \equiv e^{2\rho}$, then \[
+                K = -e^{-2\rho}(\rho_{uu} + \rho_{vv}).
+            \] 
+        \end{remark}
+    \end{theorem}
+    \begin{proof}
+        Fix a point $p \in U$, and note that the vectors $\sigma_u, \sigma_v,
+        \N^\sigma$ form an orthogonal basis. Thus, we can expand \begin{align*}
+            \sigma_{uu} \;&=\; \Gamma_{uu}^u \sigma_u + \Gamma_{uu}^v \sigma_v +
+            L\N^\sigma, \\
+            \sigma_{uv} \;&=\; \Gamma_{uv}^u \sigma_u + \Gamma_{uv}^v \sigma_v +
+            M\N^\sigma, \\
+            \sigma_{vv} \;&=\; \Gamma_{vv}^u \sigma_u + \Gamma_{vv}^v \sigma_v +
+            N\N^\sigma,
+        \end{align*} and \begin{align*}
+            \N^\sigma_u \;&=\; -\frac{L}{E}\sigma_u - \frac{M}{G}\sigma_v, \\
+            \N^\sigma_v \;&=\; -\frac{M}{E}\sigma_u - \frac{N}{G}\sigma_v.
+        \end{align*}
+        The functions $\Gamma_{\alpha\beta}^{\gamma}$ are called \emph{Christoffel
+        symbols}. Now, \begin{align*}
+            E_u \;&=\; \pp{}{u}(\sigma_u\cdot\sigma_u) = 2\sigma_u\cdot \sigma_{uu} =
+            2\Gamma_{uu}^u E, &
+            \Gamma_{uu}^u \;&=\; \frac{E_u}{2E}, \\
+            E_v \;&=\; \pp{}{v}(\sigma_u\cdot\sigma_u) = 2\sigma_u\cdot \sigma_{uv} =
+            2\Gamma_{uv}^u E, &
+            \Gamma_{uv}^u \;&=\; \frac{E_v}{2E}, \\
+            G_u \;&=\; \pp{}{u}(\sigma_v\cdot\sigma_v) = 2\sigma_v\cdot \sigma_{uv} =
+            2\Gamma_{uv}^v G, &
+            \Gamma_{uv}^v \;&=\; \frac{G_u}{2G}, \\
+            G_v \;&=\; \pp{}{v}(\sigma_v\cdot\sigma_v) = 2\sigma_v\cdot \sigma_{vv} =
+            2\Gamma_{vv}^v G, &
+            \Gamma_{vv}^v \;&=\; \frac{G_v}{2G}.
+        \end{align*} Finally, note that $\sigma_u\cdot\sigma_v = 0$, hence
+        differentiating gives \begin{align*}
+            0 \;&=\; \sigma_v\cdot \sigma_{uu} + \sigma_u\cdot\sigma_{uv} \;=\;
+            \Gamma_{uu}^v G + \Gamma_{uv}^u E, &
+            \Gamma_{uu}^v &= -\frac{E_v}{2G}, \\
+            0 \;&=\; \sigma_u\cdot \sigma_{vv} + \sigma_v\cdot\sigma_{uv} \;=\;
+            \Gamma_{vv}^u E + \Gamma_{uv}^u G, &
+            \Gamma_{uu}^v &= -\frac{G_u}{2E}.
+        \end{align*}
+        Now, we use Clairaut's theorem to equate the mixed partials $\sigma_{uuv} =
+        \sigma_{uvu}$. Computing, \begin{align*}
+            \sigma_{uuv} &= (\Gamma_{uu}^u)_v\sigma_u +
+            \Gamma_{uu}^u\sigma_{uv} + (\Gamma_{uu}^v)_v \sigma_v +
+            \Gamma_{uu}^v\sigma_{vv} + L_v\N^\sigma + L\N^\sigma_v \\
+            &= \left[(\Gamma_{uu}^u)_v + \Gamma_{uu}^u\Gamma_{uv}^u +
+            \Gamma_{uu}^v\Gamma_{vv}^u - \frac{LM}{E}\right]\sigma_u
+            + \left[\Gamma_{uu}^u\Gamma_{uv}^v + (\Gamma_{uu}^v)_v +
+            \Gamma_{uu}^v\Gamma_{vv}^v - \frac{LN}{G}\right]\sigma_v \\
+            &\;+ \left[\Gamma_{uu}^u M + \Gamma_{uu}^v N + L_v\right]\N^\sigma.
+            \\\\
+            \sigma_{uvu} &= (\Gamma_{uv}^u)_u\sigma_u +
+            \Gamma_{uv}^u\sigma_{uu} + (\Gamma_{uv}^v)_u\sigma_v +
+            \Gamma_{uv}^v\sigma_{uv} + M_u\N^\sigma + M\N^\sigma_u \\
+            &= \left[(\Gamma_{uv}^u)_u + \Gamma_{uv}^u\Gamma_{uu}^u +
+            \Gamma_{uv}^v\Gamma_{uv}^u - \frac{LM}{E}\right]\sigma_u
+            + \left[\Gamma_{uv}^u\Gamma_{uu}^v + (\Gamma_{uv}^v)_u +
+            (\Gamma_{uv}^v)^2 - \frac{M^2}{G}\right]\sigma_v \\
+            &\; + \left[\Gamma_{uv}^uL + \Gamma_{uv}^v M + M_u\right]\N^\sigma.
+        \end{align*}
+        Equating the coefficients of $\sigma_v$, we have \[
+            \frac{LN - M^2}{G} = (\Gamma_{uu}^v)_v - (\Gamma_{uv}^v)_u +
+            \Gamma_{uu}^u\Gamma_{uv}^v + \Gamma_{uu}^v\Gamma_{vv}^v -
+            \Gamma_{uv}^u\Gamma_{uu}^v - (\Gamma_{uv}^v)^2.
+        \] Identifying that the Gaussian curvature $K = (LN - M^2) / EG$, we have
+        shown that \[
+            EK = (\Gamma_{uu}^v)_v - (\Gamma_{uv}^v)_u +
+            \Gamma_{uu}^u\Gamma_{uv}^v + \Gamma_{uu}^v\Gamma_{vv}^v -
+            \Gamma_{uv}^u\Gamma_{uu}^v - (\Gamma_{uv}^v)^2.
+        \] Expanding, \begin{align*}
+            EK \;&=\; -\left(\frac{E_v}{2G}\right)_v - \left(\frac{G_u}{2G}\right)_u +
+            \frac{E_uG_u}{4EG} - \frac{E_vG_v}{4G^2} + \frac{E_v^2}{4EG} -
+            \frac{G_u^2}{4G^2} \\
+            \;&=\; \frac{E_vG_v - E_{vv}G}{2G^2} + \frac{G_{u}^2 - G_{uu}G}{2G^2} +
+            \frac{E_uG_u}{4EG} - \frac{E_vG_v}{4G^2} + \frac{E_v^2}{4EG} -
+            \frac{G_u^2}{4G^2} \\
+            \;&=\; \frac{-E_{vv} - G_{uu}}{2G} + \frac{E_vG_v + G_u^2}{4G^2} +
+            \frac{E_uG_u + E_v^2}{4EG}.
+        \end{align*}
+        But \begin{align*}
+            \left(\frac{E_v}{\sqrt{EG}}\right)_v \;&=\; \frac{E_{vv}\sqrt{EG} -
+            E_v(E_vG + EG_v)/2\sqrt{EG}}{EG}, \\
+            \left(\frac{G_u}{\sqrt{EG}}\right)_u \;&=\; \frac{G_{uu}\sqrt{EG} -
+            G_u(E_uG + EG_u)/2\sqrt{EG}}{EG}.
+        \end{align*}
+        Thus, \begin{align*}
+            -\frac{1}{2\sqrt{EG}}\left[\left(\frac{E_v}{\sqrt{EG}}\right)_v +
+            \left(\frac{G_u}{\sqrt{EG}}\right)_u\right]
+            \;&=\; \frac{-E_{vv} - G_{uu}}{2EG} + \frac{E_v^2G + E_vG_vE + E_uG_uG +
+            G_u^2E)}{4E^2G^2} \\
+            \;&=\; \frac{-E_{vv} - G_{uu}}{2EG} + \frac{E_vG_v + G_u^2}{4EG^2} +
+            \frac{E_uG_u + E_v^2}{4E^2G} \\
+            \;&=\; K. \\
+        \end{align*}
+        This proves the desired formula.
+    \end{proof}
+
+    \begin{theorem}[Theorema Egregium]
+        The Gaussian curvature $K$ is determined by only the first fundamental form,
+        i.e.\ the functions $E, F, G$, and their derivatives.
     \end{theorem}
 
 \end{document}
