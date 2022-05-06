@@ -133,7 +133,7 @@
     will see that with this new formulation of integration, we end up partitioning
     the range of $f$ rather than it's domain, and write \[
         \int f = 0\cdot \mu([0, 1]\setminus \Q) + 1\cdot \mu([0, 1] \cap \Q) = 0.
-    \] 
+    \]
 
     \begin{theorem}[Lebesgue criterion]
         A function $f\colon [a, b] \to \R$ is Riemann integrable if and only if it is
@@ -142,7 +142,7 @@
         intervals $(x_i, y_i)$ such that the sum of lengths $y_i - x_i$ can be made
         arbitrarily small.
     \end{theorem}
-    
+
     \subsection{Basic definitions}
 
     \begin{definition}
@@ -167,7 +167,7 @@
             \end{enumerate}
         \end{remark}
     \end{definition}
-    
+
     \begin{example}
         Given a set $X$, its power set forms a $\sigma$-algebra over $X$.
     \end{example}
@@ -179,7 +179,7 @@
         Given an uncountable set $X$, the following set forms the co-countable
         $\sigma$-algebra over $X$. \[
             \{E \subseteq X : E\text{ is countable or } E^c\text{ is countable}\}.
-        \] 
+        \]
     \end{example}
 
 
@@ -196,7 +196,7 @@
             = \emptyset$ for all pairs, we have \[
                 \mu\left(\bigcup_{i = 1}^\infty E_i\right) = \sum_{i = 1}^\infty
                 \mu(E_i).
-            \] 
+            \]
         \end{enumerate}
     \end{definition}
 
@@ -236,7 +236,7 @@
                 0, &\text{ if } E \text{ is countable},\\
                 1, &\text{ if } E^c \text{ is countable}.\\
             \end{cases}
-        \] 
+        \]
     \end{example}
 
 
@@ -266,7 +266,7 @@
             \item If $\{E_i\}_{i = 1}^\infty$ such that $E_i \in \M$, then \[
                 \mu\left(\bigcup_{i = 1}^\infty E_i\right) \leq \sum_{i = 1}^\infty
                 \mu(E_i).
-            \] 
+            \]
         \end{enumerate}
     \end{lemma}
 
@@ -280,7 +280,7 @@
         j$. Then, \[
             \mu\left(\bigcup_{i = 1}^\infty E_i\right) = \lim_{n \to \infty}
             \mu(E_n).
-        \] 
+        \]
     \end{theorem}
     \begin{proof}
         Define $F_i = E_i - E_{i - 1}$, denoting $E_0 = \emptyset$. Thus, \[
@@ -292,14 +292,14 @@
         \] Since the infinite sum in the first part is the limit of partial sums, we
         have our result.
     \end{proof}
-    
+
     \begin{theorem}[Continuity from above]
         Let $(X, \M, \mu)$ be a measure space, and let $\{E_i\}_{i = 1}^\infty$
         be a sequence of measurable sets such that $E_i \supseteq E_j$ for all $i <
         j$. Further assume that $\mu(E_1)$ is finite. Then, \[
             \mu\left(\bigcap_{i = 1}^\infty E_i\right) = \lim_{n \to \infty}
             \mu(E_n).
-        \] 
+        \]
     \end{theorem}
     \begin{proof}
         Define $F_i = E_1 - E_n$, and note that $F_i \subseteq F_j$ for all $i < j$.
@@ -321,7 +321,7 @@
         $E_n = \{n, n + 1, \dots \}$. Then, \[
             \mu\left(\bigcap_{i = 1}^\infty E_i\right) = 0, \qquad \lim_{n \to
             \infty} \mu(E_n) = \infty.
-        \] 
+        \]
     \end{example}
 
 
@@ -383,7 +383,7 @@
         intersection of open sets is called a $G_\delta$ set.
     \end{definition}
 
-    
+
     \subsection{Measurable functions}
 
     \begin{definition}
@@ -446,7 +446,7 @@
         (c, d)$. The pre-image of such an open set under $f$ is $u^{-1}((a, b)) \cap
         v^{-1}((c, d))$, which is clearly a measurable set in $X$.
     \end{proof}
-    
+
     \begin{corollary}
         Let $f, g\colon (X, \M) \to (\R, \mathcal{B}_\R)$ be $(\M, \mathcal{B}_\R)$
         measurable. Then the sum $f + g$ and the product $f\cdot g$ are also $(\M,
@@ -464,7 +464,7 @@
             s\colon X \to \R, \qquad x \mapsto \sum_{i = 1}^n c_i \chi_{A_i}(x)
         \] is measurable. Such functions are called simple functions.
     \end{example}
-    
+
     \begin{lemma}
         The maximum and minimum of measurable functions are measurable.
     \end{lemma}
@@ -479,20 +479,20 @@
             measurable functions.
         \end{remark}
     \end{corollary}
-    
+
 
     \begin{theorem}
         Let $\{f_n\}_{n = 1}^\infty$ be a collection of measurable functions
         $f_n\colon X \to \R \cup \{-\infty, +\infty\}$. Then, their supremum and
         infimum are measurable.
     \end{theorem}
-    
+
     \begin{theorem}
         Let $\{f_n\}_{n = 1}^\infty$ be a sequence of measurable functions $f_n\colon
         X \to \R$. Then, $\limsup_{n \to \infty} f_n$ and $\liminf_{n \to \infty}
         f_n$ are measurable.
     \end{theorem}
-    
+
     \begin{theorem}
         Let $\{f_n\}_{n = 1}^\infty$ be a sequence of measurable functions $f_n\colon
         X \to \R$, and let $f_n \to f$ pointwise on $X$. Then, $f$ is measurable.
@@ -502,7 +502,7 @@
         \end{remark}
     \end{theorem}
 
-    
+
 
     \subsection{Lebesgue integration}
 
@@ -525,11 +525,11 @@
             We want to have \[
                 \int_0^\infty 0 = 0\cdot \mu(f^{-1}(0)) = 0\cdot \mu([0, \infty)) =
                 0.
-            \] 
+            \]
         \end{remark}
     \end{definition}
 
-    
+
     \begin{definition}
         Let $(X, \M, \mu)$ be a measure space, and let $s\colon X \to [0, \infty)$ be
         a simple, measurable function, of the form \[
@@ -537,21 +537,21 @@
         \] where $c_1, \dots, c_n$ are distinct values of $s$. Then, the Lebesgue
         integral of $s$ on $E \in \M$ is defined as \[
             \int_E s\:d\mu = \sum_{i = 1}^n c_i\cdot \mu(E \cap A_i).
-        \] 
+        \]
     \end{definition}
     \begin{example}
         The Dirichlet function is the simple function $\chi_\Q$. Thus, upon assigning
         a $\sigma$-algebra and a measure $\mu$ on $\R$, we will be able to assign its
         Lebesgue integral on $\R$ as the value $\mu(\Q)$.
     \end{example}
-    
+
     \begin{definition}
         Let $(X, \M, \mu)$ be a measure space, and let $f\colon X \to [0, \infty)$ be
         a measurable function. Then, the Lebesgue integral of $f$ on $E \in \M$ is
-        defined as \[ 
+        defined as \[
             \int_E f\:d\mu = \sup\left\{\int_E s\:d\mu, \text{ for all simple
             functions }s, \text{where }0 \leq s \leq f\right\}.
-        \] 
+        \]
     \end{definition}
 
     \begin{theorem}
@@ -559,19 +559,19 @@
         \begin{enumerate}
             \item If $0 \leq f \leq g$, then \[
                 \int_E f\:d\mu \leq \int_E g\:d\mu.
-            \] 
+            \]
             \item If $A \subset B$, then \[
                 \int_A f\:d\mu \leq \int_B f\:d\mu.
-            \] 
+            \]
             \item For $c \in \R$, \[
                 \int_E cf\:d\mu = c\int_E f\:d\mu.
-            \] 
+            \]
             \item If $f = 0$, then \[
                 \int_E f\:d\mu = 0.
-            \] 
+            \]
             \item If $\mu(E) = 0$, then \[
                 \int_E f\:d\mu = 0.
-            \] 
+            \]
         \end{enumerate}
     \end{theorem}
 
@@ -579,7 +579,7 @@
         We say that a statement is true \emph{almost everywhere} on $X$ if it is true
         everywhere on $X\setminus E$ for a measure zero set $E$.
     \end{definition}
-    
+
     \begin{lemma}
         Let $f\colon X \to [0, \infty]$ be a measurable function. If \[
             \int_X f\:d\mu = 0,
@@ -603,7 +603,7 @@
         \] Then, $\nu$ is a measure on $\M$.
     \end{lemma}
 
-    
+
     \subsubsection{Monotone convergence}
 
     \begin{theorem}[Monotone convergence]
@@ -611,7 +611,7 @@
         functions $f_n\colon X \to \R$, such that $f_n \leq f_{n + 1}$, and $f_n \to
         f$ pointwise. Then, \[
             \lim_{n \to \infty} \int_X f_n\:d\mu = \int_X f\:d\mu.
-        \] 
+        \]
     \end{theorem}
 
     \begin{lemma}
@@ -624,7 +624,7 @@
             f\colon X \to \R, \qquad f(x) = \sum_{n = 1}^\infty f_n(x).
         \] Then, $f$ is measurable and \[
             \int_X f\:d\mu = \sum_{n = 1}^\infty \int_X f_n\:d\mu.
-        \] 
+        \]
     \end{theorem}
 
     \begin{theorem}[Fatou]
@@ -632,17 +632,17 @@
         functions $f_n\colon X \to \R$. Then, \[
             \int_X \liminf_{n \to \infty} f_n\:d\mu \leq \liminf_{n\to \infty} \int_X
             f_n\:d\mu.
-        \] 
+        \]
     \end{theorem}
     \begin{corollary}
         If $f_n \to f$, then \[
             \int_X f\:d\mu \leq \liminf_{n\to \infty} \int_X f_n\:d\mu.
-        \] 
+        \]
     \end{corollary}
     \begin{corollary}
         If $f_n \to f$ and each $0 \leq f_n \leq f$, then \[
             \int_X f\:d\mu = \liminf_{n\to \infty} \int_X f_n\:d\mu.
-        \] 
+        \]
     \end{corollary}
     \begin{example}
         Consider the functions $f_n = \chi_{[n, n + 1)}$. Now, $f_n \to 0$ pointwise,
@@ -652,16 +652,16 @@
     \begin{lemma}
         Let $\{a_{ij}\}_{i,j \in \N}$ be sequences of non-negative terms. Then, \[
             \sum_i\sum_j a_{ij} = \sum_j\sum_i a_{ij}.
-        \] 
+        \]
     \end{lemma}
     \begin{proof}
         Define $f_i(j) = a_{ij}$, and $f = \sum_i f_i$. Using the counting measure, \[
             \int_\N f_i\:d\mu = \sum_j a_{ij}.
         \] Also, \[
             f(j) = \sum_i a_{ij}, \qquad
-            \sum_j\sum_i a_{ij} = \sum_j f(j) = 
+            \sum_j\sum_i a_{ij} = \sum_j f(j) =
             \int_\N f\:d\mu = \sum_i\int_\N f_i\:d\mu = \sum_i\sum_j a_{ij}. \qedhere
-        \] 
+        \]
     \end{proof}
 
 
@@ -672,10 +672,10 @@
         \] Then, $\nu$ is a measure on $\M$. Furthermore, if $g\colon X \to [0,
         \infty]$ is measurable, then \[
             \int_X g\:d\nu = \int_X g\,f\:d\mu.
-        \] 
+        \]
     \end{theorem}
 
-    
+
     \subsubsection{Dominated convergence}
 
     \begin{definition}
@@ -700,16 +700,16 @@
             g\:d\mu.
         \] \[
             \left|\int_X f \:d\mu \right| \leq \int_X |f| \:d\mu.
-        \] 
+        \]
     \end{lemma}
-    
+
     \begin{theorem}
         The space of functions $L^1(\mu)$ is a vector space over $\C$.
         The map \[
             T\colon L^1(\mu) \to \C, \qquad f \mapsto \int_X f\:d\mu
         \] is a linear map. Furthermore, $L^1(\mu)$ is a metric space, with \[
             d(f, g) = \int_X |f - g|\:d\mu.
-        \] 
+        \]
         \begin{remark}
             Observe that \[
                 |T(f) - T(g)| \leq d(f, g),
@@ -725,7 +725,7 @@
         Then, $f \in L^1(\mu)$, \[
             \lim_{n \to \infty} \int_X |f_n - f| \:d\mu = 0, \qquad
             \lim_{n \to \infty} \int_X f_n \:d\mu = \int_X f \:d\mu.
-        \] 
+        \]
     \end{theorem}
 
     \begin{corollary}[Bounded convergence]
@@ -735,7 +735,7 @@
         \infty$. Then, $f \in L^1(\mu)$, \[
             \lim_{n \to \infty} \int_X |f_n - f| \:d\mu = 0, \qquad
             \lim_{n \to \infty} \int_X f_n \:d\mu = \int_X f \:d\mu.
-        \] 
+        \]
     \end{corollary}
 
     \begin{example}
@@ -744,7 +744,7 @@
         \] Then, it can be shown that $f_n \to 0$ pointwise on $[0, 1]$. Furthermore,
         each $|f_n| < 1$ and $\mu([0, 1]) = 1$, hence \[
             \lim_{n \to \infty} \int_{[0, 1]} \frac{nx}{1 + n^2x^2}\:d\mu = 0.
-        \] 
+        \]
     \end{example}
 
 
@@ -752,7 +752,7 @@
         Let $F\colon [a, b] \to \R$ such that $F' = f$ where $f \in L^1(\mu)$, $|f| <
         c$. Then, \[
             \int_{[a, b]} f \:d\mu = F(b) - F(a).
-        \] 
+        \]
     \end{theorem}
     \begin{proof}
         Define \[
@@ -769,7 +769,7 @@
             \left|\pp{f}{t}(x, t)\right| \leq g(x).
         \] Then, $F$ is differentiable, with \[
             F'(t) = \int_X \pp{f}{t}(x, t)\:d\mu(x).
-        \] 
+        \]
     \end{theorem}
 
     \begin{theorem}
@@ -779,7 +779,7 @@
             \int_E |f|\:d\mu < \epsilon.
         \] In other words, \[
             \lim_{\mu(E) \to 0} \int_E |f|\:d\mu = 0.
-        \] 
+        \]
     \end{theorem}
     \begin{proof}
         Define \[
@@ -787,8 +787,8 @@
                 |f(x)|, &\text{ if } |f(x)| \leq n, \\
                 n, &\text{ if } |f(x)| > n.
             \end{cases}
-        \] Then each $|f_n| \leq n$, $f_n \to |f|$ monotonically. Thus, the monotone
-        convergence theorem will give \[
+        \] Then each $|f_n| \leq n$, $f_n \to |f|$ monotonically. Thus, the Monotone
+        Convergence Theorem will give \[
             \lim_{n \to \infty} \int_X f_n \:d\mu = \int_X |f|\:d\mu.
         \] For sufficiently large $N$, we have \[
             \int_X |f|\:d\mu - \int_X f_N\:d\mu < \frac{\epsilon}{2}.
@@ -798,7 +798,7 @@
         have \[
             \int_E |f|\:d\mu < \int_E f_N\:d\mu + \frac{\epsilon}{2} < N\mu(E) +
             \frac{\epsilon}{2} = \epsilon. \qedhere
-        \] 
+        \]
     \end{proof}
 
     \begin{theorem}
@@ -812,7 +812,7 @@
         Let $f\colon [a, b] \to \R$ be bounded on the compact interval $[a, b]$. If
         $f$ is Riemann integrable, then $f \in L^1(\mu)$ with \[
             \int_a^b f = \int_{[a, b]} f\:d\mu.
-        \] 
+        \]
         \begin{remark}
             The converse fails, since $\chi_\Q$ is not Riemann integrable, but it is
             Lebesgue integrable.
@@ -823,10 +823,10 @@
             \int_{(0, 1)} \frac{1}{\sqrt{x}}\:d\mu.
         \] Note that the corresponding Riemann integral is improper. Thus, we define
         the functions \[
-            f_n\colon (0, 1) \to \R, \qquad 
+            f_n\colon (0, 1) \to \R, \qquad
             x \mapsto \frac{1}{\sqrt{x}}\chi_{[1 / n, 1)}(x),
         \] and note that $f_n(x) \to 1 / \sqrt{x}$ on $(0, 1)$ monotonically.
-        Thus, the monotone convergence theorem guarantees that \[
+        Thus, the Monotone Convergence Theorem guarantees that \[
             \int_{(0, 1)} \frac{1}{\sqrt{x}}\:d\mu = \lim_{n \to \infty} \int_{1 /
             n}^1 \frac{1}{\sqrt{x}}\:dx = \lim_{n \to \infty} 2 \left( 1 -
             \frac{1}{\sqrt{n}} \right) = 2.
@@ -841,7 +841,7 @@
         \] Then $f_n(x) \to 1 / x^2$ on $(1, \infty)$ monotonically, so \[
             \int_{(0, 1)} \frac{1}{x^2}\:d\mu = \lim_{n \to \infty} \int_1^n
             \frac{1}{x^2}\:dx = \lim_{n \to \infty} 1 - \frac{1}{n} = 1.
-        \] 
+        \]
     \end{example}
     \begin{example}
         Suppose that we wish to compute \[
@@ -854,10 +854,10 @@
             \lim_{n \to \infty} \int_0^n \left( 1 - \frac{x}{n} \right)^n
             e^{-2x}\:dx = \lim_{n \to \infty} \int_{[0, \infty)} f_n\:d\mu.
         \] Furthermore, $|f_n(x)| \leq e^{-2x}$ and the latter is in $L^1(\mu)$.
-        Thus, the dominated convergence theorem guarantees that this limit is \[
+        Thus, the Dominated Convergence Theorem guarantees that this limit is \[
             \int_{[0, \infty)} \lim_{n \to \infty} f_n\:d\mu = \int_0^\infty
             e^{-3x}\:dx = \frac{1}{3}.
-        \] 
+        \]
         \begin{remark}
             For any $x \in \R$, the sequence \[
                 e_n = \left(1 + \frac{x}{n}\right)^n
@@ -872,7 +872,7 @@
             Applying Bernoulli's inequality, noting that $|x / (n + x)| < 1$, \[
                 \frac{e_{n + 1}}{e_n} \geq \left(1 - \frac{x}{n + x}\right)\left(1 +
                 \frac{x}{n}\right) = 1.
-            \] 
+            \]
         \end{remark}
     \end{example}
 
@@ -890,7 +890,7 @@
             \frac{\log{x}}{x^2} + \frac{\log{n}}{x^2},
         \] and the latter is in $L^1(\mu)$. Indeed, $\log{x} < x$ yields
         $\log{\sqrt{x}} \leq \sqrt{x}$, hence $\log{x}/x^2 \leq 2 x^{-3 / 2}$. Thus,
-        the dominated convergence theorem guarantees that our limit is \[
+        the Dominated Convergence Theorem guarantees that our limit is \[
             \lim_{n \to \infty} \int_1^\infty \frac{\log(1 + nx)}{1 + x^2\log{n}}\:dx
             = \int_1^\infty \frac{1}{x^2}\:dx = 1.
         \]
@@ -911,10 +911,10 @@
             \int_1^\infty \frac{1}{\sqrt{x}(1 + x^2)}\:dx \leq \int_1^\infty
             \frac{1}{x^2}\:dx = 1.
         \] Furthermore, $n^{1 / 4}e^{-nx^2} \to 0$ pointwise as $n \to \infty$. Thus,
-        the dominated convergence theorem guarantees that \[
+        the Dominated Convergence Theorem guarantees that \[
             \lim_{n \to \infty} \int_0^\infty \frac{n^{1 / 4}e^{-nx^2}}{1 + x^2}\:dx
             = 0.
-        \] 
+        \]
 
         \begin{remark}
             Consider $n^{1 / m}e^{-nx^k}$; to bound this, we examine the map
@@ -923,7 +923,7 @@
             = e^{-1 / m} / m^{1 / m}$. Thus, putting $t = n^{1 / m}x^{k / m}$, \[
                 n^{1 / m}x^{k / m} e^{-nx^k} \leq M, \qquad n^{1 / m}e^{-nx^k} \leq
                 Mx^{-k / m}.
-            \] 
+            \]
         \end{remark}
     \end{example}
 
@@ -936,7 +936,7 @@
         \begin{remark}
             We denote \[
                 \norm{f}_p = \left(\int_X |f|^p\:d\mu\right)^{1 / p}.
-            \] 
+            \]
         \end{remark}
     \end{definition}
 
@@ -968,7 +968,7 @@
         For $a, b \geq 0$, $p, q > 1$, \[
             ab \leq \frac{a^p}{p} + \frac{b^q}{q}, \qquad \frac{1}{p} + \frac{1}{q} =
             1.
-        \] 
+        \]
     \end{lemma}
     \begin{proof}
         Using Jensen's inequality on the logarithm, \[
@@ -980,7 +980,7 @@
         For $1 \leq p, q \leq \infty$, $f, g$ measurable, \[
             \norm{fg}_1 \leq \norm{f}_p\, \norm{g}_q, \qquad \frac{1}{p}
             + \frac{1}{q} = 1.
-        \] 
+        \]
     \end{lemma}
     \begin{proof}
         This is trivial when either $f, g = 0$, or $p, q = 1$.  Otherwise, applying
@@ -993,7 +993,7 @@
         \norm{f}_p$, $G = g / \norm{g}_q$, upon which $\norm{F}_p = \norm{G}_q = 1$,
         hence \[
             \norm{fg}_1 = \int_X |f(x)g(x)|\:d\mu \leq \norm{f}_p\norm{g}_q. \qedhere
-        \] 
+        \]
     \end{proof}
 
     \begin{example}
@@ -1011,13 +1011,13 @@
         from above now gives \[
             \lim_{n \to \infty} \int_{[n, n + 1)} |f|^2\:d\mu \leq \lim_{n \to
             \infty} \nu([n, \infty)) = \nu(\emptyset) = 0.
-        \] 
+        \]
     \end{example}
-    
+
     \begin{lemma}[Minkowski]
         For $1 \leq p \leq \infty$, $f, g$ measurable, \[
             \norm{f + g}_p \leq \norm{f}_p + \norm{g}_p.
-        \] 
+        \]
     \end{lemma}
     \begin{proof}
         This is trivial when $p = 1, \infty$. Otherwise, for $1 < p < \infty$, note
@@ -1064,7 +1064,7 @@
         \] Thus, \[
             \norm{f}_p = \norm{|f|^p}_1^{1 / q} \leq \mu(X)^{1 / p - 1 /
             q}\norm{f}_q. \qedhere
-        \] 
+        \]
     \end{proof}
     \begin{example}
         Note that the map $x \mapsto 1 / \sqrt{x}$ is in $L^1(0, 1)$, but not in
@@ -1079,7 +1079,7 @@
         Let $(X, \M, \mu)$ be a finite measure space. Then, $L^\infty(\mu) \subseteq
         L^p(\mu)$ for all $1 \leq p \leq \infty$, and \[
             \lim_{p \to \infty} \norm{f}_p = \norm{f}_\infty.
-        \] 
+        \]
     \end{theorem}
     \begin{example}
         Consider the function \[
@@ -1087,11 +1087,11 @@
         \] Then for $1 \leq p < \infty$, we have \[
             \norm{f}_p^p = \int_{(0, 1)} |\log{x}|^p\:d\mu = \lim_{n \to \infty}
             \int_{(0, 1)} |\log{x}|^p\chi_{(1/n, 1)}\:d\mu.
-        \] The latter follows from the monotone convergence theorem. Now, make the
+        \] The latter follows from the Monotone Convergence Theorem. Now, make the
         substitution $u = \log{x}$ to evaluate the Riemann integral \[
-            \int_{1 / n}^1 |\log{x}|^p\:dx = \int_{-\log{n}}^0 |u|^p e^{u}\:du 
+            \int_{1 / n}^1 |\log{x}|^p\:dx = \int_{-\log{n}}^0 |u|^p e^{u}\:du
             = \int_0^{\log{n}} u^p e^{-u}\:du.
-        \] Indeed, the monotone convergence theorem immediately shows that this
+        \] Indeed, the Monotone Convergence Theorem immediately shows that this
         converges to $\Gamma(p + 1)$. Another way to show that this converges is to
         see that $e^u > u^k / k!$, $u^pe^{-u} \leq k!u^{p - k}$. Choosing
         sufficiently large $k$ so that $k - p > 2$, we have \[
@@ -1108,7 +1108,7 @@
         are non-zero on a set of finite measure. Then, the closure of $S$ in
         $L^p(\mu)$ is the whole of $L^p(\mu)$, for $1 \leq p < \infty$.
     \end{theorem}
-    
+
     \begin{theorem}[Lusin]
         Let $f\colon \R^n \to \C$ be measurable, and let $A\subseteq \R^n$ have
         finite measure, with $f = 0$ on $\R^n \setminus A$. Given $\epsilon > 0$,
@@ -1117,7 +1117,7 @@
             \mu\{x: f(x) \neq g(x)\} < \epsilon.
         \] Moreover, $g$ can be chosen such that \[
             \sup_{x \in \R^n} |g| \leq \norm{f}_\infty.
-        \] 
+        \]
     \end{theorem}
 
     \begin{theorem}
@@ -1171,6 +1171,26 @@
             The converse holds even without assuming $\mu(X) < \infty$.
         \end{remark}
     \end{theorem}
+    \begin{proof}
+        Without loss of generality, let $f_n \to f$ pointwise on $X$. Define \[
+            E_{n, m} = \bigcap_{i = n}^\infty \{x \in X : |f_i(x) - f(x)| <
+            \frac{1}{m}\}.
+        \] Then, each $E_{n, m} \subseteq E_{n + 1, m}$. Furthermore, each $f_n(x)
+        \to f(x)$ forces each \[
+            \bigcup_{n = 1}^\infty E_{n, m} = X, \qquad
+            \lim_{n \to \infty} \mu(E_{n, m}) = \mu(X).
+        \] Here, we have applied continuity from below. Let $\epsilon > 0$. Thus, for
+        each $m$, we can find $N_m \in \N$ such that \[
+            \mu(X) - \mu(E_{N_m, m}) < \frac{\epsilon}{2^m}.
+        \] Relabel $E_m = E_{N_m, m}$, and set \[
+            E = \bigcap_{m = 1}^\infty E_m, \qquad
+            F = X\setminus E = \bigcup_{m = 1}^\infty X\setminus E_m, \qquad
+            \mu(F) < \sum_{m = 1}^\infty \frac{\epsilon}{2^m} = \epsilon.
+        \] We claim that $f_n \to f$ uniformly on $E$. Indeed, given any $\eta > 0$,
+        we can find $m \in \N$ such that $m\eta > 1$. Thus, for every $x \in
+        E\subseteq E_m$, we must have $|f_{n}(x) - f(x)| < 1 / m < \eta$ for all $n
+        \geq N_m$.
+    \end{proof}
 
     \begin{example}
         Consider the counting measure on $\N$, and the sequence of functions
@@ -1203,17 +1223,17 @@
         First suppose that $f_n \to f$ in $L^p(\mu)$, i.e.\ $\norm{f_n - f}_p \to 0$.
         Now, Minkowski's inequality will show that \[
             |\norm{f_n}_p - \norm{f}_p| \leq \norm{f_n - f}_p,
-        \] hence we have $\norm{f_n}_p \to \norm{f}_p$ by the squeeze theorem.
+        \] hence we have $\norm{f_n}_p \to \norm{f}_p$ by the Squeeze Theorem.
 
         Next, suppose that $\norm{f_n}_p \to \norm{f}_p$. We first show that for
         $\alpha, \beta \in \R$, \[
             (\alpha + \beta)^p \leq 2^{p - 1}(|\alpha|^p + |\beta|^p).
         \] Indeed, this follows immediately from the convexity of the map $t \mapsto
-        t^p$ and Jensen's inequality, whence $(\alpha / 2 + \beta / 2)^p \leq
+        |t|^p$ and Jensen's inequality, whence $(\alpha / 2 + \beta / 2)^p \leq
         (|\alpha|^p + |\beta|^p) / 2$. Thus, \[
             |f_n - f|^p \leq 2^{p - 1}|f_n|^p + 2^{p - 1}|f|^p.
         \] Now, $|f_n \to f|^p \to 0$ pointwise, and the right hand side of our
-        inequality is in $L^1(\mu)$. Thus, the dominated convergence theorem
+        inequality is in $L^1(\mu)$. Thus, the Dominated Convergence Theorem
         guarantees that \[
             \lim_{n \to \infty} \int_{[0, 1]} |f_n - f|^p\:d\mu = \int_{[0, 1]}
             \lim_{n \to \infty} |f_n - f|^p\:d\mu = 0.
@@ -1222,7 +1242,7 @@
 
 
     \subsection{The Lebesgue measure}
-    
+
     \begin{definition}
         Let $X$ be a set, and let $\mathcal{P}(X)$ denote its power set. We say that
         a function $\mu^*\colon \mathcal{P}(X) \to [0, \infty]$ is called an outer
@@ -1234,7 +1254,7 @@
             \item \[
                 \mu^*\left(\bigcup_{i = 1}^\infty A_i\right) \leq \sum_{i = 1}^\infty
                 \mu^*(A_i).
-            \] 
+            \]
         \end{enumerate}
     \end{definition}
 
@@ -1251,14 +1271,14 @@
             A = \bigcup_{i = 1}^\infty A_i.
         \] Then, for arbitrary $\epsilon > 0$, we can choose $E_{ij} \in \xi$ such
         that \[
-            \mu^*(A_i) + \frac{\epsilon}{2^i} \geq \sum_j f(E_{ij}), \qquad 
+            \mu^*(A_i) + \frac{\epsilon}{2^i} \geq \sum_j f(E_{ij}), \qquad
             A_i \subseteq \bigcup_j E_{ij}.
         \] Now, the sets $E_{ij}$ all cover $A$, so \[
             \mu^*(A) \leq \sum_{ij} f(E_{ij}) \leq \sum_i \left[\mu^*(A_i) +
             \frac{\epsilon}{2^i}\right] = \sum_i \mu^*(A_i) + \epsilon.
         \] Since $\epsilon > 0$ is arbitrary, we have the desired result, \[
             \mu^*(A) \leq \sum_i \mu^*(A_i).
-        \] 
+        \]
     \end{example}
 
     \begin{definition}
@@ -1293,7 +1313,7 @@
         $\sigma$-algebra, and $m_1$ the Lebesgue measure on $\R$. Note that \[
             m_1^*(A) = \inf\left\{\sum_{i = 1}^\infty |b_i - a_i|: A \subseteq
             \bigcup_{i = 1}^\infty (a_i, b_i)\right\}.
-        \] 
+        \]
         \begin{remark}
             A similar process can be carried out using the volume function $\ell_n$
             for rectangles in $\R^n$, yielding the Lebesgue $\sigma$-algebra $\L_n$
@@ -1308,7 +1328,7 @@
 
     \begin{theorem}
         We have the inclusion $\mathcal{B}_\R \subset \L$.
-        
+
         \begin{remark}
             The restriction of $m_1$ to $\mathcal{B}_\R$ is called the Borel measure
             $m_{\mathcal{B}}$.
@@ -1389,7 +1409,7 @@
 
         Otherwise, $m_1(E)$ is finite. Find open $U$ such that $E \subseteq U$,
         $m_1(U\setminus E) < \epsilon/3$. Setting $U^n = U \cap (-n, n)$, we have \[
-            U = \bigcup_{n = 1}^\infty U^n, \qquad 
+            U = \bigcup_{n = 1}^\infty U^n, \qquad
             m_1(U) = \lim_{n \to \infty} m_1(U^n),
         \] hence $m_1(U\setminus U^m) < \epsilon/3$ for sufficiently large $m$. This
         in turn gives $m_1(E\setminus U^m) < \epsilon/3$. Next, since $m_1(E)$,
@@ -1417,9 +1437,9 @@
         open with $E \subseteq U$ and \[
             m_1(U\setminus E) \leq \sum_{n \in \Z} m_1(U_n\setminus E_n) < \epsilon.
             \qedhere
-        \] 
+        \]
     \end{proof}
-    
+
     \begin{corollary}
         If $E \subseteq \R$ is Lebesgue measurable with $m_1(E) < \infty$ and
         $\epsilon > 0$, then there exists a compact set $K$ such that $K \subseteq E$
@@ -1491,7 +1511,7 @@
             \bar{\M} = \{S \cup N : S \in \M, N \subseteq N', \mu(N) = 0\},
         \] and \[
             \bar{\mu}(S \cup N) = \mu(S).
-        \] 
+        \]
     \end{theorem}
 
     \begin{theorem}
@@ -1499,13 +1519,13 @@
         m_\mathcal{B})$ is the Lebesgue measure space $(\R, \L, m_1)$.
     \end{theorem}
 
-    
+
     \begin{lemma}
         If $E \subseteq \R$ is Lebesgue measurable, so are the translations $x + E$
         and the dilations $rE$. Moreover, \[
             m_1(x + E) = m_1(E), \qquad
             m_1(rE) = |r|\,m_1(E).
-        \] 
+        \]
     \end{lemma}
 
     \begin{example}
@@ -1513,7 +1533,7 @@
             \mathcal{C} = [0, 1]\setminus \bigcup_{n = 0}^\infty \bigcup_{k = 0}^{3n
             - 1} \left(\frac{3k + 1}{3^{n + 1}}, \frac{3k + 2}{3^{n + 1}}\right),
         \] or equivalently \[
-            \mathcal{C} = \bigcap_{n = 1}^\infty C_n, \qquad 
+            \mathcal{C} = \bigcap_{n = 1}^\infty C_n, \qquad
             C_n = \bigcup_{k = 0}^{3^n - 1}\left(\left[\frac{3k}{3^n}, \frac{3k +
             1}{3^n}\right] \cup \left[\frac{3k + 2}{3^n}, \frac{3k +
             3}{3^n}\right]\right)
@@ -1551,7 +1571,7 @@
     \begin{lemma}
         The following inclusions are strict. \[
             \mathcal{B}_\R \subset \L \subset \mathcal{P}(\R).
-        \] 
+        \]
         \begin{remark}
             The Borel $\sigma$-algebra has the cardinality of the continuum,
             $\mathfrak{c}$. However, note that the uncountable Cantor set
@@ -1561,7 +1581,7 @@
             greater than that of the Borel $\sigma$-algebra.
         \end{remark}
     \end{lemma}
-    
+
 
     \begin{theorem}
         If $E \subseteq \R$ is Lebesgue measurable with $m_1(E) > 0$, then $E$
@@ -1591,7 +1611,7 @@
         are also Lebesgue measurable. Then, $m_1(E) = 0$.
     \end{corollary}
 
-    
+
 
     \subsection{Product measures}
 
@@ -1617,11 +1637,11 @@
             \item Given $\{A_n\}_{n \in \N}$ with each $A_n \in \mathcal{A}$ and $A_n
             \subseteq A_{n + 1}$, the union \[
                 A = \bigcup_{n = 1}^\infty A_n \in \mathcal{A}.
-            \] 
+            \]
             \item Given $\{B_n\}_{n \in \N}$ with each $B_n \in \mathcal{A}$ and $B_n
             \supseteq B_{n + 1}$, the intersection \[
                 B = \bigcap_{n = 1}^\infty B_n \in \mathcal{A}.
-            \] 
+            \]
         \end{enumerate}
     \end{definition}
 
@@ -1633,7 +1653,7 @@
     \begin{lemma}
         Given a collection $S$ of subsets of $X$, we have \[
             S \subseteq \mathcal{A}(S) \subseteq \M(S) \subseteq \mathcal{P}(X).
-        \] 
+        \]
     \end{lemma}
 
     \begin{definition}
@@ -1660,7 +1680,7 @@
         The collection of elementary sets $\mathcal{E}$ defined earlier forms an
         algebra over $X \times Y$.
     \end{example}
-    
+
 
     \begin{theorem}[Monotone Class Theorem]
         If $\mathcal{F}$ is an algebra of sets over $X$, then
@@ -1709,7 +1729,7 @@
         containing $\mathcal{F}$, so $\M(\mathcal{F}) \subseteq
         \mathcal{A}(\mathcal{F})$. Thus, $\mathcal{A}(\mathcal{F}) =
         \M(\mathcal{F})$.
-    \end{proof} 
+    \end{proof}
 
     \begin{corollary}
         The monotone class generated by the algebra of elementary sets $\mathcal{E}$
@@ -1771,7 +1791,7 @@
         Let $(X, \M, \mu)$ and $(Y, \MN, \nu)$ be $\sigma$-finite measure spaces.
         The product measure on $\M \times \MN$ is defined as \[
             (\mu \times \nu)(E) = \int_X \nu(E_x)\:d\mu = \int_Y \mu(E_y)\:d\nu.
-        \] 
+        \]
     \end{definition}
 
     \begin{lemma}
@@ -1784,7 +1804,7 @@
         counting measure. Set $D = \{(x, x): x \in [0, 1]\}$, whence \[
             \int_{X}\nu(D_x)\:d\mu = \int_{[0, 1]} 1\:d\mu = 1, \qquad
             \int_{Y}\nu(D_y)\:d\nu = \int_{[0, 1]} 0\:d\mu = 0.
-        \] 
+        \]
     \end{example}
 
     \begin{example}
@@ -1812,13 +1832,13 @@
             are measurable, and \[
                 \iint_{X\times Y} f\:d(\mu\times \nu) = \int_X \varphi\:d\mu = \int_Y
                 \psi\:d\nu.
-            \] 
+            \]
 
             \item If $f \in L^1(\mu\times \nu)$, then $\varphi \in L^1(\mu)$, $\psi
             \in L^1(\nu)$, and \[
                 \iint_{X\times Y} f\:d(\mu\times \nu) = \int_X \varphi\:d\mu = \int_Y
                 \psi\:d\nu < \infty.
-            \] 
+            \]
         \end{enumerate}
 
         \begin{remark}
@@ -1862,7 +1882,7 @@
         \] Then, \[
             \sum_{m = 1}^\infty\sum_{n = 1}^\infty a_{mn} = 0, \qquad
             \sum_{n = 1}^\infty\sum_{m = 1}^\infty a_{mn} = 1.
-        \] 
+        \]
     \end{example}
 
 
@@ -1874,7 +1894,7 @@
             F\colon [0, \infty) \to [0, \infty], \qquad t \mapsto \mu(E(t)).
         \] Then, \[
             \int_{[0, \infty)} F\:dm_1 = \int_X |f|\:d\mu.
-        \] 
+        \]
     \end{theorem}
     \begin{proof}
         Using Fubini-Tonelli, write \[
@@ -1889,7 +1909,7 @@
         \] Thus, \[
             \int_{[0, \infty)} F\:dm_1 = \int_{X}\int_{[0, \infty)} \chi_{[0,
             |f(x)|)}(t) \:dm_1(t)\,d\mu(x) = \int_X |f(x)|\:d\mu(x). \qedhere
-        \] 
+        \]
     \end{proof}
 
     \begin{theorem}
@@ -1908,7 +1928,7 @@
         \] and \[
             \sigma\colon \mathcal{B}_{S^{n - 1}}\to [0, \infty], \qquad
             F \mapsto n\cdot m_n\{rx: x \in F, 0 \leq r \leq 1\}.
-        \] 
+        \]
     \end{theorem}
 
     \begin{lemma}
@@ -1920,7 +1940,7 @@
         \infty) \to \C$, then \[
             \int_{\R^n} f\:dm_n = \sigma(S^{n - 1}) \int_{(0, \infty)} g(r)\,r^{n -
             1}\:dm_1(r).
-        \] 
+        \]
     \end{lemma}
 
     \begin{example}
