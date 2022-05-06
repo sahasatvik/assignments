@@ -32,6 +32,8 @@
 \newcommand{\N}{\mathbb{N}}
 
 \newcommand{\M}{\mathcal{M}}
+\newcommand{\MN}{\mathcal{N}}
+\renewcommand{\L}{\mathcal{L}}
 
 \newcommand{\ip}[2]{\langle #1, #2 \rangle}
 \newcommand{\norm}[1]{\Vert #1 \Vert}
@@ -73,6 +75,7 @@
 \newtheorem*{solution}{Solution}
 
 \surroundwithmdframed[%
+    nobreak=false,%
     linecolor=black!20!white,%
     hidealllines=false,%
     innertopmargin=5,%
@@ -855,8 +858,74 @@
             \int_{[0, \infty)} \lim_{n \to \infty} f_n\:d\mu = \int_0^\infty
             e^{-3x}\:dx = \frac{1}{3}.
         \] 
+        \begin{remark}
+            For any $x \in \R$, the sequence \[
+                e_n = \left(1 + \frac{x}{n}\right)^n
+            \] is increasing, with $e_n \to e^x$. To show this, consider the ratio \[
+                \frac{e_{n + 1}}{e_n} = \frac{(1 + \frac{x}{n + 1})^{n + 1}}{(1 +
+                \frac{x}{n})^n}
+                = \left(\frac{1 + \frac{x}{n + 1}}{1 + \frac{x}{n}}\right)^{n + 1}
+                \left(1 + \frac{x}{n}\right)
+                = \left(1 - \frac{x}{(n + 1)(n + x)}\right)^{n + 1} \left(1 +
+                \frac{x}{n}\right).
+            \]
+            Applying Bernoulli's inequality, noting that $|x / (n + x)| < 1$, \[
+                \frac{e_{n + 1}}{e_n} \geq \left(1 - \frac{x}{n + x}\right)\left(1 +
+                \frac{x}{n}\right) = 1.
+            \] 
+        \end{remark}
     \end{example}
 
+    \begin{example}
+        Suppose that we wish to compute \[
+            \lim_{n \to \infty} \int_1^\infty \frac{\log(1 + nx)}{1 + x^2\log{n}}\:dx.
+        \] Observe that for $x\geq 1, n\geq 1$, we have $nx \leq 1 + nx \leq 2nx$ so
+        \[
+            \frac{\log{n} + \log{x}}{1 + x^2\log{n}} \leq \frac{\log(1 + nx)}{1 +
+            x^2\log{n}} \leq \frac{\log{2} + \log{n} + \log{x}}{1 + x^2\log{n}}.
+        \] The Squeeze Theorem immediately gives \[
+            \lim_{n \to \infty} \frac{\log(1 + nx)}{1 + x^2\log{n}} = \frac{1}{x^2}.
+        \] Furthermore, \[
+            \frac{\log(1 + nx)}{1 + x^2\log{n}} \leq \frac{\log{2}}{x^2} +
+            \frac{\log{x}}{x^2} + \frac{\log{n}}{x^2},
+        \] and the latter is in $L^1(\mu)$. Indeed, $\log{x} < x$ yields
+        $\log{\sqrt{x}} \leq \sqrt{x}$, hence $\log{x}/x^2 \leq 2 x^{-3 / 2}$. Thus,
+        the dominated convergence theorem guarantees that our limit is \[
+            \lim_{n \to \infty} \int_1^\infty \frac{\log(1 + nx)}{1 + x^2\log{n}}\:dx
+            = \int_1^\infty \frac{1}{x^2}\:dx = 1.
+        \]
+    \end{example}
+
+    \begin{example}
+        Suppose that we wish to compute \[
+            \lim_{n \to \infty} \int_0^\infty \frac{n^{1 / 4}e^{-nx^2}}{1 + x^2}\:dx.
+        \] Observe that the map $t \mapsto te^{-t^4}$ is bounded on $(0, \infty)$,
+        attaining a maximum at $t = 1 / \sqrt{2}$ with the maximum $M = e^{-1 / 4} /
+        \sqrt{2}$.  Thus, putting $t = n^{1 / 4}x^{1 / 2}$, we have \[
+            n^{1 / 4}\sqrt{x}e^{-nx^4} \leq M, \qquad
+            \frac{n^{1 / 4}e^{-nx^2}}{1 + x^2} \leq \frac{M / \sqrt{x}}{1 + x^2}.
+        \] On the interval $(0, 1)$, we have \[
+            \int_0^1 \frac{1}{\sqrt{x}(1 + x^2)}\:dx \leq \int_0^1
+            \frac{1}{\sqrt{x}}\:dx = 2,
+        \] and on $(1, \infty)$, we have \[
+            \int_1^\infty \frac{1}{\sqrt{x}(1 + x^2)}\:dx \leq \int_1^\infty
+            \frac{1}{x^2}\:dx = 1.
+        \] Furthermore, $n^{1 / 4}e^{-nx^2} \to 0$ pointwise as $n \to \infty$. Thus,
+        the dominated convergence theorem guarantees that \[
+            \lim_{n \to \infty} \int_0^\infty \frac{n^{1 / 4}e^{-nx^2}}{1 + x^2}\:dx
+            = 0.
+        \] 
+
+        \begin{remark}
+            Consider $n^{1 / m}e^{-nx^k}$; to bound this, we examine the map
+            $t \mapsto te^{-t^m}$. This attains a maximum when $e^{-t^m} -
+            mt^me^{-t^m} = 0$, i.e.\ $t = 1 / m^{1 / m}$, hence a maximum value of $M
+            = e^{-1 / m} / m^{1 / m}$. Thus, putting $t = n^{1 / m}x^{k / m}$, \[
+                n^{1 / m}x^{k / m} e^{-nx^k} \leq M, \qquad n^{1 / m}e^{-nx^k} \leq
+                Mx^{-k / m}.
+            \] 
+        \end{remark}
+    \end{example}
 
     \subsection{$L^p$ spaces}
     \begin{definition}
@@ -866,7 +935,7 @@
         \]
         \begin{remark}
             We denote \[
-                \norm{f}_p = \left(\int_X |f|^p\:d\mu\right).
+                \norm{f}_p = \left(\int_X |f|^p\:d\mu\right)^{1 / p}.
             \] 
         \end{remark}
     \end{definition}
@@ -926,6 +995,24 @@
             \norm{fg}_1 = \int_X |f(x)g(x)|\:d\mu \leq \norm{f}_p\norm{g}_q. \qedhere
         \] 
     \end{proof}
+
+    \begin{example}
+        Let $f \in L^2(\R)$, and let each $\mu([n, n + 1)) = 1$. Then, \[
+            \lim_{n \to \infty} \int_{[n, n + 1)} f\:d\mu = 0.
+        \] To show this, note that H\"older's inequality for $p = 1 = 2$, also known
+        as the Cauchy-Schwarz inequality, gives \[
+            \int_{[n, n + 1)} |f|\:d\mu \leq \left(\int_{[n, n +
+            1)}|f|^2\:d\mu\right)^{1 / 2}\left(\int_{[n, n + 1)}d\mu\right)^{1 / 2} =
+            \left(\int_{[n, n + 1)} |f|^2\:d\mu\right)^{1 / 2}.
+        \] Now, note that the following defines a measure $\nu$ on $\R$. \[
+            \nu(E) = \int_E |f|^2\:d\mu.
+        \] Furthermore, this is a finite measure because $\nu(\R) = \norm{f}_2^2 <
+        \infty$. Now, each $\nu([n, n + 1)) \leq \nu([n, \infty))$; continuity
+        from above now gives \[
+            \lim_{n \to \infty} \int_{[n, n + 1)} |f|^2\:d\mu \leq \lim_{n \to
+            \infty} \nu([n, \infty)) = \nu(\emptyset) = 0.
+        \] 
+    \end{example}
     
     \begin{lemma}[Minkowski]
         For $1 \leq p \leq \infty$, $f, g$ measurable, \[
@@ -983,6 +1070,10 @@
         Note that the map $x \mapsto 1 / \sqrt{x}$ is in $L^1(0, 1)$, but not in
         $L^2(0, 1)$.
     \end{example}
+    \begin{example}
+        Note that the map $x \mapsto 1 / x(|\log{x}| + 1)^2$ is in $L^1(0, 1)$, but
+        not in any $L^p(0, 1)$ where $p > 1$.
+    \end{example}
 
     \begin{theorem}
         Let $(X, \M, \mu)$ be a finite measure space. Then, $L^\infty(\mu) \subseteq
@@ -990,6 +1081,27 @@
             \lim_{p \to \infty} \norm{f}_p = \norm{f}_\infty.
         \] 
     \end{theorem}
+    \begin{example}
+        Consider the function \[
+            f\colon (0, 1) \to \R, \qquad x \mapsto \log{x}.
+        \] Then for $1 \leq p < \infty$, we have \[
+            \norm{f}_p^p = \int_{(0, 1)} |\log{x}|^p\:d\mu = \lim_{n \to \infty}
+            \int_{(0, 1)} |\log{x}|^p\chi_{(1/n, 1)}\:d\mu.
+        \] The latter follows from the monotone convergence theorem. Now, make the
+        substitution $u = \log{x}$ to evaluate the Riemann integral \[
+            \int_{1 / n}^1 |\log{x}|^p\:dx = \int_{-\log{n}}^0 |u|^p e^{u}\:du 
+            = \int_0^{\log{n}} u^p e^{-u}\:du.
+        \] Indeed, the monotone convergence theorem immediately shows that this
+        converges to $\Gamma(p + 1)$. Another way to show that this converges is to
+        see that $e^u > u^k / k!$, $u^pe^{-u} \leq k!u^{p - k}$. Choosing
+        sufficiently large $k$ so that $k - p > 2$, we have \[
+            \int_0^{\log{n}} u^p e^{-u}\:du \leq \int_0^1 du + k!\int_1^{\log{n}}
+            \frac{1}{u^2}\:du = 1 + k! - \frac{k!}{\log{n}}.
+        \] Thus, we have \[
+            \norm{f}_p^p = \int_{(0, 1)}|\log{x}|^p\:dx \leq 1 + k! < \infty.
+        \] This shows that $f \in L^p(\mu)$ for all $1 \leq p < \infty$. However, it
+        is clear that $f \notin L^\infty(\mu)$.
+    \end{example}
 
     \begin{theorem}
         Let $S$ be the set of all simple, measurable, complex valued functions which
@@ -1022,13 +1134,94 @@
         \subset \R^n$ where $|f| < \epsilon$ on $\R^n\setminus K$.
     \end{example}
 
+    \begin{example}
+        Let $f \in L^2[0, 1]$, and suppose that \[
+            \int_0^1 f(x)\, x^n\:dx = 0
+        \] for all integers $n \geq 0$. Then, $f = 0$ almost everywhere. To show
+        this, note that we have \[
+            \int_0^1 f(x)(a_0 + a_1x + \dots + a_nx^n)\:dx = 0, \qquad
+            \int_0^1 f(x)p(x)\:dx.
+        \] for all polynomials $p(x)$. By the Weierstrass Approximation Theorem, we
+        have \[
+            \int_0^1 f(x) g(x)\:dx = 0
+        \] for all continuous functions $h$ on $[0, 1]$. Now, $f \in L^2[0, 1]$,
+        hence there exists a sequence of continuous functions $\{h_n\}_{n =
+        1}^\infty$ on $[0, 1]$ so that $h_n \to f$ in $L^2[0, 1]$. By Cauchy-Schwarz,
+        \[
+            \left|\int_0^1 f(x)(h_n(x) - f(x))\:dx\right| \leq \norm{f}_2\, \norm{h_n
+            - f}_2 \to 0.
+        \] Thus, \[
+            \int_0^1 f^2\:dx = 0,
+        \] forcing $f = 0$ almost everywhere.
+    \end{example}
+
     \begin{theorem}
         The set of all smooth functions on $\R^n$ with compact support is dense in
         $L^p(\mu)$, for $1 \leq p < \infty$.
     \end{theorem}
 
+    \begin{theorem}[Egoroff]
+        Let $(X, \M, \mu)$ be a finite measure space, and let $\{f_n\}_{n =
+        1}^\infty$ be a sequence of complex measurable functions $f_n \colon X \to
+        \C$ such that $f_n \to f$ pointwise almost everywhere on $X$. Then for every
+        $\epsilon > 0$, there exists $E \subseteq X$ such that $f_n \to f$ uniformly
+        on $E$ and $\mu(X \setminus E) < \epsilon$.
 
-    \subsection{Outer measures}
+        \begin{remark}
+            The converse holds even without assuming $\mu(X) < \infty$.
+        \end{remark}
+    \end{theorem}
+
+    \begin{example}
+        Consider the counting measure on $\N$, and the sequence of functions
+        $\{f_n\}_{n = 1}^\infty$ described by \[
+            f_n\colon \N \to \R, \qquad k \mapsto \begin{cases}
+                1, &\text{ if } 1 \leq k \leq n, \\
+                0, &\text{ otherwise}.
+            \end{cases}
+        \] Then, $f_n \to 1$ pointwise. Setting $\epsilon = 1 / 2$, we demand $f_n
+        \to f$ uniformly on a set $E$ with $\mu(\N\setminus E) < 1 / 2$. This forces
+        $\N\setminus E = \emptyset$, i.e.\ $E = \N$. However, the convergence $f_n
+        \to 1$ is not uniform on $\N$.
+    \end{example}
+    \begin{example}
+        Consider the sequence of functions $\{f_n\}_{n = 1}^\infty$ described by \[
+            f_n\colon [0, 1] \to \R, \qquad x \mapsto x^n.
+        \] Then, $f_n \to \chi_{\{1\}}$ pointwise, and the convergence $f_n \to 0$ is
+        uniform on every interval $[0, 1 - \delta]$ for $\delta > 0$. However, we
+        cannot have uniform convergence on any measure zero set.
+    \end{example}
+
+
+    \begin{theorem}
+        Let $1 \leq p < \infty$, and let $\{f_n\}_{n = 1}^\infty$ be a sequence of
+        measurable functions on $[0, 1]$ such that $f_n \to f$ pointwise and $f_n, f
+        \in L^p(\mu)$. Then, $f_n \to f$ converges in $L^p(\mu)$ if and only if
+        $\norm{f_n}_p \to \norm{f}_p$.
+    \end{theorem}
+    \begin{proof}
+        First suppose that $f_n \to f$ in $L^p(\mu)$, i.e.\ $\norm{f_n - f}_p \to 0$.
+        Now, Minkowski's inequality will show that \[
+            |\norm{f_n}_p - \norm{f}_p| \leq \norm{f_n - f}_p,
+        \] hence we have $\norm{f_n}_p \to \norm{f}_p$ by the squeeze theorem.
+
+        Next, suppose that $\norm{f_n}_p \to \norm{f}_p$. We first show that for
+        $\alpha, \beta \in \R$, \[
+            (\alpha + \beta)^p \leq 2^{p - 1}(|\alpha|^p + |\beta|^p).
+        \] Indeed, this follows immediately from the convexity of the map $t \mapsto
+        t^p$ and Jensen's inequality, whence $(\alpha / 2 + \beta / 2)^p \leq
+        (|\alpha|^p + |\beta|^p) / 2$. Thus, \[
+            |f_n - f|^p \leq 2^{p - 1}|f_n|^p + 2^{p - 1}|f|^p.
+        \] Now, $|f_n \to f|^p \to 0$ pointwise, and the right hand side of our
+        inequality is in $L^1(\mu)$. Thus, the dominated convergence theorem
+        guarantees that \[
+            \lim_{n \to \infty} \int_{[0, 1]} |f_n - f|^p\:d\mu = \int_{[0, 1]}
+            \lim_{n \to \infty} |f_n - f|^p\:d\mu = 0.
+        \] Thus, $\norm{f_n - f}_p \to 0$.
+    \end{proof}
+
+
+    \subsection{The Lebesgue measure}
     
     \begin{definition}
         Let $X$ be a set, and let $\mathcal{P}(X)$ denote its power set. We say that
@@ -1079,5 +1272,681 @@
         \end{remark}
     \end{definition}
 
+    \begin{theorem}[Carath\'eodory]
+        Let $X$ be non-empty with an outer measure $\mu^*$, and let $\M$ be the set
+        of all $\mu^*$-measurable subsets of $X$. Then, $\M$ forms a
+        $\sigma$-algebra, and the restriction of $\mu^*$ to $\M$ is a measure $\mu$.
+        Moreover, $\mu$ is a complete measure.
+
+        \begin{remark}
+            A complete measure $\mu$ is such that given a measurable set $A$ with
+            $\mu(A) = 0$, all the subsets $B \subseteq A$ are measurable, with
+            $\mu(B) = 0$.
+        \end{remark}
+    \end{theorem}
+
+    \begin{definition}
+        Let $\ell$ be the length function for intervals in $\R$. Extend this to an
+        outer measure $m_1^*$ as outlined previously, and use the Carath\'eodory
+        Theorem to find a $\sigma$-algebra $\L \subset \mathcal{P}(\R)$ and a
+        complete measure $m_1$ on $\L$. Then, we call $\L$ the Lebesgue
+        $\sigma$-algebra, and $m_1$ the Lebesgue measure on $\R$. Note that \[
+            m_1^*(A) = \inf\left\{\sum_{i = 1}^\infty |b_i - a_i|: A \subseteq
+            \bigcup_{i = 1}^\infty (a_i, b_i)\right\}.
+        \] 
+        \begin{remark}
+            A similar process can be carried out using the volume function $\ell_n$
+            for rectangles in $\R^n$, yielding the Lebesgue $\sigma$-algebra $\L_n$
+            and the complete Lebesgue measure $m_n$.
+        \end{remark}
+    \end{definition}
+
+    \begin{example}
+        All singletons have Lebesgue measure zero. As a result, all countable sets
+        also have Lebesgue measure zero.
+    \end{example}
+
+    \begin{theorem}
+        We have the inclusion $\mathcal{B}_\R \subset \L$.
+        
+        \begin{remark}
+            The restriction of $m_1$ to $\mathcal{B}_\R$ is called the Borel measure
+            $m_{\mathcal{B}}$.
+        \end{remark}
+    \end{theorem}
+    \begin{proof}
+        It is enough to show that sets of the form $A = (a, \infty) \in \L$. Pick a
+        subset $E \subseteq \R$, and suppose that $\{I_n\}_{n = 1}^\infty$ is a cover
+        of $E$ with intervals $(a_n, b_n)$. Then, by the property of infimums, \[
+            \sum_{n = 1}^\infty \ell(I_n \cap (a, \infty)) + \ell(I_n \cap (-\infty,
+            a)) \geq m_1^*(E \cap A) + m_1^*(E \cap A^c)
+        \] However, each \[
+            \ell(I_n) \geq \ell(I_n \cap (a, \infty)) + \ell(I_n \cap (-\infty, a)).
+        \] Thus, summing and taking infimums again, \[
+            m_1^*(A) \geq m_1^*(E \cap A) + m_1^*(E \cap A^c),
+        \] proving that $A$ is $m_1^*$ measurable, hence $A \in \L$.
+    \end{proof}
+
+    \begin{theorem}
+        Let $E \subseteq \R$ be Lebesgue measurable. Then, \begin{align*}
+            m_1(E) &= \inf\{m_1(U): E \subseteq U,\, U\text{ is open}\}, \\
+            &= \sup\{m_1(K): K \subseteq E,\, K\text{ is compact}\}.
+        \end{align*}
+        \begin{remark}
+            The above relations describe the Lebesgue measure as a limit of sorts of
+            the Borel measure.
+        \end{remark}
+    \end{theorem}
+    \begin{proof}
+        For the first part, note that for any open set $U$ such that $E \subseteq U$,
+        we immediately have $m_1(E) \leq m_1(U)$, hence \[
+            m_1(E) \leq \inf\{m_1(U): E \subseteq U,\, U\text{ is open}\}.
+        \] We now show the reverse inequality. Note that if $m_1(E) = \infty$, this
+        is trivial. Otherwise, $m_1(E)$ is finite, hence for $\epsilon > 0$ we can
+        find an open cover $\{I_n\}_{n = 1}^\infty$ of $E$ such that \[
+            m_1(E) + \epsilon \geq \sum_{n = 1}^\infty \ell((a_n, b_n)) = \sum_{n =
+            1}^\infty m_1(I_n) \geq m_1\left(\bigcup_{n = 1}^\infty I_n\right).
+        \] Since $U = \bigcup_{n = 1}^\infty I_n$ is an open set with $E \subseteq
+        U$, we are done.
+
+        Note that when $m_1(E)$ is finite, we have found open $U$ such that $E
+        \subseteq U$, and $m_1(U \setminus E) < \epsilon$. But $U\setminus E = U \cap
+        E^c = E^c\setminus U^c$, and $U^c \subseteq E^c$. Relabelling, we have shown
+        that given Lebesgue measurable $E \subseteq \R$, we can find a closed set $F$
+        such that $F \subseteq E$, and $m_1(E \setminus F) < \epsilon$. \\
+
+        For the next part, note that for any compact set $K$ such that $K \subseteq
+        E$, we immediately have $m_1(E) \geq m_1(K)$, hence \[
+            m_1(E) \geq \sup\{m_1(K): K \subseteq E,\, K\text{ is compact}\}.
+        \] We now show the reverse inequality. First, consider the case where $E$ is
+        bounded, so $m_1(E)$ is finite. If $E$ is closed, it is also compact, hence
+        the result is trivial. Otherwise, the inclusion $E \subset \overline{E}$ is
+        strict, hence $\overline{E}\setminus E$ is non-empty and open. This gives \[
+            m_1(\overline{E}\setminus E) = \inf\{m_1(U): \overline{E}\setminus E
+            \subseteq U, U\text{ is open}\}.
+        \] Thus for $\epsilon > 0$, there exists open $U$ such that
+        $\overline{E}\setminus E \subseteq U$ and \[
+            m_1(\overline{E}\setminus E) + \epsilon \geq m_1(U), \qquad
+            m_1(E) - \epsilon \leq m_1(\overline{E}\setminus U).
+        \] Note that we could perform this rearrangement since the sets $E,
+        \overline{E}, U$ all have finite measure. This, we have found a suitable
+        compact set $K = \overline{E}\setminus U$ with $E \subseteq K$, hence we are
+        done.
+
+        If $E$ is unbounded and $m_1(E) = \infty$, set $E_n = E \cap [n, n + 1)$,
+        whence $E = \bigcup_{n \in \Z} E_n$. Now the $E_n$ are bounded, measurable,
+        and disjoint. For $\epsilon > 0$, find compact sets $K_n$ such that each \[
+            m_1(E_n) - \frac{\epsilon}{3\cdot 2^{|n|}} \leq m_1(K_n).
+        \] Set \[
+            E^n = \bigcup_{-n \leq i \leq n} E_n, \qquad
+            K^n = \bigcup_{-n \leq i \leq n} K_i
+        \] Note that each $K^n$ is compact. Summing our inequality gives \[
+            m_1(E^n) - \epsilon \leq m_1(K^n).
+        \] Continuity from below gives \[
+            m_1(E) = \lim_{n \to \infty} m_1(E^n).
+        \] Thus, if $m_1(E) = \infty$, we have $m_1(K^n) \to \infty$ with each $K^n
+        \subseteq E$ and $K^n$ compact, hence we are done.
+
+        Otherwise, $m_1(E)$ is finite. Find open $U$ such that $E \subseteq U$,
+        $m_1(U\setminus E) < \epsilon/3$. Setting $U^n = U \cap (-n, n)$, we have \[
+            U = \bigcup_{n = 1}^\infty U^n, \qquad 
+            m_1(U) = \lim_{n \to \infty} m_1(U^n),
+        \] hence $m_1(U\setminus U^m) < \epsilon/3$ for sufficiently large $m$. This
+        in turn gives $m_1(E\setminus U^m) < \epsilon/3$. Next, since $m_1(E)$,
+        $m_1(U^m)$ are finite, we can find closed sets $F_1, F_2$ such that $F_1
+        \subseteq E$, $F_2 \subseteq U^m$, and $m_1(E\setminus F_1) < \epsilon/3$,
+        $m_1(U^m\setminus F_2) < \epsilon/3$. Furthermore, $F_2$ is closed and
+        bounded, hence compact. Set $K = F_1 \cap F_2$, which is closed and bounded
+        hence compact. Now, $K \subseteq E$, and \[
+            E\setminus K \subseteq (E\setminus U^m) \cup (E \setminus F_1) \cup
+            (U^m\setminus F_2).
+        \] This immediately gives $m_1(E\setminus K) < \epsilon$, or $m_1(E) -
+        \epsilon < m_1(K)$, hence we are done.
+    \end{proof}
+
+    \begin{corollary}
+        If $E \subseteq \R$ is Lebesgue measurable and $\epsilon > 0$, then there
+        exists an open set $U$ such that $E \subseteq U$ and $m_1(U \setminus E) <
+        \epsilon$.
+    \end{corollary}
+    \begin{proof}
+        We have already dealt with the case where $m_1(E)$ is finite. Otherwise, set
+        $E_n = E \cap [n, n + 1)$; each of these has finite measure, hence we can
+        find open sets $U_n$ such that $E_n \subseteq U_n$ and $m_1(U_n\setminus E_n)
+        < \epsilon / 3\cdot 2^{|n|}$. Set $U = \bigcup_{n \in \Z} U_n$, whence $U$ is
+        open with $E \subseteq U$ and \[
+            m_1(U\setminus E) \leq \sum_{n \in \Z} m_1(U_n\setminus E_n) < \epsilon.
+            \qedhere
+        \] 
+    \end{proof}
+    
+    \begin{corollary}
+        If $E \subseteq \R$ is Lebesgue measurable with $m_1(E) < \infty$ and
+        $\epsilon > 0$, then there exists a compact set $K$ such that $K \subseteq E$
+        and $m_1(E \setminus K) < \epsilon$.
+    \end{corollary}
+
+    \begin{example}
+        Note that we cannot necessarily find open sets $U$ with $U \subseteq E$, or
+        closed sets $F$ with $E \subseteq K$ such that the differences have
+        arbitrarily small measure. Note that the set $\Q^c$ of irrationals has empty
+        interior although $m_1(\Q^c) = \infty$, and the closure of the set $\Q$ of
+        rationals is the entirety of $\R$ although $m_1(\Q) = 0$.
+    \end{example}
+
+    \begin{example}
+        If $U \subseteq R$ is Lebesgue measurable and non-empty, then $m_1(U) > 0$.
+        This is because the non-empty open set $U$ must contain a basic open interval
+        of the form $(a, b) \subseteq U$, hence $m_1(U) \geq m_1((a, b)) = b - a >
+        0$.
+    \end{example}
+
+    \begin{example}
+        If $E \subseteq \R$ is Lebesgue measurable with $m_1(E) = 0$, then
+        $\overline{E^c} = \R$. To see this, pick $x \in \R$ and an open neighbourhood
+        $(x - \delta, x + \delta)$. If $(x - \delta, x + \delta) \cap E^c = (x -
+        \delta, x + \delta)\setminus E$ were empty, that would force $(x - \delta, x
+        + \delta) \subseteq E$, hence $m_1(E) \geq 2\delta > 0$, a contradiction.
+    \end{example}
+
+    \begin{theorem}
+        A set $E \subseteq \R$ is Lebesgue measurable if and only if we can write \[
+            E = G \setminus N_1 = F \cup N_2,
+        \] where $G$ is a $G_\delta$ set, $F$ is an $F_\sigma$ set, and $N_1, N_2$
+        have measure zero.
+
+        \begin{remark}
+            A $G_\delta$ set is a countable intersection of closed sets, and an
+            $F_\sigma$ set is a countable union of open sets.
+        \end{remark}
+    \end{theorem}
+
+    \begin{proof}
+        Let $E \subseteq \R$ be Lebesgue measurable. Then, we can find a sequence of
+        open sets $\{U_n\}_{n = 1}^\infty$ such that each $E \subseteq U_n$ and
+        $m_1(U_n\setminus E) < 1 / n$. Set \[
+            G = \bigcap_{n = 1}^\infty U_n, \qquad
+            m_1(G\setminus E) \leq m_1(U_n\setminus E) < \frac{1}{n}.
+        \] This forces $m_1(G\setminus E) = 0$. Thus, we write $E = G \setminus
+        (G\setminus E)$.
+
+        Next, we can find a sequence of closed sets $\{F_n\}_{n = 1}^\infty$ such
+        that each $F_n \subseteq E$ and $m_1(E\setminus F_n) < 1 / n$. Again, set \[
+            F = \bigcup_{n = 1}^\infty F_n, \qquad
+            m_1(E\setminus F) \leq m_1(E\setminus F_n) < \frac{1}{n}.
+        \] This forces $m_1(E\setminus F) = 0$. Thus, we write $E = F\cup(E\setminus
+        F)$.
+    \end{proof}
+
+    \begin{corollary}
+        Given any Lebesgue measurable set $E \subseteq \R$, we can find Borel
+        measurable sets $F, G$ such that $F \subseteq E \subseteq G$, and
+        $m_1(G\setminus F) = 0$.
+    \end{corollary}
+
+    \begin{theorem}
+        Let $(X, \M, \mu)$ be a measure space. Then, there exists an extended
+        $\sigma$-algebra $\bar{\M}$ and an extended measure $\bar{\mu}$ such that
+        $\bar{\mu}$ is a complete measure. Furthermore, \[
+            \bar{\M} = \{S \cup N : S \in \M, N \subseteq N', \mu(N) = 0\},
+        \] and \[
+            \bar{\mu}(S \cup N) = \mu(S).
+        \] 
+    \end{theorem}
+
+    \begin{theorem}
+        The completion of the Borel measure space $(\R, \mathcal{B}_\R,
+        m_\mathcal{B})$ is the Lebesgue measure space $(\R, \L, m_1)$.
+    \end{theorem}
+
+    
+    \begin{lemma}
+        If $E \subseteq \R$ is Lebesgue measurable, so are the translations $x + E$
+        and the dilations $rE$. Moreover, \[
+            m_1(x + E) = m_1(E), \qquad
+            m_1(rE) = |r|\,m_1(E).
+        \] 
+    \end{lemma}
+
+    \begin{example}
+        The Cantor set defined as \[
+            \mathcal{C} = [0, 1]\setminus \bigcup_{n = 0}^\infty \bigcup_{k = 0}^{3n
+            - 1} \left(\frac{3k + 1}{3^{n + 1}}, \frac{3k + 2}{3^{n + 1}}\right),
+        \] or equivalently \[
+            \mathcal{C} = \bigcap_{n = 1}^\infty C_n, \qquad 
+            C_n = \bigcup_{k = 0}^{3^n - 1}\left(\left[\frac{3k}{3^n}, \frac{3k +
+            1}{3^n}\right] \cup \left[\frac{3k + 2}{3^n}, \frac{3k +
+            3}{3^n}\right]\right)
+        \] is compact, and uncountable. Indeed it is Borel measurable, hence Lebesgue
+        measurable with $m_1(\mathcal{C}) = 0$.
+    \end{example}
+
+    \begin{example}
+        Consider $\R$ as an additive group, and examine the quotient group $\R/\Q$.
+        Pick exactly one representative element from each coset, ensuring that it
+        belongs to the interval $[0, 1]$, and call this set $\mathcal{V}$. This is a
+        Vitali set, and it it not Lebesgue measurable. To see this, suppose that it
+        were. Enumerate the rationals in $[-1, 1]$ as $\{q_i\}_{i \in \N}$, and set
+        $\mathcal{V}_i = q_i + \mathcal{V}$. Note that each $\mathcal{V}_i$ must also
+        be Lebesgue measurable, with $m_1(\mathcal{V}_i) = m_1(\mathcal{V})$ due to
+        translation invariance. We claim that \[
+            [0, 1] \subseteq \bigcup_{i = 1}^\infty
+            \mathcal{V}_i \subseteq [-1, 2].
+        \] To see the former inclusion, pick arbitrary $x \in [0, 1]$. Then, $x$ must
+        belong to one of the cosets of $\R/\Q$, say $r + \Q$ with $r \in
+        \mathcal{V}$.  Thus, $x - r \in \Q$, but $-1 \leq x - r \leq 1$ hence $x - r
+        = q_i$ for some $i \in \N$. It immediately follows that $x = q_i + r \in q_i
+        + \mathcal{V} = \mathcal{V}_i$.
+
+        Our set of inclusions implies that \[
+            m_1([0, 1]) \leq \sum_{i = 1}^\infty m_1(\mathcal{V}_i) \leq m_1([-1, 3]).
+        \] Thus, $1 \leq \sum_{i = 1}^\infty m_1(\mathcal{V}) \leq 3$, which is
+        absurd.
+
+        \begin{remark}
+            The construction of $\mathcal{V}$ invokes the Axiom of Choice.
+        \end{remark}
+    \end{example}
+
+    \begin{lemma}
+        The following inclusions are strict. \[
+            \mathcal{B}_\R \subset \L \subset \mathcal{P}(\R).
+        \] 
+        \begin{remark}
+            The Borel $\sigma$-algebra has the cardinality of the continuum,
+            $\mathfrak{c}$. However, note that the uncountable Cantor set
+            $\mathcal{C}$ is Lebesgue measurable with $m_1(\mathcal{C}) = 0$, hence
+            all of its subsets are also Lebesgue measurable. This shows that the
+            Lebesgue $\sigma$-algebra has cardinality $2^\mathfrak{c}$, strictly
+            greater than that of the Borel $\sigma$-algebra.
+        \end{remark}
+    \end{lemma}
+    
+
+    \begin{theorem}
+        If $E \subseteq \R$ is Lebesgue measurable with $m_1(E) > 0$, then $E$
+        contains a non-measurable subset.
+    \end{theorem}
+    \begin{proof}
+        First, we show that any measurable subset of a Vitali set $\mathcal{V}$ has
+        measure zero. Indeed if $A \subseteq \mathcal{V}$ is Lebesgue measurable,
+        then set $A_i = q_i + A$ for all rationals $q_i \in [-1, 1]$. Furthermore,
+        the sets $A_i$ are all mutually disjoint. From $A_i \subseteq [-1, 2]$, we
+        have \[
+            \sum_{i = 1}^\infty m_1(A) = \sum_{n = 1}^\infty m_1(A_i) \leq 3,
+        \] hence $m_1(A) = 0$.
+
+        Now, let $E \subseteq [0, 1]$ be Lebesgue measurable, and $m_1(E) > 0$. Then,
+        if all the sets $E_i = E \cap \mathcal{V}_i$ were to be measurable, each
+        $m_1(E_i) = 0$ hence the union \[
+            m_1(E) = m_1\left(\bigcap_{i = 1}^\infty E_i\right) = 0,
+        \] a contradiction. Thus, at least one of the $E_i$ must be non-measurable.
+
+        Finally, given $E \subseteq \R$ Lebesgue measurable with $m_1(E) > 0$, we
+        must have some $m_1(E \cap [n, n + 1)) > 0$, whence we apply the same
+        argument on the shifted set $(E \cap [n, n + 1)) - n$.
+    \end{proof}
+    \begin{corollary}
+        Let $E \subseteq \R$ be Lebesgue measurable, such that all of its subsets
+        are also Lebesgue measurable. Then, $m_1(E) = 0$.
+    \end{corollary}
+
+    
+
+    \subsection{Product measures}
+
+    \begin{definition}
+        Let $(X, \M, \mu)$ and $(Y, \MN, \nu)$ be measure spaces.
+        \begin{enumerate}
+            \itemsep0em
+            \item The sets $A \times B$ with $A \in \M$, $B \in \MN$ are called
+            measurable rectangles.
+            \item Finite unions of disjoint measurable rectangles are called
+            elementary sets.
+            \item Let $\mathcal{E}$ be the collection of all elementary rectangles.
+            The product $\sigma$-algebra $\M \times \MN$ is the $\sigma$-algebra
+            generated by $\mathcal{E}$.
+        \end{enumerate}
+    \end{definition}
+
+    \begin{definition}
+        A collection $\mathcal{A} \subseteq \mathcal{P}(X)$ is called a monotone
+        class if the following hold.
+        \begin{enumerate}
+            \itemsep0em
+            \item Given $\{A_n\}_{n \in \N}$ with each $A_n \in \mathcal{A}$ and $A_n
+            \subseteq A_{n + 1}$, the union \[
+                A = \bigcup_{n = 1}^\infty A_n \in \mathcal{A}.
+            \] 
+            \item Given $\{B_n\}_{n \in \N}$ with each $B_n \in \mathcal{A}$ and $B_n
+            \supseteq B_{n + 1}$, the intersection \[
+                B = \bigcap_{n = 1}^\infty B_n \in \mathcal{A}.
+            \] 
+        \end{enumerate}
+    \end{definition}
+
+    \begin{definition}
+        The smallest monotone class containing a collection $S$ of subsets of $X$ is
+        called the monotone class generated by $S$, denoted $\mathcal{A}(S)$.
+    \end{definition}
+
+    \begin{lemma}
+        Given a collection $S$ of subsets of $X$, we have \[
+            S \subseteq \mathcal{A}(S) \subseteq \M(S) \subseteq \mathcal{P}(X).
+        \] 
+    \end{lemma}
+
+    \begin{definition}
+        A collection $\mathcal{F} \subseteq \mathcal{P}(X)$ is called an algebra over
+        $X$ if the following hold.
+        \begin{enumerate}
+            \itemsep0em
+            \item $\mathcal{F}$ contains $X$.
+            \item $\mathcal{F}$ is closed under complementation.
+            \item $\mathcal{F}$ is closed under finite unions.
+        \end{enumerate}
+        \begin{remark}
+            The following properties follow immediately.
+            \begin{enumerate}
+                \itemsep0em
+                \item $\mathcal{F}$ contains $\emptyset$.
+                \item $\mathcal{F}$ is closed under finite intersections.
+                \item $\mathcal{F}$ is closed under differences.
+            \end{enumerate}
+        \end{remark}
+    \end{definition}
+
+    \begin{example}
+        The collection of elementary sets $\mathcal{E}$ defined earlier forms an
+        algebra over $X \times Y$.
+    \end{example}
+    
+
+    \begin{theorem}[Monotone Class Theorem]
+        If $\mathcal{F}$ is an algebra of sets over $X$, then
+        $\mathcal{A}(\mathcal{F}) = \mathcal{M}(\mathcal{F})$. In other words, the
+        monotone class generated by $\mathcal{F}$ is precisely the $\sigma$-algebra
+        generated by $\mathcal{F}$.
+    \end{theorem}
+    \begin{proof}
+        For each $P \in \mathcal{F}$, define \[
+            \mathcal{A}_P = \{Q \in \mathcal{A}(\mathcal{F}): P\cup Q, P\setminus Q,
+            Q\setminus P \in \mathcal{A}(\mathcal{F})\}.
+        \] We claim that each $\mathcal{A}_P$ is a monotone class. Indeed, let
+        $\{Q_n\}_{n \in \N}$ be an increasing sequence in $\mathcal{A}_P$, and let
+        $Q$ be their union. Then, $\{P\cup Q_n\}_{n \in \N}$, $\{Q_n \setminus P\}_{n
+        \in \N}$ are increasing sequences in $\mathcal{A}(\mathcal{F})$, hence \[
+            P \cup Q = \bigcup_{n \in \N} P\cup Q_n \in \mathcal{A}(\mathcal{F}), \qquad
+            Q\setminus P = \bigcup_{n \in \N} Q_n\setminus P \in
+            \mathcal{A}(\mathcal{F}).
+        \] Also, $\{P\setminus Q_n\}_{n \in \N}$ is a decreasing sequence in
+        $\mathcal{A}(\mathcal{F})$, hence \[
+            P\setminus Q = \bigcap_{n \in \N} P\setminus Q_n \in
+            \mathcal{A}(\mathcal{F}).
+        \] This shows that the union $Q \in \mathcal{A}_P$. The case for decreasing
+        sequences is analogous. \\
+
+        Now, note that given $P, Q \in \mathcal{F}$, we have $P \cup Q, P\setminus Q,
+        Q\setminus P \in \mathcal{F} \subseteq \mathcal{A}(\mathcal{F})$. Thus, $Q
+        \in \mathcal{A}_P$, $P \in \mathcal{A}_Q$. This shows that $\mathcal{F}
+        \subseteq \mathcal{A}_P, \mathcal{A}_Q$, so $\mathcal{A}(\mathcal{F})
+        \subseteq \mathcal{A}_P, \mathcal{A}_Q$.
+
+        Next, for $P, Q \in \mathcal{A}(\mathcal{F})$, we have $P \in \mathcal{A}_Q$,
+        so $P \cup Q, P\setminus Q \in \mathcal{A}_Q \supseteq
+        \mathcal{A}(\mathcal{F})$. This is enough to show that
+        $\mathcal{A}(\mathcal{F})$ is an algebra.
+
+        Finally, let $\{E_n\}_{n \in \N}$ be a countable collection of sets from
+        $\mathcal{A}(\mathcal{F})$. Since the latter is an algebra, the finite unions
+        \[
+            F_n = \bigcup_{i = 1}^n E_i \in \mathcal{A}(\mathcal{F}).
+        \] Now, $\{F_n\}_{n \in \N}$ is an increasing sequence in
+        $\mathcal{A}(\mathcal{F})$, so \[
+            \bigcup_{n \in \N} E_n = \bigcup_{n \in \N} F_n \in
+            \mathcal{A}(\mathcal{F}).
+        \] This shows that $\mathcal{A}(\mathcal{F})$ is a $\sigma$-algebra
+        containing $\mathcal{F}$, so $\M(\mathcal{F}) \subseteq
+        \mathcal{A}(\mathcal{F})$. Thus, $\mathcal{A}(\mathcal{F}) =
+        \M(\mathcal{F})$.
+    \end{proof} 
+
+    \begin{corollary}
+        The monotone class generated by the algebra of elementary sets $\mathcal{E}$
+        is the product $\sigma$-algebra $\M \times \MN$.
+    \end{corollary}
+
+    \begin{theorem}
+        Let $E \subseteq \M \times \MN$. Define the sections \[
+            E_x = \{y \in Y: (x, y) \in E\}, \qquad
+            E_y = \{x \in X: (x, y) \in E\}.
+        \] Then, $E_x \in \M$, $E_y \in \MN$.
+    \end{theorem}
+    \begin{proof}
+        Let \[
+            \Omega = \{E \in \M \times \MN: E_x \in \M\text{ for all } x \in X\}
+            \subseteq \M \times \MN.
+        \] Note that $\Omega$ trivially contains all measurable rectangles, hence we
+        have $\mathcal{E} \subseteq \Omega$. We claim that $\Omega$ is a
+        $\sigma$-algebra, whence $\M(\mathcal{E}) \subseteq \Omega$ forces $\Omega =
+        \M \times \MN$. To show this, first we clearly have $X \times Y \in \Omega$.
+        Next given $E \in \Omega$, we have $E_x \in \MN$, hence \begin{align*}
+            (E^c)_x &= \{y \in Y: (x, y) \in E^c\} \\
+            &= \{y \in Y: (x, y) \notin E\} \\
+            &= Y \setminus \{y \in Y: (x, y) \in E\} \\
+            &= Y\setminus E_x
+        \end{align*} gives $(E^c)_x = (E_x)^c \in \MN$. Finally, if $\{E_i\}_{i \in
+        \N}$ are such that $E_i \in \Omega$, then each $(E_i)_x \in \MN$, hence
+        \begin{align*}
+            \left(\bigcup_{i = 1}^\infty E_i\right)_x &= \{y \in Y: (x, y) \in
+            \bigcup_{i = 1}^\infty E_i\} \\
+            &= \bigcup_{i = 1}^\infty \{y \in Y: (x, y) \in E_i\} \\
+            &= \bigcup_{i = 1}^\infty (E_i)_x
+        \end{align*} gives $(\bigcup_{i = 1}^\infty E_i)_x = \bigcup_{i = 1}^\infty
+        (E_i)_x \in \MN$.
+    \end{proof}
+
+
+    \begin{theorem}
+        Let $Z$ be a topological space, and let $f\colon X \times Y \to Z$ be
+        $(\M\times \MN, \mathcal{B}_Z)$ measurable. Define the sections \begin{align*}
+            f_x&\colon Y \to Z, \qquad y \mapsto f(x, y), \\
+            f_y&\colon X \to Z, \qquad x \mapsto f(x, y).
+        \end{align*}
+        Then, $f_x, f_y$ are measurable functions.
+    \end{theorem}
+    \begin{proof}
+        Let $U\subseteq Z$ be open. Then, $E = f^{-1}(U) \in \M \times \MN$ by the
+        measurability of $f$. It can be shown that $f_x^{-1}(U) = E_x \in \MN$ and
+        $f_y^{-1}(U) = E_y \in \M$, hence $f_x, f_y$ are indeed measurable.
+    \end{proof}
+
+    \begin{definition}
+        A measure space $(X, \M, \mu)$ is called $\sigma$-finite if $X$ can be
+        written as the countable, disjoint union of measurable sets of finite
+        measure.
+    \end{definition}
+
+    \begin{definition}
+        Let $(X, \M, \mu)$ and $(Y, \MN, \nu)$ be $\sigma$-finite measure spaces.
+        The product measure on $\M \times \MN$ is defined as \[
+            (\mu \times \nu)(E) = \int_X \nu(E_x)\:d\mu = \int_Y \mu(E_y)\:d\nu.
+        \] 
+    \end{definition}
+
+    \begin{lemma}
+        The product measure is well-defined, and is indeed a measure on $\M\times
+        \MN$.
+    \end{lemma}
+
+    \begin{example}
+        Consider $X = [0, 1]$ with the Lebesgue measure, and $Y = [0, 1]$ with the
+        counting measure. Set $D = \{(x, x): x \in [0, 1]\}$, whence \[
+            \int_{X}\nu(D_x)\:d\mu = \int_{[0, 1]} 1\:d\mu = 1, \qquad
+            \int_{Y}\nu(D_y)\:d\nu = \int_{[0, 1]} 0\:d\mu = 0.
+        \] 
+    \end{example}
+
+    \begin{example}
+        The product measure obtained from two complete measure spaces may not be
+        complete. Consider the product $m_1 \times m_1$ on $[0, 1] \times [0, 1]$,
+        and the set $\{0\} \times [0, 1]$. This clearly has zero measure, but the
+        subset $\{0\} \times \mathcal{V}$ is not $\L\times \L$ measurable; if it
+        were, the section $\mathcal{V}$ would have to be Lebesgue measurable.
+
+        This shows in particular that $m_1 \times m_1 \neq m_2$, where $m_2$ is the
+        Lebesgue measure defined on $R^2$ (via the Carath\'eodory process). However,
+        it is true that the completion $\overline{m_1 \times m_1} = m_2$.
+    \end{example}
+
+
+    \begin{theorem}[Fubini-Tonelli]
+        Let $(X, \M, \mu)$ and $(Y, \MN, \nu)$ be $\sigma$-finite measure spaces, and
+        let $f\colon X\times Y \to \C$ be measurable.
+        \begin{enumerate}
+            \item Let $f\geq 0$. Then the functions \begin{align*}
+                \varphi&\colon X \to [0, \infty], \qquad x \mapsto \int_Y f_x\:d\nu,
+                \\
+                \psi&\colon Y \to [0, \infty], \qquad y \mapsto \int_X f_y\:d\mu
+            \end{align*}
+            are measurable, and \[
+                \iint_{X\times Y} f\:d(\mu\times \nu) = \int_X \varphi\:d\mu = \int_Y
+                \psi\:d\nu.
+            \] 
+
+            \item If $f \in L^1(\mu\times \nu)$, then $\varphi \in L^1(\mu)$, $\psi
+            \in L^1(\nu)$, and \[
+                \iint_{X\times Y} f\:d(\mu\times \nu) = \int_X \varphi\:d\mu = \int_Y
+                \psi\:d\nu < \infty.
+            \] 
+        \end{enumerate}
+
+        \begin{remark}
+            If $f\colon X \times Y \to \C$ is measurable, we have $|f| \geq 0$
+            measurable, hence \begin{align*}
+                \varphi^*&\colon X \to [0, \infty], \qquad x \mapsto \int_Y |f_x|\:d\nu,
+                \\
+                \psi^*&\colon Y \to [0, \infty], \qquad y \mapsto \int_X |f_y|\:d\mu
+            \end{align*}
+            measurable. This immediately gives \[
+                \iint_{X \times Y} |f|\:d(\mu\times\nu) = \int_X \varphi^*\:d\mu =
+                \int_Y \psi^*\:d\nu.
+            \] If either \[
+                \int_X \varphi^*\:d\mu < \infty, \qquad
+                \int_Y \psi^*\:d\nu < \infty,
+            \] we obtain $f \in L^1(\mu\times\nu)$, and can use part \emph{2}.
+        \end{remark}
+    \end{theorem}
+
+    \begin{corollary}
+        Let $\{a_{mn}\}_{(m, n) \in \N\times\N}$ be a doubly-indexed sequence.
+        \begin{enumerate}
+            \item If each $a_{mn} \geq 0$, then \[
+                 \sum_{m = 1}^\infty \sum_{n = 1}^\infty a_{mn} = \sum_{n = 1}^\infty
+                 \sum_{m = 1}^\infty a_{mn}.
+            \]
+            \item If each $a_{mn} \in \C$ but either \[
+                \sum_{m = 1}^\infty \sum_{n = 1}^\infty |a_{mn}| < \infty, \qquad
+                \sum_{n = 1}^\infty \sum_{m = 1}^\infty |a_{mn}| < \infty,
+            \] then the interchange of summations can be performed as in part 1.
+        \end{enumerate}
+    \end{corollary}
+
+    \begin{example}
+        Consider the sequence defined as \[
+            a_{mn} = \begin{cases}
+                1, &\text{ if } m = n, \\
+                -1, &\text{ if } m + 1 = n, \\
+                0, &\text{ otherwise}.
+            \end{cases}
+        \] Then, \[
+            \sum_{m = 1}^\infty\sum_{n = 1}^\infty a_{mn} = 0, \qquad
+            \sum_{n = 1}^\infty\sum_{m = 1}^\infty a_{mn} = 1.
+        \] 
+    \end{example}
+
+
+    \begin{theorem}
+        Let $(X, \M, \mu)$ be a finite measure space and let $f\colon X \to \C$ be
+        measurable. Set \[
+            E(t) = \{x \in X: |f(x)| > t\},
+        \] and define the distribution function of $f$ as \[
+            F\colon [0, \infty) \to [0, \infty], \qquad t \mapsto \mu(E(t)).
+        \] Then, \[
+            \int_{[0, \infty)} F\:dm_1 = \int_X |f|\:d\mu.
+        \] 
+    \end{theorem}
+    \begin{proof}
+        Using Fubini-Tonelli, write \[
+            \int_{[0, \infty)} F\:dm_1 = \int_{[0, \infty)} \int_X
+            \chi_{E(t)}(x)\:d\mu(x)\,dm_1(t) = \int_X \int_{[0, \infty)}
+            \chi_{E(t)}(x)\:dm_1(t)\,d\mu(x).
+        \] Now, note that \[
+            \chi_{E(t)}(x) = \chi_{[0, |f(x)|)}(t) = \begin{cases}
+                1, &\text{ if } |f(x)| > t, \\
+                0, &\text{ otherwise}.
+            \end{cases}
+        \] Thus, \[
+            \int_{[0, \infty)} F\:dm_1 = \int_{X}\int_{[0, \infty)} \chi_{[0,
+            |f(x)|)}(t) \:dm_1(t)\,d\mu(x) = \int_X |f(x)|\:d\mu(x). \qedhere
+        \] 
+    \end{proof}
+
+    \begin{theorem}
+        Let \[
+            \Phi\colon \R^n\setminus\{0\} \to (0, \infty) \times S^{n - 1}, \qquad
+            x \mapsto (\norm{x}, x / \norm{x}).
+        \] This is clearly a homeomorphism. Define the measure \[
+            m_n'\colon \mathcal{B}_{(0, \infty) \times S^{n - 1}} \to [0, \infty],
+            \qquad E \mapsto m_n(\Phi^{-1}(E)).
+        \] Then, there exists a measure $\rho$ on $(0, \infty)$ and a surface measure
+        $\sigma$ on $S^{n - 1}$ such that $m_n'$ factors as the product \[
+            m_n' = \rho \times \sigma.
+        \] Furthermore, \[
+            \rho\colon \mathcal{B}_{(0, \infty)}\to [0, \infty], \qquad
+            E \mapsto \int_E r^{n - 1}\:dm_1(r),
+        \] and \[
+            \sigma\colon \mathcal{B}_{S^{n - 1}}\to [0, \infty], \qquad
+            F \mapsto n\cdot m_n\{rx: x \in F, 0 \leq r \leq 1\}.
+        \] 
+    \end{theorem}
+
+    \begin{lemma}
+        If $f\colon \R^n \to \C$ is Borel measurable, and either $f \geq 0$ or $f\in
+        L^1(m_n)$, then \[
+            \int_{\R^n} f\:dm_n = \int_{(0, \infty)} \int_{S^{n - 1}} f(r\hat{x})
+            \,r^{n - 1}\:d\sigma(\hat{x})\,dm_1(r).
+        \] Furthermore, if $f$ is radial, i.e.\ $f(x) = g(|x|)$ for some $g\colon (0,
+        \infty) \to \C$, then \[
+            \int_{\R^n} f\:dm_n = \sigma(S^{n - 1}) \int_{(0, \infty)} g(r)\,r^{n -
+            1}\:dm_1(r).
+        \] 
+    \end{lemma}
+
+    \begin{example}
+        Consider the integrals \[
+            I_n = \int_{\R^n} e^{-\norm{x}^2}\:dm_n.
+        \] For $n = 2$, we can apply the polar formula to write \[
+            I_2 = \sigma(S^1)\int_0^\infty e^{-r^2} r\:dr = \pi.
+        \] Note that we have used $\sigma(S^1) = 2m_2(B^2) = 2\pi$. Now, by repeated
+        application of Fubini-Tonelli, we have \[
+            I_n = \underbrace{\int_\R \dots \int_\R}_{n\text{ times}}
+            e^{-\sum_{i = 1}^n x_i^2}\:\underbrace{dm_1 \dots dm_1}_{n\text{ times}}
+            = \prod_{i = 1}^n \int_\R e^{-x_i^2} \:dm_1(x_i) = I_1^n.
+        \] Thus, $I_2 = \pi$ gives $I_1 = \sqrt{\pi}$, hence $I_n = \pi^{n / 2}$. The
+        polar formula also gives \[
+            I_n = \sigma(S^{n - 1})\int_0^\infty e^{-r^2} r^{n - 1}\:dx.
+        \] Making the substitution $r = x^2$ yields \[
+            \pi^{n / 2} = \sigma(S^{n - 1}) \cdot \frac{1}{2} \int_0^\infty e^{-u}
+            u^{n /2 - 1}\:du = \frac{1}{2} \sigma(S^{n - 1})
+            \,\Gamma\left(\frac{n}{2}\right).
+        \] Thus, \[
+            \sigma(S^{n - 1}) = \frac{2\pi^{n / 2}}{\Gamma(n / 2)}.
+        \] Using $\sigma(S^{n - 1}) = nm_n(B^n)$, we have the volume of the unit
+        $n$-ball \[
+            m_n(B^n) = \frac{\pi^{n / 2}}{(n / 2)\Gamma(n / 2)} = \frac{\pi^{n /
+            2}}{\Gamma(n / 2 + 1)}.
+        \] Putting $n = 1$, $m_1(B^1) = 2$, we compute $\Gamma(1 / 2) = \sqrt{\pi}$.
+    \end{example}
 
 \end{document}
