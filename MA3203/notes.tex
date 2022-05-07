@@ -287,7 +287,7 @@
             \mu\left(\bigcup_{i = 1}^\infty E_i\right) = \mu\left(\bigcup_{i =
             1}^\infty F_i\right) = \sum_{i = 1}^\infty \mu(F_i).
         \] Also note that \[
-            \sum_{i = 1}^n \mu(F_i) = \mu\left(\bigcup_{i = 1}^\infty F_n\right) =
+            \sum_{i = 1}^n \mu(F_i) = \mu\left(\bigcup_{i = 1}^n F_i\right) =
             \mu(E_n).
         \] Since the infinite sum in the first part is the limit of partial sums, we
         have our result.
@@ -1284,7 +1284,7 @@
     \begin{definition}
         A set $A \subseteq X$ is called $\mu^*$-measurable if for all $E \subseteq
         X$, we have \[
-            \mu^*(A) = \mu^*(E \cap A) + \mu^*(E \cap A^c).
+            \mu^*(E) = \mu^*(E \cap A) + \mu^*(E \cap A^c).
         \]
         \begin{remark}
             We need only check the $\geq$ direction, and we need only check sets $E$
@@ -1599,7 +1599,7 @@
         Now, let $E \subseteq [0, 1]$ be Lebesgue measurable, and $m_1(E) > 0$. Then,
         if all the sets $E_i = E \cap \mathcal{V}_i$ were to be measurable, each
         $m_1(E_i) = 0$ hence the union \[
-            m_1(E) = m_1\left(\bigcap_{i = 1}^\infty E_i\right) = 0,
+            m_1(E) = m_1\left(\bigcup_{i = 1}^\infty E_i\right) = 0,
         \] a contradiction. Thus, at least one of the $E_i$ must be non-measurable.
 
         Finally, given $E \subseteq \R$ Lebesgue measurable with $m_1(E) > 0$, we
