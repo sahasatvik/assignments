@@ -1014,7 +1014,7 @@
         $\overline{X} = \R^\omega$. Indeed, given $x = (x_1, x_2, \dots) \in \R^\omega$,
         an open neighbourhood of $x$ looks like $U = U_1 \times U_2 \times \dots$,
         where all but finitely many $I_i = \R$. In other words, there exists
-        sufficiently large $N in \N$ such that for all $n \geq N$, $U_n = \R$. Thus,
+        sufficiently large $N \in \N$ such that for all $n \geq N$, $U_n = \R$. Thus,
         the point $(x_1, x_2, \dots, x_n, 0, 0, \dots) \in U \cap \tilde{R}^N$.
     \end{example}
 
@@ -1203,10 +1203,10 @@
 
     \begin{proof}
         Let $\beta = \{B_n\}_{n \in \N}$ be a countable basis of $X$. For each $a \in
-        A$, note that $\{a\}$ is open in subspace topology $A$, hence there exists a
-        basis element $B_a \in \beta$ such that $B_a \cap A = \{a\}$. Furthermore,
-        this assignment $A \to \beta$, $a \mapsto B_a$ is injective, hence $A$ must
-        be countable.
+        A$, note that $\{a\}$ is open in the subspace topology $A$, hence there
+        exists a basis element $B_a \in \beta$ such that $B_a \cap A = \{a\}$.
+        Furthermore, this assignment $A \to \beta$, $a \mapsto B_a$ is injective,
+        hence $A$ must be countable.
     \end{proof}
 
     \begin{example}
@@ -1302,6 +1302,11 @@
         A space $X$ is regular if and only if given any point $x$ and an open set $U
         \subseteq X$ such that $x \in U$, there exists an open set $V$ such that $x
         \in V \subseteq \overline{V} \subseteq U$.
+    \end{lemma}
+    \begin{lemma}
+        A space $X$ is normal if and only if given any closed set $F$ and an open set
+        $U \subseteq X$ such that $F \subseteq U$, there exists an open set $V$ such
+        that $F \subseteq V \subseteq \overline{V} \subseteq U$.
     \end{lemma}
     \begin{example}
         All metric spaces are regular.
@@ -1586,12 +1591,12 @@
             consider the map \[
                 \gamma\colon [0, 1] \to GL_n(\C), \qquad t \mapsto tA + (1 - t)zI_n.
             \] Note that $\gamma$ is continuous and well-defined; $\gamma(0) = I_n$,
-            $\gamma(1) = A$ both of which are in $GL_n(\C)$. Now if some
-            $\det\gamma(t) = 0$ for $0 < t < 1$, there must be some non-zero vector
-            $v\in \C^n$ such that $tAv + (1 - t)zI_nv = 0$, i.e.\ $Av = -(1 -
-            t)z/t\,v$. However, $z$ was chosen such that none of its multiples are
-            eigenvectors of $A$. Thus, $\gamma$ is a path joining $I_n$ with $A$,
-            which shows that $GL_n(\C)$ is indeed path connected.
+            $\gamma(1) = A$ both of which are in $GL_n(\C)$. Now if $\det\gamma(t) =
+            0$ for some $0 < t < 1$, there must be some non-zero vector $v\in \C^n$
+            such that $tAv + (1 - t)zI_nv = 0$, i.e.\ $Av = -(1 - t)z/t\,v$. However,
+            $z$ was chosen such that none of its multiples are eigenvalues of $A$.
+            Thus, $\gamma$ is a path joining $I_n$ with $A$, which shows that
+            $GL_n(\C)$ is indeed path connected.
         \end{remark}
     \end{example}
     \begin{example}
@@ -1614,7 +1619,7 @@
         map $\Phi\colon G \to \{0, 1\}$. Since $H \subset G$ is connected, one of
         $\Phi(H) = 0, 1$. Now, the quotient map $\pi\colon G \to G/H$ induces the
         continuous surjection $\tilde{\Phi}\colon G/H \to \{0, 1\}$, $\Phi =
-        \tilde{\Phi} \circ q$, which contradicts the connectedness of $G/H$. Note
+        \tilde{\Phi} \circ \pi$, which contradicts the connectedness of $G/H$. Note
         that we have used the fact that $\pi$ is open; to see this, if $U\subseteq G$
         is open, we claim that $\pi(U) \subseteq G/H$ is open, i.e.\
         $\pi^{-1}(\pi(U))$ is open in $G$. But, \[
