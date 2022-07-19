@@ -14,6 +14,7 @@
 \usepackage{graphicx}
 \usepackage{fancyhdr}
 \usepackage{hyperref}
+\usepackage{tikz-cd}
 
 \geometry{a4paper, margin=1in, headheight=14pt}
 
@@ -806,7 +807,7 @@
         The ring $\Z[\sqrt{-5}]$ is a factorisation domain.
     \end{example}
     \begin{example}
-        Consider the ring if entire complex functions, i.e.\ \[
+        Consider the ring of entire complex functions, i.e.\ \[
             R = \{\sum_{n = 1}^\infty a_nz^n: a_n \in \C, \text{ the series converges
             for all } z \in \C\}.
         \] Then, $R$ is indeed a unit integral domain, and its units are those
@@ -847,7 +848,7 @@
         some unit $w$, then $x\mid a_i$ hence $x\mid a$. Otherwise, $x\mid b_j$ hence
         $x\mid b$.
 
-        Next suppose that $R$ is a factorisation domain where evert irreducible
+        Next suppose that $R$ is a factorisation domain where every irreducible
         element is prime. Suppose that non-zero $x \in R$ factorises into
         irreducible elements as \[
             x = ux_1\dots x_l = vy_1\dots y_m.
@@ -1235,16 +1236,6 @@
     \end{corollary}
 
 
-    \begin{theorem}[Structure theorem]
-        Let $M$ be a finitely generated module over a principal ideal domain $R$.
-        Then, $M$ can be expressed uniquely as \[
-            M \cong F\oplus R/(q_1) \oplus \dots \oplus R/(q_k)
-        \] where $F$ is a free $R$-module and $q_1, \dots, q_k$ are non-zero elements
-        of $R$ with $q_1\mid \dots \mid q_k$. Moreover, $F$ is unique up to
-        isomorphism, and $q_1, \dots, q_k$ are unique up to units.
-    \end{theorem}
-
-
     \begin{definition}
         An element $x \in M$ is a called a torsion element of the $R$-module $M$ if
         $ax = 0$ for some non-zero $a \in R$.
@@ -1258,6 +1249,10 @@
         \end{remark}
     \end{definition}
 
+    \begin{example}
+        $\Q\oplus \Z/n\Z$ is neither a torsion module, nor torsion-free.
+    \end{example}
+
 
     \begin{theorem}
         Let $M$ be a finitely generated module over a principal ideal domain $R$.
@@ -1265,5 +1260,189 @@
             M = F\oplus t(M),
         \] where $F$ is a free $R$-module. Moreover, $F$ is unique up to isomorphism.
     \end{theorem}
+
+
+    \begin{definition}
+        Let $x \in M$ and let $\Ann(x) = (a) \subseteq R$. Then, $a$ is called the
+        period of $x$.
+
+        \begin{remark}
+            The period of an element $x \in M$ is unique up to units in $R$.
+        \end{remark}
+    \end{definition}
+
+    \begin{definition}
+        Let $M$ be a finitely generated torsion module over a principal ideal domain.
+        If $\Ann(M) = (c)$, then $c$ is called the exponent of $M$.
+
+        \begin{remark}
+            The exponent of $M$ is unique up to units in $R$.
+        \end{remark}
+    \end{definition}
+
+    \begin{lemma}
+        Let $M$ be a finitely generated torsion module over a principal ideal domain,
+        with exponent $c = ab$ where $\gcd(a, b) = 1$. Then, $M = M_1 \oplus M_2$,
+        where \[
+            M_1 = \{x \in M: ax = 0\}, \qquad M_2 = \{x \in M: bx = 0\}.
+        \]
+    \end{lemma}
+
+    \begin{corollary}
+        Let $M$ be a finitely generated torsion module over a principal ideal domain,
+        with exponent $c = p_1^{\alpha_1}\cdots p_k^{\alpha_k}$ for primes $p_1,
+        \dots, p_k$. Then, $M$ can be expressed as \[
+            M = M_1\oplus \cdots \oplus M_k,
+        \] where each $M_i = \{x \in M: p_i^{\alpha_i}x = 0\}$.
+    \end{corollary}
+
+    \begin{definition}
+        A set of elements $\{y_1, \dots, y_n\} \subseteq M$ is called independent if
+        $\sum_{i = 1}^m a_i y_i = 0$ for $a_i \in R$ forces each $a_iy_i = 0$.
+
+        \begin{remark}
+            A linearly independent set is independent, but not all independent sets
+            are linearly independent.
+        \end{remark}
+    \end{definition}
+
+    \begin{lemma}
+        Let $M$ be a finitely generated torsion module over a principal ideal domain,
+        with exponent $p^r$ where $p$ is a prime, $r\geq 1$. Let $x_1 \in M$ with
+        period $p^r$, let $\overline{M} = M / (x_1)$, and let $\overline{y}_1, \dots,
+        \overline{y}_m$ be independent elements of $\overline{M}$. Then, for each
+        $i$, there exists a representative $y_i$ of $\overline{y}_i$ such that the
+        periods of $y_i$ and $\overline{y}_i$ are the same. Furthermore, $x_1, y_1,
+        \dots, y_m$ are independent.
+    \end{lemma}
+
+    \begin{lemma}
+        Let $M$ be a finitely generated torsion module over a principal ideal domain,
+        with exponent $p^r$ where $p$ is prime, $r\geq 1$. Then, $M$ can be expressed
+        as a direct sum of cyclic modules \[
+            M = R/(p^{r_1}) \oplus \cdots \oplus R/(p^{r_k}),
+        \] with $r_1 \geq \dots \geq r_k \geq 1$.
+    \end{lemma}
+
+
+    \begin{lemma}
+        Let $R$ be a unique factorisation domain. \begin{enumerate}
+            \itemsep0em
+            \item If $\gcd(a, b) = 1$, then $R/(ab) \cong R/(a) \oplus R/(b)$.
+            \item If $p \in R$ is prime and $b \in R$ is non-zero, then $R/(p) \cong
+            b R/(bp)$.
+        \end{enumerate}
+    \end{lemma}
+
+
+    \begin{theorem}[Structure theorem]
+        Let $M$ be a finitely generated module over a principal ideal domain $R$.
+        Then, $M$ can be expressed uniquely as \[
+            M \cong F\oplus R/(q_1) \oplus \dots \oplus R/(q_k),
+        \] where $F$ is a free $R$-module and $q_1, \dots, q_k$ are non-zero elements
+        of $R$ with $q_1\mid \dots \mid q_k$. Moreover, $F$ is unique up to
+        isomorphism, and $q_1, \dots, q_k$ are unique up to units.
+    \end{theorem}
+
+    \begin{corollary}
+        Let $G$ be a finitely generated abelian group. Then, $G$ can be expressed
+        uniquely as \[
+            G = F \oplus \Z/q_1Z \oplus \dots \oplus \Z/q_k\Z,
+        \] where $F$ is a free abelian group and $q_1, \dots, q_k$ are non-zero, with
+        $q_1\mid \dots \mid q_k$.
+
+        \begin{remark}
+            The rank of $M$ is defined as the rank of $F$. The elements $q_1, \dots,
+            q_k$ are called the invariant factors of $M$.
+        \end{remark}
+    \end{corollary}
+
+    \begin{example}
+        In order to enumerate all abelian groups $G$ of order $60 = 2^2 \times 3
+        \times 5$ (up to isomorphism), observe that $G$ has no free part. The only
+        abelian groups of order $2^2$ are $\Z/4\Z$ and $\Z/2\Z\times \Z/2\Z$, the
+        only abelian group of order $3$ is $\Z/3\Z$, and the only abelian group of
+        order $5$ is $\Z/5\Z$. Thus, the invariant factors of $G$ must be either
+        $60$, or $2, 30$. This gives us exactly two groups, \begin{align*}
+            G &\cong \Z/60\Z \cong \Z/4\Z \times \Z/3\Z \times \Z/5\Z, \\
+            G &\cong \Z/2\Z \times \Z/30\Z \cong \Z/2\Z\times \Z/2\Z \times \Z/3\Z
+            \times \Z/5\Z.
+        \end{align*}
+    \end{example}
+
+
+    \subsection{Tensor products}
+
+    \begin{definition}
+        Let $R$ be a commutative unit ring, and let $M, N, X$ be $R$-modules. A map
+        $f\colon M\times N \to X$ is called $R$-bilinear if it is $R$-linear in each
+        separate argument, i.e.\ for all $r \in R$, $x, y \in M$, $z, w \in N$, we
+        have \begin{enumerate}
+            \itemsep0em
+            \item $f(x + y, z) = f(x, z) + f(y, z)$.
+            \item $f(x, z + w) = f(x, z) + f(x, w)$.
+            \item $f(rx, z) = rf(x, z) = f(x, rz)$.
+        \end{enumerate}
+    \end{definition}
+
+    \begin{definition}
+        Let $R$ be a commutative unit ring, and let $M, N$ be $R$-modules. A tensor
+        product of $M$ and $N$ is an $R$-module denoted $M\otimes_R N$, together with
+        an $R$-bilinear map $\tau\colon M\times N \to M\otimes_R N$ such that for
+        every $R$-bilinear map $f\colon M \times N \to X$, there is a unique
+        $R$-linear map $f_*\colon M\otimes_R N \to X$ such that $f = f_*\circ \tau$.
+        In other words, each $f$ induces a map $f_*$ such that the following diagram
+        commutes. \[
+            \begin{tikzcd}
+                {M\times N} & X \\
+                {M\otimes_R N}
+                \arrow[from=1-1, to=1-2]
+                \arrow["f", from=1-1, to=1-2]
+                \arrow["\tau"', from=1-1, to=2-1]
+                \arrow["{f_*}"', dashed, from=2-1, to=1-2]
+            \end{tikzcd}
+        \] We usually denote $\tau(x, y) \equiv x\otimes y$.
+
+        \begin{remark}
+            The $R$-module $M\otimes_R N$ is generated by the tensors $x\otimes y$.
+        \end{remark}
+    \end{definition}
+
+    \begin{theorem}
+        The tensor product $M\otimes_R N$ of the modules $M, N$ exists, and is unique
+        up to isomorphism.
+    \end{theorem}
+
+    \begin{example}
+        We can show that $\Z/n\Z \otimes_\Z \Q = 0$, by picking an arbitrary element
+        $x\times y$ and noting that \[
+            x\otimes y = n(x\otimes (y / n)) = (nx) \otimes (y / n) = 0\otimes (y /
+            n) = 0(0\otimes (y / n)) = 0.
+        \]
+    \end{example}
+
+    \begin{example}
+        We claim that $\Q\otimes_\Z \Q \cong \Q$. Consider the maps \begin{align*}
+            \varphi&\colon \Q \to \Q\otimes_\Z \Q, &q&\mapsto q\otimes 1, \\
+            \psi&\colon \Q\times \Q \to \Q, &(p, q)&\mapsto pq.
+        \end{align*}
+        It is clear that $\varphi$ is $\Z$-linear, $\psi$ is $\Z$-bilinear hence
+        $\psi_*$ is $\Z$-linear. Furthermore, $\varphi\circ \psi_*$, $\psi_*\circ
+        \varphi$ are identity maps on their respective domains.
+    \end{example}
+
+    \begin{example}
+        If $d = \gcd(m, n)$, then \[
+            \Z/m\Z \otimes_\Z \Z/n\Z \cong \Z/d\Z.
+        \] To show this, we define the maps \begin{align*}
+            \varphi&\colon \Z/d\Z \to \Z/m\Z\otimes_\Z \Z/n\Z, &n&\mapsto n(1\otimes
+            1), \\
+            \psi&\colon \Z/m\Z \times \Z/n\Z \to \Z/d\Z, &(x, y)&\mapsto xy.
+        \end{align*}
+        It can be checked that these maps are indeed well-defined, $\varphi$ is
+        $\Z$-linear, $\psi$ is $\Z$-bilinear hence $\psi_*$ is $\Z$-linear.
+        Furthermore, $\varphi\circ \psi_*$, $\psi_*\circ\varphi$ are identity maps on
+        their respective domains.
+    \end{example}
 
 \end{document}
