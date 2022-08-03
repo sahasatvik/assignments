@@ -1,0 +1,329 @@
+\documentclass[11pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage[scr]{rsfso}
+\usepackage{bm}
+\usepackage[%
+    hidealllines=true,%
+    innerbottommargin=15,%
+    nobreak=true,%
+]{mdframed}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+
+\geometry{a4paper, margin=1in, headheight=14pt}
+
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand\headrulewidth{0.4pt}
+\fancyhead[L]{\scshape MA4103: Analysis V}
+\fancyhead[R]{\scshape \leftmark}
+\rfoot{\footnotesize\it Updated on \today}
+\cfoot{\thepage}
+
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+
+\newcommand{\M}{\mathcal{M}}
+
+\newmdtheoremenv[%
+    backgroundcolor=blue!10!white,%
+]{theorem}{Theorem}[section]
+\newmdtheoremenv[%
+    backgroundcolor=violet!10!white,%
+]{corollary}{Corollary}[theorem]
+\newmdtheoremenv[%
+    backgroundcolor=teal!10!white,%
+]{lemma}[theorem]{Lemma}
+
+\theoremstyle{definition}
+\newmdtheoremenv[%
+    backgroundcolor=green!10!white,%
+]{definition}{Definition}[section]
+\newmdtheoremenv[%
+    backgroundcolor=red!10!white,%
+]{exercise}{Exercise}[section]
+
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\newtheorem*{example}{Example}
+\newtheorem*{solution}{Solution}
+
+\surroundwithmdframed[%
+    linecolor=black!20!white,%
+    hidealllines=false,%
+    innertopmargin=5,%
+    innerbottommargin=10,%
+    skipabove=0,%
+    skipbelow=0,%
+]{example}
+
+\title{
+    \Large\textsc{MA4103} \\
+    \Huge \textbf{Analysis V} \\
+    \vspace{5pt}
+    \Large{Autumn 2022}
+}
+\author{
+    \large Satvik Saha
+    \\\textsc{\small 19MS154}
+}
+\date{\normalsize
+    \textit{Indian Institute of Science Education and Research, Kolkata, \\
+    Mohanpur, West Bengal, 741246, India.} \\
+}
+
+\begin{document}
+    \maketitle
+
+    \tableofcontents
+
+    \section{Signed measures}
+
+    As a motivating example, consider the space of linear functionals on $\C^n$; each
+    element of this space is a linear function $\phi\colon \C^n \to \C$. If we denote
+    the standard basis of $\C^n$ by $\{e_i\}$ and its dual basis by $\{\phi_i\}$,
+    any linear functional $\phi$ can be written as \[
+        \phi = \sum_{i = 1}^n \phi(e_i)\, \phi_i.
+    \] Now we switch to a different perspective; note that each element of $\C^n$ is
+    an $n$-tuple of complex numbers of the form $(z_1, z_n, \dots, z_n)$. In other
+    words, it is an assignment of complex numbers to the indices $X = \{1, 2, \dots,
+    n\}$. Thus, each element of $\C^n$ can be associated with a function $f\colon X
+    \to \C$, and vice versa. This gives us an identification of $\C^n$ with the space
+    of functions $C(X)$ (all such functions are continuous when $X$ is equipped with
+    the discrete topology). For instance, the basis vectors $\{e_i\}$ of $C(X)$ can
+    now be represented by the functions \[
+        e_i\colon X \to \C, \qquad j \mapsto \delta_{ij}.
+    \] Now, in order to extract the `coordinates' $z_i \equiv f(i)$ from some $f \in
+    C(X)$, we may define the following Dirac measures $\mu_i$ on $X$, concentrated at
+    the index $i$. \[
+        \mu_i\colon \mathscr{P}(X) \to C, \qquad
+        E \mapsto \begin{cases}
+            1, &\text{ if } i \in A, \\
+            0, &\text{ otherwise}.
+        \end{cases}
+    \] This means that for any $f \in C(X)$, \[
+        f(i) = \int f\:d\mu_i.
+    \] The dual basis $\{\phi_i\}$ behaves as $\phi_i(e_j) = \delta_{ij}$, so \[
+        \phi_i(f) = \phi_i\sum_{j = 1}^n f(j)\,e_j = f(i) = \int f\:d\mu_i.
+    \] Thus, for any linear functional $\phi\colon C(X) \to \C$, we have \[
+        \phi(f) = \sum_{i = 1}^n \phi(e_i)\, \phi_i(f) = \sum_{i = 1}^n \phi(e_i)\,
+        \int f\:d\mu_i = \int f \sum_{i = 1}^n \phi(e_i)\:d\mu_i.
+    \] If we could make sense of the measure $\mu$ described by \[
+        \mu = \sum_{i = 1}^n \phi(e_i)\: \mu_i,
+    \] then we could write \[
+        \phi(f) = \int f\:d\mu.
+    \] Note that the coefficients $\phi(e_i)$ are complex numbers, so $\mu$ is not
+    necessarily a measure in the conventional sense!
+
+
+    \subsection{Basic definitions}
+
+    \begin{definition}
+        Let $\M$ be a $\sigma$-algebra over $X$. A function $\nu\colon \M \to
+        [-\infty, +\infty]$ is called a signed measure if \begin{enumerate}
+            \itemsep0em
+            \item $\nu(\emptyset) = 0$.
+            \item For all countable collections of disjoint measurable sets
+            $\{E_i\}$, we have \[
+                \nu\left(\bigcup_{i = 1}^\infty E_i\right) = \sum_{i = 1}^\infty
+                \nu(E_i).
+            \]
+        \end{enumerate}
+        \begin{remark}
+            For disjoint sets $E, F \in \M$, we want \[
+                \nu(E \cup F) = \nu(E) + \nu(F).
+            \] Thus, we cannot allow the situation where $\nu(E) = +\infty$ and
+            $\nu(F) = -\infty$, or vice versa.
+        \end{remark}
+        \begin{remark}
+            Note that in condition 2, the union on the left hand side is independent
+            of order, while the infinite sum on the right hand side is not. Thus, we
+            demand that either the sum on the right converges absolutely, or the
+            following: neither one of the sums \[
+                \sum_{i: \nu(E_i) \geq 0} \nu(E_i), \qquad
+                \sum_{j: \nu(E_j) < 0} \nu(E_j)
+            \] should diverge to $\infty$.
+        \end{remark}
+    \end{definition}
+
+    \begin{lemma}
+        Let $E, F \in \M$, with $E \subseteq F$. Then, \begin{enumerate}
+            \item If $|\nu(E)| < \infty$, then \[
+                \nu(F\setminus E) = \nu(F) - \nu(E).
+            \]
+            \item If $\nu(E) = \pm\infty$, then $\nu(F) = \pm\infty$.
+        \end{enumerate}
+    \end{lemma}
+    \begin{proof}
+        Using $\nu(F) = \nu(F\setminus E) + \nu(E)$, we obtain \emph{1} when
+        $|\nu(E)| < \infty$. Otherwise, for $\nu(E) = \infty$, we cannot have
+        $\nu(F\setminus E) = \mp\infty$, hence we must have $\nu(F) = \pm \infty$.
+    \end{proof}
+
+    \begin{corollary}
+        If any measurable set $E\subseteq X$ has $\nu(E) = \pm\infty$, then $\nu(X) =
+        \pm\infty$. This immediately shows that we cannot have two measurable sets
+        $E, F \in \M$ with $\nu(E) = +\infty$, $\nu(F) = -\infty$. In other words, a
+        signed measure has either of the following forms. \[
+            \nu\colon \M \to [-\infty, +\infty), \quad\text{or}\quad
+            \nu\colon \M \to (-\infty, +\infty].
+        \]
+    \end{corollary}
+
+    \begin{example}
+        Consider a non-negative measure $\mu$, and a function $f\in L^1(\mu)$. Then,
+        the measure defined by \[
+            \nu(E) = \int_E f\:d\mu
+        \] is a (finite) signed measure.
+    \end{example}
+    \begin{example}
+        Consider any two non-negative measures $\mu_1, \mu_2 \geq 0$. Then, the
+        measure $\nu$ defined by \[
+            \nu = \mu_1 - \mu_2
+        \] where either one of $\mu_1, \mu_2$ is finite is a signed measure. Indeed,
+        any signed measure is of this form.
+    \end{example}
+
+    \begin{lemma}[Continuity from below]
+        Let $\{E_i\}$ be a collection of measurable sets such that each $E_i
+        \subseteq E_{i + 1}$. Then, \[
+            \lim_{n \to \infty} \nu(E_n) = \nu\left(\bigcup_{n = 1}^\infty
+            E_n\right).
+        \]
+    \end{lemma}
+
+    \begin{lemma}[Continuity from above]
+        Let $\{E_i\}$ be a collection of measurable sets such that each $E_i
+        \supseteq E_{i + 1}$, and $|\nu(E_1)| < \infty$. Then, \[
+            \lim_{n \to \infty} \nu(E_n) = \nu\left(\bigcap_{n = 1}^\infty
+            E_n\right).
+        \]
+    \end{lemma}
+
+    \subsection{The Hahn decomposition}
+
+    \begin{definition}
+        A set $P \in \M$ is called a positive set for $\nu$ if for every measurable
+        subset $E \subseteq P$, we have $\nu(E) \geq 0$.
+    \end{definition}
+    \begin{definition}
+        A set $N \in \M$ is called a negative set for $\nu$ if for every measurable
+        subset $E \subseteq N$, we have $\nu(E) \leq 0$.
+    \end{definition}
+    \begin{definition}
+        A set $F \in \M$ is called a null set for $\nu$ if for every measurable
+        subset $E \subseteq F$, we have $\nu(E) = 0$.
+    \end{definition}
+
+    \begin{example}
+        Let $\mu$ be a non-negative measure and let $f$ be a measurable function.
+        Define the signed measure \[
+            \nu(E) = \int_E f\:d\mu.
+        \] It is clear that any measurable subset of $f^{-1}[0, \infty]$ is a
+        positive set for $\nu$, any measurable subset of $f^{-1}[-\infty, 0]$ is a
+        negative set for $\nu$, and any measurable subset of $f^{-1}(0)$ is a null
+        set for $\nu$.
+    \end{example}
+
+    \begin{lemma}
+        Every measurable subset of a positive(/negative/null) set is
+        positive(/negative/null).
+    \end{lemma}
+    \begin{proof}
+        Let $P$ be a positive set for $\nu$, and $E \subseteq P$ be a measurable
+        subset. We claim that for all measurable subsets $F \subseteq E$, $\nu(F)
+        \geq 0$. This is immediate from the fact that $F \subseteq E \subseteq P$ is
+        a measurable subset of the positive set $P$. The cases for negative and null
+        sets are analogous.
+    \end{proof}
+
+    \begin{lemma}
+        Countable unions of positive(/negative/null) sets are
+        positive(/negative/null).
+    \end{lemma}
+    \begin{proof}
+        Let $\{P_i\}$ be a countable collection of positive measurable sets, and let
+        $P = \bigcup_{i = 1}^\infty P_i$. Define the sets \[
+            Q_i = P_i \setminus \bigcup_{j = 1}^{i - 1} P_j,
+        \] and note that $P = \bigcup_{i = 1}^\infty Q_i$, with the collection
+        $\{Q_i\}$ being disjoint. Furthermore, each $Q_i \subseteq P_i$ is a positive
+        set. Now for any measurable $E \subseteq P$, each $E \cap Q_i \subseteq Q_i$
+        is a positive set, hence \[
+            E = \bigcup_{i = 1}^\infty E \cap Q_i = \sum_{i = 1}^\infty \nu(E \cap
+            Q_i) \geq 0.
+        \] The cases for negative and null sets are analogous.
+    \end{proof}
+
+    \begin{lemma}
+        Let $E \in \M$ such that $\nu(E) > 0$. Then, there exists a measurable subset
+        $\tilde{E} \subseteq E$ such that $\tilde{E}$ is a positive set for $\nu$
+        and $\nu(\tilde{E}) > 0$.
+    \end{lemma}
+
+    \begin{theorem}[Hahn Decomposition]
+        Let $\nu$ be a signed measure on $(X, \M)$. Then, there exists a positive set
+        $P$ and a negative set $N$ for $\nu$ such that $P \cup N = X$, $P \cap N =
+        \emptyset$. Furthermore, if $P, N$ and $P', N'$ are two decompositions of
+        $X$, then the symmetric difference $P\Delta P' = N\Delta N'$ is a null set
+        for $\nu$.
+    \end{theorem}
+    \begin{proof}
+        Without loss of generality, suppose that $\nu$ is of the form $\nu\colon \M
+        \to [-\infty, +\infty)$. Let $\mathscr{P} \subseteq$ be the collection of all
+        positive measurable sets for $\nu$. Note that this collection is non-empty,
+        since $\emptyset \in \mathscr{P}$. Set \[
+            m = \sup_{E \in \mathscr{P}} \nu(E).
+        \] Note that from the properties of the supremum, there exists a sequence of
+        sets $\{P_i\}_{i \in \N}$ from $\mathscr{P}$ such that $\nu(P_i) \to m$. Set
+        $P = \bigcup_{i = 1}^\infty P_i$, and note that $P$ is a positive set for
+        $\nu$, i.e.\ $P \in \mathscr{P}$. We claim that $\nu(P) = m$. To see this,
+        define \[
+            Q_i = \bigcup_{j = 1}^i P_i,
+        \] and note that $\{Q_i\}$ is an increasing sequence of positive measurable
+        sets for $\nu$. Also, each $Q_i \supseteq P_i$, so $0 \leq \nu(P_i) \leq
+        \nu(Q_i) \leq m$. Taking limits, we have $\nu(Q_i) \to m$. Thus, continuity
+        from below gives \[
+            \nu(P) = \nu\left(\bigcup_{i = 1}^\infty Q_i\right) = \lim_{n \to \infty}
+            \nu(Q_i) = m.
+        \]
+
+        Now, set $N = X\setminus P$. We claim that $N$ is a negative set for $\nu$.
+        Indeed, if not, then we could find some measurable $E \subseteq N$ with
+        $\nu(E) > 0$. By the previous lemma, this yields a positive set $\tilde{E}
+        \subseteq E$ for $\nu$ with $\nu(\tilde{E}) > 0$. Now, $\tilde{E} \cup P$ is
+        a positive set for $\nu$, i.e.\ $\tilde{E} \cup P \in \mathscr{P}$. Also,
+        $\tilde{E} \cap P = \emptyset$, so \[
+            \nu(\tilde{E} \cup P) = \nu(\tilde{E}) + \nu(P) > m.
+        \] This contradicts the maximality of $m$.
+
+        Thus, we have obtained a Hahn decomposition $P, N$ of $X$. If $P', N'$ is
+        another Hahn decomposition of $X$, then \[
+            P\Delta P = (P\setminus P') \cup (P'\setminus P) = (N^c\setminus N'^c)
+            \cup (N'^c\setminus N^c) = (N'\setminus N) \cup (N\setminus N') = N\Delta
+            N'.
+        \] Furthermore, $P\setminus P' \subseteq P$ is a positive set for $\nu$;
+        $P\setminus P' \subseteq P'^c = N'$ is also a negative set for $\nu$. This
+        means that $P\setminus P'$ must be a null set for $\nu$. The same reasoning
+        shows that $P'\setminus P$ is a null set for $\nu$, hence so is $P\Delta P'$.
+    \end{proof}
+
+    \begin{corollary}
+        Given a signed measure $\nu$ on $(X, \M)$, consider the Hahn decomposition
+        $P, N$ of $X$ and define the measures $\nu^+$, $\nu^-$ as \[
+            \nu^+(E) = \nu(E \cap P) \geq 0, \qquad
+            \nu^-(E) = -\nu(E \cap N) \geq 0.
+        \] Then, we have the decomposition of $\nu$ as the difference of the non-negative
+        measures $\nu^+$, $\nu^-$ as \[
+            \nu = \nu^+ - \nu^-.
+        \]
+    \end{corollary}
+
+\end{document}
