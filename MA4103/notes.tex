@@ -7,6 +7,7 @@
 \usepackage{bm}
 \usepackage[%
     hidealllines=true,%
+    innertopmargin=15,%
     innerbottommargin=15,%
     nobreak=true,%
 ]{mdframed}
@@ -14,8 +15,13 @@
 \usepackage{graphicx}
 \usepackage{fancyhdr}
 \usepackage{hyperref}
+\usepackage{enumitem}
 
 \geometry{a4paper, margin=1in, headheight=14pt}
+
+\setlength{\parindent}{0em}
+
+\setlist[enumerate]{topsep=0em, itemsep=0em}
 
 \pagestyle{fancy}
 \fancyhf{}
@@ -59,7 +65,6 @@
 \surroundwithmdframed[%
     linecolor=black!20!white,%
     hidealllines=false,%
-    innertopmargin=5,%
     innerbottommargin=10,%
     skipabove=0,%
     skipbelow=0,%
@@ -84,6 +89,7 @@
     \maketitle
 
     \tableofcontents
+    \setlength{\parskip}{1em}
 
     \section{Signed measures}
 
@@ -104,7 +110,7 @@
     \] Now, in order to extract the `coordinates' $z_i \equiv f(i)$ from some $f \in
     C(X)$, we may define the following Dirac measures $\mu_i$ on $X$, concentrated at
     the index $i$. \[
-        \mu_i\colon \mathscr{P}(X) \to C, \qquad
+        \mu_i\colon \mathcal{P}(X) \to C, \qquad
         E \mapsto \begin{cases}
             1, &\text{ if } i \in A, \\
             0, &\text{ otherwise}.
@@ -129,7 +135,6 @@
     \begin{definition}
         Let $\M$ be a $\sigma$-algebra over $X$. A function $\nu\colon \M \to
         [-\infty, +\infty]$ is called a signed measure if \begin{enumerate}
-            \itemsep0em
             \item $\nu(\emptyset) = 0$.
             \item For all countable collections of disjoint measurable sets
             $\{E_i\}$, we have \[
@@ -208,7 +213,7 @@
         \]
     \end{lemma}
 
-    \subsection{The Hahn decomposition}
+    \subsection{The Hahn and Jordan decomposition theorems}
 
     \begin{definition}
         A set $P \in \M$ is called a positive set for $\nu$ if for every measurable
@@ -263,12 +268,62 @@
     \end{proof}
 
     \begin{lemma}
-        Let $E \in \M$ such that $\nu(E) > 0$. Then, there exists a measurable subset
-        $\tilde{E} \subseteq E$ such that $\tilde{E}$ is a positive set for $\nu$
-        and $\nu(\tilde{E}) > 0$.
+        Let $\nu\colon \M \to [-\infty, +\infty)$ be a signed measure, and let $E \in
+        \M$ such that $\nu(E) > 0$. Then, there exists a measurable subset $\tilde{E}
+        \subseteq E$ such that $\tilde{E}$ is a positive set for $\nu$ and
+        $\nu(\tilde{E}) > 0$.
     \end{lemma}
+    \begin{proof}
+        If $E$ is a positive set, we are done. Otherwise, there exists some $F
+        \subseteq E$ such that $\nu(F) < 0$. Note that \[
+            \nu(E\setminus F) = \nu(E) - \nu(F) > 0.
+        \] For any non-positive set $A$, define the set \[
+            S_A = \{n \in \N : \nu(B) < -1 / n \text{ for some } B \subseteq A, B \in
+            \M\}.
+        \] When $A$ is not a positive set, $S_A$ is clearly non-empty and hence has a
+        minimum element by the Well Ordering Principle.
 
-    \begin{theorem}[Hahn Decomposition]
+        We have a non-positive set $E$, hence $S_E$ has a minimum element $n_1$.
+        Choose $F_1 \subseteq E$ such that $\nu(F_1) < -1 / n_1$, set $E_1 =
+        E\setminus F_1$, and note that \[
+            \nu(E_1) = \nu(E) - \nu(F_1) > \nu(E) + \frac{1}{n_1} > 0.
+        \] If $E_1$ is a positive set we are done. Otherwise, $S_{E_1}$ has a minimum
+        element $n_2$, hence we can pick $F_2 \subseteq F_1$ such that $\nu(F_2) < -1
+        / n_2$. Setting $E_2 = E_1\setminus F_2 = E\setminus(F_1 \cup F_2)$, we have
+        \[
+            \nu(E_2) = \nu(E_1) - \nu(F_2) > \nu(E) + \frac{1}{n_1} + \frac{1}{n_2} >
+            0.
+        \] Again, if $E_2$ is a positive set, we are done; otherwise, we refine it to
+        obtain $E_3$ as before, and so on. In this manner, if at any stage the set
+        $E_k = E\setminus \bigcup_{i = 1}^k F_i$ is not a positive set, we let $n_{k
+        + 1}$ be the minimum element of $S_{E_k}$, pick $F_{k + 1} \subseteq E_k$
+        such that $\nu(F_{k + 1}) < -1 / n_{k + 1}$, and note that \[
+            \nu(E_{k + 1}) = \nu(E_k) - \nu(F_{k + 1}) > \nu(E) + \sum_{i = 1}^{k +
+            1} \frac{1}{n_i} > 0.
+        \] We stop this process if at any stage $E_k$ is a positive set; otherwise,
+        we obtain infinite sequences of sets $\{E_i\}$ and $\{F_i\}$. Set \[
+            A = E\setminus\bigcup_{i = 1}^\infty F_i = \bigcap_{i = 1}^\infty E_i.
+        \] We claim that $A$ is a positive set for $\nu$. Note that the sets
+        $\{F_i\}$ are all disjoint subsets of $E$, which has finite measure, hence \[
+            \nu\left(\bigcup_{i = 1}^\infty F_i\right) = \sum_{i = 1}^\infty \nu(F_i)
+            > -\infty.
+        \] This shows that the series \[
+            \sum_{i = 1}^\infty \frac{1}{n_i} < -\sum_{i = 1}^\infty \nu(F_i) < \infty.
+        \] For this convergence to hold, the terms $1 / n_i \to 0$, $n_i \to \infty$.
+        Also note that \[
+            \nu(A) = \nu(E) - \sum_{i = 1}^\infty \nu(F_i) > \nu(E) + \sum_{i = 1}
+            \frac{1}{n_i} > 0.
+        \] Suppose that $A$ is not positive for $\nu$. Then, $S_A$ has a minimum
+        element $m$, hence we can pick $B \subseteq A$ such that $\nu(B) < -1 / m$.
+        Since $n_i \to \infty$, we can fix $k$ such that $n_k > m$. But, \[
+            B \subseteq A = \bigcap_{i = 1}^\infty E_i \subseteq E_k, \qquad
+            \nu(B) < -\frac{1}{m} < -\frac{1}{n_k}.
+        \] This contradicts the minimality of $n_k$ with respect to the set
+        $S_{E_k}$. This shows that $A \subseteq E$ is indeed a positive set of
+        positive measure, as desired.
+    \end{proof}
+
+    \begin{theorem}[Hahn Decomposition]\label{theorem:hahn_decomposition}
         Let $\nu$ be a signed measure on $(X, \M)$. Then, there exists a positive set
         $P$ and a negative set $N$ for $\nu$ such that $P \cup N = X$, $P \cap N =
         \emptyset$. Furthermore, if $P, N$ and $P', N'$ are two decompositions of
@@ -277,9 +332,9 @@
     \end{theorem}
     \begin{proof}
         Without loss of generality, suppose that $\nu$ is of the form $\nu\colon \M
-        \to [-\infty, +\infty)$. Let $\mathscr{P} \subseteq$ be the collection of all
-        positive measurable sets for $\nu$. Note that this collection is non-empty,
-        since $\emptyset \in \mathscr{P}$. Set \[
+        \to [-\infty, +\infty)$. Let $\mathscr{P} \subseteq \M$ be the collection of
+        all positive measurable sets for $\nu$. Note that this collection is
+        non-empty, since $\emptyset \in \mathscr{P}$. Set \[
             m = \sup_{E \in \mathscr{P}} \nu(E).
         \] Note that from the properties of the supremum, there exists a sequence of
         sets $\{P_i\}_{i \in \N}$ from $\mathscr{P}$ such that $\nu(P_i) \to m$. Set
@@ -325,5 +380,213 @@
             \nu = \nu^+ - \nu^-.
         \]
     \end{corollary}
+
+    \begin{definition}
+        Let $\mu, \nu$ be two measures on $(X, \M)$. We say that $\mu$ and $\nu$ are
+        mutually singular, denoted $\mu \perp \nu$, if there exists $E, F \in \M$
+        such that $E \cup F = X$, $E \cap F = \emptyset$, $E$ is a null set for
+        $\mu$, and $F$ is a null set for $\nu$.
+    \end{definition}
+    \begin{example}
+        For any signed measure $\nu$, the corresponding Hahn decomposition $P, N$ of
+        $X$ also gives the decomposition $\nu = \nu^+ - \nu^-$ where $\nu^+, \nu^-$
+        are positive measures. Then, $\nu^+ \perp \nu^-$, with $N$ being a null set
+        for $\nu^+$, $P$ for $\nu^-$.
+    \end{example}
+
+    \begin{theorem}[Jordan Decomposition]\label{theorem:jordan_decomposition}
+        Let $\nu$ be a signed measure on $(X, \M)$. Then, there exist unique positive
+        measures $\nu^+, \nu^-$ on $\M$ such that $\nu = \nu^+ - \nu^-$ and $\nu^+
+        \perp \nu^-$.
+    \end{theorem}
+    \begin{proof}
+        We have already shown that every signed measure $\nu$ admits such $\nu^+,
+        \nu^-$ via the Hahn decomposition $P, N$ of $X$. Thus, it is enough to show
+        that if $\nu = \mu^+ - \mu^-$ for positive measures $\mu^+, \mu^-$, and
+        $\mu^+\perp\mu^-$ with $E, F$ being null sets for $\mu^+, \mu^-$, then $\mu^+
+        = \nu^+$ and $\mu^- = \nu^-$.
+
+        Let $A \in \M$. Then, \[
+            0 \leq \mu^+(A) = \mu^+(A \cap F) + \mu^+(A \cap E) = \mu^+(A \cap F)
+        \] since $A \cap E \subseteq E$ which is a null set for $\mu^+$.
+        Additionally, $A \cap F \subseteq F$ which is a null set for $\mu^-$, so \[
+            0 \leq \mu^+(A \cap F) = \mu^+(A \cap F) - \mu^+(A \cap F) = \nu(A \cap
+            F).
+        \] This shows that every subset of $F$ has positive $\nu$-measure, i.e.\ $F$
+        is a positive set for $\nu$. Similarly, \[
+            0 \geq -\mu^-(A) = -\mu^-(A \cap E) = -\nu(A \cap E),
+        \] which shows that $E$ is a negative set for $\nu$. Thus, $F, E$ is a Hahn
+        decomposition of $X$. Theorem~\ref{theorem:hahn_decomposition} immediately
+        tells us that $P\Delta F = N\Delta E$ is a null set for $\nu$. Now, \[
+            \mu^+(A) = \nu(A \cap F) = \nu(A \cap F \cap P) + \nu(A \cap F \cap N),
+        \] but $A \cap F \cap N \subseteq (P\cap E) \cup (F \cap N) = P\Delta F$
+        which is a null set for $\nu$. Thus, \[
+            \mu^+(A) = \nu(A \cap F \cap P).
+        \] Using the same arguments, \[
+            \nu^+(A) = \nu(A \cap P) = \nu(A \cap P \cap F) + \nu(A \cap P \cap E),
+        \] but $A \cap P \cap E \subseteq (P \cap E) \cup (F \cap N) = P\Delta F$,
+        hence \[
+            \nu^+(A) = \nu(A \cap F \cap P) = \mu^+(A).
+        \] Thus, $\nu^+ = \mu^+$. An analogous argument shows that $\nu^- = \mu^-$.
+    \end{proof}
+    \begin{remark}
+        The Hahn and Jordan decomposition theorems together give the existence of the
+        decomposition of any signed measure $\nu = \nu^+ - \nu^-$ along with its
+        uniqueness in a certain sense.
+    \end{remark}
+
+
+    \subsection{The total variation measure}
+
+    \begin{definition}
+        Let $\nu$ be a signed measure on $(X, \M)$, and let $\nu = \nu^+ - \nu^-$
+        for positive measures $\nu^+, \nu^-$ with $\nu^+ \perp \nu^-$. Then, the
+        total variation measure $|\nu|$ of $\nu$ is defined as \[
+            |\nu| = \nu^+ + \nu^- \geq 0.
+        \]
+    \end{definition}
+
+    \begin{lemma}
+        Let $E \in \M$. The following are equivalent. \begin{enumerate}
+            \item $E$ is a null set for $\nu$.
+            \item $\nu^+(E) = \nu^-(E) = 0$.
+            \item $|\nu|(E) = 0$.
+        \end{enumerate}
+    \end{lemma}
+    \begin{proof}
+        Let $P, N$ be the Hahn decomposition of $X$ associated with $\nu$.
+
+        (\emph{1}\Rightarrow \emph{2}) Note that $E \cap N, E \cap P \subseteq E$
+        are null sets for $\nu$. Thus, \begin{align*}
+            \nu^+(E) &= \nu^+(E \cap P) + \nu^+(E \cap N) \\
+            &= \nu^+(E \cap P) \\
+            &= \nu^+(E \cap P) - \nu^-(E \cap P) \\
+            &= \nu(E \cap P) \\
+            &= 0.
+        \end{align*}
+         Similarly, \begin{align*}
+            \nu^-(E) &= \nu^-(E \cap P) + \nu^-(E \cap N) \\
+            &= \nu^-(E \cap N) \\
+            &= -\nu^+(E \cap N) + \nu^-(E \cap N) \\
+            &= -\nu(E \cap N) \\
+            &= 0.
+        \end{align*}
+
+        (\emph{2}\Rightarrow \emph{3}) follows trivially.
+
+        (\emph{3}\Rightarrow \emph{1}) By the positivity of $\nu^+, \nu^-$, we
+        immediately have $\nu^+(E) = \nu^-(E) = 0$. Thus, for any measurable $F
+        \subseteq E$, we have $\nu^+(F) = \nu^-(F) = 0$, hence $\nu(F) = 0$.
+        Therefore, $E$ is a null set for $\nu$.
+    \end{proof}
+
+    \begin{lemma}
+        Let $\nu, \mu$ be signed measures. The following are equivalent. \begin{enumerate}
+            \item $\nu \perp \mu$.
+            \item $\nu^+ \perp \mu$ and $\nu^- \perp \mu$
+            \item $|\nu| \perp \mu$.
+        \end{enumerate}
+    \end{lemma}
+    \begin{proof}
+        Let $P, N$ be the Hahn decomposition associated with $\nu$.
+
+        (\emph{1}\Rightarrow \emph{2}) Let $\nu \perp \mu$ via the decomposition $E,
+        F$ of $X$. Then $F$ is a null set for $\nu$, $E$ for $\mu$. We claim that
+        $\nu^+\perp \mu$ via the decomposition $N \cup F, P \cap E$. It is clear that
+        $P \cap E \subseteq E$ is a null set for $\mu$; we now show that $N \cup F$
+        is a null set for $\nu^+$, i.e.\ $\nu^+(N \cup F) = 0$. Indeed, \[
+            0 \leq \nu^+(N \cup F) \leq \nu^+(N) + \nu^+(F) = \nu^+(F) = 0.
+        \] We have used the fact that $N$ is a null set for $\nu^+$, and $F$ is a
+        null set for $\nu$ together with the previous lemma.
+
+        The proof that $\nu^-\perp \mu$ via the decomposition $N \cup F, P \cap E$
+        is analogous.
+
+        (\emph{2}\Rightarrow \emph{3}) Let $\nu^+\perp\mu$ via $E_1, F_1$, and
+        $\nu^-\perp\mu$ via $E_2, F_2$. We claim that $|\nu| \perp \mu$ via the
+        decomposition $E_1 \cup E_2, F_1 \cap F_2$. Is is clear that $E_1 \cup E_2$
+        is a null set for $\mu$ since it is the union of the null sets $E_1, E_2$ for
+        $\mu$. We must show that $F_1 \cap F_2$ is a null set for $|\nu|$, i.e.\
+        $|\nu|(F_1 \cap F_2) = 0$; but this is clear from the fact that $F_1, F_2$
+        are null sets for $\nu^+, \nu^-$, hence \[
+            0 \leq |\nu|(F_1 \cap F_2) = \nu^+(F_1 \cap F_2) + \nu^-(F_1 \cap F_2)
+            \leq \nu^+(F_1) + \nu^-(F_2) = 0.
+        \]
+
+        (\emph{3}\Rightarrow \emph{1}) Let $|\nu| \perp \mu$ via $E, F$. We claim
+        that $\nu\perp\mu$ via the same decomposition $E, F$; indeed $|\nu|(F) = 0$
+        immediately shows that $F$ is a null set for $\nu$ by the previous lemma.
+    \end{proof}
+
+    \begin{lemma}
+        Let $\nu$ be a signed measure.
+        \begin{enumerate}
+            \item $\nu$ is a finite measure if and only if $|\nu|$ is a finite measure.
+            \item $\nu$ is a $\sigma$-finite measure if and only if $|\nu|$ is a
+            $\sigma$-finite measure.
+        \end{enumerate}
+    \end{lemma}
+    \begin{proof}
+        The finiteness of $\nu$ implies that $\nu^+$ and $\nu^-$ are finite hence
+        their sum $|\nu|$ is finite, and vice versa. Next, if $X$ is a countable
+        union of $\{X_i\}$ each of which has finite $\nu$-measure, each $\nu^+(X_i) <
+        \infty$, $\nu^-(X_i) < \infty$ i.e.\ each $X_i$ has finite $|\nu|$-measure,
+        and vice versa.
+    \end{proof}
+
+    \begin{definition}
+        The space of functions $L^1(\nu)$, where $\nu$ is a signed measure, is
+        defined by \[
+            L^1(\nu) = L^1(\nu^+) \cap L^1(\nu^-).
+        \]
+    \end{definition}
+
+    \begin{lemma}
+        The spaces $L^1(\nu) = L^1(|\nu|)$.
+    \end{lemma}
+    \begin{proof}
+        Note that \[
+            \int_P |f|\:d\nu = \int_X |f|\:d\nu^+ = \int_P |f|\:d|\nu|, \qquad
+            \int_N |f|\:d\nu = -\int_X |f|\:d\nu^- = -\int_N |f|\:d|\nu|. \qedhere
+        \]
+    \end{proof}
+
+    \begin{definition}
+        Let $\nu$ be a signed measure and $\mu$ be a positive measure. We say that
+        $\nu$ is absolutely continuous with respect to $\mu$, denoted $\nu\ll\mu$, if
+        $\mu(E) = 0 \implies \nu(E) = 0$ where $E \in \M$.
+        \begin{remark}
+            If $\nu \ll \mu$, then all null sets for $\mu$ are null sets for $\nu$.
+        \end{remark}
+        \begin{remark}
+            If $\nu \ll \mu$ and $\nu \perp \mu$, then $\nu = 0$. Indeed, if $X = E
+            \cup F$, $E \cap F = 0$ with $F$ null for $\nu$, $E$ \null for $\mu$,
+            then for any $A \in \M$, we have $\nu(A) = \nu(A \cap E)$. But $A \cap E
+            \subseteq E$ is a null set for $\mu$, hence $\mu(A \cap E) = 0 \implies
+            \nu(A) = \nu(A \cap E) = 0$.
+        \end{remark}
+    \end{definition}
+
+    \begin{lemma}
+        Let $\nu$ be a signed measure and let $\mu$ be a positive measure. The
+        following are equivalent. \begin{enumerate}
+            \item $\nu \ll \mu$.
+            \item $\nu^+ \ll \mu$ and $\nu^- \ll \mu$.
+            \item $|\nu| \ll \mu$.
+        \end{enumerate}
+    \end{lemma}
+    \begin{proof}
+        (\emph{1}\Rightarrow \emph{2}) If $\mu(E) = 0$, then $\mu(F) = 0$ for every
+        measurable $F \subseteq E$, hence $\nu(F) = 0$. In other words, $E$ is a null
+        set for $\nu$, hence $\nu^+(E) = \nu^-(E) = 0$ by a previous lemma.
+
+
+        (\emph{2}\Rightarrow \emph{3}) If $\mu(E) = 0$, then $\nu^+(E) = \nu^-(E) =
+        0$, hence $|\nu|(E) = \nu^+(E) - \nu^-(E) = 0$.
+
+        (\emph{3}\Rightarrow \emph{1}) If $\mu(E) = 0$, then $|\nu|(E) = 0$ hence $E$
+        is a null set for $\nu$ by a previous lemma, giving $\nu(E) = 0$.
+    \end{proof}
+
 
 \end{document}
