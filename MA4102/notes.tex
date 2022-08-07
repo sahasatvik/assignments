@@ -134,14 +134,14 @@
         \] is a normed linear space.
     \end{example}
     \begin{example}
-        The vector space of continuous functions $C[0, 1]$ equipped with the supremum
-        norm \[
+        The vector space of continuous functions $\mathcal{C}[0, 1]$ equipped with
+        the supremum norm \[
             \norm{f}_\infty = \sup_{x \in [0, 1]} |f(x)|
         \] is a normed linear space.
     \end{example}
     \begin{example}
-        The vector space of continually differentiable functions $C^1[0, 1]$ equipped
-        with the norm \[
+        The vector space of continually differentiable functions $\mathcal{C}^1[0,
+        1]$ equipped with the norm \[
             \norm{f_1 } = \sup_{x \in [0, 1]}|f(x)| + \sup_{x \in [0, 1]}|f'(x)|
         \] is a normed linear space.
     \end{example}
@@ -200,14 +200,15 @@
     \end{definition}
 
     \begin{lemma}
-        The space of continuous functions $C[0, 1]$ equipped with the supremum norm \[
+        The space of continuous functions $\mathcal{C}[0, 1]$ equipped with the
+        supremum norm \[
             \norm{f}_\infty = \sup_{x \in [0, 1]} |f(x)|
         \] is a Banach space.
     \end{lemma}
     \begin{proof}
-        Let $\{f_n\}$ be a Cauchy sequence of functions in $C[0, 1]$. We claim that
-        this sequence converges to some $f$ in $C[0, 1]$, i.e.\ there exists $f \in
-        C[0, 1]$ such that $\norm{f_n - f} \to 0$.
+        Let $\{f_n\}$ be a Cauchy sequence of functions in $\mathcal{C}[0, 1]$. We
+        claim that this sequence converges to some $f$ in $\mathcal{C}[0, 1]$, i.e.\
+        there exists $f \in \mathcal{C}[0, 1]$ such that $\norm{f_n - f} \to 0$.
 
         Using the fact that $\{f_n\}$ is Cauchy, we have the following: for every
         $\epsilon > 0$, there exists $N \in \N$ such that for all $m, n \geq N$, we
@@ -226,9 +227,9 @@
             \norm{f_n - f} = \sup_{x \in [0, 1]} |f_n(x) - f(x)| \leq \epsilon.
         \] Thus, $\norm{f_n - f} \to 0$, i.e.\ $f_n \to f$ in $X$.
 
-        Finally, we must show that $f \in C[0, 1]$, i.e.\ that $f$ is continuous. Fix
-        $x_0 \in X$, and let $\epsilon > 0$. Since $f_n \to f$ in $X$, pick $N \in
-        \N$ such that for all $n \geq N$, \[
+        Finally, we must show that $f \in \mathcal{C}[0, 1]$, i.e.\ that $f$ is
+        continuous. Fix $x_0 \in X$, and let $\epsilon > 0$. Since $f_n \to f$ in
+        $X$, pick $N \in \N$ such that for all $n \geq N$, \[
             |f_n(x) - f(x)| \leq \sup_{x \in [0, 1]} |f_n(x) - f(x)| = \norm{f_N - f}
             < \frac{\epsilon}{3}.
         \] From the continuity of $f_N$, there exists $\delta > 0$ such that whenever
@@ -242,7 +243,8 @@
     \end{proof}
 
     \begin{exercise}
-        Is the space of continuous functions $C[0, 2]$ equipped with the norm \[
+        Is the space of continuous functions $\mathcal{C}[0, 2]$ equipped with the
+        norm \[
             \norm{f}_1 = \int_0^2 |f(x)|\:dx
         \] a Banach space?
         \begin{solution}
@@ -270,8 +272,9 @@
                 &< \frac{\epsilon}{2} + \frac{\epsilon}{2} \\
                 &= \epsilon.
             \end{align*}
-            This shows that $\{f_n\}$ is Cauchy in $C[0, 2]$. However, if $\norm{f_n
-            - g}_1 \to 0$ for some continuous function $g \in C[0, 2]$, then \[
+            This shows that $\{f_n\}$ is Cauchy in $\mathcal{C}[0, 2]$. However, if
+            $\norm{f_n - g}_1 \to 0$ for some continuous function $g \in
+            \mathcal{C}[0, 2]$, then \[
                 0 \leq \int_0^2 |f(x) - g(x)|\:dx \leq \int_0^2 |f(x) - f_n(x)|\:dx +
                 \int_0^2 |f_n(x) - g(x)|\:dx \to 0,
             \] whence \[
@@ -288,8 +291,8 @@
                 \frac{1}{2},
             \] a contradiction.
 
-            Thus, the above Cauchy sequence $\{f_n\}$ does not converge in $C[0, 1]$,
-            hence this is not a Banach space.
+            Thus, the above Cauchy sequence $\{f_n\}$ does not converge in
+            $\mathcal{C}[0, 1]$, hence this is not a Banach space.
         \end{solution}
     \end{exercise}
 
@@ -412,6 +415,49 @@
             \]
         \end{solution}
     \end{exercise}
+
+    \begin{lemma}
+        Let $x \in \R^n$. Then $\norm{x}_p \to \norm{x}_\infty$ as $p \to \infty$.
+    \end{lemma}
+    \begin{proof}
+        Note that for each $1 \leq k \leq n$, \[
+            \norm{x}_p^p = \sum_{i = 1}^n |x^i|^p \geq |x^k|^p.
+        \] Thus, \[
+            \norm{x}_p \geq \max_{1 \leq k \leq n} |x^k| = \norm{x}_\infty.
+        \] Next, note that \[
+            \norm{x}_p^p = \sum_{i = 1}^n |x^i|^p = \norm{x}_\infty^p \left(\sum_{i =
+            1}^n \frac{|x^i|^p}{\norm{x}_\infty^p}\right) \leq \norm{x}_\infty^p\cdot
+            n,
+        \] hence \[
+            \norm{x}_p \leq \norm{x}_\infty\cdot n^{1 / p}.
+        \] Taking the limit $p \to \infty$, we have \[
+            \norm{x}_p \leq \norm{x}_\infty. \qedhere
+        \]
+    \end{proof}
+
+    \begin{lemma}
+        Let $x \in \ell^q(\R)$ for some $q \geq 1$. Then $\norm{x}_p \to
+        \norm{x}_\infty$ as $p \to \infty$.
+    \end{lemma}
+    \begin{proof}
+        Let $p \geq 1$. Note that for each $k \in \N$, \[
+            \norm{x}_p^p = \sum_{i = 1}^\infty |x^i|^p \geq \sum_{i = 1}^k |x^i|^p
+            \geq |x^k|^p.
+        \] Thus, \[
+            \norm{x}_p \geq \sup_{k \in \N} |x^k| = \norm{x}_\infty.
+        \] This immediately shows that if $\norm{x}_\infty = \infty$, then
+        $\norm{x}_p = \infty$. Thus, we can assume that $\norm{x}_\infty < \infty$.
+
+        Let $p \geq q \geq 1$. Then by H\"older's inequality, \[
+            \norm{x}_p^p = \sum_{i = 1}^\infty |x^i|^{p - q}\cdot |x^i|^q \leq
+            \norm{x}_{\infty}^{p - q}\cdot \sum_{i = 1}^\infty |x^i|^q.
+        \] In other words, \[
+            \norm{x}_p \leq \norm{x}_\infty^{1 - q / p}\cdot \norm{x}_q^{q / p}.
+        \] Note that by assumption, $\norm{x}_q < \infty$. Taking the limit as $p \to
+        \infty$, we now have \[
+            \norm{x} \leq \norm{x}_\infty. \qedhere
+        \]
+    \end{proof}
 
 
     \subsection{Linear maps}
