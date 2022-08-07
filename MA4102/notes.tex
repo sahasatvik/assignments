@@ -1,0 +1,425 @@
+\documentclass[11pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage[scr]{rsfso}
+\usepackage{bm}
+\usepackage[%
+    hidealllines=true,%
+    innertopmargin=15,%
+    innerbottommargin=15,%
+    nobreak=true,%
+]{mdframed}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+\usepackage{enumitem}
+
+\geometry{a4paper, margin=1in, headheight=14pt}
+
+\setlength{\parindent}{0em}
+
+\setlist[enumerate]{topsep=0em, itemsep=0em}
+
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand\headrulewidth{0.4pt}
+\fancyhead[L]{\scshape MA4102: Functional Analysis}
+\fancyhead[R]{\scshape \leftmark}
+\rfoot{\footnotesize\it Updated on \today}
+\cfoot{\thepage}
+
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+
+\newcommand{\norm}[1]{\Vert #1 \Vert}
+
+\newmdtheoremenv[%
+    backgroundcolor=blue!10!white,%
+]{theorem}{Theorem}[section]
+\newmdtheoremenv[%
+    backgroundcolor=violet!10!white,%
+]{corollary}{Corollary}[theorem]
+\newmdtheoremenv[%
+    backgroundcolor=teal!10!white,%
+]{lemma}[theorem]{Lemma}
+
+\theoremstyle{definition}
+\newmdtheoremenv[%
+    backgroundcolor=green!10!white,%
+]{definition}{Definition}[section]
+\newmdtheoremenv[%
+    backgroundcolor=red!10!white,%
+    nobreak=false,%
+]{exercise}{Exercise}[section]
+
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\newtheorem*{example}{Example}
+\newtheorem*{solution}{Solution}
+
+\surroundwithmdframed[%
+    linecolor=black!20!white,%
+    hidealllines=false,%
+    innerbottommargin=10,%
+    skipabove=0,%
+    skipbelow=0,%
+]{example}
+
+\title{
+    \Large\textsc{MA4102} \\
+    \Huge \textbf{Functional Analysis} \\
+    \vspace{5pt}
+    \Large{Autumn 2022}
+}
+\author{
+    \large Satvik Saha
+    \\\textsc{\small 19MS154}
+}
+\date{\normalsize
+    \textit{Indian Institute of Science Education and Research, Kolkata, \\
+    Mohanpur, West Bengal, 741246, India.} \\
+}
+
+\begin{document}
+    \maketitle
+
+    \tableofcontents
+    \setlength{\parskip}{1em}
+
+
+    \section{Normed linear spaces}
+
+    \subsection{Basic definitions}
+
+    \begin{definition}
+        Let $X$ be a vector space over the field $F$ (typically $\R$ or $\C$). A
+        subset $S \subseteq X$ is called linearly independent if for every finitely
+        many vectors $x_1, \dots, x_n \in S$, we have \[
+            \sum_{i = 1}^n c_ix_i = 0 \implies c_i = 0 \text{ for each } 1 \leq i \leq
+            n
+        \] for all possible $c_1, \dots, c_n \in F$.
+    \end{definition}
+
+    \begin{definition}
+        A subset $B \subseteq X$ is called a Hamel basis of $X$ if it is linearly
+        independent, and every element of $X$ can be written as a finite linear
+        combination of elements from $B$.
+    \end{definition}
+    \begin{example}
+        The standard basis $\{\bm{e}_i\}$ of $\R^n$ is a Hamel basis.
+    \end{example}
+    \begin{example}
+        The polynomials $\{1, x, x^2, \dots\}$ is a Hamel basis of the space
+        $\mathscr{P}(\R)$ of all polynomials.
+    \end{example}
+
+    \begin{definition}
+        A norm on $X$ is a map $\norm{\cdot}\colon X \to [0, \infty)$ satisfying the
+        following properties. \begin{enumerate}
+            \item $\norm{x} = 0$ if and only if $x = 0$.
+            \item $\norm{kx} = |k|\norm{x}$ for all $x \in X$, $k \in F$.
+            \item $\norm{x + y} \leq \norm{x} + \norm{y}$ for all $x, y \in X$.
+        \end{enumerate}
+        The space $(X, \norm{\cdot})$ is called a normed linear space.
+    \end{definition}
+    \begin{example}
+        The vector space $\R^n$ equipped with the metric \[
+            \norm{x}_2 = \left(\sum_{i = 1}^n x_i^2\right)^{1 / 2}
+        \] is a normed linear space.
+    \end{example}
+    \begin{example}
+        The vector space of continuous functions $C[0, 1]$ equipped with the supremum
+        norm \[
+            \norm{f}_\infty = \sup_{x \in [0, 1]} |f(x)|
+        \] is a normed linear space.
+    \end{example}
+    \begin{example}
+        The vector space of continually differentiable functions $C^1[0, 1]$ equipped
+        with the norm \[
+            \norm{f_1 } = \sup_{x \in [0, 1]}|f(x)| + \sup_{x \in [0, 1]}|f'(x)|
+        \] is a normed linear space.
+    \end{example}
+    \begin{example}
+        The function spaces $L^p(\mu)$ for $1 \leq p < \infty$, equipped with the
+        metrics \[
+            \norm{f}_p = \left(\int |f|^p \:d\mu\right)^{1 / p}
+        \] are normed linear spaces.
+    \end{example}
+
+    \begin{definition}
+        Every normed linear space $(X, \norm{\cdot})$ can be equipped with the normed
+        topology $\tau_d$, induced by the metric \[
+            d(x, y) = \norm{x - y}.
+        \]
+    \end{definition}
+
+    \begin{lemma}
+        Let $x_n \to x$, $y_n \to y$ in $X$ with the normed topology, and let
+        $\alpha_n \to \alpha$ in $X$. Then, \begin{enumerate}
+            \item $x_n + y_n \to x + y$ in $X$.
+            \item $\alpha_n x_n \to \alpha x$ in $X$.
+        \end{enumerate}
+    \end{lemma}
+
+
+    \subsection{Banach spaces}
+
+    \begin{definition}
+        A normed linear space $X$ is called a Banach space if $(X, d)$ is a complete
+        metric space where \[
+            d(x, y) = \norm{x - y}.
+        \]
+    \end{definition}
+    \begin{example}
+        The spaces $\R^n$ with the metrics $\norm{\cdot}_p$ for $1 \leq p \leq
+        \infty$ are Banach spaces.
+    \end{example}
+    \begin{example}
+        The sequence spaces $\ell^p$ for $1 \leq p \leq \infty$ are Banach spaces.
+    \end{example}
+
+    \begin{definition}
+        Let $X$ be a normed linear space. A countable collection $\{x_i\} \subseteq
+        X$ is called a Schauder basis of $X$ if each $\norm{x_i} = 1$, and every
+        vector $x \in X$ can be uniquely written as \[
+            x = \sum_{i = 1}^\infty c_ix_i
+        \] for $c_i \in F$.
+        \begin{remark}
+            This infinite sum represents a convergent limit of partial sums in $X$.
+        \end{remark}
+        \begin{remark}
+            A Schauder basis is linearly independent, from the uniqueness of the
+            expansion $0 = \sum_{i = 1}^\infty 0x_i$.
+        \end{remark}
+    \end{definition}
+
+    \begin{lemma}
+        The space of continuous functions $C[0, 1]$ equipped with the supremum norm \[
+            \norm{f}_\infty = \sup_{x \in [0, 1]} |f(x)|
+        \] is a Banach space.
+    \end{lemma}
+    \begin{proof}
+        Let $\{f_n\}$ be a Cauchy sequence of functions in $C[0, 1]$. We claim that
+        this sequence converges to some $f$ in $C[0, 1]$, i.e.\ there exists $f \in
+        C[0, 1]$ such that $\norm{f_n - f} \to 0$.
+
+        Using the fact that $\{f_n\}$ is Cauchy, we have the following: for every
+        $\epsilon > 0$, there exists $N \in \N$ such that for all $m, n \geq N$, we
+        have \[
+            \norm{f_n - f_m} < \epsilon.
+        \] In particular, for each $x \in X$, \[
+            |f_n(x) - f_m(x)| \leq \sup_{x \in [0, 1]} |f_n(x) - f_m(x)| = \norm{f_n
+            - f_m} < \epsilon.
+        \] In other words, each of the real sequences $\{f_n(x)\}$ is Cauchy. From
+        the completeness of $\R$, all such sequences converge, hence the pointwise
+        limit \[
+            f\colon [0, 1] \to \R, \qquad x \mapsto \lim_{n \to \infty} f_n(x)
+        \] exists. Furthermore, each \[
+            \lim_{m \to \infty} |f_n(x) - f_m(x)| = |f_n(x) - f(x)| \leq \epsilon,
+        \] hence \[
+            \norm{f_n - f} = \sup_{x \in [0, 1]} |f_n(x) - f(x)| \leq \epsilon.
+        \] Thus, $\norm{f_n - f} \to 0$, i.e.\ $f_n \to f$ in $X$.
+
+        Finally, we must show that $f \in C[0, 1]$, i.e.\ that $f$ is continuous. Fix
+        $x_0 \in X$, and let $\epsilon > 0$. Since $f_n \to f$ in $X$, pick $N \in
+        \N$ such that for all $n \geq N$, \[
+            |f_n(x) - f(x)| \leq \sup_{x \in [0, 1]} |f_n(x) - f(x)| = \norm{f_N - f}
+            < \frac{\epsilon}{3}.
+        \] From the continuity of $f_N$, there exists $\delta > 0$ such that whenever
+        $|x - x_0| < \delta$, we have \[
+            |f_N(x) - f_N(x_0)| < \frac{\epsilon}{3}.
+        \] Thus, whenever $|x - x_0| < \delta$, we have \[
+            |f(x) - f(x_0)| \leq |f(x) - f_N(x)| + |f_N(x) - f_N(x_0)| + |f_N(x_0) -
+            f(x_0)| < \frac{\epsilon}{3} + \frac{\epsilon}{3} + \frac{\epsilon}{3} =
+            \epsilon.
+        \] This shows that $f$ is continuous at each $x_0 \in X$, as desired.
+    \end{proof}
+
+    \begin{exercise}
+        Is the space of continuous functions $C[0, 2]$ equipped with the norm \[
+            \norm{f}_1 = \int_0^2 |f(x)|\:dx
+        \] a Banach space?
+        \begin{solution}
+            Consider the functions \[
+                f_n\colon [0, 2] \to \R, \qquad x \mapsto \frac{x^n}{1 + x^n}.
+            \] Note that this sequence has a pointwise limit $f_n \to f$, where \[
+                f\colon [0, 2] \to \R, \qquad x \mapsto \begin{cases}
+                    0, &\text{ if } 0 \leq x < 1, \\
+                    1 / 2, &\text{ if } x = 1, \\
+                    1, &\text{ if } 1 < x \leq 2.
+                \end{cases}
+            \] Now, \begin{align*}
+                \int_0^2 |f_n(x) - f(x)|\:dx
+                &= \int_0^1 \left|\frac{x^n}{1 + x^n}\right|\:dx + \int_1^2
+                \left|\frac{x^n}{1 + x^n} - 1\right|\:dx \\
+                &\leq \int_0^1 |x^n|\:dx + \int_1^2 |x^{-n}|\:dx \\
+                &= \frac{1}{n + 1} - \frac{1}{n - 1}(2^{-n + 1} - 1) \to 0.
+            \end{align*}
+            Thus, given $\epsilon > 0$, we can find $N \in \N$ such that for all $n
+            \geq N$, \[
+                \int_0^2 |f_n(x) - f(x)|\:dx < \frac{\epsilon}{2}.
+            \] Then, for all $m, n \geq N$, we have \begin{align*}
+                \norm{f_n - f_m}_1 &= \int_0^2 |f_n(x) - f_m(x)|\:dx \\
+                &\leq \int_0^2 |f_n(x) - f(x)| \:dx + \int_0^2 |f_m(x) - f(x)|\:dx \\
+                &< \frac{\epsilon}{2} + \frac{\epsilon}{2} \\
+                &= \epsilon.
+            \end{align*}
+            This shows that $\{f_n\}$ is Cauchy in $C[0, 2]$. However, if $\norm{f_n
+            - g}_1 \to 0$ for some continuous function $g \in C[0, 2]$, then \[
+                0 \leq \int_0^2 |f(x) - g(x)|\:dx \leq \int_0^2 |f(x) - f_n(x)|\:dx +
+                \int_0^2 |f_n(x) - g(x)|\:dx \to 0,
+            \] whence \[
+                \int_0^2 |f(x) - g(x)|\:dx = 0.
+            \] In particular, \[
+                \int_{[0, 1)} |g(x)|\:dx = 0, \qquad \int_{(1, 2]} |1
+                - g(x)|\:dx = 0.
+            \] The continuity of $g$ forces $g(x) = 0$ on $[0, 1)$
+            and $g(x) = 1$ on $(1, 2]$. Again, the continuity of $g$ guarantees
+            $\delta > 0$ such that for all $|x - 1| < \delta$, we have $|g(x) - g(1)|
+            < 1 / 4$.  But \[
+                1 = |g(1 + \delta / 2) - g(1 - \delta / 2)| \leq |g(1 + \delta / 2) -
+                g(1)| + |g(1) - g(1 - \delta / 2)| < \frac{1}{4} + \frac{1}{4} =
+                \frac{1}{2},
+            \] a contradiction.
+
+            Thus, the above Cauchy sequence $\{f_n\}$ does not converge in $C[0, 1]$,
+            hence this is not a Banach space.
+        \end{solution}
+    \end{exercise}
+
+    \begin{lemma}[Young]
+        Let $a, b \geq 0$, and $1 \leq p \leq \infty$. Then, \[
+            a^{1 / p} b^{1 / q} \leq \frac{a}{p} + \frac{b}{q}, \qquad
+            \frac{1}{p} + \frac{1}{q} = 1.
+        \]
+    \end{lemma}
+
+    \begin{lemma}[H\"older]
+        Let $x, y \in \ell^p$ for $1 \leq p \leq \infty$. Then, \[
+            \norm{x\cdot y}_1 \leq \norm{x}_p \norm{y}_q, \qquad
+            \frac{1}{p} + \frac{1}{q} = 1.
+        \]
+    \end{lemma}
+
+    \begin{lemma}[Minkowski]
+        Let $x, y \in \ell^p$ for $1 \leq p \leq \infty$. Then, \[
+            \norm{x + y}_p \leq \norm{x}_p + \norm{y}_p.
+        \]
+    \end{lemma}
+
+    \begin{lemma}
+        Cauchy sequences in a normed linear space are bounded.
+    \end{lemma}
+    \begin{proof}
+        Let $\{x_n\}$ be a Cauchy sequence in the normed linear space $X$. Then,
+        there exists $N \in \N$ such that for all $m, n \geq N$, we have \[
+            \norm{x_n - x_m} \leq 1.
+        \] In particular, putting $m = N$, we have for all $n \geq N$, \[
+            \norm{x_n} = \norm{x_n - x_N + x_N} \leq \norm{x_n - x_N} + \norm{x_N}
+            \leq 1 + \norm{x_N}.
+        \] Thus, for all $n \in \N$, \[
+            \norm{x_n} \leq \max\{\norm{x_1}, \dots, \norm{x_{N - 1}}, 1 +
+            \norm{x_N}\}. \qedhere
+        \]
+    \end{proof}
+
+    \begin{lemma}
+        The spaces of sequences $\ell^p(\R)$ for $1 \leq p < \infty$ are Banach
+        spaces.
+    \end{lemma}
+    \begin{proof}
+        Let $\{x_n\}$ be a Cauchy sequence in $\ell^p$. Note that each term is of the
+        form \[
+            x_n = (x_n^1, x_n^2, \dots, x_n^k, \dots).
+        \] Given $\epsilon > 0$, we can pick $N \in \N$ such that for all $m, n \geq
+        N$, \[
+            |x_n^k - x_m^k| \leq \left(\sum_{i = 1}^\infty |x_n^i -
+            x_m^i|^p\right)^{1 / p} = \norm{x_n - x_m}_p \leq \epsilon.
+        \] This shows that the sequences $\{x_n^k\}_{n \in \N}$ for each $k \in \N$
+        are Cauchy in $\R$. By the completeness of $\R$, they converge to some $x_n^k
+        \to x^k$. Set \[
+            x = (x^1, x^2, \dots, x^k, \dots).
+        \]
+
+        First, we show that $x \in \ell^p$. Recall that Cauchy sequences in a normed
+        linear space are bounded, hence there exists $M > 0$ such that for each $n
+        \in \N$, \[
+            \sum_{i = 1}^\infty |x_n^i|^p = \norm{x_n}_p^p < M.
+        \] Thus, for every $k \in \N$, the partial sum \[
+            \sum_{i = 1}^k |x_n^i|^p < M.
+        \] Taking the limit $n \to \infty$, \[
+            \lim_{n \to \infty} \sum_{i = 1}^k |x_n^i|^p = \sum_{i = 1}^k \lim_{n \to
+            k} |x_n^i|^p = \sum_{i = 1}^\infty |x^i|^p \leq M.
+        \] In other words, each partial sum is bounded, hence taking the limit $k \to
+        \infty$, \[
+            \lim_{k \to \infty} \sum_{i = 1}^k |x^i|^p = \sum_{i = 1}^\infty |x_i|^p
+            = \norm{x}_p^p \leq M.
+        \]
+
+        Finally, we show that $x_n \to x$ in $\ell^p$, i.e.\ that $\norm{x_n - x}_p
+        \to 0$. Note that given $\epsilon > 0$, we have for all $n, m \geq N$, \[
+            \sum_{i = 1}^\infty |x_n^i - x_m^i|^p \leq \epsilon^p,
+        \] hence for all $k \in \N$, the partial sums \[
+            \sum_{i = 1}^k |x_n^i - x_m^i|^p \leq \epsilon^p.
+        \] Thus, \[
+            \lim_{m \to \infty} \sum_{i = 1}^k |x_n^i - x_m^i|^p = \sum_{i = 1}^k
+            \lim_{m \to \infty} |x_n^i - x_m^i|^p = \sum_{i = 1}^k |x_n^i - x^i| \leq
+            \epsilon^p.
+        \] Taking the limit of partial sums, \[
+            \lim_{k \to \infty} \sum_{i = 1}^k |x_n^i - x^i|^p = \sum_{i = 1}^\infty
+            |x_n^i - x^i| = \norm{x_n - x}_p^p \leq \epsilon^p. \qedhere
+        \]
+    \end{proof}
+
+    \begin{exercise}
+        Show that the space of sequences $\ell^\infty(\R)$ is a Banach space.
+        \begin{solution}
+            Let $\{x_n\}$ be a Cauchy sequence in $\ell^\infty$. Then for every
+            $\epsilon > 0$, there exists $N \in \N$ such that for all $m, n \geq N$,
+            \[
+                |x_n^k - x_m^k| \leq \sup_{k \in \N} |x_n^k - x_m^k| = \norm{x_n -
+                x_m}_\infty < \epsilon.
+            \] This shows that the sequences $\{x_n^k\}_{n \in \N}$ are Cauchy in
+            $\R$. By the completeness of $\R$, they converge to some $x_n^k \to x^k$.
+            Set \[
+                x = (x^1, x^2, \dots, x^k, \dots).
+            \]
+
+            First, we show that $x \in \ell^\infty$. Since Cauchy sequences in a
+            normed linear space are bounded, there exists $M > 0$ such that for each
+            $n \in \N$, \[
+                |x_n^k| \leq \sup_{i \in \N} |x_n^i| = \norm{x_n}_\infty < M.
+            \] Thus, taking the limit $n \to \infty$, \[
+                \lim_{n \to \infty} |x_n^k| = |x^k| \leq M.
+            \] This shows that \[
+                \sup_{k \in \N} |x^k| = \norm{x}_\infty \leq M.
+            \]
+
+            Finally, we show that $x_n \to x$ in $\ell^\infty$, i.e.\ $\norm{x_n -
+            x}_\infty \to 0$. Note that given $\epsilon > 0$, we have for all $m, n
+            \geq N$, \[
+                |x_n^k - x_m^k| \leq \norm{x_n - x_m}_\infty < \epsilon
+            \] for each $k \in \N$. Thus, taking the limit $m \to \infty$, \[
+                \lim_{m \to \infty} |x_n^k - x_m^k| = |x_n^k - x^k| \leq \epsilon.
+            \] This shows that \[
+                \sup_{x_n^k - x^k} = \norm{x_n - x}_\infty \leq \epsilon.
+            \]
+        \end{solution}
+    \end{exercise}
+
+
+    \subsection{Linear maps}
+
+    \begin{definition}
+        Let $V, W$ be normed linear spaces over $\R$ or $\C$. Let $T\colon V \to W$
+        be a linear map. Then, $T$ is called a bounded linear map if $T$ is a
+        continuous map between the normed topological spaces $(V, \norm{\cdot}_V)$
+        and $(W, \norm{\cdot}_W)$.
+    \end{definition}
+\end{document}
