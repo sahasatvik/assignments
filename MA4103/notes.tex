@@ -213,7 +213,7 @@
         \]
     \end{lemma}
 
-    \subsection{The Hahn and Jordan decomposition theorems}
+    \subsection{The Hahn-Jordan decomposition theorems}
 
     \begin{definition}
         A set $P \in \M$ is called a positive set for $\nu$ if for every measurable
@@ -311,8 +311,8 @@
             \sum_{i = 1}^\infty \frac{1}{n_i} < -\sum_{i = 1}^\infty \nu(F_i) < \infty.
         \] For this convergence to hold, the terms $1 / n_i \to 0$, $n_i \to \infty$.
         Also note that \[
-            \nu(A) = \nu(E) - \sum_{i = 1}^\infty \nu(F_i) > \nu(E) + \sum_{i = 1}
-            \frac{1}{n_i} > 0.
+            \nu(A) = \nu(E) - \sum_{i = 1}^\infty \nu(F_i) > \nu(E) + \sum_{i =
+            1}^\infty \frac{1}{n_i} > 0.
         \] Suppose that $A$ is not positive for $\nu$. Then, $S_A$ has a minimum
         element $m$, hence we can pick $B \subseteq A$ such that $\nu(B) < -1 / m$.
         Since $n_i \to \infty$, we can fix $k$ such that $n_k > m$. But, \[
@@ -587,6 +587,219 @@
         (\emph{3}\Rightarrow \emph{1}) If $\mu(E) = 0$, then $|\nu|(E) = 0$ hence $E$
         is a null set for $\nu$ by a previous lemma, giving $\nu(E) = 0$.
     \end{proof}
+
+
+    \begin{lemma}
+        Let $\nu, \mu$ be finite measures. Then, $\nu \ll \mu$ if and only if the
+        following holds: for every $\epsilon > 0$, there exists $\delta > 0$ such
+        that whenever $\mu(E) < \delta$, we have $|\nu(E)| < \epsilon$.
+    \end{lemma}
+    \begin{proof}
+        (\Leftarrow) If $\mu(E) = 0$, then for any $\epsilon > 0$, we must have
+        $\delta > 0$ such that $\mu(E) < \delta \implies |\nu(E)| < \epsilon$. This
+        forces $\nu(E) = 0$, hence $\nu \ll \mu$.
+
+        (\Rightarrow) Let $\nu \ll \mu$. Suppose that there exists $\epsilon > 0$
+        such that for all $\delta > 0$, we have sets $E_\delta$ where $\mu(E_\delta)
+        < \delta$ but $\nu(E_\delta) \geq \epsilon$. Set $\delta = 2^{-n}$, and
+        obtain corresponding $E_n$ where $\mu(E_n) < 2^{-n}$, $\nu(E_n) \geq
+        \epsilon$. Now, set \[
+            F_n = \bigcup_{i = n}^\infty E_n, \qquad F = \bigcap_{i = 1}^\infty F_i.
+        \] Then, each $F_n \supseteq F_{n + 1}$, and \[
+            \mu(F_n) \leq \sum_{i = n}^\infty \frac{1}{2^i} = \frac{2}{2^n} \to 0.
+        \] Thus, continuity from above with the finiteness of $\mu$ gives \[
+            \mu(F) = \lim_{n \to \infty} \mu(F_n) = 0.
+        \] But each $\nu(F_n) \geq \nu(E_n) \geq \epsilon$, hence $\nu(F) \geq
+        \epsilon$ by the finiteness of $\nu$, a contradiction.
+    \end{proof}
+
+    \begin{corollary}
+        Let $f\in L^1(\mu)$. Then for all $\epsilon > 0$, there exists $\delta > 0$
+        such that whenever $\mu(E) < \delta$, we have \[
+            |\int_E f \:d\mu| < \epsilon.
+        \]
+    \end{corollary}
+
+
+
+    \subsection{The Radon-Nikodym theorem}
+
+    \begin{theorem}[Radon-Nikodym]
+        Let $\nu$ be a $\sigma$-finite measure, and let $\mu$ be a $\sigma$-finite
+        positive measure. Then, we have the following. \begin{enumerate}
+            \item There exists a unique decomposition $\nu = \nu_1 + \nu_2$ such that
+            $\nu_1 \ll \mu$ and $\nu_2 \perp \mu$. Both $\nu_1$ and $\nu_2$ are
+            $\sigma$-finite.
+
+            \item There exists a measurable, $\mu$-integrable (in the extended sense)
+            function $f$ such that \[
+                \nu_1(E) = \int_E f \:d\mu.
+            \] Furthermore, if two such functions satisfy the above, they must be
+            equal $\mu$-almost everywhere.
+        \end{enumerate}
+    \end{theorem}
+    \begin{example}
+        Let $m$ be the Lebesgue measure and let $c$ be the counting measure on $\R$.
+        Clearly, $m \ll c$. If there existed a function $f$ such that \[
+            m(E) = \int_E f \:dc,
+        \] then we would have \[
+            0 = m(\{x\}) = \int_{\{x\}} f\:dc = f(x)
+        \] for each $x \in \R$, forcing $f = 0$ hence $m = 0$ a contradiction.
+    \end{example}
+
+    \begin{definition}
+        Let $\nu$ be a $\sigma$-finite measure, and let $\mu$ be a positive
+        $\sigma$-finite measure, such that $\nu \ll \mu$. Using the Radon-Nikodym
+        theorem, we can pick a measurable function $f$ such that \[
+            \nu(E) = \int_E f \:d\mu
+        \] for all $E \in \M$. Then, the function \[
+            f \equiv \frac{d\nu}{d\mu}
+        \] is called the Radon-Nikodym derivative of $\nu$ with respect to $\mu$.
+
+        \begin{remark}
+            If $d\nu = f\:d\mu$, then $d|\nu| = |f|\:d\mu$.
+        \end{remark}
+    \end{definition}
+
+    \begin{lemma}
+        Let $\nu \ll \mu$ and $\mu \ll \lambda$. Then, \[
+            \frac{d\nu}{d\lambda} = \frac{d\nu}{d\mu} \frac{d\mu}{d\lambda}
+        \] $\lambda$-almost everywhere.
+    \end{lemma}
+
+
+
+    \section{Complex measures}
+
+    \subsection{Basic definitions}
+
+    \begin{definition}
+        Let $\M$ be a $\sigma$-algebra over $X$. A function $\nu\colon \M \to
+        \C$ is called a complex measure if \begin{enumerate}
+            \item $\nu(\emptyset) = 0$.
+            \item For all countable collections of disjoint measurable sets
+            $\{E_i\}$, we have \[
+                \nu\left(\bigcup_{i = 1}^\infty E_i\right) = \sum_{i = 1}^\infty
+                \nu(E_i).
+            \]
+        \end{enumerate}
+        \begin{remark}
+            A complex measure only assumes finite values.
+        \end{remark}
+        \begin{remark}
+            A complex measure $\nu$ can be decomposed as \[
+                \nu = \nu_r + i \nu_i
+            \] where $\nu_r$, $\nu_i$ are signed measures.
+        \end{remark}
+    \end{definition}
+
+    \begin{definition}
+        A function $f \in L^1(\nu)$ if and only if $f \in L^1(\nu_r) \cap
+        L^1(\nu_i)$.
+    \end{definition}
+
+    \begin{lemma}
+        Let $\nu, \mu$ be complex measures. The following are equivalent.
+        \begin{enumerate}
+            \item $\nu \perp \mu$.
+            \item $\nu_r \perp \mu_r$ and $\nu_i \perp \mu_i$.
+        \end{enumerate}
+    \end{lemma}
+
+    \begin{lemma}
+        Let $\nu$ be a complex measure, and let $\mu$ be a positive measure. The
+        following are equivalent.
+        \begin{enumerate}
+            \item $\nu \ll \mu$.
+            \item $\nu_r \ll \mu_r$ and $\nu_i \ll \mu_i$.
+        \end{enumerate}
+    \end{lemma}
+
+    \subsection{The Radon-Nikodym theorem and the total variation measure}
+
+    \begin{theorem}[Radon-Nikodym]
+        Let $\nu$ be a complex measure, and let $\mu$ be a $\sigma$-finite positive
+        measure. Then, there exists a unique decomposition \[
+            \nu = \nu_1 + \nu_2
+        \] such that $\nu_1 \ll \mu$, $\nu_2 \perp \mu$. There also exists a function
+        $f \in L^1(\mu)$ such that \[
+            \nu_1(E) = \int_E f \:d\mu.
+        \] Furthermore, $f$ us unique $\mu$-almost everywhere.
+    \end{theorem}
+
+    \begin{lemma}
+        Let $\nu$ be a complex measure and let $\mu_1, \mu_2$ be $\sigma$-finite
+        positive measures, such that for $f_1 \in L^1(\mu_1)$, $f_2 \in L^1(\mu_2)$, \[
+            d\nu = f_1\:d\mu_1 = f_2\:d\mu_2.
+        \] Then, \[
+            |f_1|\:d\mu_1 = |f_2|\:d\mu_2.
+        \]
+    \end{lemma}
+
+    \begin{definition}
+        Let $\nu$ be a complex measure, and let $\mu$ be a positive measure such that
+        $d\nu = f\:d\mu$. Then, $d|\nu| = |f|\:d\mu$ defines a measure $|\nu|$ called
+        the total variation measure.
+
+        \begin{remark}
+            Such a measure exists since $\nu \ll \nu_r^+ + \nu_r^- + \nu_i^+ +
+            \nu_i^-$ supplies us with a Radon-Nikodym derivative $f$.
+        \end{remark}
+        \begin{remark}
+            This definition is independent of our choice of $\mu$, hence $f$ by the
+            previous lemma.
+        \end{remark}
+    \end{definition}
+
+    \begin{lemma}
+        \[
+            |\nu(E)| \leq |\nu|(E).
+        \]
+    \end{lemma}
+
+    \begin{lemma}
+        \[
+            |\nu| = \inf\{\lambda : |\nu(E)| \leq \lambda(E) \text{ for all } E \in
+            \M\}.
+        \]
+    \end{lemma}
+
+    \begin{lemma}
+        \[
+            \nu \ll |\nu|, \qquad
+            \left|\frac{d\nu}{d|\nu|}\right| = 1\quad|\nu|\text{-almost everywhere}.
+        \]
+    \end{lemma}
+
+    \begin{lemma}
+        \[
+            L^1(\nu) = L^1(|\nu|).
+        \]
+    \end{lemma}
+
+    \begin{lemma}
+        \[
+            |\int f\:d\nu| \leq \int |f|\:d|\nu|.
+        \]
+    \end{lemma}
+
+    \begin{lemma}
+        \[
+            |\nu_1 + \nu_2| \leq |\nu_1| + |\nu_2|.
+        \]
+    \end{lemma}
+
+
+    \begin{theorem}
+        Let $\mathscr{M}(X)$ be the collection of all complex measures on $(X, \M)$.
+        Then, given $\nu_1, \nu_2 \in \mathscr{M}(X)$, we have $\nu_1 + \nu_2 \in
+        \mathscr{M}(X)$ and $\alpha\nu_1 \in \mathscr{M}(X)$ for all $\alpha \in \C$.
+        Thus, $\mathscr{X}(X)$ is a vector space. Furthermore, \[
+            \Vert \nu\Vert = |\nu|(X)
+        \] defines a norm on $\mathscr{M}(X)$. With this, $\mathscr{M}(X)$ is a
+        Banach space.
+    \end{theorem}
+
 
 
 \end{document}
