@@ -38,6 +38,7 @@
 \newcommand{\N}{\mathbb{N}}
 
 \newcommand{\M}{\mathcal{M}}
+\newcommand{\Lloc}{L^1_\text{loc}}
 
 \newmdtheoremenv[%
     backgroundcolor=blue!10!white,%
@@ -800,6 +801,253 @@
         Banach space.
     \end{theorem}
 
+
+
+    \section{Differentiation on Euclidean Spaces}
+
+
+    \subsection{Locally integrable functions}
+
+    \begin{definition}
+        Let $f\colon \R^n \to \C$ be measurable. We say that $f$ is locally
+        integrable if for every bounded measurable $E \subseteq \R^n$, \[
+            \int_E |f|\:dm
+        \] is finite. The class of all such functions is denoted
+        $\Lloc(\R^n)$.
+    \end{definition}
+
+    \begin{definition}
+        For $f \in \Lloc(\R^n)$, define the average value of $f$ on $B_r(x)$ as \[
+            A_r(f)(x) = \frac{1}{m(B_r(x))} \int_{B_r(x)} f\:dm.
+        \]
+    \end{definition}
+
+    \begin{lemma}
+        $A_r(f)(x)$ is jointly continuous in $r$ and $x$.
+    \end{lemma}
+
+    \begin{definition}
+        For $f \in \Lloc(\R^n)$, define its Hardy-Littlewood maximal function as \[
+            Hf(x) = \sup_{r > 0} A_r(|f|)(x) = \sup_{r > 0} \frac{1}{m(B_r(x))}
+            \int_{B_r(x)} |f|\:dm.
+        \]
+    \end{definition}
+
+
+    \subsection{The Maximal Function Theorem}
+
+    \begin{lemma}
+        Let $\mathscr{C}$ be a collection of open balls in $\R^n$, and let \[
+            U = \bigcup_{B \in \mathscr{C}} B.
+        \] If $c < m(U)$, then there exist disjoint $B_1, \dots, B_k \in \mathscr{C}$
+        such that \[
+            c < 3^n \sum_{i = 1}^k m(B_i).
+        \]
+    \end{lemma}
+
+    \begin{theorem}[Maximal Function]
+        There exists a constant $C > 0$ such that for all $f \in L^1$ and all $\alpha
+        > 0$, \[
+            m(\{x : Hf(x) > \alpha\}) \leq \frac{C}{\alpha} \int |f| \:dm.
+        \]
+    \end{theorem}
+
+    \begin{theorem}
+        If $f \in \Lloc(\R^n)$, then \[
+            \lim_{r \to 0} A_r(f)(x) = f(x).
+        \] almost everywhere on $\R^n$.
+    \end{theorem}
+
+
+    \subsection{The Lebesgue Differentiation Theorem}
+
+    \begin{definition}
+        For $f \in \Lloc(\R^n)$, define the Lebesgue set $L_f$ of $f$ as the
+        collection of all $x \in \R^n$ such that \[
+            \lim_{r \to 0} \frac{1}{m(B_r(x))} \int_{B_r(x)} |f(x) - f(x')| \:dx' = 0.
+        \]
+    \end{definition}
+
+    \begin{lemma}
+        For $f \in \Lloc(\R^n)$, we have $m(L_f^c) = 0$.
+    \end{lemma}
+
+    \begin{definition}
+        We say that the family of measurable sets $\{E_r\}$ shrink nicely to $x
+        \in \R^n$ if each $E_r \subseteq B_r(x)$, and there exists $\alpha > 0$ such
+        that each $m(E_r) > \alpha m(B_r(x))$.
+
+        \begin{remark}
+            It is possible that none of the sets $E_r$ contains $x$!
+        \end{remark}
+    \end{definition}
+
+    \begin{theorem}[Lebesgue Differentiation]
+        Let $f \in \Lloc(\R^n)$. Then for all $x \in L_f$, we have \[
+            \lim_{r \to 0} \frac{1}{m(E_r)} \int_{E_r} |f(x) - f(x')|\:dx', \qquad
+            \lim_{r \to 0} \frac{1}{m(E_r)} \int_{E_r} f \:dm = f(x)
+        \] for all families $\{E_r\}$ which shrink nicely to $x$.
+    \end{theorem}
+
+
+    \begin{definition}
+        A positive Borel measure $\nu$ on $\R^n$ is called regular if the following
+        hold. \begin{enumerate}
+            \item $\nu(K)$ is finite for every compact $K \subseteq \R^n$.
+            \item $\nu(E) = \inf\{\nu(U): E \subseteq U, U \subseteq \R^n\text{ is
+            open}\}$ for every Borel measurable $E$.
+        \end{enumerate}
+
+        \begin{remark}
+            The second condition follows from the first.
+        \end{remark}
+    \end{definition}
+
+
+    \begin{theorem}
+        Let $\nu$ be a regular signed or complex Borel measure on $\R^n$, whose
+        Radon-Nikodym representation is given by \[
+            d\nu = f\:dm + d\lambda.
+        \] Then, for every family $\{E_r\}$ that shrinks nicely to $x \in \R^n$, we
+        have \[
+            \lim_{r \to 0} \frac{\nu(E_r)}{m(E_r)} - f(x)
+        \] almost everywhere with respect to $m$.
+    \end{theorem}
+
+
+
+    \section{Total and Bounded Variation}
+
+    \subsection{Total variation}
+
+    \begin{theorem}
+        Let $F\colon \R \to \R$ be increasing, and let \[
+            G(x) = F(x^+) = \lim_{t \to x^+} F(x).
+        \] Then, the following hold. \begin{enumerate}
+            \item $G$ is increasing and right continuous.
+            \item The set of discontinuities of $F$ is countable.
+            \item Both $F, G$ are differentiable almost everywhere, with $F' = G'$
+            almost everywhere.
+        \end{enumerate}
+    \end{theorem}
+
+    \begin{definition}
+        Let $F\colon \R \to \R$. The total variation function $T_F$ of $F$ is defined
+        as \[
+            T_F(x) = \sup\left\{\sum_{i = 1}^n |F(x_i) - F(x_{i - 1})| : -\infty <
+            x_0 < \dots < x_n = x\right\}.
+        \]
+    \end{definition}
+
+    \begin{lemma}
+        \[
+            T_F(b) - T_F(a) = \sup\left\{\sum_{i = 1}^n |F(x_i) - F(x_{i - 1})| : a =
+            x_0 < \dots < x_n = b\right\}.
+        \]
+    \end{lemma}
+
+    \begin{lemma}
+        The total variation function $T_F$ of $F$ is increasing, taking values in
+        $[0, \infty]$.
+    \end{lemma}
+
+
+    \subsection{Bounded variation}
+
+    \begin{definition}
+        We say that $F$ is of bounded variation if \[
+            T(\infty) = \lim_{x \to \infty} T(x)
+        \] is finite. The class of such functions is denoted $BV(\R)$.
+
+        Furthermore, the class of functions $F$ such that $T_F(b) - T_F(a)$ is finite
+        is denoted $BV[a, b]$.
+    \end{definition}
+
+    \begin{example}
+        If $F$ is bounded and increasing, then $F \in BV(\R)$, with \[
+            T_F(x) = F(x) - F(-\infty).
+        \]
+    \end{example}
+    \begin{example}
+        If $F, G \in BV(\R)$, then $\alpha F + \beta G \in BV(\R)$ for all $\alpha,
+        \beta \in \C$.
+    \end{example}
+    \begin{example}
+        If $F$ is differentiable and $F'$ is bounded, then $F \in BV[a, b]$.
+    \end{example}
+
+    \begin{lemma}
+        If $F \in BV(\R)$, then $T_F \pm F$ are bounded and increasing functions.
+    \end{lemma}
+
+    \begin{theorem}
+        The following results hold.
+        \begin{enumerate}
+            \item $F \in BV(\C)$ if and only if $\Re(F), \Im(F) \in BV(\R)$.
+            \item $F \in BV(\R)$ if and only if $F$ is the difference of two bounded
+            and increasing functions. Note that \[
+                F = \frac{1}{2}(T_F + F) - \frac{1}{2}(T_F - F).
+            \]
+            \item If $F \in BV(\R)$, all of the following limits exist. \[
+                F(x^+) = \lim_{t \to x^+} F(x), \qquad
+                F(x^-) = \lim_{t \to x^-} F(x), \qquad
+                F(\pm\infty) = \lim_{x \to \pm\infty} F(x).
+            \]
+            \item If $F \in BV(\R)$, then the set of points on which $F$ is
+            discontinuous is countable.
+            \item If $F \in BV(\R)$, and $G(x) = F(x^+)$, then $F' = G'$ almost
+            everywhere.
+        \end{enumerate}
+    \end{theorem}
+
+    \begin{definition}
+        For $F \in BV(\R)$, the following is called the Jordan representation of $F$.
+        \[
+            F = \frac{1}{2}(T_F + F) - \frac{1}{2}(T_F - F).
+        \] The two terms are called the positive and negative variations of $F$
+        respectively.
+    \end{definition}
+
+    \begin{lemma}
+        Denote the positive and negative parts of $x$ as $x^\pm = \frac{1}{2}(|x| \pm
+        x)$. Then, \[
+            \frac{1}{2}(T_F \pm F)(x) = \sup\left\{\sum_{i = 1}^n \left[F(x_i) -
+            F(x_{i - 1})\right]^\pm : -\infty < x_0 < \dots < x_n = x\right\}.
+        \]
+    \end{lemma}
+
+
+    \subsection{Normalized Bounded Variation}
+
+    \begin{definition}
+        Denote \[
+            T_F(-\infty) = \lim_{x \to -\infty} T_F(x).
+        \] We say that $F \in BV(\R)$ is of normalized bounded variation if $F$ is
+        right continuous and $T_F(-\infty)$ is finite. The class of such functions is
+        denoted $NBV(\R)$.
+
+        \begin{remark}
+            If $F \in BV(\R)$, then $G(x) = F(x^+) - F(-\infty)$ is in $NBV(\R)$.
+        \end{remark}
+    \end{definition}
+
+    \begin{lemma}
+        If $F \in NBV(\C)$, then $T_F(-\infty) = 0$. Furthermore, if $F$ is right
+        continuous, so is $T_F$.
+    \end{lemma}
+
+    \begin{theorem}
+        Let $\mu$ be a complex Borel measure on $\R^n$. Let \[
+            F(x) = \mu(-\infty, x].
+        \] Then, $F \in NBV(\C)$.
+
+        Conversely, if $F \in NBV(\C)$, there exists a complex Borel measure $\mu_F$
+        such that \[
+            \mu_F(-\infty, x] = F(x).
+        \] Furthermore, \[
+            |\mu_F| = \mu_{T_F}.
+        \]
+    \end{theorem}
 
 
 \end{document}
