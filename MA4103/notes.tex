@@ -31,7 +31,7 @@
 \rfoot{\footnotesize\it Updated on \today}
 \cfoot{\thepage}
 
-\newcommand{\C}{\mathbb{C}}
+\renewcommand{\C}{\mathbb{C}}
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\Q}{\mathbb{Q}}
 \newcommand{\Z}{\mathbb{Z}}
@@ -39,6 +39,10 @@
 
 \newcommand{\M}{\mathcal{M}}
 \newcommand{\Lloc}{L^1_\text{loc}}
+
+\newcommand{\norm}[1]{\Vert #1 \Vert}
+
+\DeclareMathOperator{\supp}{supp}
 
 \newmdtheoremenv[%
     backgroundcolor=blue!10!white,%
@@ -884,7 +888,7 @@
 
     \begin{theorem}[Lebesgue Differentiation]
         Let $f \in \Lloc(\R^n)$. Then for all $x \in L_f$, we have \[
-            \lim_{r \to 0} \frac{1}{m(E_r)} \int_{E_r} |f(x) - f(x')|\:dx', \qquad
+            \lim_{r \to 0} \frac{1}{m(E_r)} \int_{E_r} |f(x) - f(x')|\:dx' = 0, \qquad
             \lim_{r \to 0} \frac{1}{m(E_r)} \int_{E_r} f \:dm = f(x)
         \] for all families $\{E_r\}$ which shrink nicely to $x$.
     \end{theorem}
@@ -1047,6 +1051,249 @@
         \] Furthermore, \[
             |\mu_F| = \mu_{T_F}.
         \]
+    \end{theorem}
+
+    \begin{corollary}
+        If $F \in NBV$, then $T_F \in NBV$.
+    \end{corollary}
+
+
+    \subsection{Fundamental Theorem of Calculus}
+
+    \begin{definition}
+        We say that $F\colon \R \to \C$ is absolutely continuous if for every
+        $\epsilon > 0$, there exists $\delta > 0$ such that for any finite disjoint
+        intervals $\{(a_i, b_i)\}_{i = 1}^n$ where $\sum_{i = 1}^n (b_i - a_i) <
+        \delta$, we have \[
+            \sum_{i = 1}^n |F(b_i) - F(a_i)| < \epsilon.
+        \]
+
+        \begin{remark}
+            All absolutely continuous functions are uniformly continuous.
+        \end{remark}
+    \end{definition}
+
+    \begin{lemma}
+        Let $F \in NBV$. Then, $F$ is absolutely continuous if and only if $\mu_F \ll
+        m$.
+    \end{lemma}
+
+    \begin{corollary}
+        Let $f \in L^1(m)$. The function $F$ defined by \[
+            F(x) = \int_{-\infty}^x f(t)\:dt
+        \] is in $NBV$, is absolutely continuous, and $f = F'$ almost everywhere.
+
+        Conversely, if $F \in NBV$, then $F' \in L^1(m)$, and \[
+            F(x) = \int_{-\infty}^x F'(t)\:dt.
+        \]
+    \end{corollary}
+
+    \begin{theorem}[Fundamental Theorem of Calculus]
+        Let $-\infty < a < b < \infty$, and let $F\colon [a, b] \to \C$. The
+        following statements are equivalent. \begin{enumerate}
+            \item $F$ is absolutely continuous on $[a, b]$.
+            \item There exists $f \in L^1([a, b], m)$ such that \[
+                F(x) - F(a) = \int_a^x f(t)\:dt.
+            \]
+            \item $F$ is differentiable almost everywhere, with $F' \in L^1([a, b],
+            m)$, and \[
+                F(x) - F(a) = \int_a^x F'(t)\:dt.
+            \]
+        \end{enumerate}
+    \end{theorem}
+
+    \begin{lemma}
+        If $F$ is absolutely continuous on $[a, b]$, then $F \in BV[a, b]$.
+        \begin{remark}
+            The converse is not true: consider the Cantor function.
+        \end{remark}
+    \end{lemma}
+
+
+    \subsection{Integration by parts}
+
+    \begin{theorem}
+        Let $F, G \in NBV$, with at least one of them continuous. Then, for $-\infty
+        < a < b < \infty$, we have \[
+            \int_{(a, b]} F\:dG + \int_{(a, b]} G\:dF = F(b)G(b) - F(a)G(a).
+        \]
+        \begin{remark}
+            Here, we denote $dF = d\mu_F = F'\:dm$.
+        \end{remark}
+    \end{theorem}
+
+
+    \section{Radon measures}
+
+    \begin{definition}
+        A Radon measure $\mu$ on $X$ is a Borel measure such that the following hold.
+        \begin{enumerate}
+            \item $\mu(K)$ is finite for all compact sets $K \subseteq X$.
+            \item $\mu$ is outer regular on Borel sets.
+            \item $\mu$ is inner regular on open sets.
+        \end{enumerate}
+    \end{definition}
+
+    \subsection{Locally compact Hausdorff spaces}
+
+    \begin{lemma}
+        Let $X$ be a locally compact Hausdorff space, let $U \subseteq X$ be open,
+        and let $x \in U$. Then, there is a compact neighborhood of $x$ contained in
+        $U$.
+    \end{lemma}
+
+    \begin{lemma}
+        Let $X$ be a locally compact Hausdorff space, and let $U$ be open, $K$ be
+        compact, such that $K \subseteq U$. Then, there exists an open set $V$ such
+        that $\overline{V} is compact$, and $K \subseteq V \subseteq \overline{V}
+        \subseteq U$.
+    \end{lemma}
+
+
+    \begin{lemma}[Urysohn]
+        Let $X$ be a locally compact Hausdorff space, let $U$ be open, $K$ be compact
+        such that $K \subseteq U$. Then, there exists a continuous map $f\colon X \to
+        [0, 1]$, such that $f = 1$ on $K$, and $f = 0$ outside a compact subset of
+        $U$.
+    \end{lemma}
+
+    \begin{lemma}
+        Let $X$ be a locally compact Hausdorff space. The space $C_c(X)$, of
+        compactly supported continuous functions on $X$, is dense in $C_0(X)$, the
+        space of functions that vanish at infinity.
+    \end{lemma}
+
+    \begin{definition}
+        Let $X$ be a topological space, and let $E \subseteq X$. A partition of unity
+        on $E$ is a collection $\{h_\alpha\}_{\alpha \in I}$ of functions in $C(X,
+        [0, 1])$ such that the following hold. \begin{enumerate}
+            \item Each $x \in X$ has a neighborhood on which only finitely many
+            $h_\alpha$'s are non-zero.
+            \item For each $x \in E$, $\sum_{\alpha \in I} h_\alpha(x) = 1$.
+        \end{enumerate}
+        Furthermore, we say that a partition of unity $\{h_\alpha\}_{\alpha \in I}$
+        is subordinate to an open cover $\mathscr{U}$ of $E$ if for each $\alpha \in
+        I$, there exists $U \in \mathscr{U}$ such that $\supp(h_\alpha) \subset U$.
+    \end{definition}
+
+    \begin{lemma}
+        Let $X$ be a locally compact Hausdorff space, let $K \subseteq X$ be compact,
+        and let $\{U_i\}_{i = 1}^n$ be an open cover of $K$. Then, there exists a
+        partition of unity on $K$ subordinate to $\{U_i\}_{i = 1}^n$, consisting of
+        compactly supported functions.
+    \end{lemma}
+
+
+    \subsection{Positive linear functionals}
+
+    \begin{definition}
+        A linear functional $I$ on $C_c(X)$ is called positive if $I(f) \geq 0$
+        whenever $f \geq 0$.
+    \end{definition}
+
+    \begin{lemma}
+        Let $I$ be a positive linear functional on $C_c(X)$. For any compact set $K
+        \subseteq X$, there exists a constant $C_K > 0$ such that whenever $f \in
+        C_c(X)$ with $\supp(f) \subseteq K$, we have \[
+            |I(f)| \leq C_K \norm{f}_\infty.
+        \]
+    \end{lemma}
+
+    \begin{definition}
+        Let $U \subseteq X$ be open, and let $f \in C_c(X)$. We write $f \prec U$
+        when $0 \leq f \leq 1$, and $\supp(f) \subset U$.
+    \end{definition}
+
+    \begin{theorem}[Riesz Representation Theorem for $C_c(X)$]
+        Let $I$ be a positive linear functional on $C_c(X)$. Then, there exists a
+        unique Radon measure $\mu$ on $X$ such that \[
+            I(f) = \int f\:d\mu,
+        \] and the following regularity conditions are satisfied. \begin{enumerate}
+            \item For all open $U \subseteq X$, \[
+                \mu(U) = \sup\{I(f): f \in C_c(X), f \prec U\}.
+            \]
+            \item For all compact $K \subseteq X$, \[
+                \mu(K) = \inf\{I(f): f \in C_c(X), f \geq \chi_K\}.
+            \]
+        \end{enumerate}
+    \end{theorem}
+
+
+    \subsection{Regularity and approximation}
+
+    \begin{lemma}
+        Every Radon measure is inner regular on $\sigma$-finite sets.
+    \end{lemma}
+
+    \begin{corollary}
+        Any $\sigma$-finite Radon measure is regular.
+    \end{corollary}
+    \begin{corollary}
+        If $X$ is $\sigma$-compact, then every Radon measure on $X$ is regular.
+    \end{corollary}
+
+
+    \begin{lemma}
+        Let $\mu$ be a $\sigma$-finite Radon measure on $X$, and let $E \subseteq X$
+        be a Borel set. \begin{enumerate}
+            \item For every $\epsilon > 0$, there exists open $U$ and closed $F$,
+            such that $F \subseteq E \subseteq U$ and $\mu(U \setminus F) <
+            \epsilon$.
+            \item There exists an $F_\sigma$ set $A$ and a $G_\delta$ set $B$ such
+            that $A \subseteq E \subseteq B$ and $\mu(B \setminus A) = 0$.
+        \end{enumerate}
+    \end{lemma}
+
+    \begin{theorem}
+        Let $X$ be a locally compact Hausdorff space, where every open set is
+        $\sigma$-compact. Then, every Borel measure on $X$ that is finite on compact
+        sets is regular, hence Radon.
+    \end{theorem}
+
+    \begin{lemma}
+        Let $\mu$ be a complex Borel measure. Then, $\mu$ is Radon if and only if
+        $|\mu|$ is Radon.
+
+        Additionally, if $\mu$ is a finite Borel measure, then $\mu$ us Radon if and
+        only if the following property holds: for every Borel set $E$, given
+        $\epsilon > 0$, there exists some compact set $K$ and open set $U$ such that
+        $K \subseteq E \subseteq U$ and $\mu(U \setminus K) < \epsilon$.
+    \end{lemma}
+
+    \begin{lemma}
+        Let $\mu$ be a Radon measure. Then, $C_c(X)$ is dense in $L^p(mu)$, where $1
+        \leq p < \infty$.
+    \end{lemma}
+
+    \begin{theorem}[Lusin]
+        Let $\mu$ be a Radon measure, and let $f\colon X \to \C$ be a measurable
+        function that vanishes outside a set of finite measure. Then, for any
+        $\epsilon > 0$, there exists $\varphi \in C_c(X)$ such that $\varphi = f$
+        except on a set of measure less than $\epsilon$. Furthermore, if $f$ is
+        bounded, then $\varphi$ can be chosen such that $\norm{\varphi}_\infty \leq
+        \norm{f}_\infty$.
+    \end{theorem}
+
+    \subsection{The dual of $C_0(X)$}
+
+    \begin{lemma}
+        Let $I \in C_0(X, \R)^*$. Then, there exist positive linear functionals
+        $I^+$, $I^-$, such that $I = I^+ - I^-$.
+    \end{lemma}
+
+    \begin{definition}
+        We denote $\mathscr{M}(X)$ to be the vector space of all complex Radon
+        measures on $X$. This is equipped with the norm \[
+            \norm{\mu} = |\mu|(X).
+        \]
+    \end{definition}
+
+    \begin{theorem}[Riesz Representation Theorem]
+        Let $X$ be a locally compact Hausdorff space, let $\mu \in \mathscr{M}(X)$,
+        and let $f \in C_0(X)$. Define \[
+            I_\mu(f) = \int f\:d\mu.
+        \] Then, the map $\mu \to I_\mu$ is an isometric isomorphism from
+        $\mathscr{M}(X)$ to $C_0(X)^*$.
     \end{theorem}
 
 
