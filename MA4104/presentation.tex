@@ -1,0 +1,169 @@
+\documentclass[11pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{bm}
+\usepackage[scr]{rsfso}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{xcolor}
+\usepackage{hyperref}
+
+\geometry{a4paper, margin=1in, headheight=14pt}
+
+\setlength{\parindent}{0em}
+\setlength{\parskip}{0.8em}
+
+\renewcommand{\labelenumi}{(\alph{enumi})}
+\renewcommand{\labelenumii}{(\roman{enumii})}
+
+\def\C{\mathbb{C}}
+\def\R{\mathbb{R}}
+\def\Q{\mathbb{Q}}
+\def\Z{\mathbb{Z}}
+\def\N{\mathbb{N}}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\newtheorem*{example}{Example}
+
+\title{
+    \Large\textsc{MA4104: Algebraic Topology} \\
+    \vspace{10pt}
+    % \textit{\Large } \\
+    % \vspace{6pt}
+    {\huge\bf The fundamental group of $\C\times\C\setminus\Delta$.}
+    \vspace{-1em}
+}
+\author{
+    \large Satvik Saha%
+    % \thanks{Email: \tt ss19ms154@iiserkol.ac.in}
+    \\\textsc{\small 19MS154}
+}
+\date{\normalsize
+    \textit{Indian Institute of Science Education and Research, Kolkata, \\
+    Mohanpur, West Bengal, 741246, India.} \\
+    % \vspace{10pt}
+    % \today
+}
+
+
+\begin{document}
+    \maketitle
+
+    Consider the space $\C\times\C\setminus\Delta$, where $\Delta = \{(z, z): z \in
+    \C\}$. We may identify $\R^2 \cong \C$ via the usual map $(x, y) \mapsto z + iy$;
+    with this, the space under question may be identified with \[
+        \R^4\setminus\{(x, y, x, y): x, y \in \R\} \;=\;
+        \R^4\setminus\operatorname{span}\{e_1 + e_3, e_2 + e_4\}.
+    \] The homeomorphism \[
+        \varphi\colon \R^4 \to \R^4, \qquad
+        (x, y, z, w) \mapsto (x + z, y + w, x - z, y - w)
+    \] restricts to the homeomorphism \[
+        \R^4\setminus\operatorname{span}\{e_1, e_2\} \cong
+        \R^4\setminus\operatorname{span}\{e_1 + e_3, e_2 + e_4\}.
+    \] In other words, our original space is homeomorphic to \[
+        \R^4\setminus(\R^2\times\{0\}\times\{0\}).
+    \] However, this can be identified again with \[
+        (\C\times\C) \setminus(\C\times\{0\}) \;=\; \C \times (\C\setminus\{0\}).
+    \] Now, $\C$ is contractible, and $\C\setminus\{0\}$ deformation retracts to the
+    unit circle $S^1$. With this, we have established the homotopy equivalence \[
+        \C\times\C\setminus\Delta \;\sim\; \{0\} \times S^1 \cong S^1.
+    \] In particular, this demonstrates that the space which we have been examining
+    is path connected. As a result, we can safely discuss its first fundamental group
+    without reference to a particular basepoint (if insisted upon, pick $(1, -1) \in
+    \C\times\C\setminus\Delta$, which gets mapped to $e_3 \in \R^4\setminus(\R^2
+    \times \{0\} \times \{0\})$, hence $(0, 1) \in \{0\}\times S^1$). Thus, \[
+        \pi_1(\C\times\C\setminus\Delta) \cong \pi_1(S^1) \cong \Z.
+    \]
+
+
+    \subsection*{Identification of $\C$ with $\R^2$}
+
+    We use the standard identification \[
+        \phi\colon \R^2 \to \C, \qquad x + iy \mapsto x + iy
+    \] and its inverse to interchangeably talk about $\C$ and $\R^2$ here.
+
+
+    \subsection*{Homeomorphism of $\R^4$}
+
+    The map $\varphi\colon \R^4 \to \R^4$ described earlier can be written in the
+    following manner. \[
+        \begin{bmatrix}x\\ y\\ z\\ w\end{bmatrix} \mapsto
+        \begin{bmatrix}
+            1 & 0 & 1 & 0 \\
+            0 & 1 & 0 & 1 \\
+            1 & 0 & -1 & 0 \\
+            0 & 1 & 0 & -1
+        \end{bmatrix}
+        \begin{bmatrix}x\\ y\\ z\\ w\end{bmatrix}
+    \] The $4\times 4$ matrix here is of full rank; all four columns are orthogonal,
+    hence linearly independent. As a result, $\varphi$ is a bijective linear map,
+    hence a homeomorphism.
+
+    By restricting $\varphi$ to $\R^4\setminus\operatorname{span}\{e_1, e_2\}$, we
+    obtain a homeomorphism onto its image. Since $\varphi(e_1) = e_1 + e_3$ and
+    $\varphi(e_2) = e_2 + e_4$, we have removed precisely $\operatorname{span}\{e_1 +
+    e_3, e_2 + e_4\}$ from the image of $\varphi$. Thus, \[
+        \R^4\setminus\operatorname{span}\{e_1, e_2\} \cong
+        \R^4\setminus\operatorname{span}\{e_1 + e_3, e_2 + e_4\}
+    \] via $\varphi$, as desired.
+
+
+    \subsection*{Deformation retracts}
+
+    The deformation retract of $\C$ onto the point $0$ looks like \[
+        h_1\colon [0, 1]\times \C \to \C, \qquad
+        (t, z) \mapsto (1 - t)z.
+    \] Similarly, the deformation retract of $\C\setminus\{0\}$ onto the circle
+    $S^1$ looks like \[
+        h_2\colon [0, 1]\times \C\setminus\{0\} \to \C\setminus\{0\}, \qquad
+        (t, z) \mapsto (1 - t)z + tz/|z|.
+    \] Note that $(1 - t)z + tz/|z| \neq 0$; if it were, then $|z| = t / (t - 1) <
+    0$, a contradiction.
+
+    These can be performed on $\C\times(\C\setminus\{0\})$ one after another on the
+    corresponding slots, or in one go as \[
+        h\colon [0, 1] \times \C \times \C\setminus\{0\} \to \C \times
+        \C\setminus\{0\}, \qquad
+        (t, z_1, z_2) \mapsto (t, (1 - t)z_1, (1 - t)z_2 + tz_2 / |z_2|).
+    \] Note that $h(0, \cdot, \cdot) = \operatorname{id}_{\C\times\C\setminus\{0\}}$
+    and $h(1, z_1, z_2) = (0, z_2 / |z_2|) \in \{0\} \times S^1$. Also, it is clear
+    that each $h(t, \cdot, \cdot)$ fixes $\{0\}\times S^1$; when $z_2 \in S^1$, we
+    have \[
+        (1 - t)z_2 + tz_2 / |z_2| = (1 - t)z_2 + tz_2 = z_2.
+    \] Thus, $h$ describes
+    a deformation retraction of $\C\times \C\setminus\{0\}$ onto $\{0\} \times S^1$,
+    which is homeomorphic to just $S^1$.
+
+
+    \subsection*{Path connectedness of a space and its deformation retract}
+
+    Suppose that $h\colon I \times X \to X$ is a deformation retract of $X$ onto
+    $A\subseteq X$. Then, given $x \in X$, we have a path $h(\cdot, x)\colon I \to X$
+    joining $h(0, x) = x$ with $h(1, x) \in A$. If in addition we know that $A$ is
+    path connected, then given any $x, x' \in X$, we can pick a path $\gamma$ joining
+    $h(1, x)$ and $h(1, x')$ in $A$. Thus, $h(\cdot, x) * \gamma * \overline{h(\cdot,
+    x')}$ describes a path joining $x$ and $x'$, proving that $X$ is path connected.
+
+
+    \subsection*{* Analogy with $\R^3\setminus(\R\times \{0\}\times\{0\})$}
+
+    Here, we have shown that removing a 2-plane from $\R^4$ keeps it path connected.
+    However, this is a bit difficult to visualize. An analogous construction involves
+    removing a line from $\R^3$. Now, it is clear that this space is path connected;
+    indeed, it deformation retracts to a circle once again. Additionally, it is easy
+    to see that each based homotopy class of loops is completely determined by the
+    number of times it winds around the line that has been removed.
+
+
+
+\end{document}

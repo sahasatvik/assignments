@@ -1,0 +1,188 @@
+\documentclass[11pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage[scr]{rsfso}
+
+\geometry{a4paper}
+
+\newtheorem*{theorem}{Theorem}
+\newtheorem*{corollary}{Corollary}
+\newtheorem*{lemma}{Lemma}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\newtheorem*{example}{Example}
+
+\title{
+    \Large\textsc{MA4103: Analysis V} \\
+    \Huge \textbf{Selected notes} \\
+    \vspace{5pt}
+    \Large{1 November, 2022}
+}
+\author{
+    \large Satvik Saha
+    \\\textsc{\small 19MS154}
+}
+\date{\normalsize
+    \textit{Indian Institute of Science Education and Research, Kolkata, \\
+    Mohanpur, West Bengal, 741246, India.} \\
+}
+
+\begin{document}
+
+    \maketitle
+
+    \section*{The Fourier Transform}
+
+    For $f \in L^1(\mathbb{T})$, we define its Fourier transform as the map \[
+        \hat{f}\colon \mathbb{Z} \to \mathbb{C}, \qquad
+        n \mapsto \frac{1}{2\pi} \int_{-\pi}^{\pi} f(t) e^{-int} \:dt.
+    \] Its Fourier series at some $\theta \in [-\pi, \pi]$ is given by \[
+        \sum_{n = -\infty}^{\infty} \hat{f}(n) e^{in\theta} \equiv
+        \lim_{N \to \infty} \underbrace{\sum_{n = -N}^{N} \hat{f}(n)
+        e^{in\theta}}_{S_N f(\theta)}.
+    \] Thus, we have an association \[
+        L^1(\mathbb{T}) \to \mathscr{F}(\mathbb{Z}), \qquad
+        f \mapsto \hat{f}.
+    \]
+
+    \begin{lemma}
+        The map $f \mapsto \hat{f}$ is a homomorphism of algebras
+        $(L^1(\mathbb{T}), +, *)$ and $(\mathscr{F}(\mathbb{Z}), +, \cdot)$. In other
+        words, \[
+            \widehat{(f + g)}(n) = \hat{f}(n) + \hat{g}(n), \qquad
+            \widehat{(\alpha f)}(n) = \alpha \hat{f}(n), \qquad
+            \widehat{(f * g)}(n) = \hat{f}(n)\, \hat{g}(n)
+        \] for all $f, g \in L^1(\mathbb{T}), \alpha \in \mathbb{C}, n \in
+        \mathbb{Z}$.
+    \end{lemma}
+
+    \section*{Trigonometric polynomials}
+
+    We say that $g$ is a trigonometric polynomial if it is of the form \[
+        g(\theta) = \sum_{n = -N}^N a_n e^{in\theta}.
+    \] For example, the family of polynomials \[
+        Q_n(\theta) = c_n\left(\frac{1 + \cos\theta}{2}\right)^n
+    \] can be shown to be trigonometric polynomials simply by substituting
+    $2\cos\theta = e^{i\theta} + e^{-i\theta}$ and expanding.
+
+    \begin{theorem}
+        The collection of all trigonometric polynomials is dense in
+        $L^1(\mathbb{T})$.
+    \end{theorem}
+    \begin{proof}[Sketch of proof]
+        Since $C(\mathbb{T})$ is dense in $L^1(\mathbb{T})$, it is enough to show
+        that any $f \in C(\mathbb{T})$ can be written as the limit of trigonometric
+        polynomials. Recall that we already have $f * Q_n \to f$ in $L^\infty$, hence
+        in $L^1$; this is because the family $\{Q_n\}$ forms a summability kernel,
+        hence an approximate identity, and the $L^1$ norm on the compact space of
+        finite measure $\mathbb{T}$ is dominated by the $L^\infty$ norm. Again, this
+        means that it is enough to show that all $f * Q_n$ are trigonometric
+        polynomials.
+
+        Denote $\varphi_n(t) = e^{int}$. Then, \[
+            \hat{\varphi}_n(k) = \int_{\mathbb{T}} e^{int} e^{-ikt} \:dt =
+            \delta_{nk}.
+        \] Thus, for any trigonometric polynomial \[
+            g = \sum_{n = -N}^N a_n\varphi_n,
+        \] we have \[
+            \hat{g}(k) = \sum_{n = -N}^N a_n\delta_{nk} = \begin{cases}
+                a_k, & |k| \leq N, \\
+                0, & \text{otherwise}.
+            \end{cases}
+        \] Now compute, \[
+            (f * \varphi_n)(t) = \frac{1}{2\pi} \int f(t - x)\, e^{inx}\:dx =
+            \frac{1}{2\pi} \int f(t - x)\, e^{-in(t - x)} e^{int}\:dx =
+            \hat{f}(n)\varphi_n(t).
+        \] Thus, write \[
+            (f * g)(t) = \sum_{n = -N}^N a_n (f * \varphi_n)(t) =
+            \sum_{n = -N}^N a_n \hat{f}(n) \varphi_n(t),
+        \] which immediately shows that all convolutions of $f$ with trigonometric
+        polynomials are trigonometric polynomials too.
+    \end{proof}
+
+    \begin{corollary}
+        The set $\{e^{int}\}_{n \in \mathbb{Z}}$ is an orthonormal basis of
+        $L^2(\mathbb{T})$.
+    \end{corollary}
+    \begin{proof}
+        The given set is orthonormal, and the collection of all its finite linear
+        combinations (i.e.\ trigonometric polynomials) is dense in $L^2(\mathbb{T})$;
+        the latter follows from the previous proof.
+    \end{proof}
+
+    \begin{lemma}[Riemann-Lebesgue]
+        Let $f \in L^1(\mathbb{T})$. Then, \[
+            |\hat{f}(n)| \leq \Vert f\Vert_1, \qquad
+            \lim_{|n| \to \infty} |\hat{f}(n)| = 0.
+        \] As a result, the map $L^1(\mathbb{T}) \to \mathscr{F}(\mathbb{Z})$
+        described earlier is a bounded linear operator mapping into the subspace
+        $c_0 \subseteq \mathscr{F}(\mathbb{Z})$.
+        \begin{remark}
+            This map is injective, but not surjective.
+        \end{remark}
+    \end{lemma}
+    \begin{proof}[Sketch of proof]
+        Use the density of trigonometric polynomials to conclude that it is enough to
+        show that the above formulae hold for all $g$ of the form \[
+            g(\theta) = \sum_{n = -N}^N a_n e^{in\theta}.
+        \] However, we already know that \[
+            \hat{g}(k) = \sum_{n = -N}^N a_n\delta_{nk} = \begin{cases}
+                a_k, & |k| \leq N, \\
+                0, & \text{otherwise},
+            \end{cases}
+        \] from which it is immediate that $\lim_{|k| \to \infty} |\hat{g}(k)| = 0$.
+
+        To show that the map $L^1(\mathbb{T}) \to c_0$ is injective, pick $f \in
+        L^1(\mathbb{T})$ such that $\hat{f}(n) = 0$ for all $n \in \mathbb{Z}$. Then,
+        each $f * Q_n = 0$; but $f * Q_n \to f$ in $L^1$ forces $f = 0$ almost
+        everywhere.
+    \end{proof}
+
+
+    \section*{Convergence of Fourier series}
+
+    \begin{theorem}
+        Let $f \in L^1(\mathbb{T})$, and suppose that \[
+            \sum_{n = -\infty}^\infty |\hat{f}(n)| < \infty.
+        \] Then, \[
+            f(\theta) = \sum_{n = -\infty}^\infty \hat{f}(\theta) e^{in\theta} \qquad
+            \text{a.e.}
+        \] If we further suppose that $f \in C(\mathbb{T})$, then equality holds
+        everywhere.
+    \end{theorem}
+    \begin{proof}[Sketch of proof]
+        Setting \[
+            g(\theta) = \sum_{n = -\infty}^\infty \hat{f}(\theta) e^{in\theta},
+            \qquad
+            g_N(\theta) = \sum_{n = -N}^N \hat{f}(\theta) e^{in\theta},
+        \] we claim that $g$ is continuous. Indeed, as $N \to \infty$, we have \[
+            \Vert g - g_N\Vert_\infty \leq \sum_{|n| > N} |\hat{f}(n)| \to 0
+        \] since the tail of the convergent series $\sum_{n \in \mathbb{Z}}
+        |\hat{f}(n)|$ vanishes. Thus, $g$ being the uniform limit of continuous
+        functions must also be continuous. This in turn gives all $\hat{g}(n) =
+        \hat{f}(n)$, hence $g = f$ almost everywhere (we have $\widehat{(g - f)} = 0$
+        and know that the Fourier transform is injective).
+    \end{proof}
+
+
+    \begin{lemma}
+        Let $f \in C^1(\mathbb{T})$. Then, for all $n \in \mathbb{Z}$, we have \[
+            \widehat{(f')}(n) = in\, \hat{f}(n).
+        \] If we further suppose that $f \in C^2(\mathbb{T})$, then there exists $C >
+        0$ for which the following holds for all $n \in \mathbb{Z}\setminus\{0\}$. \[
+            |\hat{f}(n)| \leq \frac{C}{n^2}.
+        \]
+        \begin{remark}
+            The second condition immediately gives $\sum_{n \in \mathbb{Z}}
+            |\hat{f}(n)| < \infty$, guaranteeing the convergence and equality of the
+            Fourier series of $f$ everywhere.
+        \end{remark}
+    \end{lemma}
+
+\end{document}
