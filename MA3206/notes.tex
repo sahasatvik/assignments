@@ -31,6 +31,8 @@
 \newcommand{\Z}{\mathbb{Z}}
 \newcommand{\N}{\mathbb{N}}
 
+\renewcommand{\vec}[1]{\bm{#1}}
+
 \DeclareMathOperator{\var}{Var}
 \DeclareMathOperator{\cov}{Cov}
 
@@ -645,7 +647,7 @@
     \end{lemma}
 
     \begin{lemma}
-        \[
+        Covariance is a bilinear map, with \[
             \cov(ax + by, cx + dy) = ac\sigma_x^2 + bd\sigma_y^2 + (ad + bc)\cov(x,
             y).
         \]
@@ -661,6 +663,61 @@
         \] Furthermore, equality holds if and only if $(x_i - \bar{x}) = k(y_i -
         \bar{y})$, $k = \pm \sigma_x / \sigma_y$.
     \end{lemma}
+
+
+    \subsection{Intra-class correlation}
+
+    Consider $p$ families, with the $i$th family containing $k_i$ members. Further
+    let $x_{ij}$ be the variate value of the $j$th member of the $i$th family.
+
+    Fix a family $i$, and set $u_i$ as the first variate value, which takes the
+    values $x_{ij}$, with $k_i - 1$ copies for each $j$. The second variate value
+    $v_i$ is such that $(u_{il}, v_{il})$ takes all possible pairs $(x_{ij},
+    x_{ij'})$ with $j \neq j'$. This immediately gives \[
+        \overline{u}_i = \overline{v}_i = \frac{1}{k_i} \sum_{j = 1}^{k_i} x_{ij},
+    \] hence \[
+        \overline{u} = \overline{v} = \frac{1}{N}\sum_{i = 1}^p\sum_{j = 1}^{k_i}
+        x_{ij}(k_i - 1), \qquad N = \sum_{i = 1}^p k_i(k_i - 1).
+    \] Thus, the variances of $u$, $v$ are \[
+        \sigma_u^2 = \sigma_v^2 = \frac{1}{N}\sum_{i = 1}^p\sum_{j = 1}^{k_i} (x_{ij}
+        - \overline{u})^2(k_i - 1).
+    \] Also, \[
+        \cov(u, v) = \frac{1}{N}\sum_{i = 1}^p\left[k_i^2(\overline{u}_i -
+        \overline{u})^2 - \sum_{j = 1}^{k_i}(x_{ij} - \overline{u})^2\right].
+    \] The inter-class correlation coefficient is thus defined as \[
+        r_I = \frac{\cov(u, v)}{s_u^2}.
+    \] 
+
+    Consider the special case where all families have the same size $k_i = k$. Then,
+    \[
+        N = pk(k - 1), \qquad 
+        \overline{u} = \frac{1}{kp}\sum_{i = 1}^p\sum_{j = 1}^kx_{ij}, \qquad 
+        s_u^2 = \frac{1}{pk}\sum_{i = 1}^p\sum_{j = 1}^k(x_{ij} - \overline{u})^2.
+    \] Also, \[
+        \cov(u, v) = \frac{1}{k - 1}(ks_b^2 - s_u^2), \qquad
+        s_b^2 = \frac{1}{p}\sum_{i = 1}^p (\overline{u}_i - \overline{u})^2.
+    \] This gives \[
+        r_I = \frac{1}{k - 1}\left[\frac{ksb^2}{s_u^2} - 1\right].
+    \]
+
+    \begin{lemma}
+        \[
+            -\frac{1}{k - 1} \leq r_I \leq 1.
+        \]
+        \begin{remark}
+            The equality $r_I = 1$ is attained if and only if each $x_{ij} =
+            \overline{u}_i$.
+        \end{remark}
+        \begin{remark}
+            The equality $r_I = -1 / (k - 1)$ is attained if and only if each
+            $\overline{u}_i = \overline{u}$.
+        \end{remark}
+    \end{lemma}
+    
+    \begin{lemma}
+        The numerical value of $r_I$ is invariant under shifting and scaling.
+    \end{lemma}
+    
 
 
     \subsection{Linear regression}
@@ -869,6 +926,95 @@
     \begin{lemma}
         $\tau$ may be regarded as a product moment correlation coefficient.
     \end{lemma}
+    
+
+
+
+    \section{Sample surveys}
+
+    \begin{definition}
+        A finite population consists of a finite number of $N$ identifiable units,
+        labelled $\vec{U} = (U_1, \dots, U_N)$.
+        A collection of units from $\vec{U}$ is called a sample.
+    \end{definition}
+
+    \begin{definition}
+        A variable $X$ defined on $\vec{U}$ is a study variable. We denote its values as
+        $X_i = X(U_i)$.
+        If $s$ is a sample from $\vec{U}$, then $\vec{X}(s)$ is the vector of $X$
+        values for units in the sample $s$. The components of $\vec{X}(s)$ are
+        labelled $Y_1, \dots, Y_n$.
+        The sample size $n(s)$ is the number of units in $s$, while the effective
+        sample size $\nu(s)$ is the number of distinct units in $s$.
+    \end{definition}
+
+    In this discussion, we assume that there is no observational error, and that
+    $\vec{X}(s)$ is completely known. We wish to estimate a function $f$ of the study
+    variable $\vec{X}$; we further assume that $f(\vec{X})$ is indeed estimable on
+    the basis of $\vec{X}(s)$.
+
+    \begin{definition}
+        Let $S$ be a countable collection of samples from the sampling frame
+        $\vec{U}$. Assign a real number $p(s) > 0$ to every sample $s \in S$, such that
+        $\sum_{s \in S} p(s) = 1$. Then, \[
+            P = \{p(s): s \in S\}
+        \] describes a discrete probability measure on $S$, called a sampling design.
+        \begin{remark}
+            If $S$ contains all population units, then the sampling design $P$ is
+            called a census.
+        \end{remark}
+    \end{definition}
+
+    \begin{definition}
+        Random sampling is a procedure of drawing samples in which a sample $s \in S$
+        is selected according to a sampling design, with probability $p(s)$.
+    \end{definition}
+
+    \begin{example}
+        In Simple Random Sampling With Replacement where each sample has size $n$,
+        i.e.\ $SRSWR(n)$, we have the sampling design \[
+            p(s) = \frac{1}{N^n}
+        \] for all samples $s$ such that $n(s) = n$. This can be achieved by drawing
+        $n$ units from $\vec{U}$ one at a time, each with probability $1 / N$,
+        allowing for repetitions.
+    \end{example}
+    
+    \begin{example}
+        In Simple Random Sampling WithOut Replacement where each sample has size $n$,
+        i.e.\ $SRSWOR(n)$, we have the sampling design \[
+            p(s) = \frac{1}{N(N - 1)(N - 2)\cdots (N - n + 1)}
+        \] for all samples $s$ such that $n(s) = \nu(s) = n$. This can be achieved by
+        drawing $n$ units from $\vec{U}$ one at a time, each with uniform
+        probability, discarding previously selected units thereby disallowing
+        repetitions.
+    \end{example}
+
+    \begin{definition} \mbox{}
+        \begin{enumerate}
+            \itemsep0em
+            \item A parameter is a function of the population values, typically unknown.
+            \item A statistic is a function of the sample values, which is known.
+            \item An estimator is a statistic which is used to estimate an (unknown)
+            parameter. It is a random variable.
+            \item An estimate is a numerical value of an estimator.
+        \end{enumerate}
+    \end{definition}
+
+
+    \subsection{Simple Random Sampling With Replacement}
+
+    Here, a sample of size $n$ is chosen such that every such possible sample has
+    uniform probability $1 / N^n$. The probability of the $i$th element in the sample
+    being any particular unit $X_\alpha$ from the population is $1 / N$, i.e.\ \[
+        P(Y_i = X_\alpha) = \frac{1}{N}, \qquad \text{for all } 1 \leq i \leq n,\; 1
+        \leq \alpha \leq N.
+    \] Thus, the expected value of $Y_i$ is \[
+        E[Y_i] = \sum_{\alpha = 1}^N X_\alpha\cdot P(Y_i = X_\alpha) =
+        \frac{1}{N}\sum_{\alpha = 1}^N X_\alpha = \overline{X}.
+    \] This is known as the population mean, $\mu = \overline{X}$. The variance \[
+        \var[Y_i] = E[(Y_i - E[Y_i])^2] = \frac{1}{N}\sum_{\alpha = 1}^N (X_\alpha -
+        \overline{X})^2 = \sigma^2
+    \] is called the population variance.
     
     
     
