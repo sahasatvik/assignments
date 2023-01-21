@@ -60,7 +60,7 @@
     \maketitle
 
     Consider the space $\C\times\C\setminus\Delta$, where $\Delta = \{(z, z): z \in
-    \C\}$. We may identify $\R^2 \cong \C$ via the usual map $(x, y) \mapsto z + iy$;
+    \C\}$. We may identify $\R^2 \cong \C$ via the usual map $(x, y) \mapsto x + iy$;
     with this, the space under question may be identified with \[
         \R^4\setminus\{(x, y, x, y): x, y \in \R\} \;=\;
         \R^4\setminus\operatorname{span}\{e_1 + e_3, e_2 + e_4\}.
@@ -86,10 +86,13 @@
     \]
 
 
+    The following sections elaborate on certain details from the above discussion.
+
+
     \subsection*{Identification of $\C$ with $\R^2$}
 
     We use the standard identification \[
-        \phi\colon \R^2 \to \C, \qquad x + iy \mapsto x + iy
+        \phi\colon \R^2 \to \C, \qquad (x, y) \mapsto x + iy
     \] and its inverse to interchangeably talk about $\C$ and $\R^2$ here.
 
 
@@ -163,6 +166,37 @@
     indeed, it deformation retracts to a circle once again. Additionally, it is easy
     to see that each based homotopy class of loops is completely determined by the
     number of times it winds around the line that has been removed.
+
+    Indeed, the standard deformation retraction of $\C\times \C\setminus \{(0, 0)\}$
+    to the unit sphere $S^3$ restricts to a deformation retraction \[
+        \C\times\C\setminus\Delta \;\to\; S^3\setminus\{(e^{it}, e^{it}): t \in \R\}.
+    \] The space on the right consists of $S^3$ minus a copy of $S^1$. Performing
+    stereographic projection about a point on this (removed) circle, say $(1, 1)$,
+    gives a homeomorphism to $\R^3$ minus a straight line.
+
+
+    \subsection*{* Interpretation of $\C\times\C \setminus\Delta$ as a configuration
+    space of particles}
+
+    A point in $\C$ can be thought of as the coordinate of a particle on a plane;
+    thus, points in $\C\times\C$ can be used to represent the joint positions of two
+    particles on a plane. Removing the diagonal $\Delta$ imposes the restriction that
+    the two particles cannot occupy the same position on the plane. Thus,
+    $\C\times\C\setminus\Delta$ represents the configuration space of two particles
+    on a plane.
+
+    It is now easy to see that $\C\times\C\setminus\Delta$ is path connected. Finding
+    a path in this space, i.e.\ a path between two configurations $(z_1, z_2)$ and
+    $(z_1', z_2')$ reduces to finding paths for the particles individually, one from
+    $z_1$ to $z_1'$ and another from $z_2$ to $z_2'$. The only restriction here is
+    that the paths cannot intersect at the same `time' parameter $t$; but we can do
+    better and have them \emph{never} intersect. This is possible since $\C\setminus
+    \{0\}$ is path connected; we simply fix the first particle and move the other
+    into place, then fix the second and move the first. There are a few edge cases
+    where the destination for one particle is the initial position for the other, but
+    these can be easily dealt with by noticing that the two particles can be
+    interchanged by simultaneously moving them clockwise along a circle passing
+    through their initial positions.
 
 
 
