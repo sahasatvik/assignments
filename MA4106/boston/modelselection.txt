@@ -1,0 +1,440 @@
+Forward Selection
+Current model uses features []
++LSTAT      => F = 928.1434, p = 0.0000, adjR2 =   0.6474, D_AIC = -526.4417
++RM         => F = 335.2318, p = 0.0000, adjR2 =   0.3983, D_AIC = -256.0148
++TAX        => F = 232.0283, p = 0.0000, adjR2 =   0.3139, D_AIC = -189.6183
++INDUS      => F = 209.1568, p = 0.0000, adjR2 =   0.2919, D_AIC = -173.6453
++CRIM       => F = 194.7649, p = 0.0000, adjR2 =   0.2773, D_AIC = -163.3295
++NOX        => F = 177.7376, p = 0.0000, adjR2 =   0.2592, D_AIC = -150.8467
++PTRATIO    => F = 169.5551, p = 0.0000, adjR2 =   0.2502, D_AIC = -144.7367
++RAD        => F = 152.5028, p = 0.0000, adjR2 =   0.2308, D_AIC = -131.7615
++AGE        => F = 130.4341, p = 0.0000, adjR2 =   0.2040, D_AIC = -114.4595
++B          => F =  97.3682, p = 0.0000, adjR2 =   0.1602, D_AIC = -87.3754
++ZN         => F =  76.6580, p = 0.0000, adjR2 =   0.1303, D_AIC = -69.6424
++DIS        => F =  67.1037, p = 0.0000, adjR2 =   0.1157, D_AIC = -61.2473
++CHAS       => F =  12.9731, p = 0.0003, adjR2 =   0.0232, D_AIC = -10.8598
+Added   LSTAT     
+
+Current model uses features ['LSTAT']
++PTRATIO    => F =  77.1340, p = 0.0000, adjR2 =   0.6937, D_AIC = -70.1905
++CRIM       => F =  51.6560, p = 0.0000, adjR2 =   0.6796, D_AIC = -47.4655
++RM         => F =  47.7396, p = 0.0000, adjR2 =   0.6773, D_AIC = -43.8800
++TAX        => F =  33.0123, p = 0.0000, adjR2 =   0.6684, D_AIC = -30.1649
++B          => F =  19.8904, p = 0.0000, adjR2 =   0.6601, D_AIC = -17.6235
++CHAS       => F =  19.6991, p = 0.0000, adjR2 =   0.6600, D_AIC = -17.4384
++RAD        => F =  15.1742, p = 0.0001, adjR2 =   0.6570, D_AIC = -13.0389
++INDUS      => F =   7.0194, p = 0.0083, adjR2 =   0.6515, D_AIC =  -5.0125
++DIS        => F =   6.3145, p = 0.0123, adjR2 =   0.6511, D_AIC =  -4.3126
++NOX        => F =   2.6926, p = 0.1014, adjR2 =   0.6486, D_AIC =  -0.7014
++AGE        => F =   2.2330, p = 0.1357, adjR2 =   0.6482, D_AIC =  -0.2413
++ZN         => F =   1.6475, p = 0.1999, adjR2 =   0.6478, D_AIC =   0.3454
+Added   PTRATIO   
+
+Current model uses features ['LSTAT', 'PTRATIO']
++CRIM       => F =  40.7250, p = 0.0000, adjR2 =   0.7161, D_AIC = -37.4693
++RM         => F =  34.2164, p = 0.0000, adjR2 =   0.7126, D_AIC = -31.3645
++B          => F =  19.0717, p = 0.0000, adjR2 =   0.7043, D_AIC = -16.8675
++CHAS       => F =  14.3368, p = 0.0002, adjR2 =   0.7016, D_AIC = -12.2486
++TAX        => F =  10.8077, p = 0.0011, adjR2 =   0.6995, D_AIC =  -8.7782
++DIS        => F =  10.4020, p = 0.0013, adjR2 =   0.6993, D_AIC =  -8.3777
++NOX        => F =   4.5955, p = 0.0325, adjR2 =   0.6958, D_AIC =  -2.6111
++AGE        => F =   4.1604, p = 0.0419, adjR2 =   0.6956, D_AIC =  -2.1762
++ZN         => F =   1.2912, p = 0.2564, adjR2 =   0.6938, D_AIC =   0.7002
++RAD        => F =   1.2827, p = 0.2579, adjR2 =   0.6938, D_AIC =   0.7087
++INDUS      => F =   0.9568, p = 0.3285, adjR2 =   0.6936, D_AIC =   1.0365
+Added   CRIM      
+
+Current model uses features ['LSTAT', 'PTRATIO', 'CRIM']
++RM         => F =  48.4609, p = 0.0000, adjR2 =   0.7406, D_AIC = -44.7197
++DIS        => F =  22.3806, p = 0.0000, adjR2 =   0.7277, D_AIC = -20.1136
++CHAS       => F =  14.4933, p = 0.0002, adjR2 =   0.7235, D_AIC = -12.4303
++B          => F =   8.5301, p = 0.0037, adjR2 =   0.7203, D_AIC =  -6.5428
++AGE        => F =   7.9088, p = 0.0051, adjR2 =   0.7199, D_AIC =  -5.9253
++RAD        => F =   5.6700, p = 0.0176, adjR2 =   0.7187, D_AIC =  -3.6944
++ZN         => F =   1.0183, p = 0.3134, adjR2 =   0.7161, D_AIC =   0.9726
++NOX        => F =   0.6970, p = 0.4042, adjR2 =   0.7159, D_AIC =   1.2965
++TAX        => F =   0.5093, p = 0.4758, adjR2 =   0.7158, D_AIC =   1.4859
++INDUS      => F =   0.0000, p = 0.9971, adjR2 =   0.7155, D_AIC =   2.0000
+Added   RM        
+
+Current model uses features ['LSTAT', 'PTRATIO', 'CRIM', 'RM']
++DIS        => F =  15.7529, p = 0.0001, adjR2 =   0.7480, D_AIC = -13.6960
++B          => F =  15.4455, p = 0.0001, adjR2 =   0.7479, D_AIC = -13.3943
++CHAS       => F =  12.7352, p = 0.0004, adjR2 =   0.7465, D_AIC = -10.7266
++AGE        => F =   2.2784, p = 0.1318, adjR2 =   0.7413, D_AIC =  -0.3006
++TAX        => F =   1.8965, p = 0.1691, adjR2 =   0.7411, D_AIC =   0.0844
++NOX        => F =   1.7884, p = 0.1817, adjR2 =   0.7410, D_AIC =   0.1933
++RAD        => F =   1.6627, p = 0.1978, adjR2 =   0.7409, D_AIC =   0.3202
++ZN         => F =   1.6406, p = 0.2008, adjR2 =   0.7409, D_AIC =   0.3425
++INDUS      => F =   0.0120, p = 0.9129, adjR2 =   0.7401, D_AIC =   1.9879
+Added   DIS       
+
+Current model uses features ['LSTAT', 'PTRATIO', 'CRIM', 'RM', 'DIS']
++NOX        => F =  30.8114, p = 0.0000, adjR2 =   0.7622, D_AIC = -28.3170
++B          => F =  18.5339, p = 0.0000, adjR2 =   0.7566, D_AIC = -16.4533
++CHAS       => F =   9.1864, p = 0.0026, adjR2 =   0.7521, D_AIC =  -7.2305
++TAX        => F =   7.7347, p = 0.0056, adjR2 =   0.7514, D_AIC =  -5.7830
++INDUS      => F =   7.6235, p = 0.0060, adjR2 =   0.7513, D_AIC =  -5.6720
++ZN         => F =   2.1404, p = 0.1441, adjR2 =   0.7486, D_AIC =  -0.1658
++AGE        => F =   1.6092, p = 0.2052, adjR2 =   0.7483, D_AIC =   0.3709
++RAD        => F =   0.0777, p = 0.7806, adjR2 =   0.7476, D_AIC =   1.9212
+Added   NOX       
+
+Current model uses features ['LSTAT', 'PTRATIO', 'CRIM', 'RM', 'DIS', 'NOX']
++B          => F =  12.6343, p = 0.0004, adjR2 =   0.7676, D_AIC = -10.6771
++CHAS       => F =  12.4819, p = 0.0004, adjR2 =   0.7676, D_AIC = -10.5261
++RAD        => F =   7.7614, p = 0.0055, adjR2 =   0.7654, D_AIC =  -5.8252
++ZN         => F =   2.0887, p = 0.1490, adjR2 =   0.7627, D_AIC =  -0.1178
++INDUS      => F =   0.2602, p = 0.6102, adjR2 =   0.7618, D_AIC =   1.7357
++TAX        => F =   0.1624, p = 0.6871, adjR2 =   0.7618, D_AIC =   1.8350
++AGE        => F =   0.0515, p = 0.8206, adjR2 =   0.7617, D_AIC =   1.9477
+Added   B         
+
+Current model uses features ['LSTAT', 'PTRATIO', 'CRIM', 'RM', 'DIS', 'NOX', 'B']
++RAD        => F =  12.0708, p = 0.0006, adjR2 =   0.7727, D_AIC = -10.1425
++CHAS       => F =  11.4602, p = 0.0008, adjR2 =   0.7724, D_AIC =  -9.5353
++ZN         => F =   2.3933, p = 0.1225, adjR2 =   0.7683, D_AIC =  -0.4308
++INDUS      => F =   0.0790, p = 0.7788, adjR2 =   0.7672, D_AIC =   1.9196
++TAX        => F =   0.0250, p = 0.8744, adjR2 =   0.7672, D_AIC =   1.9745
++AGE        => F =   0.0037, p = 0.9518, adjR2 =   0.7672, D_AIC =   1.9963
+Added   RAD       
+
+Current model uses features ['LSTAT', 'PTRATIO', 'CRIM', 'RM', 'DIS', 'NOX', 'B', 'RAD']
++TAX        => F =  16.3349, p = 0.0001, adjR2 =   0.7795, D_AIC = -14.3957
++CHAS       => F =  11.2259, p = 0.0009, adjR2 =   0.7773, D_AIC =  -9.3245
++ZN         => F =   1.2764, p = 0.2591, adjR2 =   0.7728, D_AIC =   0.6995
++INDUS      => F =   0.4989, p = 0.4803, adjR2 =   0.7724, D_AIC =   1.4913
++AGE        => F =   0.0774, p = 0.7810, adjR2 =   0.7723, D_AIC =   1.9211
+Added   TAX       
+
+Current model uses features ['LSTAT', 'PTRATIO', 'CRIM', 'RM', 'DIS', 'NOX', 'B', 'RAD', 'TAX']
++CHAS       => F =   9.3504, p = 0.0023, adjR2 =   0.7831, D_AIC =  -7.4691
++ZN         => F =   3.9312, p = 0.0480, adjR2 =   0.7808, D_AIC =  -2.0027
++INDUS      => F =   1.1697, p = 0.2800, adjR2 =   0.7796, D_AIC =   0.8057
++AGE        => F =   0.0934, p = 0.7600, adjR2 =   0.7791, D_AIC =   1.9045
+Added   CHAS      
+
+Current model uses features ['LSTAT', 'PTRATIO', 'CRIM', 'RM', 'DIS', 'NOX', 'B', 'RAD', 'TAX', 'CHAS']
++ZN         => F =   4.0275, p = 0.0453, adjR2 =   0.7844, D_AIC =  -2.1086
++INDUS      => F =   0.6080, p = 0.4359, adjR2 =   0.7830, D_AIC =   1.3777
++AGE        => F =   0.0232, p = 0.8789, adjR2 =   0.7827, D_AIC =   1.9762
+Added   ZN        
+
+Current model uses features ['LSTAT', 'PTRATIO', 'CRIM', 'RM', 'DIS', 'NOX', 'B', 'RAD', 'TAX', 'CHAS', 'ZN']
++INDUS      => F =   1.0069, p = 0.3161, adjR2 =   0.7845, D_AIC =   0.9676
++AGE        => F =   0.1595, p = 0.6898, adjR2 =   0.7841, D_AIC =   1.8363
+
+Final model uses 11 features ['LSTAT', 'PTRATIO', 'CRIM', 'RM', 'DIS', 'NOX', 'B', 'RAD', 'TAX', 'CHAS', 'ZN']
+
+
+Backward Elimination
+Current model uses features ['CRIM', 'ZN', 'INDUS', 'CHAS', 'NOX', 'RM', 'AGE', 'DIS', 'RAD', 'TAX', 'PTRATIO', 'B', 'LSTAT']
+-AGE        => F =   0.1587, p = 0.6906, adjR2 =   0.7845, D_AIC =  -1.8369
+-INDUS      => F =   1.0043, p = 0.3168, adjR2 =   0.7841, D_AIC =  -0.9681
+-ZN         => F =   4.5533, p = 0.0333, adjR2 =   0.7825, D_AIC =   2.6613
+-CHAS       => F =   8.5584, p = 0.0036, adjR2 =   0.7808, D_AIC =   6.7263
+-B          => F =  14.7979, p = 0.0001, adjR2 =   0.7780, D_AIC =  12.9946
+-TAX        => F =  17.2838, p = 0.0000, adjR2 =   0.7770, D_AIC =  15.4705
+-NOX        => F =  25.9206, p = 0.0000, adjR2 =   0.7732, D_AIC =  23.9797
+-RAD        => F =  28.8640, p = 0.0000, adjR2 =   0.7719, D_AIC =  26.8471
+-RM         => F =  29.4849, p = 0.0000, adjR2 =   0.7716, D_AIC =  27.4500
+-DIS        => F =  37.8059, p = 0.0000, adjR2 =   0.7680, D_AIC =  35.4602
+-PTRATIO    => F =  53.4154, p = 0.0000, adjR2 =   0.7611, D_AIC =  50.1529
+-CRIM       => F =  60.9695, p = 0.0000, adjR2 =   0.7578, D_AIC =  57.1130
+-LSTAT      => F = 204.5929, p = 0.0000, adjR2 =   0.6949, D_AIC = 173.9476
+Removed AGE       
+
+Current model uses features ['CRIM', 'ZN', 'INDUS', 'CHAS', 'NOX', 'RM', 'DIS', 'RAD', 'TAX', 'PTRATIO', 'B', 'LSTAT']
+-INDUS      => F =   1.0069, p = 0.3161, adjR2 =   0.7844, D_AIC =  -0.9676
+-ZN         => F =   4.4223, p = 0.0360, adjR2 =   0.7830, D_AIC =   2.5187
+-CHAS       => F =   8.7145, p = 0.0033, adjR2 =   0.7811, D_AIC =   6.8661
+-B          => F =  15.0808, p = 0.0001, adjR2 =   0.7783, D_AIC =  13.2464
+-TAX        => F =  17.2296, p = 0.0000, adjR2 =   0.7774, D_AIC =  15.3819
+-NOX        => F =  26.7816, p = 0.0000, adjR2 =   0.7732, D_AIC =  24.7672
+-RAD        => F =  28.7545, p = 0.0000, adjR2 =   0.7723, D_AIC =  26.6841
+-RM         => F =  31.7976, p = 0.0000, adjR2 =   0.7710, D_AIC =  29.6267
+-DIS        => F =  42.9588, p = 0.0000, adjR2 =   0.7661, D_AIC =  40.2753
+-PTRATIO    => F =  53.3780, p = 0.0000, adjR2 =   0.7616, D_AIC =  50.0178
+-CRIM       => F =  61.0536, p = 0.0000, adjR2 =   0.7582, D_AIC =  57.0767
+-LSTAT      => F = 227.5439, p = 0.0000, adjR2 =   0.6856, D_AIC = 190.0256
+Removed INDUS     
+
+Current model uses features ['CRIM', 'ZN', 'CHAS', 'NOX', 'RM', 'DIS', 'RAD', 'TAX', 'PTRATIO', 'B', 'LSTAT']
+-ZN         => F =   4.0275, p = 0.0453, adjR2 =   0.7831, D_AIC =   2.1086
+-CHAS       => F =   9.4369, p = 0.0022, adjR2 =   0.7808, D_AIC =   7.5750
+-B          => F =  14.8389, p = 0.0001, adjR2 =   0.7784, D_AIC =  12.9755
+-TAX        => F =  17.0452, p = 0.0000, adjR2 =   0.7775, D_AIC =  15.1648
+-NOX        => F =  25.9604, p = 0.0000, adjR2 =   0.7736, D_AIC =  23.9159
+-RAD        => F =  28.0119, p = 0.0000, adjR2 =   0.7727, D_AIC =  25.9083
+-RM         => F =  31.0177, p = 0.0000, adjR2 =   0.7714, D_AIC =  28.8137
+-DIS        => F =  48.2722, p = 0.0000, adjR2 =   0.7639, D_AIC =  45.1757
+-PTRATIO    => F =  52.3730, p = 0.0000, adjR2 =   0.7621, D_AIC =  48.9878
+-CRIM       => F =  61.7210, p = 0.0000, adjR2 =   0.7580, D_AIC =  57.5718
+-LSTAT      => F = 226.5848, p = 0.0000, adjR2 =   0.6862, D_AIC = 189.0290
+
+Final model uses 11 features ['LSTAT', 'NOX', 'ZN', 'CHAS', 'B', 'DIS', 'CRIM', 'PTRATIO', 'TAX', 'RM', 'RAD']
+
+
+Forward-Backward Stepwise
+Current model uses features []
+Forward pass
++LSTAT      => F = 928.1434, p = 0.0000, adj_R2 =   0.6474, D_AIC = -526.4417
++RM         => F = 335.2318, p = 0.0000, adj_R2 =   0.3983, D_AIC = -256.0148
++TAX        => F = 232.0283, p = 0.0000, adj_R2 =   0.3139, D_AIC = -189.6183
++INDUS      => F = 209.1568, p = 0.0000, adj_R2 =   0.2919, D_AIC = -173.6453
++CRIM       => F = 194.7649, p = 0.0000, adj_R2 =   0.2773, D_AIC = -163.3295
++NOX        => F = 177.7376, p = 0.0000, adj_R2 =   0.2592, D_AIC = -150.8467
++PTRATIO    => F = 169.5551, p = 0.0000, adj_R2 =   0.2502, D_AIC = -144.7367
++RAD        => F = 152.5028, p = 0.0000, adj_R2 =   0.2308, D_AIC = -131.7615
++AGE        => F = 130.4341, p = 0.0000, adj_R2 =   0.2040, D_AIC = -114.4595
++B          => F =  97.3682, p = 0.0000, adj_R2 =   0.1602, D_AIC = -87.3754
++ZN         => F =  76.6580, p = 0.0000, adj_R2 =   0.1303, D_AIC = -69.6424
++DIS        => F =  67.1037, p = 0.0000, adj_R2 =   0.1157, D_AIC = -61.2473
++CHAS       => F =  12.9731, p = 0.0003, adj_R2 =   0.0232, D_AIC = -10.8598
+Added   LSTAT     
+Backward pass
+-LSTAT      => F = 928.1434, p = 0.0000, adjR2 =  -0.0000, D_AIC = 526.4417
+
+Current model uses features ['LSTAT']
+Forward pass
++PTRATIO    => F =  77.1340, p = 0.0000, adj_R2 =   0.6937, D_AIC = -70.1905
++CRIM       => F =  51.6560, p = 0.0000, adj_R2 =   0.6796, D_AIC = -47.4655
++RM         => F =  47.7396, p = 0.0000, adj_R2 =   0.6773, D_AIC = -43.8800
++TAX        => F =  33.0123, p = 0.0000, adj_R2 =   0.6684, D_AIC = -30.1649
++B          => F =  19.8904, p = 0.0000, adj_R2 =   0.6601, D_AIC = -17.6235
++CHAS       => F =  19.6991, p = 0.0000, adj_R2 =   0.6600, D_AIC = -17.4384
++RAD        => F =  15.1742, p = 0.0001, adj_R2 =   0.6570, D_AIC = -13.0389
++INDUS      => F =   7.0194, p = 0.0083, adj_R2 =   0.6515, D_AIC =  -5.0125
++DIS        => F =   6.3145, p = 0.0123, adj_R2 =   0.6511, D_AIC =  -4.3126
++NOX        => F =   2.6926, p = 0.1014, adj_R2 =   0.6486, D_AIC =  -0.7014
++AGE        => F =   2.2330, p = 0.1357, adj_R2 =   0.6482, D_AIC =  -0.2413
++ZN         => F =   1.6475, p = 0.1999, adj_R2 =   0.6478, D_AIC =   0.3454
+Added   PTRATIO   
+Backward pass
+-PTRATIO    => F =  77.1340, p = 0.0000, adjR2 =   0.6474, D_AIC =  70.1905
+-LSTAT      => F = 730.5072, p = 0.0000, adjR2 =   0.2502, D_AIC = 451.8955
+
+Current model uses features ['LSTAT', 'PTRATIO']
+Forward pass
++CRIM       => F =  40.7250, p = 0.0000, adj_R2 =   0.7161, D_AIC = -37.4693
++RM         => F =  34.2164, p = 0.0000, adj_R2 =   0.7126, D_AIC = -31.3645
++B          => F =  19.0717, p = 0.0000, adj_R2 =   0.7043, D_AIC = -16.8675
++CHAS       => F =  14.3368, p = 0.0002, adj_R2 =   0.7016, D_AIC = -12.2486
++TAX        => F =  10.8077, p = 0.0011, adj_R2 =   0.6995, D_AIC =  -8.7782
++DIS        => F =  10.4020, p = 0.0013, adj_R2 =   0.6993, D_AIC =  -8.3777
++NOX        => F =   4.5955, p = 0.0325, adj_R2 =   0.6958, D_AIC =  -2.6111
++AGE        => F =   4.1604, p = 0.0419, adj_R2 =   0.6956, D_AIC =  -2.1762
++ZN         => F =   1.2912, p = 0.2564, adj_R2 =   0.6938, D_AIC =   0.7002
++RAD        => F =   1.2827, p = 0.2579, adj_R2 =   0.6938, D_AIC =   0.7087
++INDUS      => F =   0.9568, p = 0.3285, adj_R2 =   0.6936, D_AIC =   1.0365
+Added   CRIM      
+Backward pass
+-CRIM       => F =  40.7250, p = 0.0000, adjR2 =   0.6937, D_AIC =  37.4693
+-PTRATIO    => F =  65.6550, p = 0.0000, adjR2 =   0.6796, D_AIC =  60.1943
+-LSTAT      => F = 544.8497, p = 0.0000, adjR2 =   0.4091, D_AIC = 369.8799
+
+Current model uses features ['LSTAT', 'PTRATIO', 'CRIM']
+Forward pass
++RM         => F =  48.4609, p = 0.0000, adj_R2 =   0.7406, D_AIC = -44.7197
++DIS        => F =  22.3806, p = 0.0000, adj_R2 =   0.7277, D_AIC = -20.1136
++CHAS       => F =  14.4933, p = 0.0002, adj_R2 =   0.7235, D_AIC = -12.4303
++B          => F =   8.5301, p = 0.0037, adj_R2 =   0.7203, D_AIC =  -6.5428
++AGE        => F =   7.9088, p = 0.0051, adj_R2 =   0.7199, D_AIC =  -5.9253
++RAD        => F =   5.6700, p = 0.0176, adj_R2 =   0.7187, D_AIC =  -3.6944
++ZN         => F =   1.0183, p = 0.3134, adj_R2 =   0.7161, D_AIC =   0.9726
++NOX        => F =   0.6970, p = 0.4042, adj_R2 =   0.7159, D_AIC =   1.2965
++TAX        => F =   0.5093, p = 0.4758, adj_R2 =   0.7158, D_AIC =   1.4859
++INDUS      => F =   0.0000, p = 0.9971, adj_R2 =   0.7155, D_AIC =   2.0000
+Added   RM        
+Backward pass
+-RM         => F =  48.4609, p = 0.0000, adjR2 =   0.7161, D_AIC =  44.7197
+-PTRATIO    => F =  49.3532, p = 0.0000, adjR2 =   0.7156, D_AIC =  45.5408
+-CRIM       => F =  55.1302, p = 0.0000, adjR2 =   0.7126, D_AIC =  50.8246
+-LSTAT      => F = 272.7592, p = 0.0000, adjR2 =   0.6002, D_AIC = 217.9353
+
+Current model uses features ['LSTAT', 'PTRATIO', 'CRIM', 'RM']
+Forward pass
++DIS        => F =  15.7529, p = 0.0001, adj_R2 =   0.7480, D_AIC = -13.6960
++B          => F =  15.4455, p = 0.0001, adj_R2 =   0.7479, D_AIC = -13.3943
++CHAS       => F =  12.7352, p = 0.0004, adj_R2 =   0.7465, D_AIC = -10.7266
++AGE        => F =   2.2784, p = 0.1318, adj_R2 =   0.7413, D_AIC =  -0.3006
++TAX        => F =   1.8965, p = 0.1691, adj_R2 =   0.7411, D_AIC =   0.0844
++NOX        => F =   1.7884, p = 0.1817, adj_R2 =   0.7410, D_AIC =   0.1933
++RAD        => F =   1.6627, p = 0.1978, adj_R2 =   0.7409, D_AIC =   0.3202
++ZN         => F =   1.6406, p = 0.2008, adj_R2 =   0.7409, D_AIC =   0.3425
++INDUS      => F =   0.0120, p = 0.9129, adj_R2 =   0.7401, D_AIC =   1.9879
+Added   DIS       
+Backward pass
+-DIS        => F =  15.7529, p = 0.0001, adjR2 =   0.7406, D_AIC =  13.6960
+-RM         => F =  41.4532, p = 0.0000, adjR2 =   0.7277, D_AIC =  38.3021
+-PTRATIO    => F =  53.8695, p = 0.0000, adjR2 =   0.7214, D_AIC =  49.7744
+-CRIM       => F =  65.9168, p = 0.0000, adjR2 =   0.7154, D_AIC =  60.6625
+-LSTAT      => F = 288.8231, p = 0.0000, adjR2 =   0.6033, D_AIC = 228.7026
+
+Current model uses features ['LSTAT', 'PTRATIO', 'CRIM', 'RM', 'DIS']
+Forward pass
++NOX        => F =  30.8114, p = 0.0000, adj_R2 =   0.7622, D_AIC = -28.3170
++B          => F =  18.5339, p = 0.0000, adj_R2 =   0.7566, D_AIC = -16.4533
++CHAS       => F =   9.1864, p = 0.0026, adj_R2 =   0.7521, D_AIC =  -7.2305
++TAX        => F =   7.7347, p = 0.0056, adj_R2 =   0.7514, D_AIC =  -5.7830
++INDUS      => F =   7.6235, p = 0.0060, adj_R2 =   0.7513, D_AIC =  -5.6720
++ZN         => F =   2.1404, p = 0.1441, adj_R2 =   0.7486, D_AIC =  -0.1658
++AGE        => F =   1.6092, p = 0.2052, adj_R2 =   0.7483, D_AIC =   0.3709
++RAD        => F =   0.0777, p = 0.7806, adj_R2 =   0.7476, D_AIC =   1.9212
+Added   NOX       
+Backward pass
+-NOX        => F =  30.8114, p = 0.0000, adjR2 =   0.7480, D_AIC =  28.3170
+-RM         => F =  41.1374, p = 0.0000, adjR2 =   0.7431, D_AIC =  38.0840
+-DIS        => F =  45.5558, p = 0.0000, adjR2 =   0.7410, D_AIC =  42.2063
+-CRIM       => F =  57.5849, p = 0.0000, adjR2 =   0.7353, D_AIC =  53.2621
+-PTRATIO    => F =  67.7034, p = 0.0000, adjR2 =   0.7305, D_AIC =  62.3784
+-LSTAT      => F = 232.9784, p = 0.0000, adjR2 =   0.6519, D_AIC = 191.8713
+
+Current model uses features ['LSTAT', 'PTRATIO', 'CRIM', 'RM', 'DIS', 'NOX']
+Forward pass
++B          => F =  12.6343, p = 0.0004, adj_R2 =   0.7676, D_AIC = -10.6771
++CHAS       => F =  12.4819, p = 0.0004, adj_R2 =   0.7676, D_AIC = -10.5261
++RAD        => F =   7.7614, p = 0.0055, adj_R2 =   0.7654, D_AIC =  -5.8252
++ZN         => F =   2.0887, p = 0.1490, adj_R2 =   0.7627, D_AIC =  -0.1178
++INDUS      => F =   0.2602, p = 0.6102, adj_R2 =   0.7618, D_AIC =   1.7357
++TAX        => F =   0.1624, p = 0.6871, adj_R2 =   0.7618, D_AIC =   1.8350
++AGE        => F =   0.0515, p = 0.8206, adj_R2 =   0.7617, D_AIC =   1.9477
+Added   B         
+Backward pass
+-B          => F =  12.6343, p = 0.0004, adjR2 =   0.7622, D_AIC =  10.6771
+-NOX        => F =  24.7481, p = 0.0000, adjR2 =   0.7566, D_AIC =  22.5408
+-DIS        => F =  43.9434, p = 0.0000, adjR2 =   0.7476, D_AIC =  40.7881
+-CRIM       => F =  45.3413, p = 0.0000, adjR2 =   0.7470, D_AIC =  42.0916
+-RM         => F =  46.9183, p = 0.0000, adjR2 =   0.7462, D_AIC =  43.5581
+-PTRATIO    => F =  66.2707, p = 0.0000, adjR2 =   0.7372, D_AIC =  61.2166
+-LSTAT      => F = 216.1012, p = 0.0000, adjR2 =   0.6675, D_AIC = 180.3749
+
+Current model uses features ['LSTAT', 'PTRATIO', 'CRIM', 'RM', 'DIS', 'NOX', 'B']
+Forward pass
++RAD        => F =  12.0708, p = 0.0006, adj_R2 =   0.7727, D_AIC = -10.1425
++CHAS       => F =  11.4602, p = 0.0008, adj_R2 =   0.7724, D_AIC =  -9.5353
++ZN         => F =   2.3933, p = 0.1225, adj_R2 =   0.7683, D_AIC =  -0.4308
++INDUS      => F =   0.0790, p = 0.7788, adj_R2 =   0.7672, D_AIC =   1.9196
++TAX        => F =   0.0250, p = 0.8744, adj_R2 =   0.7672, D_AIC =   1.9745
++AGE        => F =   0.0037, p = 0.9518, adj_R2 =   0.7672, D_AIC =   1.9963
+Added   RAD       
+Backward pass
+-RAD        => F =  12.0708, p = 0.0006, adjR2 =   0.7676, D_AIC =  10.1425
+-B          => F =  16.9756, p = 0.0000, adjR2 =   0.7654, D_AIC =  14.9944
+-NOX        => F =  35.7349, p = 0.0000, adjR2 =   0.7568, D_AIC =  33.1336
+-RM         => F =  39.8140, p = 0.0000, adjR2 =   0.7550, D_AIC =  36.9932
+-DIS        => F =  47.8885, p = 0.0000, adjR2 =   0.7513, D_AIC =  44.5475
+-CRIM       => F =  58.3878, p = 0.0000, adjR2 =   0.7465, D_AIC =  54.2048
+-PTRATIO    => F =  79.7385, p = 0.0000, adjR2 =   0.7367, D_AIC =  73.2922
+-LSTAT      => F = 223.0332, p = 0.0000, adjR2 =   0.6713, D_AIC = 185.5779
+
+Current model uses features ['LSTAT', 'PTRATIO', 'CRIM', 'RM', 'DIS', 'NOX', 'B', 'RAD']
+Forward pass
++TAX        => F =  16.3349, p = 0.0001, adj_R2 =   0.7795, D_AIC = -14.3957
++CHAS       => F =  11.2259, p = 0.0009, adj_R2 =   0.7773, D_AIC =  -9.3245
++ZN         => F =   1.2764, p = 0.2591, adj_R2 =   0.7728, D_AIC =   0.6995
++INDUS      => F =   0.4989, p = 0.4803, adj_R2 =   0.7724, D_AIC =   1.4913
++AGE        => F =   0.0774, p = 0.7810, adj_R2 =   0.7723, D_AIC =   1.9211
+Added   TAX       
+Backward pass
+-B          => F =  15.8797, p = 0.0001, adjR2 =   0.7729, D_AIC =  13.9459
+-TAX        => F =  16.3349, p = 0.0001, adjR2 =   0.7727, D_AIC =  14.3957
+-NOX        => F =  25.4476, p = 0.0000, adjR2 =   0.7686, D_AIC =  23.3166
+-RAD        => F =  28.7517, p = 0.0000, adjR2 =   0.7672, D_AIC =  26.5128
+-RM         => F =  35.5666, p = 0.0000, adjR2 =   0.7641, D_AIC =  33.0418
+-DIS        => F =  49.0492, p = 0.0000, adjR2 =   0.7582, D_AIC =  45.7159
+-CRIM       => F =  60.7467, p = 0.0000, adjR2 =   0.7530, D_AIC =  56.4605
+-PTRATIO    => F =  74.2649, p = 0.0000, adjR2 =   0.7470, D_AIC =  68.5997
+-LSTAT      => F = 224.8732, p = 0.0000, adjR2 =   0.6801, D_AIC = 187.1870
+
+Current model uses features ['LSTAT', 'PTRATIO', 'CRIM', 'RM', 'DIS', 'NOX', 'B', 'RAD', 'TAX']
+Forward pass
++CHAS       => F =   9.3504, p = 0.0023, adj_R2 =   0.7831, D_AIC =  -7.4691
++ZN         => F =   3.9312, p = 0.0480, adj_R2 =   0.7808, D_AIC =  -2.0027
++INDUS      => F =   1.1697, p = 0.2800, adj_R2 =   0.7796, D_AIC =   0.8057
++AGE        => F =   0.0934, p = 0.7600, adj_R2 =   0.7791, D_AIC =   1.9045
+Added   CHAS      
+Backward pass
+-CHAS       => F =   9.3504, p = 0.0023, adjR2 =   0.7795, D_AIC =   7.4691
+-TAX        => F =  14.4305, p = 0.0002, adjR2 =   0.7773, D_AIC =  12.5402
+-B          => F =  14.8630, p = 0.0001, adjR2 =   0.7771, D_AIC =  12.9696
+-RAD        => F =  26.4975, p = 0.0000, adjR2 =   0.7720, D_AIC =  24.3863
+-NOX        => F =  28.2876, p = 0.0000, adjR2 =   0.7712, D_AIC =  26.1201
+-RM         => F =  34.9113, p = 0.0000, adjR2 =   0.7683, D_AIC =  32.4848
+-DIS        => F =  46.8255, p = 0.0000, adjR2 =   0.7631, D_AIC =  43.7355
+-CRIM       => F =  58.9963, p = 0.0000, adjR2 =   0.7578, D_AIC =  54.9757
+-PTRATIO    => F =  70.7369, p = 0.0000, adjR2 =   0.7526, D_AIC =  65.5871
+-LSTAT      => F = 224.9632, p = 0.0000, adjR2 =   0.6852, D_AIC = 187.5691
+
+Current model uses features ['LSTAT', 'PTRATIO', 'CRIM', 'RM', 'DIS', 'NOX', 'B', 'RAD', 'TAX', 'CHAS']
+Forward pass
++ZN         => F =   4.0275, p = 0.0453, adj_R2 =   0.7844, D_AIC =  -2.1086
++INDUS      => F =   0.6080, p = 0.4359, adj_R2 =   0.7830, D_AIC =   1.3777
++AGE        => F =   0.0232, p = 0.8789, adj_R2 =   0.7827, D_AIC =   1.9762
+Added   ZN        
+Backward pass
+-ZN         => F =   4.0275, p = 0.0453, adjR2 =   0.7831, D_AIC =   2.1086
+-CHAS       => F =   9.4369, p = 0.0022, adjR2 =   0.7808, D_AIC =   7.5750
+-B          => F =  14.8389, p = 0.0001, adjR2 =   0.7784, D_AIC =  12.9755
+-TAX        => F =  17.0452, p = 0.0000, adjR2 =   0.7775, D_AIC =  15.1648
+-NOX        => F =  25.9604, p = 0.0000, adjR2 =   0.7736, D_AIC =  23.9159
+-RAD        => F =  28.0119, p = 0.0000, adjR2 =   0.7727, D_AIC =  25.9083
+-RM         => F =  31.0177, p = 0.0000, adjR2 =   0.7714, D_AIC =  28.8137
+-DIS        => F =  48.2722, p = 0.0000, adjR2 =   0.7639, D_AIC =  45.1757
+-PTRATIO    => F =  52.3730, p = 0.0000, adjR2 =   0.7621, D_AIC =  48.9878
+-CRIM       => F =  61.7210, p = 0.0000, adjR2 =   0.7580, D_AIC =  57.5718
+-LSTAT      => F = 226.5848, p = 0.0000, adjR2 =   0.6862, D_AIC = 189.0290
+
+Current model uses features ['LSTAT', 'PTRATIO', 'CRIM', 'RM', 'DIS', 'NOX', 'B', 'RAD', 'TAX', 'CHAS', 'ZN']
+Forward pass
++INDUS      => F =   1.0069, p = 0.3161, adj_R2 =   0.7845, D_AIC =   0.9676
++AGE        => F =   0.1595, p = 0.6898, adj_R2 =   0.7841, D_AIC =   1.8363
+Backward pass
+-ZN         => F =   4.0275, p = 0.0453, adjR2 =   0.7831, D_AIC =   2.1086
+-CHAS       => F =   9.4369, p = 0.0022, adjR2 =   0.7808, D_AIC =   7.5750
+-B          => F =  14.8389, p = 0.0001, adjR2 =   0.7784, D_AIC =  12.9755
+-TAX        => F =  17.0452, p = 0.0000, adjR2 =   0.7775, D_AIC =  15.1648
+-NOX        => F =  25.9604, p = 0.0000, adjR2 =   0.7736, D_AIC =  23.9159
+-RAD        => F =  28.0119, p = 0.0000, adjR2 =   0.7727, D_AIC =  25.9083
+-RM         => F =  31.0177, p = 0.0000, adjR2 =   0.7714, D_AIC =  28.8137
+-DIS        => F =  48.2722, p = 0.0000, adjR2 =   0.7639, D_AIC =  45.1757
+-PTRATIO    => F =  52.3730, p = 0.0000, adjR2 =   0.7621, D_AIC =  48.9878
+-CRIM       => F =  61.7210, p = 0.0000, adjR2 =   0.7580, D_AIC =  57.5718
+-LSTAT      => F = 226.5848, p = 0.0000, adjR2 =   0.6862, D_AIC = 189.0290
+
+
+Final model uses 11 features ['LSTAT', 'PTRATIO', 'CRIM', 'RM', 'DIS', 'NOX', 'B', 'RAD', 'TAX', 'CHAS', 'ZN']
+
+Summary of models
+Forward          :  K = 11, adjR2 =   0.7844, D_AIC =   0.0000  ['LSTAT', 'PTRATIO', 'CRIM', 'RM', 'DIS', 'NOX', 'B', 'RAD', 'TAX', 'CHAS', 'ZN']
+Forward-Backward :  K = 11, adjR2 =   0.7844, D_AIC =   0.0000  ['LSTAT', 'PTRATIO', 'CRIM', 'RM', 'DIS', 'NOX', 'B', 'RAD', 'TAX', 'CHAS', 'ZN']
+Backward         :  K = 11, adjR2 =   0.7844, D_AIC =   0.0000  ['LSTAT', 'NOX', 'ZN', 'CHAS', 'B', 'DIS', 'CRIM', 'PTRATIO', 'TAX', 'RM', 'RAD']
+OLS              :  K = 13, adjR2 =   0.7841, D_AIC =   2.8044  ['CRIM', 'ZN', 'INDUS', 'CHAS', 'NOX', 'RM', 'AGE', 'DIS', 'RAD', 'TAX', 'PTRATIO', 'B', 'LSTAT']
+
+                     Forward  Forward-Backward          Backward               OLS 
+    (bias)            4.0837            4.0837            4.0837            4.1020 
+      CRIM           -0.0103           -0.0103           -0.0103           -0.0103 
+        ZN            0.0011            0.0011            0.0011            0.0012 
+     INDUS            0.0000            0.0000            0.0000            0.0025 
+      CHAS            0.1051            0.1051            0.1051            0.1009 
+       NOX           -0.7217           -0.7217           -0.7217           -0.7784 
+        RM            0.0907            0.0907            0.0907            0.0908 
+       AGE            0.0000            0.0000            0.0000            0.0002 
+       DIS           -0.0517           -0.0517           -0.0517           -0.0491 
+       RAD            0.0134            0.0134            0.0134            0.0143 
+       TAX           -0.0006           -0.0006           -0.0006           -0.0006 
+   PTRATIO           -0.0374           -0.0374           -0.0374           -0.0383 
+         B            0.0004            0.0004            0.0004            0.0004 
+     LSTAT           -0.0286           -0.0286           -0.0286           -0.0290 
+
+Best models (brute force)
+K = 11, adjR2 =   0.7844, D_AIC =   0.0000  ['CRIM', 'ZN', 'CHAS', 'NOX', 'RM', 'DIS', 'RAD', 'TAX', 'PTRATIO', 'B', 'LSTAT']
+K = 12, adjR2 =   0.7845, D_AIC =   0.9676  ['CRIM', 'ZN', 'INDUS', 'CHAS', 'NOX', 'RM', 'DIS', 'RAD', 'TAX', 'PTRATIO', 'B', 'LSTAT']
+K = 12, adjR2 =   0.7841, D_AIC =   1.8363  ['CRIM', 'ZN', 'CHAS', 'NOX', 'RM', 'AGE', 'DIS', 'RAD', 'TAX', 'PTRATIO', 'B', 'LSTAT']
+K = 10, adjR2 =   0.7831, D_AIC =   2.1086  ['CRIM', 'CHAS', 'NOX', 'RM', 'DIS', 'RAD', 'TAX', 'PTRATIO', 'B', 'LSTAT']
+K = 13, adjR2 =   0.7841, D_AIC =   2.8044  ['CRIM', 'ZN', 'INDUS', 'CHAS', 'NOX', 'RM', 'AGE', 'DIS', 'RAD', 'TAX', 'PTRATIO', 'B', 'LSTAT']
+K = 11, adjR2 =   0.7830, D_AIC =   3.4863  ['CRIM', 'INDUS', 'CHAS', 'NOX', 'RM', 'DIS', 'RAD', 'TAX', 'PTRATIO', 'B', 'LSTAT']
+K = 11, adjR2 =   0.7827, D_AIC =   4.0848  ['CRIM', 'CHAS', 'NOX', 'RM', 'AGE', 'DIS', 'RAD', 'TAX', 'PTRATIO', 'B', 'LSTAT']
+K = 12, adjR2 =   0.7825, D_AIC =   5.4657  ['CRIM', 'INDUS', 'CHAS', 'NOX', 'RM', 'AGE', 'DIS', 'RAD', 'TAX', 'PTRATIO', 'B', 'LSTAT']
+K = 10, adjR2 =   0.7808, D_AIC =   7.5750  ['CRIM', 'ZN', 'NOX', 'RM', 'DIS', 'RAD', 'TAX', 'PTRATIO', 'B', 'LSTAT']
+K = 11, adjR2 =   0.7811, D_AIC =   7.8337  ['CRIM', 'ZN', 'INDUS', 'NOX', 'RM', 'DIS', 'RAD', 'TAX', 'PTRATIO', 'B', 'LSTAT']
