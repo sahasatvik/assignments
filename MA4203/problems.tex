@@ -1,0 +1,366 @@
+\documentclass[10pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+
+\geometry{a4paper, margin=1in}
+
+\renewcommand{\labelenumi}{(\alph{enumi})}
+
+\setlength{\parindent}{0em}
+\setlength{\parskip}{0.8em}
+
+\newcounter{prob}
+\newcommand{\problem}{\stepcounter{prob}\paragraph{Exercise \arabic{prob}}}
+\newcommand{\solution}{\textit{Solution.} }
+
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+
+\newcommand{\toas}{\overset{as\,}{\longrightarrow}}
+\newcommand{\io}{\text{ i.o.}}
+
+\title{MA4203: Probability II}
+\author{Satvik Saha}
+\date{}
+
+\begin{document}
+    \noindent\textbf{IISER Kolkata} \hfill \textbf{Exercises}
+    \vspace{3pt}
+    \hrule
+    \vspace{3pt}
+    \begin{center}
+    \LARGE{\textbf{MA4203: Probability II}}
+    \end{center}
+    \vspace{3pt}
+    \hrule
+    \vspace{3pt}
+    Satvik Saha, \texttt{19MS154} \hfill \today
+    \vspace{20pt}
+
+    \problem Let $\{X_n\}$ be a sequence of pairwise independent and identically
+    distributed random variables. Show that $X_n / n \to 0$ almost surely if and only
+    if $E(|X_1|) < \infty$.
+
+    \solution \begin{align*}
+        X_n/n \toas 0 \;&\iff\;
+        \sum_{n = 1}^\infty P(|X_n / n| > \epsilon) < \infty \text{ for all }\epsilon
+        > 0 \tag{Borel-Cantelli} \\
+        \;&\iff\;
+        \sum_{n = 1}^\infty P(|X_n / \epsilon| > n) < \infty \text{ for all }\epsilon
+        > 0 \\
+        \;&\iff\;
+        \sum_{n = 1}^\infty P(|X_1 / \epsilon| > n) < \infty \text{ for all }\epsilon
+        > 0 \tag{Identical distributions} \\
+        \;&\iff\;
+        E(|X_1 / \epsilon|) < \infty \text{ for all }\epsilon > 0 \\
+        \;&\iff\;
+        E(|X_1|).
+    \end{align*}
+
+    \textit{Remark.} Pairwise independence is only needed for the forward implication
+    in the first step.
+
+
+    \problem Let $\{X_n\}$ be a sequence of identically distributed variables, and
+    let $M_n = \max\{|X_1|, \dots, |X_n|\}$.
+    \begin{enumerate}
+        \item If $E(|X_1|) < \infty$, show that $M_n/n \to 0$ almost surely.
+        \item If $E(|X_1|^\alpha) < \infty$ for some $\alpha \in (0, \infty)$, then
+        show that $M_n/n^{1/\alpha} \to 0$ almost surely.
+        \item If $\{X_n\}$ is also independent, then show that $M_n/n^{1/\alpha} \to
+        0$ almost surely implies that $E(|X_1|^\alpha) < \infty$.
+    \end{enumerate}
+
+    \solution \begin{enumerate}
+        \item We have $E(|X_1|) < \infty \implies X_n/n \toas 0$, hence there exists
+        $A \subseteq \Omega$ with $P(A) = 1$ such that $X_n(\omega) / n \to 0$ 
+        for all $\omega \in A$. Set $x_n = X_n(\Omega)$, $m_n = M_n(\omega)$, and let
+        $\epsilon > 0$, whence there exists $N \in \N$ such that for all $n > N$,
+        we have $|x_n|/n < \epsilon$. Now, observe that for all $n > N$, \[
+            \frac{m_n}{n} \leq \frac{\max\{|x_1|, \dots, |x_N|\}}{n} +
+            \max\left\{\frac{|x_{N + 1}|}{N + 1}, \dots, \frac{|x_n|}{n}\right\}.
+        \] This is because either $m_n \in \{|x_1|, \dots, |x_N|\}$, or $m_n = |x_k|$
+        for some $N < k \leq n$, so $m_n / n \leq |x_k| / k$. Note that as $n \to
+        \infty$, the first term vanishes and the second term is always bounded by
+        $\epsilon$. Thus, $m_n / n \to 0$, hence $M_n/n \toas 0$.
+
+        \item We have $E(|X_1|^\alpha) < \infty \implies M_n^\alpha / n \toas 0$. By
+        the continuous mapping theorem, $M_n / n^{1/\alpha} \toas 0$.
+
+        \item We have $M_n / n^{1/\alpha} \toas 0 \implies |X_n|/n^{1/\alpha} \toas 0$,
+        as $|X_n| \leq M_n$. By the continuous mapping theorem, $|X_n|^\alpha/n \toas
+        0$. Thus, the previous exercise gives $E(|X_1|^\alpha) < \infty$.
+    \end{enumerate}
+
+
+    \problem Let $\{A_n\}$ be a sequence of independent events with all $P(A_n) < 1$.
+    Show that \[
+        P(\limsup_{n \to \infty} A_n) = 1 \;\iff\; P\left(\bigcup_{n = 1}^\infty
+        A_n\right) = 1.
+    \]
+
+    \solution We have \[
+        P(\limsup_{n \to \infty} A_n) = 1 \;\iff\; P\left(\bigcap_{k = 1}^\infty
+        \bigcup_{n = k}^\infty A_n\right) = 1 \;\implies\; P\left(\bigcup_{n =
+        1}^\infty A_n\right) = 1.
+    \] For the reverse implication, it suffices to show that for all $k \geq 1$, we
+    have \[
+        P\left(\bigcup_{n = k}^\infty A_n\right) = 1,
+    \] which is equivalent to \[
+        P\left(\bigcap_{n = k}^\infty A_n^c\right) = 0 \;\iff\;
+        \prod_{n = k}^\infty P(A_n^c) = 0.
+    \] But this follows immediately since it holds for $k = 1$; each $P(A_n^c) > 0$
+    means that this term can be cancelled from the product yielding the equality for
+    all $k > 1$.
+
+
+    \problem Let $\{X_n\}$ be a sequence of independent and identically distributed
+    exponential random variables with density $f(x) = e^{-x} \chi_{(0, \infty)}(x)$.
+    Define \[
+        Y_n = \max_{1 \leq i \leq n} X_i.
+    \]
+
+    \begin{enumerate}
+        \item Show that \[
+            \sum_{n = 1}^\infty P(X_n > \epsilon \log{n})
+        \] converges if $\epsilon > 1$ and diverges if $0 < \epsilon \leq 1$.
+
+        \item Show that $\limsup X_n / \log{n} = 1$ almost surely.
+        \item Show that $\liminf X_n / \log{n} = 0$ almost surely.
+        \item Show that $[X_n > \epsilon \log{n} \io] \iff [Y_n > \epsilon \log{n}
+        \io]$, and hence $\limsup Y_n / n = 1$ almost surely.
+    \end{enumerate}
+
+    \solution \begin{enumerate}
+        \item Calculate \[
+            P(X_n > \epsilon \log{n}) = \int_{\epsilon\log{n}}^\infty e^{-x}\:dx =
+            \frac{1}{n^\epsilon}.
+        \] Thus \[
+            \sum_{n = 1}^\infty P(X_n > \epsilon \log{n}) = \sum_{n = 1}^\infty
+            \frac{1}{n^\epsilon}
+        \] converges precisely when $\epsilon > 1$, and diverges when $0 < \epsilon
+        \leq 1$.
+
+        \item Putting $\epsilon = 1$, we have \begin{align*}
+            \sum_{n = 1}^\infty P(X_n > \log{n}) = \infty
+            \;&\iff\; P(X_n / \log{n} > 1 \io) = 1 \tag{Borel-Cantelli} \\
+            \;&\implies\; P(\limsup X_n/\log{n} \geq 1) = 1 \\
+            \;&\iff\; \limsup X_n/\log{n} = 1 \text{ almost surely}.
+        \end{align*}
+        The second implication follows from the fact that there is a probability one
+        set $A$ such that for $\omega \in A$, we have $X_n(\omega) / \log{n} > 1$
+        infinitely often, i.e.\ there is a subsequence $\{n_k\}$ such that all
+        $X_{n_k}(\omega) / \log{n_k} > 1$.
+
+        Next, for $\epsilon > 1$, we have \begin{align*}
+            \sum_{n = 1}^\infty P(X_n > \epsilon\log{n}) < \infty
+            \;&\iff\; P(X_n / \log{n} > \epsilon \io) = 0 \tag{Borel-Cantelli} \\
+            \;&\iff\; P(X_n / \log{n} \leq \epsilon \text{ eventually}) = 1 \\
+            \;&\implies\; P(\limsup X_n/\log{n} \leq \epsilon) = 1 \\
+            \;&\iff\; \limsup X_n/\log{n} \leq \epsilon \text{ almost surely}.
+        \end{align*}
+        The third implication follows from the fact that there is a probability one
+        set $A_\epsilon$ such that for $\omega \in A_\epsilon$, we have
+        $X_{n_k}(\omega) / \log{n_k} \leq \epsilon$ for all sufficiently large $n_k$,
+        for all subsequences $\{n_k\}$. Since all $A_{1 + 1/k}$ have probability one,
+        their intersection has probability one by continuity from above, yielding
+        \[
+            \limsup X_n/\log{n} \leq 1 \text{ almost surely}.
+        \] Combining the two parts gives the desired result.
+
+        \item Note that for all $0 < \epsilon < 1$, \begin{align*}
+            \sum_{n = 1}^\infty P(X_n < \epsilon \log{n}) = \sum_{n = 1}^\infty 1 -
+            \frac{1}{\epsilon} = \infty
+            \;&\iff\; P(X_n / \log{n} < \epsilon \io) = 1 \\
+            \;&\implies\; P(\liminf X_n/\log{n} \leq \epsilon) = 1.
+        \end{align*}
+        Putting $\epsilon = 1/k \to 0$, continuity from above gives \[
+            \liminf X_n/\log{n} = 0.
+        \]
+
+        \item It is equivalent to show that \[
+            A = [X_n \leq \epsilon\log{n}\text{ eventually}] \;\iff\; [Y_n \leq
+            \epsilon\log{n}\text{ eventually}] = B.
+        \] Since $X_n \leq Y_n$, we have $\omega \in B \implies Y_n(\omega) \leq
+        \epsilon \log{n}$ for $n \geq N_\epsilon$, hence $X_n(\omega \leq
+        \epsilon \log{n})$ for $n \geq N_\epsilon$ $\implies \omega \in A$.
+
+        Next, let $\omega \in A$, and let $N \in \N$ such that for all $n > N$, we
+        have $X_n(\omega) \leq \epsilon \log{n}$. Then, \[
+            \frac{Y_n(\omega)}{\log{n}} \leq \frac{\max\{X_1(\omega), \dots,
+            X_N(\omega)\}}{\log{n}} + \max\left\{\frac{X_{N + 1}(\omega)}{\log(N + 1)},
+            \dots, \frac{X_n(\omega)}{\log{n}}\right\}.
+        \] The second term is bounded by $\epsilon$, while the first vanishes as $n
+        \to \infty$. Thus, $Y_n(\omega)/\log{n} \leq 2\epsilon$ eventually, so
+        $\omega \in B$.
+
+        We have shown that $A = B$; repeating the proof of $(b)$ with $X_n > \epsilon
+        \log{n}$ i.o.\ replaced with $Y_n > \epsilon \log{n}$ i.o.\ proves that
+        $\limsup Y_n/\log{n} = 1$ almost surely.
+    \end{enumerate}
+
+
+    \problem Show that for any given sequence of random variables $\{X_n\}$, there
+    exists a (deterministic) real sequence $\{a_n\}$ such that $X_n/a_n \toas 0$.
+
+    \solution Note that for any fixed $X_n$, we have $P(|X_n| > M) \to 0$ as $M \to
+    \infty$. Thus, for each $n \in \N$, we can pick numbers $M_n$ such that \[
+        P(|X_n| > M_n) < \frac{1}{2^n}.
+    \] Set $a_n = nM_n$. Then for $\epsilon > 0$, \[
+        \sum_{n = 1}^\infty P(|X_n/a_n| > \epsilon) \;=\;
+        \sum_{n = 1}^\infty P(|X_n| > \epsilon nM_n).
+    \] Let $N \in \N$ such that $N\epsilon > 1$. Then the tail of the above series is
+    \[
+        \sum_{n = N}^\infty P(|X_n| > \epsilon nM_n) \;\leq\;
+        \sum_{n = N}^\infty P(|X_n| > M_n) \;=\;
+        \sum_{n = N}^\infty \frac{1}{2^n} \;<\; \infty.
+    \]
+
+
+    \problem Let $\{X_n\}$ be a sequence of independent random variables such that
+    $E(X_n) = 0$, $E(X_n^2) = \sigma^2$. Define $s_n^2 = \sum_{k = 1}^n \sigma_k^2
+    \to \infty$. Show that for any $a > 1/2$, \[
+        Y_n = \frac{1}{s_n(\log{s_n^2})^a} \sum_{k = 1}^n X_k \toas 0.
+    \]
+
+    \solution Set \[
+        Z_n = \frac{X_n}{s_n(\log{s_n^2})^a}.
+    \] Without loss of generality, let $s_1 > 1$. Then, \begin{align*}
+        \sum_{n = 1}^\infty V(Z_n)
+        \;&=\; \sum_{n = 1}^\infty \frac{\sigma_n^2}{s_n^2(\log{s_n^2})^{2a}} \\
+        \;&=\; \sum_{n = 1}^\infty \frac{s_n^2 - s_{n -
+        1}^2}{s_n^2(\log{s_n^2})^{2a}} \\
+        \;&\leq\; \sum_{n = 1}^\infty \int_{s_{n-1}^n}^{s_n^2}
+        \frac{dx}{x(\log{x})^{2a}} \\
+        \;&=\; \sum_{n = 1}^\infty -\frac{1}{(2a - 1)\log(x)^{2a - 1}}\Big|_{s_{n -
+        1}^2}^{s_n^2} \\
+        \;&=\; \frac{1}{2a - 1} \sum_{n = 1}^\infty \frac{1}{(\log{s_{n - 1}^2})^{2a
+        - 1}} - \frac{1}{(\log{s_n^2})^{2a - 1}} \;<\; \infty.
+    \end{align*}
+
+    Thus, $\sum_{n = 1}^\infty Z_n$ converges in $L_2$, hence in probability, hence
+    almost surely by Levy's Theorem. Finally, Kronecker's Lemma gives \[
+        Y_n = \frac{1}{s_n(\log{s_n^2})^a}\sum_{k = 1}^n Z_k s_k(\log{s_k^2})^a \toas
+        0.
+    \]
+
+
+    \problem Let $f$ be a bounded measurable function on $[0, 1]$ that is continuous
+    at $1/2$. Evaluate \[
+        \lim_{n \to \infty} \int_0^1\int_0^1\cdots\int_0^1 f\left(\frac{x_1 + \dots +
+        x_n}{n}\right)\:dx_1\:dx_2\:\cdots\:dx_n.
+    \]
+
+    \solution Let $U_n$ be independent and identically distributed random variables,
+    having uniform distribution on $[0, 1]$. Then, the given integral is simply
+    $E(f(\bar{U}_n))$, where $\bar{U}_n = (U_1 + \dots + U_n) / n$. Since $E(|U_1|) <
+    \infty$, Kolmogorov's Strong Law of Large Numbers gives $\bar{U}_n \to E(U_1) =
+    1/2$. Since $f$ is continuous at $1/2$, we have $f(\bar{U}_n) \to f(1/2)$.
+    Finally, $f$ is bounded, so the desired limit is $f(1/2)$ by Lebesgue's dominated
+    convergence theorem.
+
+
+    \problem Let $\{X_n\}$ be a sequence of independent and identically distributed
+    random variables. Investigate the almost sure convergence/divergence of the
+    series $\sum_{n = 1}^\infty X_n$.
+
+    \solution Kolmogorov's Three-Series Theorem says that if $\sum_{n = 1}^\infty
+    X_n$ converges almost surely, then for all $A > 0$, \[
+        \sum_{n = 1}^\infty P(|X_1| > A) = \sum_{n = 1}^\infty P(|X_n| > A) < \infty.
+    \] This sum is finite precisely when $P(|X_1| > A) = 0$ for all $A > 0$. Thus,
+    the series $\sum_{n = 1}^\infty X_n$ converges almost surely only when each $X_n$
+    is a degenerate random variable with $P(X_n = 0) = 1$.
+
+
+    \problem Let $\{X_n\}$ be a sequence of independent random variables with each
+    $X_n \sim N(\mu_n, \sigma_n^2)$. Show that $\sum_{n = 1}^\infty X_n$ converges
+    almost surely if and only if both $\sum_{n = 1}^\infty \mu_n$ and $\sum_{n =
+    1}^\infty \sigma_n^2$ converge.
+
+    \solution ($\Longleftarrow$) We have $\sum_{n = 1}^\infty V(X_n - \mu_n) =
+    \sum_{n = 1}^\infty \sigma_n^2 < \infty$, hence $\sum_{n = 1}^\infty (X_n -
+    \mu_n)$ converges almost surely. Using $\sum_{n = 1}^\infty \mu_n < \infty$, we
+    have $\sum_{n = 1}^\infty X_n < \infty$ almost surely.
+
+
+    ($\Longrightarrow$) First, suppose that all $\mu_n = 0$. Since $\sum_{n =
+    1}^\infty X_n$ converges almost surely, Kolmogorov's Three-Series Theorem gives
+    \[
+        \sum_{n = 1}^\infty P(|X_n/\sigma_n| > A/\sigma_n) = \sum_{n = 1}^\infty
+        P(|X_n| > A) < \infty
+    \] for all $A > 0$; fix $A = 1$. Now, $Z_n = X_n / \sigma_n$ are independent and
+    identically distributed standard normal random variables. Thus, $P(|Z_n| >
+    A/\sigma_n) \to 0$ forces $\sigma_n \to 0$. We also have \[
+        \sum_{n = 1}^\infty \sigma_n^2E(Z_n^2\chi_{|Z_n| \leq A/\sigma_n}) =
+        \sum_{n = 1}^\infty E(X_n^2\chi_{|X_n| \leq A}) =
+        \sum_{n = 1}^\infty V(X_n\chi_{|X_n| \leq A}) < \infty
+    \] Now, $A/\sigma_n \to \infty$, so there exists $N \in \N$ such that $A/\sigma_n
+    \geq 1$ for all $n \geq N$. Then, \[
+        E(Z_n^2\chi_{|Z_n| \leq A/\sigma_n}) \geq
+        E(Z_n^2\chi_{|Z_n| \leq 1}) = K > 0.
+    \] This immediately gives \[
+        \sum_{n = N}^\infty K\sigma_n^2 \leq \sum_{n = N}^\infty
+        \sigma_n^2 E(Z_n^2\chi_{|Z_n| \geq A/\sigma_n}) < \infty,
+    \] hence $\sum_{n = 1}^\infty \sigma_n^2 < \infty$.
+
+    We now return to the general case, where $Z_n = (X_n - \mu_n) / \sigma_n$ are
+    independent and identically distributed standard normal variables. As before, the
+    almost sure convergence of $\sum_{n = 1}^\infty X_n$ gives \[
+        \sum_{n = 1}^\infty P(\sigma_nZ_n \notin [-\mu_n - A, -\mu_n + A]) =
+        \sum_{n = 1}^\infty P(|X_n| > A) < \infty
+    \] for all $A > 0$. This implies that each term \[
+        \Phi\left(\frac{-\mu_n - A}{\sigma_n}\right) + \Phi\left(\frac{\mu_n -
+        A}{\sigma_n}\right)
+        = P\left(Z_n \notin \left[\frac{-\mu_n - A}{\sigma_n}, \frac{-\mu_n +
+        A}{\sigma_n}\right]\right) \to 0.
+    \] This is possible only when both $(\mu_n + A)/\sigma_n \to \infty$ and $(-\mu_n
+    + A)/\sigma_n \to \infty$. Thus, their sum $2A/\sigma_n \to \infty$, hence
+    $\sigma_n \to 0$. If we denote the above interval by $J_n$, we have $\chi_{J_n}
+    \to 1$. Also, we see that $\mu_n + A$ and $-\mu_n + A$ become positive
+    eventually, hence $|\mu_n| < A$ eventually. Since $A > 0$ was arbitrary, we have
+    $\mu_n \to 0$.
+
+    % Denote $1 - \Phi(t) = \Phi^c(t)$; we have each term $\Phi^c((\mu_n + A) /
+    % \sigma_n) + \Phi^c((-\mu_n + A) / \sigma_n) \to 0$. Both of the arguments here
+    % exceed $1$ eventually for $n \geq N$. For $t > 1$, we use the inequality \[
+    %     \Phi^c(t) > \frac{1}{\sqrt{2\pi}} \frac{t}{t^2 + 1} e^{-t^2/2}
+    %     > \frac{1}{\sqrt{2\pi}} \frac{1}{2t} e^{-t^2/2}.
+    % \] Since our first convergent series consists of positive terms, each of the
+    % series \[
+    %     \sum_{n = N}^\infty \frac{\sigma_n}{\mu_n + A} e^{-(\mu_n + A)^2/\sigma_n^2}
+    %     < \infty, \qquad
+    %     \sum_{n = N}^\infty \frac{\sigma_n}{-\mu_n + A} e^{-(-\mu_n +
+    %     A)^2/\sigma_n^2} < \infty,
+    % \]
+
+    Next, we have \[
+        \sum_{n = 1}^\infty E((\sigma_nZ_n + \mu_n)\chi_{Z_n \in J_n}) =
+        \sum_{n = 1}^\infty E(X_n\chi_{|X_n| \leq A}) < \infty,
+    \] and \[
+        \sum_{n = 1}^\infty E((\sigma_nZ_n + \mu_n)^2\chi_{Z_n \in J_n}) -
+        E((\sigma_nZ_n + \mu_n)\chi_{Z_n \in J_n})^2 =
+        \sum_{n = 1}^\infty V(X_n\chi_{|X_n| \leq A}) < \infty.
+    \] Each term here can be broken down as (denote $\chi_n \equiv \chi_{Z_n \in
+    J_n}$)\begin{align*}
+        &\quad\;\;\sigma_n^2E(Z_n^2\chi_n) + 2\mu_n\sigma_nE(Z_n\chi_n) + \mu_n^2E(\chi_n) -
+        \sigma^2E(Z_n\chi_n)^2 - 2\mu_n\sigma_nE(Z_n)E(\chi_n) -
+        \mu_n^2E(\chi_n)^2 \\
+        \;&=\; \sigma_n^2 V(Z_n\chi_n) + 2\mu_n\sigma_n E(Z_n\chi_n) +
+        \mu_n^2 V(\chi_n)
+    \end{align*}
+    Now, observe that $\mu_n E(Z_n\chi_n) \leq 0$. To see this, suppose that $\mu_n >
+    0$; if $-\mu_n + A \leq 0$, we clearly have $E(Z_n\chi_{Z_n \in J_n}) \leq 0$. If
+    $-\mu_n + A > 0$, note that \[
+        E(Z_n\chi_{Z_n \in J_n}) = \int_{-\mu_n/\sigma_n -
+        A/\sigma_n}^{-\mu_n/\sigma_n + A/\sigma_n} t \:d\Phi(t) =
+        \int_{-\mu_n/\sigma_n -
+        A/\sigma_n}^{\mu_n/\sigma_n - A/\sigma_n} + \int_{\mu_n/\sigma_n -
+        A/\sigma_n}^{-\mu_n/\sigma_n + A/\sigma_n} t \:d\Phi(t) \leq 0.
+    \] This is because the first integral is negative, and the second is zero by
+    symmetry. The case $\mu_n < 0$ is analogous.
+\end{document}
