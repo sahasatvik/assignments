@@ -39,6 +39,8 @@
 
 
 
+    \section*{Assignment I}
+
     \problem Let $x: [-1, 1] \to \R$ be a continuous function satisfying \[
         x(t) = x(0) + \int_0^t x(s)\:ds.
     \] Show that \[
@@ -147,5 +149,119 @@
     \in \N$ whenever $|s - t| < \delta$. Then we can pick $N \in \N$ such that
     $\pi/2N < \delta$. Thus, $|\pi/2N - 0| < \delta$, but $|\sin(N\cdot\pi/2N) -
     \sin(0)| = 1 > 1/2$, a contradiction.
+
+
+
+    \section*{Assignment III}
+    \setcounter{prob}{0}
+
+    \problem Using appropriate Lyapunov functions, discuss the stability and
+    asymptotic stability of the following systems.
+
+    \begin{enumerate}
+        \item \[
+            \dot{x} = y, \qquad
+            \dot{y} = -x - y.
+        \]
+
+        \item \[
+            y'' + 6y^5 = 0.
+        \]
+    \end{enumerate}
+
+    \solution \begin{enumerate}
+        \item This system has an equilibrium point at $(0, 0)$. Consider $V(x, y) =
+        x^2 + y^2$; then, $V(0, 0) = 0$, $V(x, y) > 0$ on $\R^2\setminus\{(0, 0)\}$,
+        and \[
+            \dot{V} = 2x\dot{x} + 2y\dot{y} = -2y^2.
+        \] Since $\dot{V}(x, y) \leq 0$, the equilibrium point $(0, 0)$ is stable.
+        Furthermore, $(0, 0)$ is asymptotically stable.
+
+        \item Rewrite this system as \[
+            y_1' = y_2, \qquad y_2' = -6y_1^5.
+        \] This system has an equilibrium point at $(0, 0)$. Consider \[
+            V(y_1, y_2) = \frac{1}{2}y_2^2 + \int_0^{y_1} 6s^5 \:ds =
+            \frac{1}{2}y_2^2 + y_1^6.
+        \] Then, $V(0, 0) = 0$, $V(y_1, y_2) > 0$ on $\R^2\setminus\{(0, 0)\}$, and
+        \[
+            \dot{V} = y_2\cdot 6y_1^5 - 6y_1^5 \cdot y_2 = 0.
+        \] Thus, $(0, 0)$ is stable. Since every flow line must stay trapped on the
+        surface $V(y_1, y_2) = 0$, the point $(0, 0)$ is not asymptotically stable.
+    \end{enumerate}
+
+
+    \problem Check whether solutions of the following equations have infinitely many
+    zeros on $(0, \infty)$.
+    \begin{enumerate}
+        \item $y'' + (\sin^2{x} + 1)y = 0$.
+        \item $y'' - x^2y = 0$.
+        \item $xy'' + y = 0$.
+    \end{enumerate}
+
+    \solution \begin{enumerate}
+        \item Use Sturm's Comparison Theorem against \[
+            u'' + u = 0,
+        \] whose solutions have infinitely many zeros on $(0, \infty)$.
+
+        \item If a non-trivial solution of $y'' - x^2y = 0$ would have admitted
+        infinitely many zeros on $(0, \infty)$, so would a non-trivial solution of
+        $u'' = 0$, a contradiction.
+
+        \item On each interval$(0, K^2)$, the given equation $y'' + y / x = 0$ is a
+        Sturm majorant of $u'' + u / K^2 = 0$, which admits non-trivial solutions of
+        such as $u(x) = \sin(x / K)$. This admits zeros at each $nK\pi$, as long as
+        $0 < nK\pi < K^2$, i.e.\ at least $\lfloor K/\pi\rfloor$ zeros. Thus,
+        non-trivial solutions of $y'' + y / x$ admit at least $\lfloor K/\pi\rfloor +
+        1$ roots on $(0, K^2)$. Since $K$ is arbitrary, such $y$ admit infinitely
+        many roots.
+    \end{enumerate}
+
+
+    \problem Construct a Green's function for the differential operator $d^2/dx^2$
+    under the boundary condition $u(0) = u(1) = 0$.
+
+    Let $f$ be a continuous function on $[0, 1]$. Show that the function \[
+        u\colon [0, 1] \to \R, \qquad
+        x \mapsto \int_0^1 G(x, \xi) f(\xi) \:d\xi
+    \] satisfies \[
+        u'' = f, \qquad
+        u(0) = u(1) = 0.
+    \]
+
+    \solution Note that $u'' = 0$ admits two linearly independent solutions $y_1(x) =
+    x$, $y_2(x) = 1 - x$ with $B_0y_1 = 0$, $B_1y_2 = 0$. Thus, a Green's function
+    for $u'' = 0$ is of the form \[
+        G(x, \xi) = \begin{cases}
+            \xi(1 - x) / c, &\text{ if } 0 \leq \xi \leq x, \\
+            x(1 - \xi) / c, &\text{ if } x \leq \xi \leq 1.
+        \end{cases}
+    \] Indeed, $c = W'(y_1, y_2) = -1$, so \[
+        G(x, \xi) = \begin{cases}
+            -\xi(1 - x), &\text{ if } 0 \leq \xi \leq x, \\
+            -x(1 - \xi), &\text{ if } x \leq \xi \leq 1.
+        \end{cases}
+    \]
+
+    Check that \begin{align*}
+        u(x) &= \int_0^x -\xi(1 - x) f(\xi) \:d\xi +
+            \int_x^1 -x(1 - \xi) f(\xi) \:d\xi \\
+        u'(x) &= \int_0^x\xi f(\xi)\:d\xi - (1 - x) x f(x) -
+            \int_x^1 (1 - \xi) f(\xi) \:d\xi + x(1 - x) f(x) \\
+        &= \int_0^1 \xi f(\xi)\:d\xi - \int_x^1 f(\xi)\:d\xi \\
+        u''(x) &= f(x).
+    \end{align*}
+
+
+    \problem Let $\lambda$ and a non-zero function $u$ satisfy the following
+    equation. \[
+        u'' + \sin(x) u + \lambda u = 0, \qquad
+        u(-1) = u(1) = 0.
+    \] Show that $\lambda \geq -1$.
+
+    \solution Suppose that $\lambda < -1$ admits a non-trivial solution $u$. Then, a
+    Sturm majorant of the given problem is $v'' = 0$, hence any non-trivial solution
+    $v$ ought to admit a zero in $(-1, 1)$. However, one can choose solutions $v$
+    without roots in $(-1, 1)$, say $v = x + 2$, a contradiction.
+
 
 \end{document}
