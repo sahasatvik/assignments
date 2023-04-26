@@ -10,3 +10,6 @@
 *.swp
 *.ipynb_checkpoints
 __pycache__
+.Rproj.user
+.RData
+.Rhistory
