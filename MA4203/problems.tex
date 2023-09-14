@@ -3,6 +3,7 @@
 \usepackage[T1]{fontenc}
 \usepackage{geometry}
 \usepackage{amsmath, amssymb, amsthm}
+\usepackage{xcolor}
 
 \geometry{a4paper, margin=1in}
 
@@ -22,6 +23,8 @@
 \newcommand{\N}{\mathbb{N}}
 
 \newcommand{\toas}{\overset{as\,}{\longrightarrow}}
+\newcommand{\tod}{\overset{d\,}{\longrightarrow}}
+\newcommand{\topr}{\overset{p\,}{\longrightarrow}}
 \newcommand{\io}{\text{ i.o.}}
 
 \title{MA4203: Probability II}
@@ -42,28 +45,226 @@
     Satvik Saha, \texttt{19MS154} \hfill \today
     \vspace{20pt}
 
+
+    \section*{Assignment I}
+
+
+    \problem Let $r > 0$ and let $X$ be any almost surely non-negative random
+    variable. Prove the following. \begin{enumerate}
+        \item $$ E(X) = \int_0^\infty P(X > x) \:dx. $$
+        \item $$ \sum_{n = 1}^\infty P(X \geq n) \leq E(X) \leq 1 + \sum_{n = 1}^\infty
+        P(X \geq n). $$
+        \item $$ E(X^r) = r \int_0^\infty x^{r - 1} P(X > x) \:dx. $$
+        \item $$ \textcolor{red}{A}\sum_{n = 1}^\infty n^{r - 1}P(X \geq n) \leq
+        E(X^r) \leq 1 + \textcolor{red}{B}\sum_{n = 1}^\infty n^{r - 1} P(X \geq n). $$
+        \item Let $g$ be a non-negative strictly increasing differentiable function.
+        Then, \[
+            E(g(X)) = g(0) + \int_0^\infty g'(x) P(X > x) \:dx.
+        \] Hence, \[
+            E(g(X)) < \infty \;\iff\; \sum_{n = 1}^\infty g'(n) P(X > n) < \infty.
+        \]
+
+        \item $$ E(\log^+{X}) < \infty \;\iff\; \sum_{n = 1}^\infty n^{-1} P(X > n)
+        < \infty. $$
+
+        \item For $p > 1$, $$ E((\log^+{X})^p) < \infty \;\iff\; \sum_{n = 1}^\infty
+        n^{-1} (\log{x})^{p - 1} P(X > n) < \infty. $$
+
+        \item For $p > 0$ and $r > 1$, $$ E(X^r(\log^+{X})^p) < \infty \;\iff\;
+        \sum_{n = 1}^\infty n^{r - 1} (\log{x})^p P(X > n) < \infty. $$
+
+        \item $$ E(\log^+\log^+{X}) < \infty \;\iff\; \sum_{n = 1}^\infty n^{-1}
+        (\log{n})^{-1} P(X > n) < \infty. $$
+    \end{enumerate}
+
+    \solution \begin{enumerate}
+        \item Let $F$ be the cdf of $X$. Then, Tonelli's Theorem gives \begin{align*}
+            E(X) = \int_0^\infty x \:dF(x) &= \int_0^\infty \int_0^x \:dt \:dF(x) \\
+            &= \int_0^\infty \int_0^\infty \chi_{(0, x)}(t) \:dt \:dF(x) \\
+            &= \int_0^\infty \int_0^\infty \chi_{(t, \infty)}(x) \:dF(x) \:dt \\
+            &= \int_0^\infty 1 - F(t) \:dt \\
+            &= \int_0^\infty P(X > t) \:dt.
+        \end{align*}
+
+        \item Note that if $n \leq x < n + 1$, then \[
+            P(X < n) \leq P(X \leq x) \leq P(X < n + 1), \qquad
+            P(X \geq n + 1) \leq P(X > x) \leq P(X \geq n).
+        \] Integrating from $n$ to $n + 1$ and summing, we have \[
+            \sum_{n = 0}^\infty P(X \geq n + 1) \leq E(X) \leq \sum_{n = 0}^\infty
+            P(X \geq n) = P(X \geq 0) + \sum_{n = 1}^\infty P(X \geq n).
+        \] Thus, \[
+            \sum_{n = 1}^\infty P(X \geq n) \leq E(X) \leq 1 + \sum_{n = 1}^\infty
+            P(X \geq n).
+        \]
+
+
+        \item Using the substitution $x \mapsto u^r$, \[
+            E(X^r) = \int_0^\infty P(X^r > x) \:dx
+            = \int_0^\infty P(X > x^{1 / r}) \:dx
+            = \int_0^\infty P(X > u) \,ru^{r - 1}\:du.
+        \]
+
+        \item Check that each \[
+            rn^{r - 1} < (n + 1)^r - n^r < r(n + 1)^{r - 1}.
+        \] To see this, note that $(n + 1)^r - n^r = rx^{r - 1}$ for some $x \in (n,
+        n + 1)$ by the Mean Value Theorem. Furthermore, \[
+            (n + 1)^{r - 1} = \left(\frac{n + 1}{n}\right)^{r - 1}n^{r - 1} \leq
+            r2^{r - 1} n^{r - 1},
+        \] and \[
+            rn^{r - 1} = \left(\frac{n}{n + 1}\right)^{r - 1} (n + 1)^{r - 1} \geq
+            r2^{-(r - 1)} (n + 1)^{r - 1}.
+        \] Thus, we have \[
+            r2^{-(r - 1)} (n + 1)^{r - 1} < (n + 1)^r - n^r < r2^{r - 1} n^{r - 1}.
+        \]
+
+        Now, \[
+            E(X^r) = \int_0^\infty r x^{r - 1} P(X > x) \:dx = \sum_{n = 0}^\infty
+            \int_n^{n + 1} rx^{r - 1} P(X > x) \:dx.
+        \] Thus, \[
+            \sum_{n = 0}^\infty P(X \geq n + 1) \int_n^{n + 1} rx^{r - 1}\:dx
+            \leq E(X^r)
+            \leq \sum_{n = 0}^\infty P(X \geq n) \int_n^{n + 1} rx^{r - 1}\:dx,
+        \] so \[
+            \sum_{n = 0}^\infty P(X \geq n + 1) [(n + 1)^r - n^r]
+            \leq E(X^r)
+            \leq \sum_{n = 0}^\infty P(X \geq n) [(n + 1)^r - n^r].
+        \] Using the established inequality and re-indexing, \[
+            \sum_{n = 0}^\infty P(X \geq n + 1)\cdot r2^{-(r - 1)}(n + 1)^{r - 1}
+            \leq E(X^r)
+            \leq 1 + \sum_{n = 1}^\infty P(X \geq n)\cdot r2^{r - 1}n^{r - 1},
+        \] \[
+            r2^{-(r - 1)} \sum_{n = 1}^\infty n^{r - 1} P(X \geq n)
+            \leq E(X^r)
+            \leq 1 + r2^{r - 1}\sum_{n = 1}^\infty n^{r - 1} P(X \geq n).
+        \]
+
+
+        \item Calculate \begin{align*}
+            E(g(X)) &= \int_0^\infty g(x) \:dF(x) \\
+            &= \int_0^\infty (g(0) + g(x) - g(0)) \:dF(x) \\
+            &= g(0) + \int_0^\infty \int_0^x g'(t) \:dt \:dF(x) \\
+            &= g(0) + \int_0^\infty \int_t^\infty g'(t) \:dF(x) \:dt \\
+            &= g(0) + \int_0^\infty g'(t) (1 - F(t)) \:dt \\
+            &= g(0) + \int_0^\infty g'(t) P(X > t) \:dt.
+        \end{align*}
+
+        We now impose the condition that there exist constants $A, B$ such that for
+        $x \in [n, n + 1]$, sufficiently large $n$, \[
+            \textcolor{red}{A\,g'(n + 1) \leq g'(x) \leq B\,g'(n).}
+        % \] One way for this to happen is \[
+        %     \frac{\inf_{n \leq x \leq n + 1} g'(x)}{\sup_{n \leq x \leq n + 1} g'(x)}
+        %     \to 1.
+        \] Then, $E(g(X)) < \infty$ if and only if the following integral is finite.
+        \[
+            \int_0^\infty g'(x) P(X > x) \:dx = \sum_{n = 0}^\infty \int_n^{n + 1}
+            g'(x) P(X > x) \:dx.
+        \] Now, \[
+            \sum_{n = 0}^\infty A g'(n + 1) P(X > n + 1) \leq
+            \sum_{n = 0}^\infty \int_n^{n + 1} g'(x) P(X > x) \:dx \leq
+            \sum_{n = 0}^\infty B g'(n) P(X > n),
+        \] hence \[
+            A \sum_{n = 1}^\infty g'(n) P(X > n) \leq
+            \int_0^\infty g'(x) P(X > x) \:dx \leq
+            B g'(0) + B \sum_{n = 1}^\infty g'(n) P(X > n).
+        \] Thus, $E(g(X)) < \infty$ if and only if $\sum_{n = 1}^\infty g'(n) P(X >
+        n) < \infty$.
+
+        \textit{Remark.} Instead of starting at $0$, we may have to truncate the
+        integral/sum.
+
+
+        \item Note that \[
+            E(g(X)) = \int_0^\infty g(x) \:dF(x) = \int_0^M g(x) \:dF(x) +
+            \int_M^\infty g(x) \:dF(x),
+        \] the first part being finite, so we need only check the criterion for $g$
+        and for the sum described in the previous part on $(M, \infty)$ and for $n >
+        M$. Here, $g = \log^+$, which is non-negative, strictly increasing, and
+        differentiable on $(1, \infty)$, with $g'(x) = 1 / x$. Now, for $x \in [n, n
+        + 1]$, we have \[
+            \frac{1}{n + 1} \leq \frac{1}{x} \leq \frac{1}{n}.
+        \] With this, the desired follows via the criterion in the previous part.
+
+        \item Putting $g = (\log^+)^p$, we have $g$ non-negative, strictly
+        increasing, differentiable on $(2, \infty)$, with $g'(x) = p x^{-1}
+        (\log{x})^{p - 1}$. For $x \in [n, n + 1]$, we have \[
+            \log{x} \leq \log(n + 1) < \log(n^2) = 2\log{n},
+        \] and \[
+            \log{x} > \log{n} = \frac{1}{2} \log{n^2} > \frac{1}{2} \log(n + 1).
+        \] Thus, \[
+            2^{-(p - 1)} (n + 1)^{-1}(\log(n + 1))^{p - 1}
+            \leq x^{-1}(\log{x})^{p - 1}
+            \leq 2^{p - 1} n^{-1} (\log{n})^{p - 1}.
+        \] Again, the desired criterion follows.
+
+        \item Precisely the same calculations as in (c) show that if there exist
+        constants $A, B$ and a map $h\colon \N \to \R$ such that for all $x \in [n, n
+        + 1]$, \[
+            A\, h(n + 1) \leq g'(x) \leq B\, h(n),
+        \] then \[
+            E(g(x)) < \infty \;\iff\; \sum_{n = 1}^\infty h(n) P(X > n) < \infty.
+        \]
+
+        Putting $g(x) = x^r (\log^+{x})^p$, we have $g$ non-negative, strictly
+        increasing, differentiable on $(1, \infty)$, with $g'(x) = x^{r - 1}
+        (\log{x})^{p - 1}[r\log{x} + 1]$. For sufficiently large $n$ \[
+            r\log{x} \leq r\log{x} + 1 \leq 2r\log{x}, \qquad
+            rx^{r - 1} (\log{x})^p \leq g'(x) \leq 2rx^{r - 1}(\log{x})^p.
+        \] for $x \in [n, n + 1]$. Thus, \[
+            r\cdot 2^{-(r - 1)} (n + 1)^{r - 1} \cdot 2^{-p} (\log(n + 1))^p
+            \leq g'(x) \leq
+            2r\cdot 2^{r - 1} n^{r - 1} \cdot 2^{p} (\log{n})^p.
+        \] Thus, putting $h(n) = n^{r - 1} (\log{n})^p$ gives the desired criterion.
+
+
+        \item Putting $g = \log^+\log^+$, we have $g$ non-negative, strictly
+        increasing, differentiable on $(e, \infty)$, with $g'(x) = x^{-1}
+        (\log{x})^{-1}$. Also, for $x \in [n, n + 1]$, we have \[
+            (n + 1)^{-1} (\log(n + 1))^{-1} \leq g'(x) \leq n^{-1} (\log{n})^{-1}.
+        \] The desired criterion follows.
+
+    \end{enumerate}
+
+
+
     \problem Let $\{X_n\}$ be a sequence of pairwise independent and identically
-    distributed random variables. Show that $X_n / n \to 0$ almost surely if and only
-    if $E(|X_1|) < \infty$.
+    distributed random variables.
 
-    \solution \begin{align*}
-        X_n/n \toas 0 \;&\iff\;
-        \sum_{n = 1}^\infty P(|X_n / n| > \epsilon) < \infty \text{ for all }\epsilon
-        > 0 \tag{Borel-Cantelli} \\
-        \;&\iff\;
-        \sum_{n = 1}^\infty P(|X_n / \epsilon| > n) < \infty \text{ for all }\epsilon
-        > 0 \\
-        \;&\iff\;
-        \sum_{n = 1}^\infty P(|X_1 / \epsilon| > n) < \infty \text{ for all }\epsilon
-        > 0 \tag{Identical distributions} \\
-        \;&\iff\;
-        E(|X_1 / \epsilon|) < \infty \text{ for all }\epsilon > 0 \\
-        \;&\iff\;
-        E(|X_1|).
-    \end{align*}
+    \begin{enumerate}
+        \item Show that $X_n / n \to 0$ almost surely if and only if $E(|X_1|) <
+        \infty$.
 
-    \textit{Remark.} Pairwise independence is only needed for the forward implication
-    in the first step.
+        \item Show that $|X_n|^{1 / n} \to 1$ almost surely if and only if
+        $E(\log^+|X_1|) < \infty$.
+    \end{enumerate}
+
+    \solution \begin{enumerate}
+        \item \begin{align*}
+            X_n/n \toas 0 \;&\iff\;
+            \sum_{n = 1}^\infty P(|X_n / n| > \epsilon) < \infty \text{ for all }
+            \epsilon > 0 \tag{Borel-Cantelli} \\
+            \;&\iff\;
+            \sum_{n = 1}^\infty P(|X_n / \epsilon| > n) < \infty \text{ for all }
+            \epsilon > 0 \\
+            \;&\iff\;
+            \sum_{n = 1}^\infty P(|X_1 / \epsilon| > n) < \infty \text{ for all }
+            \epsilon > 0 \tag{Identical distributions} \\
+            \;&\iff\;
+            E(|X_1 / \epsilon|) < \infty \text{ for all } \epsilon > 0 \\
+            \;&\iff\;
+            E(|X_1|) < \infty.
+        \end{align*}
+        \textit{Remark.} Pairwise independence is only needed for the forward implication
+        in the first step.
+
+        \item Note that $(\log^+|X_n|) / n \toas 0$ if and only if $E(\log^+|X_1|) <
+        \infty$ by the previous part. By the continuous mapping theorem, $|X_n|^{1 /
+        n} \toas 1$ gives $(\log^+|X_n|) / n \toas 0$. Conversely, $(\log^+|X_n|) / n
+        \toas 0$ means that $(\log^+|X_n(\omega)|) / n \to 0$ for all $\omega \in A$
+        with $P(A = 1)$. Thus, $|X_n(\omega)| / n \to 0$ for those $\omega \in A$
+        where $|X_n(\omega)| > 1$; for the remaining $\omega$, we already have
+        $|X_n(\omega)| / n \leq 1 / n \to 0$.
+    \end{enumerate}
+
 
 
     \problem Let $\{X_n\}$ be a sequence of identically distributed variables, and
@@ -79,7 +280,7 @@
     \solution \begin{enumerate}
         \item We have $E(|X_1|) < \infty \implies X_n/n \toas 0$, hence there exists
         $A \subseteq \Omega$ with $P(A) = 1$ such that $X_n(\omega) / n \to 0$ 
-        for all $\omega \in A$. Set $x_n = X_n(\Omega)$, $m_n = M_n(\omega)$, and let
+        for all $\omega \in A$. Set $x_n = X_n(\omega)$, $m_n = M_n(\omega)$, and let
         $\epsilon > 0$, whence there exists $N \in \N$ such that for all $n > N$,
         we have $|x_n|/n < \epsilon$. Now, observe that for all $n > N$, \[
             \frac{m_n}{n} \leq \frac{\max\{|x_1|, \dots, |x_N|\}}{n} +
@@ -117,6 +318,19 @@
     \] But this follows immediately since it holds for $k = 1$; each $P(A_n^c) > 0$
     means that this term can be cancelled from the product yielding the equality for
     all $k > 1$.
+
+
+    \problem Let $\{X_n\}$ be a sequence of independent random variables such that
+    for $n \geq 1$, we have $P(X_n = 1) = n^{-1} = 1 - P(X_n = 0)$. Show that $X_n$
+    converges to $0$ in probability but not almost surely.
+
+    \solution Note that for $\epsilon > 0$, we have $P(|X_n| > \epsilon) \leq 1 / n \to
+    0$. Thus, $X_n \topr 0$.
+
+    By the Borel-Cantelli Lemmas, $X_n \toas 0$ is equivalent to $\sum_{n = 1}^\infty
+    P(|X_n| > \epsilon) < \infty$ for all $\epsilon > 0$. However, this is false;
+    putting $\epsilon = 1 / 2$, the latter sum is $\sum_{n = 1}^\infty 1 / n =
+    \infty$.
 
 
     \problem Let $\{X_n\}$ be a sequence of independent and identically distributed
@@ -223,6 +437,43 @@
 
 
     \problem Let $\{X_n\}$ be a sequence of independent random variables such that
+    \[
+        P(X_n = 2) = P(X_n = n^\beta) = a_n, \qquad
+        P(X_n = a_n) = 1 - 2a_n,
+    \] for some $a_n \in (0, 1/3)$ and $\beta \in \R$. Show that $\sum_{n = 1}^\infty
+    X_n$ converges if and only if $\sum_{n = 1}^\infty a_n < \infty$.
+
+    \solution Define $Y_n = X_n \chi_{[|X_n| \leq A]}$ for $A > 0$. First, suppose that
+    $\beta > 0$, whence $n^\beta \to \infty$. Thus, putting $A = 3$, for sufficiently
+    large $n$, we have \[
+        E(Y_n) = 2a_n + a_n(1 - 2a_n) = 3a_n -
+        2a_n^2 < 3a_n,
+    \] using $a_n^2 \geq 0$. Also, \[
+        V(Y_n) < E(Y_n^2) = 4a_n + a_n^2(1 - 2a_n) = 4a_n
+        - a_n^2 + 2a_n^3 < 6a_n,
+    \] using $a_n^3 < a_n$. Finally, \[
+        P(|X_n| > 3) = a_n.
+    \] Thus, if $\sum_{n = 1}^\infty a_n < \infty$, we have $\sum_{n = 1}^\infty
+    P(|X_n| > 3) < \infty$, $\sum_{n = 1}^\infty E(Y_n) < \infty$, $\sum_{n =
+    1}^\infty V(Y_n) < \infty$, whence Kolmogorov's Three Series Theorem gives the
+    convergence of $\sum_{n = 1}^\infty X_n$. Conversely, the convergence of $\sum_{n
+    = 1}^\infty X_n$ gives the convergence of $\sum_{n = N}^\infty P(|X_n| > 3) =
+    \sum_{n = N}^\infty a_n$. \\
+
+    Next, suppose that $\beta \leq 0$. Thus, putting $A = 1$,
+    for sufficiently large $n$, we have $n^\beta \leq 1$, hence \[
+        E(Y_n) = n^\beta a_n + a_n(1 - 2a_n) = n^\beta a_n + a_n - 2a_n^2 < 2a_n.
+    \] Also, \[
+        V(Y_n) < E(Y_n^2) = n^{2\beta} a_n + a_n^2(1 - 2a_n) = n^{2\beta} a_n + a_n^2
+        - 2a_n^3 < 2a_n,
+    \] using $a_n^2 < a_n$. Finally, \[
+        P(|X_n| > 1) = a_n.
+    \] Using precisely the same argument as before, $\sum_{n = 1}^\infty X_n$
+    converges almost surely if and only if $\sum_{n = 1}^\infty a_n$ converges.
+
+
+
+    \problem Let $\{X_n\}$ be a sequence of independent random variables such that
     $E(X_n) = 0$, $E(X_n^2) = \sigma^2$. Define $s_n^2 = \sum_{k = 1}^n \sigma_k^2
     \to \infty$. Show that for any $a > 1/2$, \[
         Y_n = \frac{1}{s_n(\log{s_n^2})^a} \sum_{k = 1}^n X_k \toas 0.
@@ -277,18 +528,31 @@
     is a degenerate random variable with $P(X_n = 0) = 1$.
 
 
+    \problem Let $\{X_n\}$ be a sequence of independent random variables with $E(X_n)
+    = 0$ and $E(X_n^2) = \sigma_n^2 < \infty$. Suppose that $\sum_{n = 1}^\infty
+    \sigma_n^2 / b_n^2 < \infty$ for some positive sequence $\{b_n\}$ which increases
+    to $\infty$. Show that $b_n^{-1} \sum_{i = 1}^n X_i \toas 0$.
+
+    \solution By Kronecker's Lemma, it is enough to show that $\sum_{n = 1}^\infty
+    X_n / b_n$ converges almost surely. By Levy's Theorem, it is equivalent to show
+    that this converges in probability. This it is enough to show convergence in
+    $L^2$, whence is it enough to show that the sum of variances $\sum_{n = 1}^\infty
+    V(X_n / b_n)$ is finite. This is precisely $\sum_{n = 1}^\infty \sigma_n^2 /
+    b_n^2 < \infty$ as given.
+
+
     \problem Let $\{X_n\}$ be a sequence of independent random variables with each
     $X_n \sim N(\mu_n, \sigma_n^2)$. Show that $\sum_{n = 1}^\infty X_n$ converges
     almost surely if and only if both $\sum_{n = 1}^\infty \mu_n$ and $\sum_{n =
     1}^\infty \sigma_n^2$ converge.
 
-    \solution ($\Longleftarrow$) We have $\sum_{n = 1}^\infty V(X_n - \mu_n) =
+    \solution ($\Leftarrow$) We have $\sum_{n = 1}^\infty V(X_n - \mu_n) =
     \sum_{n = 1}^\infty \sigma_n^2 < \infty$, hence $\sum_{n = 1}^\infty (X_n -
     \mu_n)$ converges almost surely. Using $\sum_{n = 1}^\infty \mu_n < \infty$, we
     have $\sum_{n = 1}^\infty X_n < \infty$ almost surely.
 
 
-    ($\Longrightarrow$) First, suppose that all $\mu_n = 0$. Since $\sum_{n =
+    ($\Rightarrow$) First, suppose that all $\mu_n = 0$. Since $\sum_{n =
     1}^\infty X_n$ converges almost surely, Kolmogorov's Three-Series Theorem gives
     \[
         \sum_{n = 1}^\infty P(|X_n/\sigma_n| > A/\sigma_n) = \sum_{n = 1}^\infty
@@ -308,59 +572,639 @@
         \sigma_n^2 E(Z_n^2\chi_{|Z_n| \geq A/\sigma_n}) < \infty,
     \] hence $\sum_{n = 1}^\infty \sigma_n^2 < \infty$.
 
-    We now return to the general case, where $Z_n = (X_n - \mu_n) / \sigma_n$ are
-    independent and identically distributed standard normal variables. As before, the
-    almost sure convergence of $\sum_{n = 1}^\infty X_n$ gives \[
-        \sum_{n = 1}^\infty P(\sigma_nZ_n \notin [-\mu_n - A, -\mu_n + A]) =
-        \sum_{n = 1}^\infty P(|X_n| > A) < \infty
-    \] for all $A > 0$. This implies that each term \[
-        \Phi\left(\frac{-\mu_n - A}{\sigma_n}\right) + \Phi\left(\frac{\mu_n -
-        A}{\sigma_n}\right)
-        = P\left(Z_n \notin \left[\frac{-\mu_n - A}{\sigma_n}, \frac{-\mu_n +
-        A}{\sigma_n}\right]\right) \to 0.
-    \] This is possible only when both $(\mu_n + A)/\sigma_n \to \infty$ and $(-\mu_n
-    + A)/\sigma_n \to \infty$. Thus, their sum $2A/\sigma_n \to \infty$, hence
-    $\sigma_n \to 0$. If we denote the above interval by $J_n$, we have $\chi_{J_n}
-    \to 1$. Also, we see that $\mu_n + A$ and $-\mu_n + A$ become positive
-    eventually, hence $|\mu_n| < A$ eventually. Since $A > 0$ was arbitrary, we have
-    $\mu_n \to 0$.
+    % We now return to the general case, where $Z_n = (X_n - \mu_n) / \sigma_n$ are
+    % independent and identically distributed standard normal variables. As before, the
+    % almost sure convergence of $\sum_{n = 1}^\infty X_n$ gives \[
+    %     \sum_{n = 1}^\infty P(\sigma_nZ_n \notin [-\mu_n - A, -\mu_n + A]) =
+    %     \sum_{n = 1}^\infty P(|X_n| > A) < \infty
+    % \] for all $A > 0$. This implies that each term \[
+    %     \Phi\left(\frac{-\mu_n - A}{\sigma_n}\right) + \Phi\left(\frac{\mu_n -
+    %     A}{\sigma_n}\right)
+    %     = P\left(Z_n \notin \left[\frac{-\mu_n - A}{\sigma_n}, \frac{-\mu_n +
+    %     A}{\sigma_n}\right]\right) \to 0.
+    % \] This is possible only when both $(\mu_n + A)/\sigma_n \to \infty$ and $(-\mu_n
+    % + A)/\sigma_n \to \infty$. Thus, their sum $2A/\sigma_n \to \infty$, hence
+    % $\sigma_n \to 0$. If we denote the above interval by $J_n$, we have $\chi_{J_n}
+    % \to 1$. Also, we see that $\mu_n + A$ and $-\mu_n + A$ become positive
+    % eventually, hence $|\mu_n| < A$ eventually. Since $A > 0$ was arbitrary, we have
+    % $\mu_n \to 0$.
 
-    % Denote $1 - \Phi(t) = \Phi^c(t)$; we have each term $\Phi^c((\mu_n + A) /
-    % \sigma_n) + \Phi^c((-\mu_n + A) / \sigma_n) \to 0$. Both of the arguments here
-    % exceed $1$ eventually for $n \geq N$. For $t > 1$, we use the inequality \[
-    %     \Phi^c(t) > \frac{1}{\sqrt{2\pi}} \frac{t}{t^2 + 1} e^{-t^2/2}
-    %     > \frac{1}{\sqrt{2\pi}} \frac{1}{2t} e^{-t^2/2}.
-    % \] Since our first convergent series consists of positive terms, each of the
-    % series \[
-    %     \sum_{n = N}^\infty \frac{\sigma_n}{\mu_n + A} e^{-(\mu_n + A)^2/\sigma_n^2}
-    %     < \infty, \qquad
-    %     \sum_{n = N}^\infty \frac{\sigma_n}{-\mu_n + A} e^{-(-\mu_n +
-    %     A)^2/\sigma_n^2} < \infty,
-    % \]
+    % % Denote $1 - \Phi(t) = \Phi^c(t)$; we have each term $\Phi^c((\mu_n + A) /
+    % % \sigma_n) + \Phi^c((-\mu_n + A) / \sigma_n) \to 0$. Both of the arguments here
+    % % exceed $1$ eventually for $n \geq N$. For $t > 1$, we use the inequality \[
+    % %     \Phi^c(t) > \frac{1}{\sqrt{2\pi}} \frac{t}{t^2 + 1} e^{-t^2/2}
+    % %     > \frac{1}{\sqrt{2\pi}} \frac{1}{2t} e^{-t^2/2}.
+    % % \] Since our first convergent series consists of positive terms, each of the
+    % % series \[
+    % %     \sum_{n = N}^\infty \frac{\sigma_n}{\mu_n + A} e^{-(\mu_n + A)^2/\sigma_n^2}
+    % %     < \infty, \qquad
+    % %     \sum_{n = N}^\infty \frac{\sigma_n}{-\mu_n + A} e^{-(-\mu_n +
+    % %     A)^2/\sigma_n^2} < \infty,
+    % % \]
 
-    Next, we have \[
-        \sum_{n = 1}^\infty E((\sigma_nZ_n + \mu_n)\chi_{Z_n \in J_n}) =
-        \sum_{n = 1}^\infty E(X_n\chi_{|X_n| \leq A}) < \infty,
-    \] and \[
-        \sum_{n = 1}^\infty E((\sigma_nZ_n + \mu_n)^2\chi_{Z_n \in J_n}) -
-        E((\sigma_nZ_n + \mu_n)\chi_{Z_n \in J_n})^2 =
-        \sum_{n = 1}^\infty V(X_n\chi_{|X_n| \leq A}) < \infty.
-    \] Each term here can be broken down as (denote $\chi_n \equiv \chi_{Z_n \in
-    J_n}$)\begin{align*}
-        &\quad\;\;\sigma_n^2E(Z_n^2\chi_n) + 2\mu_n\sigma_nE(Z_n\chi_n) + \mu_n^2E(\chi_n) -
-        \sigma^2E(Z_n\chi_n)^2 - 2\mu_n\sigma_nE(Z_n)E(\chi_n) -
-        \mu_n^2E(\chi_n)^2 \\
-        \;&=\; \sigma_n^2 V(Z_n\chi_n) + 2\mu_n\sigma_n E(Z_n\chi_n) +
-        \mu_n^2 V(\chi_n)
+    % Next, we have \[
+    %     \sum_{n = 1}^\infty E((\sigma_nZ_n + \mu_n)\chi_{Z_n \in J_n}) =
+    %     \sum_{n = 1}^\infty E(X_n\chi_{|X_n| \leq A}) < \infty,
+    % \] and \[
+    %     \sum_{n = 1}^\infty E((\sigma_nZ_n + \mu_n)^2\chi_{Z_n \in J_n}) -
+    %     E((\sigma_nZ_n + \mu_n)\chi_{Z_n \in J_n})^2 =
+    %     \sum_{n = 1}^\infty V(X_n\chi_{|X_n| \leq A}) < \infty.
+    % \] Each term here can be broken down as (denote $\chi_n \equiv \chi_{Z_n \in
+    % J_n}$)\begin{align*}
+    %     &\quad\;\;\sigma_n^2E(Z_n^2\chi_n) + 2\mu_n\sigma_nE(Z_n\chi_n) + \mu_n^2E(\chi_n) -
+    %     \sigma^2E(Z_n\chi_n)^2 - 2\mu_n\sigma_nE(Z_n)E(\chi_n) -
+    %     \mu_n^2E(\chi_n)^2 \\
+    %     \;&=\; \sigma_n^2 V(Z_n\chi_n) + 2\mu_n\sigma_n E(Z_n\chi_n) +
+    %     \mu_n^2 V(\chi_n)
+    % \end{align*}
+    % Now, observe that $\mu_n E(Z_n\chi_n) \leq 0$. To see this, suppose that $\mu_n >
+    % 0$; if $-\mu_n + A \leq 0$, we clearly have $E(Z_n\chi_{Z_n \in J_n}) \leq 0$. If
+    % $-\mu_n + A > 0$, note that \[
+    %     E(Z_n\chi_{Z_n \in J_n}) = \int_{-\mu_n/\sigma_n -
+    %     A/\sigma_n}^{-\mu_n/\sigma_n + A/\sigma_n} t \:d\Phi(t) =
+    %     \int_{-\mu_n/\sigma_n -
+    %     A/\sigma_n}^{\mu_n/\sigma_n - A/\sigma_n} + \int_{\mu_n/\sigma_n -
+    %     A/\sigma_n}^{-\mu_n/\sigma_n + A/\sigma_n} t \:d\Phi(t) \leq 0.
+    % \] This is because the first integral is negative, and the second is zero by
+    % symmetry. The case $\mu_n < 0$ is analogous.
+
+    Returning to the general case, write \[
+        S_n = \sum_{i = 1}^n X_i \sim N(m_n, s_n^2), \qquad
+        m_n = \sum_{i = 1}^n \mu_i, \qquad
+        s_n^2 = \sum_{i = 1}^n \sigma_i^2.
+    \] Since $S_n$ converges almost surely to some random variable $Y$, it also does
+    so in distribution, hence the characteristic functions $\phi_{S_n}(t) \to
+    \phi_Y(t)$ for all $t \in \R$. Now, \[
+        \phi_{S_n}(t) = e^{itm_n - t^2s_n^2 / 2}, \qquad
+        e^{-t^2s_n^2 / 2} = |\phi_{S_n}(t)| \to |\phi_Y(t)|.
+    \] Since $\phi_Y(0) = 1$, the continuity of $\phi_Y$ gives $\phi_Y > 0$ on some
+    neighbourhood of $0$. There, applying logarithms gives \[
+        -\frac{1}{2} t^2 s_n^2 \to \log{|\phi_Y(t)|}.
+    \] Fixing one such $t \neq 0$, we have $s_n^2 \to -2\log{|\phi_Y(t)|} / t^2$,
+    hence $\sum_{n = 1}^\infty \sigma_n^2$ converges, say to $s^2$. Thus, \[
+        e^{itm_n} \to e^{t^2 s^2 / 2} \phi_Y(t)
+    \] for all $t \in \R$. This forces the convergence of $m_n$, hence of $\sum_{n =
+    1}^\infty \mu_n$.
+
+    To justify the last step, suppose that the sequences $\{e^{-it\alpha_n}\}$
+    converge for all $t \in \R$. Then, we have each $e^{it(\alpha_n - \alpha_m)} \to
+    1$. It is enough to show that $\alpha_n - \alpha_m \to 0$, whence $\{\alpha_n\}$
+    is Cauchy, hence convergent. Thus, suppose that $e^{it\beta_k} \to 1$ for all $t
+    \in \R$. Also suppose that all $\beta_k \neq 0$; we show that $\beta_k \to 0$ (we
+    can re-insert any $0$ values after initially removing them). Then, the dominated
+    convergence theorem gives \[
+        \int_0^1 e^{it\beta_k} \:dt \to \int_0^1 \:dt = 1,
+    \] while \[
+        \int_0^1 e^{it\beta_k} \:dt = \frac{1}{i\beta_k}(e^{i\beta_k} - 1).
+    \] Thus, the following limit exists, and is given by \[
+        \lim_{n \to \infty} \beta_k = \lim_{n \to \infty} -i(e^{i\beta_k} - 1) = 0.
+    \]
+
+
+
+
+    \clearpage
+    \section*{Assignment II}
+    \setcounter{prob}{0}
+
+    \problem Suppose that $\{x_n\}_{n \geq 1}$ is a sequence of real numbers. Define
+    a sequence of random variables $\{X_n\}_{n \geq 1}$ as follows: $P(X_n = x_n) =
+    1$ for each $n \geq 1$.
+    \begin{enumerate}
+        \item Show that if $x_n \to x$, then $X_n$ converges weakly to $X$, where
+        $P(X = x) = 1$.
+
+        \item Show that if $X_n$ converges weakly to $X$ as above, then $x_n \to x$.
+        \item Show that if $X_n$ converges weakly to a random variable $Y$, then $P(Y
+        = x) = 1$ for some $x \in \R$.
+    \end{enumerate}
+
+    \solution \begin{enumerate}
+        \item Note that for any continuous bounded function $f$, we have \[
+            E(f(X_n)) = f(x_n) \to f(x) = E(f(X)),
+        \] hence $X_n \tod X$.
+
+        \item Note that for all $y \neq x$, we have $F_{X_n}(y) \to F_X(y)$. This
+        means that $F_{X_n}(y) \to 0$ when $y < x$, and $F_{X_n}(y) \to 1$ when $y >
+        x$. But $F_{X_n}$ only takes values in $\{0, 1\}$; thus, for any $\epsilon >
+        0$, there exists sufficiently large $N$ such that $F_{X_n}(x - \epsilon) = 0$
+        and $F_{X_n}(x + \epsilon) = 1$ for all $n \geq N$. Since each $x_n = \inf
+        \{y : F_{X_n}(y) = 1\}$, we must have $x - \epsilon \leq x_n \leq x +
+        \epsilon$ for all $n \geq N$. Thus, $x_n \to x$.
+
+        \item Note that for $y$ not in the set of (countably many) discontinuities of
+        $Y$, we have $F_{X_n}(y) \to F(y)$; since $F_{X_n}$ only takes values in
+        $\{0, 1\}$, this means that the limit function $F_y$ must only take values in
+        $\{0, 1\}$. The gaps at the point of discontinuity can be filled in by right
+        continuity of $F_Y$; for any such point of discontinuity $y$, one can always
+        find a sequence $\{y_k\}$ decreasing to $y$ that misses all discontinuity
+        points of $F_Y$, hence $F_Y(y_n) \to F_Y(y)$.
+
+        Set $x = \inf\{y : F_Y(y) = 1\}$. Then, $F_Y(y) = 0$ for all $y < x$, and
+        $F_Y(y) = 1$ for all $y > x$ by construction, thus $P(Y = x) = 1$ (right
+        continuity).
+    \end{enumerate}
+
+
+    \problem Let $X$ and $Y$ be two real random variables. Show that $P(X = Y) = 1$
+    if and only if $E(f(X)) = E(f(Y))$ for all $f\colon \R \to \R$ which are bounded
+    and uniformly continuous. Hence or otherwise, show that a sequence of probability
+    measures cannot converge weakly to two different limits.
+
+    \solution $(\Rightarrow)$ This follows immediately from the fact that $X$ and $Y$
+    are identically distributed.
+
+    $(\Leftarrow)$ Let $a, b$ be continuity points of both $F_X, F_Y$, with $-\infty
+    < a < b < \infty$. Pick a sequence $\delta_k$ decreasing to $0$, and define the
+    functions \[
+        h_k(x) = \begin{cases}
+            0,  &\text{if } x \in (-\infty, a - \delta_k], \\
+            (x - (a - \delta_k)) / \delta_k,
+                &\text{if } x \in [a - \delta_k, a], \\
+            1,  &\text{if } x \in [a, b], \\
+            ((b + \delta_k) - x) / \delta_k,
+                &\text{if } x \in [b, b + \delta_k], \\
+            0,  &\text{if } x \in [b + \delta_k, \infty).
+        \end{cases}
+    \] Such $h_k \in C_B(\R)$ approximate $\chi_{(a, b]}$ from above. Now, each $h_k$
+    is bounded and uniformly continuous, so \[
+        F_X(b) - F_X(a) = E(\chi_{(a, b]}(X)) \leq E(h_k(X)) = E(h_k(Y)).
+    \] By the Dominated Convergence Theorem, taking limits as $k \to \infty$ gives
+    \[
+        F_X(b) - F_X(a) \leq E(\chi_{[a, b]}(Y)) = E(\chi_{(a, b]}(Y)) = F_Y(b) -
+        F_Y(a).
+    \] The reverse inequality holds by symmetry, hence \[
+        F_X(b) - F_X(a) = F_Y(b) - F_Y(a).
+    \] Taking the limit $a \to -\infty$, we have $F_X(b) = F_Y(b)$ for all common
+    continuity points $b$. Thus, $X$ and $Y$ are identically distributed. \\
+
+    With this, we see that if $X_n \tod X, Y$, then for all $f \in C_B(\R)$, we have
+    $E(f(X_n)) \to E(f(X))$, $E(f(X_n)) \to E(f(Y))$. Thus, $E(f(X)) = E(f(Y))$ for
+    all $f \in C_B(\R)$, whence $X$ and $Y$ are identically distributed.
+
+
+    \problem \begin{enumerate}
+        \item Show that for any real random variable $X$ and any proper open subset
+        $U$ of $\R$, we have \[
+            P(X \in U) = \sup \{P(X \in K) : K \subseteq U \text{ is compact}\}.
+        \]
+
+        \item Show that \[
+            X_n \tod X \iff \liminf P(X_n \in U) \geq P(X \in U) \text{ for any open
+            } U \subseteq \R.
+        \]
+
+        \item Show that \[
+            X_n \tod X \iff \limsup P(X_n \in F) \leq P(X \in F) \text{ for any
+            closed } F \subseteq \R.
+        \]
+    \end{enumerate}
+
+    \solution \begin{enumerate}
+        \item We use the property of inner regularity of probability measures, \[
+            P(X \in U) = \sup \{P(X \in F) : F \subseteq U \text{ is closed}\}.
+        \] Given $\epsilon > 0$, find $N > 0$ such that $P(X \in U \setminus[-N, N])
+        < \epsilon / 2$; this is possible, since this probability converges to zero
+        as $N \to \infty$ by continuity from above. Via inner regularity, find closed
+        $F \subseteq U\cap [-N, N]$ such that $P(X \in U\cap [-N, N]) - P(X \in F) <
+        \epsilon / 2$. Note that $F \subseteq [-N, N]$, hence $F$ is compact. Also,
+        \begin{align*}
+            P(X \in U) - P(X \in F) &\leq P(X \in U \setminus [-N, N]) + P(X \in U
+            \cap [-N, N]) - P(X \in F) \\
+            &< \epsilon / 2 + \epsilon / 2 = \epsilon.
+        \end{align*}
+
+        \item $(\Rightarrow)$ Note that $E(f(X_n)) \to E(f(X))$ for all continuous
+        and bounded functions $f$. Let $U \subseteq \R$ be open. For any compact set
+        $K \subseteq U$, use Urysohn's Lemma to find $f \in C_c(\R)$ such that $0
+        \leq f \leq 1$, $f(K) = 1$, and $\operatorname{supp}(f) \subseteq U$. Thus,
+        \[
+            P(X_n \in U) = E(\chi_U(X_n)) \geq E(f(X_n)).
+        \] As $n \to \infty$, \[
+            \liminf_{n \to \infty} P(X_n \in U) \geq E(f(X)) \geq E(\chi_K(X)) = P(X
+            \in K).
+        \] Taking a supremum over all such $K$, and using the previous exercise gives
+        \[
+            \liminf_{n \to \infty} P(X_n \in U) \geq P(X \in U).
+        \]
+
+        $(\Leftarrow)$ Let $x$ be a continuity point of $X$. Considering the open
+        sets $(-\infty, x)$ and $(x, \infty)$, we have \[
+            \liminf_{n \to \infty} P(X_n < x) \geq P(X < x), \qquad
+            \liminf_{n \to \infty} P(X_n > x) \geq P(X > x).
+        \] The latter gives \[
+            \limsup_{n \to \infty} P(X_n \leq x) = 1 - \liminf_{n \to \infty} P(X_n >
+            x) \leq 1 - P(X > x) = P(X \leq x).
+        \] This gives \begin{align*}
+            P(X \leq x) &= P(X < x) \\
+            &\leq \liminf_{n \to \infty} P(X_n < x) \\
+            &\leq \liminf_{n \to \infty} P(X_n \leq x) \\
+            &\leq \limsup_{n \to \infty} P(X_n \leq x) \\
+            &\leq P(X \leq x).
+        \end{align*}
+        Thus, $P(X_n \leq x) \to P(X \leq x)$, i.e.\ $X_n \tod X$.
+
+        \item The conditions \[
+            \liminf P(X_n \in U) \geq P(X \in U) \text{ for any open
+                        } U \subseteq \R,
+        \] \[
+            \limsup P(X_n \in F) \leq P(X \in F) \text{ for any
+                        closed } F \subseteq \R,
+        \] are equivalent, since \[
+            \liminf P(X_n \in U) = 1 - \limsup P(X_n \in U^c), \qquad
+            \limsup P(X_n \in F) = 1 - \liminf P(X_n \in F^c),
+        \] and \[
+            P(X \in U) = 1 - P(X \in U^c), \qquad
+            P(X \in F) = 1 - P(X \in F^c).
+        \]
+    \end{enumerate}
+
+
+    \problem Let $\mathcal{A}$ be a $\pi$-system of subsets of $\R$. Suppose that
+    $\mathcal{A}$ has the property that any open subset of $\R$ is a countable union
+    of sets from $\mathcal{A}$. For a collection of real random variables $\{X_n\}_{n
+    \geq 1}$ and $X$, show that $P(X_n \in A) \to P(X \in A)$ for every $A \in
+    \mathcal{A}$ implies that $X_n \tod X$.
+
+    \solution We use the criterion from 3(b); let $U \subseteq \R$ be open. Then,
+    write \[
+        U = \bigcup_{n = 1}^\infty A_n, \qquad
+        U_N = \bigcup_{n = 1}^N A_n
+    \] where $A_n \in \mathcal{A}$. Then, the Inclusion-Exclusion Principle gives \[
+        P(X_n \in U_N) = \sum_{\emptyset \neq J \subseteq \{1, \dots, N\}} (-1)^{|J|
+        + 1} P\left(X_n \in \bigcap_{j \in J} A_j\right).
+    \] Taking the limit $n \to \infty$, we have \[
+        \lim_{n \to \infty} P(X_n \in U_N) = \sum_{\emptyset \neq J \subseteq \{1,
+        \dots, N\}} (-1)^{|J| + 1} P\left(X \in \bigcap_{j \in J} A_j\right)
+        = P(X \in U_N).
+    \] Since each $P(X_n \in U) \geq P(X_n \in U_N)$, \[
+        \liminf_{n \to \infty} P(X_n \in U) \geq P(X \in U_N),
+    \] so taking the limit $N \to \infty$ and using continuity from below, \[
+        \liminf_{n \to \infty} P(X_n \in U) \geq P(X \in U).
+    \]
+
+
+    \problem Let $\{X_n\}_{n \geq 1}$ be i.i.d.\ real random variables defined from a
+    probability space $(\Omega, \mathcal{F}, P)$ having a common cdf $F$. Define the
+    empirical cdf $\hat{F}_n$ corresponding to the observations $(X_1, \dots, X_n)$
+    as \[
+        \hat{F}_n(\omega, x) = \frac{1}{n}\sum_{i = 1}^n \chi_{(X_i(\omega) \leq x)},
+    \] where $\omega \in \Omega$ and $x \in \R$.
+
+    \begin{enumerate}
+        \item Prove that $\hat{F}_n(\cdot, x)$ is a real-valued random variable for
+        each $x \in \R$.
+
+        \item Prove that $\hat{F}_n(\omega, \cdot)$ is a valid cdf for each $\omega
+        \in \Omega$.
+
+        \item Show that $\hat{F}_n(\cdot, \cdot) \tod F$ as $n \to \infty$ almost
+        surely, i.e.\ \[
+            P(\{\omega : \lim_{n \to \infty} \hat{F}_n(\omega, x) = F(x) \text{ for
+            every } x \in C(F)\}) = 1.
+        \]
+    \end{enumerate}
+
+    \solution \begin{enumerate}
+        \item Note that each of the terms $Y_i = \chi_{[X_i \leq x]}$ is a
+        real-valued random variable; since $X_i\colon \Omega \to \R$ is measurable,
+        the set $[X_i \leq x] = X_i^{-1}(-\infty, x]$ is measurable, whence the
+        indicator function $Y_i$ on this set is also measurable. Thus,
+        $\hat{F}_n(\cdot, x)\colon \Omega \to \R$ is measurable, being a scaled
+        finite sum of measurable functions. This means that $\hat{F}_n(\cdot, x)$ is
+        a random variable for each $x \in \R$.
+
+        \item It is enough to check that given $\omega \in \Omega$, the map
+        $\hat{F}_n(\omega, \cdot)$ is non-decreasing, right continuous,
+        $\lim_{x \to -\infty} \hat{F}_n(\omega, x) = 0$, and $\lim_{x \to \infty}
+        \hat{F}_n(\omega, x) = 1$.
+
+        Denote $X_i(\omega) = y_j$, where the indices $j$ are arranged such that $y_1
+        \leq \dots \leq y_n$. Then, \[
+            \hat{F}(\omega, x) = \begin{cases}
+                0 &\text{if } x \in (-\infty, y_1), \\
+                1 / n &\text{if } x \in [y_1, y_2), \\
+                \vdots &\vdots \\
+                k / n &\text{if } x \in [y_k, y_{k + 1}), \\
+                \vdots &\vdots \\
+                1 &\text{if } x \in [y_n, \infty).
+            \end{cases}
+        \] All four properties follow immediately.
+
+        \item For fixed $x$, the random variable $Y_i = \chi_{[X_i \leq x]}$ has
+        expectation $F(x)$, which is also the absolute expectation. Since all $X_i$
+        are independent, so are all $Y_i$, whence the Strong Law of Large Numbers
+        gives \[
+            \hat{F}_n(\cdot, x) = \frac{1}{n} \sum_{i = 1}^n Y_i \toas E(Y_1) = F(x).
+        \]
+
+        Note that the (countable) collection $\mathcal{A}$ of all intervals of the
+        form $(q_i, q_i')$ for $q_i, q_i' \in \Q$ forms a basis of the standard
+        topology on $\R$. Now, for each $x \in C(F)$, \[
+            P(\hat{F}_n(\cdot, x) < q_i') \to P(F(x) < q_i'), \qquad
+            P(\hat{F}_n(\cdot, x) \leq q_i) \to P(F(x) \leq q_i),
+        \] since $\hat{F}_n(\cdot, x) \toas F(x)$ implies $\hat{F}_n(\cdot, x) \tod
+        F(x)$. Thus, \[
+            P(\hat{F}_n(\cdot, x) \in A) \to P(F(x) \in A)
+        \] for every $A \in \mathcal{A}$, whence $\mathcal{A}$ is a $\pi$-system as
+        described in the previous exercise. Thus, $\hat{F}(\cdot, x) \tod F(x)$ for
+        all $x \in C(F)$, hence $\hat{F}(\cdot, \cdot) \tod F$ almost surely.
+
+    \end{enumerate}
+
+
+
+
+    \clearpage
+    \section*{Assignment III}
+    \setcounter{prob}{0}
+
+    \problem Let $X$ be a random variable with characteristic function $\phi_X$. Show
+    that the following are equivalent.
+    \begin{enumerate}
+        \item $|\phi_X(t_0)| = 1$ for some $t_0 \neq 0$.
+        \item There exists $a, h \in \R$ with $h \neq 0$ such that \[
+            P(X \in \{a + kh : k \in \Z\}) = 1.
+        \]
+    \end{enumerate}
+
+    \solution $(\Leftarrow)$ Check that \[
+        \phi_X(2\pi / h) = E(e^{2\pi iX /h}) = \sum_{k \in \Z} e^{2\pi i(a + kh) / h}
+        P(X = a + kh) = e^{2\pi i a / h} \sum_{k \in \Z} P(X = a + kh) = e^{2\pi i a
+        / h}.
+    \]
+
+    $(\Rightarrow)$ Let $|\phi_X(t_0)| = 1$ for some $t_0 \neq 0$. Then, write
+    $\phi_X(t_0) = e^{2\pi i\alpha}$, and set $h = 2\pi / t_0$, $a = \alpha h = 2\pi
+    \alpha / t_0$. Now, \begin{align*}
+        1
+        &= e^{-2\pi i \alpha} \phi_{X}(t_0) \\
+        &= e^{-2\pi i \alpha} \int_\R e^{i t_0 x} \:dF(x) \\
+        &= e^{-2\pi i a / h} \int_\R e^{2\pi i x / h} \:dF(x) \\
+        &= \int_\R e^{2\pi i (x - a) / h} \:dF(x),
     \end{align*}
-    Now, observe that $\mu_n E(Z_n\chi_n) \leq 0$. To see this, suppose that $\mu_n >
-    0$; if $-\mu_n + A \leq 0$, we clearly have $E(Z_n\chi_{Z_n \in J_n}) \leq 0$. If
-    $-\mu_n + A > 0$, note that \[
-        E(Z_n\chi_{Z_n \in J_n}) = \int_{-\mu_n/\sigma_n -
-        A/\sigma_n}^{-\mu_n/\sigma_n + A/\sigma_n} t \:d\Phi(t) =
-        \int_{-\mu_n/\sigma_n -
-        A/\sigma_n}^{\mu_n/\sigma_n - A/\sigma_n} + \int_{\mu_n/\sigma_n -
-        A/\sigma_n}^{-\mu_n/\sigma_n + A/\sigma_n} t \:d\Phi(t) \leq 0.
-    \] This is because the first integral is negative, and the second is zero by
-    symmetry. The case $\mu_n < 0$ is analogous.
+    so \[
+        \int_\R 1 - e^{2\pi i (x - a) / h} \:dF(x) = 0.
+    \] This is possible only when $e^{2\pi i (x - a) / h} = 1$ almost everywhere with
+    respect to $F$, i.e.\ when $(X - a) / h \in \Z$ almost surely.
+
+    To see this, note that the above equation forces \[
+        \int_\R 1 - \cos(2\pi (x - a) / h) \:dF(x) = 0,
+    \] hence \[
+        \int_\R \sin^2(\pi(x - a) / h) \:dF(x) = 0.
+    \]
+
+
+    \problem Let $F$ be a cdf on $\R$ with pdf $f$ and c.f.\ $\phi_X$. Show that \[
+        \lim_{|t| \to \infty} |\phi_X(t)| = 0.
+    \]
+
+    \solution First, suppose that $f \in C_c(\R)$. Then, note that the substitution
+    $x \mapsto x + \pi / t$ gives \[
+        \phi_X(t) = \frac{1}{2\pi} \int_\R f(x) e^{itx}\:dx
+        = \frac{1}{2\pi} \int_\R f(x + \pi / t) e^{itx} e^{i\pi} \:dx.
+    \] Taking averages, \[
+        \phi_X(t) = \frac{1}{2\pi} \int_\R [f(x) - f(x + \pi / t)] e^{itx}\:dt,
+    \] so \[
+        |\phi_X(t)| \leq \frac{1}{2\pi} \int_\R |f(x) - f(x + \pi / t)| \:dx.
+    \] Note that as $|t| \to \infty$, we have $|f(x) - f(x + \pi / t)| \to 0$; also,
+    for $|t| > 1$, the latter has compact hence bounded support. Thus, the Bounded
+    Convergence Theorem gives \[
+        \lim_{|t| \to \infty} |\phi_X(t)| = 0.
+    \]
+
+    Next, if $f \notin C_c(\R)$, use the density of $C_c(\R)$ in $L^1(\R)$ to find $g
+    \in C_c(\R)$ such that $\Vert f - g\Vert_1 < \epsilon$. Then, separate \[
+        \phi_X(t) = \frac{1}{2\pi} \int_\R [f(x) - g(x)] e^{itx}\:dx + \frac{1}{2\pi}
+        \int_\R g(x) e^{itx}\:dx,
+    \] hence \[
+        |\phi_X(t)| \leq \frac{1}{2\pi} \Vert f(x) - g(x)\Vert_1 + \frac{1}{2\pi}
+        |\int_\R g(x) e^{itx}\:dx|.
+    \] The first term is less than $\epsilon / 2\pi$, and the second vanishes in the
+    limit $|t| \to \infty$ by the previous argument. Since $\epsilon > 0$ is
+    arbitrary, we have \[
+        \lim_{|t| \to \infty} |\phi_X(t)| = 0.
+    \]
+
+
+    \problem Let $X$ and $Y$ be i.i.d.\ random variables with cdf $F$ and c.f.\
+    $\phi$. Show that \[
+        P(X = Y) = \lim_{T \to \infty} \frac{1}{2T} \int_{-T}^T |\phi(t)|^2 \:dt.
+    \] Hence or otherwise, show that $F$ is continuous if and only if the above limit
+    equals zero.
+
+    \solution Set $Z = X - Y$, and note that the independence of $X, Y$, followed by
+    their identical distribution gives \[
+        \phi_{Z}(t) = \phi_{X - Y}(t) = \phi_{X}(t) \phi_{-Y}(t) = \phi(t)\,
+        \overline{\phi(t)} = |\phi(t)|^2.
+    \] Thus, the inversion formulae give \[
+        P(X = Y) = P(Z = 0) = \lim_{T \to \infty} \frac{1}{2T} \int_{-T}^T \phi_Z(t)
+        \:dt = \lim_{T \to \infty} \frac{1}{2T} \int_{-T}^T |\phi(t)|^2 \:dt.
+    \]
+
+    We show that $F$ is continuous if and only if $P(X = Y) = 0$. To see this, note
+    that $P(X = Y) = P((X, Y) \in \Delta)$, where $\Delta = \{(x, x) : x \in \R\}$.
+    Thus, \[
+        P(X = Y) = \iint_\Delta \:dF_{X, Y}(x, y) = \int_\R \int_{\{x = y\}} \:dF(x)
+        \:dF(y).
+    \] If $F$ is continuous, the inner integral is always zero, hence $P(X = Y) = 0$.
+    Conversely, if $P(X = a) = p > 0$ for some $a \in \R$, then $P(X = Y) \geq P((X,
+    Y) = (a, a)) = p^2 > 0$.
+
+
+    \problem Let $\{F_n\}$ and $F$ be cdfs on $\R$ with corresponding c.f.'s given by
+    $\{\phi_n\}$ and $\phi$. Suppose that $F_n \tod F$.
+    \begin{enumerate}
+        \item Give an example to show that $\phi_n$ may not converge to $\phi$
+        uniformly on the entire real line.
+
+        \item Suppose that $F_n$ and $F$ have pdfs given by $f_n$ and $f$. If $f_n$
+        converges to $f$ almost surely, then show that $\phi_n$ converges to $\phi$
+        uniformly on $\R$.
+    \end{enumerate}
+
+    \solution \begin{enumerate}
+        \item Let $F_n \sim N(0, 1 / n)$, whence $\phi_n(t) = e^{-t^2 / 2n}$. As $n
+        \to \infty$, we have $\phi_n \to 1$, hence $F_n \tod F$ where $F$ is the cdf
+        of a degenerate distribution with full mass at $0$. However, $\phi_n$ does
+        not converge uniformly to $1$ on $\R$. Note that $\phi_n(\sqrt{2n}) =
+        e^{-1}$, hence \[
+            \Vert \phi_n - 1\Vert = \sup_{t \in \R} |\phi_n(t) - 1| \geq |e^{-1} - 1|
+            \not\to 0.
+        \]
+
+        \item Write \[
+            \phi_n(t) - \phi(t) = \frac{1}{2\pi} \int_\R (f_n(x) - f(x))e^{itx} \:dx,
+        \] hence \[
+            |\phi_n(t) - \phi(t)| \leq \frac{1}{2\pi} \int_\R |f_n(x) - f(x)|\:dx.
+        \] As $n \to \infty$, the right hand side (which is independent of $t$)
+        converges to zero by the Dominated Convergence Theorem, since $f_n \to f$
+        almost surely, and \[
+            \int_\R |f_n(x) - f(x)| \:dx = 2\int_\R (f(x) - f_n(x))^+ \:dx,
+        \] with $(f - f_n)^+$ dominated by $f$ which is integrable on $\R$.
+    \end{enumerate}
+
+
+    \problem Let $\phi_X$ be the c.f.\ of a random variable $X$ on $\R$. Suppose that
+    $|\phi_X(t)| = |\phi_X(\alpha t)| = 1$ for some non-zero $t \in \R$, and some
+    irrational $\alpha \in \R$. Show that there exists $c \in \R$ such that $P(X = c)
+    = 1$.
+
+    \solution From Exercise 1, we find that $X$ must be supported on \[
+        S = \{a + kh: k \in \Z\} \cap \{a / \alpha + kh / \alpha : k \in \Z\},
+    \] where $h = 2\pi / t$, $a = \beta h$, $\phi_X(t) = e^{2\pi i \beta}$. Any
+    element $x \in S$ must look like \[
+        x = (\beta + k)h = (\beta + \ell) h / \alpha
+    \] for $k, \ell \in \Z$. Thus, \[
+        \alpha = \frac{\beta + \ell}{\beta + k}.
+    \] If we had $x' \in S$ with $x' \neq x$, then we could write \[
+        \alpha = \frac{\beta + \ell'}{\beta + k'}
+    \] for $k', \ell' \in \Z$, $k' \neq k$, $\ell' \neq \ell$. Thus, \[
+        \alpha = \frac{\beta + \ell}{\beta + k} = \frac{\beta + \ell'}{\beta + k'} =
+        \frac{(\beta + \ell) - (\beta + \ell')}{(\beta + k) - (\beta + k')} =
+        \frac{\ell - \ell'}{k - k',}
+    \] contradicting the irrationality of $\alpha$. Thus, $S$ contains at most one
+    element; it must contain at least one element since $P(X \in S) = 1$.
+
+
+    \problem Let $\{X_n\}$ and $X$ be a collection of random variables with
+    corresponding c.f.'s $\{\phi_n\}$ and $\phi$. Suppose that $\phi_n \in L^1(\R)$
+    for each $n \geq 1$, and $\phi_n$ converges in $L^1(\R)$ to $\phi$. Show that
+    \[
+        \sup_{B \in \mathcal{B}_\R} |P(X_n \in B) - P(X \in B)| \to 0.
+    \]
+
+    \solution Note that $\phi \in L^1(\R)$; thus, $\{X_n\}$ and $X$ admit density
+    functions $f_n$ and $f$. By Scheffe's Theorem, it is now enough to show that $f_n
+    \to f$ almost everywhere. To do so, use the inversion formula \[
+        f_n(x) - f(x) = \frac{1}{2\pi} \int_\R (\phi_n(t) - \phi(t)) e^{-itx} \:dt,
+    \] hence \[
+        |f_n(x) - f(x)| \leq \frac{1}{2\pi} \Vert \phi_n - \phi\Vert_1 \to 0.
+    \]
+
+
+    \problem Let $\{U_i\}_{i \geq 1}$ be i.i.d.\ random variables with distribution
+    $P(U_1 = \pm 1) = 1 / 2$. Define $X_n = \sum_{i = 1}^n U_i / 2^i$.
+    \begin{enumerate}
+        \item Find the c.f.\ of $X_n$.
+        \item Show that $\lim_{n \to \infty} X_n$ exists almost surely, and denote it
+        by $X$. Show that the c.f.\ of $X$ is given by $\phi_X(t) = \sin(t)/t$.
+    \end{enumerate}
+
+    \solution \begin{enumerate}
+        \item Calculate \[
+            \phi_{U_1}(t) = E(e^{itU_1}) = \frac{1}{2}e^{it} + \frac{1}{2}e^{-it} =
+            \cos(t).
+        \] Thus, using independence, \[
+            \phi_{X_n}(t) = \prod_{i = 1}^n \phi_{U_i / 2^i}(t) = \prod_{i = 1}^n
+            \phi_{U_1}(t / 2^i) = \prod_{i = 1}^n \cos(t / 2^i).
+        \] Multiplying and dividing by $\sin(t / 2^i)$ and using the identity
+        $2\sin(x)\cos(x) = \sin(2x)$, we can simplify this (for $t \neq 0$) to \[
+            \phi_{X_n}(t) = \frac{\sin(t)}{2^n \sin(t / 2^n)}.
+        \]
+
+        \item Note that \[
+            \lim_{n \to \infty} X_n = \lim_{n \to \infty} \sum_{i = 1}^n
+            U_i / 2^i
+        \] is an infinite sum of centred random variables; it is enough to check that
+        the following limit is finite. \[
+            \lim_{n \to \infty} \sum_{i = 1}^n V(U_i / 2^i) = \lim_{n \to \infty}
+            \sum_{i = 1}^n \frac{1 / 4}{2^{2i}} = \frac{1 / 4}{1 - 1 / 4} =
+            \frac{1}{3}.
+        \] Thus, $X_n$ converges almost surely, say $X_n \toas X$. This means that
+        $X_n \tod X$, hence $\phi_{X_n} \to \phi_X$. Calculate \[
+            \lim_{n \to \infty} \phi_{X_n}(t) = \lim_{n \to \infty}
+            \frac{\sin(t)}{2^n \sin(t / 2^n)} = \lim_{n \to \infty}
+            \frac{\sin(t)}{t}\cdot \frac{t / 2^n}{\sin(t / 2^n)} = \frac{\sin(t)}{t}.
+        \] This is precisely the c.f.\ of a $U(-1, 1)$ random variable.
+    \end{enumerate}
+
+
+
+    \problem Let $\{X_n\}$ be a sequence of independent random variables with $P(X =
+    \pm 1) = 1 / 2 - 1 / 2\sqrt{n}$ and $P(X = \pm n^2) = 1 / 2\sqrt{n}$ for each $n
+    \geq 1$. Find constants $\{a_n\} \subseteq (0, \infty)$ and $\{b_n\} \subseteq
+    \R$ such that $a_n^{-1} \sum_{j = 1}^n (X_n - b_n)$ converges weakly to $N(0,
+    1)$.
+
+    \solution Note that $E(X_j) = 0$; set \[
+        \sigma_j^2 = V(X_j) = 1 - \frac{1}{\sqrt{n}} + \frac{n^4}{\sqrt{n}}, \qquad
+        s_n^2 = \sum_{j = 1}^n \sigma_j^2.
+    \] We claim that $a_n = s_n$, $b_n = 0$ gives the desired result, via the
+    Lindeberg-Levy Central Limit Theorem. Check that $\sigma_j^2$ increases to
+    $\infty$, hence \[
+        \frac{\max_{1 \leq j \leq n}\sigma_j^2}{s_n^2} = \frac{\sigma_n^2}{s_n^2}.
+    \] Now, \[
+        n^{7 / 2} \leq \sigma_n^2 \leq 1 + n^{7 / 2},
+    \] hence \[
+        \sum_{j = 1}^n j^{7 / 2} \leq s_n^2 \leq n + \sum_{j = 1}^n j^{7 / 2}
+    \] Also, \[
+        \int_{j - 1}^j x^{7 / 2} \:dx \leq j^{7 / 2} \leq \int_j^{j + 1} x^{7 /
+        2}\:dx,
+    \] so \[
+        \frac{2}{9} n^{9 / 2} \leq \int_0^n x^{7 / 2}\:dx \leq s_n^2 \leq \int_1^{n +
+        1} x^{7 / 2}\:dx = \frac{2}{9}(n + 1)^{9 / 2}.
+    \] Thus, \[
+        \frac{\max_{1 \leq j \leq n}\sigma_j^2}{s_n^2} = \frac{\sigma_n^2}{s_n^2}
+        \leq \frac{1 + n^{7 / 2}}{2n^{9 / 2} / 9} \to 0.
+    \] Next, we verify the Lyapunov condition for $\delta = 2$. Check that \[
+        E(X_j^4) = 1 - \frac{1}{\sqrt{n}} + \frac{n^8}{\sqrt{n}} \leq 1 + n^{15 / 2},
+    \] hence \[
+        \sum_{j = 1}^n E(X_j^4) \leq n + \sum_{j = 1}^n n^{15 / 2} \leq n + \int_1^{n
+        + 1} n^{15 / 2} = n + \frac{2}{17} n^{17 / 2}.
+    \] Thus, \[
+        \frac{\sum_{j = 1}^n E(X_j^4)}{s_n^4} \leq \frac{n + 2n^{17 / 2} / 17}{4 n^9
+        / 81} \to 0.
+    \] Lindeberg-Levy now gives \[
+        s_n^{-1} \sum_{j = 1}^n X_j \tod N(0, 1).
+    \]
+
+
+
+    \problem Let $\{X_n\}$ be a sequence of random variables. Let \[
+        S_n = \sum_{j = 1}^n X_j, \qquad
+        s_n^2 = \sum_{j = 1}^n E(X_j^2) < \infty.
+    \] If $s_n^2 \to \infty$, then show that the following are equivalent. \[
+        \lim_{n \to \infty} s_n^{-2} \sum_{j = 1}^n E(X_j^2 \chi_{|X_j| > \epsilon
+        s_n}) = 0 \text{ for all } \epsilon > 0,
+    \] \[
+        \lim_{n \to \infty} s_n^{-2} \sum_{j = 1}^n E(X_j^2 \chi_{|X_j| > \epsilon
+        s_j}) = 0 \text{ for all } \epsilon > 0,
+    \]
+
+    \solution $(\Leftarrow)$ Each sum in the second expression has more terms than in
+    the first, since $|X_j| > \epsilon s_n \implies |X_j| > \epsilon s_j$. Thus, the
+    first expression is sandwiched between zero and the second expression, hence must
+    also be zero in the limit.
+
+    $(\Rightarrow)$ Check that for any $\delta > 0$, we have \[
+        \sum_{j: s_j < \delta s_n} E(X_j^2) < \delta^2 s_n^2.
+    \] This is clear, since $s_j$ increases to $s_n$; if $j'(n)$ is the largest $j$
+    such that $s_j < \delta s_n$, then the sum is over precisely $1, 2, \dots,
+    j'(n)$, hence is equal to $s_{j'(n)}^2$. But $s_{j'(n)}^2 < \delta^2 s_n^2$ by
+    construction.
+
+    Let $\epsilon > 0$; for each $\delta > 0$, we have \[
+        s_n^{-2} \sum_{j = 1}^n E(X_j^2 \chi_{|X_j| > \delta\epsilon s_n}) \to 0.
+    \] Now, \begin{align*}
+        s_n^{-2} \sum_{j = 1}^n E(X_j^2 \chi_{|X_j| > \epsilon s_j})
+        &= s_n^{-2} \sum_{j = 1}^n E(X_j^2 \chi_{|X_j| > \epsilon s_j} (\chi_{|X_j| >
+        \delta \epsilon s_n} + \chi_{|X_j| \leq \delta\epsilon s_n})) \\
+        &= s_n^{-2} \sum_{j = 1}^n E(X_j^2 \chi_{|X_j| >
+        \epsilon s_j} \chi_{|X_j| > \delta\epsilon s_n}) +
+        s_n^{-2} \sum_{j = 1}^n E(X_j^2 \chi_{|X_j| >
+        \epsilon s_j} \chi_{|X_j| \leq \delta\epsilon s_n}) \\
+        &\leq s_n^{-2} \sum_{j = 1}^n E(X_j^2 \chi_{|X_j| >
+        \delta \epsilon s_n}) +
+        s_n^{-2} \sum_{j = 1}^n E(X_j^2 \chi_{\delta\epsilon s_n \geq |X_j| >
+        \epsilon s_j}) \\
+        &\leq s_n^{-2} \sum_{j = 1}^n E(X_j^2 \chi_{|X_j| >
+        \delta \epsilon s_n}) +
+        s_n^{-2} \sum_{j = 1}^n E(X_j^2 \chi_{\delta s_n > s_j}) \\
+        &< s_n^{-2} \sum_{j = 1}^n E(X_j^2 \chi_{|X_j| >
+        \delta \epsilon s_n}) + \delta^2
+    \end{align*}
+    Taking the limit as $n \to \infty$, the first term vanishes. Since $\delta > 0$
+    is arbitrary, the limit must be zero.
+
 \end{document}
