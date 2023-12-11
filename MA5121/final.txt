@@ -1,0 +1,24 @@
+1. Let dataset on X and Y be
+
+ X: 35, 66, 58, 83, 71
+ Y: 46, 56, 60, 49
+
+ Test whether X and Y have the same variability?
+
+2. A group of 20 mice are allocated to individual cages randomly. 
+ The cages are randomly assigned to two treatments, a control A
+ and a certain drug B. All animals, in a random sequence, are 
+ infected with tuberculosis. The numbers of days until the mice 
+ die after infection are given as follows
+ 
+ control A: 5, 6, 7, 7, 8, 8, 8, 9, 12
+ drug B: 7, 8, 8, 8, 9, 9, 12, 13, 14, 17
+ 
+ Since a priliminary experiment has established that the drug
+ is not toxic, we can assume that the drug group cannot be
+ worse (die sooner) than the control group. Test the null
+ hypothesis that the drug is without effect at a significance 
+ level of 0.05 (with a litle justification on your choice of
+ test).
+ 
+ 
