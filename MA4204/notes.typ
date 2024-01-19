@@ -565,7 +565,7 @@ derive the following result.
   Let $V_1, ..., V_k$ be irreducible representations of $G$, and let $
     V tilde.equiv m_1 V_1 plus.circle dots.c plus.circle m_k V_k.
   $ Then, $
-    chi_V tilde.equiv m_1 chi_V_1 + dots.c + m_k chi_V_k.
+    chi_V = m_1 chi_V_1 + dots.c + m_k chi_V_k.
   $ The multiplicities can be recovered as $m_i = ip(chi_V, chi_V_i)$.
 ]
 
@@ -688,4 +688,12 @@ $
   Let $(sigma, V)$ and $(tau, CC^times)$ be representations of $G$. Then,
   $(tau sigma, V)$ is also a representation of $G$, where $(tau sigma)(g) =
   tau(g) sigma(g)$. Furthermore, $chi_(tau sigma) = chi_tau chi_sigma$.
+]
+
+#remark[
+  If we wish to define a transitive action of $G$ on a set $X$ (and thereby
+  examine the vector space $"span"{e_x}_(x in X)$ with the action of $G$
+  defined via $g e_x = e_(g x)$), we may invoke the Orbit-Stabilizer Theorem,
+  along with the fact that there is only one orbit (all of $X$) to demand that
+  $"ord"(X) divides "ord"(G)$.
 ]
