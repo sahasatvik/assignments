@@ -152,18 +152,18 @@ the presence of $sigma$ is clear from context.
 ]
 
 #example[
-  The only one dimensional representation of $S_3$ in $C^*$ is the sign
+  The only one dimensional representation of $S_3$ in $CC^times$ is the sign
   homomorphism. To see this, consider an arbitrary homomorphism $sigma: S_3 ->
-  C^*$. Note that $ker(sigma)$ must be a normal subgroup of $S_3$, hence must
-  be one of ${e}, A_3, S_3$. The third option yields the trivial
-  representation $sigma = id_(C^*)$, and the first option gives the
-  contradiction $S_3 tilde.equiv im(sigma) subset C^*$ (the right side is
+  CC^times$. Note that $ker(sigma)$ must be a normal subgroup of $S_3$, hence
+  must be one of ${e}, A_3, S_3$. The third option yields the trivial
+  representation $sigma = id_(CC^times)$, and the first option gives the
+  contradiction $S_3 tilde.equiv im(sigma) subset CC^times$ (the right side is
   abelian while the left is not). This leaves $ker(sigma) = A_3$, i.e.
   $sigma(g) = 1$ for all even permutations $g in S_3$. The remaining elements
   of $S_3$ (the odd permutations) must be sent to $-1$, since for any odd
   permutation $h in S_3$, the permutation $h^2$ is even, so $sigma(h)^2 =
   sigma(h^2) = 1$. The result is precisely the sign homomorphism $
-    sigma: S_3 -> C^*, wide
+    sigma: S_3 -> CC^times, wide
     g mapsto cases(
       +1 &"if" g in A_3,\
       -1 & "if" g in.not A_3.
@@ -497,7 +497,7 @@ $
      for $i = k$, $j = ell$; summing over $1 <= i <= n$, $1 <= j <= m$, we
      have $
         0  = sum_(i j) sum_(g in G) [sigma'(g)]_(i i) [sigma(g)^(-1)]_(j j) 
-          &= sum_(g in G) ((sum_i [sigma(g)]_(i i)) (sum_j [sigma(g)^(-1)]_(j j))) \
+          &= sum_(g in G) ((sum_i [sigma'(g)]_(i i)) (sum_j [sigma(g)^(-1)]_(j j))) \
           &= sum_(g in G) chi_V (g) chi_(V') (g^(-1)) \
           &= "ord"(G) ip(chi_V, chi_V').
      $
@@ -510,13 +510,17 @@ $
        "ord"(G) delta_(i j) delta_(k l)
      $ for all $1 <= i, j, k, ell <= n$. Following a similar process as before, $
        "ord"(G) ip(chi_V, chi_V')
-       &= sum_(g in G) ((sum_i [sigma(g)]_(i i)) (sum_j [sigma(g)^(-1)]_(j j))) \
+       &= sum_(g in G) ((sum_i [sigma'(g)]_(i i)) (sum_j [sigma(g)^(-1)]_(j j))) \
        &= sum_(i j) sum_(g in G) [sigma'(g)]_(i i) [sigma(g)^(-1)]_(j j) \
        &= sum_(i j) 1/n "ord"(G) delta_(i j) \
        &= "ord"(G)
      $
   This completes the proof.
 ]
+
+With this, the characters of irreducible representations form an orthonormal
+subset of class functions on $G$. To check whether a representation $V$ is
+irreducible or not, it is enough to verify that $ip(chi_V, chi_V) = 1$.
 
 #corollary[
   The number of irreducible representations of $G$ (up to isomorphism) is at
@@ -550,3 +554,138 @@ $
   Observe that the rows of this table are orthogonal; indeed, so are the
   columns!
 ] <ex_S3_table>
+
+Given any representation $V$ of $G$, we can use Maschke's Theorem
+(@thm_maschke) to decompose it as a direct sum of (non-isomorphic) irreducible
+representations $V_1, ..., V_k$, with multiplicities $m_1, ..., m_k$. By
+representing the elements of $G$ as matrices in block diagonal form, we can
+derive the following result.
+
+#lemma[
+  Let $V_1, ..., V_k$ be irreducible representations of $G$, and let $
+    V tilde.equiv m_1 V_1 plus.circle dots.c plus.circle m_k V_k.
+  $ Then, $
+    chi_V tilde.equiv m_1 chi_V_1 + dots.c + m_k chi_V_k.
+  $ The multiplicities can be recovered as $m_i = ip(chi_V, chi_V_i)$.
+]
+
+This immediately tells us that $chi_V = chi_V'$ if and only if $V tilde.equiv
+V'$. Furthermore, we have the relation $
+  ip(chi_V, chi_V) = sum_i m_i^2.
+$
+
+#example[
+  Let $S_4$ act on $CC^4$ by permuting the basis vectors ${e_1, e_2, e_3,
+  e_4}$, and let $(sigma, V)$ denote the induced (regular) representation. Note that
+  each matrix $sigma(g)$ is a permutation, hence its trace $chi_V(g)$ is
+  precisely the number of elements of ${1, 2, 3, 4}$ fixed by the action of
+  $g$. With this, we can compute $chi_V$ for each conjugacy class (identified
+  by its cycle type) as follows.
+  #align(
+    center,
+    tablex(
+      columns: 6,
+      inset: (x: 1em, y: 0.6em),
+      stroke: table-stroke,
+      align: center + horizon,
+      auto-hlines: false,
+      auto-vlines: false,
+      [*$bold(S_4)$*], vlinex(), $e$, $(a b) times 6$, $(a b)(c d) times 3$, $(a b c) times 8$, $(a b c d) times 6$,
+      hlinex(),
+      [Trivial],  1,  1,  1,  1,  1,
+      [Sign],     1, -1,  1,  1, -1,
+      $V$,        4,  2,  0,  1,  0,
+    )
+  )
+  Compute $
+    ip(chi_V, chi_V) = 1/24 (4^2 + 6 dot.c 2^2 + 8 dot.c 1^2) = 2,
+  $ whence $V$ is not irreducible. Indeed, we know that $W_1 = "span"{e_1 +
+  e_2 + e_3 + e_4}$ is a trivial subrepresentation of $V$ of dimension $1$.
+  Furthermore, $2 = 1^2 + 1^2$ is the only way of writing $2$ as a sum of
+  squares of integers, so $V$ must decompose into precisely two irreducible
+  subrepresentations with both multiplicities $1$. This means that $V
+  tilde.equiv W_1 plus.circle W_3$ for some irreducible representation $W_3$
+  of dimension 3. Using $chi_V = chi_W_1 + chi_W_3$, we can compute the
+  character $chi_W_3$ and obtain the following.
+  #align(
+    center,
+    tablex(
+      columns: 6,
+      inset: (x: 1em, y: 0.6em),
+      stroke: table-stroke,
+      align: center + horizon,
+      auto-hlines: false,
+      auto-vlines: false,
+      [*$bold(S_4)$*], vlinex(), $e$, $(a b) times 6$, $(a b)(c d) times 3$, $(a b c) times 8$, $(a b c d) times 6$,
+      hlinex(),
+      $W_3$,  3,  1,  -1,  0, -1,
+    )
+  )
+
+  Next, we move on to a different representation of $S_4$: consider all
+  subsets of size 2 of ${1, 2, 3, 4}$ (of which there are 6), and consider the
+  action on this collection induced by the permutations on the set ${1, 2, 3,
+  4}$. Let $(tau, V')$ denote the induced representation. Again, $chi_V'(g)$
+  is the number of 2-subsets fixed by the action of $g$. For instance, an
+  element $(a b) in S_4$ will only fix 2-subsets ${a, b}, {c, d}$, while an
+  element $(a b c) in S_4$ fixes no 2-subset. With this, we have the
+  following.
+  #align(
+    center,
+    tablex(
+      columns: 6,
+      inset: (x: 1em, y: 0.6em),
+      stroke: table-stroke,
+      align: center + horizon,
+      auto-hlines: false,
+      auto-vlines: false,
+      [*$bold(S_4)$*], vlinex(), $e$, $(a b) times 6$, $(a b)(c d) times 3$, $(a b c) times 8$, $(a b c d) times 6$,
+      hlinex(),
+      $V'$,  6,  2,  2,  0,  0,
+    )
+  ) Compute $ip(chi_V', chi_V') = 3 = 1^2 + 1^2 + 1^2$. Again, we may compute
+  $ip(chi_V', chi_W_1) = 1$ and $ip(chi_V', chi_W_3) = 1$, which tells us that
+  $V' tilde.equiv W_1 plus.circle W_3 plus.circle W_2$ for some irreducible
+  representation $W_2$ of dimension $2$. Using $chi_V' = chi_W_1 + chi_W_3 +
+  chi_W_2$, we can compute the character $chi_W_2$.
+  #align(
+    center,
+    tablex(
+      columns: 6,
+      inset: (x: 1em, y: 0.6em),
+      stroke: table-stroke,
+      align: center + horizon,
+      auto-hlines: false,
+      auto-vlines: false,
+      [*$bold(S_4)$*], vlinex(), $e$, $(a b) times 6$, $(a b)(c d) times 3$, $(a b c) times 8$, $(a b c d) times 6$,
+      hlinex(),
+      $W_2$,  2,  0,  2,  -1,  0,
+    )
+  ) We now have $4$ irreducible characters of $S_4$; indeed, we may combine
+  $W_3$ with the sign representation to get another irreducible representation
+  $W'_3$, completing the character table of $S_4$.
+  #align(
+    center,
+    tablex(
+      columns: 6,
+      inset: (x: 1em, y: 0.6em),
+      stroke: table-stroke,
+      align: center + horizon,
+      auto-hlines: false,
+      auto-vlines: false,
+      [*$bold(S_4)$*], vlinex(), $e$, $(a b) times 6$, $(a b)(c d) times 3$, $(a b c) times 8$, $(a b c d) times 6$,
+      hlinex(),
+      [Trivial],  1,  1,  1,  1,  1,
+      [Sign],     1, -1,  1,  1, -1,
+      $W_2$,      2,  0,  2, -1,  0,
+      $W_3$,      3,  1, -1,  0, -1,
+      $W'_3$,     3, -1, -1,  0,  1,
+    )
+  ) The last trick uses the following proposition.
+]
+
+#proposition[
+  Let $(sigma, V)$ and $(tau, CC^times)$ be representations of $G$. Then,
+  $(tau sigma, V)$ is also a representation of $G$, where $(tau sigma)(g) =
+  tau(g) sigma(g)$. Furthermore, $chi_(tau sigma) = chi_tau chi_sigma$.
+]
