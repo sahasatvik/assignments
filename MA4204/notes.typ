@@ -48,12 +48,14 @@
 #let lemma = thmbox(
   "common",
   "Lemma",
+  base_level: 1,
   fill: rgb("#E78963").lighten(90%),
   stroke: rgb("#E78963")
 )
 #let proposition = thmbox(
   "common",
   "Proposition",
+  base_level: 1,
   fill: rgb("#C8566B").lighten(95%),
   stroke: rgb("#C8566B").lighten(50%)
 )
@@ -67,6 +69,7 @@
 #let definition = thmbox(
   "common",
   "Definition",
+  base_level: 1,
   fill: rgb("#6661AB").lighten(90%),
   stroke: rgb("#6661AB").lighten(30%)
 )
@@ -454,6 +457,9 @@ tr(s)$, yields the following result.
   $tr(sigma(g)) = tr(sigma'(g))$ as desired.
 ]
 
+
+== Orthogonality of characters
+
 The space $K^G$ of all maps $G -> K$ forms a vector space over $K$, with
 dimension $"ord"(G)$. In the setting $K = CC$, we may define the following
 inner product. $
@@ -527,34 +533,6 @@ irreducible or not, it is enough to verify that $ip(chi_V, chi_V) = 1$.
   most the number of conjugacy classes of $G$.
 ] <cor_number_rep_upper>
 
-#example[
-  We have now established that the trivial representation, the one dimensional
-  representation from @ex_S3_1D, and the two dimensional representation from
-  @ex_S3_2D are the only irreducible representations of $S_3$. Note that $S_3$
-  has three conjugacy classes: ${e}$, ${(12), (23), (31)}$, and ${(123),
-  (321)}$. With this, we can construct the _character table_ for $S_3$, with
-  each row containing the characters of the group elements with respect to the
-  given representation.
-  #align(
-    center,
-    tablex(
-      columns: 7,
-      inset: (x: 1em, y: 0.6em),
-      stroke: table-stroke,
-      align: center + horizon,
-      auto-hlines: false,
-      auto-vlines: false,
-      [*$bold(S_3)$*], vlinex(), $e$, $(12)$, $(23)$, $(31)$, $(123)$, $(321)$,
-      hlinex(),
-      [Trivial],  1,  1,  1,  1,  1,  1,
-      [Sign],     1, -1, -1, -1,  1,  1,
-      [Standard], 2,  0,  0,  0, -1, -1,
-    )
-  )
-  Observe that the rows of this table are orthogonal; indeed, so are the
-  columns!
-] <ex_S3_table>
-
 Given any representation $V$ of $G$, we can use Maschke's Theorem
 (@thm_maschke) to decompose it as a direct sum of (non-isomorphic) irreducible
 representations $V_1, ..., V_k$, with multiplicities $m_1, ..., m_k$. By
@@ -574,121 +552,88 @@ V'$. Furthermore, we have the relation $
   ip(chi_V, chi_V) = sum_i m_i^2.
 $
 
-#example[
-  Let $S_4$ act on $CC^4$ by permuting the basis vectors ${e_1, e_2, e_3,
-  e_4}$, and let $(sigma, V)$ denote the induced (regular) representation. Note that
-  each matrix $sigma(g)$ is a permutation, hence its trace $chi_V(g)$ is
-  precisely the number of elements of ${1, 2, 3, 4}$ fixed by the action of
-  $g$. With this, we can compute $chi_V$ for each conjugacy class (identified
-  by its cycle type) as follows.
-  #align(
-    center,
-    tablex(
-      columns: 6,
-      inset: (x: 1em, y: 0.6em),
-      stroke: table-stroke,
-      align: center + horizon,
-      auto-hlines: false,
-      auto-vlines: false,
-      [*$bold(S_4)$*], vlinex(), $e$, $(a b) times 6$, $(a b)(c d) times 3$, $(a b c) times 8$, $(a b c d) times 6$,
-      hlinex(),
-      [Trivial],  1,  1,  1,  1,  1,
-      [Sign],     1, -1,  1,  1, -1,
-      $V$,        4,  2,  0,  1,  0,
-    )
-  )
-  Compute $
-    ip(chi_V, chi_V) = 1/24 (4^2 + 6 dot.c 2^2 + 8 dot.c 1^2) = 2,
-  $ whence $V$ is not irreducible. Indeed, we know that $W_1 = "span"{e_1 +
-  e_2 + e_3 + e_4}$ is a trivial subrepresentation of $V$ of dimension $1$.
-  Furthermore, $2 = 1^2 + 1^2$ is the only way of writing $2$ as a sum of
-  squares of integers, so $V$ must decompose into precisely two irreducible
-  subrepresentations with both multiplicities $1$. This means that $V
-  tilde.equiv W_1 plus.circle W_3$ for some irreducible representation $W_3$
-  of dimension 3. Using $chi_V = chi_W_1 + chi_W_3$, we can compute the
-  character $chi_W_3$ and obtain the following.
-  #align(
-    center,
-    tablex(
-      columns: 6,
-      inset: (x: 1em, y: 0.6em),
-      stroke: table-stroke,
-      align: center + horizon,
-      auto-hlines: false,
-      auto-vlines: false,
-      [*$bold(S_4)$*], vlinex(), $e$, $(a b) times 6$, $(a b)(c d) times 3$, $(a b c) times 8$, $(a b c d) times 6$,
-      hlinex(),
-      $W_3$,  3,  1,  -1,  0, -1,
-    )
-  )
 
-  Next, we move on to a different representation of $S_4$: consider all
-  subsets of size 2 of ${1, 2, 3, 4}$ (of which there are 6), and consider the
-  action on this collection induced by the permutations on the set ${1, 2, 3,
-  4}$. Let $(tau, V')$ denote the induced representation. Again, $chi_V'(g)$
-  is the number of 2-subsets fixed by the action of $g$. For instance, an
-  element $(a b) in S_4$ will only fix 2-subsets ${a, b}, {c, d}$, while an
-  element $(a b c) in S_4$ fixes no 2-subset. With this, we have the
-  following.
-  #align(
-    center,
-    tablex(
-      columns: 6,
-      inset: (x: 1em, y: 0.6em),
-      stroke: table-stroke,
-      align: center + horizon,
-      auto-hlines: false,
-      auto-vlines: false,
-      [*$bold(S_4)$*], vlinex(), $e$, $(a b) times 6$, $(a b)(c d) times 3$, $(a b c) times 8$, $(a b c d) times 6$,
-      hlinex(),
-      $V'$,  6,  2,  2,  0,  0,
-    )
-  ) Compute $ip(chi_V', chi_V') = 3 = 1^2 + 1^2 + 1^2$. Again, we may compute
-  $ip(chi_V', chi_W_1) = 1$ and $ip(chi_V', chi_W_3) = 1$, which tells us that
-  $V' tilde.equiv W_1 plus.circle W_3 plus.circle W_2$ for some irreducible
-  representation $W_2$ of dimension $2$. Using $chi_V' = chi_W_1 + chi_W_3 +
-  chi_W_2$, we can compute the character $chi_W_2$.
-  #align(
-    center,
-    tablex(
-      columns: 6,
-      inset: (x: 1em, y: 0.6em),
-      stroke: table-stroke,
-      align: center + horizon,
-      auto-hlines: false,
-      auto-vlines: false,
-      [*$bold(S_4)$*], vlinex(), $e$, $(a b) times 6$, $(a b)(c d) times 3$, $(a b c) times 8$, $(a b c d) times 6$,
-      hlinex(),
-      $W_2$,  2,  0,  2,  -1,  0,
-    )
-  ) We now have $4$ irreducible characters of $S_4$; indeed, we may combine
-  $W_3$ with the sign representation to get another irreducible representation
-  $W'_3$, completing the character table of $S_4$.
-  #align(
-    center,
-    tablex(
-      columns: 6,
-      inset: (x: 1em, y: 0.6em),
-      stroke: table-stroke,
-      align: center + horizon,
-      auto-hlines: false,
-      auto-vlines: false,
-      [*$bold(S_4)$*], vlinex(), $e$, $(a b) times 6$, $(a b)(c d) times 3$, $(a b c) times 8$, $(a b c d) times 6$,
-      hlinex(),
-      [Trivial],  1,  1,  1,  1,  1,
-      [Sign],     1, -1,  1,  1, -1,
-      $W_2$,      2,  0,  2, -1,  0,
-      $W_3$,      3,  1, -1,  0, -1,
-      $W'_3$,     3, -1, -1,  0,  1,
-    )
-  ) The last trick uses the following proposition.
-]
+== The character table for $S_3$
 
-#proposition[
-  Let $(sigma, V)$ and $(tau, CC^times)$ be representations of $G$. Then,
-  $(tau sigma, V)$ is also a representation of $G$, where $(tau sigma)(g) =
-  tau(g) sigma(g)$. Furthermore, $chi_(tau sigma) = chi_tau chi_sigma$.
-] <prop_tensor_1D>
+We have now established that the trivial representation, the one dimensional
+representation from @ex_S3_1D, and the two dimensional representation from
+@ex_S3_2D are the only irreducible representations of $S_3$. Note that $S_3$
+has three conjugacy classes: ${e}$, ${(12), (23), (31)}$, and ${(123),
+(321)}$. With this, we can construct the _character table_ for $S_3$, with
+each row containing the characters of the group elements with respect to the
+given representation.
+#align(
+  center,
+  tablex(
+    columns: 7,
+    inset: (x: 1em, y: 0.6em),
+    stroke: table-stroke,
+    align: center + horizon,
+    auto-hlines: false,
+    auto-vlines: false,
+    [*$bold(S_3)$*], vlinex(), $e$, $(12)$, $(23)$, $(31)$, $(123)$, $(321)$,
+    hlinex(),
+    [Trivial],  1,  1,  1,  1,  1,  1,
+    [Sign],     1, -1, -1, -1,  1,  1,
+    [Standard], 2,  0,  0,  0, -1, -1,
+  )
+)
+Observe that the rows of this table are orthogonal; indeed, so are the
+columns!
+
+
+== The character table for $S_4$
+
+Let $S_4$ act on $CC^4$ by permuting the basis vectors ${e_1, e_2, e_3, e_4}$,
+and let $(sigma, V)$ denote the induced (regular) representation. Note that
+each matrix $sigma(g)$ is a permutation, hence its trace $chi_V (g)$ is
+precisely the number of elements of ${1, 2, 3, 4}$ fixed by the action of $g$.
+With this, we can compute $chi_V$ for each conjugacy class (identified by its
+cycle type) as follows.
+#align(
+  center,
+  tablex(
+    columns: 6,
+    inset: (x: 1em, y: 0.6em),
+    stroke: table-stroke,
+    align: center + horizon,
+    auto-hlines: false,
+    auto-vlines: false,
+    [*$bold(S_4)$*], vlinex(), $e$, $(a b) times 6$, $(a b)(c d) times 3$, $(a b c) times 8$, $(a b c d) times 6$,
+    hlinex(),
+    [Trivial],  1,  1,  1,  1,  1,
+    [Sign],     1, -1,  1,  1, -1,
+    $V$,        4,  2,  0,  1,  0,
+  )
+)
+Compute $
+  ip(chi_V, chi_V) = 1/24 (4^2 + 6 dot.c 2^2 + 8 dot.c 1^2) = 2,
+$ whence $V$ is not irreducible. Indeed, we know that $W_1 = "span"{e_1 + e_2
++ e_3 + e_4}$ is a trivial subrepresentation of $V$ of dimension $1$.
+Furthermore, $2 = 1^2 + 1^2$ is the only way of writing $2$ as a sum of
+squares of integers, so $V$ must decompose into precisely two irreducible
+subrepresentations with both multiplicities $1$. This means that $V
+tilde.equiv W_1 plus.circle W_3$ for some irreducible representation $W_3$ of
+dimension 3. Using $chi_V = chi_W_1 + chi_W_3$, we can compute the character
+$chi_W_3$ and obtain the following.
+#align(
+  center,
+  tablex(
+    columns: 6,
+    inset: (x: 1em, y: 0.6em),
+    stroke: table-stroke,
+    align: center + horizon,
+    auto-hlines: false,
+    auto-vlines: false,
+    [*$bold(S_4)$*], vlinex(), $e$, $(a b) times 6$, $(a b)(c d) times 3$, $(a b c) times 8$, $(a b c d) times 6$,
+    hlinex(),
+    $W_3$,  3,  1,  -1,  0, -1,
+  )
+)
+
+Next, we move on to a different representation of $S_4$: consider all subsets
+of size 2 of ${1, 2, 3, 4}$ (of which there are 6), and consider the action on
+this collection induced by the permutations on the set ${1, 2, 3, 4}$.
 
 #remark[
   If we wish to define a transitive action of $G$ on a set $X$ (and thereby
@@ -697,6 +642,76 @@ $
   along with the fact that there is only one orbit (all of $X$) to demand that
   $"ord"(X) divides "ord"(G)$.
 ]
+
+Let $(tau, V')$ denote the induced representation. Again, $chi_V'(g)$ is the
+number of 2-subsets fixed by the action of $g$. For instance, an element $(a
+b) in S_4$ will only fix 2-subsets ${a, b}, {c, d}$, while an element $(a b c)
+in S_4$ fixes no 2-subset. With this, we have the following.
+#align(
+  center,
+  tablex(
+    columns: 6,
+    inset: (x: 1em, y: 0.6em),
+    stroke: table-stroke,
+    align: center + horizon,
+    auto-hlines: false,
+    auto-vlines: false,
+    [*$bold(S_4)$*], vlinex(), $e$, $(a b) times 6$, $(a b)(c d) times 3$, $(a b c) times 8$, $(a b c d) times 6$,
+    hlinex(),
+    $V'$,  6,  2,  2,  0,  0,
+  )
+) Compute $ip(chi_V', chi_V') = 3 = 1^2 + 1^2 + 1^2$. Again, we may compute
+$ip(chi_V', chi_W_1) = 1$ and $ip(chi_V', chi_W_3) = 1$, which tells us that
+$V' tilde.equiv W_1 plus.circle W_3 plus.circle W_2$ for some irreducible
+representation $W_2$ of dimension $2$. Using $chi_V' = chi_W_1 + chi_W_3 +
+chi_W_2$, we can compute the character $chi_W_2$.
+#align(
+  center,
+  tablex(
+    columns: 6,
+    inset: (x: 1em, y: 0.6em),
+    stroke: table-stroke,
+    align: center + horizon,
+    auto-hlines: false,
+    auto-vlines: false,
+    [*$bold(S_4)$*], vlinex(), $e$, $(a b) times 6$, $(a b)(c d) times 3$, $(a b c) times 8$, $(a b c d) times 6$,
+    hlinex(),
+    $W_2$,  2,  0,  2,  -1,  0,
+  )
+) We now have $4$ irreducible characters of $S_4$; indeed, we may combine
+$W_3$ with the sign representation to get another irreducible representation
+$W'_3$, completing the character table of $S_4$.
+#align(
+  center,
+  tablex(
+    columns: 6,
+    inset: (x: 1em, y: 0.6em),
+    stroke: table-stroke,
+    align: center + horizon,
+    auto-hlines: false,
+    auto-vlines: false,
+    [*$bold(S_4)$*], vlinex(), $e$, $(a b) times 6$, $(a b)(c d) times 3$, $(a b c) times 8$, $(a b c d) times 6$,
+    hlinex(),
+    [Trivial],  1,  1,  1,  1,  1,
+    [Sign],     1, -1,  1,  1, -1,
+    $W_2$,      2,  0,  2, -1,  0,
+    $W_3$,      3,  1, -1,  0, -1,
+    $W'_3$,     3, -1, -1,  0,  1,
+  )
+) The last trick uses the following proposition.
+
+#proposition[
+  Let $(sigma, V)$ and $(tau, CC^times)$ be representations of $G$. Then,
+  $(tau sigma, V)$ is also a representation of $G$, where $(tau sigma)(g) =
+  tau(g) sigma(g)$. Furthermore, $chi_(tau sigma) = chi_tau chi_sigma$.
+] <prop_tensor_1D>
+
+#remark[
+  The above proposition is a special case of @prop_tensor.
+]
+
+
+== The character of the regular representation
 
 We focus our attention once again to the regular representation, as defined in
 @ex_regular. Note that when $G$ acts on itself by left multiplication, only
@@ -737,10 +752,10 @@ By simply evaluating $chi_tau (1)$, we have the following result.
   where $lambda = "ord(G)" ip(f, overline(chi_sigma)) \/ dim(V)$.
 ] <prop_class_func>
 
-With this, we can improve upon @cor_number_rep_upper and precisely count the
-number of irreducible representations of a group $G$ (up to isomorphism).
-However, we still do not have any simple way of calculating these
-representations explicitly.
+With this construction, we can improve upon @cor_number_rep_upper and
+precisely count the number of irreducible representations of a group $G$ (up
+to isomorphism).  However, we still do not have any simple way of calculating
+these representations explicitly.
 
 #theorem[
   The number of irreducible representations of $G$ (up to isomorphism) is
@@ -767,6 +782,9 @@ representations explicitly.
   $G$.
 ]
 
+
+== The tensor product of representations
+
 The construction used in @prop_tensor_1D generalizes nicely to tensor products
 of representations, as follows.
 
@@ -785,4 +803,4 @@ the next proposition follows.
 #proposition[
   Let $V, V'$ be two representations of $G$. Then, $chi_(V times.circle V') =
   chi_V chi_V'$.
-]
+] <prop_tensor>
