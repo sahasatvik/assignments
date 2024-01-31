@@ -116,7 +116,7 @@
   ${e_h}_(h in G)$. The _regular_ representation $tau: G -> "GL"(V)$ of $G$ is
   defined as follows: $tau(g)$ sends each of the basis vectors $e_h mapsto
   e_(g h)$.
-]
+] <ex_regular>
 
 The following propositions show that it is possible to define group
 representations in terms of a special class of group actions of $G$ on the
@@ -525,7 +525,7 @@ irreducible or not, it is enough to verify that $ip(chi_V, chi_V) = 1$.
 #corollary[
   The number of irreducible representations of $G$ (up to isomorphism) is at
   most the number of conjugacy classes of $G$.
-]
+] <cor_number_rep_upper>
 
 #example[
   We have now established that the trivial representation, the one dimensional
@@ -688,7 +688,7 @@ $
   Let $(sigma, V)$ and $(tau, CC^times)$ be representations of $G$. Then,
   $(tau sigma, V)$ is also a representation of $G$, where $(tau sigma)(g) =
   tau(g) sigma(g)$. Furthermore, $chi_(tau sigma) = chi_tau chi_sigma$.
-]
+] <prop_tensor_1D>
 
 #remark[
   If we wish to define a transitive action of $G$ on a set $X$ (and thereby
@@ -696,4 +696,93 @@ $
   defined via $g e_x = e_(g x)$), we may invoke the Orbit-Stabilizer Theorem,
   along with the fact that there is only one orbit (all of $X$) to demand that
   $"ord"(X) divides "ord"(G)$.
+]
+
+We focus our attention once again to the regular representation, as defined in
+@ex_regular. Note that when $G$ acts on itself by left multiplication, only
+the identity element $1$ fixes all $"ord"(G)$ elements of $G$, while the
+remaining elements have no fixed points at all. With this, we have the
+following proposition.
+
+#proposition[
+  Let $(tau, V_G)$ be the regular representation of $G$, and let $chi_tau$
+  denote its character. Then, $
+    chi_tau (g) = cases(
+      "ord"(G) quad&"if" g = 1,\
+      0 &"otherwise".
+    )
+  $ It follows that $
+    chi_tau = d_1 chi_1 + ... + d_k chi_k
+  $ where $chi_1, ..., chi_k$ are the irreducible characters of $G$, and each
+  $d_i = chi_i (1)$ is the dimension of the corresponding irreducible
+  representation.
+] <prop_regular>
+
+By simply evaluating $chi_tau (1)$, we have the following result.
+
+#corollary[
+  Let $chi_1, ..., chi_k$ be the irreducible characters of $G$, and let each
+  $d_i = chi_i (1)$. Then, $
+    sum_i d_i^2 = "ord"(G).
+  $
+]
+
+#proposition[
+  Let $f: G -> CC$ be a class function, and let $(sigma, V)$ be a
+  representation of $G$. Define $
+    f_sigma: V -> V, wide
+    v mapsto sum_(g in G) f(g)thin sigma(g)(v).
+  $ Then, $f_sigma$ is $G$-invariant. Furthermore, if $(sigma, V)$ is
+  irreducible, then Schur's Lemma (@thm_schur) gives $f_sigma = lambda id_V$,
+  where $lambda = "ord(G)" ip(f, overline(chi_sigma)) \/ dim(V)$.
+] <prop_class_func>
+
+With this, we can improve upon @cor_number_rep_upper and precisely count the
+number of irreducible representations of a group $G$ (up to isomorphism).
+However, we still do not have any simple way of calculating these
+representations explicitly.
+
+#theorem[
+  The number of irreducible representations of $G$ (up to isomorphism) is
+  precisely the number of conjugacy classes of $G$.
+]
+#proof[
+  Let $cal(C)$ be the space of class functions on $G$, with dimension equal to
+  the number of conjugacy classes of $G$. Let $cal(X)$ be the subspace of
+  $cal(C)$ spanned by the irreducible characters ${chi_i}$ of $G$. We claim
+  that $cal(X) = cal(C)$. It is enough to show that the orthocomplement of
+  $cal(X)$ in $cal(C)$ is trivial. For this, pick $f in cal(C)$ such that
+  all $ip(f, overline(chi_i)) = 0$. Let $(tau, V_G)$ be the regular
+  representation of $G$, and use @prop_regular to write $
+    V_G tilde.equiv d_1 V_1 plus.circle ... plus.circle d_k V_k
+  $ where ${(sigma_i, V_i)}$ are the irreducible representations corresponding
+  to the characters ${chi_i}$. Using @prop_class_func, each $f_sigma_i = 0$,
+  hence $f_tau = 0$. Evaluating $f_tau$ at the element $e_1 in V_G$, we have $
+    sum_(g in G) f(g)thin sigma(g)(e_1) = sum_(g in G) f(g)thin e_g = 0.
+  $ Since ${e_g}_(g in G)$ forms a basis of $V_G$, we must have $f = 0$.
+]
+
+#remark[
+  The irreducible characters of $G$ span the space of all class functions on
+  $G$.
+]
+
+The construction used in @prop_tensor_1D generalizes nicely to tensor products
+of representations, as follows.
+
+#definition[
+  Let $V, V'$ be two representations of $G$. Then, the tensor product $V
+  times.circle V'$ is a representation of $G$ induced by the action defined by
+  $
+    g(v times.circle v') = (g v) times.circle (g v').
+  $
+]
+
+Recall that if ${v_i}$ is a basis of $V$ and ${v'_j}$ is a basis of $V$', then
+${v_i times.circle v'_j}$ forms a basis of $V times.circle V'$. Using this,
+the next proposition follows.
+
+#proposition[
+  Let $V, V'$ be two representations of $G$. Then, $chi_(V times.circle V') =
+  chi_V chi_V'$.
 ]
