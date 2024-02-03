@@ -777,10 +777,10 @@ these representations explicitly.
   $ Since ${e_g}_(g in G)$ forms a basis of $V_G$, we must have $f = 0$.
 ]
 
-#remark[
-  The irreducible characters of $G$ span the space of all class functions on
-  $G$.
-]
+#corollary[
+  The irreducible characters of $G$ form a basis of the space of all class
+  functions on $G$.
+] <cor_class_basis>
 
 
 == The tensor product of representations
@@ -982,3 +982,180 @@ follows.
   $ where $chi_i, ..., chi_k$ are the irreducible characters of $G$, and
   $"Cl"(g)$ denotes the conjugacy class of $g in G$.
 ]
+
+
+== Orthogonality revisited
+
+Let $cal(O)_1, ..., cal(O)_k$ be the conjugacy classes of $G$, let $n_1, ...,
+n_k$ be their sizes, and let $chi_1, ..., chi_k$ be the irreducible characters
+of $G$. Furthermore, let's work with the field $K = CC$. Set $n = "ord"(G)$.
+We know from @thm_orthogonality that (with a little abuse of notation) $
+  sum_ell n_ell thin chi_i (cal(O)_ell) overline(chi_j (cal(O)_ell)) = delta_(i j) n.
+$ We construct the matrix $A in M_k (CC)$ via $A_(i ell) = sqrt(n_ell\/n) thin
+chi_i (cal(O)_ell)$ and note that $A A^dagger = II_n$. Thus, $A$ is a unitary
+matrix with orthonormal rows. As a result, the columns of $A$ must also be
+orthonormal, giving $
+  delta_(i j) = sum_ell A_(ell i) overline(A_(ell j)) = sqrt(n_i n_j) / n sum_ell chi_ell (cal(O)_i) overline(chi_ell (cal(O)_j)).
+$ In other words, $
+  sum_ell chi_ell (cal(O)_i) overline(chi_ell (cal(O)_j)) = cases(
+    n \/ n_i quad&"if" i = j,\
+    0 &"otherwise".
+  )
+$ Thus, the columns of the character table of $G$ also obey an orthonormality
+relation. We supply a different proof below.
+
+#theorem("Column orthogonality of characters")[
+  Suppose that $K = CC$. Let $chi_1, ..., chi_k$ be the irreducible characters
+  of $G$, and let $g, g' in G$. Denote $g tilde g'$ if $g$ and $g'$ are
+  conjugates.  Then, $
+    sum_i chi_i (g) overline(chi_i (g')) = cases(
+      "ord"(G) \/ "ord"("Cl"(g)) quad&"if" g tilde g',\
+      0 &"otherwise".
+    )
+  $
+] <thm_orthogonality_col>
+
+#proof[
+  Define the class function $
+    f_g: G -> CC, wide
+    h mapsto cases(
+      1 quad&"if" g tilde h,\
+      0 &"otherwise".
+    )
+  $ Using @cor_class_basis, we can expand $f_g$ in terms of the irreducible
+  characters as $
+    f_g = a_1 chi_1 + ... + a_k chi_k,
+  $ and compute each $a_i = ip(f_g, chi_i) = "ord"("Cl"(g)) thin
+  overline(chi_i (g)) \/ "ord"(G)$. Thus, $
+    "ord"("Cl"(g)) / "ord"(G) sum_i chi_i (g) overline(chi_i (h))
+      = overline(f_g (h)) = cases(
+        1 quad&"if" g tilde h,\
+        0 &"otherwise",
+      )
+  $ as desired.
+]
+
+
+== The character table for $A_5$
+
+Note that $A_5$ has five conjugacy classes; the 5-cycles split into two
+conjugacy classes in $A_5$. As usual, we start with the natural representation
+$V$ of $A_5$, then take away the copy of the trivial representation yielding
+an irreducible representation $W_4$.
+#align(
+  center,
+  tablex(
+    columns: 6,
+    inset: (x: 1em, y: 0.6em),
+    stroke: table-stroke,
+    align: center + horizon,
+    auto-hlines: false,
+    auto-vlines: false,
+    [*$bold(A_5)$*], vlinex(), $e$, $(1 2)(3 4)$, $(1 2 3)$, $(1 2 3 4 5)$, $(1 3 5 2 4)$,
+    [], $times 1$, $times 15$, $times 20$, $times 12$, $times 12$,
+    hlinex(),
+    [Trivial],  1,  1,  1,  1,  1,
+    $V$,        5,  1,  2,  0,  0,
+    $W_4$,      4,  0,  1, -1, -1,
+  )
+)
+We compute $"Sym"^2(W_4)$ and $"Alt"^2(W_4)$ as usual.
+#align(
+  center,
+  tablex(
+    columns: 6,
+    inset: (x: 1em, y: 0.6em),
+    stroke: table-stroke,
+    align: center + horizon,
+    auto-hlines: false,
+    auto-vlines: false,
+    [*$bold(A_5)$*], vlinex(), $e$, $(1 2)(3 4)$, $(1 2 3)$, $(1 2 3 4 5)$, $(1 3 5 2 4)$,
+    hlinex(),
+    $chi_(W_4)^2$,     16,  0,  1,  1,  1,
+    $chi_(W_4) (g^2)$,  4,  4,  1, -1, -1,
+    $"Alt"^2(W_4)$,     6, -2,  0,  1,  1,
+    $"Sym"^2(W_4)$,    10,  2,  1,  0,  0,
+  )
+)
+Now, $"Sym"^2(W_4)$ contains copies of both the trivial representation and
+$W_4$; taking them away yields the irreducible representation $W_5$.
+#align(
+  center,
+  tablex(
+    columns: 6,
+    inset: (x: 1em, y: 0.6em),
+    stroke: table-stroke,
+    align: center + horizon,
+    auto-hlines: false,
+    auto-vlines: false,
+    [*$bold(A_5)$*], vlinex(), $e$, $(1 2)(3 4)$, $(1 2 3)$, $(1 2 3 4 5)$, $(1 3 5 2 4)$,
+    hlinex(),
+    $W_5$,     5,  1, -1,  0,  0,
+  )
+)
+Looking back, we have found three out of five irreducible representations. The
+sum of squares of their dimensions is $42$, hence the sum of squares
+dimensions of the remaining two representations must be $"ord"(A_5) - 42 = 18$
+by @cor_dim_sq. The only way to write this as a sum of two squares is $18 =
+3^2 + 3^2$, hence the remaining two irreducible representations must both have
+dimension $3$.
+
+/* Computing $ip(chi_("Alt"^2(W_4)), chi_("Alt"^2(W_4))) = 2 = 1^2 + 1^2$, we see */
+/* that $"Alt"^2(W_4)$ must be composed of two irreducible representations both */
+/* of dimension $3$ (we already know that the dimensions of the irreducible */
+/* representations are $1, 3, 3, 4, 5$, and the inner product with the trivial */
+/* representation is zero). */
+
+We can now fill in most of the character table for $A_5$ as follows.
+#align(
+  center,
+  tablex(
+    columns: 6,
+    inset: (x: 1em, y: 0.6em),
+    stroke: table-stroke,
+    align: center + horizon,
+    auto-hlines: false,
+    auto-vlines: false,
+    [*$bold(A_5)$*], vlinex(), $e$, $(1 2)(3 4)$, $(1 2 3)$, $(1 2 3 4 5)$, $(1 3 5 2 4)$,
+    [], $times 1$, $times 15$, $times 20$, $times 12$, $times 12$,
+    hlinex(),
+    [Trivial],  1,    1,    1,    1,    1,
+    $W_4$,      4,    0,    1,   -1,   -1,
+    $W_3$,      3,  $a$,  $b$,  $c$,  $d$,
+    $W'_3$,     3, $a'$, $b'$, $c'$, $d'$,
+    $W_5$,      5,    1,   -1,    0,    0,
+  )
+)
+Column orthogonality (@thm_orthogonality_col) gives the relations $1 + 3a +
+3a' + 5 = 0$ and $1^2 + a^2 + a'^2 + 1^2 = 60\/15 = 4$, which simplifies to
+$a + a' = -2$ and $a^2 + a'^2 = 2$. This is only possible if $a = a' = -1$.
+Again, we have the relations $1 + 4 + 3b + 3b' - 5 = 0$ and $1^2 + 1^2 +
+b^2 + b'^2 + 1^2 = 60\/20 = 3$, which simplify to $b + b' = 0$ and $b^2 + b'^2
+= 0$. This is only possible if $b = b' = 0$.
+
+Similar computations give $c + c' = d + d' = 1$, and $c^2 + c'^2 = d^2 + d'^2
+= 3$. This gives $c c' = d d' = -1$. Thus, $c, c'$ and $d, d'$ are the roots
+of $x^2 - x - 1$, which we denote as $phi = (1 + sqrt(5))\/2$ and $psi = (1 -
+sqrt(5)) \/ 2$. Without loss of generality, set $c = phi$, $c' = psi$. Using
+the column orthogonality $1 + 1 + c d + c' d' = 0$, we discard the case $d =
+phi$, $d' = psi$, leaving $d = psi$, $d' = phi$. This completes our
+computation of the character table of $A_5$.
+#align(
+  center,
+  tablex(
+    columns: 6,
+    inset: (x: 1em, y: 0.6em),
+    stroke: table-stroke,
+    align: center + horizon,
+    auto-hlines: false,
+    auto-vlines: false,
+    [*$bold(A_5)$*], vlinex(), $e$, $(1 2)(3 4)$, $(1 2 3)$, $(1 2 3 4 5)$, $(1 3 5 2 4)$,
+    [], $times 1$, $times 15$, $times 20$, $times 12$, $times 12$,
+    hlinex(),
+    [Trivial],  1,    1,    1,     1,     1,
+    $W_4$,      4,    0,    1,    -1,    -1,
+    $W_3$,      3,   -1,    0, $phi$, $psi$,
+    $W'_3$,     3,   -1,    0, $psi$, $phi$,
+    $W_5$,      5,    1,   -1,     0,     0,
+  )
+)
