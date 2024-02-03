@@ -867,7 +867,7 @@ of the corresponding conjugacy class.
     align: center + horizon,
     auto-hlines: false,
     auto-vlines: false,
-    [*$bold(S_4)$*], vlinex(), $e$, $(a b)$, $(a b)(c d)$, $(a b c)$, $(a b) (c d f)$, $(a b c d)$, $(a b c d f)$,
+    [*$bold(S_5)$*], vlinex(), $e$, $(a b)$, $(a b)(c d)$, $(a b c)$, $(a b) (c d f)$, $(a b c d)$, $(a b c d f)$,
     [], $times 1$, $times 10$, $times 15$, $times 20$, $times 20$, $times 30$, $times 24$,
     hlinex(),
     [Trivial],  1,  1,  1,  1,  1,  1,  1,
@@ -890,7 +890,7 @@ representation.
     align: center + horizon,
     auto-hlines: false,
     auto-vlines: false,
-    [*$bold(S_4)$*], vlinex(), $e$, $(a b)$, $(a b)(c d)$, $(a b c)$, $(a b) (c d f)$, $(a b c d)$, $(a b c d f)$,
+    [*$bold(S_5)$*], vlinex(), $e$, $(a b)$, $(a b)(c d)$, $(a b c)$, $(a b) (c d f)$, $(a b c d)$, $(a b c d f)$,
     hlinex(),
     $W_4$,        4,  2,  0,  1,  -1,  0,  -1,
     $W'_4$,       4, -2,  0,  1,   1,  0,  -1,
@@ -909,7 +909,7 @@ happens to each cycle type after squaring.
     align: center + horizon,
     auto-hlines: false,
     auto-vlines: false,
-    [*$bold(S_4)$*], vlinex(), $e$, $(a b)$, $(a b)(c d)$, $(a b c)$, $(a b) (c d f)$, $(a b c d)$, $(a b c d f)$,
+    [*$bold(S_5)$*], vlinex(), $e$, $(a b)$, $(a b)(c d)$, $(a b c)$, $(a b) (c d f)$, $(a b c d)$, $(a b c d f)$,
     hlinex(),
     $chi_(W_4)^2$,     16,  4,  0,  1,  1,  0,   1,
     $chi_(W_4) (g^2)$,  4,  4,  4,  1,  1,  0,  -1,
@@ -930,7 +930,7 @@ $W_9$.
     align: center + horizon,
     auto-hlines: false,
     auto-vlines: false,
-    [*$bold(S_4)$*], vlinex(), $e$, $(a b)$, $(a b)(c d)$, $(a b c)$, $(a b) (c d f)$, $(a b c d)$, $(a b c d f)$,
+    [*$bold(S_5)$*], vlinex(), $e$, $(a b)$, $(a b)(c d)$, $(a b c)$, $(a b) (c d f)$, $(a b c d)$, $(a b c d f)$,
     hlinex(),
     $W_9$,    9,  3,  1,  0,  0,  -1,   -1,
   )
@@ -960,7 +960,7 @@ follows.
     align: center + horizon,
     auto-hlines: false,
     auto-vlines: false,
-    [*$bold(S_4)$*], vlinex(), $e$, $(a b)$, $(a b)(c d)$, $(a b c)$, $(a b) (c d f)$, $(a b c d)$, $(a b c d f)$,
+    [*$bold(S_5)$*], vlinex(), $e$, $(a b)$, $(a b)(c d)$, $(a b c)$, $(a b) (c d f)$, $(a b c d)$, $(a b c d f)$,
     [], $times 1$, $times 10$, $times 15$, $times 20$, $times 20$, $times 30$, $times 24$,
     hlinex(),
     [Trivial],        1,  1,  1,  1,  1,  1,  1,
@@ -972,3 +972,13 @@ follows.
     $"Alt"^2(W_4)$,   6,  0, -2,  0,  0,  0,  1,
   )
 )
+
+#remark[
+  Observe that the columns of this character table are pairwise orthogonal!
+  Indeed, we already know from @prop_regular that the first column of any
+  character table must be orthogonal to the rest. Furthermore, this character
+  table strongly suggests a relation of the form $
+    sum_i |chi_i (g)|^2 = "ord"(G) / "ord"("Cl"(g)),
+  $ where $chi_i, ..., chi_k$ are the irreducible characters of $G$, and
+  $"Cl"(g)$ denotes the conjugacy class of $g in G$.
+]
