@@ -585,7 +585,7 @@ columns!
 == The character table for $S_4$
 
 Let $S_4$ act on $CC^4$ by permuting the basis vectors ${e_1, e_2, e_3, e_4}$,
-and let $(sigma, V)$ denote the induced (regular) representation. Note that
+and let $(sigma, V)$ denote the induced (natural) representation. Note that
 each matrix $sigma(g)$ is a permutation, hence its trace $chi_V (g)$ is
 precisely the number of elements of ${1, 2, 3, 4}$ fixed by the action of $g$.
 With this, we can compute $chi_V$ for each conjugacy class (identified by its
@@ -740,7 +740,7 @@ By simply evaluating $chi_tau (1)$, we have the following result.
   $d_i = chi_i (1)$. Then, $
     sum_i d_i^2 = "ord"(G).
   $
-]
+] <cor_dim_sq>
 
 #proposition[
   Let $f: G -> CC$ be a class function, and let $(sigma, V)$ be a
@@ -804,3 +804,171 @@ the next proposition follows.
   Let $V, V'$ be two representations of $G$. Then, $chi_(V times.circle V') =
   chi_V chi_V'$.
 ] <prop_tensor>
+
+Let's focus on the tensor product $V times.circle V$ and examine the
+involution defined by $
+  iota: V times.circle V -> V times.circle V, wide
+  v times.circle v' mapsto v' times.circle v.
+$ This map has two eigenspaces, corresponding to the eigenvalues $1$ and $-1$,
+which we define as $"Sym"^2(V)$ and $"Alt"^2(V)$ respectively. Furthermore, it
+is clear that these eigenspaces are stable under the action of $G$, since the
+action of $G$ commutes with $iota$. This gives us the following decomposition
+of $V times.circle V$.
+
+#proposition[
+  Let $V$ be a representation of $G$. Then, $
+    V times.circle V tilde.equiv "Sym"^2(V) plus.circle "Alt"^2(V).
+  $
+]
+
+Observe that $"Sym"^2(V)$ is spanned by elements of the form $v times.circle
+v' + v' times.circle v$, while $"Alt"^2(V)$ is spanned by elements of the form
+$v times.circle v' - v' times.circle v$. This, together with $dim(V
+times.circle V) = n^2$, tells us that $
+  dim("Sym"^2(V)) = binom(n, 2) + n, wide
+  dim("Alt"^2(V)) = binom(n, 2).
+$ To compute the characters of these representations, first note that $
+  chi_V^2 = chi_("Sym"^2(V)) + chi_("Alt"^2(V)).
+$ Fix $g in G$ and choose a basis ${v_i}$ of $V$ such that the action of $g$
+is diagonalized, i.e. $g v_i = lambda_i v_i$; recall that this is always
+possible via @prop_eigenvalues when we are working over the field $K = CC$. We
+need only check the action of $g$ on the basis elements of $"Sym"^2(V)$ and
+$"Alt"^2(V)$. To this end, compute $
+  g(v_i times.circle v_j + v_j times.circle v_i) = lambda_i lambda_j (v_i
+  times.circle v_j + v_j times.circle v_i),
+$ whence $
+  chi_("Sym"^2(V))(g)
+    = sum_(i <= j) lambda_i lambda_j
+    = sum_(i < j) lambda_i lambda_j + sum_i lambda_i^2
+    = 1/2 (sum_i lambda_i)^2 + 1/2 sum_i lambda_i^2.
+$ However, $sum_i lambda_i$ and $sum_i lambda_i^2$ are precisely $chi_V (g)$
+and $chi_V (g^2)$. Thus, we have the following result.
+
+#proposition[
+  $
+    chi_("Sym"^2(V)) (g) = 1/2(chi_V (g)^2 + chi_V (g^2)), wide
+    chi_("Alt"^2(V)) (g) = 1/2(chi_V (g)^2 - chi_V (g^2)).
+  $
+] <prop_sym_alt_character>
+
+
+== The character table for $S_5$
+
+We proceed much in the same manner as in the computation for $S_4$; the
+character of the natural representation $V$ of $S_5$ (induced by the action of
+$S_5$ on $5$ objects) can be computed by counting the number of fixed points
+of the corresponding conjugacy class.
+#align(
+  center,
+  tablex(
+    columns: 8,
+    inset: (x: 1em, y: 0.6em),
+    stroke: table-stroke,
+    align: center + horizon,
+    auto-hlines: false,
+    auto-vlines: false,
+    [*$bold(S_4)$*], vlinex(), $e$, $(a b)$, $(a b)(c d)$, $(a b c)$, $(a b) (c d f)$, $(a b c d)$, $(a b c d f)$,
+    [], $times 1$, $times 10$, $times 15$, $times 20$, $times 20$, $times 30$, $times 24$,
+    hlinex(),
+    [Trivial],  1,  1,  1,  1,  1,  1,  1,
+    [Sign],     1, -1,  1,  1, -1, -1,  1,
+    $V$,        5,  3,  1,  2,  0,  1,  0,
+  )
+)
+Since the inner product of the first and last rows is non-zero, $V$ contains a
+copy of the trivial representation, which we subtract from its character to
+obtain the representation $W_4$. This happens to be irreducible (verified by
+checking $ip(chi_W, chi_W) = 1$), and we obtain another irreducible
+representation $W'_4$ by taking the tensor product with the sign
+representation.
+#align(
+  center,
+  tablex(
+    columns: 8,
+    inset: (x: 1em, y: 0.6em),
+    stroke: table-stroke,
+    align: center + horizon,
+    auto-hlines: false,
+    auto-vlines: false,
+    [*$bold(S_4)$*], vlinex(), $e$, $(a b)$, $(a b)(c d)$, $(a b c)$, $(a b) (c d f)$, $(a b c d)$, $(a b c d f)$,
+    hlinex(),
+    $W_4$,        4,  2,  0,  1,  -1,  0,  -1,
+    $W'_4$,       4, -2,  0,  1,   1,  0,  -1,
+  )
+)
+We now compute the characters of $"Sym"^2(W_4)$ and $"Alt"^2(W_4)$ using
+@prop_sym_alt_character. To do so, we compute $chi_(W_4) (g)^2$ and $chi_(W_4)
+(g^2)$ for each conjugacy class; the latter can be computed by examining what
+happens to each cycle type after squaring.
+#align(
+  center,
+  tablex(
+    columns: 8,
+    inset: (x: 1em, y: 0.6em),
+    stroke: table-stroke,
+    align: center + horizon,
+    auto-hlines: false,
+    auto-vlines: false,
+    [*$bold(S_4)$*], vlinex(), $e$, $(a b)$, $(a b)(c d)$, $(a b c)$, $(a b) (c d f)$, $(a b c d)$, $(a b c d f)$,
+    hlinex(),
+    $chi_(W_4)^2$,     16,  4,  0,  1,  1,  0,   1,
+    $chi_(W_4) (g^2)$,  4,  4,  4,  1,  1,  0,  -1,
+    $"Alt"^2(W_4)$,     6,  0, -2,  0,  0,  0,   1,
+    $"Sym"^2(W_4)$,    10,  4,  2,  1,  1,  0,   0,
+  )
+)
+Note that $"Alt"^2(W_4)$ is irreducible, but $"Sym"^2(W_4)$ is not. Indeed,
+the latter clearly has a positive inner product with the trivial
+representation, hence contains a copy of it which we take away giving us
+$W_9$.
+#align(
+  center,
+  tablex(
+    columns: 8,
+    inset: (x: 1em, y: 0.6em),
+    stroke: table-stroke,
+    align: center + horizon,
+    auto-hlines: false,
+    auto-vlines: false,
+    [*$bold(S_4)$*], vlinex(), $e$, $(a b)$, $(a b)(c d)$, $(a b c)$, $(a b) (c d f)$, $(a b c d)$, $(a b c d f)$,
+    hlinex(),
+    $W_9$,    9,  3,  1,  0,  0,  -1,   -1,
+  )
+)
+Looking back, we have found five irreducible representations of $S_5$, and
+hence are left to discover two more. The sum of squares of their dimensions is
+$70$; @cor_dim_sq tells us that the sum of squares of the dimensions of the
+remaining two must be $"ord"(S_5) - 70 = 50$. Now, $50 = 1^2 + 7^2 = 5^2 +
+5^2$, but the first decomposition is not possible since the trivial and sign
+representations are the only ones of dimension 1. Thus, both remaining
+representations are of dimension 5.
+
+Observe that $ip(chi_W_9, chi_W_9) = 2 = 1^2 + 1^2$, hence $W_9$ must be
+composed of two irreducible representations. The only way to write 9 as the
+sum of two dimensions of irreducible representations (which we know are $1, 1,
+4, 4, 5, 5, 6$) is $4 + 5$. Indeed, $ip(chi_W_9, chi_W_4) = 1$, so we take
+$W_4$ away leaving us with an irreducible representation $W_5$. Taking the
+tensor product with the sign representation yields our final irreducible
+representation $W_5'$. Thus, the complete character table of $S_5$ is as
+follows.
+#align(
+  center,
+  tablex(
+    columns: 8,
+    inset: (x: 1em, y: 0.6em),
+    stroke: table-stroke,
+    align: center + horizon,
+    auto-hlines: false,
+    auto-vlines: false,
+    [*$bold(S_4)$*], vlinex(), $e$, $(a b)$, $(a b)(c d)$, $(a b c)$, $(a b) (c d f)$, $(a b c d)$, $(a b c d f)$,
+    [], $times 1$, $times 10$, $times 15$, $times 20$, $times 20$, $times 30$, $times 24$,
+    hlinex(),
+    [Trivial],        1,  1,  1,  1,  1,  1,  1,
+    [Sign],           1, -1,  1,  1, -1, -1,  1,
+    $W_4$,            4,  2,  0,  1, -1,  0, -1,
+    $W'_4$,           4, -2,  0,  1,  1,  0, -1,
+    $W_5$,            5,  1,  1, -1,  1, -1,  0,
+    $W'_5$,           5, -1,  1, -1, -1,  1,  0,
+    $"Alt"^2(W_4)$,   6,  0, -2,  0,  0,  0,  1,
+  )
+)
