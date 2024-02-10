@@ -458,7 +458,7 @@ tr(s)$, yields the following result.
 ]
 
 
-== Orthogonality of characters
+== Orthogonality
 
 The space $K^G$ of all maps $G -> K$ forms a vector space over $K$, with
 dimension $"ord"(G)$. In the setting $K = CC$, we may define the following
@@ -711,7 +711,7 @@ $W'_3$, completing the character table of $S_4$.
 ]
 
 
-== The character of the regular representation
+= Regular representations revisited
 
 We focus our attention once again to the regular representation, as defined in
 @ex_regular. Note that when $G$ acts on itself by left multiplication, only
@@ -783,7 +783,7 @@ these representations explicitly.
 ] <cor_class_basis>
 
 
-== The tensor product of representations
+= Tensor products of representations
 
 The construction used in @prop_tensor_1D generalizes nicely to tensor products
 of representations, as follows.
@@ -984,7 +984,7 @@ follows.
 ]
 
 
-== Orthogonality revisited
+= Orthogonality of characters revisited
 
 Let $cal(O)_1, ..., cal(O)_k$ be the conjugacy classes of $G$, let $n_1, ...,
 n_k$ be their sizes, and let $chi_1, ..., chi_k$ be the irreducible characters
@@ -1126,6 +1126,20 @@ We can now fill in most of the character table for $A_5$ as follows.
     $W_5$,      5,    1,   -1,    0,    0,
   )
 )
+
+We can be sure that the unknown quantities are real because of the following
+observation.
+
+#lemma[
+  Let $G$ be such that for every $g in G$, the elements $g$ and $g^(-1)$
+  belong to the same conjugacy class. Then, the characters of $G$ (with $K =
+  CC$) are real valued.
+] <lem_real_char>
+#proof[
+  Use $chi(g) = chi(g^(-1)) = overline(chi(g))$, with the first equality
+  following from the fact that $chi$ is a class function and $g tilde g^(-1)$.
+]
+
 Column orthogonality (@thm_orthogonality_col) gives the relations $1 + 3a +
 3a' + 5 = 0$ and $1^2 + a^2 + a'^2 + 1^2 = 60\/15 = 4$, which simplifies to
 $a + a' = -2$ and $a^2 + a'^2 = 2$. This is only possible if $a = a' = -1$.
@@ -1142,20 +1156,62 @@ phi$, $d' = psi$, leaving $d = psi$, $d' = phi$. This completes our
 computation of the character table of $A_5$.
 #align(
   center,
-  tablex(
-    columns: 6,
-    inset: (x: 1em, y: 0.6em),
-    stroke: table-stroke,
-    align: center + horizon,
-    auto-hlines: false,
-    auto-vlines: false,
-    [*$bold(A_5)$*], vlinex(), $e$, $(1 2)(3 4)$, $(1 2 3)$, $(1 2 3 4 5)$, $(1 3 5 2 4)$,
-    [], $times 1$, $times 15$, $times 20$, $times 12$, $times 12$,
-    hlinex(),
-    [Trivial],  1,    1,    1,     1,     1,
-    $W_4$,      4,    0,    1,    -1,    -1,
-    $W_3$,      3,   -1,    0, $phi$, $psi$,
-    $W'_3$,     3,   -1,    0, $psi$, $phi$,
-    $W_5$,      5,    1,   -1,     0,     0,
+  box(
+    tablex(
+      columns: 6,
+      inset: (x: 1em, y: 0.6em),
+      stroke: table-stroke,
+      align: center + horizon,
+      auto-hlines: false,
+      auto-vlines: false,
+      breakable: false,
+      [*$bold(A_5)$*], vlinex(), $e$, $(1 2)(3 4)$, $(1 2 3)$, $(1 2 3 4 5)$, $(1 3 5 2 4)$,
+      [], $times 1$, $times 15$, $times 20$, $times 12$, $times 12$,
+      hlinex(),
+      [Trivial],  1,    1,    1,     1,     1,
+      $W_4$,      4,    0,    1,    -1,    -1,
+      $W_3$,      3,   -1,    0, $phi$, $psi$,
+      $W'_3$,     3,   -1,    0, $psi$, $phi$,
+      $W_5$,      5,    1,   -1,     0,     0,
+    )
   )
 )
+
+
+= Induced representations
+
+Consider a representation $W$ of a subgroup $H subset.eq G$. We want to obtain
+a representation $V$ of $G$, by extending the action of $H$ on $W$ to the
+action of $G$ on a larger space. To do so, we first let $cal(R) = {r_1, ...,
+r_m}$ be representative elements from each of the cosets of $H$ in $G$, and
+consider the vector spaces $r_i W$. These are just 'copies' of $W$, containing
+elements of the form $r_i w$ for $w in W$. We have the isomorphisms $
+  phi_i: W -> r_i W_i, wide
+  w mapsto r_i w.
+$ With this, define the vector space $
+  V = r_1 W plus.circle ... plus.circle r_m W.
+$ We will define the action of $G$ on $V$ via the components $r_i W$. Given $g
+in G$, write $g r_i = r h$ for $r in cal(R)$, $h in H$ (this is always
+possible since $g$ belongs to precisely one coset of $H$ in $G$). With this,
+for $r_i w in r_i W$, define $g (r_i w) = r (h w)$. It can be shown that this
+does indeed define a group action of $G$ on $V$. We call the associated
+representation $V$ of $G$ the induced representation $"Ind"_H^G (W)$.
+
+For some fixed $g in G$, observe that the action of $g$ permutes the cosets
+$r_i W$ among each other. In particular, if $g r_i = r h$, we have $g (r_i W)
+= r W$. Thus, if we represent $g$ as a block matrix using the natural basis
+${r_i w_j}$ (where ${w_j}$ forms a basis of $W$), the result contains blocks
+of size $dim(W)$, with exactly one block per 'row' and 'column'. This means
+that when computing the trace of $g$, the only blocks that contribute
+correspond to those $i$ where $g (r_i W) = r_i W$, i.e. $g r_i = r_i h$ for
+some $h in H$.  In this setting, we have each $g (r_i w) = r_i (h w)$; thus,
+the trace of $g$ acting on $r_i W$ is precisely the same as the trace of $h$
+acting on $W$ (use the isomorphism $phi_i$ to note that $g = phi_i compose h
+compose phi_i^(-1)$ on $r_i W$). Since $h = r_i^(-1) g r_i$, we have $
+  chi_V (g) = sum_(r in cal(R)\ r^(-1) g r in H) chi_W (r^(-1) g r)
+    = 1/"ord"(H) sum_(s in G\ s^(-1) g s in H) chi_W (s^(-1) g s).
+$ The last equivalence follows from the fact that if $s in r H$, then we may
+write $s = r h$ for some $h in H$, hence $s^(-1) g s = h^(-1) (r^(-1) g r) h
+in H$ if and only if $r^(-1) g r in H$; furthermore, $chi_W$ will be the same
+for both of them since they are conjugates in $H$. The factor of $"ord"(H) =
+"ord"(r H)$ accounts for the number of these repeated terms.
