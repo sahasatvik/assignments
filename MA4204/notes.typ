@@ -1,5 +1,5 @@
 #import "@local/plain:0.1.0": plain, contents
-#import "@preview/ctheorems:1.1.0": *
+#import "@preview/ctheorems:1.1.2": *
 #import "@preview/tablex:0.0.8": tablex, cellx, hlinex, vlinex
 
 #show footnote.entry: it => {
@@ -29,7 +29,7 @@
 #let table-stroke = rgb("#9D75BF").lighten(20%)
 
 #set heading(numbering: "1.")
-#show: thmrules
+#show: thmrules.with(qed-symbol: $square$)
 
 #let thmbox = thmbox.with(
   titlefmt: title => text(10pt, font: "Ubuntu", weight: 500, fill: black, title),
@@ -73,13 +73,11 @@
   fill: rgb("#6661AB").lighten(90%),
   stroke: rgb("#6661AB").lighten(30%)
 )
-#let proof = thmplain(
+#let proof = thmproof(
   "proof",
   "Proof",
-  bodyfmt: body => [#body#h(1fr)$square$],
-  namefmt: emph,
   inset: 0em,
-).with(numbering: none)
+)
 #let remark = thmplain(
   "remark",
   "Remark",
@@ -393,7 +391,7 @@ representations.
      $ Since $lambda$ is an eigenvalue of $f$, we have $ker(f - lambda) eq.not
      {0}$. Since $ker(f - lambda) subset.eq V$ is stable and $V$ is
      irreducible, we must have $ker(f - lambda) = V$, whence $f - lambda"
-     "id_V = 0$.
+     "id_V = 0$. #qedhere
 ]
 #remark[
   Note how the existence of the scalar $lambda in K$ is guaranteed by the fact
@@ -1031,8 +1029,8 @@ relation. We supply a different proof below.
       = overline(f_g (h)) = cases(
         1 quad&"if" g tilde h,\
         0 &"otherwise",
-      )
-  $ as desired.
+      ) #qedhere
+  $
 ]
 
 
@@ -1215,3 +1213,413 @@ write $s = r h$ for some $h in H$, hence $s^(-1) g s = h^(-1) (r^(-1) g r) h
 in H$ if and only if $r^(-1) g r in H$; furthermore, $chi_W$ will be the same
 for both of them since they are conjugates in $H$. The factor of $"ord"(H) =
 "ord"(r H)$ accounts for the number of these repeated terms.
+
+
+#definition[
+  Let $W$ be a representation of a subgroup $H$ of $G$. The induced character
+  $"Ind"_H^G (chi_W)$ of $chi_W$ is defined as $
+    "Ind"_H^G (chi_W)(g) = 1/"ord"(H) sum_(s in G\ s^(-1) g s in H) chi_W (s^(-1) g s).
+  $
+]
+
+Observe that as a map, $
+  "Ind"_H^G: cal(C)_H -> cal(C)_G
+$ is maps class functions on $H$ to class functions on $G$.
+
+Suppose that $cal(O)$ is a conjugacy class in $H$. We may define the class
+function $
+  chi_cal(O): H -> CC, wide
+  g mapsto bold(1)_cal(O)(g) = cases(
+    1quad&"if" g in cal(O)\
+    0&"otherwise"
+  ).
+$
+Note that there is a unique conjugacy class $tilde(cal(O))$ in $G$ containing
+$cal(O)$. Now, $"Ind"_H^G (chi_cal(O))$ must vanish outside $tilde(cal(O))$;
+since it is constant on $tilde(cal(O))$, we must have $"Ind"_H^G
+(chi_(cal(O))) = lambda chi_(tilde(cal(O)))$ for some scalar $lambda$. We
+compute $lambda$ by evaluating at some $g in cal(O)$, whence $
+  lambda = "Ind"_H^G (chi_(cal(O))) 
+    &= 1/"ord"(H) sum_(s in G\ s^(-1) g s in H) chi_(cal(O)) (s^(-1) g s) \
+    &= "ord"({s in G: s^(-1) g s in cal(O)}) / "ord"(H) \
+    &= ("ord"(cal(O)) dot.c "ord"(Z_G (g))) / "ord"(H) \
+    &= "ord"(G) / "ord"(H) dot.c "ord"(cal(O)) / "ord"(tilde(cal(O))).
+$ Here, $Z_G (g)$ denotes the centralizer of $g$ in $G$. Together with the
+orbit-stabilizer theorem, This gives us the following.
+
+#lemma[
+  Let $cal(O)$ be a conjugacy class in $H subset.eq G$, let $tilde(cal(O))$ be
+  the unique conjugacy class in $G$ containing $cal(O)$, and let $g in
+  cal(O)$. Then, $
+    "Ind"_H^G (chi_cal(O)) = "ord"(Z_G (g)) / "ord"(Z_H (g)) thick chi_(tilde(cal(O))).
+  $
+] <lem_ind_class>
+
+
+#theorem("Frobenius reciprocity")[
+  Let $chi$ be a class function on $H subset.eq G$, let $chi'$ be a class
+  function on $G$, and let $tilde(chi)$ denote the restriction of $chi'$ to
+  $H$. Then, $
+    ip("Ind"_H^G (chi), chi')_G = ip(chi, tilde(chi))_H.
+  $
+]
+#proof[
+  It is sufficient to prove this for all $chi$ of the form $chi_(cal(O))$ for
+  conjugacy classes $cal(O)$ in $H$, since they form a basis of $cal(C)_H$.
+  The result is immediate from $ip(chi_(cal(O)), tilde(chi))_H =
+  overline(chi'(cal(O))) dot.c "ord"(cal(O)) \/ "ord"(H)$ and @lem_ind_class.
+]
+
+
+== The character table for $"GL"_2(FF_q)$
+
+Let $FF_q$ denote the finite field of order $q = p^n$, where $p$ is prime.
+Recall that $FF_q^times = FF_q \\ {0}$ is a cyclic group of order $q - 1$.
+
+#proposition[
+  Let $[K : FF_q] = n$. Then, $K tilde.equiv FF_(q^n)$.
+]
+
+Henceforth, we are interested in the group $G = "GL"_2(FF_q)$.
+
+#lemma[
+  The group $"GL"_2(FF_q)$ has size $(q^2 - 1)(q^2 - q) = q(q + 1)(q - 1)^2$.
+] <lem_gl2_size>
+#proof[
+  Each of the $q^2 - 1$ non-zero choices for the first column of an element of
+  $"GL"_2(FF_q)$ has $q$ multiples, leaving $q^2 - q$ choices for the second
+  column.
+]
+
+We compute and classify the conjugacy classes of $"GL"_2(FF_q)$ as follows.
+Fixing $epsilon in FF_q\\{x^2: x in FF_q}$, we have the following.
+
+#align(
+  center,
+  box(
+    tablex(
+      columns: 5,
+      inset: (x: 1em, y: 0.6em),
+      stroke: table-stroke,
+      align: center + horizon,
+      // auto-hlines: false,
+      // auto-vlines: false,
+      breakable: true,
+      hlinex(),
+      [], [*Matrix type*], [*Size of centralizer*], [*Size of conjugacy class*], [*Number of classes*],
+      hlinex(),
+      [*I*], $ mat(delim: "[", lambda, 0; 0, lambda) \ lambda in FF_q^times $,
+        $"ord"(G)$, $1$, $q - 1$,
+      [*II*], $ mat(delim: "[", lambda, 1; 0, lambda) \ lambda in FF_q^times $,
+        $q(q - 1)$, $q^2 - 1$, $q - 1$,
+      [*III*], $ mat(delim: "[", lambda, 0; 0, mu) \ lambda, mu in FF_q^times\ lambda eq.not mu $,
+        $(q - 1)^2$, $q(q + 1)$, $ ((q - 1) (q - 2))/2 $,
+      [*IV*], $ mat(delim: "[", a, b epsilon; b, a) \ a, b in FF_q \ b eq.not 0 $,
+        $q^2 - 1$, $q(q - 1)$, $ q(q - 1)/2 $
+    )
+  )
+)
+
+These can be deduced by considering the possible minimal polynomials $f$ for
+an element $M$ of $"GL"_2(FF_q)$. If $f(x) = x - lambda$, then clearly $M =
+lambda II_2$, hence we have *Type I*.
+
+Suppose that $f(x) = (x - lambda)^2$. It follows by evaluating $f(0), f(1)$
+that $2lambda, lambda^2 in FF_q$, hence $lambda in FF_q$.
+
+#lemma[
+  Every matrix with minimal polynomial $(x - lambda)^2$ is conjugate to
+  $mat(delim: "[", lambda, 1; 0, lambda)$.
+]
+#proof[
+  Let $M$ be such a matrix, hence $N^2 = 0$ where $N = M - lambda$.
+  Furthermore, $im(N) = ker(N)$, with $dim(im(N)) = 1$. Let $im(N) =
+  "span"{v}$, and pick $w in.not im(N)$. Then, $N v = 0$, and $N w in im(V)$,
+  hence $N w = mu v$ for some $mu in FF_q$. Thus, $N tilde mat(delim: "[", 0,
+  1; 0, 0)$ via the basis ${v, w \/ mu}$.
+  With this, write $N = P mat(delim: "[", 0, 1; 0, 0) P^(-1)$, so $M = N +
+  lambda = P mat(delim: "[", lambda, 1; 0, lambda) P^(-1)$.
+]
+
+This gives us *Type II*. The centralizer of $M$ is computed as follows: $A$
+commutes with $M$ if and only if it commutes with $N = M - lambda$. Setting $A
+= mat(delim: "[", a, b; c, d)$, we demand $c = 0$ and $a = d$, which can be
+fulfilled in $q(q - 1)$ ways (non-trivially).
+
+If $f(x) = (x - lambda)(x - mu)$ for distinct $lambda, mu in FF_q$, we must
+have $M tilde mat(delim: "[", lambda, 0; 0, mu)$, giving us *Type III*.
+Computing the centralizer by brute force, we see that it consists of diagonal
+matrices.
+
+Finally, if $f$ is irreducible over $FF_q$, note that $f$ must split over
+$FF_(q^2)$, the unique degree 2 extension of $FF_q$. Our choice of $epsilon$
+ensures that $FF_(q^2) = FF_q (sqrt(epsilon))$. Thus, we may write $f(x) = (x
+- alpha)(x - beta)$ where $alpha, beta in FF_q (sqrt(epsilon))$ are conjugate.
+Let $alpha = a + b sqrt(epsilon)$, $beta = a - b sqrt(epsilon)$ for $a, b in
+FF_q$, $b eq.not 0$. Now, $M tilde mat(delim: "[", alpha, 0; 0, beta)$ in
+$"GL"_2(FF_(q^2))$. Find $v in FF_(q^2)^2$ such that $M v = alpha v$; applying
+Galois conjugation, we have $M overline(v) = overline(alpha) overline(v) =
+beta overline(v)$, hence $M w = beta w$ for $w = overline(v)$. With this, $v +
+w, sqrt(epsilon)(v - w) in FF_q^2$ are linearly independent! We may compute
+that in this basis, $M = mat(delim: "[", a, b epsilon; b, a)$, giving us *Type
+IV*.
+
+#proposition[
+  The centralizer of $mat(delim: "[", a, b epsilon; b, a)$ contains all
+  matrices $mat(delim: "[", c, d epsilon; d, c)$.
+]
+
+Thus, the centralizer of $M$ has size at least $q^2 - 1$, whence there are at
+most $"ord"(G) \/ (q^2 - 1) = q(q - 1)$ members of the same conjugacy class.
+The class equation will force this to be an equality. Indeed, the previous
+proposition identifies _all_ elements of the centralizer of $M$.
+
+
+= The group ring
+
+#definition("Group ring")[
+  Let $G$ be a group. Its group ring $CC[G]$ is described as the $CC$-span of
+  the elements of $G$, with the multiplicative structure inherited from $G$.
+]
+
+In particular, every element of $CC[G]$ is of the form $sum_(g in G) lambda_g
+g$. The product of two such elements can be written as $
+  (sum_(g in G) lambda_g g) (sum_(g' in G) mu_(g') g') = sum_(g, g' in G) lambda_g mu_(g') g g'.
+$ The elements $
+  e_cal(O) = sum_(g in cal(O)) g
+$ for conjugacy classes $cal(O)$ in $G$ are of particular interest.
+
+#lemma[
+  The elements ${e_(cal(O))}$ form a basis of the center of $CC[G]$.
+]
+#proof[
+  Observe that $s = sum_(g in G) lambda_g g$ is in the center of $CC[G]$ if
+  and only if for all $g_0 in G$, we have $
+    g_0 (sum_(g in G) lambda_g g) = (sum_(g in G) lambda_g g) g_0,
+  $ which reduces to $lambda_g = lambda_(g_0^(-1) g g_0)$ for all $g, g_0 in
+  G$. In other words, $lambda_g = lambda_(g')$ if and only if $g tilde g'$.
+  However, this is precisely the condition for $s in "span"_CC {e_cal(O)}$.
+]
+
+
+It is clear that representations of $G$, i.e. group homomorphisms $sigma: G ->
+"GL"(V)$ extend naturally to ring homomorphisms $
+  tilde(sigma): CC[G] -> cal(L)(V), wide
+  sum_(g in G) lambda_g g mapsto sum_(g in G) lambda_g sigma(g).
+$ Suppose that $s = sum_(g in G) lambda_g g$ is in the center of $CC[G]$. It
+follows that $tilde(sigma)(s)$ commutes with $tilde(sigma)(g) = sigma(g)$ for
+all $g in G$. Thus, $tilde(sigma)(s) in cal(L)(V)$ is a $G$-invariant map.
+Furthermore, when $V$ is irreducible, Schur's Lemma (@thm_schur) tells us that
+$tilde(sigma)(s)$ is a scalar mad of the form $lambda id_V$. To compute
+$lambda$, we take the trace of $tilde(sigma)(s) = sum_(g in G) lambda_g
+sigma(g)$ yielding $
+  sum_(g in G) lambda_g chi_V (g) = lambda thick dim(V).
+$
+
+#lemma[
+  Let $V$ be an irreducible representation of $G$, and let $s = sum_(cal(O))
+  lambda_cal(O) e_cal(O)$. Then, $
+    tilde(sigma)(s) = 1/dim(V) sum_cal(O) lambda_cal(O) "ord"(cal(O)) chi_V (cal(O)) dot.c id_V.
+  $
+] <lem_lift_center>
+
+
+== Integral elements
+
+We now take a brief detour and recall a few facts about integral ring
+extensions.
+
+#definition("Integral extension")[
+  Let $R$ be a commutative ring containing $ZZ$. An element $x$ is called
+  integral over $ZZ$ if it satisfies $
+    x^n + a_(n - 1) x^(n - 1) + ... + a_1 x + a_0 = 0
+  $ for some $a_i in ZZ$.
+]
+
+#example[
+  Let $R = QQ$. Then, the integral elements over $ZZ$ in $QQ$ are precisely
+  the integers $ZZ$. To see this, note that if $x = p\/q$ for coprime $p, q$
+  satisfies $
+    x^n + a_(n - 1) x^(n - 1) + ... + a_1 x + a_0 = 0,
+  $ then we have $
+    p^n + [a_(n - 1) p^(n - 1)q + ... + a_1 p q^(n - 1) + a_0 q^n] = 0
+  $ where the bracketed term is divisible by $q$, but the leading term is not
+  unless $q = 1$.
+]
+
+
+#definition("Algebraic integers")[
+  Integral elements in $CC$ over $ZZ$ are called algebraic integers.
+]
+
+#lemma[
+  The following are equivalent.
+  + $x in R$ is integral over $ZZ$.
+  + $ZZ[x] subset R$ is finitely generated as a $Z$-module.
+]
+#proof[
+  To show $(==>)$, write $x^n + a_(n - 1)x^(n - 1) + ... + a_0 = 0$; we now
+  claim that $ZZ[x]$ is spanned by ${1, x, ..., x^(n - 1)}$. It suffices to
+  check that every $x^m$ can be written as a linear combination of ${1, x,
+  ..., x^(n - 1)}$. But for $m >= n$, we may write $
+    x^m = -a_(n - 1) x^(m - 1) - ... - a_1 x^(m - n + 1) - a_0 x^(m - n),
+  $ whence the claim follows by induction on $m$.
+
+  To show $(<==)$, suppose that ${f_1, ..., f_n} subset ZZ[x]$ is a finite
+  generating set. Choosing $d > 1$ such that $d > max_i (deg(f_i))$, we may
+  expand $
+    x^d = a_1 f_1 + ... + a_n f_n
+  $ for $a_i in ZZ$, which gives us the desired condition on $x$.
+]
+
+#corollary[
+  The set of integral elements of $R$ over $ZZ$ forms a ring.
+] <cor_integral_ring>
+
+The proof of the above result uses the fact that if $ZZ[x], ZZ[y]$ are
+finitely generated $ZZ$-modules, then so are $ZZ[x, y]$, $ZZ[x + y]$, and
+$ZZ[x y]$.
+
+With this, set $
+  R = {sum_cal(O) n_cal(O) e_cal(O) : n_cal(O) in ZZ} = plus.circle.big_cal(O) ZZ e_cal(O).
+$ It is easily checked that $R$ is indeed a ring, sitting inside the center of
+$CC[G]$. Furthermore, $R$ is a finite dimensional $ZZ$-module, whence each
+$ZZ[x]$ for $x in R$ is a finitely generated $ZZ$-module. Thus, each element
+of $R$ is integral over $ZZ$.
+
+In particular, all $e_cal(O)$ are integral over $ZZ$. Combining this with
+@cor_integral_ring gives us the following.
+
+#proposition[
+  The element $sum_cal(O) lambda_cal(O) e_cal(O)$ is integral over $ZZ$ if all
+  $lambda_cal(O)$ are algebraic integers.
+] <prop_integral>
+
+#remark[
+  For an algebraic integer $lambda$, note that $lambda e_1$ is integral in
+  $CC[G]$ over $ZZ$ since it satisfies the same polynomial relation as
+  $lambda$!
+]
+
+Recall the setup of @lem_lift_center: for an irreducible representation
+$(sigma, V)$ of $G$ and an element $s = sum_(g in G) lambda_g g$ in the center
+of $CC[G]$, we have $tilde(sigma)(s) = lambda_s id_V$.
+This gives us a natural map, indeed a homomorphism which by abuse of notation
+is denoted as $
+  tilde(sigma): Z(CC[G]) -> CC, wide
+  s mapsto lambda_s = 1/dim(V) sum_(g in G) lambda_g chi_V (g).
+$ Here, $Z(CC[G])$ denotes the center of $CC[G]$. Thus, if $s in Z(CC[G])$ is
+integral over $ZZ$, then $lambda_s$ is an algebraic integer!
+
+
+#theorem[
+  Let $(sigma, V)$ be an irreducible representation of $G$. Then, $dim(V) |
+  G$.
+]
+#proof[
+  Set $s = sum_(g in G) lambda_g g$, and $lambda_g = overline(chi) (g)$. Then,
+  $s in Z(CC[G])$, whence $
+    tilde(sigma)(s) = 1/dim(V) sum_(g in G) overline(chi)(g) chi(g) = "ord"(G) / dim(V)
+  $ is an algebraic integer. Furthermore, this is a rational algebraic
+  integer, hence must belong to $ZZ$.
+]
+
+
+== Burnside's theorem
+
+#theorem("Burnside")[
+  If $"ord"(G) = p^n q^m$ for primes $p, q$, then $G$ is not simple (unless
+  $"ord"(G)$ is prime).
+] <thm_burnside>
+
+We will prove this theorem using the machinery of group representations. To do
+so, we first take a closer look at representations of normal subgroups.
+
+#proposition[
+  Let $(sigma, V)$ be a representation of $G$. Then, $
+    ker(sigma) = {g in G: chi(g) = chi(1) = dim(V)}
+  $ is a normal subgroup of $G$.
+] <prop_normal>
+
+Observe in particular that $chi(g) = chi(1) = dim(V)$ forces $sigma(g) =
+id_V$, by applying the triangle inequality on the sum of eigenvalues of
+$sigma(g)$.
+
+#proposition[
+  Let $N$ be a normal subgroup of $G$, and let $sigma$ be a representation of
+  $G\/N$. Then, $sigma compose pi$ is a representation of $G$, where $pi: G ->
+  G\/N$ is the usual projection map sending elements of $G$ to their
+  respective cosets.
+]
+
+#lemma[
+  Let $alpha$ be an algebraic number with minimal polynomial $f$. Then,
+  $alpha$ is an algebraic integer if and only if $f$ has integer coefficients.
+]
+#proof[
+  $(<==)$ Trivial.\
+  $(==>)$ Let $f_alpha$ be a monic polynomial with integer coefficients such
+  that $f_alpha (alpha) = 0$. Then, we must have $f | f_alpha$, so $f_alpha =
+  f g$ for another monic polynomial $g$. Write $tilde(f) = f\/m$, $tilde(g) =
+  g\/n$ where $m, n$ are chosen such that $tilde(f), tilde(g)$ are primitive
+  polynomials (the coefficients are integral with greatest common divisor
+  $1$). Then, $tilde(f) tilde(g)$ is primitive by Gauss's Lemma, but this is
+  also $m n f_alpha$ which is primitive only when $m n = plus.minus 1$. This
+  forces $f, g$ to be primitive, hence integral.
+] <lem_algebraic_minpol>
+
+
+We are now ready to prove our result.
+
+#proof([of @thm_burnside])[
+  We may assume that $m, n >= 1$; the case where $G$ is a $p$-group can be
+  dealt with by examining the class equation of $G$ and concluding that $p |
+  "ord"(Z(G))$, whence $Z(G)$ is a non-trivial normal subgroup of $G$.
+
+  Let $G$ be simple. This forces its center to be either ${e}$ or $G$; in the
+  latter case, $G$ is abelian! Thus, we have $Z(G) = {e}$. The class equation
+  of $G$ is thus of the form $
+    "ord"(G) = 1 + sum_("ord"(cal(O)) > 1) "ord"(cal(O)).
+  $ Now, pick $cal(O)$ such that $q divides.not "ord"(cal(O))$. Using
+  $"ord"(cal(O)) | "ord"(G)$, we must have $"ord"(cal(O)) = p^ell$ for some $1
+  <= ell <= n$.
+
+  Let ${chi_i}$ be the irreducible representations of $G$, where $chi_1$ is
+  the trivial representation. The column orthogonality relations
+  (@thm_orthogonality_col) give $sum_i chi_i (1) chi_i (cal(O)) = 0$, whence $
+    1 + sum_(i > 1) chi_i (1) chi_i(cal(O)) = 0.
+  $
+  It follows that there is a non-trivial irreducible character $chi$ such that
+  $chi(cal(O)) eq.not 0$ and $p divides.not chi(1)$. If not, then all $chi_i
+  (1) chi_i (cal(O)) \/ p$ would be algebraic integers for $i > 1$, forcing
+  $1\/p$ to be an algebraic integer (dividing the previous equation by $p$), a
+  contradiction.
+
+  Let $sigma$ be a representation corresponding to $chi$. Recall that each
+  $e_cal(O)$ is integral over $ZZ$, so $
+    tilde(sigma)(e_cal(O)) = ("ord"(cal(O)) dot.c chi(cal(O))) / chi(1)
+  $ is an algebraic integer. But $"ord"(cal(O))$ being a power of $p$ is
+  coprime with $chi(1)$ by choice! Thus, $chi(cal(O))\/chi(1)$ is an algebraic
+  integer too. To see this, use Bezout's Lemma to write $alpha "ord"(cal(O)) +
+  beta chi(1) = 1$ for integers $alpha, beta$, and conclude that $
+    chi(cal(O)) / chi(1) = alpha "ord"(cal(O)) chi(cal(O)) / chi(1) + beta chi(cal(O)).
+  $
+
+  Recall that $chi(cal(O))$ is the sum of $d = chi(1)$ roots of unity
+  (@prop_eigenvalues), say $chi(cal(O)) = xi_1 + ... + xi_d$. Setting $beta =
+  chi(cal(O)) \/ d$, it follows that the roots of the minimal polynomial $f$ of
+  $beta$, which has integer coefficients, are the Galois conjugates of $beta$;
+  examine the field extensions $QQ arrow.hook.r QQ(beta) arrow.hook.r K$ where
+  $K\/QQ$ is Galois. In other words, the roots of $f$ are precisely
+  ${tau(beta): tau in "Gal"(K\/QQ)}$. Since each of these $tau(beta) = sum_i
+  tau(xi_i) \/ d$, if$|beta| < 1$, then $|tau(beta)| < 1$. Thus, the constant
+  term of $f$, being the product of all such $tau(beta)$, must have absolute
+  value $<1$. This contradicts the fact that it must be a non-zero integer,
+  forcing $|beta| = 1$, hence all $xi_i = beta$ of are equal.
+
+  With this, for any $s in cal(O)$, observe that $sigma(s) = beta id_V$, hence
+  it commutes with all $sigma(g)$ for $g in G$. Furthermore, $sigma$ is
+  injective; if not, @prop_normal would yield a contradiction. It follows that
+  $s$ commutes with all $g in G$, whence $cal(O) subset.eq Z(G)$, a
+  contradiction!
+]
