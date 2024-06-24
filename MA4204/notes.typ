@@ -93,6 +93,24 @@
 #let mapsto = $arrow.r.bar$
 #let ip(u, v) = $angle.l #u, #v angle.r$
 
+#let young(..rows) = {
+  let cols = calc.max(..rows.pos().map(row => row.len()))
+  show table.cell: it => {
+    if (it.body == []) { return }
+    box(width: 2em, height: 2em, stroke: table-stroke, it)
+  }
+  rows = rows.pos().map(row => row + ([], ) * (cols - row.len()))
+  rows = rows.flatten()
+  rows = rows.map(x => [#x])
+  box(
+    table(
+      align: center + horizon,
+      columns: cols,
+      stroke: none,
+      ..rows
+    )
+  )
+}
 
 #contents()
 
@@ -1622,4 +1640,361 @@ We are now ready to prove our result.
   injective; if not, @prop_normal would yield a contradiction. It follows that
   $s$ commutes with all $g in G$, whence $cal(O) subset.eq Z(G)$, a
   contradiction!
+]
+
+
+== Young tableaus
+
+We are interested in calculating the irreducible representations of the
+symmetry group $S_n$. To do this, we must first understand its conjugacy
+classes; recall that they are characterized by _cycle types_. Thus, there is a
+one to one correspondence between the conjugacy classes of $S_n$ and the
+integer partitions of $n$.
+
+#definition("Young diagrams and tableaus")[
+  Let $lambda = (lambda_1, ..., lambda_k)$ be a partition of $n$, in the sense
+  that $n = lambda_1 + ... + lambda_k$. Additionally, we impose $lambda_1 >=
+  ...  >= lambda_k$. The associated _Young diagram_ for $lambda$ consists of
+  $n$ boxes arranged in a grid-like fashion, with precisely $lambda_i$ boxes
+  in the $i$-th row. When the boxes are filled with distinct integers from $1,
+  ..., n$, this is called a _Young tableau_. In particular, if the entries in
+  each row and column appear in ascending order, we call this a _standard
+  Young tableau_.
+]
+
+#example[
+  Consider the partition $(3, 3, 1)$ of $7$. Following are its Young diagram,
+  a possible Young tableau of the same shape, as well as a standard Young
+  tableau.
+  #align(center)[
+    #young(([ ], [ ], [ ]), ([ ], [ ], [ ]), ([ ], ))
+    #h(3em)
+    #young(([4], [1], [6]), ([3], [5], [7]), ([2], ))
+    #h(3em)
+    #young(([1], [2], [6]), ([3], [5], [7]), ([4], ))
+  ]
+]
+
+The group $S_n$ acts naturally on a Young tableau by acting on its entries. We
+denote the image of a Young tableau $T$ under the action of $g in S_n$ simply
+by $g T$. If a box in $T$ contained the integer $a$, then the same box in $g
+T$ contains $g(a)$.
+
+#definition[
+  Let $T$ be a Young tableau. We denote $C_T$ as the elements of $S_n$
+  stabilizing the columns of $T$, and $R_T$ as the elements of $S_n$ which
+  stabilize the rows of $T$.
+]
+
+A permutation _stabilizes a column_ of a Young tableau $T$ if the image of
+each element remains in the same column, and similarly for stabilizing rows.
+It is clear that $R_T sect C_T = {1}$.
+
+Given a permutation $lambda$, we let $mu_i$ denote the number of boxes in the
+$i$-th column of the corresponding Young diagram.
+
+#proposition[
+  Let the Young diagram of $lambda$ have $k$ rows and $ell$ columns. Then,
+  $
+    R_T tilde.equiv S_(lambda_1) times ... times S_(lambda_k), wide
+    C_T tilde.equiv S_(mu_1) times ... times S_(mu_ell).
+  $
+]
+
+#lemma[
+  Let $T$ be a Young tableau, and let $g in S_n$. Then, $
+    R_(g T) = g R_T g^(-1), wide
+    C_(g T) = g C_T g^(-1).
+  $
+] <lem_T_conjugate>
+#proof[
+  Fix a row $i$ in $T$, and let its elements be $a_1, ..., a_(lambda_i)$.
+  Then, the $i$-th row in $g T$ contains the elements $g a_1, ..., g
+  a_(lambda_i)$. Note that $R_(g T)$ and $g R_T g^(-1)$ have the same size, so
+  it is enough to show that for $h in R_t$ we have $g h g^(-1) in R_(g T)$.
+  But $g h g^(-1)$ sends the element $g a_j$ of the $i$-th row in $g T$ to $(g
+  h g^(-1)) g a_j = g h a_j$. Furthermore, $h a_j$ also belongs to the $i$-th
+  row of $T$ by choice of $h$, so $h a_j in {a_1, ..., a_(lambda_i)}$. Thus,
+  $g h g^(-1)$ sends $g(a_j)$ to $g (h a_j) in {g(a_1), ...,
+  g(a_(lambda_i))}$ i.e. to the $i$-th row of $g T$, whence it stabilizes the
+  $i$-th row of $g T$ as desired. The proof for the second identity is
+  similar.
+]
+
+We now define three special elements of the group ring $CC[S_n]$.
+
+#definition[
+  Let $T$ be a Young tableau. We denote $
+    a_T = sum_(g in R_T) g, wide
+    b_T = sum_(g in C_T) "sign"(g)thin g, wide
+    c_T = a_T dot.c b_T.
+  $
+]
+
+#proposition[
+  Let $T$ be a Young tableau, and let $h in R_T$, $h' in C_T$. Then, $
+    h a_T = a_T, wide
+    h' b_T = "sign"(h')thin b_T, wide
+    h c_T h' = "sign"(h')thin c_T.
+  $
+] <prop_abc_mult>
+
+#lemma[
+  Let $T, T'$ be two Young tableaus such that there exist two integers which
+  appear in the same row of $T$ and in the same column of $T'$. Then, $a_T
+  dot.c b_T' = 0 = b_T' dot.c a_T$.
+] <lem_aT_bT>
+#proof[
+  Let $p, q$ be two such integers, and let $t$ be the transposition $(p thin
+  q)$. Note that $t in R_T sect C_(T')$. Write each coset from $R_T\/ {1, t}$
+  as ${r, r t}$ where $r$ varies over the coset representatives $cal(R)$, and
+  rewrite $
+    a_T = sum_(r in cal(R)) r + sum_(r in cal(R)) r t = sum_(r in R) r (1 + t) = a' (1 + t).
+  $ Thus, $
+    a_T dot.c b_T' = a' (1 + t) b_T' = a' (b_T' + "sign"(t)thin b_T') = 0. #qedhere
+  $
+]
+
+Impose the lexicographic dictionary order on the collection of all partitions
+of $S_n$.
+
+#definition[
+  Let $lambda, mu$ be two partitions of $S_n$. We say that $lambda > mu$ if
+  for some $1 <= i <= n$, we have $lambda_i > mu_i$ and $lambda_j = mu_j$ for
+  all $j < i$.
+]
+
+#example[
+  The partitions of $4$ in increasing order are $(1, 1, 1, 1)$, $(2, 1, 1)$,
+  $(2, 2)$, $(3, 1)$, and $(4)$.
+]
+
+#lemma[
+  Let $lambda > mu$, and let $T, T'$ be tableaus with shapes $lambda, mu$
+  respectively. Then, the conditions of @lem_aT_bT are satisfied, whence $a_T
+  dot.c b_T' = 0 = b_T' dot.c a_T$.
+] <lem_aT_bT_order>
+#proof[
+  Suppose not, whence any two numbers in the same row of $T$ must belong to
+  different columns of $T'$. This means that $T'$ must have at least as many
+  columns of as there are columns of $T$, so $lambda_1 <= mu_1$. The condition
+  $lambda > mu$, forces $lambda_1 = mu_1$. Apply a suitable element of $C_T'$
+  to $T'$ so that the elements from the first row of $T$ all end up in the
+  first row of $T'$. Now, delete the first rows of $T, T'$, and repeat the
+  previous argument until there are no rows remaining to show that $lambda =
+  mu$.
+]
+
+
+== Irreducible representations of $S_n$
+
+Returning to the problem of finding irreducible representations of $S_n$, note
+that $CC[S_n]$ is effectively the regular representation of $S_n$. Thus, it
+contains copies of every irreducible representation of $S_n$, via
+@prop_regular. This means that the search for irreducible representations of
+$S_n$ reduces to finding $S_n$-invariant subspaces of $CC[S_n]$.
+
+Observe that if $V subset.eq CC[S_n]$ is an irreducible representation of
+$S_n$, we may decompose $CC[S_n] = V plus.circle W$ where $W$ is another
+representation of $S_n$, via Maschke (@thm_maschke). This gives us an
+$S_n$-invariant projection $pi: CC[S_n] -> V$, which simply deletes the $W$
+component. Setting $pi(1) = a$, note that $
+  pi(g) = pi(g dot.c 1) = g dot.c pi(1) = g dot.c a.
+$ This shows that $pi$ is simply right multiplication by $pi(1) = a$ in
+$CC[S_n]$. Also, $a in V$, so $a = pi(a) = pi(1) dot.c a = a^2$. Thus, $V =
+im(pi) = CC[S_n] dot.c a$, where $a$ is idempotent.
+
+#proposition[
+  Let $b in CC[G]$. Then, $CC[G] dot.c b$ is $G$-invariant.
+]
+
+This motivates us to find idempotent elements $a in CC[S_n]$ such that
+$CC[S_n]dot.c a$ is irreducible. Eventually, we will see that there are as
+many such elements as there are partitions of $S_n$.
+
+#lemma[
+  Let $T, T'$ have the same shape. Then, $CC[S_n]dot.c c_T tilde.equiv
+  CC[S_n]dot.c c_T'$ as representations of $S_n$.
+]
+#proof[
+  Let $g$ be the (unique) permutation from $S_n$ such that $T = g T'$. It
+  follows from @lem_T_conjugate that $
+    a_T' = g a_T g^(-1), wide
+    b_T' = g b_T g^(-1), wide
+    c_T' = g c_T g^(-1).
+  $ Thus, $CC[S_n] dot.c c_T' = CC[S_n] dot.c g c_T g^(-1)$. Now, $CC[S_n]
+  dot.c g = CC[S_n]$ since $g$ merely permutes the basis elements, so $CC[S_n]
+  dot.c c_T' = (CC[S_n] dot.c c_T)thin g^(-1)$. This means that the desired
+  isomorphism is right multiplication by $g$, which is indeed an
+  $S_n$-invariant map.
+]
+
+#example[
+  Consider the partition $(n)$ of $n$.
+]
+
+
+#proposition[
+  Let $H subset.eq G$, and let $a = sum_(h in H) h$. Then, $dim(CC[G] dot.c a)
+  = [G : H]$.
+]
+
+Indeed, the action of $g$ sends $a$ to $a_g = sum_(h in g H) h$. Thus, we have
+a bijection between the basis ${a_g}_(g in G)$ of $CC[G]dot.c a$ and the
+cosets $G\/H$, sending $a_g$ to $g H$. Furthermore, this bijection is
+$G$-invariant: for $s in G$, note that $s a_g = a_(s g)$. This gives us the
+following.
+
+#proposition[
+  Let $H subset.eq G$, let $a = sum_(h in H) h$, and let $bold(1)_H$ denote
+  the trivial representation of $H$. Then, $CC[G]dot.c a tilde.equiv
+  "Ind"_H^G (bold(1)_H)$ as representations of $G$.
+]
+
+#lemma[
+  Let $a in CC[S_n]$. If $p a q = "sign"(q)thin a$ for all $p in R_T$, $q in C_T$,
+  then $a$ is a scalar multiple of $c_T$.
+]
+#proof[
+  Write $a = sum_(g in G) lambda_g g$, so $p a q = sum_(g in G) lambda_(p^(-1)
+  g q^(-1)) g$. This forces all $lambda_(p g q) = "sign"(q)thin lambda_g$ for
+  all $g in S_n$, $p in R_T$, $q in C_T$. Now, $
+    c_T = (sum_(p in R_T) p)(sum_(q in C_T) "sign"(q)thin q) = sum_(p in R_T\ q
+    in C_T) "sign"(q) thin p q = sum_(g in G) lambda'_g g,
+  $ where each $lambda'_(p q) = "sign"(q)$, $lambda'_g = 0$ otherwise.
+  Plugging in $g = 1$, we have $lambda_(p q) = "sign"(q)thin lambda_1 =
+  lambda'_(p q) lambda_1$, so it suffices to show that the remaining $lambda_g
+  = 0$ when $g in.not R_T C_T$.
+
+  Suppose that $alpha, beta$ appear in the same row of $T$ and the same column
+  of $T' = g T$. Then, setting $t = (alpha thin beta)$, we have $t in R_T sect
+  C_(g T) = R_T sect g C_T g^(-1)$, whence $r = g s g^(-1)$ for some $s in
+  C_T$. Note that $s$ must also be a transposition. Thus, $g = r g s$, so
+  $lambda_(g) = lambda_(r g s) = "sign"(s)thin lambda_g = -lambda_g$, forcing
+  $lambda_g = 0$.
+
+  With the above, it is enough to show that if no two such elements $alpha,
+  beta$ exist, then $g in R_T C_T$. Indeed, if all elements from the same row
+  of $T$ appear in distinct columns of $T ' = g T$, then we may find $q' in
+  C_T'$ such that rows of $T$ are the same as the rows of $q' T'$ as sets
+  (following the argument of @lem_aT_bT_order). Next, find $p in R_T$ such
+  that $p T = q' T'$. Finally, write $q' = g q g^(-1)$ for $q in C_T$, whence
+  $p T = g q T$, forcing $p = g q$. This shows that $g in R_T C_T$ as desired.
+]
+#remark[
+  Compare this with @prop_abc_mult.
+]
+
+#corollary[
+  Let $a in CC[S_n]$. Then, $c_T a c_T = lambda_a c_T$.
+]
+
+We are now ready to prove our main results.
+
+#theorem[
+  Let $T$ be a Young tableau. Then, $CC[S_n] dot.c c_T$ is an irreducible
+  representation of $S_n$.
+]
+#proof[
+  Set $V = CC[S_n] dot.c c_T$, and suppose that $W subset.eq V$ is
+  $S_n$-invariant. We claim that $W$ is either ${0}$ or $V$. The previous
+  corollary gives $c_T V = c_T dot.c CC[S_n] dot.c c_T subset.eq
+  "span"_CC {c_T} = CC c_T$, so $c_T W subset.eq CC c_T$.
+
+  Now, if $c_T W = CC c_T$, then $
+    V = CC[S_n] dot.c c_T = CC[S_n] dot.c CC c_T = CC[S_n] dot.c c_T W
+    subset.eq CC[S_n] dot.c W subset.eq W,
+  $ where the final step follows from the $S_n$-invariance of $W$. This forces
+  $V = W$.
+
+  Otherwise, if $c_T W = {0}$, recall that we may write $W = CC[S_n]dot.c a$
+  for some $a in W$ such that $a^2 = a$. Then, for $v, w in W$, we may write
+  $v = b dot.c c_T in CC[S_n] dot.c c_T = V$ for some $b in CC[S_n]$, so that
+  $v w = b c_T w = 0$. In particular, putting $v = w = a$ gives $a = a^2 = 0$,
+  hence $W = CC[S_n] dot.c a = {0}$.
+]
+
+#theorem[
+  Let $T, T'$ be two Young tableaus with different shapes. Then, $CC[S_n]
+  dot.c c_T tilde.equiv.not CC[S_n] dot.c c_T'$ as representations of $S_n$.
+]
+#proof[
+  Set $V = CC[S_n] dot.c c_T$, $V' = CC[S_n] dot.c c_T'$, and suppose that $V
+  tilde.equiv V'$. Without loss of generality, let $T > T'$, whence $a_T dot.c
+  b_T' = 0$. Again, $c_T V subset.eq CC c_T$; if $c_T V = {0}$, then $V = {0}$
+  (via the same argument in the previous proof) hence so is $V'$.
+
+  Otherwise, $c_T V eq.not {0}$. Observe that $
+    c_T V' = a_T b_T dot.c CC[S_n] dot.c a_T' b_T' = a_T dot.c X dot.c b_T'.
+  $ We claim that this is $0$; it is enough to show that $a_T g b_T' = 0$ for
+  all $g in S_n$. However, this is equivalent to $a_T b_(g T') = 0$. Since
+  $T'$ and $g T'$ have the same shape, this is equivalent to $a_T b_T' = 0$,
+  which we already have from $T > T'$.
+]
+
+Thus, we may enumerate all irreducible representations of $S_n$ by picking a
+tableau $T_lambda$ of shape $lambda$ for each partition $lambda$ of $n$, then
+computing $CC[S_n] dot.c c_T_lambda$.
+
+
+== Revisiting standard Young tableaus
+
+#theorem[
+  Let $f_lambda$ be the number of standard Young tableaus of shape $lambda$.
+  Then, $
+    sum_lambda f_lambda^2 = n!.
+  $
+] <thm_standard_number>
+
+To prove the above, we will find a bijection between the collection of all
+ordered pairs of Young tableaus $(P, Q)$ of the same shape, and all
+permutations in $S_n$. First, we must describe the process of _row insertion_.
+Given a tableau $T$ with distinct positive entries and increasing rows and
+columns, and a positive integer $k$, we may obtain a new tableau $T'$
+(satisfying the same properties as $T$, with one more box), denoted $T <- k$
+by inserting the element $k$ as follows.
++ If possible, append $k$ to the end of the first row of $T$, and stop.
++ Otherwise, find the rightmost element in the first row where $k$ can be
+  substituted, say $k'$. Replace $k'$ with $k$.
++ Insert $k'$ into next row, using the same process as above.
+
+#proof([of @thm_standard_number])[
+  Let $sigma in S_n$ be a permutation. Set $P = sigma(1) <- ... <- sigma(n)$,
+  i.e. successively insert the numbers $sigma(1), ..., sigma(n)$. At each
+  step, a new box is created. Construct a tableau $Q$ according to the
+  following rule: the integer $i$ appears in a box in $Q$ if the corresponding
+  box in $P$ was created at step $i$. This gives us a map $sigma mapsto (P,
+  Q)$. It can be shown that this process is reversible!
+]
+
+#definition("Hook length")[
+  The hook length of a box in a Young diagram is the number of boxes in the
+  $L$-shape formed by the box itself, the boxes to its right, and the boxes
+  below it.
+]
+
+Consider a hook within a Young diagram of the following form, where each of
+the boxes is filled with its hook length.
+#align(center)[
+  #young(($a_1$, $a_2$, $dots.h.c$, $a_k$), ($b_1$, $dots.down$), ($dots.v$, ), ($b_ell$, ))
+]
+For instance, $a_1 = k + ell$. We must have $a_1 > a_2 > ... > a_k$, and $a_1
+> b_1 > ... > b_ell$.
+
+#lemma[
+  The numbers $a_1, ..., a_k, a_1 - b_1, ..., a_1 - b_ell$ form a permutation
+  of $1, ..., k + ell$.
+]
+#proof[
+  It suffices to show that these numbers are distinct; the only possible
+  duplicates are of the form $a_i = a_1 - b_j$, i.e. $a_1 = a_i + b_j$ for
+  some $i, j$.
+
+  Suppose that the box which is both below $a_i$ and to the right of $b_j$ is
+  not present in the diagram. Then, counting boxes gives $a_i <= j + (k - i)$,
+  and $b_j <= (ell - j) + (i - 1)$, which together give $k + ell = a_1 = a_i +
+  b_j <= k + ell - 1$, a contradiction.
+
+  Similarly, when the box below $a_i$ and to the right of $b_j$ is present, we
+  will obtain $k + ell = a_i + b_j >= k + ell + 1$, another contradiction.
 ]
