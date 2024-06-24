@@ -113,6 +113,7 @@
 }
 
 #contents()
+#pagebreak()
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -1630,10 +1631,10 @@ We are now ready to prove our result.
   examine the field extensions $QQ arrow.hook.r QQ(beta) arrow.hook.r K$ where
   $K\/QQ$ is Galois. In other words, the roots of $f$ are precisely
   ${tau(beta): tau in "Gal"(K\/QQ)}$. Since each of these $tau(beta) = sum_i
-  tau(xi_i) \/ d$, if$|beta| < 1$, then $|tau(beta)| < 1$. Thus, the constant
+  tau(xi_i) \/ d$, if $|beta| < 1$, then $|tau(beta)| < 1$. Thus, the constant
   term of $f$, being the product of all such $tau(beta)$, must have absolute
   value $<1$. This contradicts the fact that it must be a non-zero integer,
-  forcing $|beta| = 1$, hence all $xi_i = beta$ of are equal.
+  forcing $|beta| = 1$, hence all $xi_i = beta$ are equal.
 
   With this, for any $s in cal(O)$, observe that $sigma(s) = beta id_V$, hence
   it commutes with all $sigma(g)$ for $g in G$. Furthermore, $sigma$ is
