@@ -1,0 +1,505 @@
+\documentclass[11pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage[scr = rsfso]{mathalpha}
+\usepackage{bm}
+
+\geometry{a4paper, margin = 1in}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+
+\setlength\parindent{0em}
+\setlength\parskip{0.8em}
+
+\title{\bfseries STAT6301: Probability Theory I}
+\author{Satvik Saha}
+\date{}
+
+\begin{document}
+    \maketitle
+
+    \section*{Homework 1}
+
+    \subsection*{Problem 1}
+
+    \begin{enumerate}
+        \item To show that $f(\mathcal{A})$ is indeed a field, let
+        $\mathscr{F}_0(\mathcal{A})$ be the collection of fields containing
+        $\mathcal{A}$, and write $f(\mathcal{A}) = \bigcap_{\mathcal{F}_0 \in
+        \mathscr{F}_0(A)} \mathcal{F}$.
+        \begin{enumerate}
+            \item $\Omega \in \mathcal{F}$ for all $\mathcal{F} \in
+            \mathscr{F}_0(\mathcal{A})$, hence $\Omega \in f(\mathcal{A})$.
+
+            \item For $A \in f(\mathcal{A})$, we have $A \in \mathcal{F}$ for
+            arbitrary $\mathcal{F} \in \mathscr{F}_0(\mathcal{A})$, hence $A^c
+            \in \mathcal{F}$ for all $\mathcal{F} \in
+            \mathscr{F}_0(\mathcal{A})$.
+            Thus, $A^c \in f(\mathcal{A})$.
+
+            \item For $A_1, \dots, A_n \in f(\mathcal{A})$, we have $A_1,
+            \dots, A_n \in \mathcal{F}$ hence $\bigcup_{i = 1}^n A_i \in
+            \mathcal{F}$ for all $\mathcal{F} \in \mathscr{F}_0(\mathcal{A})$.
+            Thus, $\bigcup_{i = 1}^n A_i \in f(\mathcal{A})$.
+        \end{enumerate}
+
+        With this, suppose that $\mathcal{G}$ is another field with
+        $\mathcal{A} \subseteq \mathcal{G}$.
+        Then, $\mathcal{G} \in \mathscr{F}_0(\mathcal{A})$ hence
+        $f(\mathcal{A}) = \bigcap_{\mathcal{F} \in \mathscr{F}_0(\mathcal{A})}
+        \mathcal{F} \subseteq \mathcal{G}$ by construction.
+
+
+        \item We first make the following observation: for any finite class
+        $\mathcal{E} = \{E_1, \dots, E_n\}$ of sets in $\Omega$, and any
+        expression involving sets from $\mathcal{E}$ composed of finitely many
+        finite intersections, unions, and complements, the resulting set $B$
+        can be expressed (uniquely) in the form \[
+            B = \bigcup_{d \in D} \bigcap_{i = 1}^n E_i^{d_i} := \bigcup_{d \in D} E^d, \tag{1.2.1}
+        \] for some $D \subseteq \{0, 1\}^n$.
+        Here, we denote $X^0 := X$, $X^1 := X^c$.
+        Note that this is a union of pairwise disjoint sets of the form $E^d
+        := \bigcap_{i = 1}^n E_i^{d_i}$, and $\{E^d\}_{d \in \{0, 1\}^n}$
+        forms a partition of $\Omega$.
+        As a result, \[
+            B^c = \bigcup_{d \in \{0, 1\}^n \setminus D} \bigcap_{i = 1}^n E_i^{d_i} = \bigcup_{d \notin D} E^d, \tag{1.2.2}
+        \] which is crucially of the `same form' as $B$
+
+        \emph{Remark:} This is inspired by the observation that in boolean
+        algebra, any finite boolean expression over finitely many variables
+        can be written in a canonical `sum of products' form (as well as a
+        `product of sums' form).
+        This follows immediately because boolean functions of the form $\{0,
+        1\}^n \to \{0, 1\}$ are spanned by basis functions $\delta_d$ of the
+        form $x \mapsto x_1^{d_1}\cdots x_n^{d_n}$ which take the value $1$ if
+        $x = d$ and $0$ otherwise.
+        Again, we have notated $x^0 := x$, $x^1 := \overline{x} = x^c = 1 -
+        x$.
+
+        \emph{Remark:} This shows that there are precisely $2^n$ possible sets
+        that can be built (using complements, finite intersections, finite
+        unions, finitely many operations) using $n$ (distinct) sets.
+
+        In general, this is true because for $x \in \Omega$, answering the
+        question $x \in B?$ depends only on the answers to the questions $x
+        \in E_i?$ (the expression forming $B$ can be broken down into this
+        form), which is completely determined by the answer to $x \in E^d?$.
+
+        For our purposes, it is enough to only consider expressions of the
+        form \[
+           B =  \bigcup_{i = 1}^n \bigcap_{j \in J_i} F_{ij}
+        \] where all $J_i$ are finite and for each $F_{ij}$, at least one of
+        $F_{ij} \in \mathcal{E}$ or $F_{ij}^c \in \mathcal{E}$.
+        Note that for each $i$, we can relabel $\{F_{ij}\}_{j \in J_i} =
+        \{E_k\}_{k \in K_i}$ for indices $K_i \subseteq \{1, \dots, n\}$, and
+        rewrite \[
+            \bigcap_{j \in J_i} F_{ij}
+                = \bigcap_{k \in K_i} E_k
+                = \left(\bigcap_{k \in K_i} E_k\right) \cap \left(\bigcap_{k \notin K_i} (E_k \cup E_k^c)\right),
+        \] which will split into a (pairwise disjoint) union of sets (at most
+        $2^{n - |K_i|}$ many) of the form $E^d$ by distributing over the
+        unions.
+        Thus, the expression for $B$ again reduces to a union of sets of the
+        form $E^d$, which (after removing duplicates) are pairwise disjoint.
+
+
+        With this, denote \begin{align*}
+            g(\mathcal{A}) = \Bigg\{B \subseteq \Omega\colon B = \bigcup_{i = 1}^m\bigcap_{j = 1}^{n_i} A_{ij}, \text{ where } A_{ij} \in \mathcal{A} \text{ or } A_{ij}^c \in \mathcal{A},\\ \text{ and } \left(\bigcap_{j = 1}^{n_i} A_{ij}\right) \cap \left(\bigcap_{j = 1}^{n_k} A_{kj}\right) = \emptyset \text{ for }k \neq i\Bigg\}. \tag{$\star$}
+        \end{align*}
+        Note that $\mathcal{A} \subseteq g(\mathcal{A}) \subseteq
+        f(\mathcal{A})$; every element $A \in \mathcal{A}$ is trivially of the
+        form demanded in ($\star$), and $f(\mathcal{A})$ being a field
+        containing $\mathcal{A}$ must contain all finite unions of finite
+        intersections of elements (or their complements) from $\mathcal{A}$.
+        Thus, it suffices to show that $g(\mathcal{A})$ is a field, whence
+        $f(\mathcal{A}) \subseteq g(\mathcal{A})$ via minimality of
+        $f(\mathcal{A})$ forces $f(\mathcal{A}) = g(\mathcal{A})$.
+
+        Putting aside the case where $\mathcal{A} = \emptyset$ (in which case
+        one might argue that $g(\mathcal{A}) = \{\emptyset, \Omega\}$, using
+        conventions such as empty unions being $\emptyset$, and empty
+        intersections being $\Omega$; this is certainly a field):
+        \begin{enumerate}
+            \item Fix $A_0 \in \mathcal{A}$.
+            Then, $\Omega = A_0 \cup A_0^c \in g(\mathcal{A})$.
+
+            \item Suppose that $B \in g(\mathcal{A})$, hence is of the
+            form demanded in ($\star$).
+            Use our first observation to express $B$ in the form (1.2.1), then
+            use (1.2.2) to see that $B^c$ can still be expressed in the form
+            demanded by ($\star$), hence $B^c \in g(\mathcal{A})$.
+
+            \item Suppose that $B_1, \dots, B_n \in g(\mathcal{A})$; again,
+            express them in the form $B_i = \bigcup_{d \in D_i} A^d$, where
+            $A_1, \dots, A_m$ (satisfying $A_j \in \mathcal{A}$ or $A_j^c \in
+            \mathcal{A}$) are all of the sets used in the expressions used to
+            write $B_1, \dots, B_n$ in the form from ($\star$).
+            Then, $\bigcup_{i = 1}^n B_i = \bigcup_{i \in D} A^d$ where $D =
+            \bigcup_{i = 1}^n D_i$, which is in the form demanded by
+            ($\star$), hence $\bigcup_{i = 1}^n B_i \in g(\mathcal{A})$.
+        \end{enumerate}
+
+    This shows that $g(\mathcal{A})$ is indeed a field, hence we are done.
+    \end{enumerate}
+
+
+
+
+    \subsection*{Problem 2}
+
+    \begin{enumerate}
+        \item Given that $\mathcal{A} = \{\{x\}\colon x \in \Omega\}$, set \[
+            g(\mathcal{A}) = \{A\subseteq \Omega\colon |A| < \infty \text{ or } |A^c| < \infty\}.
+        \] Again, note that $\mathcal{A} \subseteq g(\mathcal{A}) \subseteq
+        f(\mathcal{A})$. First, singletons have finite cardinality. Next,
+        finite sets are finite unions of singletons hence mush be in
+        $f(\mathcal{A})$; co-finite sets have finite complements which must be
+        in $f(\mathcal{A})$, hence they too must be in $f(\mathcal{A})$.
+        Thus, it suffices to show that $g(\mathcal{A})$ is a field for
+        $f(\mathcal{A}) \subseteq g(\mathcal{A})$, yielding $f(\mathcal{A}) =
+        g(\mathcal{A})$.
+
+        \begin{enumerate}
+            \item Note that $\Omega^c = \emptyset$ has zero cardinality, so
+            $\Omega \in g(\mathcal{A})$.
+
+            \item If $A \in g(\mathcal{A})$, at least one of $|A| < \infty$ or
+            $|A^c| < \infty$, which also guarantees that $A^c \in
+            g(\mathcal{A})$ (recall that $(A^c)^c = A$).
+
+            \item Suppose that $A_1, \dots, A_n \in \mathcal{A}$. If all of
+            them are finite, then their union $A = \bigcup_{i = 1}^n A_i$ is
+            also finite, hence $A \in g(\mathcal{A})$. Otherwise, one of them
+            is cofinite; say $|A_1^c| < \infty$ without loss of generality.
+            Then, $A^c = \bigcap_{i = 1}^n A_i^c \subseteq A_1^c$ is finite,
+            hence $A \in g(\mathcal{A})$.
+        \end{enumerate}
+
+        Thus, $g(\mathcal{A})$ is a field, and we are done.
+
+
+        \item Note that $\sigma(\mathcal{A})$ is the smallest $\sigma$-field
+        containing $\mathcal{A}$; specifically it is also a field containing
+        $\mathcal{A}$, hence we must have $f(\mathcal{A}) \subseteq
+        \sigma(\mathcal{A})$ by minimality of $f(\mathcal{A})$.
+
+        Suppose that $\mathcal{A}$ is finite.
+        We will show that $f(\mathcal{A})$ is a $\sigma$-field, from which
+        $\sigma(\mathcal{A}) \subseteq f(\mathcal{A})$ by minimality of
+        $\sigma(\mathcal{A})$, forcing $f(\mathcal{A}) = \sigma(\mathcal{A})$.
+        Indeed, $f(\mathcal{A})$ must be finite, via the characterization in
+        Problem 1.2; there are only finitely many possible sets of the form
+        $\bigcap_{i = 1}^n A_i$ where $A_i \in \mathcal{A}$ or $A_i^c \in
+        \mathcal{A}$, hence finitely many possible unions involving them.
+        With this, countable unions of sets from $f(\mathcal{A})$ are actually
+        finite unions, hence belong to $f(\mathcal{A})$.
+        Thus, $f(\mathcal{A})$ is a $\sigma$-field, and we are done.
+
+        Note that $\mathcal{A} \subseteq f(\mathcal{A}) \subseteq
+        \sigma(\mathcal{A})$.
+        Thus, $\sigma(\mathcal{A}) \subseteq \sigma(f(\mathcal{A})) \subseteq
+        \sigma(\mathcal{A})$, forcing $\sigma(f(\mathcal{A})) =
+        \sigma(\mathcal{A})$.
+
+        \emph{Remark:} In general, $\mathcal{A} \subseteq \mathcal{B}$ gives
+        $\mathcal{A} \subseteq \mathcal{B} \subseteq \sigma(\mathcal{B})$ by
+        construction of $\sigma(\mathcal{B})$, hence $\sigma(\mathcal{A})
+        \subseteq \sigma(\mathcal{B})$ by minimality of $\sigma(\mathcal{A})$.
+        Also, we trivially have $\sigma(\sigma(\mathcal{A})) =
+        \sigma(\mathcal{A})$.
+
+
+
+        \item If $\mathcal{A}$ is countable, the characterization in Problem
+        1.2 shows that $f(\mathcal{A})$ must be countable.
+        To see this, note that every set $B \in f(\mathcal{A})$ can be written in
+        the form (1.2.1), say $B = \bigcup_{d \in D} E^d$ where $E_1, \dots,
+        E_n \in \mathcal{A}$.
+        Enumerate $\mathcal{A} = \{A_n\}_{n \in \N}$, and let $\{p_n\}_{n \in
+        \N}$ be an enumeration of the primes (in order).
+        Then, the following map is a surjection. \begin{align*}
+            h\colon \N\times\N \to f(\mathcal{A}), \qquad
+            (p_{n_1}\cdots p_{n_k}, p_{d_1 + 1}\cdots p_{d_m + 1}) \mapsto \bigcup_{i = 1}^{m} \bigcap_{j = 1}^k A_{n_j}^{d_{ij}}.
+        \end{align*}
+        Here, $d_{ij}$ is the $j$-th binary digit of $d_i$ (which is
+        interpreted as a binary number of length $k$).
+        Elements of $\N\times \N$ not of the given form are mapped to
+        $\emptyset$.
+        Since $\N\times\N$ is countable, we have $f(\mathcal{A})$ countable.
+
+
+
+        \item Let $\mathcal{F}_1, \mathcal{F}_2$ be fields in $\Omega$.
+        Define \begin{align*}
+            g(\mathcal{F}_1, \mathcal{F}_2) = \Bigg\{B \subseteq \Omega\colon &B = \bigcup_{j = 1}^m A_{1j} \cap A_{2j},\: A_{ij} \in \mathcal{F}_{ij}, \\
+                &\text{ and } (A_{ik} \cap A_{2k}) \cap (A_{1j} \cap A_{2k}) = \emptyset\text{ for all } k \neq j \Bigg\}.
+                \tag{$\star\star$}
+        \end{align*}
+        Again, it suffices to show that $g(\mathcal{F}_1, \mathcal{F}_2)$ is a
+        field, since clearly $g(\mathcal{F}_1, \mathcal{F}_2) \subseteq
+        f(\mathcal{F}_1 \cup \mathcal{F}_2)$, so equality will follow from
+        minimality of $f(\mathcal{F}_1 \cup \mathcal{F}_2).$
+        \begin{enumerate}
+            \item $\Omega \in \mathcal{F}_2 \cap \mathcal{F}_2$, so $\Omega
+            \in g(\mathcal{F}_1, \mathcal{F}_2)$.
+
+            \item Suppose that $B \in g(\mathcal{F}_1, \mathcal{F}_2)$, hence
+            is of the form described in ($\star\star$).
+            Rewrite $B$ in the form (1.2.1), hence $B^c$ in the form (1.2.2),
+            and note that the sets $E_1, \dots, E_k$ used in the expression
+            can be separated into those from $\mathcal{F}_1$ and those from
+            $\mathcal{F}_2$.
+            Thus, $B^c$ is also in the form demanded by ($\star\star$), hence
+            $B^c \in g(\mathcal{F}_1, \mathcal{F}_2)$.
+
+            \item Suppose that $B_1, \dots, B_n \in g(\mathcal{F}_1,
+            \mathcal{F}_2)$; again, express them in the form $B_i = \bigcup_{d
+            \in D_i} A^d$, where $A_1, \dots, A_n$ are all of the sets used to
+            write $B_1, \dots, B_n$ in the form from ($\star\star$).
+            Then, $B = \bigcup_{i = 1}^n B_i = \bigcup_{d \in D} A^d$ where $D
+            = \bigcup_{i = 1}^n D_i$.
+            Since we can separate the $A_i$ into those from $\mathcal{F}_1$
+            and those from $\mathcal{F}_2$, we have expressed $B$ in the form
+            demanded by $g(\mathcal{F}_1, \mathcal{F}_2)$, hence $B \in
+            g(\mathcal{F}_1, \mathcal{F}_2)$.
+        \end{enumerate}
+        This shows that $g(\mathcal{F}_1, \mathcal{F}_2)$ is indeed a field,
+        and we are done.
+    \end{enumerate}
+
+
+
+
+    \subsection*{Problem 3}
+
+    \begin{enumerate}
+        \item Recall that the Borel $\sigma$-algebra $\mathcal{B}(\R)$ is
+        simply $\sigma(\tau)$, where $\tau$ is the standard Euclidean topology
+        on $\R$ generated by the basis of open intervals.
+        We claim that $\mathcal{B}(\R) = \sigma(\mathcal{H})$, where \[
+            \mathcal{H} = \{(\infty, x]\colon x \in \Q\},
+        \] whence $\mathcal{B}(\R)$ is countably generated.
+        Indeed, note that for $x \in \Q$, we have $(\infty, x]^c = (x, \infty)
+        \in \tau \subset \mathcal{B}(\R)$, so $\mathcal{H} \subseteq
+        \mathcal{B}(\R)$.
+        Thus, $\sigma(\mathcal{H}) \subseteq \mathcal{B}(\R)$.
+        Now, sets of the form $(x, y] = (\infty, y] \cap (-\infty, x]^c \in
+        \sigma(\mathcal{H})$ for $x, y \in \Q$.
+        Then, for $x, y \in \Q$, find $\{y_n\}_{n \in \N} \subset \N$ such
+        that $y_n \uparrow y$, so that sets of the form $(x, y) = \bigcup_{n
+        \in \N} (x, y_n] \in \sigma(\mathcal{H})$.
+        Setting \[
+            \mathcal{U} = \{(x, y)\colon x, y \in \Q\} \subseteq \sigma(\mathcal{H}),
+        \] note that $\mathcal{U}$ is countable, and the topology $\tau$ is
+        generated by $\mathcal{U}$.
+        In other words, any $U \in \tau$ can be written as a countable union
+        $U = \bigcup_{n \in \N} U_n$ for $\{U_n\}_{n \in \N} \subset
+        \mathcal{U}$.
+        This means that $\tau \subseteq \sigma(\mathcal{H})$, from which
+        $\mathcal{B}(\R) = \sigma(\tau) \subseteq \sigma(\mathcal{H})
+        \subseteq \mathcal{B}(\R)$, and we are done.
+
+        \emph{Remark:} In general, showing that $\mathcal{A} \subseteq
+        \sigma(\mathcal{B})$ and $\mathcal{B} \subseteq \sigma(\mathcal{A})$
+        yields $\sigma(\mathcal{A}) = \sigma(\mathcal{B})$.
+
+
+
+        \item Consider the $\sigma$-field \[
+            \mathcal{F} = \{A \subseteq \Omega\colon A\text{ is countable, or } A^c\text{ is countable}\}.
+        \] When $\Omega$ is countable, every $A \subseteq \Omega$ is
+        countable, hence $A = \bigcup_{x \in A}\{x\}$ is a countable union.
+        Thus, $\mathcal{F} = \sigma(\{\{x\}\colon x \in \Omega\})$ is
+        countably generated.
+
+        Suppose that $\Omega$ is uncountable, and that $\mathcal{A}$ is a
+        countable generating set for $\mathcal{F}$, i.e.\ that $\mathcal{F} =
+        \sigma(\mathcal{A})$.
+        Without loss of generality, suppose that every $A \in \mathcal{A}$ is
+        countable; note that if $A$ is uncountable, then $A^c$ must be
+        countable, so we can replace $A$ with $A^c$ in $\mathcal{A}$.
+        Now, observe that $\Omega_0 = \bigcup_{A \in \mathcal{A}} A$, being a
+        countable union of countable sets, is countable.
+        Thus, $\Omega_0 \neq \Omega$; fix $\omega \in
+        \Omega\setminus\Omega_0$.
+        Then, $\{\omega\} \in \mathcal{F}$, whence $\{\omega\}$ belongs to
+        every $\sigma$-field containing $\mathcal{A}$.
+        Set \[
+            \mathcal{F}_0 = \{A \subseteq \Omega\colon A \subseteq \Omega_0 \text{ or } A^c \subseteq \Omega_0\}.
+        \] Then, $\Omega^c = \emptyset \subseteq \Omega_0$, so $\Omega \in
+        \mathcal{F}_0$.
+        Next, $A \in \mathcal{F}_0$ means that one of $A, A^c$ is a subset of
+        $\Omega_0$, whence $A^c \in \mathcal{F}_0$.
+        Finally, suppose that $A = \bigcup_{n \in \N} A_n$ where $\{A_n\}_{n
+        \in \N} \subset \mathcal{F}_0$.
+        If all $A_n \subseteq \Omega_0$, we have $A \subseteq \Omega_0$,
+        whence $A \in \mathcal{F}_0$.
+        Otherwise, some $A_k^c \subseteq \Omega_0$, so $A^c = \bigcap_{n \in
+        \N} A_n^c \subseteq A_k^c \subseteq \Omega_0$, whence $A \in
+        \mathcal{F}_0$.
+        This shows that $\mathcal{F}_0$ is a $\sigma$-field in $\Omega$.
+        Furthermore, $A \subseteq \Omega_0$ for $A \in \mathcal{A}$, so
+        $\mathcal{A} \subseteq \mathcal{F}_0$, hence $\mathcal{F} \subseteq
+        \mathcal{F}_0$.
+        However, the uncountable set $\{\omega\}^c \notin \mathcal{F}_0$, yet
+        $\{\omega\}^c \in \mathcal{F}$, a contradiction.
+        This proves that $\Omega$ must be countable.
+
+
+        \item Set $\mathcal{F}_2 = \mathcal{B}(\R)$, and \[
+            \mathcal{F}_1 = \{A \subseteq \R\colon A\text{ is countable, or }A^c\text{ is countable}\}.
+        \] Then, $\mathcal{F}_1$ is not countably generated as $\R$ is
+        uncountable, whereas $\mathcal{F}_2$ is countably generated.
+
+        Note that singletons $\{x\}$ for $x \in \R$, being closed in $\R$, are
+        Borel sets.
+        Thus, if $A \subseteq \R$ is countable, then $A = \bigcup_{x \in A}
+        \{x\} \in \mathcal{B}(\R)$.
+        Otherwise, if $A^c$ is countable, then $A^c = \bigcup_{x \in A^c}
+        \{x\} \in \mathcal{B}(\R)$, hence $A \in \mathcal{B}(\R)$.
+        It follows that $\mathcal{F}_1 \subseteq \mathcal{F}_2$.
+
+    \end{enumerate}
+
+
+
+
+
+    \subsection*{Problem 4}
+
+    \begin{enumerate}
+        \item We have infinite $\Omega$, a field \[
+            \mathcal{F} = \{A \subseteq \Omega\colon |A| < \infty \text{ or } |A^c| < \infty\},
+        \] and the map \[
+            \mathbb{P}\colon \mathcal{F} \to [0, \infty], \qquad
+            A \mapsto \begin{cases}
+                0, &\text{ if } |A| < \infty, \\
+                1, &\text{ if } |A^c| < \infty.
+            \end{cases}
+        \] Suppose that $A = \bigcup_{i = 1}^n A_i \in \mathcal{F}$ for
+        pairwise disjoint $A_1, \dots, A_n \in \mathcal{F}$.
+        If all $|A_i| < \infty$, then $|A| < \infty$, so \[
+            \mathbb{P}(A) = 0 = \sum_{i = 1}^n 0 = \sum_{i = 1}^n \mathbb{P}(A_i).
+        \] Otherwise, at least one $|A_k| = \infty$ with $|A_k^c| < \infty$.
+        Now, for $i \neq k$, we must have $A_i \subseteq A_k^c$ by pairwise
+        disjointness, hence $|A_i| < \infty$.
+        Since $A_k \subseteq A \in \mathcal{F}$, we must have $|A| = \infty$,
+        forcing $|A^c| < \infty$.
+        Together, \[
+            \mathbb{P}(A) = 1 = \mathbb{P}(A_k) + \sum_{i \neq k}
+            \mathbb{P}(A_i) = \sum_{i = 1}^n \mathbb{P}(A_i).
+        \] Thus, $\mathbb{P}$ is finitely additive.
+
+
+
+        \item Enumerate $\Omega = \{\omega_i\}_{i \in \N}$, so \[
+            \mathbb{P}(\Omega) = 1 \neq 0 = \sum_{i = 1}^n \mathbb{P}(\{\omega_i\}).
+        \]
+
+
+        \item Let $\Omega$ be uncountable, and suppose that $A = \bigcup_{i
+        \in \N} A_i \in \mathcal{F}$ for pairwise disjoint $\{A_i\}_{i \in \N}
+        \subseteq \mathcal{F}$.
+        Again, if all $|A_i| < \infty$, then $A$ must be countable.
+        Now, $|A^c| < \infty$ would mean that $A = \Omega\setminus A^c$ is
+        uncountable (since $\Omega$ is uncountable), a contradiction.
+        Thus, we must have $|A| < \infty$, whence \[
+            \mathbb{P}(A) = 0 = \sum_{i = 1}^\infty 0 = \sum_{i = 1}^\infty \mathbb{P}(A_i).
+        \] Otherwise, suppose that at least one $|A_k| = \infty$.
+        Then, $|A_k^c| < \infty$, so $A^c \subseteq A_k^c$ gives $|A^c| <
+        \infty$.
+        Again, for $i \neq k$, pairwise disjointness forces $A_i \subseteq
+        A_k^c$ hence $|A_i| < \infty$.
+        Together, \[
+            \mathbb{P}(A) = 1 = \mathbb{P}(A_k) + \sum_{i \neq k}
+            \mathbb{P}(A_i) = \sum_{i = 1}^\infty \mathbb{P}(A_i).
+        \] Thus, $\mathbb{P}$ is countably additive.
+
+
+        \item We have uncountable $\Omega$, a $\sigma$-field \[
+            \mathcal{G} = \{A \subseteq \Omega\colon A \text{ is countable, or } A^c \text{ is countable}\},
+        \] and the map \[
+            \mathbb{P}\colon \mathcal{G} \to [0, \infty], \qquad
+            A \mapsto \begin{cases}
+                0, &\text{ if } A \text{ is countable}, \\
+                1, &\text{ if } A^c \text{ is countable}.
+            \end{cases}
+        \] Let $A = \bigcup_{i \in \N} A_i \in \mathcal{G}$ for pairwise
+        disjoint $\{A_i\}_{i \in \N} \subseteq \mathcal{G}$.
+        If all $A_i$ are countable, so is their union $A$, hence $P(A) =
+        \sum_{n \in \N} P(A_i) = 0$.
+        Otherwise, some $A_k$ is uncountable, hence so is $A$; $A_k \in
+        \mathcal{G}$ forces $A_k^c$ countable, hence $A^c \subseteq A_k^c$
+        countable.
+        Now, for $i \neq k$, pairwise disjointness gives $A_i \subseteq A_k^c$
+        countable.
+        Together, \[
+            \mathbb{P}(A) = 1 = \mathbb{P}(A_k) + \sum_{i \neq k}
+            \mathbb{P}(A_i) = \sum_{i = 1}^\infty \mathbb{P}(A_i).
+        \] Thus, $\mathbb{P}$ is countably additive.
+    \end{enumerate}
+
+
+
+
+    \subsection*{Problem 5}
+
+    Given non-negative, finite, finitely additive $\mu$ on $\R^k$ (we assume
+    on $\mathcal{B}(\R)$, or a larger $\sigma$-field, since we need to talk
+    about $\mu(K)$ for compact $K$), satisfying \[
+        \mu(A) = \sup \{\mu(K)\colon K \subseteq A\text{ is compact}\}.
+    \] To show that $\mu$ is countably additive, it suffices to prove
+    continuity at $\emptyset$, i.e.\ for $\mu(B_i) \to 0$ whenever $B_i
+    \downarrow \emptyset$.
+    With this, for pairwise disjoint $\{A_i\}_{i \in \N}$ with $A = \bigcup_{i
+    \in \N} A_i$, we may set $B_n = A\setminus \bigcup_{i = 1}^n A_i =
+    \bigcup_{i > n} A_i$. Then, each $B_{n + 1} \subseteq B_n$, and
+    $\bigcap_{n \in \N} B_n = \emptyset$, i.e.\ $B_n \downarrow \emptyset$.
+    It follows that $\mu(B_n) \to 0$; now, use countably additivity to write \[
+        \mu(A) = \mu\left(\bigcup_{i = 1}^n A_i\right) + \mu(B_n)
+            = \sum_{i = 1}^n \mu(A_i) + \mu(B_n),
+    \] and take limits $n \to \infty$ so see that \[
+        \mu(A) = \sum_{i = 1}^\infty \mu(A_i),
+    \] whence $\mu$ is countably additive.
+
+    It remains to show that $\mu$ is continuous at $\emptyset$.
+    Given $B_i \downarrow \emptyset$, let $\epsilon > 0$ be arbitrary, and
+    choose $\{K_i\}$ such that each $K_i \subseteq B_i$ is compact, with
+    $\mu(B_i) < \mu(K_i) + \epsilon/2^i$.
+    The latter can be written as $\mu(B_i \setminus K_i) \leq \epsilon/2^i$,
+    since $\mu$ is finite.
+    Then, $\bigcap_{i \in \N} K_i \subseteq \bigcap_{i \in \N} B_i =
+    \emptyset$.
+    It follows from the properties of compact sets that there exists $N \in
+    \N$ for which $\bigcap_{i = 1}^N K_i = \emptyset$.
+    Thus, \[
+        \mu(B_N) = \mu\left(B_N \setminus \bigcap_{i = 1}^N K_i\right)
+            = \mu\left(\bigcup_{i = 1}^N B_N \setminus K_i\right)
+            \leq \mu\left(\bigcup_{i = 1}^N B_i \setminus K_i\right)
+            < \epsilon.
+    \] Indeed, $\mu(B_n) < \epsilon$ for all $n \geq N$.
+    Since $\epsilon > 0$ was arbitrary, we must have $\mu(B_n) \to 0$,
+    completing the proof.
+
+    \emph{Remark:} Recall that if $\{K_n\}_{n \in \N}$ are compact sets in
+    $\R^k$, with $K^N = \bigcap_{n = 1}^N K_n \neq \emptyset$ for all $N \in
+    \N$, then $K = \bigcap_{n \in \N} K_n \neq \emptyset$.
+    This is because one can construct a sequence $\{x_n\}_{n \in \N} \subset
+    \R^k$ where each $x_N \in K^N$.
+    For each $N \in \N$, note that the $N$-tail of this sequence is contained
+    in $K^N$, hence there exists a convergent subsequence $x_{n_N(m)}^N \to x^N \in
+    K^N$ as $m \to \infty$.
+    Again, $\{x^n\}$ is a sequence contained in the compact set $K_1$, and
+    thus must contain a convergent subsequence $x^{n_m} \to x$ as $m \to
+    \infty$.
+    We claim that $x \in K$; indeed, every $K^N$ contains a tail of the
+    sequence $x^{n_m}$, hence must contain the limit $x$.
+    This immediately gives $x \in \bigcap_{N \in \N} K^N = K$, whence $K \neq
+    \emptyset$.
+
+\end{document}
