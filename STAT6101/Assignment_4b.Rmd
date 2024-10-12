@@ -1,0 +1,92 @@
+---
+title: "Assignment 4b"
+author: "Satvik Saha"
+date: "`r Sys.Date()`"
+output:
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(fig.pos = "!H", out.extra = "")
+```
+
+## Answer 1
+
+(a)
+``` {r 1a, message = FALSE}
+library(rstanarm)
+
+gen.fit.linear <- function(n, a, b, sigma, x.lo, x.hi) {
+  x <- runif(n, min = x.lo, max = x.hi)
+  y <- a + b*x + sigma * rnorm(n)
+  df <- data.frame(x, y)
+  
+  fit.y <- stan_glm(y ~ x, data = df, refresh = 0)
+  a.hat <- coef(fit.y)[1]
+  b.hat <- coef(fit.y)[2]
+  a.se <- se(fit.y)[1]
+  b.se <- se(fit.y)[2]
+  
+  return(list(
+    fit = fit.y,
+    slope.1.se = abs(b.hat - b) < b.se
+  ))
+}
+
+```
+
+
+(b)
+``` {r 1b}
+gen.fit.linear(
+  n = 50,
+  a = 10,
+  b = -20,
+  sigma = 30,
+  x.lo = 0,
+  x.hi = 1
+)
+```
+
+
+
+## Answer 2
+
+(a) The regression model $y_i = a + \epsilon_i$ involves minimizing the residual sum of squares $\text{RSS} = \sum_{i = 1}^n (y_i - a)^2$, which is solved by $\hat{a} = \frac{1}{n}\sum_{i = 1}^n y_i = \bar{y}$.
+This is easily seen via \[
+  \text{RSS} = \sum_{i = 1}^n (y_i - \bar{y})^2 + n(\bar{y} - a)^2.
+\]
+
+``` {r 2a, message = FALSE}
+fit.scores <- function(scores) {
+  fit.y <- stan_glm(test_scores ~ 1, data = scores, refresh = 0)
+  a.hat <- coef(fit.y)[1]
+  
+  return(list(
+    fit = fit.y,
+    a.hat = a.hat
+  ))
+}
+```
+
+``` {r 2a gen}
+ugrad <- data.frame(
+  level = 1,
+  test_scores = 50 + 10 * rnorm(10)
+)
+grad <- data.frame(
+  level = 2,
+  test_scores = 60 + 15 * rnorm(10)
+)
+scores <- rbind(ugrad, grad)
+head(scores[sample(nrow(scores)), ])
+```
+
+``` {r 2a check}
+mean(scores$test_scores)
+
+fit.scores(scores)
+```
+
+Of course, `stan_glm` goes beyond simple linear regression, with priors and regularization, but the point stands.

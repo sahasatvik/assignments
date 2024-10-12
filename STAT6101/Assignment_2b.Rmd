@@ -1,0 +1,50 @@
+---
+title: "Assignment 2b"
+author: "Satvik Saha"
+date: "`r Sys.Date()`"
+output:
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Answer 1
+
+```{r 1}
+v1 <- rep(1, 10)
+v2 <- 1:10
+v3 <- v2^2
+
+X  <- rbind(v1, v2, v3)
+```
+
+(a) For equal weights, the weighted average is just the usual simple average.
+```{r 1a}
+colMeans(X)
+```
+
+(b)
+```{r 1b}
+w <- c(1, 2, 3)
+colSums(X * w) / sum(w)
+```
+
+
+## Answer 2
+
+(a) Number of games won by a chess player who has played 20 games, with a probability of 30% of winning each game.
+```{r 2a}
+rbinom(1, 20, 0.3)
+```
+
+(b) Number of games won by a couple of chess players who have played 20 games (not against each other). The first has a probability of 30% of winning each game, while the second has a probability of 40% of winning each game.
+```{r 2b}
+rbinom(2, 20, c(0.3, 0.4))
+```
+
+(c) Number of games won by a couple of chess players. The first has played 30 games with a probability of 30% of winning each game, while the second has played 20 games with a probability of 40% of winning each game.
+```{r 2c}
+rbinom(2, c(30, 20), c(0.3, 0.4))
+```

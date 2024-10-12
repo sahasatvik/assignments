@@ -1,0 +1,27 @@
+---
+title: "Assignment 1b"
+author: "Satvik Saha"
+date: "`r Sys.Date()`"
+output:
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Answer 1
+
+(a) The three challenges of statistical inference^[As per _Regression and Other Stories (Gelman, Hill, Vehtari)_] are as follows.
+    (i) _Generalizing from a sample to the population_.
+    (ii) _Generalizing from the treatment group to the control group_.
+    (iii) _Generalizing from the observed measurements to the underlying construct_.
+  
+(b) The data and examples from the textbook are available at [https://avehtari.github.io/ROS-Examples/examples.html](https://avehtari.github.io/ROS-Examples/examples.html).
+
+
+## Answer 2
+
+(a) Consider the problem of trying to gauge the (relative) popularity of different chess players, by examining social media interaction. By sampling from social media posts or users, we can only access a population of chess enthusiasts _who use social media_. It is difficult to generalize to the population of chess enthusiasts as a whole; it is conceivable that the opinions of older chess enthusiasts (who may not use social media as frequently) will be underrepresented.
+(b) Consider the problem of determining which color (or design) in an advertisement is most effective. If two competing designs are tested against two groups of people, there are a lot of adjustments that have to be made to account for differences between the groups, such as demand for the advertised item (perhaps affected by income, presence of competing brands, etc) or modes of advertisement.
+(c) Consider the problem of ranking countries according to some 'happiness index'. Of course, the notion of _happiness_ is quite vague and difficult to pin down via reasonable measurements. The World Happiness Index uses factors such as GDP per capita, life expectancy, and perceptions of corruption, to extrapolate some underlying sense of national happiness.

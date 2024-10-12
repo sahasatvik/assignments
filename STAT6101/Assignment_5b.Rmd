@@ -1,0 +1,123 @@
+---
+title: "Assignment 5b"
+author: "Satvik Saha"
+date: "`r Sys.Date()`"
+output:
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(fig.pos = "!H", out.extra = "")
+```
+
+## Answer 1
+
+``` {r 1 data, message = FALSE}
+library(rstanarm)
+
+n <- 30
+x <- rnorm(n, mean = 6, sd = 2)
+x <- pmax(pmin(x, 10), 0)
+z <- sample(c(0, 1), n, replace = TRUE)
+y <- x + 1.5 * (z - 0.5) + 0.5 * rnorm(n)
+y <- pmax(pmin(y, 10), 0)
+df <- data.frame(x = x, y = y, z = z)
+plot(x, y, pch = z + 2)
+
+prior.x.sd <- 2.5 * sd(y) / sd(x)
+```
+
+(a)
+``` {r 1a}
+fit.a <- stan_glm(
+  y ~ x + z,
+  data = df,
+  refresh = 0
+)
+fit.a
+prior_summary(fit.a)
+```
+
+(b)
+``` {r 1b}
+fit.b <- stan_glm(
+  y ~ x + z,
+  data = df,
+  prior = c(normal(c(0, 0), c(prior.x.sd, 10^3))),
+  refresh = 0
+)
+fit.b
+prior_summary(fit.b)
+```
+
+(c) One appropriate prior for $z$ is the $N(0, 1.5)$.
+``` {r 1c}
+fit.c <- stan_glm(
+  y ~ x + z,
+  data = df,
+  prior = c(normal(c(0, 0), c(prior.x.sd, 1.5))),
+  refresh = 0
+)
+fit.c
+prior_summary(fit.c)
+```
+
+
+## Answer 2
+
+The point on the extreme right (on the $x$ scale) has most influence, being the one furthest away from the mean of the $x$ data.
+
+
+## Research homework assignment
+
+
+``` {r rha model1, message = FALSE}
+fit.normal <- function(n, M, S) {
+  y <- rnorm(n, mean = M, sd = S)
+  stan_glm(
+    y ~ 1,
+    prior_intercept = normal(0, 1),
+    prior_aux = NULL,
+    refresh = 0
+  )
+}
+```
+
+For $M = 5$, $S = 10$, note that the prior and data will have similar information about $\mu$ when $S^2/n \approx \sigma_{\text{prior}}^2$, i.e. we set $n \approx 100$.
+
+``` {r rha test1, warning = FALSE}
+fit.normal(100, 5, 10)
+fit.mu <- replicate(50, coef(fit.normal(100, 5, 10)))
+hist(fit.mu, probability = TRUE)
+curve(dnorm(x, mean = mean(fit.mu), sd = sd(fit.mu)), add = TRUE)
+mean(fit.mu)
+sd(fit.mu)
+```
+
+Note that the fitted values of $\mu$ seem to follow a normal distribution with a mean in the middle of the prior and model means, i.e. between $0$ and $5$.
+
+
+We repeat the same for the second model; we keep the approximation $n = 100$.
+
+``` {r rha model2, message = FALSE}
+fit.t <- function(n, M, S) {
+  y <- rnorm(n, mean = M, sd = S)
+  stan_glm(
+    y ~ 1,
+    prior_intercept = student_t(df = 1, location = 0, scale = 1),
+    prior_aux = NULL,
+    refresh = 0
+  )
+}
+```
+
+``` {r rha test2, warning = FALSE}
+fit.t(100, 5, 10)
+fit.mu <- replicate(50, coef(fit.t(100, 5, 10)))
+hist(fit.mu, probability = TRUE)
+```
+
+Here, the fitted values of $\mu$ are much more unstable.
+This may be explained by the fact that the $t_1(0, 1)$ prior on $\mu$ has fairly heavy tails, making prior draws of $\mu$ erratic.
+This, the shrinking effect of the prior on the estimate of $\mu$ seen in the first model is not so apparent in this one.

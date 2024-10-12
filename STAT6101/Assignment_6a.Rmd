@@ -1,0 +1,91 @@
+---
+title: "Assignment 6a"
+author: "Satvik Saha"
+date: "`r Sys.Date()`"
+output:
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(fig.pos = "!H", out.extra = "")
+```
+
+## Answer 1
+
+``` {r 1 data, message = FALSE}
+library(rstanarm)
+
+n <- 50
+score_pre <- rnorm(n, mean = 50, sd = 20)
+sex <- sample(c(0, 1), n, replace = TRUE)
+grade <- sample(c(6, 7, 8), n, replace = TRUE)
+score <- 5 + score_pre + 0.0 * sex + ifelse(grade == 7, 5, -5) + 10 * rnorm(n)
+df <- data.frame(
+  score_pre = score_pre,
+  sex = sex,
+  grade = grade,
+  score = score
+)
+plot(score_pre, score, pch = grade, col = sex + 1)
+```
+
+(a) With the encoding $0$ for women and $1$ for men, it is easy to read the model without the 'sex' variable as the model for women, and the model without the 'sex' variable but with the coefficient for 'sex' added to the intercept as the model for men.
+An encoding with $1$, $2$ for women and men respectively is only slightly more awkward to read off the two models.
+
+(b)
+``` {r 1b}
+stan_glm(
+  score ~ score_pre + sex + grade,
+  data = df,
+  refresh = 0
+)
+```
+
+(c)
+``` {r 1c}
+stan_glm(
+  score ~ score_pre + sex + factor(grade),
+  data = df,
+  refresh = 0
+)
+```
+
+
+## Answer 2
+
+Consider the model $$
+  y_i = a + b h_i + c m_i + d h_i m_i + \epsilon_i,
+$$ with $\epsilon_i \overset{iid}{\sim} N(0, \sigma^2)$, and $y, h, m$ denoting the variables _earnings, _height_, and _male_.
+
+We have our estimates $\hat{a} = -9.3, \hat{b} = 0.4, \hat{c} = -29.3, \hat{d} = 0.6$.
+
+(a) Setting $m_i' = m_i - 0.5$, we may rewrite our model as $$
+\begin{aligned}
+  y_i &= (a + 0.5 c) + (b + 0.5 d) h_i + c (m_i - 0.5) + d h_i (m_i - 0.5) + \epsilon_i \\
+    &= a' + b' h_i + c' m_i' + d' h_i m_i' + \epsilon_i,
+\end{aligned}
+$$ so our new coefficients are $\hat{a}' = \hat{a} + 0.5 \hat{c} = -23.95$, $\hat{b}' = \hat{b} + 0.5 \hat{d} =  0.7$, $\hat{c}' = \hat{c} = -29.3$, $\hat{d}' = \hat{d} = 0.6$.
+
+(b) Setting $h_i' = h_i - 66$, we may rewrite our model as $$
+\begin{aligned}
+  y_i &= (a' + 66b') + b' (h_i - 66) + (c' + 66 d') m_i' + d' (h_i - 66) m_i' + \epsilon_i \\
+    &= a'' + b'' h_i + c'' m_i' + d'' h_i' m_i' + \epsilon_i,
+\end{aligned}
+$$ so our new coefficients are $\hat{a}'' = \hat{a}' + 66\hat{d}' = 15.65$, $\hat{b}'' = \hat{b}' = 0.7$, $\hat{c}'' = \hat{c}' + 66\hat{d}' = 10.3$, $\hat{d}'' = \hat{d}' = 0.6$.
+
+
+(c) Identical to (b)
+
+
+
+## Answer 3
+
+(a) The estimated regression line for the control group ($z = 0$) can be read as $$
+  y = 1.2 + 1.6 x,
+$$ and the model for the treatment group ($z = 1$) can be read as $$
+  y = 1.2 + 1.6x + 2.7 + 0.7x = 3.9 + 2.3x.
+$$
+
+(b)
+![Control and treatment regression lines](6a3b.pdf){width=450px}
