@@ -1,0 +1,71 @@
+---
+title: "Assignment 8b"
+author: "Satvik Saha"
+date: "`r Sys.Date()`"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(fig.pos = "!H", out.extra = "")
+```
+
+## Answer 1
+
+(a)
+
+``` {r 1a}
+logit <- qlogis
+invlogit <- plogis
+
+x <- seq(0, 5, length.out = 100)
+plot(x, invlogit(2 + 3 * x), type = "l")
+
+```
+
+
+(b)
+
+``` {r 1b}
+z <- c(0, 1, 2)
+p <- sapply(z, function(z) invlogit(2 + 3 * x - 3 * z))
+labels <- sapply(z, function(z) paste("z = ", z))
+matplot(x, p, type = "l", lty = 1)
+legend("bottomright", labels, col = seq_along(z), fill = seq_along(z), cex = 0.8)
+```
+
+
+
+## Answer 2
+
+(a)
+We have the models $$
+\begin{aligned}
+    P(y = 1) &= \text{logit}^{-1}(-0.2 + 0.3x), \qquad& z = 0, \\
+    P(y = 1) &= \text{logit}^{-1}(`r -0.2 - 1.5` + `r 0.3 - 0.2`x), \qquad& z = 1, \\
+    P(y = 1) &= \text{logit}^{-1}(`r -0.2 - 2 * 1.5` `r 0.3 - 2 * 0.2`x), \qquad& z = 2.
+\end{aligned}
+$$
+
+(b)
+``` {r 2b}
+x <- seq(0, 10, length.out = 100)
+z <- c(0, 1, 2)
+p <- sapply(z, function(z) invlogit(-0.2 + 0.3 * x - 1.5 * z - 0.2 * x * z))
+labels <- sapply(z, function(z) paste("z = ", z))
+matplot(x, p, type = "l", lty = 1)
+legend("topleft", labels, col = seq_along(z), fill = seq_along(z), cex = 0.8)
+```
+
+(b)
+``` {r 2c}
+x <- seq(-10, 0, length.out = 100)
+z <- c(0, 1, 2)
+p <- sapply(z, function(z) invlogit(-0.2 + 0.3 * x - 1.5 * z - 0.2 * x * z))
+labels <- sapply(z, function(z) paste("z = ", z))
+matplot(x, p, type = "l", lty = 1)
+legend("topleft", labels, col = seq_along(z), fill = seq_along(z), cex = 0.8)
+```
+
+Note that $\text{logit}^{-1}(-0.2 + 0.3x - 1.5z - 0.2xz)$ is independent of $z$
+when $1.5z + 0.2xz = 0$, i.e. $x = `r -1.5/0.2`$.

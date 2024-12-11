@@ -1,0 +1,37 @@
+---
+title: "Assignment 12b"
+author: "Satvik Saha"
+date: "`r Sys.Date()`"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(fig.pos = "!H", out.extra = "")
+```
+
+## Answer 1
+
+(a) Using the discussion in Section 21.2, we estimate the treatment effect as
+    $0.5 / 0.7 \approx `r round(0.5/0.7, 2)`$.
+
+
+(b) We can estimate the average treatment effect among the compliers, i.e.
+    those patients whose decision to take the drug can be affected by the
+    offer.
+
+
+## Answer 2
+
+(a) The pre-treatment measurement is used to compute the encouragement effects,
+    thereby allowing us to perform our instrumental variable analysis using
+    estimated ITT and treatment effects.
+
+
+(b) I would set up a model of the form $$
+        \text{blood pressure}_{\text{post experiment}}
+            \sim \text{drug taken}
+                + \text{blood pressure}_{\text{pre experiment}}
+                + \text{age}.
+    $$ We could also throw in an indicator variable for restricting our
+    pre-experiment data to near the discontinuity.

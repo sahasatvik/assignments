@@ -1,0 +1,58 @@
+---
+title: "Assignment 9b"
+author: "Satvik Saha"
+date: "`r Sys.Date()`"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(fig.pos = "!H", out.extra = "")
+```
+
+## Answer 1
+
+``` {r 1 data}
+df <- data.frame(
+    i = c("Audrey", "Anna", "Bob", "Bill", "Caitlin", "Cara", "Dave", "Doug"),
+    x = c(40, 45, 50, 55, 60, 65, 70, 75),
+    z = c(0, 1, 1, 0, 0, 0, 1, 1),
+    y0 = c(140, 140, 150, 150, 160, 160, 170, 170),
+    y1 = c(135, 135, 140, 140, 155, 155, 160, 160)
+)
+```
+(a)
+    ``` {r 1a}
+    audrey <- df$i == "Audrey"
+    df$y1[audrey] - df$y0[audrey]
+    ```
+    Thus, the treatment effect for Audrey is $-5$.
+
+(b)
+    ``` {r 1b}
+    df$tau <- df$y1 - df$y0
+    mean(df$tau)
+    ```
+    Thus, the sample average treatment effect is $-7.5$.
+
+(c)
+    ``` {r 1c}
+    df$y <- ifelse(df$z == 0, df$y0, df$y1)
+    lm(y ~ z, data = df)
+    ```
+    Thus, the estimated treatement effect is $-3.75$.
+
+
+    For the sake of curiosity, consider
+    ``` {r 1c remark}
+    lm(y ~ z + x, data = df)
+    ```
+
+
+
+## Answer 2
+
+It would seem that (b) is true; the prediction $X\beta$ has a smoothing effect
+leading to the absence of more extreme values for income.
+In particular, the imputed data will be 'missing' extreme values produced by
+the error terms.

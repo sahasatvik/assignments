@@ -1,0 +1,24 @@
+---
+title: "Assignment 13a"
+author: "Satvik Saha"
+date: "`r Sys.Date()`"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(fig.pos = "!H", out.extra = "")
+```
+
+## Answer 1
+
+(a) We can reasonably assume that an issue attitude of $5$ (the midpoint of the
+    $0$-$10$ scale) corresponds to a predicted probability of $1/2$ for voting
+    for the conservative party.
+    This suggests that $a = -1$ (solving for $a + 0.2(5) = 0$).
+
+(b) Given our fitted model $$
+        y = 0.1 + 0.2x + (0.3 + 0.4x) z + \text{error},
+    $$ we would estimate the population average causal effect as $0.3
+    + 0.4\bar{x}$, where $\bar{x}$ is the population average pre-treatment
+    measurement.
