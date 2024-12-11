@@ -1,0 +1,262 @@
+\documentclass[11pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage[scr]{rsfso}
+\usepackage{bm}
+\usepackage{cancel}
+
+\geometry{a4paper, margin = 1in}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\norm}[1]{\left\Vert #1 \right\Vert}
+
+\newcommand{\EE}{\mathbb{E}}
+
+\newcommand{\MLE}{\text{MLE}}
+
+\newcommand{\iid}{\overset{iid}{\sim}}
+\newcommand{\topp}{\overset{p}{\to}}
+\newcommand{\toas}{\overset{a.s.}{\longrightarrow}}
+
+\DeclareMathOperator*{\trace}{trace}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\KL}{KL}
+
+\title{\bfseries STAT6201: Theoretical Statistics I}
+\author{Satvik Saha}
+\date{}
+
+\begin{document}
+    \maketitle
+
+    \section*{Homework 4}
+
+    \begin{enumerate}
+        \item Let $P$ be supported on $\N$, and let $Q_\lambda$ denote the
+        $\text{Poisson}(\lambda)$ distribution.
+        Further let $p, q$ be the probability mass functions of $P, Q_\lambda$
+        respectively.
+        Then, \begin{align*}
+            \KL(P, Q_\lambda)
+                &= \sum_{n \in \N} p(n) \log\left(\frac{p(n)}{q_\lambda(n)}\right) \\
+                &= \sum_{n \in \N} p(n) \log\left(\frac{p(n)\,n!\, e^\lambda}{\lambda^n}\right) \\
+                &= \sum_{n \in \N} p(n)\,\log(p(n)\, n!)
+                    + \lambda \cancelto{1}{\sum_{n \in \N} p(n)}
+                    - \log(\lambda) \sum_{n \in \N} n\, p(n) \\
+                &= C_P + \lambda - \mu \log(\lambda).
+        \end{align*}
+        It follows that $\KL(P, Q_\lambda)$ is minimized when $\lambda - \mu
+        \log(\lambda)$ is minimized.
+        Differentiating, we see that $\lambda^* = \mu$ is indeed the unique
+        minimizer.
+
+        \emph{Remark:} The map $x \mapsto x - \mu \log{x}$ diverges to $\infty$
+        when $x \to 0$ as well as when $x \to \infty$.
+
+
+        \item
+        \begin{enumerate}
+            \item Let $X_1, \dots, X_n \iid N(0, \theta^{-1})$, so \[
+                f(\bm{x}\mid \theta) = (2\pi)^{-n / 2} \theta^{n / 2} \exp\left(-\frac{1}{2}\theta\sum_{i = 1}^n x_i^2\right)
+            \] Let $\mathscr{G}$ be the family of gamma distributions with densities \[
+                \pi(\theta\mid \alpha, \beta) = \frac{\beta^\alpha}{\Gamma(\alpha)} \theta^{\alpha - 1} \exp(-\beta \theta),
+            \] for $\alpha, \beta > 0$.
+            Then, observe that \[
+                \pi(\theta \mid \bm{x})
+                    \propto \theta^{\alpha + n / 2 - 1} \exp\left(-\left[\beta + \frac{1}{2}\sum_{i = 1}^n x_i^2\right]\theta\right).
+            \] Thus, $\theta\mid\bm{x} \sim \pi(\theta\mid \alpha + n / 2,
+            \beta + \sum_i x_i^2 / 2) \in \mathscr{G}$.
+            The posterior mean is simply \[
+                \EE[\theta \mid \bm{x}] = \frac{\alpha + n / 2}{\beta + \sum_i x_i^2 / 2}.
+            \]
+
+            \item Let $X_1, \dots, X_n \iid N(0, \theta^2)$ for $\theta \in (0,
+            \infty)$, so \[
+                f(\bm{x} \mid \theta) = (2\pi\theta^2)^{-n / 2} \exp\left(-\frac{1}{2\theta^2} \sum_{i = 1}^n x_i^2\right).
+            \] Then, \begin{align*}
+                \frac{\partial}{\partial \theta} \log{f(\bm{x}\mid \theta)}
+                    &= -\frac{n}{\theta} + \frac{1}{\theta^3} \sum_{i = 1}^n x_i^2, \\
+                \frac{\partial^2}{\partial \theta^2} \log{f(\bm{x}\mid \theta)}
+                    &= \frac{n}{\theta^2} - \frac{3}{\theta^4} \sum_{i = 1}^n x_i^2, \\
+                -\EE\left[\frac{\partial^2}{\partial \theta^2}  \log{f(\bm{x}\mid \theta)} \right]
+                    &= -\frac{n}{\theta^2} + \frac{3}{\theta^4} \cdot n\theta^2 = \frac{2n}{\theta^2}.
+            \end{align*}
+            Thus, the Jeffrey's prior is given by $\pi(\theta) \propto
+            \sqrt{I(\theta)} \propto \theta^{-1}$.
+            Note that with this, \[
+                \pi(\theta\mid \bm{x}) \propto \theta^{-n - 1} \exp\left(-\frac{1}{2}\sum_{i = 1}^n x_i^2 / \theta^2\right),
+            \] so \[
+                \pi(\theta^{-2}\mid \bm{x}) \propto \theta^3 \cdot (\theta^{-2})^{(n + 1) / 2} \exp\left(-\frac{1}{2}\sum_{i = 1}^n x_i^2 \theta^{-2}\right),
+            \] from which $\theta^{-2} \mid \bm{x} \sim \text{Gamma}(n / 2,
+            \sum_i x_i^2 / 2)$.
+            Thus, \[
+                \EE[\theta\mid \bm{x}]
+                    = \EE[(\theta^{-2})^{-1 / 2}\mid \bm{x}]
+                    = \frac{\Gamma(n/2 - 1/2)}{\Gamma(n/2)} \cdot \left(\frac{1}{2}\sum_{i = 1}^n x_i^2\right)^{1 / 2}.
+            \] 
+        \end{enumerate}
+
+
+        \item Let $Z \sim N(0, 1)$, and let $h \in C^1(\R)$ with $\EE[|h'(Z)|]
+        < \infty$.
+        Recall the relation $\phi'(z) = -z\,\phi(z)$, where $\phi$ is the density
+        of the standard normal distribution.
+        Then, integration by parts yields \[
+            \int_\R h'(z) \phi(z)\:dz
+                = \cancelto{0}{h(z) \phi(z) \Big|_{-\infty}^{+\infty}} - \int_\R h(z) \phi'(z)\:dz
+                = \int_\R zh(z)\,\phi(z)\:dz.
+        \] This is precisely $\EE[h'(Z)] = \EE[Z h(Z)]$.
+
+        \emph{Remark:} It is easily checked that \[
+            \phi(z)
+                = \frac{1}{\sqrt{2\pi}} e^{-z^2 /2}, \qquad
+            \phi'(z)
+                = \frac{1}{\sqrt{2\pi}} e^{-z^2 /2} \cdot (-z)
+                = - z\,\phi(z).
+        \]
+
+        \emph{Remark:} To verify that the boundary term does indeed vanish, we
+        show that $h(z) \phi(z) \to 0$ as $z \to \infty$; the other case will
+        follow by symmetry.
+        Fix $z_0 > 0$, and note that for $z > z_0$, we have $\phi$ decreasing
+        on $(z_0, z)$, so \begin{align*}
+            |h(z)\phi(z)|
+                &\leq |h(z_0)|\phi(z) + |h(z) - h(z_0)| \phi(z) \\
+                &= |h(z_0)|\phi(z) + \left|\int_{z_0}^z h'(t) \phi(z) \:dt\right| \\
+                &\leq |h(z_0)|\phi(z) + \int_{z_0}^z |h'(t)| \phi(t) \:dt \\
+                &\leq |h(z_0)|\phi(z) + \EE[|h'(Z)|\,\bm{1}_{(z_0, \infty)}(Z)].
+        \end{align*}
+        Now, using $\phi(z) \to 0$ as $z \to \infty$, \[
+            \limsup_{z \to \infty} |h(z) \phi(z)|
+                \leq \EE[|h'(Z)|\,\bm{1}_{(z_0, \infty)}(Z)]
+        \] for all $z_0 > 0$.
+        Thus, $\EE[|h'(Z)|] < \infty$ along with the Dominated Convergence
+        Theorem guarantees that \[
+            \limsup_{z \to \infty} |h(z) \phi(z)|
+                \leq \lim_{z_0 \to \infty} \EE[|h'(Z)|\,\bm{1}_{(z_0, \infty)}(Z)]
+                = 0.
+        \]
+
+
+
+        \item Let $X \sim N_n(\theta, \sigma^2 \bm{I}_n)$, and let $h \in
+        C^1(\R^n, \R^n)$ such that $\EE[\norm{\nabla h}_2] < \infty$.
+        \begin{enumerate}
+            \item Write \begin{align*}
+                \EE[\norm{X - h(X) - \theta}_2^2]
+                    &= \EE[\norm{X - \theta}_2^2] + \EE[\norm{h(X)}_2^2] - 2 \EE[h(X)\cdot (X - \theta)] \\
+                    &= n\sigma^2 + \EE[\norm{h(X)}_2^2] - 2 \EE[h(X)\cdot (X - \theta)].
+            \end{align*}
+            Set $Z = (X - \theta) / \sigma \sim N_n(0, \bm{I}_n)$, and $g(z) =
+            h(\sigma z + \theta)$, so \[
+                h(X)\cdot (X - \theta)
+                    = \sigma h(\sigma Z + \theta)\cdot Z
+                    = \sigma g(Z)\cdot Z.
+            \] Notate $Z_{-i}$ as the vector $(Z_1, \dots, Z_n)$ with the
+            $i$-th variable removed.
+            Now, \begin{align*}
+                \EE[h(X)\cdot  (X - \theta)]
+                    &= \sigma \EE[g(Z)\cdot  Z] \\
+                    &= \sigma \sum_{i = 1}^n \EE[g_i(Z) Z_i] \\
+                    &= \sigma \sum_{i = 1}^n \EE[\EE[g_i(Z) Z_i \mid Z_{-i}]] \\
+                    &= \sigma \sum_{i = 1}^n \EE\left[\frac{\partial g_i(Z)}{\partial z_i}\right] \tag{Stein's method} \\
+                    &= \sigma^2 \sum_{i = 1}^n \EE\left[\frac{\partial h_i(X)}{\partial x_i}\right].
+            \end{align*}
+            Thus, we have shown that \[
+                \EE[\norm{X - h(X) - \theta}_2^2]
+                    = n\sigma^2 + \EE[\norm{h(X)}_2^2] - 2 \sigma^2 \sum_{i = 1}^n \EE\left[\frac{\partial h_i(X)}{\partial x_i}\right].
+            \]
+
+
+            \item Let $n > 2$.
+            Setting $\delta_{JS}(X) = X - h(X)$ with \[
+                h(x) = \frac{(n - 2)\sigma^2}{\norm{x}_2^2}\, x,
+            \] the previous part guarantees that we need only show that for all
+            $\theta \in \R^n$, \[
+                \EE[\norm{h(X)}_2^2] - 2\sigma^2\sum_{i = 1}^n \EE\left[\frac{\partial h_i(X)}{\partial x_i}\right] < 0.
+            \] Now, \[
+                \EE[\norm{h(X)}_2^2] = (n - 2)^2\sigma^4\EE\left[\frac{1}{\norm{X}_2^2}\right].
+            \] Furthermore, \[
+                \frac{1}{(n - 2)\sigma^2}\frac{\partial h_i(x)}{\partial x_i}
+                    = \frac{\norm{x}_2^2 - x_i \cdot (2x_i)}{\norm{x}_2^4}
+                    = \frac{1}{\norm{x}_2^2} - \frac{2x_i^2}{\norm{x}_2^4},
+            \] so \[
+                \sum_{i = 1}^n \frac{\partial h_i(x)}{\partial x_i}
+                    = (n - 2)\sigma^2 \left[\frac{n}{\norm{x}_2^2} - \frac{2 \norm{x}_2^2}{\norm{x}_2^4}\right]
+                    = (n - 2)^2\sigma^2\,\frac{1}{\norm{x}_2^2}.
+            \] Putting these together, we have \[
+                \EE[\norm{h(X)}_2^2] - 2\sigma^2\sum_{i = 1}^n \EE\left[\frac{\partial h_i(X)}{\partial x_i}\right]
+                    = -(n - 2)^2\sigma^4\,\EE\left[\frac{1}{\norm{X}_2^2}\right]
+                    < 0.
+            \] From this, \[
+                \EE\norm{\delta_{JS}(X) - \theta}_2^2
+                    = \EE\norm{X - h(X) - \theta}_2^2
+                    < \EE\norm{X - \theta}_2^2
+            \] for all $\theta \in \R^n$, whence the estimator $X$ for $\theta$
+            is inadmissible.
+
+            \emph{Remark:} It ought to be clear that $h \in C^1$ with
+            $\EE\norm{\nabla h(X)}_2 < \infty$, given that \[
+                \frac{1}{(n - 2)\sigma^2}\frac{\partial h_i(x)}{\partial x_j}
+                    = \frac{\delta_{ij}}{\norm{x}_2^2} - \frac{2x_ix_j}{\norm{x}_2^4},
+            \] and inverse Gaussians have finite moments.
+        \end{enumerate}
+
+
+        \item Let $X \mid \theta \sim N_n(\theta, \sigma^2 \bm{I}_n)$, and
+        $\theta \sim N_n(0, \tau^2 \bm{I}_n)$ for $\sigma > 0$ known, $\tau >
+        0$ unknown.
+        Consider the Bayes estimator under squared error loss (in the case
+        $\tau$ is known) for $\theta$, \[
+            \delta_\pi(X) = \frac{\tau^2}{\tau^2 + \sigma^2}\, X
+        \] Denote $\alpha = \tau^2 / (\tau^2 + \sigma^2)$.
+        We can calculate the posterior \begin{align*}
+            \pi(\theta \mid x, \tau^2)
+                &\propto (2\pi \sigma^2)^{n / 2} (2\pi \tau^2)^{n / 2}\exp\left(-\frac{1}{2\sigma^2}\sum_{i = 1}^n (x_i - \theta_i)^2 - \frac{1}{2\tau^2} \sum_{i = 1}^n \theta_i^2\right) \\
+                &\propto \prod_{i = 1}^n \exp\left(-\frac{1}{2}\left[\frac{1}{\sigma^2} + \frac{1}{\tau^2}\right]\theta_i^2 + \frac{1}{\sigma^2} x_i \theta_i\right) \\
+                &\sim N_n(\tau^2 X / (\tau^2 + \sigma^2), \sigma^2\tau^2 \bm{I}_n / (\tau^2 + \sigma^2)) \\
+                &\sim N_n(\alpha X, \alpha \sigma^2 \bm{I}_n).
+        \end{align*}
+        Thus, the marginal \begin{align*}
+            f(x \mid \tau^2)
+                &= \frac{f(x\mid \theta)\pi(\theta\mid \tau^2)}{\pi(\theta\mid x, \tau^2)} \\
+                &= \frac{(\alpha\sigma^2)^{n / 2}}{(2\pi\tau^2\sigma^2)^{n / 2}}\prod_{i = 1}^n \exp\left(-\frac{1}{2\sigma^2} (x_i - \theta_i)^2 -\frac{1}{2\tau^2} \theta_i^2 + \frac{1}{2\alpha\sigma^2} (\theta_i - \alpha x_i)^2\right) \\
+                &= \frac{1}{(2\pi \tau^2 / \alpha)^{n / 2}} \prod_{i = 1}^n \exp\left(-\frac{(1 - \alpha)}{2\sigma^2}x_i^2\right) \\
+                &\sim N_n(0, (\tau^2 +\sigma^2) \bm{I}_n).
+        \end{align*}
+
+        \begin{enumerate}
+            \item Note that $(\tau^2 + \sigma^2) \norm{X}_2^2 \mid
+            \tau^2 \sim \chi_n^2 \sim \text{Gamma}(n / 2, 1 / 2)$, whence \[
+                \EE\left[(\tau^2 + \sigma^2)\norm{X}_2^{-2} \mid \tau^2\right]
+                    = \frac{1 / 2}{n / 2 - 1}
+                    = \frac{1}{n - 2}.
+            \] Thus, $(n - 2)\sigma^2 \norm{X}_2^{-2}$ is an unbiased estimator
+            for $\sigma^2 / (\tau^2 + \sigma^2) = 1 - \alpha$, so \[
+                \EE[1 - (n - 2)\sigma^2 \norm{X}_2^{-2} \mid \tau^2]
+                    = \frac{\tau^2}{\tau^2 + \sigma^2}.
+            \] This gives us an empirical Bayes estimator \[
+                \delta(X) = \left(1 - \frac{(n - 2)\sigma^2}{\norm{X}_2^2}\right) X,
+            \] which is precisely the James-Stein estimator.
+
+
+            \item Using the standard form of the MLE for Gaussian variances, \[
+                \hat{\tau}^2
+                    = \argmax_{\tau^2} f(X\mid \tau^2) = \left(\frac{1}{n}\sum_{i = 1}^n X_i^2 - \sigma^2\right)^+.
+            \] With this, we have an empirical Bayes estimator \[
+                \delta(X)
+                    = \frac{\hat{\tau}^2}{\hat{\tau}^2 + \sigma^2}\, X
+                    = \frac{\left(\norm{X}_2^2 / n - \sigma^2\right)^+}{\norm{X}_2^2 / n} \, X
+                    = \left(1 - \frac{n\sigma^2}{\norm{X}_2^2}\right)^+ X.
+            \] This resembles the positive-part James-Stein estimator, up to
+            the replacement of $n - 2$ with $n$.
+        \end{enumerate}
+
+    \end{enumerate}
+
+\end{document}

@@ -1,0 +1,301 @@
+\documentclass[11pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage[scr]{rsfso}
+\usepackage{bm}
+\usepackage{cancel}
+
+\geometry{a4paper, margin = 1in}
+
+\include{mathsymbols}
+
+
+\title{\bfseries STAT6201: Theoretical Statistics I}
+\author{Satvik Saha}
+\date{}
+
+\begin{document}
+    \maketitle
+
+    \section*{Homework 6}
+
+    \begin{enumerate}
+
+        \item
+        \begin{enumerate}
+            \item Suppose that $\delta_0$ is Bayes for some prior $\pi$ on
+            $\Theta$, and is an equalizer, i.e.\ has constant risk
+            $\overline{R}(\delta_0) = R(g(\cdot), \delta_0)$ on $\Theta$.
+            Then, for any other estimator $\delta$ of $g(\theta)$, we have
+            \begin{align*}
+                \overline{R}(\delta_0)
+                    &= R(g(\cdot), \delta_0) \\
+                    &= \EE_{\theta \sim \pi}[R(g(\theta)), \delta_0] \tag{Constant risk} \\
+                    &\leq \EE_{\theta \sim \pi}[R(g(\theta), \delta)] \tag{$\delta_0$ is Bayes} \\
+                    &\leq \sup_{\theta \in \Theta} R(g(\theta), \delta) \\
+                    &= \overline{R}(\delta).
+            \end{align*}
+            This shows that $\delta_0$ is minimax for $\Theta$.
+
+            \item Suppose that $\delta_0$ is extended Bayes, and is an
+            equalizer on $\Theta$.
+            Let $\delta$ be some other estimator of $g(\theta)$.
+            Fix $\epsilon > 0$, and let $\pi$ be a prior such that \[
+                \EE_{\theta \sim \pi}[R(g(\theta), \delta_0)]
+                    \leq \inf_\eta \EE_{\theta \sim \pi}[R(g(\theta), \eta)] + \epsilon.
+            \] Then, \begin{align*}
+                \overline{R}(\delta_0)
+                    &= R(g(\cdot), \delta_0) \\
+                    &= \EE_{\theta \sim \pi}[R(g(\theta)), \delta_0] \tag{Constant risk} \\
+                    &\leq \EE_{\theta \sim \pi}[R(g(\theta), \delta)] + \epsilon \tag{$\delta_0$ is extended Bayes} \\
+                    &\leq \sup_{\theta \in \Theta} R(g(\theta), \delta) + \epsilon \\
+                    &= \overline{R}(\delta) + \epsilon.
+            \end{align*}
+            Since $\epsilon > 0$ was arbitrary, we must have
+            $\overline{R}(\delta_0) \leq \overline{R}(\delta)$, whence
+            $\delta_0$ is minimax for $\Theta_0$.
+        \end{enumerate}
+
+
+        \item Let $X \sim \text{Binomial}(n, p)$ for some $n \geq 1$, where $p
+        \in (0, 1)$.
+        Set $\delta_0(X) = X / n$.
+        Then, using $\var(X) = np(1 - p)$, \[
+            R(p, \delta_0)
+                = \EE_{X}[\ell(p, \delta_0(X))]
+                = \EE_{X}\left[\frac{(p - X / n)^2}{p(1 - p)}\right]
+                = \frac{1}{n}.
+        \] Thus, $\delta_0$ is an equalizer.
+        Next, consider a prior $\pi$ such that $\theta \sim \text{Beta}(1, 1)
+        \sim \text{Uniform}[0, 1]$, then $\theta \mid X \sim \text{Beta}(1 + X,
+        1 + n - X)$.
+        To find the corresponding Bayes estimator, we minimize the posterior
+        expected losses \begin{align*}
+            \EE_{p\mid X = x}[\ell(p, \delta(x))]
+                &= \EE_{p\mid X = x}\left[\frac{(p - \delta(x))^2}{p(1 - p)}\right] \\
+                &= \frac{\Gamma(n + 2)}{\Gamma(x + 1)\Gamma(n - x + 1)}\int_0^1 (p - \delta(x))^2 p^{x - 1} (1 - p)^{n - x - 1} \:dx.
+        \end{align*}
+        When $x = 0$, this is $\infty$ unless $\delta(x) = 0$; similarly, when
+        $x = n$, this is $\infty$ unless $\delta(x) = 1$.
+        Otherwise, this is just \[
+                \left(\frac{\Gamma(n + 2)}{\Gamma(x + 1)\Gamma(n - x + 1)}\cdot\frac{\Gamma(x)\Gamma(n - x)}{\Gamma(n)}\right)\; \EE_{q \sim \text{Beta}(x, n - x)}[(q - \delta(x))^2],
+        \] which we know is minimized when \[
+            \delta(x)
+                = \EE_{q \sim \text{Beta}(x, n - x)}[q]
+                = \frac{x}{n}.
+        \] This shows that we must have $\delta_\pi(x) = x / n$.
+
+        With this, $\delta_0$ is Bayes for $\pi$.
+        By the result in the previous problem, it is minimax on $p \in (0, 1)$.
+        Furthermore, the corresponding Bayes risk is just $1 / n$ which is
+        equal to the minimax risk, and our Bayes estimator is unique, which
+        makes $\delta_0$ unique minimax.
+
+
+
+        % \emph{Remark:} The computation above does not quite work for $X \in \{0, n\}$.
+        % When $X = 0$, compute the posterior expected loss \[
+        %     \EE_{p\mid X = 0}\left[\frac{(p - \delta_0)^2}{p(1 - p)}\right]
+        %         = \EE_{p\mid X = 0}\left[\frac{p^2 - 2p\delta_0 + \delta_0^2}{p(1 - p)}\right]
+        %         = \begin{cases}
+        %             \infty, &\text{ if } \delta_0 \neq 0, \\
+        %             C(\delta_0), &\text{ if } \delta_0 = 0,
+        %         \end{cases}
+        %         % = \frac{\Gamma(n + 2)}{\Gamma(1)\Gamma(n + 1)} \int_0^1 p^{-1}(1 - p)^{n - 1} \:dp
+        %         % = \infty.
+        % \] for some $C(\delta_0) < \infty$.
+        % This is because \[
+        %     \EE_{p\mid X = 0}\left[\frac{1}{p(1 - p)}\right]
+        %         = \frac{\Gamma(n + 2)}{\Gamma(1)\Gamma(n + 1)} \int_0^1 p^{-1}(1 - p)^{n - 1} \:dp
+        %         = \infty,
+        % \] and for $k \geq 1$, \[
+        %     \EE_{p\mid X = 0}\left[\frac{p^k}{p(1 - p)}\right]
+        %         = \frac{\Gamma(n + 2)}{\Gamma(1)\Gamma(n + 1)} \int_0^1 p^{k-1}(1 - p)^{n - 1} \:dp
+        %         < \infty.
+        % \] ...
+
+
+
+        \item Let $\Theta_0 \subseteq \Theta$, and let $\delta$ be minimax for
+        $g(\theta)$ under $\Theta_0$.
+        Further suppose that \[
+            \sup_{\theta \in \Theta} R(g(\theta), \delta)
+                = \sup_{\theta \in \Theta_0} R(g(\theta), \delta).
+        \] Then, for any estimator $\eta$ for $g(\theta)$, \begin{align*}
+            \sup_{\theta \in \Theta} R(g(\theta), \delta)
+                &= \sup_{\theta \in \Theta_0} R(g(\theta), \delta) \\
+                &\leq \sup_{\theta \in \Theta_0} R(g(\theta), \eta) \tag{$\delta$ minimax under $\Theta_0$} \\
+                &\leq \sup_{\theta \in \Theta} R(g(\theta), \eta), \tag{Supremums}
+        \end{align*}
+        whence $\delta$ is minimax under $\Theta$.
+
+
+
+
+        \item Let $X_1, \dots, X_n \iid N(\mu, \sigma^2)$, where $\mu \in \R$
+        and $\sigma^2 \in (0, \infty)$.
+        \begin{enumerate}
+            \item Suppose that $\sigma^2 \in (0, M]$ for some constant $M > 0$.
+            Note that \[
+                R(\mu, \bar{X})
+                    = \EE[(\mu - \bar{X})^2]
+                    = \frac{\sigma^2}{n},
+            \] so $\overline{R}(\mu, \bar{X}) = M / n$.
+            Using the fact that $\bar{X}$ is minimax for fixed $\sigma^2$, for
+            any other estimator $\delta$, \[
+                \sup_{\mu, \sigma^2} R(\mu, \delta)
+                    = \sup_{\sigma^2 \in (0, M]} \sup_{\mu \in \R} R(\mu, \delta)
+                    \geq \sup_{\sigma^2 \in (0, M]} \frac{\sigma^2}{n}
+                    = \frac{M}{n}.
+            \] Now, $\bar{X}$ attains the lower bound $M / n$ on the supremum
+            risk over $(\mu, \sigma^2) \in \R\times (0, M]$, hence must be
+            minimax.
+
+            \emph{Remark:} For fixed $\sigma^2$, one can show that $\bar{X}$
+            has supremum risk $\sigma^2 / n$, which is the limit of Bayes risks
+            of the (least favorable) sequence of priors $N(0, m)$ as $m \to
+            \infty$, whence $\bar{X}$ is minimax.
+
+
+            \item Since $\bar{X}$ is minimax for fixed $\sigma^2$, note that
+            when $\sigma^2 \in (0, \infty)$, we have \[
+                \sup_{\mu, \sigma^2} R(\mu, \delta)
+                    \geq \sup_{\sigma^2 \in (0, \infty)} \frac{\sigma^2}{n}
+                    = \infty.
+            \] Thus, estimators such as $\bar{X}$ are minimax.
+
+
+            \item Note that with the loss \[
+                \ell((\mu, \sigma^2), \delta) = \frac{(\delta - \mu)^2}{\sigma^2},
+            \] we have \[
+                R(\mu, \bar{X})
+                    = \EE\left[\frac{(\mu - \bar{X})^2}{\sigma^2}\right]
+                    = \frac{1}{n}.
+            \] Thus, $\bar{X}$ is an equalizer.
+            Again, for any other estimator $\delta$, since $\bar{X}$ is minimax
+            for fixed $\sigma^2$, \begin{align*}
+                \sup_{\mu, \sigma^2} R(\mu, \delta)
+                    &= \sup_{\sigma^2 \in (0, \infty)} \sup_{\mu \in \R} R(\mu, \delta) \\
+                    &= \sup_{\sigma^2 \in (0, \infty)} \sup_{\mu \in \R} \frac{\EE[(\mu - \delta(X))^2]}{\sigma^2} \\
+                    &= \sup_{\sigma^2 \in (0, \infty)} \left(\frac{1}{\sigma^2} \sup_{\mu \in \R} \EE[(\mu - \delta(X))^2] \right) \\
+                    &\geq \sup_{\sigma^2 \in (0, \infty)} \left(\frac{1}{\sigma^2} \sup_{\mu \in \R} \EE[(\mu - \bar{X})^2] \right) \\
+                    &= \frac{1}{n}.
+            \end{align*}
+            Thus, $\bar{X}$ attains the lower bound $1/n$ on the supremum risk
+            over $(\mu, \sigma^2) \in \R \times (0, \infty)$, hence must be
+            minimax.
+
+        \end{enumerate}
+
+
+
+
+        \item Let $X\mid\theta \sim N(\theta, 1)$ and $\theta \sim \pi \in
+        \Gamma$, where $\Gamma$ is a class of priors on $\R$ with \[
+            \EE_\pi[\theta] = 0, \qquad
+            \EE_\pi[\theta^2] = 1.
+        \]
+        \begin{enumerate}
+            \item For $\delta_{a, b}(X) = aX + b$, observe that \begin{align*}
+                R(\pi, \delta)
+                    &= \EE[(\theta - (aX + b))^2] \\
+                    &= \EE_{\theta}[\EE_{X\mid\theta}[a^2(\theta - X)^2 + ((1 - a)\theta - b)^2 + 2a\cancelto{0}{(\theta - X)}((1 - a)\theta - b)]] \\
+                    &= a^2 + \EE_{\theta}[(1 - a)^2\theta^2 + b^2 - \cancelto{0}{2b(1 - a)\theta}] \\
+                    &= a^2 + (1 - a)^2 + b^2.
+            \end{align*}
+            This is clearly minimized when $a = 1/2, b = 0$, with a value of
+            $1/2$.
+
+            \emph{Remark:} The map $t \mapsto \sum_i (t - x_i)^2$ is minimized
+            at $\bar{x}$.
+
+            \item Set $\pi_0 \sim N(0, 1)$ and $\delta_0(X) := \delta_{1 /2,
+            0}(X) = X/2$.
+            Then, observe that for $\pi \in \Gamma$, our previous calculations give \[
+                \inf_\delta R(\pi, \delta)
+                    \leq \inf_{\delta_{a, b}} R(\pi, \delta_{a, b})
+                    = \frac{1}{2},
+            \] so $\sup_{\pi \in \Gamma} \inf_{\delta} R(\pi, \delta) \leq 1 / 2$.
+            On the other hand, $\delta_0$ is Bayes for $\pi_0 \in \Gamma$, with
+            Bayes risk $1/2$, so \[
+                \frac{1}{2}
+                    = R(\pi_0)
+                    = \inf_\delta R(\pi_0, \delta)
+                    \leq \sup_{\pi \in \Gamma} \inf_\delta R(\pi, \delta)
+                    \leq \frac{1}{2}.
+            \] This forces $\sup_{\pi \in \Gamma} \inf_{\delta} R(\pi, \delta)
+            = 1 / 2$.
+        \end{enumerate}
+
+
+
+        \item Let $X_1, \dots, X_n \iid F \in \mathcal{P}$, where $\mathcal{P}$
+        is the class of probability distributions supported on $[0, 1]$.
+        Set $\mu_F = \EE_{X \sim F}[X]$ and $\sigma^2_F = \var_{X \sim F}[X]$.
+
+        Now, let \[
+            \delta_0(X) = \frac{\sqrt{n}\bar{X} + \frac{1}{2}}{\sqrt{n} + 1}.
+        \] We will show that $\delta_0$ is minimax for $\mu_F$ under the
+        squared error loss.
+
+        \begin{enumerate}
+            \item Note that \begin{align*}
+                R(\mu_F, a\bar{X} + b)
+                    &= \EE[(\mu_F - (a\bar{X} + b))^2] \\
+                    &= \EE[a^2(\mu_F - \bar{X})^2 + ((1 - a)\mu_F - b)^2 + 2a\cancelto{0}{(\mu_F - \bar{X})}((1 - a)\mu_F - b)] \\
+                    &= \frac{1}{n}a^2\sigma^2_F + ((1 - a)\mu_F - b)^2,
+            \end{align*}
+            so for $\delta_0$, \begin{align*}
+                R(\mu_F, \delta_0)
+                    &= \frac{\sigma^2_F}{(\sqrt{n} + 1)^2} + \left(\frac{\mu_F - \frac{1}{2}}{\sqrt{n} + 1}\right)^2 \\
+                    &= \frac{1}{(\sqrt{n} + 1)^2} \EE_{X\sim F}\left[\left(X - \frac{1}{2}\right)^2\right] \\
+                    &\leq \frac{1}{4(\sqrt{n} + 1)^2}. \tag{$|X - 1 / 2| \leq 1 / 2$}
+            \end{align*}
+
+            Furthermore, this upper bound is attained when $F \sim
+            \text{Bernoulli}(\frac{1}{2})$; note that in that case, $\mu_F = 1
+            / 2$ and $\sigma^2_F = 1 / 4$.
+            Thus, \[
+                \sup_{F \in \mathcal{P}} R(\mu_F, \delta_0)
+                    = \frac{1}{4(\sqrt{n} + 1)^2}.
+            \]
+
+
+            \item Let $\mathcal{P}_0 \subseteq \mathcal{P}$ be the class of
+            distributions where the above supremum is attained.
+            For this, we demand $\EE[(X - 1 / 2)^2] = 1 / 4$, which is possible
+            only when $|X - 1 / 2| = 1 / 2$ almost surely.
+            This forces $X \in \{0, 1\}$ almost surely, i.e.\ $X \sim
+            \text{Bernoulli}(p)$ for some $p \in [0, 1]$.
+            Thus, \[
+                \mathcal{P}_0 = \{\text{Bernoulli}(p)\colon p \in [0, 1]\}.
+            \]
+
+            With this, let $\pi$ be a prior on $\mathcal{P}$ taking probability
+            $1$ on $\mathcal{P}_0$, with $p \sim \text{Beta}(\sqrt{n} / 2,
+            \sqrt{n} / 2)$.
+            Then, we have the posterior $p \mid X \sim \text{Beta}(n\bar{X} +
+            \sqrt{n} / 2, n - n\bar{X} + \sqrt{n} / 2)$, whence the Bayes
+            estimator is the posterior expectation \[
+                \delta_\pi(X)
+                    = \frac{n\bar{X} + \sqrt{n}/2}{n + \sqrt{n}}
+                    = \delta_0(X).
+            \] The Bayes risk for this estimator is precisely the supremum risk
+            in (a), since $R(\mu_F, \delta_0)$ is constant on $F \in
+            \mathcal{P}_0$.
+
+
+            \item We have shown that $\delta_0$ is minimax for $\mu_F$ under
+            $\mathcal{P}_0$, since it is the Bayes estimator under $\pi$ and
+            an equalizer.
+            Since $\sup_{F \in \mathcal{P}_0} R(\mu_F, \delta_0) = \sup_{F \in
+            \mathcal{P}} R(\mu_F, \delta_0)$, we must have $\delta_0$ minimax
+            for $\mu_F$ under $\mathcal{P}$ via the result in Problem 3.
+
+        \end{enumerate}
+
+    \end{enumerate}
+
+\end{document}

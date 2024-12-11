@@ -1,0 +1,485 @@
+\documentclass[11pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage[scr]{rsfso}
+\usepackage{bm}
+\usepackage{cancel}
+\usepackage{xcolor}
+
+\geometry{a4paper, margin = 1in}
+
+\include{mathsymbols}
+
+
+\title{\bfseries STAT6201: Theoretical Statistics I}
+\author{Satvik Saha}
+\date{}
+
+\begin{document}
+    \maketitle
+
+    \section*{Midterm exam}
+
+    \begin{enumerate}
+    \setlength\itemsep{1.5em}
+
+        \item The proof claims that $\eta(T) = \EE[\delta \mid T]$ is an
+        estimator that outperforms $\delta$.
+        For this, we require that $\eta$ is indeed an estimator, i.e.\
+        $\EE[\delta\mid T]$ should not be a function of $\theta$.
+        We can guarantee this by demanding that the conditional distribution
+        $\delta \mid T = t$ be independent of $\theta$, which is achieved when
+        $T$ is sufficient for $\theta$.
+
+        \emph{Remark:} $T$ is sufficient for $\theta$ when the distribution
+        $X\mid T = t$ is free of $\theta$ for all $t$.
+
+        For a generic statistic $T$, we may not have $\EE[\delta\mid T]$
+        calculable without knowledge of $\theta$.
+        For instance, consider $X_1, X_2 \iid N(\theta, 1)$, whence
+        $\EE[X_1\mid X_2] = \EE[X_1] = \theta$, which is not a statistic.
+
+
+
+        \item Let $X_1, \dots, X_n \iid N(\theta, \theta^2)$ for $\theta \in
+        \Theta = (0, \infty)$.
+
+        \begin{enumerate}
+            \item We have the likelihood \[
+                \mathcal{L}(\theta\mid X)
+                    = \prod_{i = 1}^n \frac{1}{\sqrt{2\pi\theta^2}} e^{-(X_i - \theta)^2 / 2\theta^2}
+                    = (2\pi)^{-n / 2} \theta^{-n} \exp\left(-\frac{1}{2\theta^2}
+                    \sum_{i = 1}^n (X_i - \theta)^2\right).
+            \] Thus, the log likelihood is given by \[
+                \ell(\theta\mid X)
+                    = -\frac{n}{2}\log(2\pi) - n\log(\theta) -
+                    \frac{1}{2\theta^2}\sum_{i = 1}^n (X_i - \theta)^2.
+            \] Maximizing this is equivalent to minimizing \[
+                n\log{\theta} + \frac{1}{2\theta^2}\sum_{i = 1}^n \left[X_i^2 - 2X_i\theta + \theta^2\right]
+                    = n\log{\theta} - \frac{1}{\theta}\sum_{i = 1}^n X_i + \frac{1}{2\theta^2}\sum_{i = 1}^n X_i^2 + \frac{n}{2},
+            \] hence we need only minimize \[
+                g(\theta)
+                    = n\log{\theta} - \frac{S_1}{\theta} + \frac{S_2}{2\theta^2},
+            \] where we abbreviate $S_1 = \sum_i X_i$, $S_2 = \sum_i X_i^2$.
+            Compute \[
+                g'(\theta) = \frac{n}{\theta} + \frac{S_1}{\theta^2} - \frac{S_2}{\theta^3}.
+            \] This vanishes when $p(\theta) = n\theta^2 + S_1\theta - S_2 = 0$.
+            The positive value of $\theta$ for which this is true is \[
+                \theta_0
+                    = -\frac{S_1}{2n} + \frac{\sqrt{S_1^2 + 4nS_2}}{2n}
+                    = -\frac{S_1}{2n} + \sqrt{\frac{S_1^2}{4n^2} + \frac{S_2}{n^2}}.
+            \] This is indeed positive since $\sqrt{S_1^2 + 4nS_2} \geq S_1$.
+            To check when this is the minimizer of $g$, we compute \begin{align*}
+                g''(\theta_0)
+                    &= -\frac{n}{\theta_0^2} - \frac{2S_1}{\theta_0^3} + \frac{3S_2}{\theta_0^4} \\
+                    &= -\frac{1}{\theta_0^4}\left[n\theta_0^2 + 2S_1\theta_0 - 3S_2\right] \\
+                    &= -\frac{1}{\theta_0^4}\left[\cancelto{0}{(n\theta_0^2 + S_1\theta_0 - S_2)} + S_1\theta_0 - 2S_2\right] \\
+                    &= -\frac{1}{\theta_0^4}\left[S_1\theta_0 - 2S_2\right] \\
+                    &= \frac{1}{2n\theta_0^4}\left[S_1^2 - S_1\sqrt{S_1^2 + 4nS_2} + 4nS_2\right].
+            \end{align*}
+            This is non-negative when $\sqrt{S_1^2 + 4nS_2} \geq S_1$, which
+            always holds.
+            Also, note that as $\theta \to \infty$ or as $\theta \to 0$, we
+            have $g(\theta) \to \infty$.
+            Thus, we have \[
+                \hat{\theta}_\MLE
+                    = -\frac{S_1}{2n} + \sqrt{\frac{S_1^2}{4n^2} + \frac{S_2}{n^2}}.
+            \]
+
+
+            \item From our earlier computation of the likelihood, note that \[
+                \mathcal{L}(\theta\mid X)
+                    = (2\pi)^{-n / 2} \theta^{-n} \exp\left(-\frac{S_2}{2\theta^2} + \frac{S_1}{\theta}\right) \exp\left(-\frac{n}{2}\right).
+            \] By the Neyman-Fisher factorization theorem, we see that $(S_1,
+            S_2)$ is sufficient for $\theta \in \Theta$.
+            Furthermore, this is minimal sufficient for $\theta$.
+            To see this, note that the natural parameter space $\{(-1 /
+            2\theta^2, 1 / \theta)\}_{\theta \in (0, \infty)}$ contains three
+            affinely independent vectors; say for $\theta = 1, 2, 3$, we have
+            natural parameters $(-1 / 2, 1), (-1 / 8, 1 / 2), (-1 / 18, 1 /
+            3)$ which are not collinear.
+
+            With this, for $\hat{\theta}_\MLE$ to be sufficient for $\theta$,
+            we would have to be able to write $(S_1, S_2)$ as a (measurable)
+            function of $\hat{\theta}_\MLE$, which is not possible.
+            Thus, $\hat{\theta}_\MLE$ is not sufficient for $\theta$.
+
+
+        \end{enumerate}
+
+
+
+        \item Let $X_1, \dots, X_n \iid p_\theta$, with $\theta \sim \pi$.
+        Further assume that the variables and parameters are real valued.
+        \begin{enumerate}
+            \item Set \[
+                R_n
+                    = \inf_{\delta \in \mathscr{D}_n} \EE \left|\delta(X_1, \dots, X_n) - \theta\right|,
+            \] where $\mathscr{D}_n$ is the class of estimators of the form
+            $\delta\colon \mathscr{X}^n \to \Theta$.
+            Then, for each $\delta \in \mathscr{D}_n$, we may define $\delta_0
+            \in \mathscr{D}_{n + 1}$ where $\delta_0(X_1, \dots, X_n, X_{n +
+            1}) = \delta(X_1, \dots, X_n)$.
+            Thus, we have \[
+                \EE \left|\delta(X_1, \dots, X_n) - \theta\right|
+                    = \EE \left|\delta_0(X_1, \dots, X_n, X_{n + 1}) - \theta\right|
+                    \geq R_{n + 1}.
+            \] Taking infimums, \[
+                R_n
+                    = \inf_{\delta \in \mathscr{D}_n} \EE \left|\delta(X_1, \dots, X_n) - \theta\right|
+                    \geq R_{n + 1}.
+            \] This shows that $\{R_n\}_{n \in \N}$ is a non-increasing sequence.
+
+
+            \item \textcolor{red}{Set \[
+                B_n
+                    = \EE \left|\EE(\theta \mid X_1, \dots, X_n) - \theta\right|.
+            \]
+            Also denote $\delta_n(X) = \EE[\theta\mid X_1, \dots, X_n]$.
+            }
+
+            \emph{Remark:} Note that \[
+                \EE\left[(\delta_n(X) - \theta)^2\right]
+                    = \inf_{\delta \in \mathscr{D}_n} \EE\left[(\delta(X) - \theta)^2\right].
+            \] The right minimizer for the absolute error loss is the posterior
+            \emph{median}, not the posterior \emph{mean}.
+
+            \emph{Remark:} Note that $\{B_n\}$ is indeed decreasing in settings
+            such as $X_i \iid N(\theta, 1)$, $\pi(\theta) = 1$.
+
+            \emph{Remark:} We have \[
+                R_n^2
+                    \leq B_n^2
+                    \leq \EE\left[(\delta_n(X) - \theta)^2\right]
+                    = \inf_{\delta \in \mathscr{D}_n} \EE\left[(\delta(X) - \theta)^2\right]
+                    := S_n^2,
+            \] with $\{S_n\}$ non-increasing via the same argument as before.
+
+            \emph{Remark:} For $\{B_n\}$ to be non-increasing, we need each \[
+                \EE\left[|\delta_n(X) - \theta| - |\delta_{n + 1}(X) - \theta|\right] \geq 0.
+            \] 
+
+
+        \end{enumerate}
+
+
+        \item Let $X_1, \dots, X_n \iid \frac{1}{2}N(\theta, 1) +
+        \frac{1}{2}N(-\theta, 1)$, for $\theta \in [0, \infty)$.
+        Then, the likelihood is of the form \begin{align*}
+            \mathcal{L}(\theta\mid X)
+                &= \prod_{i = 1}^n \frac{1}{2\sqrt{2\pi}}\left[e^{-(X_i - \theta)^2 / 2} + e^{-(X_i + \theta)^2 / 2}\right] \\
+                &= \prod_{i = 1}^n \frac{1}{2\sqrt{2\pi}}\left[2e^{-X_i^2 / 2} e^{-\theta^2 / 2} \cosh(X_i\theta)\right].
+        \end{align*}
+        Note that this is unchanged by replacing $(X_1, \dots, X_n)$ with $T(X)
+        = (|X|_{(1)}, \dots, |X|_{(n)})$, the ordered absolute values of the
+        sample.
+        It is clear that this is sufficient for $\theta \in [0, \infty)$.
+        We further claim that this is minimal sufficient for $\theta$.
+
+        Examine \[
+            \frac{\mathcal{L}(\theta\mid X)}{\mathcal{L}(\theta\mid Y)}
+                = \prod_{i = 1}^n \frac{e^{-X_i^2 / 2} \cosh(X_i\theta)}{e^{-Y_i^2 / 2} \cosh(Y_i\theta)}.
+        \] It is clear that $T(X) = T(Y)$ makes this ratio identically $1$,
+        hence independent of $\theta$.
+
+        On the other hand, suppose that this ratio is free of $\theta$ for all
+        $\theta \in [0, \infty)$.
+        Then, so is \[
+            r(X, Y) = \prod_{i = 1}^n \frac{\cosh(X_i\theta)}{\cosh(Y_i\theta)} > 0.
+        \] Putting $\theta = 0$ tells us that $r(X, Y) = 1$.
+        Write \[
+            \prod_{i = 1}^n \cosh(X_i\theta)
+                = \prod_{i = 1}^n \cosh(Y_i\theta), \quad \text{ for all } \theta \in [0, \infty).
+                    \tag{$\star$}
+        \]
+
+        We will turn these products into sums, by brute force.
+        Note that $2\cosh(W_1)\cosh(W_2) = \cosh(W_1 + W_2) + \cosh(W_1 -
+        W_2)$.
+        Applying this repeatedly, for $0 \leq W_1 \leq \dots \leq W_n$, we may
+        write \[
+            2^{n - 1}\prod_{i = 1}^n \cosh(W_i)
+                = \sum_{J \subseteq \{0, 1\}^{n - 1}} \cosh\left(\sum_{j = 1}^{n - 1} (-1)^{J_j} W_j + W_n\right)
+                := \sum_{J \subseteq \{0, 1\}^{n - 1}} \cosh(W^J).
+        \] The sum on the right has $2^{n - 1}$ terms.
+        Importantly, the two largest terms in the sum are those corresponding
+        to $W^0 := W_1 + (W_2 + \dots + W_n)$ and $W^1 := -W_1 + (W_2 + \dots +
+        W_n)$ inside the hyperbolic cosines.
+
+        Next, observe that for $W, Z \geq 0$, \[
+            2e^{-Z\theta}\cosh(W\theta)
+                = e^{-Z\theta}\left(e^{W\theta} + e^{-W\theta}\right)
+                = e^{(-Z + W)\theta} + e^{(-Z - W)\theta}.
+        \] Taking limits as $\theta \to \infty$, \[
+            \lim_{\theta \to \infty} 2e^{-Z\theta} \cosh(W\theta)
+                = \begin{cases}
+                    1, &\text{ if } W = Z, \\
+                    0, &\text{ if } W < Z, \\
+                    \infty, &\text{ if } W > Z.
+                \end{cases}
+        \]
+
+        With this, define for multi-indices $J \subseteq \{0, 1\}^{n - 1}$ the terms \[
+            X^J = \sum_{j = 1}^n (-1)^{J_j} |X|_{(j)} + |X|_{(n)}, \qquad
+            Y^J = \sum_{j = 1}^n (-1)^{J_j} |Y|_{(j)} + |Y|_{(n)},
+        \] These are merely sums involving the elements of $T(X)$ and $T(Y)$,
+        with signs inserted according to $J$.
+        Specifically denote $X^0 := X^{(0, \dots, 0)}$, $X^1 := X^{(1, 0,
+        \dots, 0)}$, and similarly for $Y^0$, $Y^1$.
+        Then, ($\star$) says that for all $\theta \in [0, \infty)$, \[
+            \sum_{J \subseteq \{0, 1\}^{n - 1}} \cosh(X^J\theta)
+                = \sum_{J \subseteq \{0, 1\}^{n - 1}} \cosh(Y^J\theta).
+                    \tag{$\star\star$}
+        \] Suppose without loss of generality\footnote{If not, interchange the
+        roles of $X$ and $Y$.} that $X^0 \geq Y^0$.
+        Then, \begin{align*}
+            2e^{-X^0\theta} \cosh(X^0\theta) &+ \sum_{\substack{J \subseteq \{0, 1\}^{n - 1} \\ J \neq (0, \dots, 0)}} 2e^{-X^0\theta}\cosh(X^J\theta) \\
+                &= 2e^{-X^0\theta} \cosh(Y^0\theta) + \sum_{\substack{J \subseteq \{0, 1\}^{n - 1} \\ J \neq (0, \dots, 0)}} 2e^{-X^0\theta}\cosh(Y^J\theta).
+        \end{align*}
+        If we had $X^0 > Y^0$, taking limits as $\theta \to \infty$, the left
+        hand side gives $1$ while the right hand side gives $0$, a contradiction.
+        Thus, we must have $X^0 = Y^0$.
+        We can now cancel the first term from ($\star\star$).
+        Again, without loss of generality, suppose that $X^1 \geq Y^1$.
+        Multiplying by $2e^{-X^1\theta}$, we obtain \begin{align*}
+            2e^{-X^1\theta} \cosh(X^1\theta) &+ \sum_{\substack{J \subseteq \{0, 1\}^{n - 1} \\ J \neq (0, \dots, 0) \\ J \neq (1, 0, \dots, 0)}} 2e^{-X^1\theta}\cosh(X^J\theta) \\
+                &= 2e^{-X^1\theta} \cosh(Y^1\theta) + \sum_{\substack{J \subseteq \{0, 1\}^{n - 1} \\ J \neq (0, \dots, 0) \\ J \neq (1, 0, \dots, 0)}} 2e^{-X^1\theta}\cosh(Y^J\theta).
+        \end{align*}
+        Like before, if we had $X^1 > Y^1$, taking limits as $\theta \to
+        \infty$ would give $1$ on the left side, $0$ on the right, a contradiction.
+        Thus, we must have $X^1 = Y^1$.
+
+        Subtracting $X^0 = Y^0$ and $X^1 = Y^1$ yields $|X|_{(1)} = |Y|_{(1)}$.
+        Canceling these terms in ($\star$), we have one fewer term; repeating
+        the same argument as above will successively yield each $|X|_{(i)} =
+        |Y|_{(i)}$, hence $T(X) = T(Y)$.
+
+        This proves that $T$ is indeed minimal sufficient for $\theta \in [0,
+        \infty)$, via the result in HW1, Problem 2(a).
+
+
+        % With this, ($\star$) gives for all $\theta \in [0, \infty)$, \begin{align*}
+        %     \prod_{i = 1}^n 2e^{-|X_i|\theta} \cosh(X_i\theta)
+        %         &= 2^n e^{-S_X\theta} \prod_{i = 1}^n \cosh(X_i\theta) \\
+        %         &= r(X, Y)\, 2^n e^{-S_X\theta}\, \prod_{i = 1}^n \cosh(Y_i\theta) \\
+        %         &= r(X, Y)\, e^{-(S_X - S_Y)\theta}\, \prod_{i = 1}^n 2e^{-|Y_i|\theta} \cosh(Y_i\theta).
+        % \end{align*}
+        % If we had $S_X > S_Y$, then taking limits as $\theta \to \infty$ above,
+        % the left side gives $1$ while the right side gives $0$, a
+        % contradiction.
+        % Thus, we must have $S_X = S_Y$.
+        % This also reveals that $r(X, Y) = 1$.
+
+        \emph{Remark:} Since zero sample values, ties, etc in the sample occur
+        with probability zero, we ignore such cases.
+
+        \emph{Remark:} Alternatively, we can check that the left and right hand
+        sides of ($\star$) are analytic functions of $\theta$, hence must be
+        equal for all $\theta \in \C$.
+        Since $\cosh(z) = 0$ precisely when $z = (n + \frac{1}{2})\pi i$, $n
+        \in \N$, we can compare roots on both sides of ($\star$), perhaps in
+        order of magnitude of $X_i, Y_i$, and reach the same conclusion.
+
+
+
+
+        \item Let $X_1, \dots, X_n \iid U(0, \theta)$ for $\theta \in (0, \infty)$.
+        Set $\delta_1(X) = X_1$, and $\delta_2(X) = \EE_\theta[X_1\mid X_{(n)}]$.
+        \begin{enumerate}
+            \item Note that $X_{(n)}$ is a complete sufficient statistic for
+            $\theta > 0$.
+            Indeed, the likelihood \[
+                \mathcal{L}(\theta\mid X)
+                    = \prod_{i = 1}^n \frac{1}{\theta} \bm{1}_{(0, \theta)}(X_i)
+                    = \frac{1}{\theta^n} \bm{1}_{(0, \theta)}(X_{(n)}),
+            \] shows that $X_{(n)}$ is sufficient for $\theta$ via
+            Neyman-Fisher factorization.
+            Furthermore, we have for $0 \leq x \leq 1$, \[
+                P(X_{(n)} \leq x)
+                    = P(X_1 \leq x, \dots, X_n \leq x)
+                    = \frac{x^n}{\theta^n},
+            \] so $f_{X_{(n)}}(x) = nx^{n - 1} \theta^{-n} \bm{1}_{(0, \theta)}(x)$.
+            It follows that \[
+                \EE[X_{(n)}]
+                    = \int_0^\theta \frac{nx^n}{\theta^n}\:dx = \frac{n\theta}{n + 1},
+            \] so $(n + 1) X_{(n)} / n$ is unbiased for $\theta$.
+            Now suppose that for measurable $h\colon \R_+ \to \R$, we have
+            $\EE_\theta[h(X_{(n)})] = 0$ for all $\theta > 0$.
+            This would imply that \[
+                \int_0^\theta h(x)\, x^{n - 1} \:dx = 0, \quad \text{ for all }
+                \theta > 0.
+            \] By a similar argument as in HW2, Problem 3(a), we can conclude
+            that $h = 0$ almost everywhere on $(0, \infty)$, whence $X_{(n)}$
+            is complete.
+
+            % \emph{Remark:} Construct \[
+            %     \mathcal{E} = \left\{E \in \mathcal{B}(\R_+) \colon \int_0^\theta h(x)\, x^{n - 1} \:dx = 0\right\},
+            % \] and note that the $\lambda$-system $\mathcal{E}$ contains the
+            % $\pi$-system of intervals $(0, \theta]$ which generate
+            % $\mathcal{B}(\R_+)$, hence $\mathcal{E}$ must be equal to
+            % $\mathcal{B}(\R_+)$ by Dynkin's Lemma.
+            % Thus, $\int_E h(x)\, x^{n - 1} \:dx = 0$ on all Borel sets in $(0,
+            % \infty)$, from which it follows that $h = 0$ almost everywhere on
+            % $(0, \infty)$. \\
+
+            \emph{Remark:} Alternatively, note that the map \[
+                \theta \mapsto \int_0^\theta h(x)\, x^{n - 1} \:dx
+            \] is differentiable by the Fundamental Theorem of Calculus, and
+            has derivative $h(\theta)\,\theta^{n - 1}$ at each $\theta \in (0,
+            \infty)$.
+            Since this is a zero map, its derivative is also zero, and the
+            claim follows. \\
+
+            Now, note that \[
+                \EE[X_1] = \int_0^\theta \frac{x}{\theta} \:dx = \frac{\theta}{2},
+            \] so $2X_1$ is unbiased for $\theta$.
+            The Lehmann-Scheffe Theorem\footnote{See HW2, Problem 5.} now
+            guarantees that $2\delta_2(X) = \EE[2X_1 \mid X_{(n)}]$ is the
+            \emph{unique} UMVUE for $\theta$.
+            On the other hand, $(n + 1) X_{(n)} / n$ is an unbiased function of
+            the complete sufficient statistic $X_{(n)}$, and hence must be
+            UMVUE too.
+            This means that we must have equality, hence \[
+                \delta_2(X) = \EE_\theta[X_1\mid X_{(n)}] = \left(\frac{n + 1}{2n}\right) X_{(n)}.
+            \]
+
+
+            \item We have $L(\theta, \delta) = \sqrt{|\theta - \delta|}$.
+            First we claim that $L$ is concave in $\delta$ for each $\theta$
+            (note that we need only look at $\delta$ such that $\delta \leq
+            \theta$ almost surely, since our estimators fall within this
+            category), from which the result in Problem 1 immediately tells us
+            that \[
+                R(\theta, \delta_1) \leq R(\theta, \delta_2), \quad \text{ for all } \theta \in (0, \infty).
+            \] This is because $T = X_{(n)}$ is sufficient for $\theta \in (0,
+            \infty)$, and $\ell = -L$ is convex; the proof supplied in Problem
+            1 proceeds exactly as given, with $\delta = \delta_1, \eta = \delta_2$.
+            We will then show that for $\theta = 1$, we have $R(1, \delta_1) <
+            R(1, \delta_2)$, rendering $\delta_2$ inadmissible.
+
+            \emph{Remark:} Since $L(\theta, \delta) = \sqrt{\theta} L(1, \delta
+            / \theta)$, we see that $\delta_1$ has uniformly \emph{strictly}
+            lower risk than $\delta_2$.
+
+            Indeed, for fixed $\theta > 0$, we need only show that the map $x
+            \mapsto \sqrt{x}$ is concave for $x \geq 0$, which is clear by
+            the differentiability criterion; we have the second derivative
+            $-x^{-3/2} / 4 < 0$.
+            This further tells us that our loss is \emph{strictly} concave in
+            $\delta$, so Jensen's inequality gives \[
+                \EE[L(1, \delta_1) \mid X_{(n)}] < L(1, \delta_2).
+            \] Thus, taking expectations gives us a strict inequality, whence
+            $R(1, \delta_1) < R(1, \delta_2)$.
+        \end{enumerate}
+
+
+
+        \item Let $\mathcal{S}_2$ be the unit ball in $\R^2$, and let $(x_0,
+        y_0) \in \mathcal{S}_2$.
+        The process described is equivalent to the following: generate for $n \in \N$,
+        \begin{enumerate}
+            \item[(i)] $y_n \sim U(-\sqrt{1 - x_{n - 1}^2}, \sqrt{1 - x_{n - 1}^2})$.
+            \item[(ii)] $x_n \sim U(-\sqrt{1 - y_n^2}, \sqrt{1 - y_n^2})$.
+        \end{enumerate}
+        \emph{Remark:} Drawing $x \sim U(-a, a)$ is equivalent to independently
+        drawing $x' \sim U(0, a)$, $r \sim \frac{1}{2}\delta_{-1} +
+        \frac{1}{2}\delta_{1}$ and setting $x = rx'$.
+        Also, $x^2 = x'^2$.
+
+
+        We claim that the stationary distribution $\pi$ of this chain is
+        uniform on $\mathcal{S}_2$, with density \[
+            f(x, y)
+                = \frac{1}{\pi} \bm{1}_{\mathcal{S}_2}(x, y)
+                = \frac{1}{\pi} \bm{1}\left(x_0^2 + y_0^2 \leq 1\right).
+        \]
+
+        We can describe the transition kernels (conditional densities) \begin{align*}
+            K((x_0, y_0), (x_0, y_1))
+                &= \frac{1}{2\sqrt{1 - x_0^2}} \bm{1}\left(-\sqrt{1 - x_0^2} \leq y_1 \leq \sqrt{1 - x_0^2}\right) \\
+                &= \frac{1}{2\sqrt{1 - x_0^2}} \bm{1}\left(x_0^2 + y_1^2 \leq 1\right), \\
+            K((x_0, y_1), (x_1, y_1))
+                &= \frac{1}{2\sqrt{1 - y_1^2}} \bm{1}\left(-\sqrt{1 - y_1^2} \leq x_1 \leq \sqrt{1 - y_1^2}\right) \\
+                &= \frac{1}{2\sqrt{1 - y_1^2}} \bm{1}\left(x_1^2 + y_1^2 \leq 1\right).
+        \end{align*}
+        With this, we have the transition kernel for the chain \[
+            K((x_0, y_0), (x_1, y_1))
+                = K((x_0, y_0), (x_0, y_1)) \cdot K((x_0, y_1), (x_1, y_1)).
+        \]
+
+        Compute \begin{align*}
+            \int f(x_0, y_0) &K((x_0, y_0), (x_0, y_1)) \:dy_0 \\
+                &= \frac{1}{\pi} \int_{-\sqrt{1 - x_0^2}}^{\sqrt{1 - x_0^2}} \frac{1}{2\sqrt{1 - x_0^2}} \bm{1}\left(x_0^2 + y_1^2 \leq 1\right)\:dy_0 \\
+                &= \frac{1}{\pi} \bm{1}\left(x_0^2 + y_1^2 \leq 1\right),
+        \end{align*}
+        so the density of $(x_1, y_1)$ is given by \begin{align*}
+            \tilde{f}(x_1, y_1)
+                &= \int f(x_0, y_0) K((x_0, y_0), (x_1, y_1)) \:dy_0\:dx_0 \\
+                &= \int \left[\int f(x_0, y_0) K((x_0, y_0), (x_0, y_1)) \:dy_0\right] K((x_0, y_1), (x_1, y_1))\:dx_0 \\
+                &= \frac{1}{\pi}\int_{-\sqrt{1 - y_1^2}}^{\sqrt{1 - y_1^2}} \frac{1}{2\sqrt{1 - y_1^2}} \bm{1}\left(x_1^2 + y_1^2 \leq 1\right)\:dx_0 \\
+                &= \frac{1}{\pi} \bm{1}\left(x_1^2 + y_1^2 \leq 1\right).
+        \end{align*}
+        Thus, $\tilde{f} = f$, whence $f$ is the stationary distribution of
+        this chain.
+
+        \emph{Remark:} This is a Gibbs sampling procedure!
+
+
+        \item Let $\Theta\subseteq \R^k$ be open, and let $R(\theta, \delta)$ be
+        continuous in $\theta$ for every estimator $\delta(X)$.
+        Suppose that $\pi_n$ is a sequence of priors on $\Theta$, and let
+        $\delta^*$ satisfy \begin{enumerate}
+            \item[(i)] $r(\pi_n, \delta^*) < \infty$ for all $n \in \N$.
+            \item[(ii)] For any open $\Theta_0 \subseteq \Theta$, \[
+                \liminf_{n \to \infty} \int_{\Theta_0} \pi_n(\theta) \:d\theta > 0.
+            \]
+            \item[(iii)] If $\delta_{\pi_n}$ are Bayes estimators with respect
+            to each prior $\pi_n$, then \[
+                \lim_{n \to \infty} r(\pi_n, \delta^*) - r(\pi_n, \delta_{\pi_n}) = 0.
+            \]
+        \end{enumerate}
+
+        Suppose that $\delta$ is an estimator such that \[
+            R(\theta, \delta) \leq R(\theta, \delta^*), \quad \text{ for all } \theta \in \Theta.
+        \] Further suppose that there exists $\theta_0 \in \Theta$ such that
+        $R(\theta_0, \delta) < R(\theta_0, \delta^*)$.
+        Set $2\epsilon = R(\theta_0, \delta^*) - R(\theta_0, \delta) > 0$.
+        Then, by continuity of $R(\,\cdot\,, \delta^*) - R(\,\cdot\,, \delta)$,
+        there exists an open neighborhood of $\Theta_0 \subseteq \Theta$ of
+        $\theta_0$ such that \[
+            R(\theta, \delta^*) - R(\theta, \delta) \geq \epsilon, \quad \text{ for all } \theta \in \Theta_0.
+        \] Using (ii), we can descend to a subsequence of priors $\pi_{n_k}$ for
+        which $\lim_{n \to \infty} \int_{\Theta_0} \pi_{n_k} = 2C > 0$, hence to a
+        further sub-subsequence $\pi_{m_{n_k}}$ where each $\int_{\Theta_0}
+        \pi_{m_{n_k}} > C > 0$.
+        Without loss of generality, let this sub-subsequence of priors be
+        simply $\pi_n$ (by relabeling).
+        Then, for all $n \in \N$, we have \begin{align*}
+            r(\pi_n, \delta^*) - r(\pi_n, \delta)
+                &= \EE_{\theta \sim \pi_n}\left[R(\theta, \delta^*) - R(\theta, \delta)\right] \\
+                &\geq \EE_{\theta \sim \pi_n}\left[\left(R(\theta, \delta^*) - R(\theta, \delta)\right) \bm{1}_{\Theta_0}(\theta)\right] \\
+                &\geq \EE_{\theta \sim \pi_n}\left[\epsilon \bm{1}_{\Theta_0}(\theta)\right] \\
+                &\geq C\epsilon \\
+                &> 0.
+        \end{align*}
+        But each $r(\pi_n, \delta_{\pi_n}) \leq r(\pi_n, \delta)$ by
+        construction of the (potentially generalized) Bayes
+        estimators\footnote{These exist with finite Bayes risk using (i) and
+        the construction in HW3, Problem 6.}.
+        Thus, for all $n \in \N$, we have \[
+            r(\pi_n, \delta^*) - r(\pi_n, \delta_{\pi_n})
+                \geq r(\pi_n, \delta^*) - r(\pi_n, \delta)
+                \geq C\epsilon
+                > 0.
+        \] Taking limits, \[
+            \lim_{n \to \infty} r(\pi_n, \delta^*) - r(\pi_n, \delta_{\pi_n})
+                \geq C\epsilon > 0.
+        \] This contradicts (iii).
+        Thus, no such $\delta$ can exist, whence $\delta^*$ is admissible.
+
+
+    \end{enumerate}
+
+\end{document}

@@ -1,0 +1,180 @@
+\documentclass[11pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage[scr]{rsfso}
+\usepackage{bm}
+\usepackage{cancel}
+
+\geometry{a4paper, margin = 1in}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\norm}[1]{\left\Vert #1 \right\Vert}
+
+\newcommand{\EE}{\mathbb{E}}
+
+\newcommand{\MLE}{\text{MLE}}
+
+\newcommand{\iid}{\overset{iid}{\sim}}
+\newcommand{\topp}{\overset{p}{\to}}
+\newcommand{\toas}{\overset{a.s.}{\longrightarrow}}
+
+\DeclareMathOperator*{\trace}{trace}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\KL}{KL}
+
+\title{\bfseries STAT6201: Theoretical Statistics I}
+\author{Satvik Saha}
+\date{}
+
+\begin{document}
+    \maketitle
+
+    \section*{Homework 5}
+
+    \begin{enumerate}
+
+        \item Let $X\mid \theta \sim f(x\mid \theta)$, $\theta\mid \lambda \sim
+        \pi(\theta\mid \lambda)$, and $\lambda \sim \psi(\lambda)$.
+
+        \begin{enumerate}
+            \item The mutual information \[
+                I(X, Y) = \KL(P_{X, Y}, P_X\otimes P_Y) \geq 0
+            \] simply by the properties of the KL divergence (which in turn is
+            due to Jensen's inequality).
+            Furthermore, we have equality if and only if $P_{X, Y} = P_X\otimes
+            P_Y$; but this is precisely the criterion for independence of $X$
+            and $Y$.
+
+            \item Note that $f(x, \lambda) = \psi(\lambda\mid x) m(x)$.
+            We have \begin{align*}
+                I(X, \lambda)
+                    &= \EE_{X, \lambda}\left[\log\left(\frac{f(X, \lambda)}{m(X) \psi(\lambda)}\right)\right] \\
+                    &= \EE_{X}\left[\EE_{\lambda \mid X}\left[\log\left(\frac{f(X, \lambda)}{m(X) \psi(\lambda)}\right)\right]\right] \\
+                    &= \EE_{X}\left[\EE_{\lambda \mid X}\left[\log\left(\frac{\psi(\lambda\mid X)}{\psi(\lambda)}\right)\right]\right] \\
+                    &= \EE_{X}\left[\KL(\psi(\lambda\mid X), \psi(\lambda))\right].
+            \end{align*}
+
+            \item The same calculations will give \[
+                I(X, \theta) = \EE_X\left[\KL(\pi(\theta\mid X), \pi(\theta))\right].
+            \] Using the fact that \[
+                \KL(\psi(\lambda\mid X), \psi(\lambda)) \leq \KL(\pi(\theta\mid X), \pi(\theta)),
+            \] taking expectations with respect to $X$ immediately gives $I(X,
+            \lambda) \leq I(X, \theta)$.
+        \end{enumerate}
+
+
+        \item Check \begin{align*}
+            P(U < \rho(Y))
+                &= \int P(U < \rho(y)) g(y) \:dy \\
+                &= \int \rho(y) g(y) \:dy \\
+                &= \frac{1}{M} \int f(y) \:dy \\
+                &= \frac{1}{M}.
+        \end{align*}
+        Thus, \begin{align*}
+            P(X \in A)
+                &= P(Y \in A \mid U < \rho(Y)) \\
+                &= \frac{P(Y \in A, U < \rho(Y))}{P(U < \rho(Y))} \\
+                &= M \int_A \rho(y) g(y) \:dy \\
+                &= \int_A f(y) \:dy.
+        \end{align*}
+        It follows that $X \sim f$.
+
+
+        \item We have the closed unit ball $\mathcal{U}_p$ in $\R^p$, and the
+        unit sphere $\partial\mathcal{U}_p$.
+
+        \begin{enumerate}
+            \item Define \[
+                h\colon \R^p \to \partial\mathcal{U}_p, \qquad
+                x \mapsto x / \norm{x}_2.
+            \] Suppose that $Y$ is spherically symmetric.
+            To show that $h(Y)$ is uniformly distributed on
+            $\partial\mathcal{U}_p$, it suffices to show that $h(Y)$ is
+            spherically symmetric.
+            Indeed, for $H \in O_p(\R)$, we have \[
+                H h(Y)
+                    = \frac{HY}{\norm{Y}_2}
+                    = \frac{HY}{\norm{HY}_2}
+                    = h(H Y)
+                    \overset{d}{=} h(Y).
+            \] The last equality follows since $HY \overset{d}{=} Y$.
+
+
+            \item Suppose that $X \sim \text{Uniform}(\mathcal{U}_p)$.
+            Note that its density is \[
+                f_X
+                    = C \bm{1}_{\mathcal{U}_p}
+                    = C \bm{1}_{[0, 1]}(\norm{\,\cdot\,}_2),
+            \] where $C$ is a normalizing constant (the reciprocal of the
+            volume of $\mathcal{U}_p$).
+            Since this is purely a function of $\norm{x}_2$, we have $X$
+            spherically symmetric. \\
+
+            Next, we claim that $V = h(X)$ and $R = \norm{X}_2$ are independent.
+            Recall that $V$ is uniformly distributed on $\partial\mathcal{U}_p$
+            and is spherically symmetric.
+            Note that for $r \in [0, 1]$, we have \[
+                P(R \leq r)
+                    = P(X \in r \mathcal{U}_p)
+                    = \frac{\text{vol}(r \mathcal{U}_p)}{\text{vol}(\mathcal{U}_p)}
+                    = r^p.
+            \] Thus, we have a density \[
+                f_R(r) = p r^{p - 1} \,\bm{1}_{[0, 1]}(r).
+            \] Now, for $A \subseteq \partial\mathcal{U}_p$, observe that \[
+                P(R \leq r, V \in A)
+                    = P(X \in \text{cone}_r(A))
+                    = \frac{\text{vol}(\text{cone}_r(A))}{\text{vol}(\mathcal{U}_p)},
+            \] where $\text{cone}_r(A) = \bigcup_{r' \in [0, r]} r'A$.
+            But this is just \[
+                \frac{\text{vol}(\text{cone}_r(A))}{\text{vol}(\text{cone}_1(A))}\cdot\frac{\text{vol}(\text{cone}_1(A))}{\text{vol}(\mathcal{U}_p)}
+                    = r^p \cdot \frac{\text{area}(A)}{\text{area}(\partial\mathcal{U}_p)}
+                    = P(R \leq r) \cdot P(V \in A).
+            \] It follows that $V$ and $R$ are independent.
+
+            \emph{Remark:} Here, $\text{area}(\cdot)$ refers to the surface
+            area i.e.\ the Lebesgue measure on $\partial\mathcal{U}_p$.
+            We typically define for measurable $A \subseteq
+            \partial\mathcal{U}_p$ \[
+                \text{area}(A) = p \cdot \text{vol}(\text{cone}_1(A)).
+            \] With this, $\text{area}(\cdot)$ becomes the measure (up to
+            normalization) describing the distribution of $V = h(X)$, i.e.\ the
+            uniform distribution on $\partial\mathcal{U}_p$.
+            This can be verified by checking that $\text{area}(\cdot)$ is
+            spherically symmetric.
+
+            As a consequence, we have \[
+                \frac{\text{vol}(\text{cone}_1(A))}{\text{vol}(\text{cone}_1(B))}
+                    = \frac{\text{area}(A)}{\text{area}(B)}.
+            \]
+
+
+            \emph{Remark:} With this notation,
+            $\text{cone}_1(\partial\mathcal{U}_p) = \mathcal{U}_p$.
+
+
+            \item To sample from $\text{uniform}(\partial\mathcal{U}_p)$, first
+            generate $Z \sim N(0, \bm{I}_p)$, say via a vector of $Z_i \iid
+            N(0, 1)$.
+            Then, the result in part (a) will show that $V = Z / \norm{Z}_2
+            \sim \text{uniform}(\partial\mathcal{U}_p)$.
+
+            Next, we can independently sample $R = U^{1 / p}$ where $U \sim
+            \text{uniform}[0, 1]$; then, $P(R \leq r) = r^p$, so $R
+            \overset{d}{=} \norm{X}_2$ where $X \sim
+            \text{uniform}(\mathcal{U}_p)$.
+            Using the result from (b), we have $VR \overset{d}{=} X \sim
+            \text{uniform}(\mathcal{U}_p)$.
+
+            \emph{Remark:} We have $Z$ spherically symmetric, since it has density \[
+                f_Z(z) = \frac{1}{(2\pi)^{1 / p}} e^{-\norm{z}_2^2 / 2}.
+            \] 
+        \end{enumerate}
+
+    \end{enumerate}
+
+\end{document}
