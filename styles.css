@@ -183,6 +183,12 @@ nav a:hover {
     filter: invert(0%);
 }
 
+.university .card-title {
+    position: relative;
+    font-size: 1.4em;
+    margin-bottom: 0.5em;
+}
+
 .accordion {
     position: relative;
     cursor: pointer;
