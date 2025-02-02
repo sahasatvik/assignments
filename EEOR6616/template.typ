@@ -46,12 +46,13 @@
   primary: rgb("#DA1212"),
   secondary: rgb("#11468F"),
   color-strong: auto,
+  paper: "a4",
   doc
 ) = {
 
   set document(title: title, author: author)
   set page(
-    paper: "a4",
+    paper: paper,
     margin: (bottom: 1in),
     footer-descent: 0.5in,
     footer: footer(title, footer-left, footer-right),

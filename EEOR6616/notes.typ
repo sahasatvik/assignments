@@ -20,6 +20,7 @@
   primary: rgb("#8EACCD").darken(5%),
   secondary: rgb("#8EACCD").darken(30%),
   footer-left: [EEOR6616: Convex Optimization],
+  // paper: "us-letter"
 )
 
 #show heading.where(level: 1): h => block(above: 2em, below: 1em, h)
@@ -39,6 +40,7 @@
 
 
 #set heading(numbering: "1.")
+// #show bibliography: set heading(numbering: "1.")
 #show: thm-rules.with(qed-symbol: $square$)
 
 #let thm-style = (
@@ -94,7 +96,7 @@
 #let remark = thm-rem(
   "Remark",
 ).with(numbering: none)
-#let example = thm-plain(
+#let example = thm-def(
   "Example",
   counter: "sub",
   base: "common",
@@ -108,11 +110,16 @@
 #let argmax = math.op($arg max$, limits: true)
 
 #let grad(f) = $nabla f$
+#let subgrad(f) = $diff#f$
 
+#let XX = $cal(X)$
 #let KK = $cal(K)$
 
 #let epi = "epi"
 #let interior = "int"
+#let relinterior = "ri"
+#let boundary(X) = $diff#X$
+
 
 
 #let eq(tag, eq) = math.equation(numbering: num => $#tag$, block: true, eq)
@@ -139,10 +146,37 @@
   $ for all $x, y in KK$ and $lambda in [0, 1]$.
 ]
 
+#example[
+  All linear subspaces of $RR^d$ are convex sets.
+]
+
+#example[
+  Consider points $x_1, ..., x_n in RR^d$.
+  Their _convex hull_, described by $
+    "conv"(x_1, ..., x_n) = {lambda_1 x_1 + ... + lambda_n x_n: lambda_1, ..., lambda_n >= 0, #h(0.5em) sum_(i = 1)^n lambda_i = 1},
+  $ is a convex set.
+  In fact, it is the smallest convex set containing $x_1, ..., x_n$.
+]
+
 #definition("Convex function")[
   We say that $f: KK -> RR$ is convex if $KK$ is convex, and $
     f(lambda x + (1 - lambda) y) <= lambda f(x) + (1 - lambda) f(y)
   $ for all $x, y in KK$ and $lambda in [0, 1]$.
+]
+
+#example[
+  The map $x mapsto x^2$ is convex.
+]
+
+#example[
+  Indicator functions of convex sets are convex.
+  The indicator function of $XX subset.eq RR^d$ is given by $
+    I_XX: RR^d -> overline(RR), quad quad
+    x mapsto cases(
+      0 quad&"if" x in XX,
+      oo &"if" x in.not XX
+    ).
+  $
 ]
 
 #proposition("Jensen's Inequality")[
@@ -167,7 +201,7 @@
 
 #proposition[
   $f$ is convex if and only if $epi(f)$ is convex.
-]
+] <prop-convex-epigraph>
 #proof[
   $(==>)$ For $(x_1, alpha_1), (x_2, alpha_2) in epi(f)$ and $lambda in [0,
   1]$, we have $
@@ -183,7 +217,8 @@
 ]
 
 
-From now on, we will always assume that $f:KK -> RR$ is differentiable.
+From now on, we will always assume that $f:KK -> RR$ is differentiable, unless
+stated otherwise.
 Under this setting, we have a simpler characterization of convexity.
 
 #proposition("Gradient Inequality")[
@@ -252,18 +287,30 @@ via its critical points.
 
 
 
-= Gradient Descent
+= Projections
 
-Gradient descent algorithms for solving @op-unconstrained[] follow the
-iterative scheme #eq($(cal("GD"))$)[$
-  x_(t + 1) = x_t - eta_t grad(f)(x_t).
-$] <al-GD>
+We say that $z$ is the projection of a point $y$ onto a set $XX$ if $z in XX$
+and $norm(y - z) <= norm(y - x)$ for all $x in XX$.
+In general, such projections of points need not exist!
 
-It is possible for @al-GD[] to take our iterates $x_t$ outside $KK$; we can
-rectify this using projections.
+#example[
+  Consider the open unit disk $DD^2 = {x in RR^2 : norm(x) < 1}$ in $RR^2$.
+  Projections of points outside $DD^2$ onto $DD^2$ do not exist.
+]
 
+We may observe that at least in Euclidean spaces $RR^d$, closedness of
+(nonempty) $XX$ guarantees the existence of a projection of $y in RR^d$ onto
+$XX$.
+By picking some $x_0 in XX$, we need only look at the compact set $XX sect
+overline(B_r (y))$ where $r = norm(y - x_0)$, on which the continuous map $x
+mapsto norm(y - x)$ must attain its minimum.
 
-== Projections
+On the other hand, projections of points need not be unique.
+
+#example[
+  Consider the unit circle $S^1 = {x in RR^2 : norm(x) < 1}$ in $RR^2$.
+  Then, every point in $S^1$ is a projection of $0 in RR^2$ onto $S^1$.
+]
 
 #theorem("Hilbert Projection")[
   Let $KK subset.eq RR^d$ be closed and convex.
@@ -289,7 +336,7 @@ rectify this using projections.
 
 #definition[
   Let $KK subset.eq RR^d$ be closed and convex.
-  The projection onto $KK$ is defined by $
+  The projection operator onto $KK$ is defined by $
     Pi_KK: RR^d -> KK, quad
     y mapsto argmin_(x in KK) thick norm(x - y).
   $
@@ -339,6 +386,177 @@ rectify this using projections.
 ]
 
 
+
+== Normals
+
+A very useful property of closed convex sets $KK$ is that given a point $w
+in.not K$, one can find a hyperplane separating $w$ from $KK$.
+In other words, there exists a continuous linear functional $g$ and a constant
+$a$ such that $g(x) < a < g(w)$ for all $x in KK$.
+
+#theorem("Strict Separation")[
+  Let $w in.not KK$ for closed convex $KK$.
+  There exists $v != 0$ such that $
+    sup_(x in KK) ip(v, x) < ip(v, w).
+  $
+] <thm-separation>
+#proof[
+  Set $v = w - Pi_KK (w)$. Then, @prop-variational gives $
+    ip(v, x - (w - v))
+      = ip(w - Pi_KK (w), x - Pi_KK (w))
+      <= 0,
+  $ for all $x in KK$, which rearranges into $
+    ip(v, x) + norm(v)^2 <= ip(v, w). #qedhere
+  $
+]
+
+
+#definition("Normal")[
+  Let $x in KK$ for closed convex $KK$.
+  We say that $v$ is normal to $KK$ at $x$ if $ip(v, y) <= ip(v, x)$ for all $y
+  in KK$.
+]
+
+#definition("Normal Cone")[
+  Let $x in KK$ for closed convex $KK$.
+  The normal cone $N_KK (x)$ at $x$ is the collection of normals to $KK$ at $x$.
+]
+
+Note that if $v$ is normal to $KK$ at $x$, so is $alpha v$ for $alpha >= 0$,
+hence $N_KK (x)$ is indeed a cone; it is also convex.
+Furthermore, $N_KK (x)$ is nontrivial only when $x in.not interior(X)$; if $x
+in B_delta (x) subset.eq KK$, then for any $v$ with $norm(v) = 1$, we have $x
+plus.minus delta/2 v in B_delta (x) subset.eq KK$, and $
+  ip(v, x - delta/2  v)
+    = ip(v, x) - delta/2
+    < ip(v, x)
+    < ip(v, x) + delta/2
+    = ip(v, x + delta/2 v).
+$ Thus, we need only look at normal cones at boundary points $x in boundary(KK)$.
+At these points, nonzero $v in N_KK (x)$ describe _supporting hyperplanes_ to
+$KK$ at $x$.
+
+#proposition[
+  Let $x in boundary(KK)$ for closed convex $K subset.eq RR^d$.
+  Then, $N_KK (x)$ is nontrivial, i.e. there exists a supporting hyperplane to
+  $KK$ at $x$.
+] <prop-supporting-plane>
+#proof[
+  Pick a sequences ${x_n} subset.eq KK^c$ such that $x_n -> x$, and a
+  corresponding sequence ${v_n} subset S^(d - 1)$ of directions via
+  @thm-separation, such that $sup_(y in KK) ip(v_n, y) < ip(v_n, x_n)$.
+  Using the compactness of $S^(d-1)$, descend to a subsequence and relabel so
+  that $v_n -> v in S^(d - 1)$.
+  Then, for $y in K$, we have $
+    ip(v, y)
+      = lim_(n -> oo) ip(v_n, y)
+      <= lim_(n -> oo) ip(v_n, x_n)
+      = ip(v, x). #qedhere
+  $
+]
+
+// #proposition[
+//   The normal cone $N_KK (x)$ is convex.
+// ]
+
+#proposition[
+  Let $x in KK$ for closed convex $KK$, and let $v in N_KK (x)$.
+  Then, $Pi_KK (x + alpha v) = x$ for all $alpha >= 0$.
+]
+#proof[
+  For all $y in KK$, we have $
+    ip(x - (x + alpha v), x - y)
+      = alpha ip(v, y - x)
+      <= 0,
+  $ whence $x = Pi_KK (x + alpha v)$ by @prop-variational.
+]
+
+
+
+== Subdifferentials
+
+#definition("Subdifferential")[
+  Let $f: KK -> RR$ be convex.
+  The subdifferential of $f$ at $x in KK$ is the collection of all directions
+  $v$ such that $
+    f(y) >= f(x) + v^top (y - x)
+  $ for all $y in KK$, and is denoted $subgrad(f)(x)$.
+]
+
+Compare with the gradient inequality (@prop-tangent) for differentiable convex $f$.
+
+#example[
+  Consider $f: RR -> RR$, $x mapsto |x|$.
+  Then, $
+    subgrad(f)(x) = cases(
+      {-1} #h(1.5em)& "if "x < 0,
+      [-1, 1] & "if "x < 0,
+      {+1} & "if "x > 0
+    )
+  $
+]
+
+
+It is clear that the subgradient $subgrad(f)(x)$ is convex.
+Showing that it is nontrivial requires more work.
+
+#proposition[
+  Let $f: KK -> RR$ be convex.
+  Then, $subgrad(f)(x)$ is nonempty for all $x in relinterior(KK)$.
+]
+#proof[
+  Note that $epi(f)$ is convex via @prop-convex-epigraph.
+  Use @prop-supporting-plane to find a supporting hyperplane to $epi(f)$ at
+  $\(x^top thin f(x)\)^top$, i.e. $\(v^top thin s\)^top != 0$ such that for all
+  $\(y^top thin alpha\)^top in epi(f)$, $
+    v^top (y - x) + s(alpha - f(x)) <= 0.
+  $ By considering $y = x$ and $alpha > f(x)$, we must have $s <= 0$.
+  If $s = 0$, we would need $v^top (y - x) <= 0$ for all $y in KK$, which would
+  force $v = 0$ since $x in relinterior(KK)$.
+  Thus, $s < 0$; putting $alpha = f(y)$, we have $
+    f(y) >= f(x) - v^top / s (y - x),
+  $ whence $-v^top\/s in subgrad(f)(x)$.
+]
+
+The next result follows immediately from the definition of the subdifferential;
+compare this with @prop-convex-gradient.
+
+#proposition[
+  Let $f: KK -> RR$ be convex.
+  Then, $x^* in KK$ is a global minimizer of $f$ if and only if $0 in subgrad(f)(x^*)$.
+] <prop-convex-subgradient>
+
+
+When $f$ is differentiable at $x in interior(XX)$, the subgradient reduces to
+the usual gradient, with $subgrad(f)(x) = {grad(f)(x)}$.
+Indeed, @prop-tangent shows that $grad(f)(x) in subgrad(f)(x)$.
+To check that there are no other elements, pick $v in subgrad(f)(x)$, and note
+that for $lambda >= 0$, $
+  v^top u
+    <= (f(x + lambda u) - f(x))/lambda
+    -> grad(f)(x)^top u quad "as" lambda -> 0,
+$ hence $(grad(f)(x) - v)^top u >= 0$ for all directions $u$.
+This forces $v = grad(f)(x)$.
+
+The converse of the above result also holds, in the following form.
+
+#theorem[
+  Let $f: KK -> RR$ be convex and $x in interior(KK)$.
+  If $f$ is differentiable at $x$, then $subgrad(f)(x) = {grad(f)(x)}$.
+  Conversely, if $subgrad(f)(x) = {v}$, then $f$ is differentiable at $x$ with
+  $grad(f)(x) = v$.
+]
+
+
+= Gradient Descent
+
+Gradient descent algorithms for solving @op-unconstrained[] follow the
+iterative scheme #eq($(cal("GD"))$)[$
+  x_(t + 1) = x_t - eta_t grad(f)(x_t).
+$] <al-GD>
+
+It is possible for @al-GD[] to take our iterates $x_t$ outside $KK$; we can
+rectify this using projections.
 Projected gradient descent algorithms for solving @op-X[] follow the iterative
 scheme #eq($(cal("PGD"))$)[$
   y_(t + 1) &= x_t - eta_t grad(f)(x_t), \
@@ -445,7 +663,7 @@ In fact, we can use $ell$-smoothness to improve upon the estimate in @prop-tange
 
 #theorem[
   Let $f$ be convex and $ell$-smooth, $x^* in RR^d$ be its global minimizer.
-  Further let ${x_t}_(t in NN)$ be iterates of @al-GD[] with $eta = 1\/ell$.
+  Further let $\{x_t\}_(t in NN)$ be iterates of @al-GD[] with $eta = 1\/ell$.
   Then, $
     norm(x_(t + 1) - x^*) <= norm(x_t - x^*)
   $ for all $t in NN$.
@@ -461,13 +679,13 @@ In fact, we can use $ell$-smoothness to improve upon the estimate in @prop-tange
   $
 ]
 
-#remark[
-  This remains true with @al-PGD[] as long as $x^* in interior(KK)$, via $
-    norm(x_(t + 1) - x^*)
-      = norm(Pi_KK (y_(t + 1)) - x^*)
-      <= norm(y_(t + 1) - x^*).
-    $
-]
+// #remark[
+//   This remains true with @al-PGD[] as long as $x^* in interior(KK)$, via $
+//     norm(x_(t + 1) - x^*)
+//       = norm(Pi_KK (y_(t + 1)) - x^*)
+//       <= norm(y_(t + 1) - x^*).
+//     $
+// ]
 
 #theorem[
   Let $f$ be convex and $ell$-smooth, $x^* in RR^d$ be its global minimizer,
@@ -503,3 +721,13 @@ In fact, we can use $ell$-smoothness to improve upon the estimate in @prop-tange
       <=  1/(2ell) norm(grad(f)(x_t))^2.
   $
 ]
+
+
+
+
+
+#bibliography(
+  "references.bib",
+  style: "ieee",
+  full: true,
+)
