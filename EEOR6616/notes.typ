@@ -140,7 +140,7 @@
 == Convex Sets and Functions
 
 
-#definition("Convex set")[
+#definition("Convex Set")[
   We say that $KK subset.eq RR^d$ is convex if $
     lambda x + (1 - lambda) y in KK
   $ for all $x, y in KK$ and $lambda in [0, 1]$.
@@ -158,7 +158,7 @@
   In fact, it is the smallest convex set containing $x_1, ..., x_n$.
 ]
 
-#definition("Convex function")[
+#definition("Convex Function")[
   We say that $f: KK -> RR$ is convex if $KK$ is convex, and $
     f(lambda x + (1 - lambda) y) <= lambda f(x) + (1 - lambda) f(y)
   $ for all $x, y in KK$ and $lambda in [0, 1]$.
@@ -295,10 +295,12 @@ via its critical points.
 ]
 
 In other words, $z$ is a projection of $y$ onto $XX$ when $z in argmin_(x in
-XX) norm(y - x)$.
+XX) norm(y - x)$.springer-mathphys
 In general, such projections of points need not exist!
 For instance, one can argue that a projection of $y in.not XX$ onto $XX$ cannot
-lie in $interior(XX)$.
+lie in the interior of $XX$: given $z in B_delta (z) subset.eq interior(XX)$,
+set $z_t = z + t(y - z) in XX$ where $t = delta \/ (2norm(y - z))$ whence
+$norm(y - z_t) = (1 - t) norm(y - z) < norm(y - z)$.
 
 #example[
   Consider the open unit disk $DD^2 = {x in RR^2 : norm(x) < 1}$ in $RR^2$.
@@ -318,19 +320,23 @@ On the other hand, projections of points need not be unique.
   Then, every point in $S^1$ is a projection of $0 in RR^2$ onto $S^1$.
 ]
 
+The following theorem establishes the existence and uniqueness of projections
+onto closed convex sets in any Hilbert space; we focus on Euclidean spaces
+$RR^d$ for simplicity.
+
 #theorem("Hilbert Projection")[
   Let $KK subset.eq RR^d$ be closed and convex.
-  Then, for each $y in RR^d$, there exists unique $z in KK$ such that $norm(z -
-  y) <= norm(x - y)$ for all $x in KK$.
+  Then, for each $y in RR^d$, there exists a unique projection of $y$ onto
+  $XX$.
 ] <thm-hilbert-projection>
 #proof[
-  Set $delta = inf_(x in KK) norm(x - y)$ and pick a sequence
-  ${z_n} subset KK$ such that $norm(z_n - y) -> delta$.
+  Set $delta = inf_(x in KK) norm(x - y)$ and pick a sequence $\{z_n\} subset
+  KK$ such that $norm(z_n - y) -> delta$.
   Note that $(z_n + z_m)\/2 in KK$; the parallelogram law gives $
     norm(z_n - z_m)^2
       &=  2norm(z_n - y)^2 + 2norm(z_m - y)^2 - 4norm((z_n + z_m)\/2 - y)^2 \
       &<= 2norm(z_n - y)^2 + 2norm(z_m - y)^2 - 4delta^2.
-  $ Since this goes to $0$ as $m, n -> oo$, ${z_n}$ is Cauchy and hence has a
+  $ Since this goes to $0$ as $m, n -> oo$, $\{z_n\}$ is Cauchy and hence has a
   limit $z in KK$.
   Furthermore, if $delta = norm(z' - y)$ for some other $z' in KK$,
   then $
@@ -343,7 +349,7 @@ On the other hand, projections of points need not be unique.
 #definition[
   Let $KK subset.eq RR^d$ be closed and convex.
   The projection operator onto $KK$ is defined by $
-    Pi_KK: RR^d -> KK, quad
+    Pi_KK: RR^d -> KK, quad quad
     y mapsto argmin_(x in KK) thick norm(x - y).
   $
 ]
@@ -552,6 +558,9 @@ The converse of the above result also holds, in the following form.
   Conversely, if $subgrad(f)(x) = {v}$, then $f$ is differentiable at $x$ with
   $grad(f)(x) = v$.
 ]
+#proof[
+  See @rockafellar-1970[Theorem 25.1].
+]
 
 
 = Gradient Descent
@@ -673,7 +682,7 @@ In fact, we can use $ell$-smoothness to improve upon the estimate in @prop-tange
   Then, $
     norm(x_(t + 1) - x^*) <= norm(x_t - x^*)
   $ for all $t in NN$.
-] <thm-GD-step>
+] <thm-GD-lsmooth-step>
 #proof[
   Using $grad(f)(x^*) = 0$ and @cor-lsmooth-convex, $
     norm(x_(t + 1) - x^*)^2
@@ -713,7 +722,7 @@ In fact, we can use $ell$-smoothness to improve upon the estimate in @prop-tange
       &<= grad(f)(x_t)^top (x_t - x^*)
       &<= norm(grad(f)(x_t)) norm(x_t - x^*)
       &<= norm(grad(f)(x_t)) norm(x_1 - x^*),
-  $ with the last inequality guaranteed by @thm-GD-step.
+  $ with the last inequality guaranteed by @thm-GD-lsmooth-step.
   Setting $w = 1\/ 2ell norm(x_1 - x^*)^2$, this is $norm(grad(f)(x_t))^2 \/
   2ell >= w delta_t^2$.
   Thus, $delta_(t + 1) <= delta_t - w delta_t^2$, which rearranges to $
@@ -729,9 +738,93 @@ In fact, we can use $ell$-smoothness to improve upon the estimate in @prop-tange
 ]
 
 
+== $alpha$-strong Convexity
+
+#definition([$alpha$-strong Convex Function])[
+  We say that convex differentiable $f$ is $alpha$-strongly convex for $alpha
+  >= 0$ if $
+    f(y) >= f(x) + grad(f)(x)^top (y - x) + alpha/2 norm(y - x)^2
+  $ for all $x, y in KK$.
+]
+
+#remark[
+  This is often presented as $
+    f(x) - f(y) <= grad(f)(x)^top (x - y) - alpha/2 norm(x - y)^2.
+  $ Thus, $alpha$-strong convexity is a strengthening of the gradient
+  inequality (@prop-convex-gradient).
+]
+
+#example[
+  All convex functions are '$0$-strongly convex'.
+]
+
+
+We can improve upon @thm-PGD-Lipschitz and @thm-GD-lsmooth-step dramatically
+with this added assumption.
+
+
+#theorem[
+  Let $f$ be $alpha$-strongly convex and $L$-Lipschitz, and let $x^* in KK$ be
+  its global minimizer.
+  Further let $x_1, ..., x_T$ be $T$ iterates of @al-PGD[] with $eta_t = 2\/
+  (alpha(t + 1))$.
+  Then, $
+    f(sum_(t = 1)^T t / (T(T + 1)\/2) thin x_t) - f(x^*) <= (2L^2)/(alpha(T + 1)).
+  $
+] <thm-PGD-Lipschitz-strong>
 
 
 
+
+Note that when $f$ is both $alpha$-strongly convex and $ell$-smooth, we have $
+  alpha/2 norm(y - x)^2 <= f(y) - f(x) - grad(f)(x)^top (y - x) <= ell/2 norm(y - x)^2.
+$ This also justifies that $alpha <= ell$.
+
+#lemma[
+  Let $f$ be $alpha$-strongly convex and $ell$-smooth, and let $x^+ = x - 1/ell
+  grad(f)(x)$.
+  Then, $
+    f(x^+) - f(y) <= grad(f)(x)^top (x - y) - 1/(2ell) norm(grad(f)(x))^2 - alpha/2 norm(x - y)^2.
+  $
+] <lem-lsmooth-strong-convex>
+#proof[
+  Write $
+    f(x^+) - f(y)
+      &= (f(x^+) - f(x)) + (f(x) - f(y)) \
+      &<= grad(f)(x)^top (x^+ - x) + ell/2 norm(x^+ - x)^2 + grad(f)(x)^top (x - y) - alpha / 2 norm(x - y)^2 \
+      &= -1/ell norm(grad(f)(x))^2 + 1/(2ell) norm(grad(f)(x))^2 + grad(f)(x)^top (x - y) - alpha/2 norm(x - y)^2 \
+      &= - 1/(2ell) norm(grad(f)(x))^2 + grad(f)(x)^top (x - y) - alpha/2 norm(x - y)^2 #qedhere
+  $
+]
+
+#theorem[
+  Let $f$ be $alpha$-strongly convex and $ell$-smooth, and let $x^* in RR^d$ be
+  its global minimizer.
+  Further let $\{x_t\}_(t in NN)$ be iterates of @al-GD[] with $eta = 1\/ell$.
+  Then, $
+    norm(x_(t + 1) - x^*)^2 <= e^(-t alpha \/ ell) thin norm(x_1 - x^*)^2
+  $ for all $t in NN$.
+] <thm-GD-lsmooth-strong-step>
+#proof[
+  Write $
+    norm(x_(t + 1) - x^*)^2
+      &= norm(x_(t + 1) - x_t)^2 + norm(x_t - x^*)^2 + 2 (x_(t + 1) - x_t)^top (x_t - x^*) \
+      &= 1/(ell^2) norm(grad(f)(x_t))^2 + norm(x_t - x^*)^2 - 2/ell grad(f)(x_t)^top (x_t - x^*) \
+      &<= 1/(ell^2) norm(grad(f)(x_t))^2 + norm(x_t - x^*)^2 \
+        &#h(2em) - 2/ell [f(x_(t + 1)) - f(x^*) + 1/(2 ell) norm(grad(f)(x_t))^2 + alpha/2 norm(x_t - x^*)^2] #tag[(@lem-lsmooth-strong-convex)]\
+      &<= norm(x_t - x^*)^2 - alpha/ell norm(x_t - x^*)^2 #tag[($f(x_(t + 1)) >= f(x^*)$)] \
+      &= (1 - alpha/ell) thin norm(x_t - x^*)^2.
+  $ Iterating and using $1 - s <= e^(-s)$, we have $
+    norm(x_(t + 1) - x^*)^2
+      <= (1 - alpha/ell)^t thin norm(x_1 - x^*)^2
+      <= e^(-t alpha\/ell) thin norm(x_1 - x^*)^2. #qedhere
+  $
+]
+
+A version of the above still holds with regards to @al-PGD[].
+
+
+#pagebreak()
 #bibliography(
   "references.bib",
   style: "ieee",
