@@ -289,18 +289,24 @@ via its critical points.
 
 = Projections
 
-We say that $z$ is the projection of a point $y$ onto a set $XX$ if $z in XX$
-and $norm(y - z) <= norm(y - x)$ for all $x in XX$.
+#definition[
+  We say that $z$ is a projection of a point $y$ onto a set $XX$ if $z in XX$
+  and $norm(y - z) <= norm(y - x)$ for all $x in XX$.
+]
+
+In other words, $z$ is a projection of $y$ onto $XX$ when $z in argmin_(x in
+XX) norm(y - x)$.
 In general, such projections of points need not exist!
+For instance, one can argue that a projection of $y in.not XX$ onto $XX$ cannot
+lie in $interior(XX)$.
 
 #example[
   Consider the open unit disk $DD^2 = {x in RR^2 : norm(x) < 1}$ in $RR^2$.
   Projections of points outside $DD^2$ onto $DD^2$ do not exist.
 ]
 
-We may observe that at least in Euclidean spaces $RR^d$, closedness of
-(nonempty) $XX$ guarantees the existence of a projection of $y in RR^d$ onto
-$XX$.
+In Euclidean spaces $RR^d$, we may observe that closedness of (nonempty) $XX$
+guarantees the existence of a projection of $y in RR^d$ onto $XX$.
 By picking some $x_0 in XX$, we need only look at the compact set $XX sect
 overline(B_r (y))$ where $r = norm(y - x_0)$, on which the continuous map $x
 mapsto norm(y - x)$ must attain its minimum.
