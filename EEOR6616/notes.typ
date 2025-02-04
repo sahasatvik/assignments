@@ -308,7 +308,7 @@ mapsto norm(y - x)$ must attain its minimum.
 On the other hand, projections of points need not be unique.
 
 #example[
-  Consider the unit circle $S^1 = {x in RR^2 : norm(x) < 1}$ in $RR^2$.
+  Consider the unit circle $S^1 = {x in RR^2 : norm(x) = 1}$ in $RR^2$.
   Then, every point in $S^1$ is a projection of $0 in RR^2$ onto $S^1$.
 ]
 
