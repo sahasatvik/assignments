@@ -6,41 +6,34 @@
   suptitle: [
     *EEOR6616*
   ],
-  title: [Convex Optimization],
-  // subtitle: [ ],
+  title: [
+    Convex Optimization
+  ],
   author: "Satvik Saha",
   author-show: [
     #set footnote(numbering: "*")
     #set strong(delta: 100)
-    _Instructed by *Prof.~Tianyi Lin*_~#footnote[Department of Industrial Engineering and Operations Research (IEOR), Columbia University]
+    _Instructed by *Prof.~Tianyi Lin*_~#footnote[
+      Department of Industrial Engineering and Operations Research (IEOR), Columbia University
+    ]
     #v(-0.4em)
-    _Transcribed by *Satvik Saha*_~#footnote[Department of Statistics, Columbia University]
+    _Transcribed by *Satvik Saha*_~#footnote[
+      Department of Statistics, Columbia University
+    ]
   ],
-  // affiliation: [Columbia University],
   primary: rgb("#8EACCD").darken(5%),
   secondary: rgb("#8EACCD").darken(30%),
-  footer-left: [EEOR6616: Convex Optimization],
-  // paper: "us-letter"
+  footer-left: [
+    EEOR6616: Convex Optimization
+  ],
 )
 
+#set heading(numbering: "1.")
 #show heading.where(level: 1): h => block(above: 2em, below: 1em, h)
 #show heading.where(level: 2): h => block(above: 2em, below: 1em, h)
-// #show heading.where(level: 2): h => {
-//   context {
-//     let hh = query(selector(heading).before(here()))
-//     if hh.at(-2).level != 1 {
-//       v(2em)
-//     }
-//   }
-//   block(above: 1em, below: 1em, h)
-// }
 #show enum: it => pad(left: 1em, it)
-
 #show math.equation: set block(breakable: true)
 
-
-#set heading(numbering: "1.")
-// #show bibliography: set heading(numbering: "1.")
 #show: thm-rules.with(qed-symbol: $square$)
 
 #let thm-style = (
@@ -103,6 +96,8 @@
   stroke: black.lighten(85%),
 )
 
+
+
 #let mapsto = $arrow.r.bar$
 #let ip(u, v) = $angle.l #u, #v angle.r$
 
@@ -121,15 +116,12 @@
 #let boundary(X) = $diff#X$
 
 
-
 #let eq(tag, eq) = math.equation(numbering: num => $#tag$, block: true, eq)
 
 
 #v(-0.2in)
 #contents()
 #v(0.3in)
-
-// #pagebreak()
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -295,11 +287,11 @@ via its critical points.
 ]
 
 In other words, $z$ is a projection of $y$ onto $XX$ when $z in argmin_(x in
-XX) norm(y - x)$.springer-mathphys
+XX) norm(y - x)$.
 In general, such projections of points need not exist!
 For instance, one can argue that a projection of $y in.not XX$ onto $XX$ cannot
 lie in the interior of $XX$: given $z in B_delta (z) subset.eq interior(XX)$,
-set $z_t = z + t(y - z) in XX$ where $t = delta \/ (2norm(y - z))$ whence
+set $z_t = z + t(y - z) in XX$ with $t = delta \/ (2norm(y - z))$, whence
 $norm(y - z_t) = (1 - t) norm(y - z) < norm(y - z)$.
 
 #example[
