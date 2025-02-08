@@ -872,8 +872,8 @@ $] <al-HBGD>
 ]
 
 #theorem[
-  Let $f(x) = 1/2 (x - x^*)^top A (x - x^*)$ for positive definite $A in RR^(d
-  times d)$, and let $\{x_t\}_(t in NN)$ be iterates of @al-HBGD[] with $
+  Let $f(x) = 1/2 x^top A x$ for positive definite $A in RR^(d times d)$, and
+  let $\{x_t\}_(t in NN)$ be iterates of @al-HBGD[] with $
     eta = (2/(sqrt(ell) + sqrt(alpha)))^2, quad
     beta = ((sqrt(kappa) - 1) / (sqrt(kappa) + 1))^2, quad
     kappa = ell / alpha,
@@ -885,21 +885,22 @@ $] <al-HBGD>
   $ for all $t in NN$.
 ] <thm-HBGD>
 #proof[
-  Without loss of generality, let $x^* = 0$.
   Note that $grad(f)(x) = A x$, so the @al-HBGD[] updates read $
     x_(t + 1)
-      = x_t - eta A x_t + beta (x_t - x_(t - 1))
-      = ((1 + beta)I_d - eta A)x_t - beta x_(t - 1),
+      &= x_t - eta A x_t + beta (x_t - x_(t - 1))
+      &= ((1 + beta)I_d - eta A)x_t - beta x_(t - 1),
   $ which can be rewritten as $
     vec(x_(t + 1), x_t)
       = mat((1 + beta) I_d - eta A, -beta I_d; I_d, 0) vec(x_t, x_(t - 1)).
-  $ Notate this as $X_(t + 1) = B X_t = B^t X_1$.
+  $ Notate this as $
+    X_(t + 1) = B X_t = B^t X_1.
+  $
   Since $product_j |nu_j| = |det(B)| = beta^d$ for eigenvalues $\{nu_j\}_(j =
   1)^(2d)$ of $B$, we must have $rho(B) = max_j |nu_j| >= sqrt(beta)$.
   The eigenvalue equation for $B$ reads $
-    vec((1 + beta)y - eta A y - beta z, y) = nu vec(y, z), quad
-    eta nu A z = (beta + (1 + beta) nu - nu^2) z,
-  $ so the eigenvalues $\{lambda_i\}_(i = 1)^d$ of $A$ and $\{nu_(2i - 1),
+    B vec(y, z) = vec((1 + beta)y - eta A y - beta z, y) = nu vec(y, z) quad <==> quad
+    cases(eta nu A z = (beta + (1 + beta) nu - nu^2) z, y = nu z).
+  $ Thus, the eigenvalues $\{lambda_i\}_(i = 1)^d$ of $A$ and $\{nu_(2i - 1),
   nu_(2i)\}_(i = 1)^d$ of $B$ are related via $eta lambda nu = beta + (1 +
   beta) nu - nu^2$, or $
     nu_(2i - 1, 2i)
