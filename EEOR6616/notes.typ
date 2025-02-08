@@ -98,8 +98,11 @@
 
 
 
+#let cdot = $thin dot.c thin$
 #let mapsto = $arrow.r.bar$
 #let ip(u, v) = $angle.l #u, #v angle.r$
+
+#let diag = "diag"
 
 #let argmin = math.op($arg min$, limits: true)
 #let argmax = math.op($arg max$, limits: true)
@@ -699,7 +702,7 @@ In fact, we can use $ell$-smoothness to improve upon the estimate in @prop-tange
   and $norm(x_1 - x^*) <= R$.
   Further let $x_1, ..., x_T$ be $T$ iterates of @al-GD[] with $eta = 1\/ell$.
   Then, $
-    f(x_T) - f(x^*) <= (2 R^2 ell)/(T - 1).
+    f(x_T) - f(x^*) <= (2 ell R^2)/(T - 1).
   $
 ] <thm-GD-lsmooth>
 #proof[
@@ -814,6 +817,151 @@ $ This also justifies that $alpha <= ell$.
 ]
 
 A version of the above still holds with regards to @al-PGD[].
+
+The quantity $kappa = ell \/ alpha >= 1$, called the _conditional number_,
+controls the rate of convergence of @al-GD[].
+Convergence is especially slow when $kappa$ is very high.
+
+
+#example[
+  Let $f(x) = 1/2 x^top A x$ for positive definite $A$.
+  Then, $ell$ and $alpha$ are the largest and smallest eigenvalues of $A$
+  respectively.
+]
+
+
+
+
+
+= Momentum-Based Gradient Descent
+
+
+
+== Polyak's Heavy Ball Method
+
+Polyak's heavy ball method follows the iterative scheme
+#eq([(HB-$cal("GD")$)])[$
+  x_(t + 1) &= x_t - eta_t grad(f)(x_t) + beta_t (x_t - x_(t - 1)).
+$] <al-HBGD>
+
+
+#remark[
+  The @al-HBGD[] method can be viewed as a discretized version of the _heavy
+  ball flow_ $
+    dot.double(x) + gamma dot(x) = -grad(f)(x).
+  $
+]
+
+#lemma[
+  Given $M in RR^(d times d)$ and $epsilon > 0$, there exists a norm
+  $norm(cdot)_epsilon$ such that $norm(M)_epsilon <= rho(M) + epsilon$, where $
+    rho(M) = max{|lambda_1|, .., |lambda_n|}
+  $ is the _spectral radius_ of $M$, and $lambda_1, ..., lambda_n$ are the
+  eigenvalues of $M$.
+] <lem-matrix-norm>
+#remark[
+  Recall that every norm $norm(cdot)$ on $RR^d$ naturally induces a
+  matrix norm $
+    norm(M) = sup {norm(M x) : norm(x) = 1}
+  $ on $RR^(d times d)$.
+  The spectral radius satisfies $rho(A) <= norm(A)$ for every natural matrix
+  norm $norm(cdot)$.
+  The above lemma shows that $
+    rho(M) = inf {norm(M): norm(cdot) " is a matrix norm"}.
+  $
+]
+
+#theorem[
+  Let $f(x) = 1/2 (x - x^*)^top A (x - x^*)$ for positive definite $A in RR^(d
+  times d)$, and let $\{x_t\}_(t in NN)$ be iterates of @al-HBGD[] with $
+    eta = (2/(sqrt(ell) + sqrt(alpha)))^2, quad
+    beta = ((sqrt(kappa) - 1) / (sqrt(kappa) + 1))^2, quad
+    kappa = ell / alpha,
+  $ where $ell, alpha$ are the largest and smallest eigenvalues of $A$.
+  Then, for every $epsilon > 0$, there exists a norm $norm(cdot)_epsilon$ such
+  that $
+    norm(vec(x_(t + 1), x_t))_epsilon
+      <= (sqrt(beta) + epsilon)^t thin norm(vec(x_1, x_0))_epsilon
+  $ for all $t in NN$.
+] <thm-HBGD>
+#proof[
+  Without loss of generality, let $x^* = 0$.
+  Note that $grad(f)(x) = A x$, so the @al-HBGD[] updates read $
+    x_(t + 1)
+      = x_t - eta A x_t + beta (x_t - x_(t - 1))
+      = ((1 + beta)I_d - eta A)x_t - beta x_(t - 1),
+  $ which can be rewritten as $
+    vec(x_(t + 1), x_t)
+      = mat((1 + beta) I_d - eta A, -beta I_d; I_d, 0) vec(x_t, x_(t - 1)).
+  $ Notate this as $X_(t + 1) = B X_t = B^t X_1$.
+  Since $product_j |nu_j| = |det(B)| = beta^d$ for eigenvalues $\{nu_j\}_(j =
+  1)^(2d)$ of $B$, we must have $rho(B) = max_j |nu_j| >= sqrt(beta)$.
+  The eigenvalue equation for $B$ reads $
+    vec((1 + beta)y - eta A y - beta z, y) = nu vec(y, z), quad
+    eta nu A z = (beta + (1 + beta) nu - nu^2) z,
+  $ so the eigenvalues $\{lambda_i\}_(i = 1)^d$ of $A$ and $\{nu_(2i - 1),
+  nu_(2i)\}_(i = 1)^d$ of $B$ are related via $eta lambda nu = beta + (1 +
+  beta) nu - nu^2$, or $
+    nu_(2i - 1, 2i)
+      = 1/2 (1 + beta - eta lambda_i plus.minus sqrt((1 + beta - eta lambda_i)^2 - 4 beta)).
+  $ Note that when $Delta_i = (1 + beta - eta lambda_i)^2 - 4 beta <= 0$, we
+  have $|nu_(2i - 1)| = |nu_(2i)| = sqrt(beta)$.
+  Thus, for $rho(B)$ to achieve the lower bound $sqrt(beta)$, we need $(1 -
+  sqrt(beta))^2 <= eta lambda_i <= (1 + sqrt(beta))^2$ for all $i$, which holds
+  when $
+    (1 - sqrt(beta))^2 <= eta alpha <= eta ell <= (1 + sqrt(beta))^2.
+  $ Plugging in our choice of $eta, beta$, this is indeed true.
+
+  We now have $rho(B) = sqrt(beta)$.
+  Pick a norm $norm(cdot)_epsilon$ such that $norm(B)_epsilon <= sqrt(beta) +
+  epsilon$ using @lem-matrix-norm, whence $
+    norm(X_(t + 1))_epsilon 
+      <= norm(B^t)_epsilon norm(X_1)_epsilon
+      <= (sqrt(beta) + epsilon)^t thin norm(X_1)_epsilon. #qedhere
+  $
+]
+
+#remark[
+  Given $f(x) = 1/2 (x - x^*)^top A(x - x^*)$ for positive definite, symmetric
+  $A$, set $y = P(x - x^*)$ where $A = P^top Lambda P$ is the diagonalization
+  of $A$.
+  Minimizing $f$ is now equivalent to minimizing $g(y) = y^top Lambda y$.
+]
+
+== Nesterov's Accelerated Gradient Descent
+
+Nesterov's accelerated gradient descent follows the iterative scheme
+#eq([(N-$cal("AGD"))$])[$
+  y_t &= x_t + beta_t (x_t - x_(t - 1)), \
+  x_(t + 1) &= y_t - eta_t grad(f)(y_t).
+$] <al-NAGD>
+
+
+#theorem[
+  Let $f$ be $alpha$-strongly convex and $ell$-smooth, and let $x^*$ be its
+  global minimizer.
+  Further let $\{x_t\}_(t in NN)$ be iterates of @al-NAGD[] with $
+    eta = 1/ell, quad
+    beta = (sqrt(kappa) - 1) / (sqrt(kappa) + 1), quad
+    kappa = ell/alpha.
+  $ Then, $
+    f(x_t) - f(x^*) <= (1 - 1/sqrt(kappa))^t ((l + m) / 2) thin norm(x_0 - x^*)^2
+  $ for all $t in NN$.
+] <thm-NAGD>
+
+
+#theorem[
+  Let $f$ be convex and $ell$-smooth, $x^*$ be its global minimizer, and
+  $norm(x_0 - x^*) <= R$.
+  Further let $x_1, ..., x_T$ be $T$ iterates of @al-NAGD[] with $
+    eta = 1/ell, quad
+    lambda_(t + 1) = (1 + sqrt(1 + 4lambda_t^2))/2, quad
+    beta_(t + 1) = (lambda_t - 1) / (lambda_(t + 1)),
+  $ where $lambda_0 = beta_0 = 0$.
+  Then, $
+    f(x_T) - f(x^*) <= (2 ell R^2) / T^2.
+  $
+] <thm-NAGD-variable-momentum>
 
 
 #pagebreak()
