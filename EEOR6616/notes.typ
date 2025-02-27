@@ -1,5 +1,6 @@
 #import "template.typ": plain, contents
 #import "theorems.typ": *
+#import "defs.typ": *
 
 
 #show: plain.with(
@@ -35,91 +36,6 @@
 #show math.equation: set block(breakable: true)
 
 #show: thm-rules.with(qed-symbol: $square$)
-
-#let thm-style = (
-  title-fmt: title => text(10pt, font: "Ubuntu", weight: 500, fill: black, title),
-  separator: [#text(weight: "bold")[.]#h(0.2em)],
-  outset: 1.2em,
-  radius: 3pt,
-  padding: (top: 1.6em, bottom: 1em),
-  breakable: false,
-)
-
-#let thm-def = thm-def.with(..thm-style)
-#let thm-plain = thm-plain.with(..thm-style)
-
-#let theorem = thm-plain(
-  "Theorem",
-  counter: "common",
-  base-level: 1,
-  fill: rgb("#9EC299").lighten(90%),
-  stroke: rgb("#9EC299").lighten(30%)
-)
-#let lemma = thm-plain(
-  "Lemma",
-  counter: "common",
-  base-level: 1,
-  fill: rgb("#E78963").lighten(90%),
-  stroke: rgb("#E78963").lighten(50%)
-)
-#let proposition = thm-plain(
-  "Proposition",
-  counter: "common",
-  base-level: 1,
-  fill: rgb("#C8566B").lighten(95%),
-  stroke: rgb("#C8566B").lighten(50%)
-)
-#let corollary = thm-plain(
-  "Corollary",
-  counter: "sub",
-  base: "common",
-  fill: rgb("#F2D48F").lighten(85%),
-  stroke: rgb("#F2D48F").lighten(10%)
-)
-#let definition = thm-def(
-  "Definition",
-  counter: "common",
-  base-level: 1,
-  fill: rgb("#8EACCD").lighten(90%),
-  stroke: rgb("#8EACCD").lighten(30%)
-)
-#let proof = thm-proof(
-  "Proof",
-)
-#let remark = thm-rem(
-  "Remark",
-).with(numbering: none)
-#let example = thm-def(
-  "Example",
-  counter: "sub",
-  base: "common",
-  stroke: black.lighten(85%),
-)
-
-
-
-#let cdot = $thin dot.c thin$
-#let mapsto = $arrow.r.bar$
-#let ip(u, v) = $angle.l #u, #v angle.r$
-
-#let diag = "diag"
-
-#let argmin = math.op($arg min$, limits: true)
-#let argmax = math.op($arg max$, limits: true)
-
-#let grad(f) = $nabla f$
-#let subgrad(f) = $diff#f$
-
-#let XX = $cal(X)$
-#let KK = $cal(K)$
-
-#let epi = "epi"
-#let interior = "int"
-#let relinterior = "ri"
-#let boundary(X) = $diff#X$
-
-
-#let eq(tag, eq) = math.equation(numbering: num => $#tag$, block: true, eq)
 
 
 #v(-0.2in)
@@ -242,47 +158,8 @@ Under this setting, we have a simpler characterization of convexity.
 ]
 
 
-== The Optimization Problem
 
-#definition("Global Minimizer")[
-  We say that $x^*$ is a global minimizer of $f: KK -> RR$ if $f(x) >= f(x^*)$
-  for all $x in KK$.
-]
-
-#definition("Local Minimizer")[
-  We say that $x^*$ is a local minimizer of $f: KK -> RR$ if $f(x) >= f(x^*)$
-  for all $x in cal(U)$ for some neighborhood $cal(U) subset.eq KK$ of $x^*$.
-]
-
-#proposition[
-  Let $x^* in interior(KK)$ be a local minimizer of $f$.
-  Then, $grad(f)(x^*) = 0$.
-] <prop-local-gradient>
-
-
-The optimization problem for convex $f$ on a convex set $KK$ can be described
-as #eq($(cal(M)_KK)$)[$
-  min_(x in KK) f(x).
-$] <op-X>
-
-In the special case $KK = RR^d$, this is #eq($(cal(M_(RR^d)))$)[$
-  min_(x in RR^d) f(x).
-$] <op-unconstrained>
-
-The convexity of $f$ allows us to characterize solutions of @op-unconstrained[]
-via its critical points.
-
-#proposition[
-  Let $f: RR^d -> RR$ be convex.
-  Then, $x^* in RR^d$ is a global minimizer of $f$ if and only if $grad(f)(x^*) = 0$.
-] <prop-convex-gradient>
-#proof[
-  Follows directly from @prop-local-gradient and @prop-tangent.
-]
-
-
-
-= Projections
+== Projections
 
 #definition[
   We say that $z$ is a projection of a point $y$ onto a set $XX$ if $z in XX$
@@ -304,7 +181,7 @@ $norm(y - z_t) = (1 - t) norm(y - z) < norm(y - z)$.
 
 In Euclidean spaces $RR^d$, we may observe that closedness of (nonempty) $XX$
 guarantees the existence of a projection of $y in RR^d$ onto $XX$.
-By picking some $x_0 in XX$, we need only look at the compact set $XX sect
+By picking some $x_0 in XX$, we need only look at the compact set $XX inter
 overline(B_r (y))$ where $r = norm(y - x_0)$, on which the continuous map $x
 mapsto norm(y - x)$ must attain its minimum.
 
@@ -480,82 +357,48 @@ $KK$ at $x$.
 
 
 
-== Subdifferentials
+= The Convex Optimization Problem
 
-#definition("Subdifferential")[
-  Let $f: KK -> RR$ be convex.
-  The subdifferential of $f$ at $x in KK$ is the collection of all directions
-  $v$ such that $
-    f(y) >= f(x) + v^top (y - x)
-  $ for all $y in KK$, and is denoted $subgrad(f)(x)$.
+#definition("Global Minimizer")[
+  We say that $x^*$ is a global minimizer of $f: KK -> RR$ if $f(x) >= f(x^*)$
+  for all $x in KK$.
 ]
 
-Compare with the gradient inequality (@prop-tangent) for differentiable convex $f$.
-
-#example[
-  Consider $f: RR -> RR$, $x mapsto |x|$.
-  Then, $
-    subgrad(f)(x) = cases(
-      {-1} #h(1.5em)& "if "x < 0,
-      [-1, 1] & "if "x < 0,
-      {+1} & "if "x > 0
-    )
-  $
+#definition("Local Minimizer")[
+  We say that $x^*$ is a local minimizer of $f: KK -> RR$ if $f(x) >= f(x^*)$
+  for all $x in cal(U)$ for some neighborhood $cal(U) subset.eq KK$ of $x^*$.
 ]
-
-
-It is clear that the subgradient $subgrad(f)(x)$ is convex.
-Showing that it is nontrivial requires more work.
 
 #proposition[
-  Let $f: KK -> RR$ be convex.
-  Then, $subgrad(f)(x)$ is nonempty for all $x in relinterior(KK)$.
-]
-#proof[
-  Note that $epi(f)$ is convex via @prop-convex-epigraph.
-  Use @prop-supporting-plane to find a supporting hyperplane to $epi(f)$ at
-  $\(x^top thin f(x)\)^top$, i.e. $\(v^top thin s\)^top != 0$ such that for all
-  $\(y^top thin alpha\)^top in epi(f)$, $
-    v^top (y - x) + s(alpha - f(x)) <= 0.
-  $ By considering $y = x$ and $alpha > f(x)$, we must have $s <= 0$.
-  If $s = 0$, we would need $v^top (y - x) <= 0$ for all $y in KK$, which would
-  force $v = 0$ since $x in relinterior(KK)$.
-  Thus, $s < 0$; putting $alpha = f(y)$, we have $
-    f(y) >= f(x) - v^top / s (y - x),
-  $ whence $-v^top\/s in subgrad(f)(x)$.
-]
+  Let $x^* in interior(KK)$ be a local minimizer of $f$.
+  Then, $grad(f)(x^*) = 0$.
+] <prop-local-gradient>
 
-The next result follows immediately from the definition of the subdifferential;
-compare this with @prop-convex-gradient.
+
+The optimization problem for convex $f$ on a convex set $KK$ can be described
+as #eq($(cal(M)_KK)$)[$
+  min_(x in KK) f(x).
+$] <op-K>
+
+In the special case $KK = RR^d$, this is #eq($(cal(M_(RR^d)))$)[$
+  min_(x in RR^d) f(x).
+$] <op-unconstrained>
+
+The convexity of $f$ allows us to characterize solutions of @op-unconstrained[]
+via its critical points.
 
 #proposition[
-  Let $f: KK -> RR$ be convex.
-  Then, $x^* in KK$ is a global minimizer of $f$ if and only if $0 in subgrad(f)(x^*)$.
-] <prop-convex-subgradient>
-
-
-When $f$ is differentiable at $x in interior(XX)$, the subgradient reduces to
-the usual gradient, with $subgrad(f)(x) = {grad(f)(x)}$.
-Indeed, @prop-tangent shows that $grad(f)(x) in subgrad(f)(x)$.
-To check that there are no other elements, pick $v in subgrad(f)(x)$, and note
-that for $lambda >= 0$, $
-  v^top u
-    <= (f(x + lambda u) - f(x))/lambda
-    -> grad(f)(x)^top u quad "as" lambda -> 0,
-$ hence $(grad(f)(x) - v)^top u >= 0$ for all directions $u$.
-This forces $v = grad(f)(x)$.
-
-The converse of the above result also holds, in the following form.
-
-#theorem[
-  Let $f: KK -> RR$ be convex and $x in interior(KK)$.
-  If $f$ is differentiable at $x$, then $subgrad(f)(x) = {grad(f)(x)}$.
-  Conversely, if $subgrad(f)(x) = {v}$, then $f$ is differentiable at $x$ with
-  $grad(f)(x) = v$.
-]
+  Let $f: RR^d -> RR$ be convex.
+  Then, $x^* in RR^d$ is a global minimizer of $f$ if and only if $grad(f)(x^*) = 0$.
+] <prop-convex-gradient>
 #proof[
-  See @rockafellar-1970[Theorem 25.1].
+  Follows directly from @prop-local-gradient and @prop-tangent.
 ]
+
+#corollary[
+  Local minimizers of convex functions are global minimizers.
+]
+
 
 
 = Gradient Descent
@@ -567,7 +410,7 @@ $] <al-GD>
 
 It is possible for @al-GD[] to take our iterates $x_t$ outside $KK$; we can
 rectify this using projections.
-Projected gradient descent algorithms for solving @op-X[] follow the iterative
+Projected gradient descent algorithms for solving @op-K[] follow the iterative
 scheme #eq($(cal("PGD"))$)[$
   y_(t + 1) &= x_t - eta_t grad(f)(x_t), \
   x_(t + 1) &= Pi_KK (y_(t + 1)).
@@ -836,7 +679,6 @@ Convergence is especially slow when $kappa$ is very high.
 = Momentum-Based Gradient Descent
 
 
-
 == Polyak's Heavy Ball Method
 
 Polyak's heavy ball method follows the iterative scheme
@@ -929,6 +771,7 @@ $] <al-HBGD>
   Minimizing $f$ is now equivalent to minimizing $g(y) = y^top Lambda y$.
 ]
 
+
 == Nesterov's Accelerated Gradient Descent
 
 Nesterov's accelerated gradient descent follows the iterative scheme
@@ -963,6 +806,240 @@ $] <al-NAGD>
     f(x_T) - f(x^*) <= (2 ell R^2) / T^2.
   $
 ] <thm-NAGD-variable-momentum>
+
+
+
+
+= Subdifferentials
+
+#definition("Subdifferential")[
+  Let $f: KK -> RR$ be convex.
+  The subdifferential of $f$ at $x in KK$ is the collection of all directions
+  $v$ such that $
+    f(y) >= f(x) + v^top (y - x)
+  $ for all $y in KK$, and is denoted $subgrad(f)(x)$.
+]
+
+Compare with the gradient inequality (@prop-tangent) for differentiable convex $f$.
+
+#example[
+  Consider $f: RR -> RR$, $x mapsto |x|$.
+  Then, $
+    subgrad(f)(x) = cases(
+      {-1} #h(1.5em)& "if "x < 0,
+      [-1, 1] & "if "x = 0,
+      {+1} & "if "x > 0
+    )
+  $
+]
+
+#example[
+  Consider $f: RR^d -> RR$, $x mapsto norm(x)_1 = sum_(i = 1)^d |x_i|$.
+  Then, $
+    subgrad(f)(x) = {v : v_i in subgrad(|x_i|) "for all" 1 <= i <= d}.
+  $
+]
+
+#example[
+  Let $KK$ be closed and convex.
+  The subdifferential of the indicator function $I_KK$ at $x in KK$ is the
+  normal cone $N_KK (x)$.
+]
+
+
+It is clear that the subdifferential $subgrad(f)(x)$ is closed and convex.
+Showing that it is nontrivial requires more work.
+
+#proposition[
+  Let $f: KK -> RR$ be convex.
+  Then, $subgrad(f)(x)$ is nonempty for all $x in relinterior(KK)$.
+]
+#proof[
+  Note that $epi(f)$ is convex via @prop-convex-epigraph.
+  Use @prop-supporting-plane to find a supporting hyperplane to $epi(f)$ at
+  $\(x^top thin f(x)\)^top$, i.e. $\(v^top thin s\)^top != 0$ such that for all
+  $\(y^top thin alpha\)^top in epi(f)$, $
+    v^top (y - x) + s(alpha - f(x)) <= 0.
+  $ By considering $y = x$ and $alpha > f(x)$, we must have $s <= 0$.
+  If $s = 0$, we would need $v^top (y - x) <= 0$ for all $y in KK$, which would
+  force $v = 0$ since $x in relinterior(KK)$.
+  Thus, $s < 0$; putting $alpha = f(y)$, we have $
+    f(y) >= f(x) - v^top / s (y - x),
+  $ whence $-v^top\/s in subgrad(f)(x)$.
+]
+
+The next result follows immediately from the definition of the subdifferential;
+compare this with @prop-convex-gradient.
+
+#proposition[
+  Let $f: KK -> RR$ be convex.
+  Then, $x^* in KK$ is a global minimizer of $f$ if and only if $0 in subgrad(f)(x^*)$.
+] <prop-convex-subgradient>
+
+
+When $f$ is differentiable at $x in interior(XX)$, the subdifferential reduces
+to the usual gradient, with $subgrad(f)(x) = {grad(f)(x)}$.
+Indeed, @prop-tangent shows that $grad(f)(x) in subgrad(f)(x)$.
+To check that there are no other elements, pick $v in subgrad(f)(x)$, and note
+that for $lambda >= 0$, $
+  v^top u
+    <= (f(x + lambda u) - f(x))/lambda
+    -> grad(f)(x)^top u quad "as" lambda -> 0,
+$ hence $(grad(f)(x) - v)^top u >= 0$ for all directions $u$.
+This forces $v = grad(f)(x)$.
+
+The converse of the above result also holds, in the following form.
+
+#theorem[
+  Let $f: KK -> RR$ be convex and $x in interior(KK)$.
+  If $f$ is differentiable at $x$, then $subgrad(f)(x) = {grad(f)(x)}$.
+  Conversely, if $subgrad(f)(x) = {v}$, then $f$ is differentiable at $x$ with
+  $grad(f)(x) = v$.
+]
+#proof[
+  See @rockafellar-1970[Theorem 25.1].
+]
+
+#example[
+  Let $f_1, f_2$ be convex and differentiable, and let $f = max{f_1, f_2}$.
+  At points $x$ where $f_1 (x) != f_2 (x)$, we have $subgrad(f)(x) =
+  {grad(f)(x)}$.
+  Otherwise, $subgrad(f)(x) = "conv"(grad(f_1)(x), grad(f_2)(x))$.
+]
+
+
+#lemma[
+  + $subgrad((alpha f)) = alpha thin (subgrad(f))$ for $alpha > 0$.
+  + $subgrad((f_1 + f_2)) = subgrad(f_1) + subgrad(f_2)$.
+  + $subgrad(g)(x) = A^top subgrad(f)(A x + b)$ for $g(x) = f(A x + b)$.
+]
+
+#lemma[
+  Let $f = max{f_1, ..., f_n}$. Then, $
+    subgrad(f)(x) = "conv"( union.big_(i : f(x) = f_i (x)) subgrad(f_i)(x))
+  $
+]
+
+
+== Subgradient Descent
+
+The subgradient descent algorithm follows the iterative scheme
+#eq([($cal("SGD")$)])[$
+  x_(t + 1) = x_t - eta_t v_t, quad v_t in subgrad(f)(x_t).
+$] <al-SGD>
+
+#theorem[
+  Let $f$ be convex and $L$-Lipschitz, $x^*$ be its global minimizer, and
+  $norm(x_1 - x^*) <= R$.
+  Further let $x_1, ..., x_T$ be $T$ iterates of @al-SGD[].
+  Then, $
+    min_(1 <= t <= T) f(x_t) - f(x^*)
+      <= (R^2 + L^2 sum_(t = 1)^T eta_t^2)/(2 sum_(t = 1)^T eta_t).
+  $
+]
+#proof[
+  Write $
+    norm(x_(t + 1) - x^*)
+      &= norm(x_t - x^*)^2 - 2 eta_t v_t^top (x_t - x^*) + eta_t^2 norm(v_t^2) \
+      &<= norm(x_t - x^*)^2 - 2 eta_t (f(x_t) - f(x^*)) + eta_t^2 L^2.
+  $ This gives $
+    2(sum_(t = 1)^T eta_t) (min_(1 <= t <= T) f(x_t) - f(x^*))
+      &<= sum_(t = 1)^T 2 eta_t (f(x_t) - f(x^*)) \
+      &<= norm(x_1 - x^*)^2 - norm(x_(T + 1) - x^*)^2 + sum_(t = 1)^T eta_t^2 L^2 \
+      &<= R^2 + L^2 sum_(t = 1)^T eta_t^2. #qedhere
+  $
+]
+
+#remark[
+  We would like $sum_t eta_t -> oo$ while $sum_t eta_t^2 < oo$; this is
+  achieved by step sizes of the form $eta_t = 1 \/ t$.
+]
+
+
+= Exponential Gradient Descent
+
+Consider the standard $d$-simplex $
+  Delta^d = {x in RR^d : sum_(i = 1)^d x_i = 1, x_i >= 0 "for all" 1 <= i <= d}.
+$ Members of $Delta^d$ can be naturally identified with discrete probability
+distributions on ${1, ..., k}$.
+Given convex $f$, we examine the optimization problem #eq($(cal(M)_(Delta^d))$)[$
+  min_(x in Delta^d) f(x).
+$] <op-simplex>
+
+The exponential gradient descent algorithm follows the iterative scheme
+#eq([($cal("EGD")$)])[$
+  z^((t)) &= sum_(i = 1)^d x^((t))_i thin e^(- eta grad(f)\(x^((t))\)_i), \
+  x^((t + 1))_i &= 1/(z^((t))) thick x^((t))_i thin e^(- eta grad(f)\(x^((t))\)_i)
+$] <al-EGD>
+
+
+Since we are effectively dealing with probability distributions, we will use
+the Kullback-Leibler divergence instead of a Euclidean norm to describe
+convergence in $Delta^d$.
+
+
+#definition("Kullback-Leibler Divergence")[
+  The Kullback-Leibler (KL) divergence of $p in Delta^d$ with respect to $q in
+  Delta^d$ is defined by $
+    KL(p, q)
+      = EE_p [log(p/q)]
+      = sum_(i = 1)^d p_i log(p_i / q_i).
+  $
+]
+
+Note that for any $x^* in Delta^d$, the concavity of the logarithm gives $
+  KL(x^*, 1/d bold(1))
+    = sum_(i = 1)^d x^*_i log(x^*_i cdot d)
+    <= log(sum_(i = 1)^d (x^*_i)^2 d)
+    <= log(d).
+$ This is often useful in bounding the 'diameter' of $Delta^d$.
+
+
+#lemma[
+  For iterates of @al-EGD[], $
+    KL(x^*, x^((t))) - KL(x^*, x^((t + 1)))
+      = -eta grad(f)(x^((t)))^top x^* - log(z^((t))).
+  $
+] <lem-EGD-KL>
+
+
+#theorem[
+  Let $f$ be convex such that $norm(grad(f))_oo <= ell$ on $Delta^d$, and let
+  $x^* in KK$ be its global minimizer.
+  Further let $x^((1)), ..., x^((T))$ be $T$ iterates of @al-EGD[] with $
+    eta = 1/ell sqrt(log(d) / T), quad
+    x^((1)) = 1/d bold(1).
+  $ Then, $
+    f(1/T sum_(t = 1)^T x^((t))) - f(x^*)
+      <= 2 ell sqrt(log(d) / T).
+  $
+]
+#proof[
+  It will suffice to show that $
+    sum_(t = 1)^T grad(f)(x^((t)))^top (x^((t)) - x^*)
+      <= KL(x^*, x^((1))) / eta + eta^2 ell T,
+  $ from which the result will follow using @prop-jensen and @prop-tangent,
+  much like in the proof of @thm-PGD-Lipschitz.
+  Indeed, checking that $e^(-x) <= 1 + x + x^2$ for $x <= 1$ and noting that
+  $eta norm(grad(f))_oo <= 1$ for sufficiently large $T$, $
+    log(z^((t)))
+      &= log(sum_(i = 1)^d x_i^((t)) e^(-eta (grad(f)(x^((t))))_i)) \
+      &<= log(sum_(i = 1)^d x_i^((t)) (1 - eta grad(f)(x^((t)))_i + eta^2 grad(f)(x^((t)))_i^2 )) \
+      &= log(1 - eta grad(f)(x^((t)))^top x^((t)) + sum_(i = 1)^d eta^2 grad(f)(x^((t)))_i^2 x_i^((t)) ) \
+      &<= log(1 - eta grad(f)(x^((t)))^top x^((t)) + eta^2 ell^2 ) \
+      &<= - eta grad(f)(x^((t)))^top x^((t)) + eta^2 ell^2.
+  $ Thus, by @lem-EGD-KL, $
+    eta grad(f)(x^((t)))^top (x^((t)) - x^*) - eta^2 ell^2
+      &<= KL(x^*, x^((t))) - KL(x^*, x^((t + 1))).
+  $ Summing over $t$ and rearranging gives the desired result.
+]
+
+
+
+
+
+// = Mirror Descent
+
 
 
 #pagebreak()
