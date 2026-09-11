@@ -197,7 +197,8 @@ variance of a special class of estimators.
   We say that $T_n$ is an $M$-estimator of location if $
     T_n in argmin_t sum_(i = 1)^n rho(X_i - t)
   $ for some function $rho$.
-  When $rho$ is differentiable, we denote $psi := rho'$, and $T_n$ satisfies $
+  When $rho$ is differentiable, we denote $psi := rho'$, and $T_n$ equivalently
+  satisfies $
     sum_(i = 1)^n psi(X_i - T_n) = 0.
   $
 ]
@@ -208,14 +209,19 @@ variance of a special class of estimators.
 
 
 #lemma[Asymptotic Normality of $M$-estimators][
-  Let ${T_n}$ be the sequence of $M$ estimators associated with $psi$, and let
-  $t_0$ be such that
-  + $psi$ is nondecreasing and sufficiently regular,
-  + $EE_F [psi(X - t)] > 0$ for all $t < t_0$,
-  + $EE_F [psi(X - t)] < 0$ for all $t > t_0$.
+  Let ${T_n}$ be the sequence of $M$ estimators associated with $psi$.
+  Define the maps $lambda(t) := EE_F [psi(X - t)]$, $sigma^2 (t) := var_F
+  [psi(X - t)]$, and suppose that there exists $t_0 in RR$ such that the
+  following are satisfied.
+  // + $psi$ is nondecreasing and sufficiently regular,
+  // + $EE_F [psi(X - t)] > 0$ for all $t < t_0$,
+  // + $EE_F [psi(X - t)] < 0$ for all $t > t_0$.
+  + $lambda$ is continuous in a neighborhood of $t_0$, with $lambda(t_0) = 0$.
+  + $lambda$ is differentiable at $t_0$, with $lambda'(t_0) < 0$.
+  + $sigma^2$ is continuous, finite, non-zero in a neighborhood of $t_0$.
   Then $sqrt(n)(T_n - t_0) -->^d normal(0,thick V(psi, F))$, where $
     V(psi, F)
-      := (EE_F [(psi(X - t_0))^2])/(EE_F [psi'(X - t_0)])^2
+      := (sigma^2 (t_0))/(lambda'(t_0))^2
   $ is the asymptotic variance of ${T_n}$.
 ]
 
