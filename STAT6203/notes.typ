@@ -23,13 +23,15 @@
   primary: rgb("#8EACCD").darken(20%),
   secondary: rgb("#8EACCD").darken(30%),
   footer-left: [
-    Nonparametric Statistics
+    Robust Statistics
   ],
 )
 
 #set heading(numbering: "1.")
 #show enum: it => pad(left: 1em, it)
 #show math.equation: set block(breakable: true)
+
+// #show bibliography: place.with(bottom, float: true)
 
 #show: thm-rules.with(qed-symbol: $square$)
 
@@ -96,8 +98,11 @@ As a first step, we may look at some simple population-level functionals.
         = F_0^- ((1/2)/(1 - eps)).
   $ Unlike the previous example, the median $m(F)$ cannot deviate arbitrarily
   over $F in cP_eps (F_0)$.
-]
+] <ex:median-bias>
 
+
+~
+== Minimax Asymptotic Bias
 
 For the purposes of location estimation, it is natural to restrict ourselves to
 _translation invariant_ estimators.
@@ -111,19 +116,145 @@ _translation invariant_ estimators.
 #definition[Asymptotic Bias][
   Let ${T_n}$ be a sequence of estimators for $T(F_0)$.
   Its asymptotic bias is defined as $
-    b({T_n}, F) := |lim_(n -> oo) EE_F [T_n] - T(F_0)|.
+    b({T_n}, F) := limsup_(n -> oo) thin lr(|EE_F [T_n] - T(F_0)|).
   $
 ]
 
 We can now choose our 'best' estimator on the basis of asymptotic bias; fix
 $eps > 0$ and consider the minimax problem $
-  min_({T_n} subset cT) max_(F in cP_eps (F_0)) b({T_n}, F).
+  b_* := min_({T_n} subset cT) max_(F in cP_eps (F_0)) b({T_n}, F).
+$
+
+#theorem[
+  Let $F_0$ have a density that is symmetric about zero and decreasing on
+  $RR_+$, and let $T(F_0) = 0$.
+  The sample medians ${M_n}$ solve the minimax asymptotic bias problem, with $
+    min_({T_n} subset cT) max_(F in cP_eps (F_0)) b({T_n}, F)
+      = F_0^(-1)((1\/2) / (1 - eps)).
+  $
+]
+#proof[
+  First note that the sample median estimator is consistent, and $lim_(n -> oo)
+  EE_F [M_n] = F^- (1/2)$ under some mild conditions on $F$.
+  We have already demonstrated in @ex:median-bias that $|F^- (1/2)| <=
+  F_0^(-1)((1\/2)/(1 - eps)) =: m_*$ for all $F in cP_eps (F_0)$, which gives
+  us the upper bound $b_* <= m_*$.
+
+  Next, we will construct two distributions $F_+, F_- in cP_eps (F_0)$, and
+  use $
+    b_* >= min_({T_n} subset cT) max(b({T_n}, F_+),thick b({T_n}, F_-))
+      #tag[($star$)]
+  $ to obtain the matching lower bound $b_* >= m_*$.
+  Define $
+    F_+(x) := cases(
+      (1 - eps) F_0(x)  & "if" x < m_*\,,
+      1 - (1 - eps) F_0(2m_* - x) & "if" x >= m_*.
+    )
+  $ This describes a distribution which has the same shape as $F_0$ on $(-oo,
+  m_*)$, and is symmetric about $m_*$.
+  Further set $F_-(x) = F_+(x + 2m_*)$, which is symmetric about $-m_*$.
+  We can verify that $F_+, F_-$ are indeed members of $cP_eps (F_0)$; solving
+  for $F_+ = (1 - eps)F_0 + eps H_+$ reveals that $
+    H_+(x)
+      = (F_+(x) - (1 - eps) F_0(x))/eps
+      = (1 - (1 - eps)(F_0(x) + F_0(2m_* - x)))/eps bold(1)(x >= m_*).
+  $ This is continuous with $H(-oo) = 0$, $H(oo) = 1$, and is nondecreasing
+  since $
+    F_0(x) + F_0(2m_* - x)
+      = F_0(x) - F_0(x - 2m_*) + 1
+  $ is decreasing on $x >= m_*$, which makes it a valid _cdf_.
+  The argument for $F_-$, which is a reflection of $F_+$ about zero, is
+  similar.
+
+  Now, if $b_* < m_*$, then $m_*$ must be strictly greater than the right hand
+  side of $(star)$, hence there exists a sequence ${T_n} subset cT$ such that $
+    max(
+      limsup_(n -> oo)thin |EE_(F_+) [T_n]|,quad
+      limsup_(n -> oo)thin |EE_(F_-) [T_n]|
+    ) < m_*.
+  $ However, translation invariance of $T_n$ forces $EE_(F_+) [T_n] = EE_(F_-)
+  [T_n] + 2m_*$, hence $
+      2m_*
+        = limsup_(n -> oo)thin |EE_(F_+) [T_n] - EE_(F_-) [T_n]|
+        <= limsup_(n -> oo)thin |EE_(F_+) [T_n]| + limsup_(n -> oo)thin |EE_(F_-) [T_n]|
+        < 2m_*,
+  $ a contradiction!
+]
+
+#remark[
+  Some further technical conditions are required to ensure that $EE_F [M_n] ->
+  F^-(1/2)$, which we omit here.
+]
+
+
+~
+== Minimax Asymptotic Variance
+
+Instead of relying on asymptotic bias, we will now examine the asymptotic
+variance of a special class of estimators.
+
+#definition[$M$-estimator][
+  We say that $T_n$ is an $M$-estimator of location if $
+    T_n in argmin_t sum_(i = 1)^n rho(X_i - t)
+  $ for some function $rho$.
+  When $rho$ is differentiable, we denote $psi := rho'$, and $T_n$ satisfies $
+    sum_(i = 1)^n psi(X_i - T_n) = 0.
+  $
+]
+
+#remark[
+  $M$-estimators are translation invariant.
+]
+
+
+#lemma[Asymptotic Normality of $M$-estimators][
+  Let ${T_n}$ be the sequence of $M$ estimators associated with $psi$, and let
+  $t_0$ be such that
+  + $psi$ is nondecreasing and sufficiently regular,
+  + $EE_F [psi(X - t)] > 0$ for all $t < t_0$,
+  + $EE_F [psi(X - t)] < 0$ for all $t > t_0$.
+  Then $sqrt(n)(T_n - t_0) -->^d normal(0,thick V(psi, F))$, where $
+    V(psi, F)
+      := (EE_F [(psi(X - t_0))^2])/(EE_F [psi'(X - t_0)])^2
+  $ is the asymptotic variance of ${T_n}$.
+]
+
+#example[
+  The $M$-estimator associated with $rho(x) = x^2$ is the sample mean, with
+  asymptotic variance $var_F (X)$.
+]
+
+#example[
+  The $M$-estimator associated with $rho(x) = |x|$ is the sample median, with
+  asymptotic variance $1 \/ 4 (f(F^-(1/2)))^2$.
+]
+
+From now on, we will restrict ourselves to the contamination neighborhood $
+  cP_eps^"sym" (F_0)
+    := {(1 - eps) F_0 + eps H : "symmetric" H}
+$ to ensure that $F in cP_eps^"sym" (F_0)$ is symmetric (about zero), and
+further select $F_0 = Phi$.
+
+Consider the problem $
+  V_* := min_psi max_(F in cP_eps^"sym" (Phi)) V(psi, F).
 $
 
 
+#theorem[
+  Define the Huber loss $
+    rho_c (x) = cases(
+      1/2 x^2 & "if" |x| < c\,,
+      c|x| - 1/2 c^2 quad& "if" |x| >= c.
+    )
+  $ The sequence of $M$-estimators associated with $rho_c$ solve the minimax
+  asymptotic variance problem when $c$ satisfies $
+    2 (nphi(c)/c - Phi(c)) = eps / (1 - eps).
+  $
+]
 
 
-#v(1fr)
+
+#pagebreak()
 #bibliography(
   "references.bib",
   style: "apa",

@@ -5,6 +5,7 @@
 
 #let cdot = $thin dot.c thin$
 #let mapsto = $arrow.r.bar$
+#let implies = $#h(1em)==>#h(1em)$
 
 #let diag = "diag"
 
@@ -24,8 +25,12 @@
 #let cP = $cal(P)$
 #let cT = $cal(T)$
 
+#let normal = $cal(N)$
+#let nphi = $phi.alt$
+
 #let iid = $~^"iid"$
-#let var = "var"
+#let var = math.op("var")
+#let cov = math.op("cov")
 
 #let eq(tag, eq) = math.equation(numbering: num => $#tag$, block: true, eq)
 
@@ -109,7 +114,7 @@
 #let proposition = thm-plain.with(
   supplement: "Proposition",
   counter: "Theorem",
-  base-level: 1,
+  // base-level: 1,
   fill: rgb("#C8566B").lighten(95%),
   stroke: rgb("#C8566B").lighten(50%)
 )
@@ -137,6 +142,7 @@
   supplement: "Example",
   // counter: "Sub-Theorem",
   counter: "Theorem",
+  base-level: 1,
   // base: "Theorem",
   stroke: black.lighten(85%),
 )
