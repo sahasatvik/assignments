@@ -203,9 +203,9 @@ variance of a special class of estimators.
   $
 ]
 
-#remark[
-  $M$-estimators are translation invariant.
-]
+Note that $M$-estimators are automatically translation invariant.
+We will generally assume that the loss function $rho$ is symmetric and convex
+from now on.
 
 
 #lemma[Asymptotic Normality of $M$-estimators][
@@ -223,7 +223,7 @@ variance of a special class of estimators.
     V(psi, F)
       := (sigma^2 (t_0))/(lambda'(t_0))^2
   $ is the asymptotic variance of ${T_n}$.
-]
+] <lem:M-normal>
 
 #example[
   The $M$-estimator associated with $rho(x) = x^2$ is the sample mean, with
@@ -242,8 +242,9 @@ $ to ensure that $F in cP_eps^"sym" (F_0)$ is symmetric (about zero), and
 further select $F_0 = Phi$.
 
 Consider the problem $
-  V_* := min_psi max_(F in cP_eps^"sym" (Phi)) V(psi, F).
-$
+  V_* := min_psi max_(F in cP_eps^"sym" (Phi)) V(psi, F),
+$ where $psi$ ranges over functions satisfying the requirements of
+@lem:M-normal, along with symmetry and convexity so that $t_0 = 0$.
 
 
 #theorem[
@@ -255,6 +256,16 @@ $
   $ The sequence of $M$-estimators associated with $rho_c$ solve the minimax
   asymptotic variance problem when $c$ satisfies $
     2 (nphi(c)/c - Phi(c)) = eps / (1 - eps).
+  $
+] <thm:minimax-var>
+
+#lemma[
+  Suppose that $F_* in cP_eps^"sym" (Phi)$ has density $f_*$ such that $
+    F_* in argmax_(F in cP_eps^"sym" (Phi)) V(psi_*, F_*)
+  $ where $psi_* = -f'_* \/ f_*$.
+  Then $psi_*$ solves the minimax asymptotic variance solution, and $
+    min_psi max_(F in cP_eps^"sym" (Phi)) V(psi, F)
+      = V(psi_*, F_*).
   $
 ]
 
