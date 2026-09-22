@@ -1,4 +1,4 @@
-#import "@local/ctheorems:2.0.0": *
+#import "@preview/ctheorems:2.0.0": *
 
 
 // Math definitions
@@ -7,7 +7,8 @@
 #let mapsto = $arrow.r.bar$
 #let implies = $#h(1em)==>#h(1em)$
 
-#let diag = "diag"
+#let diag = math.op("diag")
+#let sign = math.op("sign")
 
 #let argmin = math.op($arg min$, limits: true)
 #let argmax = math.op($arg max$, limits: true)
@@ -32,7 +33,10 @@
 #let var = math.op("var")
 #let cov = math.op("cov")
 
-#let eq(tag, eq) = math.equation(numbering: num => $#tag$, block: true, eq)
+#let IF = math.op("IF")
+
+#let eqn(tag, eq) = math.equation(numbering: num => $#tag$, block: true, eq)
+
 
 
 // Citation
