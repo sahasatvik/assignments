@@ -340,15 +340,15 @@ $ where $psi$ ranges over functions satisfying the requirements of
 
 
 
-~
-
+// ~
+#pagebreak()
 = Quantification of Robustness
 
 == Influence Functions
 
 #definition[Influence Function][
   The influence function of a functional $T$ at $x$ with respect to a
-  direibution $F$ is defined by $
+  distribution $F$ is defined by $
     IF(x; T, F)
       = lim_(eps -> 0^+) (T((1-eps)F + eps delta_x) - T(F))/eps
       = lr(dif/(dif eps) thin T((1-eps)F + eps delta_x) |)_(eps = 0).
@@ -441,11 +441,16 @@ $
   $ In particular, $eps^* (T, F) = 1/2$ when $psi(-oo) + psi(oo) = 0$.
 ]
 
+#example[
+  For the median functional $m(F) := F^(-1)(1/2)$, $eps^* (m, F) = 1/2$.
+]
+
 
 #definition[Breakdown Point, Finite Sample][
-  The finite sample breakdown point of a statistic $T_n$ at $X$ is $
-    eps^* (T_n, X)
-      := sup {m/n : sup_(d_H (X, X') = m) thin norm(T_n (X') - T_n (X)) < oo}.
+  The finite sample breakdown point of a statistic $T_n$ at $X := (X_1, ...,
+  X_n)$ is $
+    hat(eps) (T_n, X)
+      := sup {m/n : sup_(d_H (X, X') <= m) thin norm(T_n (X') - T_n (X)) < oo}.
   $
 ]
 
