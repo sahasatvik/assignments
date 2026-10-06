@@ -195,7 +195,7 @@ $
 Instead of relying on asymptotic bias, we will now examine the asymptotic
 variance of a special class of estimators.
 
-#definition[M-estimator][
+#definition[M-estimator of Location][
   We say that $T_n$ is an M-estimator of location if $
     T_n in argmin_t sum_(i = 1)^n rho(X_i - t)
   $ for some function $rho$.
@@ -398,7 +398,7 @@ robust_.
     -cancel(EE_F [psi(X, T(F))]) &+ (1 - t) EE_F [psi'(X, T(F))] IF(x; T, F) \
       &+ psi(x, T(F)) + t psi'(x, T(F)) IF(x; T, F) = 0,
   $ hence $
-    IF(x; T, F) = M^(-1) EE_F [psi(x, T(F))], quad quad
+    IF(x; T, F) = M^(-1) EE_F [psi(x, T(F))], #h(2em)
       M := - EE_F [psi'(x, T(F))].
   $
 ]
@@ -459,6 +459,219 @@ $
     d_H (X, X') := sum_(i = 1)^n bold(1)(X_i eq.not X'_i).
   $ We may call $X'$ an _$m$-replacement of $X$_ when $d_H (X, X') = m$.
 ]
+
+#remark[
+  The sample median $M_n$ achieves the largest possible finite sample breakdown
+  point $
+      hat(eps)(M_n, X) = 1/n floor(n/2 - 1)
+  $ among all translation invariant estimators.
+]
+
+
+
+#pagebreak()
+= Location and Scale Estimation
+
+== The Univariate Setting
+
+Pure scale estimation involves considering iid $X_1, ..., X_n$ from the the
+scale family $
+  f(x; sigma) = 1/sigma f(x/sigma).
+$ An MLE of $sigma$ would satisfy the score equation $
+  sum_(i = 1)^n partial/(partial x) log f(x; sigma)
+    = sum_(i = 1)^n -x/(sigma^2) (f'(x\/sigma))/(f(x\/sigma)) - 1/sigma
+    = 0.
+$
+
+#definition[M-estimator of Scale][
+  We say that $S_n$ is an M-estimator of scale if it satisfies $
+    sum_(i = 1)^n chi(X_i / S_n) = 0
+  $ for some function $chi$.
+]
+
+This corresponds to the population functional $S$ satisfying $
+  EE_F [chi(X/S(F))] = 0.
+$
+
+#remark[
+  We can compute $
+    IF(x; S, F)
+      = (chi(x\/S(F)))/(EE_F [chi'(X\/S(F)) (X\/S(F))]).
+  $ An infinitesimally robust M-estimator of scale requires bounded $chi$.
+]
+
+#example[
+  Let $X_i iid N(0, sigma^2)$, and consider the M-estimator described by $
+    chi_c (x)
+      := cases(
+        x^2 + kappa_c quad&"if" |x| <= c\,,
+        c^2 + kappa_c &"if" |x| > c\,
+      )
+  $ where $kappa_c$ is a _Fisher consistency constant_ chosen such that
+  $EE_(N(0, 1)) [chi_c (Z)]$.
+  Note that the symmetry of the location problem saved us from this
+  complication earlier!
+]
+
+
+More generally, for iid $X_1, ..., X_n$ from a location-scale family of
+the form $
+  f(x; sigma) = 1/sigma f((x - mu)/sigma),
+$ we may consider estimators $(T_n, S_n)$ which satisfy equations $
+  sum_(i = 1)^n psi((X_i - T_n) / S_n) = 0, #h(2em)
+  sum_(i = 1)^n chi((X_i - T_n) / S_n) = 0
+$ as joint M-estimators of location and scale.
+
+
+#example[
+  Picking $rho = rho_c$, $chi = chi_c$ amounts to solving $
+    (T_n, S_n) in argmin_(mu, sigma) {
+      sum_(i = 1)^n sigma rho_c ((X_i - mu) / sigma) + sigma beta n
+    }
+  $ with an appropriate Fisher consistency constant $beta$.
+]
+
+#example[
+  It is also possible to perform estimation in two stages, by first estimating
+  the scale, then plugging that into a location estimation problem.
+  The _Mean Absolute Deviation (MAD)_ estimator is a common choice for this
+  initial scale estimate.
+]
+
+
+
+~
+== The Multivariate Setting
+
+
+Here, we will consider multivariate distributions on $RR^p$.
+
+#definition[
+  An elliptical family of distributions has densities of the form $
+    f(x; mu, Sigma)
+      = 1/(|Sigma|^(1/2)) f((x - mu)^top Sigma^(-1) (x - mu)).
+  $ The quantity $d(cdot; mu, Sigma) := sqrt(norm(x - mu)_(Sigma^(-1))^2)$ is
+  the _Mahalanobis distance_.
+]
+
+We may consider estimators $(T_n, S_n)$ satisfying equations of the form $
+  sum_(i = 1)^n w_1 (d_i^2) (X_i - T_n) &= 0, \
+  1/n sum_(i = 1)^n w_2 (d_i^2) (X_i - T_n)(X_i - T_n)^top &= S_n,
+$ where $d_i^2 := d^2 (X_i; T_n, S_n)$.
+Note that these produce _affine invariant estimators_.
+As usual, we may construct the corresponding population-level functionals $
+  EE_F [w_1 (d^2 (X)) (X - T(F))] &= 0, \
+  EE_F [w_2 (d^2 (X)) (X - T(F))(X - T(F))^top] &= S(F).
+$
+
+#theorem[#pc[@maronna-1976]][
+  Suppose that $w_2 (d^2) d^2$ is nondecreasing with a finite supremum $k$, and
+  $w_1 (d^2) d < oo$.
+  Then, the corresponding location-scale functionals $(T, S)$ have breakdown
+  point $
+    eps^* ((T, S); F)
+      <= min {1/k,thin 1 - p/k}
+      <= 1/(p + 1).
+  $
+] <thm:mv_ls_bp>
+
+In this setting, the right notion of breakdown involves $T$ escaping to $oo$ as
+well as the minimum/maximum eigenvalues of $S$ escaping to $0$/$oo$:
+$
+  eps^* (T, S; F)
+    := sup{ eps:
+      sup_(G in cP_eps (F))& norm(T(G) - T(F)) < oo, \
+      &sup_(G in cP_eps (F)) lambda_"max" (S(G)) < oo, #h(1em)
+      sup_(G in cP_eps (F)) lambda_"min" (S(G)) > 0
+    }.
+$
+
+
+The Mahalanobis distance in the previous construction can be swapped out for
+other notions of outlyingness.
+The Stahel-Donoho estimator uses a projection-based outlyingness of the form $
+  o(x; F)
+    := sup_(u in S^(d-1))thick lr(| (u^top x - T_n^1(u^top x; F_u)) / (S_n^1(u^top x; F_u)) |)
+$ where $F_u$ is the distribution of $u^top X$ with $X ~ F$, and $T_n^1, S_n^1$
+are (robust) univariate location and scale estimators.
+This leads to weighted mean and covariance estimators $
+  T_n (X)
+    &:= (sum_(i = 1)^n w_1 (o(X_i)) X_i) / (sum_(i = 1)^n w_1 (o(X_i))), \
+  S_n (X)
+    &:= (sum_(i = 1)^n w_2 (o(X_i)) (X_i - T_n (X))(X_i - T_n (X))^top)
+      / (sum_(i = 1)^n w_2 (o(X_i))).
+$ Under conditions analogous to @thm:mv_ls_bp, these estimators can be shown to
+achieve a breakdown point of $1/2$, avoiding the dimensional penalty.
+
+
+
+
+// TODO: S-estimators
+
+
+
+
+#pagebreak()
+= Robust Regression
+
+Consider $
+  y_i = x_i^top beta + eps_i
+$ where ${eps_i}$ are iid random variables such that $eps_i perp x_i$,
+$EE[eps_i] = 0$, and $var[eps_i] = sigma^2$.
+Recall that ordinary least-squares linear regression solves $
+  hat(beta)_"OLS"
+    in argmin_(beta in RR^p) sum_(i = 1)^n norm(y_i - x_i^top beta)_2^2.
+$ One obvious extension is to instead optimize $
+  hat(beta)
+    in argmin_(beta in RR^p) sum_(i = 1)^n rho(y_i - x_i^top beta).
+  iff sum_(i = 1)^n psi(x_i - x_i^top hat(beta)) thin x_i = 0.
+$ Under suitable conditions on the loss $rho$ and the noise $eps$, we recover
+asymptotic normality $
+  sqrt(n) (hat(beta) - beta)
+    -->^d normal(
+      0, thick
+      (EE_F [psi^2 (eps_1)])/(EE_F [psi' (eps_1)])^2 EE_F [x_1 x_1^top]^(-1)
+    ).
+$ The general theory of M-estimators shows that using the Huber loss gives the
+minimax variance optimal estimator for symmetric contaminated noise $eps_i$.
+The influence function for (the population version of) these estimators take
+the form $
+  IF((x, y); T, F)
+    = - (EE_F [psi'(eps_1)] EE_F [x_1 x_1^top])^(-1)
+      psi(y - x^top T(F))thin x.
+$ This shows that this setup is infinitesimally robust in the space of
+residuals, but _not_ in the space of covariates $x$!
+
+#lemma[
+  Let $psi$ be nondecreasing.
+  The breakdown point of the regression estimator solving $sum_(i = 1)^n
+  psi(y_i - x_i^top T_n)x_i = 0$ is zero.
+]
+
+~
+== Mean-Shift Model
+
+Consider an extension of the previous model of the form $
+  y_i = x_i^top beta + gamma_i + eps_i,
+$ introducing a sparse parameter $gamma$; we intend for $gamma_i != 0$ when the
+linear model does not hold (for instance, because of the presence of outliers).
+One choice is a LASSO-type estimator $
+  (hat(beta)_lambda, hat(gamma)_lambda)
+    in argmin_(beta, gamma) {
+      1/2 norm(y - X beta - gamma)_2^2
+        + lambda norm(gamma)_1
+      }
+$ for some $lambda >= 0$.
+
+#theorem[
+  The solution $hat(beta)_lambda$ coincides with the Huber estimator obtained from $
+    hat(beta)
+      in argmin_(beta in RR^p) sum_(i = 1)^n rho_lambda (y_i - x_i^top beta).
+  $
+]
+
+
+
 
 
 

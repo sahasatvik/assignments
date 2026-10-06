@@ -6,6 +6,7 @@
 #let cdot = $thin dot.c thin$
 #let mapsto = $arrow.r.bar$
 #let implies = $#h(1em)==>#h(1em)$
+#let iff = $#h(1em)<==>#h(1em)$
 
 #let diag = math.op("diag")
 #let sign = math.op("sign")
