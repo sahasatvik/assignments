@@ -1,0 +1,72 @@
+\documentclass[12pt]{article}
+
+\input{preamble}
+
+\begin{document}
+
+\begin{flushleft}
+\textbf{Probabilistic Topic Models (Blei, 2012)} \\
+Satvik Saha (ss7228) \\
+\today
+\end{flushleft}
+
+\vspace{0.1in}
+
+This article surveys probabilistic topic models, focusing on \emph{Latent
+Dirichlet Allocation} (LDA), which can be described by the generative model
+\begin{align*}
+    \beta_k &\sim \text{Dirichlet}(\eta), \\
+    \theta_i &\sim \text{Dirichlet}(\alpha), \\
+    z_{ij}\mid \theta_i &\sim \text{Categorical}(\theta_i), \\
+    w_{ij}\mid z_{ij}, \beta &\sim \text{Categorical}(\beta_{z_{ij}}),
+\end{align*}
+where $\eta \in \mathbb{R}^V$, $\alpha \in \mathbb{R}^K$.
+We only observe a collection of words $\{w_{ij}\}$, with $w_{ij}$ being the
+$i$-th word (from a vocabulary of $V$ words) from the $j$-th document.
+The goal is to discover a hidden structure of $K$ topics $\{\beta_k\}$, with
+each topic $\beta_k$ being a distribution over words.
+Any given document (which itself can be viewed as a distribution over words) is
+assumed to be a mixture of these topics, with proportions $\theta_i$; this
+makes LDA a kind of \emph{mixed membership model} as opposed to a simple
+mixture model.
+The hyperparameter $\alpha$ controls the sparsity of $\theta_i$; sparser
+$\theta_i$ meaning that fewer topics dominate in the corresponding document.
+
+LDA can be viewed as a kind of factorization model: the observed document-word
+distributions are factored into document-topic distributions $\theta$ and
+topic-word distributions $\beta$.
+A non-probabilistic version would involve matrix factorization, such as in
+\emph{Nonnegative Matrix Factorization} (NMF).
+
+LDA can also be viewed as a kind of dimensionality reduction technique: the
+inferred document-topic distribution $\theta_i \in \Delta^{K - 1}$ is a summary
+of the underlying document-word generating distribution (which lives in
+$\Delta^{V - 1}$) when $K \ll V$.
+
+A crude way of incorporating metadata (publishing information, location, etc)
+$\{x_i\}$ for each document might be to draw $\theta_i \mid \alpha_i \sim
+\text{Dirichlet}(\alpha_i)$, with $\alpha_i$ itself regressed on $x_i$ in some
+way.
+This might help explore how different factors in $x_i$ push documents towards
+particular topics.
+
+
+
+\nocite{*}
+\bibliographystyle{plainnat}
+
+\vfill
+
+\begingroup
+\renewcommand{\section}[2]{}%
+\textbf{References}
+\bibliography{week05}
+\endgroup
+
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

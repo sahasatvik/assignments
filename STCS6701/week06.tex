@@ -1,0 +1,78 @@
+\documentclass[12pt]{article}
+
+\input{preamble}
+
+\begin{document}
+
+\begin{flushleft}
+\textbf{Yes, but Did It Work?: Evaluating Variational Inference (Yao, et al., 2018)} \\
+Satvik Saha (ss7228) \\
+\today
+\end{flushleft}
+
+\vspace{0.1in}
+
+
+This paper examines two methods of evaluating the performance of a variational
+approximation $q(\theta)$ of $p(\theta\mid x)$.
+These are diagnostics which can detect some (but not all!) issues with $q$,
+from overall distributional differences to pointwise biases.
+It has been pointed out that simply relying on the ELBO is not enough: this is
+a non-convex objective function which may flatten out even at poor
+approximations, and we do not know at what value we should stop!
+
+The first method uses an idea from importance sampling: if $q(\theta)$ is a
+good proposal distribution for sampling from $p(\theta\mid x)$, then $\sum_{s =
+1}^S h(\theta_s) r_s/\sum_{s = 1}^S r_s$ is a good Monte-Carlo approximation
+for $\mathbb{E}_{\theta\mid x}[h(\theta)]$, where $\theta_s \overset{iid}{\sim}
+q$ and $r_s = p(\theta_s, x) / q(\theta_s)$.
+Note that this weighted average is dominated by samples $h(\theta_s)$
+corresponding to the largest values of $r_s$.
+The quality of $q$ can be inferred from $\{r_s\}$ by fitting the largest values
+against a generalized Pareto distribution and examining a particular parameter
+$k$.
+It is recommended that an estimate $\hat{k} > 0.7$ indicates an unreliable VI
+estimate.
+This is justified by drawing a connection between $k$ and a R\'enyi divergence
+between $q(\theta)$ and $p(\theta\mid x)$.
+Similar adjustments on the aforementioned weighted average (smoothing the
+largest weights) gives a \emph{Pareto Smoothed Importance Sampling} (PSIS)
+estimate.
+
+The next method uses the median of $q$ as a pointwise estimate to detect
+systematic bias, when $p(\theta\mid x)$ is symmetric.
+Here, multiple datasets are generated as follows: sample $\theta^{(0)}_j \sim
+p(\theta)$ from the prior, then $x_j \sim p(x\mid \theta^{(0)}_j)$.
+With this, we can compute variational approximations $q_j(\theta)$ for each
+$p(\theta\mid x_j)$.
+Finally, compute the $p$-values $p_j = \mathbb{P}(\theta^{(0)}_j < \theta^*
+\mid \theta^* \sim q_j)$.
+If our variational approximations are good, the distribution of these
+$p$-values (hence a histogram of $\{p_j\}$) ought to be symmetric; asymmetry
+(detected by tests such as Kolmogorov-Smirnov) also indicates the direction of
+bias in $q$.
+This is called a \emph{Variational Simulation-Based Calibration} (VSBC)
+diagnostic.
+
+
+
+
+
+\nocite{*}
+\bibliographystyle{plainnat}
+
+\vfill
+
+\begingroup
+\renewcommand{\section}[2]{}%
+\textbf{References}
+\bibliography{week06}
+\endgroup
+
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

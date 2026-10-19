@@ -1,0 +1,991 @@
+\documentclass[12pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage[scr]{rsfso}
+\usepackage{bm}
+\usepackage{thmtools}
+\usepackage{mathtools}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{cleveref}
+\usepackage{cancel}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{booktabs}
+\usepackage{siunitx}
+
+\usepackage{natbib}
+\bibliographystyle{plainnat}
+
+
+\usepackage[parfill]{parskip}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{2ex plus 0.2ex minus 0.2ex}
+
+\usepackage[
+    paper  = letterpaper,
+    left   = 1in,
+    right  = 1in,
+    top    = 1in,
+    bottom = 1in,
+]{geometry}
+
+
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+
+\newcommand{\GG}{\mathcal{G}}
+\newcommand{\LL}{\mathcal{L}}
+\newcommand{\NN}{\mathcal{N}}
+
+\newcommand{\iid}{\overset{iid}{\sim}}
+\renewcommand{\Pr}{\mathbb{P}}
+\newcommand{\E}{\mathbb{E}}
+
+\newcommand{\ELBO}{\text{ELBO}}
+
+\title{
+    Image Segmentation with Hierarchical Potts-Markov Priors
+}
+\author{
+    Satvik Saha\footnote{\texttt{ss7228@columbia.edu}}\\
+    \textit{\normalsize Department of Statistics, Columbia University}
+}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+
+\begin{abstract}
+    Image segmentation generally describes the process of separating an image into
+    different groups or regions of pixels, with pixels in a group sharing
+    similar characteristics.
+    A crude method of image segmentation involves clustering pixels by their color,
+    with no regard to their spatial arrangement.
+    In this work, we introduce spatial structure to a mixture model for
+    segmenting images, by imposing suitable priors on group labels.
+    In particular, we focus on hierarchical Potts-Markov-like priors which
+    encourage smoothing based on pixel neighborhoods and group-specific
+    temperatures.
+    We use MCMC-based inference procedures to apply this method on the Berkeley
+    Segmentation Dataset, and find that it generally outperforms the
+    corresponding spatially-na\"ive mixtures.
+\end{abstract}
+
+
+
+\section{Introduction}
+
+
+Image segmentation, the process of dividing an image into different parts
+(segments), is a problem in computer vision that has applications in many
+areas, ranging from biomedical imaging (detecting diseased tissue) to
+autonomous vehicles (detecting objects on the road).
+Ideally, each segment represents a recognizable object in a scene, i.e.\ is a
+region of similar pixels.
+This lets us frame segmentation as a clustering problem, for which mixture
+models are well suited.
+
+Interpreting an image as a bag of pixel colors $\bm{x} = \{x_\ell\}_{\ell \in
+\LL}$ suggests a crude segmentation method: pick $K$ colors, then declare a
+pixel to be part of the $k$-th object if its color is most similar to the
+$k$-th color.
+While such a procedure works reasonably well, it often leads to noisy segments
+with fuzzy boundaries; this kind of algorithm discards a lot of potentially
+useful information, in particular the spatial configuration of the pixels in
+the image.
+For instance, supposing that our objects of interest occupy continuous regions
+in space, we may believe that neighboring pixels will more often than not
+belong to the same segment.
+In this project, we build a simple, spatially-aware probabilistic model that
+exploits this heuristic and produces cleaner segmentations than a na\"ive
+mixture.
+
+\begin{figure}[ht]
+\begin{center}
+    \begin{subfigure}[t]{0.32\textwidth}
+    \begin{center}
+        \includegraphics[width=\textwidth]{figures/42049_orig}
+    \end{center}
+    \caption{Original image}
+    \label{fig:42049_orig}
+    \end{subfigure}
+    %
+    \begin{subfigure}[t]{0.32\textwidth}
+    \begin{center}
+        \includegraphics[width=\textwidth]{figures/42049_seg_human}
+    \end{center}
+    \caption{Human segmentation}
+    \label{fig:42049_human}
+    \end{subfigure}
+    %
+    \begin{subfigure}[t]{0.32\textwidth}
+    \begin{center}
+        \includegraphics[width=\textwidth]{figures/42049_K4_seg_kmeans}
+    \end{center}
+    \caption{$K$-Means}
+    \label{fig:42049_kmeans}
+    \end{subfigure}
+
+    \vspace{0.5em}
+
+    \begin{subfigure}[t]{0.32\textwidth}
+    \begin{center}
+        \includegraphics[width=\textwidth]{figures/42049_K4_seg_gmm}
+    \end{center}
+    \caption{GMM}
+    \label{fig:42049_gmm}
+    \end{subfigure}
+    %
+    % \begin{subfigure}[t]{0.32\textwidth}
+    % \begin{center}
+    %     \includegraphics[width=\textwidth]{figures/42049_K4_seg_fixed}
+    % \end{center}
+    % \caption{GMM-PM-($\bm{\beta} = \bm{1}$)}
+    % \label{fig:42049_fixed}
+    % \end{subfigure}
+    %
+    \begin{subfigure}[t]{0.32\textwidth}
+    \begin{center}
+        \includegraphics[width=\textwidth]{figures/42049_K4_seg}
+    \end{center}
+    \caption{GMM-PM \eqref{eq:potts_mixture}}
+    \label{fig:42049_potts}
+    \end{subfigure}
+    %
+    \begin{subfigure}[t]{0.32\textwidth}
+    \begin{center}
+        \includegraphics[width=\textwidth]{figures/42049_K4_beta}
+    \end{center}
+    \caption{Posterior summary of $\bm{\beta}$}
+    \label{fig:42049_beta}
+    \end{subfigure}
+\end{center}
+\caption{%
+    Segmentations of an image (\ref{fig:42049_orig}, \texttt{42049} in the
+    Berkeley Segmentation Dataset) by humans (\ref{fig:42049_human}), $K$-Means
+    (\ref{fig:42049_kmeans}), a simple Gaussian Mixture (GMM,
+    \ref{fig:42049_gmm}), and a Gaussian Mixture with a hierarchical
+    Potts-Markov prior (GMM-PM, \ref{fig:42049_potts}).
+    The last three models use $K = 4$ segments.
+    The posterior distribution of $\bm\beta$ in GMM-PM (\ref{fig:42049_beta})
+    gives us information about the relative smoothness of different segments.
+}
+\label{fig:img_42049}
+\end{figure}
+
+
+
+\subsection{Image Segmentation with Mixture Models}
+
+A general mixture model for $\bm{x} = \{x_\ell\}_{\ell \in \LL}$ looks like
+\begin{equation}
+\label{eq:general_mixture}
+\begin{aligned}
+    \bm{\beta}
+        &\sim p(\bm{\beta}), \\
+    \bm{\theta}
+        &\sim p(\bm{\theta}), \\
+    \bm{z} \mid \bm\beta
+        &\sim p(\bm{z} \mid \bm\beta), \\
+    x_\ell \mid \bm\theta, z_\ell = k
+        &\sim p(x_\ell \mid \bm\theta, z_\ell = k) =: f(x_\ell; \theta_k),
+            &\quad\ell \in \LL.
+\end{aligned}
+\end{equation}
+Each data item $x_\ell$ is associated with a latent label $z_\ell \in \{1,
+\dots, K\}$ which determines which component it belongs to.
+The distribution $f(\,\cdot\,; \theta_k)$ of items within the $k$-th component
+is controlled by the parameter $\bm\theta$.
+
+A simple mixture model may choose \emph{a priori} independent labels $z_\ell
+\mid \bm\beta$, i.e.\ allow \begin{equation}
+\label{eq:naive_prior}
+    p(\bm{z} \mid \bm\beta) = \prod_{\ell \in \LL} p(z_\ell \mid \bm\beta)
+\end{equation}
+to factorize.
+This makes the pairs $\{(z_\ell, x_\ell)\}_{\ell \in \LL}$
+exchangeable: the location $\ell \in \LL$ of a data point $x_\ell$ plays no
+role in the model.
+In the context of image segmentation, with $x_\ell \in \R^d$ denoting the color
+of a pixel, its location $\ell$ within the image is ignored.
+
+Instead, we will choose our prior $p(\bm{z}\mid\bm\beta)$ in a way that
+respects the spatial structure of $\LL$.
+Specifically, we would like to use the following heuristic ---
+\emph{neighboring pixels often belong to the same segment} --- motivated by the
+following observation.
+A segment within an image is rarely uniform in color; small fluctuations and
+scattered islands of pixels with very different colors may appear within the
+larger region.
+A simple mixture model using \eqref{eq:naive_prior} would see these islands as
+part of a completely different segment (or as individual segments of their
+own).
+For example, looking closely at the segmentation produced by such a model in
+Figure~\ref{fig:42049_gmm} reveals a visually noisy blue sky.
+The kind of spatially aware model we explore here chooses to smooth out these
+irregularities and group them as part of the encompassing segment.
+This ought to result in a cleaner, less noisy segmented image; for instance,
+note the more uniform sky in Figure~\ref{fig:42049_potts}.
+Additionally, such a model can also give us the opportunity to learn about the
+smoothness of each segment.
+
+Note that this is very much a modeling choice/goal, which is not always
+desirable: in applications like medical imaging, such small irregularities are
+often the target and should \emph{not} be glossed over!
+The aim here is to identify high level structure in an image where all objects
+are of similar importance, rather than picking out fine detail.
+
+
+
+\subsection{The Potts-Markov Prior}
+\label{sec:potts_prior}
+
+\begin{figure}
+\begin{center}
+    \begin{subfigure}[t]{0.24\textwidth}
+    \begin{center}
+        \includegraphics[width=\textwidth]{figures/potts_beta_0}
+    \end{center}
+    \caption{$\bm\beta = \bm0$}
+    \label{fig:potts_beta_0}
+    \end{subfigure}
+    %
+    \begin{subfigure}[t]{0.24\textwidth}
+    \begin{center}
+        \includegraphics[width=\textwidth]{figures/potts_beta_1}
+    \end{center}
+    \caption{$\bm\beta = \bm1$}
+    \label{fig:potts_beta_1}
+    \end{subfigure}
+    %
+    \begin{subfigure}[t]{0.24\textwidth}
+    \begin{center}
+        \includegraphics[width=\textwidth]{figures/potts_beta_10}
+    \end{center}
+    \caption{$\bm\beta = \bm{10}$}
+    \label{fig:potts_beta_10}
+    \end{subfigure}
+    %
+    \begin{subfigure}[t]{0.24\textwidth}
+    \begin{center}
+        \includegraphics[width=\textwidth]{figures/potts_beta_custom}
+    \end{center}
+    \caption{$\bm\beta = (1, 1.5, 1.5)^\top$}
+    \label{fig:potts_beta_custom}
+    \end{subfigure}
+\end{center}
+\caption{%
+    Draws from $\text{Potts}(\bm\beta)$, where each pixel is connected to its
+    (at most) 8 immediate neighbors.
+    Larger values of $\beta_k$ promote more cohesive components with smoother
+    boundaries: components in \ref{fig:potts_beta_1} have noticeably more
+    `islands' of foreign labels compared to \ref{fig:potts_beta_10}.
+    Note that imbalanced $\bm\beta$, as in \ref{fig:potts_beta_custom}, leads
+    to some components effectively vanishing.
+}
+\label{fig:potts_samples}
+\end{figure}
+
+
+
+Let $\GG(\LL, \mathcal{E})$ be a graph on the set of locations $\LL$, and
+notate $\ell \sim \ell'$ when $\ell, \ell' \in \LL$ are neighbors in $\GG$.
+We denote $\bm{z} \sim \text{Potts}(\bm\beta)$ for $\bm\beta \succeq \bm0$,
+when the distribution of $\bm{z}$ has density
+\begin{equation}
+\label{eq:potts}
+    p(\bm{z} \mid \bm\beta) = \frac{1}{Z(\bm{\beta})} \exp\left(\sum_{\ell \sim \ell'} \sum_{k = 1}^K \beta_k \bm{1}(z_{\ell'} = z_{\ell} = k)\right).
+\end{equation}
+This produces a smoothing effect on the class labels $\bm{z}$ with respect to
+the spatial structure $\GG$.
+The `reward' for agreement between neighboring nodes assigned class $k$ is
+controlled by a class-specific temperature $\beta_k$: this allows different
+components to have smoother boundaries than others.
+See \Cref{fig:potts_samples} for illustrative samples from
+$\text{Potts}(\bm\beta)$.
+% By further imposing a fairly non-informative prior on $\bm\beta$, its posterior
+% distribution can reveal the relative smoothness of each segment.
+
+Observe that \eqref{eq:potts} is an exponential family in $\bm\beta$, with
+sufficient statistic $\bm{T}(\bm{z})$ described by
+\begin{equation}
+    T_k(\bm{z})
+        := \sum_{\ell\sim\ell'} \bm{1}(z_\ell = z_{\ell'} = k), \qquad\qquad 1 \leq k \leq K.
+\end{equation}
+Each $T_k$ counts the number of edges in $\GG$ connecting items
+assigned the same class $k$.
+With this, we have $p(\bm{z}\mid\bm{\beta}) = \exp(\bm\beta^\top
+\bm{T}(\bm{z})) / Z(\bm\beta)$.
+Further keeping track of the statistics
+\begin{equation}
+    U_{k\ell}(\bm{z}) := \sum_{\ell \sim \ell'} \bm{1}(z_{\ell'} = k), \quad\qquad 1 \leq k \leq K, \quad \ell \in \LL,
+\end{equation}
+which count the number of neighbors of $z_\ell$ assigned the class $k$, the
+full conditionals
+\begin{equation}
+    p(z_{\ell} = k\mid \bm{z}_{-\ell}, \bm\beta) \propto \exp\left(\beta_k U_{k\ell}(\bm{z})\right)
+\end{equation}
+suggest a simple Gibbs sampling algorithm for $\text{Potts}(\bm\beta)$.
+
+
+% \emph{Remark:} Note that \[
+%     T_k(\bm{z})
+%         = \frac{1}{2}\sum_{\ell \in \LL} U_{k\ell}(\bm{z}) \,\bm{1}(z_\ell = k).
+% \]
+
+The partition function $Z(\bm\beta) = \sum_{\bm{z} \in \{1, \dots, K\}^{|\LL|}}
+\exp(\bm\beta^\top \bm{T}(\bm{z}))$ is an intractable normalizing constant.
+This makes \emph{both} the joint density of the mixture model
+\eqref{eq:general_mixture}, as well as the full-conditional
+\begin{equation}
+\label{eq:beta_full_conditional}
+    p(\bm\beta \mid \bm{z}, \bm{\theta}, \bm{x})
+        \propto \frac{p(\bm\beta)}{Z(\bm\beta)} \exp(\bm\beta^\top \bm{T}(\bm{z}))
+\end{equation}
+intractable, which presents problems for standard posterior inference
+algorithms such as Gibbs sampling and mean field variational inference.
+For the former choice, sampling from \eqref{eq:beta_full_conditional} using
+ordinary Metropolis-Hastings requires computing $Z(\bm\beta^*)/Z(\bm\beta)$ as
+part of the acceptance ratio.
+This issue of a \emph{doubly intractable likelihood} can be sidestepped using
+an \emph{auxiliary variable} technique.
+
+
+
+\subsection{The Exchange Algorithm}
+\label{sec:exchange_algorithm}
+
+The following auxiliary variable Metropolis-Hastings scheme \citep{murray2006}
+is used to produce samples from \eqref{eq:beta_full_conditional} without
+directly dealing with the partition function $Z(\,\cdot\,)$.
+\begin{enumerate}[itemsep=-0.7em]
+    \item Propose $\bm{\beta}^* \sim q(\bm{\beta}^*; \bm{\beta})$.
+    \item Draw auxiliary $\bm{z}^* \sim p(\bm{z}^* \mid \bm{\beta}^*)$.
+    \item Accept $\bm{\beta}^*$ with probability
+    \begin{equation}
+    \label{eq:exchange_ratio}
+        \frac{
+            q(\bm{\beta}; \bm{\beta}^*)\,
+            p(\bm{\beta}^*)
+        }{
+            q(\bm{\beta}^*; \bm{\beta})\,
+            p(\bm{\beta})
+        }\cdot \frac{
+            p(\bm{z} \mid \bm{\beta}^*)
+        }{
+            p(\bm{z} \mid \bm{\beta})
+        }\cdot \frac{
+            p(\bm{z}^*\mid \bm{\beta})
+        }{
+            p(\bm{z}^* \mid \bm{\beta}^*)
+        },
+    \end{equation}
+    and repeat from step 1.
+\end{enumerate}
+Note that the problematic terms $Z(\bm\beta)$, $Z(\bm\beta^*)$ neatly cancel
+out in the ratio \eqref{eq:exchange_ratio}.
+This is a simpler version of the algorithm in \citet{moller2006}.
+% An easy way to see why this algorithm works is to observe that this is simply
+% Metropolis-Hastings for drawing samples of $(\bm{\beta}', \bm{z}')$ from
+% $p(\bm\beta'\mid \bm{z})\, p(\bm{z}' \mid \bm{\beta}')$, with proposal
+% $q(\bm\beta'^*; \bm\beta')\, p(\bm{z}'^* \mid \bm\beta'^*)$; the marginal for
+% $\bm\beta'$ is our target.
+
+Running this algorithm is fairly expensive in practice for image data,
+especially since step 2 involves sampling from $\text{Potts}(\bm{\beta}^*)$,
+with the benefit of targeting the correct stationary distribution.
+Mean field variational methods are much faster, at the cost of using inexact
+approximations for $Z(\,\cdot\,)$.
+See Section~\ref{sec:inference}, step (c) for details on implementation.
+
+
+
+
+\section{Gaussian Mixture Model with Potts-Markov Prior}
+\label{sec:model}
+
+Let $x_\ell \in \R^d$ be the color of the pixel at location $\ell \in \LL$.
+We use a $K \in \N$ component mixture model of the form
+\eqref{eq:general_mixture}, with a Potts-Markov prior \eqref{eq:potts} on the
+latent class labels $\bm{z} = \{z_\ell\}_{\ell \in \LL}$, multivariate
+Gaussians as component distributions with means and covariances $\{(\mu_k,
+\Sigma_k)\}_{k = 1}^K \subseteq \R^d \times \R^{d\times d}$, and conjugate
+Normal-Inverse-Wishart priors on the latter component parameters.
+We further impose weak Gamma priors on the smoothness parameters $\bm\beta$,
+which yields the following hierarchical model.
+% Let $\LL$ be the set of locations of pixels, and for $\ell \in
+% \LL$, let $\NN_\ell \subseteq \LL$ be the set of
+% neighbors of $\ell$ in a graph $\GG(\LL, \mathcal{E})$.
+% Denote $\ell \sim \ell'$ when $\ell, \ell'$ are neighbors in $\GG$,
+% i.e.\ $\{\ell, \ell'\} \in \mathcal{E}$.
+% Let $x_\ell \in \R^d$ be the intensity of the pixel at $\ell$.
+% We model $\bm{x} := \{\bm{x}\}_{\ell \in \LL}$ as a mixture of $K \in
+% \N$ Gaussians, with class means and covariances $\{(\mu_k, \Sigma_k)\}_{k =
+% 1}^K \subseteq \R^d \times \R^{d\times d}$.
+% Each pixel $x_\ell$ is associated with a class label $z_\ell \in \{1, \dots,
+% K\}$.
+\begin{equation}
+\label{eq:potts_mixture}
+\begin{aligned}
+    \beta_k
+        &\iid \text{Gamma}(a_\beta, b_\beta),
+        & 1 \leq k \leq K, \\
+    \bm{z} \mid \bm{\beta}
+        &\sim \text{Potts}(\bm\beta), \\
+    \Sigma_k
+        &\iid \text{Inverse-Wishart}(\Sigma_0, \nu_0),
+        & 1 \leq k \leq K, \\
+    \mu_k \mid \Sigma_k
+        &\sim \text{Normal}(m_0, \kappa_0^{-1}\Sigma_k),
+        & 1 \leq k \leq K, \\
+    x_\ell \mid \bm{\mu}, \bm{\Sigma}, z_{\ell} = k
+        &\sim \text{Normal}(\mu_k, \Sigma_k),
+        & \ell \in \LL.
+\end{aligned}
+\end{equation}
+We will abbreviate \eqref{eq:potts_mixture} as a GMM-PM model.
+Its joint density factors as
+\begin{equation}
+\label{eq:joint_density}
+    \prod_{k = 1}^K p(\beta_k)
+        \cdot p(\bm{z}\mid\bm{\beta})
+        \cdot \prod_{k = 1}^K p(\Sigma_k)\, p(\mu_k \mid \Sigma_k)
+        \cdot \prod_{\ell \in \LL} p(x_\ell \mid \mu_k, \Sigma_k, z_\ell = k).
+\end{equation}
+
+Here, $\LL = \{(i, j): 1 \leq i \leq m, 1 \leq j \leq n\}$ is a
+collection of tuples representing positions on an $m\times n$ image grid, and
+we choose the spatial structure $\GG$ such that each pixel is connected to its
+(at most) 8 immediate neighbors on the grid.
+Formally, the neighborhood of $\ell$ in $\GG$ looks like $\NN_{\ell} = (\ell +
+\Delta) \cap \LL$ for the set of translations $\Delta = \{-1, 0,
+1\}^2\setminus\{(0, 0)\}$.
+Furthermore, we have $d = 3$, with the components of $x_\ell$ denoting red,
+green, blue intensities in $[0, 1]$.
+
+Modifying \eqref{eq:potts_mixture} by fixing $\bm\beta = \bm0$ reduces it to a
+simple Gaussian mixture model with \emph{a priori} independent labels $\bm{z}$.
+In contrast, the Potts-Markov prior on $\bm{z} \mid \bm{\beta}$ induces the
+full conditionals
+\begin{equation}
+    p(z_\ell = k \mid \bm{z}_{-\ell}, \beta_k, \mu_k, \Sigma_k, x_\ell)
+        \propto \exp\left(\beta_k U_{k\ell}(\bm{z})\right) \cdot p(x_\ell \mid \mu_k, \Sigma_k, z_\ell = k),
+\end{equation}
+where the weights $\exp(\beta_k U_{k\ell})$ encourage each $z_\ell$ to conform
+with its neighbors.
+% This has a smoothing effect on the class labels $\bm{z}$ with respect to the
+% spatial structure of the image.
+% The `reward' for agreement is controlled by class-specific temperatures
+% $\beta_k$, which allows different classes to have smoother boundaries than
+% others.
+% The partition function $Z(\bm{\beta})$ for $p(\bm{z} \mid \bm{\beta})$ is in
+% general intractable, which makes sampling from the full-conditional of
+% $\bm{\beta}$ difficult in a Gibbs sampling inference procedure; this can be
+% circumvented using an auxiliary variable Metropolis-Hastings technique.
+
+% Define the statistics \[
+%     T_k(\bm{z})
+%         := \sum_{\ell\sim\ell'} \bm{1}(z_\ell = z_{\ell'} = k), \qquad\qquad 1 \leq k \leq K
+% \] which count the number of edges connecting pixels assigned the same class
+% $k$.
+% Then, we may alternatively describe \[
+%     p(\bm{z}\mid\bm{\beta})
+%         = \frac{1}{Z(\bm{\beta})} \exp\left(\sum_{k = 1}^K \beta_k T_k(\bm{z}) \right)
+%         = \frac{1}{Z(\bm{\beta})} \exp\left(\bm{\beta}^\top \bm{T}(\bm{z})\right).
+% \]
+% Note that $\bm{T}(\bm{z})$ is a sufficient statistic for the exponential family
+% $p(\bm{z} \mid \bm{\beta})$.
+
+% Further keeping track of the statistics \[
+%     U_{k\ell}(\bm{z}) = \sum_{\ell \sim \ell'} \bm{1}(z_{\ell'} = k)
+% \] which count the number of neighbors of $z_\ell$ assigned the class $k$, note
+% that the full conditional \[
+%     p(z_{\ell} = k\mid \bm{z}_{-\ell}, \bm{\beta}, \bm{\mu}, \bm{\Sigma}, \bm{x})
+%         \propto \exp\left(\beta_k U_{k\ell}\right) \cdot p(x_\ell \mid \mu_k, \Sigma_k, z_\ell = k).
+% \]
+
+
+% Note that \[
+%     p(\bm{\beta} \mid \bm{z})
+%         = \frac{p(\bm\beta)}{Z(\bm\beta)}\, \exp\left(\bm{\beta}^\top \bm{T}(\bm{z})\right)
+% \] only depends on $\bm{z}$ through $\bm{T}(\bm{z})$.
+
+
+
+\section{Data and Implementation}
+\label{sec:data_implementation}
+
+\begin{figure}[ht!]
+\begin{center}
+    \begin{subfigure}[t]{0.32\textwidth}
+    \begin{center}
+        \includegraphics[width=\textwidth]{figures/108073_orig}
+    \end{center}
+    \caption{Original image}
+    \label{fig:108073_orig}
+    \end{subfigure}
+    %
+    \begin{subfigure}[t]{0.32\textwidth}
+    \begin{center}
+        \includegraphics[width=\textwidth]{figures/108073_seg_human}
+    \end{center}
+    \caption{Human segmentation}
+    \label{fig:108073_human}
+    \end{subfigure}
+    %
+    \begin{subfigure}[t]{0.32\textwidth}
+    \begin{center}
+        \includegraphics[width=\textwidth]{figures/108073_K3_seg_kmeans}
+    \end{center}
+    \caption{$K$-Means}
+    \label{fig:108073_kmeans}
+    \end{subfigure}
+
+    \vspace{0.5em}
+
+    \begin{subfigure}[t]{0.32\textwidth}
+    \begin{center}
+        \includegraphics[width=\textwidth]{figures/108073_K3_seg_gmm}
+    \end{center}
+    \caption{GMM}
+    \label{fig:108073_gmm}
+    \end{subfigure}
+    %
+    % \begin{subfigure}[t]{0.32\textwidth}
+    % \begin{center}
+    %     \includegraphics[width=\textwidth]{figures/108073_K3_seg_fixed}
+    % \end{center}
+    % \caption{GMM-PM-($\bm{\beta} = \bm{1}$)}
+    % \label{fig:108073_fixed}
+    % \end{subfigure}
+    %
+    \begin{subfigure}[t]{0.32\textwidth}
+    \begin{center}
+        \includegraphics[width=\textwidth]{figures/108073_K3_seg}
+    \end{center}
+    \caption{GMM-PM \eqref{eq:potts_mixture}}
+    \label{fig:108073_potts}
+    \end{subfigure}
+    %
+    \begin{subfigure}[t]{0.32\textwidth}
+    \begin{center}
+        \includegraphics[width=\textwidth]{figures/108073_K3_beta}
+    \end{center}
+    \caption{Posterior summary of $\bm{\beta}$}
+    \label{fig:108073_beta}
+    \end{subfigure}
+\end{center}
+\caption{%
+    Segmentations of an image (\ref{fig:108073_orig}, \texttt{108073} in the
+    Berkeley Segmentation Dataset), with
+    \labelcref{fig:108073_kmeans,fig:108073_gmm,fig:108073_potts} using $K = 3$
+    segments.
+    While $K$-Means and the GMM retain a lot of detail (the tiger's stripes,
+    ripples in the water), GMM-PM attempts to smooth them out in favor of
+    high-level structure.
+}
+\label{fig:img_108073}
+\end{figure}
+
+
+
+\begin{figure}[ht!]
+\begin{center}
+    \begin{subfigure}[t]{0.32\textwidth}
+    \begin{center}
+        \includegraphics[width=\textwidth]{figures/86000_orig}
+    \end{center}
+    \caption{Original image}
+    \label{fig:86000_orig}
+    \end{subfigure}
+    %
+    \begin{subfigure}[t]{0.32\textwidth}
+    \begin{center}
+        \includegraphics[width=\textwidth]{figures/86000_seg_human}
+    \end{center}
+    \caption{Human segmentation}
+    \label{fig:86000_human}
+    \end{subfigure}
+    %
+    \begin{subfigure}[t]{0.32\textwidth}
+    \begin{center}
+        \includegraphics[width=\textwidth]{figures/86000_K5_seg_kmeans}
+    \end{center}
+    \caption{$K$-Means}
+    \label{fig:86000_kmeans}
+    \end{subfigure}
+
+    \vspace{0.5em}
+
+    \begin{subfigure}[t]{0.32\textwidth}
+    \begin{center}
+        \includegraphics[width=\textwidth]{figures/86000_K5_seg_gmm}
+    \end{center}
+    \caption{GMM}
+    \label{fig:86000_gmm}
+    \end{subfigure}
+    %
+    % \begin{subfigure}[t]{0.32\textwidth}
+    % \begin{center}
+    %     \includegraphics[width=\textwidth]{figures/86000_K5_seg_fixed}
+    % \end{center}
+    % \caption{GMM-PM-($\bm{\beta} = \bm{1}$)}
+    % \label{fig:86000_fixed}
+    % \end{subfigure}
+    %
+    \begin{subfigure}[t]{0.32\textwidth}
+    \begin{center}
+        \includegraphics[width=\textwidth]{figures/86000_K5_seg}
+    \end{center}
+    \caption{GMM-PM \eqref{eq:potts_mixture}}
+    \label{fig:86000_potts}
+    \end{subfigure}
+    %
+    \begin{subfigure}[t]{0.32\textwidth}
+    \begin{center}
+        \includegraphics[width=\textwidth]{figures/86000_K5_beta}
+    \end{center}
+    \caption{Posterior summary of $\bm{\beta}$}
+    \label{fig:86000_beta}
+    \end{subfigure}
+\end{center}
+\caption{%
+    Segmentations of an image (\ref{fig:86000_orig}, \texttt{86000} in the
+    Berkeley Segmentation Dataset), with
+    \labelcref{fig:86000_kmeans,fig:86000_gmm,fig:86000_potts} using $K = 5$
+    segments.
+    While $K$-Means and GMM retain more detail, the GMM-PM smooths them out and
+    focuses on large-scale features.
+    The posterior distribution of $\bm\beta$ (\ref{fig:86000_beta}) seems to
+    indicate that the building and sky segments are smoother than the flower
+    segments.
+}
+\label{fig:img_86000}
+\end{figure}
+
+
+We select color images from the Berkeley Segmentation Dataset
+\citep{martin2001} and compare the segmentations produced by our GMM-PM model
+\eqref{eq:potts_mixture} with those from $K$-Means algorithms and simple
+Gaussian mixture models.
+All images contain $|\LL| =$ 154,401 pixels (size $321\times 481$ or $481
+\times 321$); the resulting spatial graph $\GG$ has $|\mathcal{E}| =$ 615,200
+edges.
+
+We use a Gibbs sampler, incorporating the exchange algorithm
+(\ref{sec:exchange_algorithm}) to perform posterior inference on
+GMM-PM \eqref{eq:potts_mixture}; given the sheer volume of data, most
+hyperparameters are chosen such that the priors are non-informative.
+See Section~\ref{sec:inference} for complete details on posterior inference,
+Section~\ref{sec:hyperparameter} for hyperparameter selection.
+The Gibbs sampler for GMM-PM has been implemented in \texttt{C++} with an
+\texttt{R} wrapper (using \texttt{Rcpp}).
+% The Gaussian mixture model is run using the same sampler, fixing $\bm\beta =
+% \bm0$.
+The $K$-means algorithm is run using a native R implementation.
+
+
+
+\section{Evaluation and Results}
+
+The dataset contains segmentations performed by humans, which we use as a
+reference to compute Adjusted Rand Index (ARI) scores \citep{rand1971} for the
+models of interest; see Table~\ref{tab:ari}.
+These scores are a measure of similarity between two segmentations (not
+necessarily having the same number of clusters): $1$ indicates a perfect match,
+$0$ indicates a completely random segmentation.
+\Cref{fig:img_42049,fig:img_108073,fig:img_86000} illustrate segmentations of
+particular images.
+
+
+\sisetup{detect-all=true}
+\begin{table}[h!]
+    \centering
+    \caption{%
+        Adjusted Rand Index (ARI) scores of segmentations against human
+        references; higher is better.
+        The last four columns report scores for the following models:
+        $K$-Means, simple Gaussian Mixture (GMM), model
+        \eqref{eq:potts_mixture} with fixed $\bm\beta = \bm{1}$
+        (GMM-PM-($\bm{\beta} = \bm{1}$)), and model \eqref{eq:potts_mixture}
+        (GMM-PM).
+    }
+    \label{tab:ari}
+    \begin{tabular}{>{\tt}lc|SSSS}
+    \toprule
+    \normalfont{Image ID} & $K$
+        & \text{$K$-Means}
+        & \text{GMM}
+        & \text{GMM-PM-($\bm\beta = \bm1$)}
+        & \text{GMM-PM}
+        \\\midrule
+        108073 & 3
+            &   0.2395
+            &   0.2241
+            &   \bfseries 0.2767
+            &   0.2678
+            \\
+        198054 & 7
+            & 0.3603
+            & 0.4081
+            & \bfseries 0.6521
+            & 0.4444
+            \\
+        253027 & 3
+            & 0.1707
+            & 0.3470
+            & \bfseries 0.4481
+            & 0.4408
+            \\
+        253036 & 5
+            & 0.4154
+            & \bfseries 0.6150
+            & 0.4444
+            & 0.4459
+            \\
+        295087 & 8
+            & 0.2591
+            & 0.2693
+            & 0.2967
+            & \bfseries 0.2982
+            \\
+        300091 & 5
+            & 0.1563
+            & 0.1404
+            & 0.1892
+            & \bfseries 0.2648
+            \\
+        37073 & 5
+            & 0.7151
+            & 0.4705
+            & 0.5428
+            & \bfseries 0.5757
+            \\
+        38092 & 7
+            & 0.4471
+            & 0.5342
+            & \bfseries 0.5453
+            & 0.5381
+            \\
+        42049 & 4
+            & 0.3009
+            & 0.3187
+            & \bfseries 0.3412
+            & 0.3403
+            \\
+        86000 & 5
+            & 0.4587
+            & 0.4913
+            & \bfseries 0.6341
+            & 0.6270
+            \\
+    \bottomrule
+    \end{tabular}
+\end{table}
+
+Table~\ref{tab:ari} indicates that although GMM-PM with fixed $\bm{\beta}$ can
+outperform GMM-PM in full generality, the discrepancy is rarely large, and the
+former loses out on information from the posterior distribution of the
+smoothness parameter $\bm{\beta}$.
+In general, human segmentations identify many more segments than our mixture
+models, as they can tell apart different objects with the same color, which may
+explain why the performances aren't particularly high.
+To illustrate this point, note that in \Cref{fig:img_42049}, our models cannot
+separate the bird and the branch which have very similar colors.
+
+
+\section{Discussion}
+
+We have presented a spatially aware Gaussian mixture model (GMM-MP), and
+demonstrated that it frequently outperforms na\"ive Gaussian mixtures in the
+context of image segmentation, especially when the focus is not on fine detail
+but on broad strokes.
+While the use of the Potts-Markov prior incorporates spatial information for
+the purpose of smoothing (by rewarding cohesion), one can imagine priors which
+encourage other kinds of behavior.
+A generalization of \eqref{eq:potts} would be priors of the form
+\begin{equation}
+    p(\bm{z} \mid \bm{\beta})
+        \propto \exp\left(\sum_{\ell \in \LL} \alpha(z_\ell; \ell) + \sum_{\ell, \ell' \in \LL} \beta(z_\ell, z_{\ell'}; \ell, \ell')\right)
+\end{equation}
+for potentials $\alpha, \beta$ that could model a variety of interactions
+between labels.
+Priors like these could be plugged directly into this project's setup with
+little change to the core sampling algorithm.
+
+Segmentation results such as those in
+\Cref{fig:img_42049,fig:img_108073,fig:img_86000} show that a Gaussian mixture
+is not always good at modeling colors that appear at the bundaries of the RGB
+color space $[0, 1]^3$, including bright hilights and very dark areas.
+This suggests that mixtures of Gaussians (which are supported on all of $\R^3$)
+may not be the best choice for modeling color distributions.
+We may swap out $\{f(\,\cdot\,; \theta)\}_{\theta \in \Theta}$ in
+\eqref{eq:general_mixture} for any convenient family of likelihoods with
+minimal change to the spatial prior.
+Another solution may be to transform our color features $x_\ell \in [0, 1]^3$
+to range over $\R^3$, say using logit links, before plugging them into our
+model.
+
+
+% \nocite{*}
+\bibliography{references}
+
+
+
+
+% \clearpage
+
+\appendix
+
+
+
+
+\section{Posterior Inference}
+\label{sec:inference}
+
+We produce posterior samples of $\bm{z}, \bm{\beta}, \bm{\mu}, \bm{\Sigma} \mid
+\bm{x}$ using a Gibbs sampling scheme.
+This involves updating a state $(\bm{z}, \bm{\beta}, \bm{\mu}, \bm{\Sigma})$ by
+iteratively cycling through the following full-conditionals.
+\begin{enumerate}[label=(\alph*)]
+    \item Sample new component means and covariances $\bm{\mu}, \bm{\Sigma}
+    \mid - $ as follows: for each $1 \leq k \leq K$, set \begin{align*}
+        n_k &:= \sum_{\ell \in \LL} \bm{1}(z_\ell = k), &
+        \bar{x}_k &:= \frac{1}{n_k}\sum_{\ell \in \LL} x_\ell \bm{1}(z_\ell = k), \\
+        % \kappa_k &:= \kappa_0 + n_k, &
+        % \nu_k &:= \nu_0 + n_k, \\
+        \mu_k'&:= \frac{\kappa_0 m_0 + n_k \bar{x}_k}{\kappa_0 + n_k}, &
+        S_k &:= \sum_{\ell \in \LL} (x_\ell - \bar{x}_k)(x_\ell - \bar{x}_k)^\top \bm{1}(z_\ell = k), \\
+        \Sigma_k' &:= \Sigma_0 + S_k + \frac{\kappa_0 n_k}{\kappa_0 + n_k} (\bar{x}_k - m_0)(\bar{x}_k - m_0)^\top. \hspace{-8em}
+    \end{align*}
+    Then, replace the current $\bm{\mu}, \bm{\Sigma}$, by sampling from \begin{align*}
+        \Sigma_k \mid -
+            &\sim \text{Inverse-Wishart}\left(\Sigma_k', \nu_0 + n_k\right), \\\
+        \mu_k \mid \Sigma_k, -
+            &\sim \text{Normal}\left(\mu_k', (\kappa_0 + n_k)^{-1}\Sigma_k\right).
+    \end{align*}
+    These are standard Gaussian-Inverse-Wishart conjugate prior updates (see
+    \cite{hoff2009}).
+
+    \item Sample new labels $\bm{z} \mid -$ as follows: for each $\ell \in
+    \LL$ (we choose a randomized order), sample $z_\ell$ from a
+    categorical distribution with unnormalized probabilities \[
+        p(z_\ell = k \mid -)
+            \propto \exp\left(\beta_k U_{k\ell}\right)\cdot p(x_\ell \mid \mu_k, \Sigma_k, z_\ell = k)
+    \] for $1 \leq k \leq K$.
+    The second term is simply a (multivariate) Gaussian likelihood \[
+        p(x_\ell \mid \mu_k, \Sigma_k, z_\ell = k)
+            = (2\pi)^{-d/2}\det(\Sigma_k)^{-1 /2}\exp\left(-\frac{1}{2}(x_\ell - \mu_k)^\top \Sigma_k^{-1}(x_\ell - \mu_k)\right).
+    \] These can be pre-computed and stored before looping over $\ell \in \LL$.
+    The statistic $\bm{U}$ can be locally updated each time a new $z_\ell$ is
+    sampled.
+
+    \item Sample new Potts-Markov smoothness terms $\bm{\beta} \mid - $ using
+    an auxiliary variable Metropolis-Hastings algorithm as follows: for $1 \leq
+    t \leq T_{\beta}$, iterate the following.
+    \begin{enumerate}[label=(\roman*)]
+        \item Propose $\bm\beta^* \sim q(\,\cdot\,; \bm{\beta})$.
+        Here, we use the proposal \[
+            \log\bm{\beta}^* = \log\bm{\beta} + \bm\epsilon, \qquad
+                \bm\epsilon \sim \text{Normal}\left(\bm0, \sigma_\beta^2 \bm{I}_K\right),
+        \] to automatically keep $\bm\beta \succeq 0$.
+        This makes the proposal ratio \[
+            \frac{q(\bm{\beta}; \bm{\beta}^*)}{q(\bm{\beta}^*; \bm{\beta})}
+                 = \prod_{k = 1}^K \exp(\epsilon_k).
+        \]
+
+        \item Draw an auxiliary set of labels $\bm{z}^* \sim p(\bm{z}^*\mid
+        \bm{\beta}^*)$ from the Potts-Markov prior.
+        This is accomplished by performing a few Gibbs sampling sweeps (with a
+        hot-start initialization at the current $\bm{z}$), repeatedly looping
+        through $\ell \in \LL$ and resampling $z_\ell^*$ with
+        unnormalized probabilities \[
+            p(z_\ell^* \mid - ) \propto \exp\left(\beta_k^* U_{k\ell}(\bm{z}^*)\right)
+                =: \exp\left(\beta_k^* \sum_{\ell' \in \NN_\ell} \bm{1}(z_{\ell'}^* = k)\right).
+        \]
+
+        \item Update $\bm{\beta}$ to $\bm{\beta}^*$ with probability \[
+            \frac{
+                q(\bm{\beta}; \bm{\beta}^*)\,
+                p(\bm{\beta}^*)
+            }{
+                q(\bm{\beta}^*; \bm{\beta})\,
+                p(\bm{\beta})
+            }\cdot \frac{
+                p(\bm{z} \mid \bm{\beta}^*)
+            }{
+                p(\bm{z} \mid \bm{\beta})
+            }\cdot \frac{
+                p(\bm{z}^*\mid \bm{\beta})
+            }{
+                p(\bm{z}^* \mid \bm{\beta}^*)
+            },
+        \] keep the old value of $\bm{\beta}$ otherwise.
+        Note that $p(\bm{\beta}), p(\bm{\beta}^*)$ are $\text{Gamma}(a_\beta,
+        b_\beta)$ likelihoods, and the ratio \[
+            \frac{
+                p(\bm{z} \mid \bm{\beta}^*)
+            }{
+                p(\bm{z} \mid \bm{\beta})
+            }\cdot \frac{
+                p(\bm{z}^*\mid \bm{\beta})
+            }{
+                p(\bm{z}^* \mid \bm{\beta}^*)
+            } = \exp\left(
+                (\bm{\beta}^* - \bm{\beta})^\top (\bm{T}(\bm{z}) - \bm{T}(\bm{z}^*))
+            \right)
+        \] is free of the intractable partition function values $Z(\bm\beta),
+        Z(\bm\beta^*)$!
+    \end{enumerate}
+\end{enumerate}
+
+This describes a Gibbs within Metropolis-Hastings within Gibbs MCMC sampling
+scheme.
+In practice, we choose $5$ inner Gibbs loops (step (c)(ii)), $T_\beta = 10$
+Metropolis-Hastings loops (step (c)), and $750$ outer Gibbs loops with the
+first burn-in $250$ samples discarded.
+% We also use a hot-start initialization of $(\bm{z}, \bm{\mu}, \bm{\Sigma})$
+% using parameters obtained from a run of $K$-Means, while $\bm{\beta}$ is
+% initialized to a vector of ones.
+Convergence is assessed by examining trace plots of parameters.
+
+One practical consideration is tuning the proposal step size $\sigma_\beta$.
+This is adjusted dynamically during the burn-in period so that the acceptance
+rate for $\bm\beta^*$ (step (c)) settles around 30\%.
+
+We use the same sampling scheme with $\bm{\beta} = \bm0$ and skipping step (c)
+to perform posterior inference on a Gaussian mixture model.
+
+
+\section{Hyperparameter Selection}
+\label{sec:hyperparameter}
+
+Since the joint density \eqref{eq:joint_density} is intractable and there is no
+convenient way of holding out image data once a spatial structure $\GG$ is
+imposed, we estimate the required number of components $K$ by maximizing an
+expected log predictive density score from a simpler Gaussian mixture (fixing
+$\bm\beta = \bm0$ in \ref{eq:potts_mixture}), with the idea that this reduction
+already models the color distribution of an image well and is thus a good
+proxy.
+The remaining hyperparameters in \eqref{eq:potts_mixture} are chosen to be
+weakly informative, with $a_\beta = b_\beta = 2$, $m_0 = \frac{1}{2}\bm{1}$,
+$\Sigma_0 = \frac{1}{K}\bm{I}_d$, $\nu_0 = 10^{-2}$, $\kappa_0 = 5$; given the
+huge volume of data, we do not spend much effort tuning these.
+We also use a hot-start initialization of $(\bm{z}, \bm{\mu}, \bm{\Sigma})$
+using parameters obtained from a run of $K$-Means, while $\bm{\beta}$ is
+initialized to $\bm{1}$.
+
+
+
+\end{document}

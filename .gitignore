@@ -5,6 +5,8 @@
 *.nav
 *.snm
 *.toc
+*.bbl
+*.blg
 *.synctex.gz
 *.out
 *.swp

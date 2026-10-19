@@ -1,0 +1,74 @@
+\documentclass[12pt]{article}
+
+\input{preamble}
+
+\usepackage{tikzit}
+\input{pm.tikzstyles}
+
+\begin{document}
+
+\begin{flushleft}
+\textbf{%
+    An Introduction to Probabilistic Graphical Models (Jordan, 2003) \\
+    Chapter 2: Conditional Independence and Factorization
+} \\
+Satvik Saha (ss7228) \\
+\today
+\end{flushleft}
+
+\vspace{0.1in}
+
+This chapter introduces a framework for moving back and forth between a
+(potentially very complicated) joint probability distribution and its graphical
+representation.
+One advantage of the latter is that assertions of \emph{conditional
+independence} are much easier to read off (almost a triviality in
+\emph{undirected} graphical models): the task of carefully factorizing a joint
+distribution is translated into examining \emph{graph separations} between
+groups of nodes.
+This can be done via a \emph{Bayes ball algorithm}: two groups of nodes are
+conditionally independent given a third group if `information' cannot travel
+along the graph between the former groups, according to a simple set of rules.
+In an undirected graphical model, this reduces to checking connectedness
+between the former groups after removing the latter!
+
+\vspace{1em}
+\ctikzfig{gmm}
+\vspace{1em}
+
+For example, in the above (Gaussian mixture) model, we may conclude that each
+$z_i \perp z_j \mid \bm{x}, \bm{\mu}, \bm{\lambda}, \pi$ for $i \neq j$, simply
+by observing that the paths between $z_i$ and $z_j$ are blocked.
+Furthermore, $\pi \perp \{\bm{x}, \bm{\mu}, \bm{\lambda}\} \mid \bm{z}$.
+
+This is often useful when writing full conditionals for Gibbs sampling: the
+full conditional of a node depends solely on its \emph{Markov blanket},
+consisting of parents, children, and co-parents!
+This tells us that the updates for \vspace{-0.5em}
+\begin{itemize}
+    \itemsep-0.5em
+    \item $\pi$ involve only $\bm{z}$,
+    \item $z_i$ involve only $x_i, \bm{\mu}, \bm{\lambda}, \pi$,
+    \item $\mu_k$ involve only $\bm{x}, \bm{\lambda}, \bm{z}$,
+    \item $\lambda_k$ involve only $\bm{x}, \bm{\mu}, \bm{z}$.
+\end{itemize}
+
+
+\nocite{*}
+\bibliographystyle{plainnat}
+
+\vfill
+
+\begingroup
+\renewcommand{\section}[2]{}%
+\textbf{References}
+\bibliography{week07}
+\endgroup
+
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

@@ -1,0 +1,99 @@
+\documentclass[12pt]{article}
+
+\input{preamble}
+
+\usepackage{tikzit}
+\input{pm.tikzstyles}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\norm}[1]{\Vert#1\Vert}
+
+
+
+\begin{document}
+
+\begin{flushleft}
+\textbf{%
+    Approximation by Superpositions of a Sigmoidal Function (Cybenko, 1989)
+} \\
+Satvik Saha (ss7228) \\
+\today
+\end{flushleft}
+
+\vspace{0.1in}
+
+
+The flexibility of a neural network lies in its ability to approximate a very
+large class of functions well, given an appropriate choice of activation
+function $\sigma$; results of this nature are often termed as \emph{universal
+approximation theorems}.
+Here, we will only look at one-hidden-layer networks $\Omega\colon I \to \R$
+with arbitrary width where $I := [0, 1]^n$.
+These are maps of the form \[
+    x \mapsto \sum_{j = 1}^N \alpha_j \sigma(y_j^\top x + \theta_j);
+\] call this class of functions $\mathscr{S}_\sigma$.
+\cite{cybenko89} shows that for continuous activation functions $\sigma$
+satisfying $\lim_{t \to -\infty} \sigma(t) = 0$ and $\lim_{t \to \infty}
+\sigma(t) = 1$, called \emph{sigmoidal} activation functions, the class
+$\mathscr{S}_\sigma$ is dense in $(C(I), \norm{\cdot}_\infty)$.
+This is also true of continuous $\sigma$ satisfying a more general
+\emph{discriminatory} property: given a finite signed regular measure $\mu$ on
+$I$, \[
+    \int \sigma(y^\top x + \theta) \:d\mu(x) = 0\text{ for all } y \in \R^n, \theta \in \R
+        \implies \mu = 0.
+\] The proof of the result in \cite{cybenko89} is as follows: if $\mathscr{R}
+:= \overline{\mathscr{S}_\sigma} \neq C(I)$, then one can produce a non-zero
+bounded linear functional $L$ such that $L|_\mathscr{R} = 0$ via Hahn-Banach
+extension.
+Riesz Representation gives a finite signed regular measure $\mu_L$ such that $L
+= \int \cdot \:d\mu_L$.
+Consider the family of maps $\mathscr{H} := \{h_{y, \theta}: y \in \R^n, \theta
+\in \R\}$ where each $h_{y, \theta}(x) = \sigma(y^\top x + \theta)$; since $
+\mathscr{H} \subset \mathscr{S}_\sigma \subset \mathscr{R}$, we have
+$L|_\mathscr{H} = 0$.
+The discriminatory nature of $\sigma$ forces $\mu_L = 0$, contradicting $L \neq
+0$.
+
+For measurable functions $f$ on $I$ in general, given $\epsilon > 0$, Lusin's
+theorem gives $f|_D = g$ continuous for some $D \subset I$ with Lebesgue
+measure $m(D) > 1 - \epsilon$.
+In this sense, neural networks can well approximate this broader class of
+measurable functions.
+
+This result does not hold if $\sigma$ is a polynomial.
+Indeed, $h_{y, \theta}$ would also be a polynomial, and $\int h_{y, \theta}
+\:d\mu = 0$ can only guarantee that finitely many moments of $\mu$ are zero,
+hence $\sigma$ is not discriminatory.
+More directly, $\mathscr{S}_\sigma$ would only contain polynomials of (at most)
+a certain degree, and hence be a proper closed subspace of $C(I)$.
+
+Fairly accessible classes of functions, such as polynomials and trigonometric
+polynomials (finite linear combinations of $\cos(m\cdot), \sin(m\cdot)$), are
+also dense in $C(I)$ via the Stone-Weierstrass theorem.
+Recovering the right approximations would correspond to polynomial regression
+and Fourier decomposition tasks.
+What seems to make neural networks more attractive in practice is the
+\emph{curse of dimensionality}; methods like polynomial regression are famously
+sensitive when $n$ is large!
+A good choice of activation function $\sigma$ can often make this regression
+task more stable.
+
+
+\vfill
+
+\nocite{*}
+\bibliographystyle{plainnat}
+
+\begingroup
+\renewcommand{\section}[2]{}%
+\textbf{References}
+\bibliography{week09}
+\endgroup
+
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

@@ -1,0 +1,75 @@
+\documentclass[12pt]{article}
+
+\input{preamble}
+
+\usepackage{tikzit}
+\input{pm.tikzstyles}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\E}{\mathbb{E}}
+\renewcommand{\Pr}{\mathbb{P}}
+\newcommand{\norm}[1]{\Vert#1\Vert}
+
+
+
+\begin{document}
+
+\begin{flushleft}
+\textbf{%
+    The validity of posterior expansions based on Laplace’s method (Geisser et al., 1990)
+} \\
+Satvik Saha (ss7228) \\
+\today
+\end{flushleft}
+
+\vspace{0.1in}
+
+
+Laplace's method is a classical tool for approximating high-frequency integrals \[
+    \int_\R g(x)\, e^{-n h(x)}\:dx
+        = \sqrt{\frac{2\pi}{nh''(x_0)}}\,e^{-nh(x_0)}\left(g(x_0) + \mathcal{O}\left(n^{-1}\right)\right)
+\] as $n \to \infty$, where $x_0$ is the unique global minimizer of $h$.
+The key idea is to approximate \[
+    h(x_0) + \frac{1}{2}(h''(x_0) - \epsilon)(x - x_0)^2
+        \leq h(x)
+        \leq h(x_0) + \frac{1}{2}(h''(x_0) + \epsilon)(x - x_0)^2
+\] for sufficiently small $0 < \epsilon < h''(x_0)$ around a
+$\delta$-neighborhood of $x_0$.
+This essentially turns the integrand of interest into an unnormalized Gaussian
+density, with nearly all of its mass concentrated in a vanishingly small
+neighborhood of $x_0$!
+
+In Bayesian inference, the posterior density of $\theta$ under some prior
+$\pi(\theta)$ and likelihood $L(y\mid \theta)$ is described by \[
+    \E[g(\theta) \mid y] = \frac{\int g(\theta)\, L(y\mid \theta)\pi(\theta) \:d\theta}{\int L(y\mid \theta)\pi(\theta)\:d\theta},
+\] which can be approximated using Laplace's method, expanding around the MAP
+$\hat{\theta}$.
+The main difference between this and the classical setup is that the
+log-likelihood function $h$ (hence its maximizer $x_0$ too) depends on the data
+$y_1, \dots, y_n$.
+\cite{geisser1990} formalizes conditions under which this kind of approximation
+does indeed work; call this \emph{Laplace regularity} of log-likelihoods.
+One (very neat!) consequence is that for nice enough likelihoods, we have
+posterior concentration inequalities of the form \[
+    \Pr(|\theta - \hat{\theta}| \geq \delta \mid y) < e^{-nc}.
+\]
+
+
+\vfill
+
+\nocite{*}
+\bibliographystyle{plainnat}
+
+\begingroup
+\renewcommand{\section}[2]{}%
+\textbf{References}
+\bibliography{week10}
+\endgroup
+
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

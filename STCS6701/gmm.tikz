@@ -1,0 +1,51 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=none] (9) at (-18.25, 0.25) {$\kappa_0$};
+		\node [style=latent] (1) at (-11, 1) {$\mu_k$};
+		\node [style=observed] (2) at (-3, -0.5) {$x_i$};
+		\node [style=latent] (3) at (1, -0.5) {$z_i$};
+		\node [style=parameter] (4) at (-17, 1.75) {};
+		\node [style=parameter] (5) at (-17, 0.25) {};
+		\node [style=latent] (6) at (-11, -2) {$\lambda_k$};
+		\node [style=none] (8) at (-18.25, 1.75) {$m_0$};
+		\node [style=none] (11) at (-13, 3) {};
+		\node [style=none] (12) at (-9, 3) {};
+		\node [style=none] (13) at (-9, -4) {};
+		\node [style=none] (14) at (-13, -4) {};
+		\node [style=none] (15) at (-5, 1.5) {};
+		\node [style=none] (16) at (3, 1.5) {};
+		\node [style=none] (17) at (-5, -2.5) {};
+		\node [style=none] (18) at (3, -2.5) {};
+		\node [style=none] (19) at (-9.75, -3.25) {$K$};
+		\node [style=none] (20) at (2.25, -1.75) {$N$};
+		\node [style=parameter] (21) at (-17, -1.25) {};
+		\node [style=parameter] (22) at (-17, -2.75) {};
+		\node [style=none] (23) at (-18.25, -1.25) {$a_0$};
+		\node [style=none] (24) at (-18.25, -2.75) {$b_0$};
+		\node [style=latent] (25) at (5, -0.5) {$\pi$};
+		\node [style=parameter] (26) at (8, -0.5) {};
+		\node [style=none] (27) at (9, -0.5) {$\alpha$};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw [style=arrow] (3) to (2);
+		\draw [style=arrow] (1) to (2);
+		\draw [style=arrow] (4) to (1);
+		\draw [style=arrow] (5) to (1);
+		\draw [style=arrow] (6) to (2);
+		\draw (11.center)
+			 to (14.center)
+			 to (13.center)
+			 to (12.center)
+			 to cycle;
+		\draw (18.center)
+			 to (16.center)
+			 to (15.center)
+			 to (17.center)
+			 to cycle;
+		\draw [style=arrow] (6) to (1);
+		\draw [style=arrow] (22) to (6);
+		\draw [style=arrow] (21) to (6);
+		\draw [style=arrow] (25) to (3);
+		\draw [style=arrow] (26) to (25);
+	\end{pgfonlayer}
+\end{tikzpicture}
